@@ -1,0 +1,175 @@
+--- a/msgq/event.cc
++++ b/msgq/event.cc
+@@ -1,3 +1,7 @@
++#ifdef __ANDROID__
++#include "msgq/android_ipc.h"
++#endif
++
+ #include <cerrno>
+ #include <chrono>
+ #include <cstdint>
+@@ -61,7 +65,11 @@
+ 
+   char buf[32];
+   std::snprintf(buf, sizeof(buf), "/msgq_%016llx", static_cast<unsigned long long>(h));
++#ifdef __ANDROID__
++  return msgq_android_path(buf + 1);
++#else
+   return buf;
++#endif
+ }
+ 
+ }  // namespace
+@@ -69,7 +77,11 @@
+ void event_state_shm_mmap(std::string endpoint, std::string identifier, char **shm_mem, std::string *shm_name_out) {
+   std::string name = event_shm_name(endpoint, identifier);
+ 
++#ifdef __ANDROID__
++  int shm_fd = open(name.c_str(), O_RDWR | O_CREAT | O_CLOEXEC | O_NOFOLLOW, 0600);
++#else
+   int shm_fd = shm_open(name.c_str(), O_RDWR | O_CREAT, 0664);
++#endif
+   if (shm_fd < 0) throw_errno("Could not open shared memory");
+ 
+   // macOS rejects ftruncate on an already-sized shm object, so only size it once.
+@@ -101,7 +113,11 @@
+   this->owns_fifos = override;
+ 
+   if (override) {
++#ifdef __ANDROID__
++    std::string base = msgq_android_path("event_" + std::to_string(getpid()) + "_" + std::to_string(event_fifo_counter++));
++#else
+     std::string base = "/tmp/msgq_event_" + std::to_string(getpid()) + "_" + std::to_string(event_fifo_counter++);
++#endif
+     for (size_t i = 0; i < 2; i++) {
+       std::string p = base + "." + std::to_string(i);
+       if (p.size() >= EVENT_PATH_MAX) {
+@@ -127,7 +143,11 @@
+   if (this->owns_fifos) {
+     unlink(this->state->paths[RECV_CALLED]);
+     unlink(this->state->paths[RECV_READY]);
++#ifdef __ANDROID__
++    unlink(this->shm_name.c_str());
++#else
+     shm_unlink(this->shm_name.c_str());
++#endif
+   }
+   munmap(this->state, sizeof(EventState));
+ }
+--- a/msgq/msgq.cc
++++ b/msgq/msgq.cc
+@@ -1,3 +1,7 @@
++#ifdef __ANDROID__
++#include "msgq/android_ipc.h"
++#endif
++
+ #include <iostream>
+ #include <cassert>
+ #include <cerrno>
+@@ -85,6 +89,9 @@
+   assert(size < 0xFFFFFFFF); // Buffer must be smaller than 2^32 bytes
+   std::signal(SIGUSR2, sigusr2_handler);
+ 
++#ifdef __ANDROID__
++  std::string full_path = msgq_android_path(std::string("msgq_") + path);
++#else
+ #ifdef __APPLE__
+   std::string base_path = "/tmp/msgq_";
+ #else
+@@ -96,7 +103,12 @@
+   }
+   std::string full_path = base_path + path;
+ 
++#endif
++#ifdef __ANDROID__
++  auto fd = open(full_path.c_str(), O_RDWR | O_CREAT | O_CLOEXEC | O_NOFOLLOW, 0600);
++#else
+   auto fd = open(full_path.c_str(), O_RDWR | O_CREAT, 0664);
++#endif
+   if (fd < 0) {
+     std::cout << "Warning, could not open: " << full_path << std::endl;
+     return -1;
+--- a/msgq/visionipc/visionipc_server.cc
++++ b/msgq/visionipc/visionipc_server.cc
+@@ -1,3 +1,7 @@
++#ifdef __ANDROID__
++#include "msgq/android_ipc.h"
++#endif
++
+ #include <iostream>
+ #include <chrono>
+ #include <cassert>
+@@ -19,11 +23,15 @@
+ }
+ 
+ std::string get_ipc_path(const std::string& name) {
++#ifdef __ANDROID__
++  return msgq_android_path("visionipc_" + name);
++#else
+   std::string path = "/tmp/";
+   if (char* prefix = std::getenv("OPENPILOT_PREFIX")) {
+     path += std::string(prefix) + "_";
+   }
+   return path + "visionipc_" + name;
++#endif
+ }
+ 
+ VisionIpcServer::VisionIpcServer(std::string name_) : name(name_) {
+--- a/msgq/visionipc/visionbuf.cc
++++ b/msgq/visionipc/visionbuf.cc
+@@ -12,6 +12,11 @@
+ std::atomic<int> offset = 0;
+ 
+ static void *malloc_with_fd(size_t len, int *fd) {
++#ifdef __ANDROID__
++  // Anonymous, shared mappings passed through the existing SCM_RIGHTS protocol.
++  *fd = memfd_create("msgq_visionbuf", MFD_CLOEXEC);
++  assert(*fd >= 0);
++#else
+   char full_path[0x100];
+ 
+ #ifdef __APPLE__
+@@ -24,6 +29,7 @@
+   assert(*fd >= 0);
+ 
+   unlink(full_path);
++#endif
+ 
+   int ret = ftruncate(*fd, len);
+   assert(ret == 0);
+--- /dev/null
++++ b/msgq/android_ipc.h
+@@ -0,0 +1,33 @@
++#pragma once
++
++#include <cerrno>
++#include <cstdlib>
++#include <stdexcept>
++#include <string>
++#include <sys/stat.h>
++#include <unistd.h>
++
++// All Android service processes must set the same app-private directory.
++inline std::string msgq_android_path(const std::string &name) {
++  const char *root = std::getenv("MSGQ_ANDROID_PATH");
++  struct stat st{};
++  if (!root || root[0] != '/' || stat(root, &st) || !S_ISDIR(st.st_mode) ||
++      st.st_uid != getuid() || (st.st_mode & 0077)) {
++    throw std::runtime_error("MSGQ_ANDROID_PATH must be an existing private application directory");
++  }
++  if (name.empty() || name.find('/') != std::string::npos || name == "." || name == "..") {
++    throw std::invalid_argument("Invalid Android IPC endpoint");
++  }
++  std::string directory(root);
++  if (const char *prefix = std::getenv("OPENPILOT_PREFIX"); prefix && *prefix) {
++    std::string value(prefix);
++    if (value.size() > 24 || value.find_first_not_of("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_-") != std::string::npos) {
++      throw std::invalid_argument("Invalid Android IPC prefix");
++    }
++    directory += "/" + value;
++    if (mkdir(directory.c_str(), 0700) && errno != EEXIST) throw std::runtime_error("Cannot create Android IPC namespace");
++    if (lstat(directory.c_str(), &st) || !S_ISDIR(st.st_mode) || st.st_uid != getuid() || (st.st_mode & 0077))
++      throw std::runtime_error("Android IPC namespace must be a private application directory");
++  }
++  return directory + "/" + name;
++}

@@ -1,0 +1,82 @@
+plugins {
+    id 'com.android.application'
+    id 'com.chaquo.python'
+}
+android {
+    namespace 'ai.sunnypilot.fold3'
+    compileSdk 35
+    ndkVersion '28.2.13676358'
+    defaultConfig {
+        applicationId 'ai.sunnypilot.fold3'
+        minSdk 35
+        targetSdk 35
+        versionCode 1
+        versionName '0.1.0-port-validation'
+        ndk { abiFilters 'arm64-v8a' }
+        externalNativeBuild { cmake { cppFlags '-std=c++17 -O2 -Wall -Wextra -Werror' } }
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+        buildConfigField 'boolean', 'VEHICLE_TX_ENABLED', 'false'
+    }
+    buildFeatures { buildConfig true }
+    compileOptions { sourceCompatibility JavaVersion.VERSION_17; targetCompatibility JavaVersion.VERSION_17 }
+    packaging { jniLibs { useLegacyPackaging true } }
+    externalNativeBuild { cmake { path 'src/main/cpp/CMakeLists.txt'; version '3.22.1' } }
+    sourceSets { main { python.srcDir "$buildDir/generated/python"; assets.srcDir "$buildDir/generated/notices" } }
+    testOptions { unitTests.returnDefaultValues = true }
+}
+chaquopy {
+    defaultConfig {
+        version '3.12'
+        extractPackages 'tinygrad', 'openpilot', 'opendbc', 'msgq', 'capnp'
+        buildPython System.getenv('FOLD3_BUILD_PYTHON') ?: 'python3.12'
+        // Diagnostic runtime only: upstream requires NumPy 2, unavailable as a Chaquopy wheel.
+        pip { install 'numpy==1.26.2' }
+    }
+}
+tasks.register('stagePython', Copy) {
+    inputs.file '../patches/tinygrad-android.patch'
+    inputs.file '../patches/cereal-android.patch'
+    dependsOn 'externalNativeBuildDebug'
+    into "$buildDir/generated/python"
+    doFirst {
+        if (!file("$buildDir/model-reference/manifest.json").isFile()) {
+            throw new GradleException('Run android/scripts/model_reference.py before building the validation APK')
+        }
+        delete destinationDir
+    }
+    from('../..') { include 'openpilot/**/*.py', 'openpilot/cereal/**/*.capnp'; exclude '**/tests/**', '**/test/**', 'openpilot/tools/**', 'openpilot/third_party/**' }
+    from('../..') { include 'openpilot/selfdrive/modeld/models/*.onnx' }
+    from("$buildDir/model-reference") { into 'fold3_reference' }
+    from('../../tinygrad_repo') { include 'tinygrad/**/*.py' }
+    from('../../opendbc_repo') { include 'opendbc/**/*.py', 'opendbc/**/*.capnp' }
+    from('../../msgq_repo') { include 'msgq/**/*.py' }
+    from('../build/native/pycapnp-2.1.0') { include 'capnp/**/*.py' }
+    from('../build/native/capnproto-c++-1.0.1/src') { include 'capnp/*.capnp' }
+    from("$buildDir/native-python") { include '**/*.so' }
+    doLast {
+        exec {
+            workingDir rootProject.projectDir.parentFile
+            commandLine 'git', 'apply', '--directory=android/app/build/generated/python', 'android/patches/tinygrad-android.patch'
+        }
+        exec {
+            workingDir rootProject.projectDir.parentFile
+            commandLine 'git', 'apply', '--directory=android/app/build/generated/python', 'android/patches/cereal-android.patch'
+        }
+    }
+}
+tasks.register('stageNotices', Copy) {
+    into "$buildDir/generated/notices/third_party"
+    from('../build/native/libusb/COPYING') { into 'libusb' }
+    from('../../') { include 'LICENSE', 'LICENSE.md'; into 'sunnypilot' }
+    from('../../tinygrad_repo/LICENSE') { into 'tinygrad' }
+    from('../../opendbc_repo') { include 'LICENSE', 'LICENSE.md'; into 'opendbc' }
+    from('../build/native/pycapnp-2.1.0/LICENSE.md') { into 'pycapnp' }
+    from('../build/native/capnproto-c++-1.0.1/LICENSE') { into 'capnproto' }
+}
+tasks.configureEach { if (name.startsWith('merge') && name.endsWith('PythonSources')) dependsOn 'stagePython' }
+tasks.configureEach { if (name.startsWith('merge') && name.endsWith('Assets')) dependsOn 'stageNotices' }
+dependencies {
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test:runner:1.6.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.2.1'
+}

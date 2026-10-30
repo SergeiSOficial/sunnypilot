@@ -1,0 +1,78 @@
+{
+  "started_utc": 1793400323.0242114,
+  "pid": 27715,
+  "python": "3.12.15",
+  "machine": "aarch64",
+  "vehicle_tx_enabled": false,
+  "modules": {
+    "numpy": {
+      "status": "passed",
+      "version": "1.26.2",
+      "file": "/data/data/ai.sunnypilot.fold3/files/chaquopy/AssetFinder/requirements/numpy/__init__.py",
+      "import_ms": 132.695469
+    },
+    "tinygrad": {
+      "status": "passed",
+      "version": null,
+      "file": "/data/data/ai.sunnypilot.fold3/files/chaquopy/AssetFinder/app/tinygrad/__init__.py",
+      "import_ms": 328.756979
+    },
+    "capnp": {
+      "status": "passed",
+      "version": "2.1.0",
+      "file": "/data/data/ai.sunnypilot.fold3/files/chaquopy/AssetFinder/app/capnp/__init__.py",
+      "import_ms": 176.058646
+    },
+    "msgq.ipc_pyx": {
+      "status": "passed",
+      "version": null,
+      "file": "/data/data/ai.sunnypilot.fold3/files/chaquopy/AssetFinder/app/msgq/ipc_pyx.cpython-312.so",
+      "import_ms": 51.086094
+    },
+    "msgq.visionipc": {
+      "status": "passed",
+      "version": null,
+      "file": "/data/data/ai.sunnypilot.fold3/files/chaquopy/AssetFinder/app/msgq/visionipc/__init__.py",
+      "import_ms": 2.87526
+    },
+    "openpilot.cereal": {
+      "status": "passed",
+      "version": null,
+      "file": "/data/data/ai.sunnypilot.fold3/files/chaquopy/AssetFinder/app/openpilot/cereal/__init__.py",
+      "import_ms": 667.091198
+    },
+    "openpilot.cereal.messaging": {
+      "status": "blocked",
+      "error": "ModuleNotFoundError: No module named 'zstandard'"
+    },
+    "opendbc.car.hyundai.values": {
+      "status": "passed",
+      "version": null,
+      "file": "/data/data/ai.sunnypilot.fold3/files/chaquopy/AssetFinder/app/opendbc/car/hyundai/values.py",
+      "import_ms": 35.43125
+    },
+    "openpilot.common.params": {
+      "status": "blocked",
+      "error": "ModuleNotFoundError: No module named 'zmq'"
+    },
+    "pyray": {
+      "status": "blocked",
+      "error": "ModuleNotFoundError: No module named 'pyray'"
+    }
+  },
+  "cereal_msgq_round_trip": {
+    "status": "passed",
+    "bytes": 168,
+    "valid": false
+  },
+  "tinygrad_cl": {
+    "status": "passed",
+    "values": [
+      2.0,
+      5.0,
+      10.0
+    ]
+  },
+  "driving_runtime_ready": false,
+  "numpy_upstream_requirement": "blocked: diagnostic NumPy 1.26.2 does not satisfy upstream >=2.0"
+}

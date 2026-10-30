@@ -1,0 +1,20 @@
+diff --git a/src/kj/filesystem-disk-unix.c++ b/src/kj/filesystem-disk-unix.c++
+--- a/src/kj/filesystem-disk-unix.c++
++++ b/src/kj/filesystem-disk-unix.c++
+@@ -1701,7 +1701,16 @@ private:
+ 
+   static AutoCloseFd openDir(const char* dir) {
+     int newFd;
++#ifdef __ANDROID__
++    // Android permits path traversal but denies reading the root directory.
++    // O_PATH still supports openat() for absolute schema imports. Keep readable
++    // handles for app-owned directories so directory enumeration is unaffected.
++    newFd = open(dir, O_RDONLY | MAYBE_O_CLOEXEC | MAYBE_O_DIRECTORY);
++    if (newFd < 0 && errno == EACCES) newFd = open(dir, O_PATH | O_CLOEXEC | O_DIRECTORY);
++    KJ_SYSCALL(newFd);
++#else
+     KJ_SYSCALL(newFd = open(dir, O_RDONLY | MAYBE_O_CLOEXEC | MAYBE_O_DIRECTORY));
++#endif
+     AutoCloseFd result(newFd);
+ #ifndef O_CLOEXEC
+     setCloexec(result);

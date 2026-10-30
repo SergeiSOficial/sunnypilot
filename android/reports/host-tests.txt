@@ -1,0 +1,14 @@
+2026-10-30, macOS ARM64, base 6f7a2c94c10dffcf9a83b120ab1e6985e4496868
+PATH=.venv/bin:$PATH .venv/bin/scons -j4 --minimal: PASSED
+
+.venv/bin/python -m unittest opendbc.car.hyundai.tests.test_hyundai msgq.visionipc.tests.test_visionipc msgq.tests.test_messaging
+----------------------------------------------------------------------
+Ran 22 tests in 0.426s
+
+OK (skipped=2)
+
+.venv/bin/python -m unittest opendbc.safety.tests.test_hyundai
+----------------------------------------------------------------------
+Ran 1899 tests in 4.033s
+
+OK (skipped=198)

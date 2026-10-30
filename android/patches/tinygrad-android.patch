@@ -1,0 +1,18 @@
+--- a/tinygrad/tensor.py
++++ b/tinygrad/tensor.py
+@@ -280,7 +280,7 @@
+       from tinygrad.engine.jit import JitError
+       raise JitError("cannot access tensor data during JIT capture, the value will be baked in")
+     x = self.contiguous()
+-    if self.uop.device is None or isinstance(self.device, tuple): x = x.clone("CPU")
++    if self.uop.device is None or isinstance(self.device, tuple): x = x.clone("PYTHON" if hasattr(sys, "getandroidapilevel") else "CPU")
+     return cast(Buffer, x.realize().uop.buffer).ensure_allocated()
+ 
+   def _data(self) -> memoryview: return self._buffer().as_memoryview()
+--- a/tinygrad/runtime/ops_disk.py
++++ b/tinygrad/runtime/ops_disk.py
+@@ -1,3 +1,4 @@
++from __future__ import annotations
+ import os, sys, mmap, io, ctypes, contextlib, pathlib, functools, collections, struct, itertools
+ from dataclasses import replace
+ from typing import cast
