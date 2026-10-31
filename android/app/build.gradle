@@ -13,24 +13,24 @@ android {
         versionCode 1
         versionName '0.1.0-port-validation'
         ndk { abiFilters 'arm64-v8a' }
-        externalNativeBuild { cmake { cppFlags '-std=c++17 -O2 -Wall -Wextra -Werror' } }
+        externalNativeBuild { cmake { arguments '-DANDROID_STL=c++_shared'; cppFlags '-std=c++17 -O2 -Wall -Wextra -Werror' } }
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         buildConfigField 'boolean', 'VEHICLE_TX_ENABLED', 'false'
     }
     buildFeatures { buildConfig true }
     compileOptions { sourceCompatibility JavaVersion.VERSION_17; targetCompatibility JavaVersion.VERSION_17 }
     packaging { jniLibs { useLegacyPackaging true } }
-    externalNativeBuild { cmake { path 'src/main/cpp/CMakeLists.txt'; version '3.22.1' } }
+    externalNativeBuild { cmake { path 'src/main/cpp/CMakeLists.txt'; version '3.31.6' } }
     sourceSets { main { python.srcDir "$buildDir/generated/python"; assets.srcDir "$buildDir/generated/notices" } }
     testOptions { unitTests.returnDefaultValues = true }
 }
 chaquopy {
     defaultConfig {
         version '3.12'
-        extractPackages 'tinygrad', 'openpilot', 'opendbc', 'msgq', 'capnp'
+        extractPackages 'tinygrad', 'openpilot', 'opendbc', 'msgq', 'capnp', 'zmq', 'zstandard', 'pyray', 'raylib'
         buildPython System.getenv('FOLD3_BUILD_PYTHON') ?: 'python3.12'
         // Diagnostic runtime only: upstream requires NumPy 2, unavailable as a Chaquopy wheel.
-        pip { install 'numpy==1.26.2' }
+        pip { install 'numpy==1.26.2'; install 'cffi==1.17.1'; install 'requests==2.32.5'; install 'pyyaml==6.0.3'; install 'tqdm==4.70.1'; install 'pycryptodome==3.21.0'; install 'PyJWT==2.10.1' }
     }
 }
 tasks.register('stagePython', Copy) {
@@ -50,7 +50,15 @@ tasks.register('stagePython', Copy) {
     from('../../tinygrad_repo') { include 'tinygrad/**/*.py' }
     from('../../opendbc_repo') { include 'opendbc/**/*.py', 'opendbc/**/*.capnp' }
     from('../../msgq_repo') { include 'msgq/**/*.py' }
+    from('../../openpilot/tools/sim/lib') { include 'android_protocol.py' }
     from('../build/native/pycapnp-2.1.0') { include 'capnp/**/*.py' }
+    from('../build/native/pyzmq-27.2.0') { include 'zmq/**/*.py' }
+    from('../build/native/zstandard-0.25.0') { include 'zstandard/*.py' }
+    from('../build/native/setproctitle-1.3.7/pkg') { include 'setproctitle/*.py' }
+    from('../build/native/raylib-python-cffi') { include 'pyray/*.py', 'raylib/*.py' }
+    from('../..') { include 'openpilot/selfdrive/assets/**', 'openpilot/selfdrive/ui/translations/**'; exclude '**/*.py' }
+    from('../..') { include 'openpilot/**/*.json', 'openpilot/**/*.yaml', 'openpilot/**/*.toml', 'openpilot/**/*.cl'; exclude '**/tests/**', '**/test/**', 'openpilot/tools/**', 'openpilot/third_party/**', 'openpilot/selfdrive/assets/**', 'openpilot/selfdrive/ui/translations/**' }
+    from('../../opendbc_repo') { include 'opendbc/dbc/**', 'opendbc/car/**/*.yaml', 'opendbc/car/**/*.toml', 'opendbc/car/**/*.json'; exclude '**/*.py' }
     from('../build/native/capnproto-c++-1.0.1/src') { include 'capnp/*.capnp' }
     from("$buildDir/native-python") { include '**/*.so' }
     doLast {
@@ -72,6 +80,11 @@ tasks.register('stageNotices', Copy) {
     from('../../opendbc_repo') { include 'LICENSE', 'LICENSE.md'; into 'opendbc' }
     from('../build/native/pycapnp-2.1.0/LICENSE.md') { into 'pycapnp' }
     from('../build/native/capnproto-c++-1.0.1/LICENSE') { into 'capnproto' }
+    from('../build/native/pyzmq-27.2.0/licenses') { into 'pyzmq' }
+    from('../build/native/libzmq-4.3.5/LICENSE') { into 'libzmq' }
+    from('../build/native/zstandard-0.25.0/LICENSE') { into 'zstandard' }
+    from('../build/native/json11/LICENSE.txt') { into 'json11' }
+    from('../build/native/raylib-python-cffi') { include 'LICENSE', 'raylib-c/LICENSE'; into 'raylib' }
 }
 tasks.configureEach { if (name.startsWith('merge') && name.endsWith('PythonSources')) dependsOn 'stagePython' }
 tasks.configureEach { if (name.startsWith('merge') && name.endsWith('Assets')) dependsOn 'stageNotices' }

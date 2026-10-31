@@ -4,7 +4,6 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 import com.chaquo.python.Python;
-import com.chaquo.python.android.AndroidPlatform;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.charset.StandardCharsets;
@@ -18,7 +17,7 @@ public final class ModelService extends Service {
         final String selected = profile == null ? "baseline" : profile;
         new Thread(() -> {
             try {
-                if (!Python.isStarted()) Python.start(new AndroidPlatform(this));
+                PythonRuntime.start(this);
                 Python.getInstance().getModule("fold3_models").callAttr("benchmark", getFilesDir().getAbsolutePath(), selected);
             } catch (Exception e) {
                 try {

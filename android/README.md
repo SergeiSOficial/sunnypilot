@@ -1,21 +1,23 @@
-# Fold 3 Android port qualification
+# Fold 3 Android runtime port
 
-This branch contains an installable **qualification app**, not a working driving
-port. Vehicle transmission is compiled out. Dual rear capture, sustained camera
-operation, model parity and model deadlines failed on the connected Fold 3.
-See [VALIDATION.md](VALIDATION.md) for the acceptance matrix and remaining work.
+This branch runs upstream **controlsd, dmonitoringd and the landscape Raylib UI**
+in separate Android processes, with bounded supervision, native Params and
+msgq/VisionIPC. The debug ADB bridge runs the phone's steering controller in a
+host MetaDrive world. **The complete visual driving stack is not operational.**
+Vehicle transmission is compiled out and engagement is unconditionally blocked.
+See [VALIDATION.md](VALIDATION.md) for passed, failed and blocked acceptance checks.
 
-Base: `6f7a2c94c10dffcf9a83b120ab1e6985e4496868`.
-Branch: `codex/fold3-android-port`.
-Target: stock SM-F926B, Android 15/API 35, ARM64; 2019 Hyundai Ioniq PHEV,
-right hand drive, factory ACC and red Panda. No Android replacement, bootloader
-changes or Panda flashing are part of these recipes.
+Branch: `codex/fold3-android-port`, based on
+`6f7a2c94c10dffcf9a83b120ab1e6985e4496868`.
+Target: stock SM-F926B, Android 15/API 35, ARM64; right-hand-drive 2019 Hyundai
+Ioniq PHEV, factory ACC and red Panda. Installation preserves stock Android.
 
 ## Build on the Mac
 
-Install Git LFS, uv, JDK 17 and the Android SDK. The tested tools are NDK
-28.2.13676358, CMake 3.22.1, platform/build tools 35, Gradle 8.9, AGP 8.5.2 and
-Chaquopy 17.2.0. Use Python 3.12 to prepare sources. From the repository root:
+Tested: JDK 17, NDK 28.2.13676358, CMake 3.31.6, build tools 35.0.0,
+Gradle 8.9, AGP 8.5.2, Chaquopy 17.2.0 and host Python 3.12.
+Install Git LFS, uv and Cap'n Proto **1.0.1** (`capnp`, `capnpc-c++` on PATH).
+Then, from the repository root:
 
 ```sh
 git switch codex/fold3-android-port
@@ -24,140 +26,145 @@ git submodule update --init --recursive
 git lfs pull
 git submodule foreach --recursive 'git lfs pull'
 uv sync --frozen --extra testing --extra tools
-uv pip install --python .venv/bin/python numpy==2.5.3 onnx==1.23.2 onnxruntime==1.31.1
-.venv/bin/python android/scripts/prepare_native.py
-.venv/bin/python android/scripts/model_reference.py
+uv pip install --python .venv/bin/python -r android/requirements-host.txt
 
 export JAVA_HOME=/opt/homebrew/opt/openjdk@17/libexec/openjdk.jdk/Contents/Home
 export ANDROID_HOME="$HOME/Library/Android/sdk"
 export FOLD3_BUILD_PYTHON="$PWD/.venv/bin/python"
+export PATH="$ANDROID_HOME/platform-tools:$PATH"
 "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" \
   'platform-tools' 'platforms;android-35' 'build-tools;35.0.0' \
-  'ndk;28.2.13676358' 'cmake;3.22.1'
+  'ndk;28.2.13676358' 'cmake;3.31.6'
+.venv/bin/python android/scripts/prepare_native.py
+.venv/bin/python android/scripts/model_reference.py
+.venv/bin/python android/scripts/model_reference.py --fp32
 cd android
+# Remove an existing incremental APK before final packaging to avoid ZIP slack.
+../.venv/bin/python -c 'from pathlib import Path; Path("app/build/outputs/apk/debug/app-debug.apk").unlink(missing_ok=True)'
 ./gradlew --no-daemon --console plain \
-  :app:assembleDebug :app:testDebugUnitTest :app:assembleDebugAndroidTest
+  :app:assembleDebug :app:assembleDebugAndroidTest :app:testDebugUnitTest
 ```
 
-`uv pip install` adds the independent host model reference runtime after the
-locked project environment is populated. Running `uv sync` again can remove
-these additional packages. It does not change `uv.lock`.
+`uv sync` can remove the supplemental packages. Reinstall the requirements after
+syncing. Source preparation verifies archive checksums and Git pins, generates
+Cereal C++ headers and Cython/CFFI sources, and patches disposable exports under
+`android/build`. Required changes to msgq, tinygrad, Cereal, Cap'n Proto and Raylib
+are kept in this repository. Pinned submodule checkouts remain unchanged.
+Native modules are cross-compiled for Android Bionic; desktop binaries are not
+packaged. The shared Raylib library is used by both NativeActivity and pyray.
 
-The model assets are the original LFS-managed `dmonitoring_model.onnx` and
-`driving_supercombo.onnx`. The reference generator records their SHA-256 hashes,
-tensor shapes, seed and host library versions. It uses synthetic inputs with
-the upstream RHD traffic convention; it does not establish driving quality.
+The APK contains Python 3.12, NumPy 1.26.2, native Params, pycapnp, msgq/VisionIPC,
+libusb, pyzmq/libzmq, zstandard, setproctitle and Raylib/CFFI. NumPy 1.26.2 does
+**not** satisfy upstream's NumPy >=2 requirement; only the exercised subset is
+validated. With optional FP32 assets this debug APK is about 230 MiB after fresh
+packaging. An earlier incremental package contained 214 MiB of unused ZIP space;
+repackaging removed it while preserving every ZIP entry's bytes.
+The FP32 assets are diagnostic experiments, not accepted driving models.
+Third party licenses are packaged as assets.
 
-`prepare_native.py` verifies the pinned msgq checkout and downloads checksum
-pinned Python headers, pycapnp and Cap'n Proto, plus a commit pinned libusb
-checkout. Patches apply to generated copies under `android/build`, leaving
-submodules unchanged. It needs network access on the first run. CMake compiles
-ARM64 libusb, msgq/VisionIPC and pycapnp against Android's Python ABI; host Linux
-or macOS extension binaries are not packaged. Third party notices are APK assets.
-
-The APK embeds Chaquopy's Python 3.12 and diagnostic NumPy 1.26.2. This NumPy
-does **not** satisfy upstream's `>=2.0` requirement. Other native dependencies,
-including Params, CAN parsing and Raylib, remain unported. The app starts
-diagnostic work in separate `:runtime` and `:models` Android services; this is
-not the upstream manager or daemon restart supervision.
-
-Outputs:
+Outputs (debug key signed):
 
 - `android/app/build/outputs/apk/debug/app-debug.apk`
 - `android/app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk`
 
-These are debug builds signed with the local Android debug key. Clean source
-builds are supported; byte-identical APK signatures are not promised.
+## Install, run and inspect
 
-## Install and validate
-
-From the repository root, select the intended device explicitly:
+Select the device explicitly. These commands also work with `emulator-5560`:
 
 ```sh
-export PATH="$HOME/Library/Android/sdk/platform-tools:$PATH"
-adb devices -l
 export FOLD3_SERIAL=RFCR81Y1TBJ
 adb -s "$FOLD3_SERIAL" install -r android/app/build/outputs/apk/debug/app-debug.apk
 adb -s "$FOLD3_SERIAL" install -r android/app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk
-adb -s "$FOLD3_SERIAL" shell am instrument -w \
+adb -s "$FOLD3_SERIAL" shell am instrument -w -r \
   ai.sunnypilot.fold3.test/androidx.test.runner.AndroidJUnitRunner
-adb -s "$FOLD3_SERIAL" shell am start -n ai.sunnypilot.fold3/.MainActivity
-```
-
-Accept the camera permission on the phone. The app has buttons for the camera
-matrix, a requested 30-minute road/driver camera soak, original-model OpenCL
-validation and Panda identity reads. Panda access uses Android's USB permission
-dialog. The native USB code only permits identity/version IN requests: CAN
-transmission, safety mode changes, reset and flashing are absent. Firmware
-compatibility is not yet established, so CAN reception is not started either.
-
-Run one workload at a time, with the activity visible. Stop camera work using
-the app button, or stop the whole app with `adb shell am force-stop`. Wait for
-installation to finish before launching a run. To start diagnostics through ADB:
-
-```sh
-adb -s "$FOLD3_SERIAL" shell am force-stop ai.sunnypilot.fold3
-adb -s "$FOLD3_SERIAL" shell am start -n ai.sunnypilot.fold3/.MainActivity --ez run_probe true
-# Camera soak only; this is not a combined driving workload:
 adb -s "$FOLD3_SERIAL" shell am force-stop ai.sunnypilot.fold3
 adb -s "$FOLD3_SERIAL" shell am start -n ai.sunnypilot.fold3/.MainActivity \
-  --ez run_probe true --ez soak true --ez soak_only true
+  --ez run_runtime true --ez raylib true
 ```
 
-Model profiles are `baseline`, `image-fp32` (image-buffer experiment), and
-`beam1` (kernel search). All retain original ONNX types; the flag `FLOAT16=0`
-does not replace FP16 types already present in the model. Compilation can take
-several minutes. For example:
+Grant camera/location permissions through Android when needed. The foreground
+manager supervises separate controls, monitoring and IMU service processes.
+Physical controls wait for real `CarParams` and `CarParamsSP`; there is no fake
+fingerprint. DM waits for driver-model output. Raw IMU messages and Camera2
+VisionIPC frames are explicitly invalid until mounting/camera calibration is
+implemented and verified. The Raylib UI has Android connectivity/application
+settings and a permanent transmission-disabled banner. UI backgrounding and
+Surface changes do not restart the driving workers. Finishing the UI creates a
+fresh renderer on the next launch, preserving the service processes.
+EGL falls back when four-sample antialiasing is unavailable and refuses an
+invalid window surface. Lifecycle validation checks the visible transmission
+banner as well as frame delivery, worker PIDs and requested landscape sizes.
+
+Stop the whole app before switching between physical and simulation sessions.
+Diagnostics and model benchmarks are started from the launcher buttons, or with
+`--ez run_probe true`, `--ez run_models true --es model_profile baseline`, and
+`--ez run_probe true --ez soak true --ez soak_only true`. The soak requests 30
+minutes of camera capture; it does not run the full combined driving workload.
+Model profiles also include `image-fp32`, `beam1`, `fp32` and `fp32-image`.
+The first two retain FP16 types embedded in ONNX; the latter two promote FP16
+types and weights to FP32 and compare with their own host reference.
+
+Reports live in private app storage:
 
 ```sh
-adb -s "$FOLD3_SERIAL" shell am force-stop ai.sunnypilot.fold3
-adb -s "$FOLD3_SERIAL" shell am start -n ai.sunnypilot.fold3/.MainActivity \
-  --ez run_models true --es model_profile baseline
-.venv/bin/python android/scripts/collect_metrics.py --serial "$FOLD3_SERIAL" \
-  --process ai.sunnypilot.fold3:models --progress-file model-progress.txt \
-  --seconds 1900 --output /tmp/fold3-model-metrics.jsonl
+adb -s "$FOLD3_SERIAL" exec-out run-as ai.sunnypilot.fold3 cat files/manager.json
+adb -s "$FOLD3_SERIAL" exec-out run-as ai.sunnypilot.fold3 cat files/controlsd.json
+adb -s "$FOLD3_SERIAL" exec-out run-as ai.sunnypilot.fold3 cat files/ui-report.json
+adb -s "$FOLD3_SERIAL" exec-out run-as ai.sunnypilot.fold3 cat files/camera-report.json
+adb -s "$FOLD3_SERIAL" exec-out run-as ai.sunnypilot.fold3 cat files/model-report.json
 ```
 
-The collector records the selected process, rather than aggregate application
-memory. Its defaults select the main camera/UI process and `progress.txt`.
-The `:models` service needs the explicit options above.
+Check timestamps and PIDs: reports persist across installations and can describe
+an earlier run. Committed reports retain qualification failures as well as passes.
+No camera images, audio recordings or location tracks are retained.
+USB permission wraps Android's authorized descriptor in native libusb. Only
+identity/version IN reads exist: no CAN OUT, safety mode changes, reset or flash.
+Panda firmware compatibility and receive-only CAN integration remain blocked.
 
-Reports are private app files, accessible with debug `run-as`:
-
-```sh
-adb -s "$FOLD3_SERIAL" exec-out run-as ai.sunnypilot.fold3 cat files/camera-report.json > /tmp/fold3-camera.json
-adb -s "$FOLD3_SERIAL" exec-out run-as ai.sunnypilot.fold3 cat files/runtime.json > /tmp/fold3-runtime.json
-adb -s "$FOLD3_SERIAL" exec-out run-as ai.sunnypilot.fold3 cat files/hardware.json > /tmp/fold3-hardware.json
-adb -s "$FOLD3_SERIAL" exec-out run-as ai.sunnypilot.fold3 cat files/model-report.json > /tmp/fold3-model.json
-```
-
-Check report start/completion timestamps and status before interpreting results.
-The next run replaces the current app report. Committed `reports/` files retain
-the actual qualification runs, including failures. There are no raw camera
-images, recorded audio or location tracks in these reports.
-
-## Dedicated ARM64 emulator and host tests
+## Emulator and MetaDrive
 
 ```sh
 "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" 'system-images;android-35;google_apis;arm64-v8a'
 echo no | "$ANDROID_HOME/cmdline-tools/latest/bin/avdmanager" create avd \
   --name sunnypilot_fold3_api35 --package 'system-images;android-35;google_apis;arm64-v8a'
 "$ANDROID_HOME/emulator/emulator" -avd sunnypilot_fold3_api35 -port 5560 \
-  -no-window -no-audio -no-boot-anim -no-snapshot -gpu swiftshader_indirect -memory 2048 -cores 2
+  -no-window -no-audio -no-boot-anim -no-snapshot -gpu swiftshader_indirect -memory 4096 -cores 2
+uv pip install --python .venv/bin/python -r android/requirements-simulator.txt
+adb -s "$FOLD3_SERIAL" shell am force-stop ai.sunnypilot.fold3
+adb -s "$FOLD3_SERIAL" shell am start -n ai.sunnypilot.fold3/.MainActivity \
+  --ez run_runtime true --ez simulation true --ez raylib true
+.venv/bin/python -m openpilot.tools.sim.android_validation --serial "$FOLD3_SERIAL" \
+  --metadrive --duration 30 --fault stale --report /tmp/fold3-metadrive.json
+.venv/bin/python android/scripts/validate_lifecycle.py --serial "$FOLD3_SERIAL" \
+  --report /tmp/fold3-lifecycle.json
+# Only on the dedicated emulator: also add --resize to validate display changes.
+.venv/bin/python android/scripts/validate_adb_faults.py --serial "$FOLD3_SERIAL" \
+  --report /tmp/fold3-adb-faults.json
+.venv/bin/python android/scripts/validate_model_reference.py \
+  --report /tmp/fold3-host-original-parity.json
+# Original parity currently fails (nonzero exit). FP32 uses a different reference:
+.venv/bin/python android/scripts/validate_model_reference.py --fp32 \
+  --report /tmp/fold3-host-fp32-parity.json
 ```
 
-Use `emulator-5560` in place of the physical serial for installation and
-instrumentation. The emulator does not expose the phone's OpenCL driver or
-prove camera concurrency. No MetaDrive-to-Android bridge is implemented yet.
+The debug-only ADB transport uses an app/ADB-UID restricted socket, a strict
+Cereal service allowlist, bounded packets, ordered sequences and input-age checks.
+It cannot relay CAN, Panda messages or Params. Simulation uses separate app Params
+and IPC directories. Host validation creates temporary Params/IPC namespaces
+before constructing MetaDrive. Factory ACC remains host simulated; steering
+below the pinned 14.30528 m/s minimum stays inactive. Cancel, stale data and
+transport disconnect withdraw both upstream and sunnypilot active states.
+Missing model, driver or vehicle state also withdraws activity with a live
+connection. The fault script checks these guards and rejects ten malformed or
+disallowed session types without restarting the driving workers.
 
-Focused host checks from the root:
-
-```sh
-PATH="$PWD/.venv/bin:$PATH" .venv/bin/scons -j4 --minimal
-.venv/bin/python -m unittest opendbc.car.hyundai.tests.test_hyundai \
-  msgq.visionipc.tests.test_visionipc msgq.tests.test_messaging
-.venv/bin/python -m unittest opendbc.safety.tests.test_hyundai
-```
+The fixture feeds synthetic perception, driver and calibration messages. Its
+steering plant maps torque to angle and is **not** a Hyundai EPS model. A passing
+run proves Android controller/transport integration only. For an existing host
+simulator/perception stack, `python -m openpilot.tools.sim.android_bridge --help`
+describes the Cereal relay. Start every host simulator/perception process with
+the same `OPENPILOT_PREFIX=fold3_sim_<name>` and a dedicated `PARAMS_ROOT`, before
+importing Cereal or Params. The relay rejects the default host namespace.
 
 See [CAMERAS.md](CAMERAS.md), [PERFORMANCE.md](PERFORMANCE.md) and
-[VALIDATION.md](VALIDATION.md) for measured results and their limits.
+[VALIDATION.md](VALIDATION.md) for the physical blockers and remaining work.

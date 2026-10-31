@@ -1,8 +1,8 @@
 {
-  "generated_utc": "2026-10-30T22:37:53.400124+00:00",
+  "generated_utc": "2026-10-31T09:19:57.710954+00:00",
   "branch": "codex/fold3-android-port",
   "base_commit": "6f7a2c94c10dffcf9a83b120ab1e6985e4496868",
-  "overall_status": "blocked: qualification foundation; complete driving runtime, camera/model and vehicle gates are unmet",
+  "overall_status": "blocked: Android controls, monitoring, Raylib and simulator runtime implemented; complete visual pipeline, camera/model and physical vehicle gates remain unmet",
   "application_id": "ai.sunnypilot.fold3",
   "version": "0.1.0-port-validation",
   "vehicle_tx_enabled": false,
@@ -11,7 +11,7 @@
     "min_sdk": 35,
     "target_sdk": 35,
     "ndk": "28.2.13676358",
-    "cmake": "3.22.1",
+    "cmake": "3.31.6",
     "gradle": "8.9",
     "android_gradle_plugin": "8.5.2",
     "chaquopy": "17.2.0",
@@ -20,7 +20,10 @@
     "pycapnp": "2.1.0",
     "capnproto": "1.0.1",
     "libusb_commit": "d52e355daa09f17ce64819122cb067b8a2ee0d4b",
-    "build_type": "debug; local Android debug signature"
+    "build_type": "debug; local Android debug signature",
+    "raylib": "dff603f4f122163900469e73d113deacd9ec9817",
+    "raylib_python_cffi": "a32e9109c9924abdaae5e6e3d5408e210f939ee1",
+    "json11": "db00e9369a92aa74bf630a2ffb092a4b0b132c01"
   },
   "submodules": {
     "panda": "8a16e089b88593914823743df29e1c30b7dd3e00",
@@ -46,32 +49,59 @@
   },
   "artifacts": [
     {
+      "package": "ai.sunnypilot.fold3",
       "path": "android/app/build/outputs/apk/debug/app-debug.apk",
-      "bytes": 133566518,
-      "sha256": "2550c803d44ab8d2b8051cf5c7efde5180c99f55162979edb37027045c7ef6cb"
+      "bytes": 241356342,
+      "sha256": "f5010a856d9a530a3b456438f3ab0610e3476b84ca4650e6d6e689020ed2dc25"
     },
     {
+      "package": "ai.sunnypilot.fold3.test",
       "path": "android/app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk",
-      "bytes": 4452891,
-      "sha256": "5cf4dc690561eba9067c0a41c6b9d8327205273ae8e8d6af74e1e237aa7a08fe"
+      "bytes": 4458147,
+      "sha256": "44cb546f9d9af6816fbfe5a1b518a439736240ecb83668968bc5a96ef3fed8fa"
     }
   ],
-  "measurement_scope": "Raw camera/model reports are development qualification runs. The final APK receives component instrumentation; a complete driving workload is absent.",
+  "measurement_scope": "The delivered APK receives final installation/hash verification, instrumentation, visible lifecycle rendering and ADB fault checks. Camera/model, UI/control timing and MetaDrive reports identify development-run scope; the final build adds KEEP_SCREEN_ON. No complete camera-to-control workload exists.",
   "final_component_validation": {
-    "verified_utc": "2026-10-30T22:46:26.382713+00:00",
+    "verified_utc": "2026-10-31T09:19:57.710954+00:00",
     "installed_hash_verification": "installed-artifacts.json",
     "physical_fold3_instrumentation": {
-      "passed": 7,
+      "passed": 10,
       "report": "fold3-instrumentation.txt"
     },
     "api35_arm64_emulator_instrumentation": {
-      "passed": 7,
+      "passed": 10,
       "report": "emulator-instrumentation.txt"
     },
     "jvm_tests_passed": 2,
     "host_hyundai_and_ipc_tests_passed": 20,
     "host_hyundai_and_ipc_tests_skipped": 2,
     "host_hyundai_safety_tests_passed": 1701,
-    "host_hyundai_safety_tests_skipped": 198
+    "host_hyundai_safety_tests_skipped": 198,
+    "host_runtime_tests_passed": 58,
+    "lifecycle": {
+      "physical_fold3": "passed",
+      "api35_arm64_emulator": "passed",
+      "physical_fold_transition": "not verified",
+      "reports": [
+        "fold3-lifecycle.json",
+        "emulator-lifecycle.json"
+      ]
+    },
+    "adb_faults": {
+      "physical_fold3": "passed",
+      "api35_arm64_emulator": "passed with renderer backgrounded",
+      "negative_cases_per_device": 10,
+      "reports": [
+        "fold3-adb-faults.json",
+        "emulator-adb-faults.json"
+      ]
+    },
+    "physical_phone_restored": {
+      "simulation": false,
+      "engagement_allowed": false,
+      "vehicle_tx_enabled": false,
+      "report": "fold3-physical-manager-final.json"
+    }
   }
 }

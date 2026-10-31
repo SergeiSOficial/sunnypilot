@@ -1,5 +1,8 @@
 import numpy as np
 
+# Shared by the model and controls without initializing an inference backend.
+LAT_SMOOTH_SECONDS = 0.0
+
 def index_function(idx, max_val=192, max_idx=32):
   return (max_val) * ((idx/max_idx)**2)
 

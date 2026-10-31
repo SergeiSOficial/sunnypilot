@@ -1,4 +1,5 @@
 from importlib.resources import files
+from pathlib import Path
 import json
 import os
 import re
@@ -15,7 +16,7 @@ else:
     Params = None
 
 SYSTEM_UI_DIR = os.path.join(BASEDIR, "openpilot/system", "ui")
-UI_DIR = files("openpilot.selfdrive.ui")
+UI_DIR = Path(BASEDIR) / "openpilot/selfdrive/ui" if os.getenv("ANDROID_DATA_ROOT") else files("openpilot.selfdrive.ui")
 TRANSLATIONS_DIR = UI_DIR.joinpath("translations")
 LANGUAGES_FILE = TRANSLATIONS_DIR.joinpath("languages.json")
 

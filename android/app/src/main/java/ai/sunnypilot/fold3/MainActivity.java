@@ -18,6 +18,7 @@ public final class MainActivity extends Activity {
     private final Handler handler = new Handler();
     private boolean autoRun;
     private boolean soak;
+    private boolean preparingUi;
     private UsbProbe usb;
     private final Runnable refresh = new Runnable() {
         public void run() {
@@ -72,12 +73,46 @@ public final class MainActivity extends Activity {
         scroll.addView(status);
         layout.addView(scroll);
         setContentView(layout);
+        Button runtime = new Button(this);
+        runtime.setText("Start supervised runtime (transmission disabled)");
+        runtime.setOnClickListener(v -> startForegroundService(new Intent(this, ManagerService.class)));
+        layout.addView(runtime, 0);
+        Button drivingUi = new Button(this);
+        drivingUi.setText("Open Raylib UI");
+        drivingUi.setOnClickListener(v -> launchDrivingUi());
+        layout.addView(drivingUi, 1);
+        Button stopRuntime = new Button(this);
+        stopRuntime.setText("Stop supervised runtime");
+        stopRuntime.setOnClickListener(v -> stopService(new Intent(this, ManagerService.class)));
+        layout.addView(stopRuntime, 2);
+        if (saved == null && getIntent().getBooleanExtra("run_runtime", false))
+            startForegroundService(new Intent(this, ManagerService.class).putExtra("simulation", getIntent().getBooleanExtra("simulation", false)));
+        if (saved == null && getIntent().getBooleanExtra("raylib", false)) launchDrivingUi();
         if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[]{Manifest.permission.CAMERA, Manifest.permission.POST_NOTIFICATIONS}, 1);
         } else if (autoRun) { autoRun = false; start(soak); }
         startService(new Intent(this, RuntimeService.class));
         if (saved == null && getIntent().getBooleanExtra("run_models", false)) startService(new Intent(this, ModelService.class)
             .putExtra("model_profile", getIntent().getStringExtra("model_profile")));
+    }
+    private void launchDrivingUi() {
+        if (preparingUi) return;
+        preparingUi = true;
+        new Thread(() -> {
+            try {
+                PythonRuntime.start(this);
+                runOnUiThread(() -> { preparingUi = false; if (!isFinishing()) startActivity(new Intent(this, DrivingActivity.class)
+                    .addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
+                    .putExtra("simulation", getIntent().getBooleanExtra("simulation", false))); });
+            } catch (Exception e) { runOnUiThread(() -> { preparingUi = false; status.setText("UI startup failed: " + e); }); }
+        }, "prepare-ui").start();
+    }
+    @Override protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+        if (intent.getBooleanExtra("run_runtime", false))
+            startForegroundService(new Intent(this, ManagerService.class).putExtra("simulation", intent.getBooleanExtra("simulation", false)));
+        if (intent.getBooleanExtra("raylib", false)) launchDrivingUi();
     }
     private void start(boolean runSoak) {
         if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) return;

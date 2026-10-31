@@ -5,7 +5,10 @@
 #include "common/hardware/base.h"
 #include "common/util.h"
 
-#if __COMMA_HARDWARE__
+#if defined(__ANDROID__)
+#include "common/hardware/android/hardware.h"
+#define Hardware HardwareAndroid
+#elif __COMMA_HARDWARE__
 #include "common/hardware/comma/hardware.h"
 #define Hardware HardwareComma
 #else
@@ -19,6 +22,7 @@ namespace Path {
   }
 
   inline std::string comma_home() {
+    if (const char *root = getenv("ANDROID_DATA_ROOT")) return std::string(root) + "/comma" + Path::openpilot_prefix();
     return util::getenv("HOME") + "/.comma" + Path::openpilot_prefix();
   }
 
@@ -38,6 +42,7 @@ namespace Path {
   }
 
   inline std::string swaglog_ipc() {
+    if (const char *root = getenv("MSGQ_ANDROID_PATH")) return "ipc://" + std::string(root) + "/logmessage" + Path::openpilot_prefix();
     return "ipc:///tmp/logmessage" + Path::openpilot_prefix();
   }
 
@@ -49,6 +54,7 @@ namespace Path {
   }
 
  inline std::string shm_path() {
+    if (const char *root = getenv("MSGQ_ANDROID_PATH")) return root;
     #ifdef __APPLE__
      return"/tmp";
     #else

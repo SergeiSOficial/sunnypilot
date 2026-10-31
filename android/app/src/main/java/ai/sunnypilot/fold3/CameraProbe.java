@@ -27,9 +27,11 @@ final class CameraProbe implements AutoCloseable {
     private final HandlerThread thread = new HandlerThread("camera-frames");
     private final Handler handler;
     private final Progress progress;
+    private final String ipcDirectory;
 
     CameraProbe(Context context, Progress progress) {
         manager = context.getSystemService(CameraManager.class);
+        ipcDirectory = new java.io.File(context.getFilesDir(), "ipc").getAbsolutePath();
         this.progress = progress;
         thread.start();
         handler = new Handler(thread.getLooper());
@@ -98,12 +100,16 @@ final class CameraProbe implements AutoCloseable {
         final ByteBuffer nv12;
         final JSONObject metadata;
         volatile long lastArrivalMs;
-        Stream(String id, int width, int height) throws Exception {
+        long metadataFailures, uncapturedRequests, lostBuffers;
+        Stream(String id, int width, int height, VisionPublisher publisher) throws Exception {
             label = id;
             CameraCharacteristics c = manager.getCameraCharacteristics(id);
             metadata = new JSONObject().put("sensor_id", id).put("width", width).put("height", height)
                 .put("sensor_orientation", c.get(CameraCharacteristics.SENSOR_ORIENTATION))
                 .put("timestamp_source", c.get(CameraCharacteristics.SENSOR_INFO_TIMESTAMP_SOURCE))
+                .put("intrinsic_calibration", array(c.get(CameraCharacteristics.LENS_INTRINSIC_CALIBRATION)))
+                .put("lens_distortion", array(c.get(CameraCharacteristics.LENS_DISTORTION)))
+                .put("visionipc_valid", false).put("visionipc_stream", VisionPublisher.stream(id))
                 .put("focal_lengths_mm", array(c.get(CameraCharacteristics.LENS_INFO_AVAILABLE_FOCAL_LENGTHS)));
             reader = ImageReader.newInstance(width, height, ImageFormat.YUV_420_888, 3);
             nv12 = ByteBuffer.allocateDirect(width * height * 3 / 2);
@@ -116,6 +122,10 @@ final class CameraProbe implements AutoCloseable {
                         p[1].getBuffer().slice(), p[1].getRowStride(), p[1].getPixelStride(),
                         p[2].getBuffer().slice(), p[2].getRowStride(), p[2].getPixelStride(), width, height, nv12);
                     stats.add(image.getTimestamp(), hash, System.nanoTime() - start);
+                    long timestamp = image.getTimestamp();
+                    if (Objects.equals(c.get(CameraCharacteristics.SENSOR_INFO_TIMESTAMP_SOURCE), CameraCharacteristics.SENSOR_INFO_TIMESTAMP_SOURCE_REALTIME))
+                        timestamp -= android.os.SystemClock.elapsedRealtimeNanos() - System.nanoTime();
+                    publisher.send(id, nv12, width, height, stats.frames, timestamp);
                     lastArrivalMs = android.os.SystemClock.elapsedRealtime();
                 } catch (Exception e) { stats.packingErrors++; }
             }, handler);
@@ -124,6 +134,7 @@ final class CameraProbe implements AutoCloseable {
             return new JSONObject(metadata.toString()).put("frames", stats.frames).put("fps", stats.fps())
                 .put("first_timestamp_ns", stats.firstTimestamp).put("last_timestamp_ns", stats.lastTimestamp)
                 .put("timestamp_errors", stats.timestampErrors).put("changed_frames", stats.changedFrames)
+                .put("metadata_failures", metadataFailures).put("uncaptured_requests", uncapturedRequests).put("lost_buffers", lostBuffers)
                 .put("packing_errors", stats.packingErrors).put("packing_p99_ns", stats.percentile(true, .99))
                 .put("frame_interval_p99_ns", stats.percentile(false, .99));
         }
@@ -183,11 +194,15 @@ final class CameraProbe implements AutoCloseable {
             request.set(CaptureRequest.CONTROL_AE_TARGET_FPS_RANGE, new Range<>(30, 30));
         result.get().setRepeatingRequest(request.build(), new CameraCaptureSession.CaptureCallback() {
             public void onCaptureFailed(CameraCaptureSession s, CaptureRequest r, CaptureFailure f) {
-                failure.compareAndSet(null, "capture_failed:camera=" + camera.getId() + ":reason=" + f.getReason()
-                    + ":frame=" + f.getFrameNumber() + ":image_captured=" + f.wasImageCaptured());
+                // A request failure is not a device/session death. Keep measuring
+                // recovery and actual frame freshness, but never hide lost metadata.
+                for (Stream stream : streams) {
+                    stream.metadataFailures++;
+                    if (!f.wasImageCaptured()) stream.uncapturedRequests++;
+                }
             }
             public void onCaptureBufferLost(CameraCaptureSession s, CaptureRequest r, android.view.Surface target, long frame) {
-                failure.compareAndSet(null, "capture_buffer_lost:camera=" + camera.getId() + ":frame=" + frame);
+                for (Stream stream : streams) if (stream.reader.getSurface().equals(target)) stream.lostBuffers++;
             }
         }, handler);
         return result.get();
@@ -200,12 +215,14 @@ final class CameraProbe implements AutoCloseable {
         List<Stream> streams = new ArrayList<>();
         AtomicReference<String> failure = new AtomicReference<>();
         long started = android.os.SystemClock.elapsedRealtime();
+        VisionPublisher publisher = null;
         try {
             if (logical != null) {
                 Set<String> physicalIds = manager.getCameraCharacteristics(logical).getPhysicalCameraIds();
                 if (!physicalIds.containsAll(Arrays.asList(ids))) throw new IllegalStateException("requested physical IDs not exposed by logical camera");
             }
-            for (String id : ids) streams.add(new Stream(id, width, height));
+            publisher = new VisionPublisher(ipcDirectory, ids, width, height);
+            for (String id : ids) streams.add(new Stream(id, width, height, publisher));
             if (logical != null) {
                 CameraDevice device = open(logical, failure); devices.add(device);
                 sessions.add(session(device, streams, true, failure));
@@ -233,13 +250,15 @@ final class CameraProbe implements AutoCloseable {
             for (CameraDevice d : devices) d.close();
             // Drain already dispatched image callbacks before reading their final statistics.
             CountDownLatch drained = new CountDownLatch(1); handler.post(drained::countDown); drained.await(3, TimeUnit.SECONDS);
+            if (publisher != null) publisher.close();
         }
         JSONArray results = new JSONArray();
         boolean healthy = streams.size() == ids.length;
         for (Stream stream : streams) {
             results.put(stream.result());
             healthy &= stream.stats.frames >= Math.max(10, durationMs * 15 / 1000)
-                && stream.stats.timestampErrors == 0 && stream.stats.packingErrors == 0;
+                && stream.stats.timestampErrors == 0 && stream.stats.packingErrors == 0
+                && stream.metadataFailures == 0 && stream.lostBuffers == 0;
         }
         if (streams.size() >= 2) {
             FrameStats a = streams.get(0).stats, b = streams.get(1).stats;
@@ -252,9 +271,10 @@ final class CameraProbe implements AutoCloseable {
         }
         for (Stream stream : streams) stream.close();
         out.put("streams", results).put("elapsed_ms", android.os.SystemClock.elapsedRealtime() - started)
+            .put("completed_requested_duration", failure.get() == null)
             .put("status", failure.get() == null && healthy ? "passed" : "failed");
         if (failure.get() != null) out.put("error", failure.get());
-        else if (!healthy) out.put("error", "insufficient independent, overlapping, monotonic frames");
+        else if (!healthy) out.put("error", "frame loss/metadata failure or insufficient independent, overlapping, monotonic frames");
         return out;
     }
     static long pairingSkew(long[] a, long[] b) {

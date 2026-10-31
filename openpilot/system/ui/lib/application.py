@@ -19,6 +19,7 @@ from typing import NamedTuple
 from importlib.resources import as_file, files
 from openpilot.common.swaglog import cloudlog
 from openpilot.common.hardware import HARDWARE, PC
+from openpilot.common.basedir import BASEDIR
 from openpilot.system.ui.lib.multilang import FONT_FALLBACK_LANGUAGES, TRANSLATIONS_DIR, multilang
 from openpilot.common.realtime import Ratekeeper
 
@@ -48,14 +49,9 @@ RECORD_BITRATE = os.getenv("RECORD_BITRATE", "")  # Target bitrate e.g. "2000k" 
 RECORD_SPEED = int(os.getenv("RECORD_SPEED", "1"))  # Speed multiplier
 OFFSCREEN = os.getenv("OFFSCREEN") == "1"  # Disable FPS limiting for fast offline rendering
 
-GL_VERSION = """
-#version 300 es
-precision highp float;
-"""
+GL_VERSION = "#version 300 es\nprecision highp float;\n"
 if platform.system() == "Darwin":
-  GL_VERSION = """
-    #version 330 core
-  """
+  GL_VERSION = "#version 330 core\n"
 
 BURN_IN_MODE = "BURN_IN" in os.environ
 BURN_IN_VERTEX_SHADER = GL_VERSION + """
@@ -92,7 +88,7 @@ DEFAULT_TEXT_COLOR = rl.Color(255, 255, 255, int(255 * 0.9))
 # The real scales for the fonts below range from 1.212 to 1.266
 FONT_SCALE = 1.242 if BIG_UI else 1.16
 
-ASSETS_DIR = files("openpilot.selfdrive").joinpath("assets")
+ASSETS_DIR = Path(BASEDIR) / "openpilot/selfdrive/assets" if os.getenv("ANDROID_DATA_ROOT") else files("openpilot.selfdrive").joinpath("assets")
 FONT_DIR = ASSETS_DIR.joinpath("fonts")
 EXTRA_FONT_CHARS = "–‑✓×°§•X⚙✕◀▶✔⌫⇧␣○●↳çêüñ–‑✓×°§•€£¥"
 NOTO_FONTS = {
@@ -294,7 +290,8 @@ class GuiApplication(GuiApplicationExt):
       def _close(sig, frame):
         self.close()
         sys.exit(0)
-      signal.signal(signal.SIGINT, _close)
+      if threading.current_thread() is threading.main_thread():
+        signal.signal(signal.SIGINT, _close)
       atexit.register(self.close)
 
       flags = rl.ConfigFlags.FLAG_MSAA_4X_HINT
@@ -777,6 +774,10 @@ class GuiApplication(GuiApplicationExt):
     rl.begin_scissor_mode = _begin_scissor_mode_scaled
 
   def _set_log_callback(self):
+    if hasattr(sys, "getandroidapilevel"):
+      # AArch64 Bionic passes va_list by value. The desktop CFFI callback uses
+      # void*, which has a different ABI. Raylib's Android logger uses logcat.
+      return
     ffi_libc = cffi.FFI()
     ffi_libc.cdef("""
       int vasprintf(char **strp, const char *fmt, void *ap);

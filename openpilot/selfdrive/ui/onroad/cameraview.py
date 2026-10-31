@@ -13,14 +13,9 @@ from openpilot.selfdrive.ui.ui_state import ui_state
 
 CONNECTION_RETRY_INTERVAL = 0.2  # seconds between connection attempts
 
-VERSION = """
-#version 300 es
-precision mediump float;
-"""
+VERSION = "#version 300 es\nprecision mediump float;\n"
 if platform.system() == "Darwin":
-  VERSION = """
-    #version 330 core
-  """
+  VERSION = "#version 330 core\n"
 
 
 VERTEX_SHADER = VERSION + """

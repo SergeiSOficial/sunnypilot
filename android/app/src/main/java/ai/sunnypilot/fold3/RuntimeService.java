@@ -4,7 +4,6 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 import com.chaquo.python.Python;
-import com.chaquo.python.android.AndroidPlatform;
 import java.io.File;
 import java.nio.file.Files;
 
@@ -12,10 +11,11 @@ import java.nio.file.Files;
 public final class RuntimeService extends Service {
     @Override public void onCreate() {
         super.onCreate();
+        AndroidHardware.initialize(this);
         new Thread(() -> {
             try {
                 Files.write(new File(getFilesDir(), "hardware.json").toPath(), HardwareProbe.measure(this).toString(2).getBytes(java.nio.charset.StandardCharsets.UTF_8));
-                if (!Python.isStarted()) Python.start(new AndroidPlatform(this));
+                PythonRuntime.start(this);
                 String report = Python.getInstance().getModule("fold3_runtime").callAttr("probe", getFilesDir().getAbsolutePath()).toString();
                 Files.write(new File(getFilesDir(), "runtime.json").toPath(), report.getBytes(java.nio.charset.StandardCharsets.UTF_8));
             } catch (Exception e) {

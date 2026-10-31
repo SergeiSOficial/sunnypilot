@@ -19,6 +19,8 @@ if gui_app.sunnypilot_ui():
   from openpilot.selfdrive.ui.sunnypilot.onroad.driver_state import DriverStateRendererSP as DriverStateRenderer
   from openpilot.selfdrive.ui.sunnypilot.onroad.hud_renderer import HudRendererSP as HudRenderer
   from openpilot.selfdrive.ui.sunnypilot.ui_state import OnroadTimerStatus
+else:
+  AugmentedRoadViewSP = object
 
 OpState = log.SelfdriveState.OpenpilotState
 CALIBRATED = log.ExtrinsicsCalibration.Status.calibrated
@@ -30,7 +32,7 @@ BORDER_COLORS = {
   UIStatus.DISENGAGED: rl.Color(0x12, 0x28, 0x39, 0xFF),  # Blue for disengaged state
   UIStatus.OVERRIDE: rl.Color(0x89, 0x92, 0x8D, 0xFF),  # Gray for override state
   UIStatus.ENGAGED: rl.Color(0x16, 0x7F, 0x40, 0xFF),  # Green for engaged state
-  **BORDER_COLORS_SP,
+  **(BORDER_COLORS_SP if gui_app.sunnypilot_ui() else {}),
 }
 
 WIDE_CAM_MAX_SPEED = 5.0  # m/s (11 mph)
@@ -41,7 +43,8 @@ INF_POINT = np.array([1000.0, 0.0, 0.0])
 class AugmentedRoadView(CameraView, AugmentedRoadViewSP):
   def __init__(self, stream_type: VisionStreamType = VisionStreamType.VISION_STREAM_NARROW_ROAD):
     CameraView.__init__(self, "camerad", stream_type)
-    AugmentedRoadViewSP.__init__(self)
+    if gui_app.sunnypilot_ui():
+      AugmentedRoadViewSP.__init__(self)
     self._set_placeholder_color(BORDER_COLORS[UIStatus.DISENGAGED])
 
     self.device_camera: DeviceCameraConfig | None = None
@@ -89,7 +92,8 @@ class AugmentedRoadView(CameraView, AugmentedRoadViewSP):
 
     # Draw all UI overlays
     self.model_renderer.render(self._content_rect)
-    AugmentedRoadViewSP.update_fade_out_bottom_overlay(self, self._content_rect)
+    if gui_app.sunnypilot_ui():
+      AugmentedRoadViewSP.update_fade_out_bottom_overlay(self, self._content_rect)
     self._hud_renderer.render(self._content_rect)
     self.alert_renderer.render(self._content_rect)
     self.driver_state_renderer.render(self._content_rect)

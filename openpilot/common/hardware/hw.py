@@ -9,6 +9,8 @@ DEFAULT_DOWNLOAD_CACHE_ROOT = "/tmp/comma_download_cache"
 class Paths:
   @staticmethod
   def comma_home() -> str:
+    if root := os.environ.get("ANDROID_DATA_ROOT"):
+      return os.path.join(root, "comma" + os.environ.get("OPENPILOT_PREFIX", ""))
     return os.path.join(str(Path.home()), ".comma" + os.environ.get("OPENPILOT_PREFIX", ""))
 
   @staticmethod
@@ -33,6 +35,8 @@ class Paths:
 
   @staticmethod
   def swaglog_ipc() -> str:
+    if root := os.environ.get("MSGQ_ANDROID_PATH"):
+      return "ipc://" + os.path.join(root, "logmessage" + os.environ.get("OPENPILOT_PREFIX", ""))
     return "ipc:///tmp/logmessage" + os.environ.get("OPENPILOT_PREFIX", "")
 
   @staticmethod
@@ -71,6 +75,8 @@ class Paths:
 
   @staticmethod
   def shm_path() -> str:
+    if root := os.environ.get("MSGQ_ANDROID_PATH"):
+      return root
     if PC and platform.system() == "Darwin":
       return "/tmp"  # This is not really shared memory on macOS, but it's the closest we can get
     return "/dev/shm"

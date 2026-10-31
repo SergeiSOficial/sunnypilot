@@ -1,92 +1,113 @@
 # Fold 3 performance measurements
 
-**The performance and numerical acceptance targets were not met.** No control
-loop, full UI or combined workload is running in this APK. No precision
-reduction has been accepted.
+**The model deadline and full visual-driving acceptance targets were not met.**
+Android controls and Raylib now run, but passing their isolated checks does not
+qualify simultaneous camera, perception, localization, planning and controls.
+No precision change is accepted for driving.
 
-## Original models on the exposed OpenCL driver
+## Models on the exposed OpenCL driver
 
-The phone's `/vendor/lib64/libOpenCL.so` loads from an ordinary Android app.
-A simple arithmetic probe passed. Both original ONNX models compiled using the
-pinned tinygrad OpenCL backend with serial compilation and app-local caches.
-The reference uses host ONNX Runtime 1.31.1 CPU, NumPy 2.5.3, seed 42, zero float
-inputs and seeded uint8 images, with RHD traffic convention. Android uses
-diagnostic NumPy 1.26.2. This is one synthetic case per model, not replay.
+The ordinary Android app loads `/vendor/lib64/libOpenCL.so`. The pinned tinygrad
+backend compiles both ONNX models with serial compilation and app-local caches.
+Measurements include realization/device completion after three warmups, with
+100 calls per model. Models are measured separately. Host reference: ONNX Runtime
+1.31.1 CPU, NumPy 2.5.3, seed 42, zero float inputs and seeded uint8 images with
+RHD traffic convention. Android NumPy is 1.26.2. This is one synthetic case per
+model, not replay or a measured live perception pipeline.
 
-Measured baseline: [reports/fold3-model-baseline.json](reports/fold3-model-baseline.json).
-Each model ran alone after compilation and three warmups. Durations include
-realization/device completion. There are 100 measured calls per model;
-the 20 Hz pacing waits only when work finishes within 50 ms.
-
-| Model | Compile | Work p50 | Work p99 | ≥50 ms / 100 | Numerical result |
+| Model / experiment | Compile | Work p50 | Work p99 | ≥50 ms / 100 | Numerical result |
 |---|---:|---:|---:|---:|---|
-| Driver monitoring | 111.009 s | 95.459 ms | 98.319 ms | 100 | Failed |
-| Driving supercombo | 179.908 s | 71.921 ms | 74.858 ms | 100 | Failed |
+| Original DM, baseline | 111.009 s | 95.459 ms | 98.319 ms | 100 | Failed |
+| Original driving, baseline | 179.908 s | 71.921 ms | 74.858 ms | 100 | Failed |
+| FP32 DM, image buffers | 321.217 s | 148.691 ms | 158.417 ms | 100 | Passed own FP32 reference only |
+| FP32 driving, image buffers | 404.734 s | 263.415 ms | 276.665 ms | 100 | Passed own FP32 reference only |
 
-The parity check uses `rtol=1e-3`, `atol=1e-4`, without weakening tolerances to
-accept this device. Driver-monitoring maximum absolute error was 0.048828125.
-Driving `outputs` maximum absolute error was 2.90625 and
-`next_state_feat_q` was 0.0116272; the other two outputs matched in this case.
-See raw results for each tensor. Neither model qualifies for driving use.
+Raw [baseline](reports/fold3-model-baseline.json) and
+[FP32 image-buffer experiment](reports/fold3-model-fp32-image.json).
+The latter is slower; no speedup is claimed.
 
-The image-buffer experiment (`IMAGE=1`, `FLOAT16=0`, `BEAM=0`) failed tinygrad
-UOp type verification during compilation for both models:
-[reports/fold3-model-image-fp32.json](reports/fold3-model-image-fp32.json).
-It produced no usable timing comparison. `FLOAT16=0` leaves FP16 tensors
-already encoded in ONNX unchanged. The optional `beam1` profile searches kernels
-with the original model types. It was operator-interrupted after 1,092.266 s
-while still compiling driver monitoring; driving-model search had not started.
-The [partial report](reports/fold3-model-beam1-partial.json) and
-[interruption record](reports/fold3-model-beam1-interruption.json) retain that
-state. This is an incomplete experiment, with no timing, parity or speedup
-result. No compile-time acceptance limit is inferred from stopping it.
+Parity uses unchanged `rtol=1e-3`, `atol=1e-4`. Original phone maximum absolute
+errors: DM 0.048828125, driving `outputs` 2.90625, next features 0.0116272.
+The [host tinygrad CPU check](reports/host-model-parity-original.json) also fails
+on original FP16 types (DM 0.015625, driving 0.21875), so the discrepancy cannot
+be attributed solely to the phone's GPU driver.
 
-During that cold search, 44 samples of the `:models` service recorded PSS
-221,753–333,664 KiB and RSS 326,020–413,416 KiB. These are compilation-only
-process measurements, not inference or whole-application memory. The separate
-`fold3-beam1-main-metrics.jsonl` file sampled the main UI process and its stale
-camera progress text; it must not be interpreted as model-service usage.
+Promoting FP16 weights, casts and intermediate types to FP32 makes host tinygrad
+and Android OpenCL agree with their respective FP32 ONNX Runtime reference.
+Phone errors are 0.00000715 DM and 0.00014305 driving. However, FP32 ONNX Runtime
+itself differs from the original FP16 reference: driving output max 0.296173,
+next features 0.00048198. Passing the promoted reference does **not** establish
+original-model semantics or replay quality. The FP32 profile remains diagnostic.
+[Host FP32 comparison](reports/host-model-parity-fp32.json).
 
-Earlier compile blockers and their fixes are retained in the diagnostic
-failure reports: optional io_uring annotation evaluation, Android's missing
-named semaphore worker support, and CPU constant copies invoking an unavailable
-external compiler. The portable fixes apply to generated Android sources only.
-These changes make compilation possible; they are not evidence of a speedup.
+`IMAGE=1` with the original FP16 types failed UOp verification and produced no
+usable timing. `FLOAT16=0` does not replace types encoded in ONNX. `BEAM=1` was
+interrupted after 1,092.266 s while compiling its first model; no parity or
+performance result was obtained. The original failure, partial and interruption
+reports are retained. No tolerance or deadline was relaxed to accept a profile.
 
-## Camera conversion and bounded memory
+## Controls, UI and camera work
 
-Camera input is converted from Android YUV planes into reusable NV12 buffers.
-The native path checks dimensions, capacities, row padding and chroma pixel
-stride; tests include interleaved chroma. Readers and timing windows are bounded.
+The phone's real upstream controlsd runs in an isolated service process. A short
+synthetic state/DM/calibration fixture with Raylib visible measured **p99 work
+6.399 ms**, 2,223 updated iterations, zero work durations ≥10 ms:
+[report](reports/fold3-controls-work.json). It times `state_control`, publication
+and extension work; it excludes `update` (message reception and pose calibration)
+and the report callback. It is not complete loop work, end-to-end latency or
+100 Hz scheduling qualification. The fixed control rate and upstream controller
+limits remain.
 
-| Camera-only road 0 + driver 1 | Rear packing p99 | Front packing p99 |
-|---|---:|---:|
-| Short probe, 1280×720 | 2.31 ms | 2.43 ms |
-| Short probe, 640×480 | 1.51 ms | 2.69 ms |
-| Longer rerun, 1280×720 | 4.326 ms | 4.607 ms |
+A later mixed simulator/fault run on the final APK collected 2,991 iterations:
+p99 6.501 ms, one ≥10 ms in the same measured subset
+([raw report](reports/fold3-controls-work-final.json)). These runs are not a
+controlled before/after optimization comparison.
 
-The short resolution comparison does not prove a consistent improvement:
-front-camera time increased and sessions were short. Packing timing excludes
-capture-to-inference latency, UI rendering and actual VisionIPC camera delivery.
+The native Raylib backend runs the upstream landscape UI with a 30 fps target.
+UI reports record actual frame intervals, CPU work, bounded recent p99 and
+surface dimensions. Background time is included in mean fps, so mean fps during
+lifecycle tests is not a steady-state throughput estimate. Emulator software
+rendering and physical fold transitions require separate interpretation.
+See the committed lifecycle reports for the final measured runs.
+The emulator initially counted frames on a black surface with an invalid EGL
+configuration. The Android backend now retries without unsupported MSAA and
+checks EGL failures. Final lifecycle checks verify visible pixels; the older
+emulator frame counters alone were insufficient evidence of rendering.
+The final phone UI snapshot recorded 13,200 frames, mean 29.85 fps including
+startup, recent frame-interval p99 33.71 ms and CPU-work p99 8.50 ms
+([raw report](reports/fold3-ui-work-final.json)). It includes simulated state,
+without concurrent camera/model inference. This measures offroad UI rendering;
+onroad camera overlays are not qualified. The loaded emulator fault run hit its
+100 ms transport timeout; isolated controller validation passes with software
+rendering backgrounded. Neither run establishes combined real-time scheduling.
 
-During the failed 436.729 s camera rerun, 28 ADB samples inside its actual
-start/completion window recorded total PSS 84,052–176,500 KiB and total RSS
-209,956–301,940 KiB. Battery temperature was 27.1–29.2°C; reported skin readings
-were 29.1–34.3°C. Android thermal status remained 0 in these samples. The
-committed metrics include samples before and after capture: filter by the
-soak report's UTC window when reproducing this comparison. These observations
-cannot establish 30-minute thermal stability or the cause of capture failures.
+Fresh APK packaging removed 224,024,254 bytes of unused incremental ZIP space
+(48.14% of that package). Every ZIP entry had identical size and SHA-256 before
+and after: [comparison](reports/apk-packaging-comparison.json). This reduces
+installation size/transfer, not model execution time.
 
-## Targets still blocked
+NV12 packing reuses buffers and validates row/pixel strides and capacities.
+The latest camera-only VisionIPC soak measured packing p99 **4.519 ms rear /
+4.745 ms front**, with zero packing errors. It failed at 663.268 s on a stale
+front stream; nearest-stream skew p99 was 806.163 ms including stalls/drops.
+Packing time excludes capture wait, IPC delivery, transforms and inference.
 
-| Acceptance target | Result |
+During the earlier 436.729 s camera rerun, 28 in-window samples recorded total
+PSS 84,052–176,500 KiB, RSS 209,956–301,940 KiB, battery 27.1–29.2°C and Android
+thermal status 0. The newer camera/VisionIPC report records thermal status 0→1
+(light throttling), native heap 20–68 MiB. These observations do not establish
+30-minute combined stability or the cause of capture failure.
+
+## Acceptance
+
+| Target | Result |
 |---|---|
-| Sustained 20 Hz model inference, p99 work <50 ms | Failed baseline; combined models untested |
-| 100 Hz controls, p99 work <10 ms | Blocked: Android driving runtime absent |
-| 30 fps Raylib UI on cover/inner display | Blocked: Raylib backend absent |
-| No upstream watchdog violations | Blocked: upstream supervised stack absent |
-| 30-minute combined workload | Blocked; camera-only attempts failed early |
-| Reduced precision with replay validation | Blocked; no reduced-precision option adopted |
+| 20 Hz models, p99 work <50 ms | **Failed**, original and FP32 experiments |
+| Original-model parity and replay | **Failed** synthetic original parity; replay **blocked** |
+| 100 Hz controls, p99 work <10 ms | Short controller/publication subset **passed**; complete work/scheduling qualification **blocked** |
+| 30 fps Raylib | Rendering **passed**; sustained combined/folded display qualification **blocked** |
+| No upstream watchdog violations | Service restart check **passed**; complete stack qualification **blocked** |
+| 30-minute combined workload | **Blocked**; camera-only attempts failed early |
 
-Measured failures take precedence over successful APK installation or emulator
-tests. No simulator or emulator result qualifies physical road operation.
+The default backend and precision policy are unchanged. Cached compilation,
+bounded queues and reusable frame buffers are implemented, but model accuracy,
+GPU throughput and camera reliability remain unresolved physical-device blockers.

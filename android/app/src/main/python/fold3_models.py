@@ -6,14 +6,14 @@ import time
 
 
 def benchmark(data_dir, profile="baseline"):
-  if profile not in ("baseline", "image-fp32", "beam1"):
+  if profile not in ("baseline", "image-fp32", "beam1", "fp32", "fp32-image"):
     raise ValueError("Unknown model profile")
   from fold3_runtime import probe
   probe(data_dir)
   from tinygrad.helpers import Context
   # Image-backed buffers are an independently measured layout experiment.
   # FLOAT16=0 leaves the original ONNX precision policy unchanged.
-  with Context(IMAGE=int(profile == "image-fp32"), FLOAT16=0, BEAM=int(profile == "beam1")):
+  with Context(IMAGE=int(profile in ("image-fp32", "fp32-image")), FLOAT16=0, BEAM=int(profile == "beam1")):
     return _benchmark(data_dir, profile)
 
 
@@ -23,10 +23,14 @@ def _benchmark(data_dir, profile):
   from tinygrad.nn.onnx import OnnxRunner
   models = Path(__file__).parent / "openpilot/selfdrive/modeld/models"
   references = Path(__file__).parent / "fold3_reference"
+  promoted = profile in ("fp32", "fp32-image")
+  if promoted:
+    references /= "fp32"
+    models = references
   destination = Path(data_dir) / "model-report.json"
   progress = Path(data_dir) / "model-progress.txt"
-  report = {"backend": "CL", "precision": "original ONNX types; no precision reduction requested",
-            "profile": profile, "image_buffers": int(profile == "image-fp32"), "float16_override": 0,
+  report = {"backend": "CL", "precision": "FP16 promoted to FP32" if promoted else "original ONNX types",
+            "profile": profile, "image_buffers": int(profile in ("image-fp32", "fp32-image")), "float16_override": 0,
             "beam_width": int(profile == "beam1"),
             "started_utc": time.time(), "parallel_compiler_workers": 0,  # noqa: TID251 -- UTC evidence timestamp, not a duration
             "vehicle_tx_enabled": False, "replay_validation": "blocked: synthetic cases only", "models": {}}

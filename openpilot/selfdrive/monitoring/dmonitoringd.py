@@ -5,7 +5,7 @@ from openpilot.common.realtime import config_realtime_process
 from openpilot.selfdrive.monitoring.policy import DriverMonitoring
 
 
-def dmonitoringd_thread():
+def dmonitoringd_thread(progress=None):
   config_realtime_process([0, 1, 2, 3], 5)
 
   params = Params()
@@ -18,8 +18,10 @@ def dmonitoringd_thread():
 
   # 20Hz <- dmonitoringmodeld
   while True:
-    sm.update()
+    sm.update(1000 if progress is not None else 100)
     if not sm.updated['driverStateV2']:
+      if progress is not None:
+        progress(False)
       # iterate when model has new output
       continue
 
@@ -32,6 +34,8 @@ def dmonitoringd_thread():
     # publish
     dat = DM.get_state_packet(valid=valid)
     pm.send('driverMonitoringState', dat)
+    if progress is not None:
+      progress(True)
 
     # load live always-on toggle
     if sm['driverStateV2'].frameId % 40 == 1:

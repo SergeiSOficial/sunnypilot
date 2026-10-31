@@ -218,10 +218,11 @@ class SubMaster:
       p = self.poller if s not in self.non_polled_services else None
       self.sock[s] = sub_sock(s, poller=p, addr=addr, conflate=True)
 
-      try:
-        data = new_message(s)
-      except capnp.lib.capnp.KjException:
-        data = new_message(s, 0) # lists
+      # Lists, data and text need a size at initialization. Android's compiled
+      # pycapnp translates KJ exceptions differently, so inspect the schema
+      # instead of using an exception to discover the field type.
+      needs_size = log.Event.schema.fields[s].proto.slot.type.which() in ("list", "data", "text")
+      data = new_message(s, 0 if needs_size else None)
 
       self.data[s] = getattr(data.as_reader(), s)
       self.freq_tracker[s] = FrequencyTracker(SERVICE_LIST[s].frequency, self.update_freq, s == poll)

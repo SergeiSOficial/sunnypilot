@@ -2,7 +2,6 @@ package ai.sunnypilot.fold3;
 
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import com.chaquo.python.Python;
-import com.chaquo.python.android.AndroidPlatform;
 import org.json.JSONObject;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,11 +11,14 @@ import static org.junit.Assert.*;
 public class RuntimeTest {
     @Test public void androidCerealAndMsgqPreservePayloadAndValidity() throws Exception {
         android.content.Context app = androidx.test.platform.app.InstrumentationRegistry.getInstrumentation().getTargetContext();
-        if (!Python.isStarted()) Python.start(new AndroidPlatform(app));
+        PythonRuntime.start(app);
         JSONObject report = new JSONObject(Python.getInstance().getModule("fold3_runtime")
             .callAttr("probe", app.getFilesDir().getAbsolutePath()).toString());
         assertEquals("passed", report.getJSONObject("modules").getJSONObject("capnp").getString("status"));
         assertEquals("passed", report.getJSONObject("modules").getJSONObject("openpilot.cereal").getString("status"));
+        for (String module : new String[]{"openpilot.selfdrive.controls.controlsd", "openpilot.selfdrive.monitoring.dmonitoringd", "openpilot.selfdrive.ui.ui"}) {
+            assertEquals(module, "passed", report.getJSONObject("modules").getJSONObject(module).getString("status"));
+        }
         assertEquals("passed", report.getJSONObject("cereal_msgq_round_trip").getString("status"));
         assertFalse(report.getJSONObject("cereal_msgq_round_trip").getBoolean("valid"));
         assertFalse(report.getBoolean("driving_runtime_ready"));

@@ -2,6 +2,7 @@ import pyray as rl
 from dataclasses import dataclass, field
 from enum import IntEnum
 from collections.abc import Callable
+import os
 from openpilot.selfdrive.ui.layouts.settings.developer import DeveloperLayout
 from openpilot.selfdrive.ui.layouts.settings.device import DeviceLayout
 from openpilot.selfdrive.ui.layouts.settings.firehose import FirehoseLayout
@@ -10,9 +11,13 @@ from openpilot.selfdrive.ui.layouts.settings.toggles import TogglesLayout
 from openpilot.system.ui.lib.application import gui_app, FontWeight, MousePos
 from openpilot.system.ui.lib.multilang import tr, tr_noop
 from openpilot.system.ui.lib.text_measure import measure_text_cached
-from openpilot.system.ui.lib.wifi_manager import WifiManager
 from openpilot.system.ui.widgets import Widget
-from openpilot.system.ui.widgets.network import NetworkUI
+
+if os.getenv("ANDROID_DATA_ROOT"):
+  from openpilot.system.ui.widgets.android_settings import AndroidSettings
+else:
+  from openpilot.system.ui.lib.wifi_manager import WifiManager
+  from openpilot.system.ui.widgets.network import NetworkUI
 
 # Constants
 SIDEBAR_WIDTH = 500
@@ -52,14 +57,16 @@ class SettingsLayout(Widget):
     self._current_panel = PanelType.DEVICE
 
     # Panel configuration
-    wifi_manager = WifiManager()
-    wifi_manager.set_active(False)
+    android = bool(os.getenv("ANDROID_DATA_ROOT"))
+    if not android:
+      wifi_manager = WifiManager()
+      wifi_manager.set_active(False)
 
     self._panels = {
-      PanelType.DEVICE: PanelInfo(tr_noop("Device"), DeviceLayout()),
-      PanelType.NETWORK: PanelInfo(tr_noop("Network"), NetworkUI(wifi_manager)),
+      PanelType.DEVICE: PanelInfo(tr_noop("Device"), AndroidSettings("device") if android else DeviceLayout()),
+      PanelType.NETWORK: PanelInfo(tr_noop("Network"), AndroidSettings("network") if android else NetworkUI(wifi_manager)),
       PanelType.TOGGLES: PanelInfo(tr_noop("Toggles"), TogglesLayout()),
-      PanelType.SOFTWARE: PanelInfo(tr_noop("Software"), SoftwareLayout()),
+      PanelType.SOFTWARE: PanelInfo(tr_noop("Software"), AndroidSettings("software") if android else SoftwareLayout()),
       PanelType.FIREHOSE: PanelInfo(tr_noop("Firehose"), FirehoseLayout()),
       PanelType.DEVELOPER: PanelInfo(tr_noop("Developer"), DeveloperLayout()),
     }

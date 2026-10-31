@@ -6,25 +6,41 @@ import platform
 import time
 
 
-def probe(data_dir):
+def configure(data_dir, simulation=False):
+  """Set sandbox paths before importing any upstream module with global state."""
   os.chdir(data_dir)
-  os.environ["HOME"] = data_dir
+  os.environ["ANDROID_DATA_ROOT"] = data_dir
+  os.environ["PARAMS_ROOT"] = os.path.join(data_dir, "sim-params" if simulation else "params")
+  os.environ["LOG_ROOT"] = os.path.join(data_dir, "logs")
+  os.environ["COMMA_CACHE"] = os.path.join(data_dir, "cache")
   os.environ["XDG_CACHE_HOME"] = os.path.join(data_dir, "cache")
   os.environ["OPENCL_PATH"] = "/vendor/lib64/libOpenCL.so"
   os.environ["CL"] = "1"
   os.environ["DEV"] = "CL"
+  # Android has no desktop monitor to probe before NativeActivity attaches.
+  os.environ["SCALE"] = "1"
+  os.environ["BIG"] = "1"
+  # The extended Linux settings depend on NetworkManager/system update tools.
+  # Reuse the upstream landscape UI with Android-owned settings instead.
+  os.environ["SUNNYPILOT_UI"] = "0"
   # Android services provide process isolation. Python subprocess workers require
   # POSIX named semaphores, which Android does not implement.
   os.environ["PARALLEL"] = "0"
-  ipc_dir = os.path.join(data_dir, "ipc")
+  ipc_dir = os.path.join(data_dir, "sim-ipc" if simulation else "ipc")
   os.makedirs(ipc_dir, mode=0o700, exist_ok=True)
   os.chmod(ipc_dir, 0o700)
   os.environ["MSGQ_ANDROID_PATH"] = ipc_dir
+  return ipc_dir
+
+
+def probe(data_dir):
+  configure(data_dir)
   result = {"started_utc": time.time(), "pid": os.getpid(), "python": platform.python_version(),  # noqa: TID251 -- UTC evidence timestamp
             "machine": platform.machine(), "vehicle_tx_enabled": False, "modules": {}}
   report_path = os.path.join(data_dir, "runtime.json")
   modules = ("numpy", "tinygrad", "capnp", "msgq.ipc_pyx", "msgq.visionipc", "openpilot.cereal", "openpilot.cereal.messaging",
-             "opendbc.car.hyundai.values", "openpilot.common.params", "pyray")
+             "opendbc.car.hyundai.values", "openpilot.common.params", "pyray", "zmq", "zstandard", "setproctitle",
+             "openpilot.selfdrive.controls.controlsd", "openpilot.selfdrive.monitoring.dmonitoringd", "openpilot.selfdrive.ui.ui")
   for name in modules:
     result["modules"][name] = {"status": "running"}
     with open(report_path, "w") as report:
@@ -35,7 +51,8 @@ def probe(data_dir):
       result["modules"][name] = {"status": "passed", "version": getattr(module, "__version__", None),
                                 "file": getattr(module, "__file__", None), "import_ms": (time.monotonic_ns() - start) / 1e6}
     except Exception as exc:
-      result["modules"][name] = {"status": "blocked", "error": f"{type(exc).__name__}: {exc}"}
+      import traceback
+      result["modules"][name] = {"status": "blocked", "error": f"{type(exc).__name__}: {exc}", "traceback": traceback.format_exc()}
   try:
     import msgq
     from openpilot.cereal import log
@@ -68,3 +85,33 @@ def probe(data_dir):
   with open(report_path, "w") as report:
     json.dump(result, report, indent=2)
   return json.dumps(result, indent=2)
+
+
+def receive_camera_test(data_dir, ready):
+  """Verify Java's NV12 publisher against the actual Python VisionIPC client."""
+  configure(data_dir)
+  from msgq.visionipc import VisionIpcClient
+  from openpilot.cereal.visionipc import VisionStreamType
+  client = VisionIpcClient("camerad", VisionStreamType.VISION_STREAM_NARROW_ROAD, False)
+  deadline = time.monotonic() + 10
+  while not client.connect(False):
+    if time.monotonic() >= deadline:
+      raise TimeoutError("Camera publisher connection timed out")
+    time.sleep(.01)
+  ready.countDown()
+  deadline = time.monotonic() + 4
+  frames, previous = 0, -1
+  while time.monotonic() < deadline and frames < 10:
+    buffer = client.recv(100)
+    if buffer is None:
+      continue
+    frame = client.frame_id
+    if frame <= previous or client.valid or client.timestamp_sof != 1000000 + frame:
+      raise ValueError("Camera frame order, timestamp or calibration validity changed")
+    if int(buffer.data[0]) != frame % 128 or int(buffer.data[client.uv_offset]) != frame % 128:
+      raise ValueError("Camera NV12 payload or UV offset mismatch")
+    previous = frame
+    frames += 1
+  if frames < 10:
+    raise TimeoutError("Insufficient Java/Python camera frames")
+  return frames

@@ -57,7 +57,7 @@ class MetaDriveBridge(SimulatorBridge):
     self.test_run = test_run
     self.test_duration = test_duration if self.test_run else math.inf
 
-  def spawn_world(self, queue: Queue):
+  def spawn_world(self, queue: Queue, map_config=None, initial_speed=None):
     sensors = {
       "rgb_road": (RGBCameraRoad, W, H, )
     }
@@ -82,7 +82,7 @@ class MetaDriveBridge(SimulatorBridge):
       "crash_object_done": False,
       "arrive_dest_done": False,
       "traffic_density": 0.0, # traffic is incredibly expensive
-      "map_config": create_map(),
+      "map_config": create_map() if map_config is None else map_config,
       "decision_repeat": 1,
       "physics_world_step_size": self.TICKS_PER_FRAME/100,
       "preload_models": False,
@@ -90,4 +90,6 @@ class MetaDriveBridge(SimulatorBridge):
       "anisotropic_filtering": False
     }
 
+    if initial_speed is not None:
+      config["vehicle_config"].update(spawn_velocity=(initial_speed, 0), spawn_velocity_car_frame=True)
     return MetaDriveWorld(queue, config, self.test_duration, self.test_run, self.dual_camera)

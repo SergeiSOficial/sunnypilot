@@ -1,0 +1,241 @@
+--- a/src/platforms/rcore_android.c
++++ b/src/platforms/rcore_android.c
+@@ -794,6 +794,7 @@
+         if (platform.app->destroyRequested != 0)
+         {
+             CORE.Window.shouldClose = true;
++            break;  // A paused Activity must not poll forever after destruction.
+         }
+     }
+ }
+@@ -873,8 +874,7 @@
+             // Process this event
+             if (platform.source != NULL) platform.source->process(platform.app, platform.source);
+ 
+-            // NOTE: It's highly likely destroyRequested will never be non-zero at the start of the activity lifecycle
+-            //if (platform.app->destroyRequested != 0) CORE.Window.shouldClose = true;
++            if (CORE.Window.shouldClose || platform.app->destroyRequested != 0) return -1;
+         }
+     }
+ 
+@@ -932,7 +932,8 @@
+         TRACELOG(LOG_INFO, "DISPLAY: Trying to enable MSAA x4");
+     }
+ 
+-    const EGLint framebufferAttribs[] = {
++    EGLint framebufferAttribs[] = {
++        EGL_SURFACE_TYPE, EGL_WINDOW_BIT,
+         EGL_RENDERABLE_TYPE, (rlGetVersion() == RL_OPENGL_ES_30)? EGL_OPENGL_ES3_BIT : EGL_OPENGL_ES2_BIT, // Type of context support
+         EGL_RED_SIZE, 8,            // RED color bit depth (alternative: 5)
+         EGL_GREEN_SIZE, 8,          // GREEN color bit depth (alternative: 6)
+@@ -946,7 +947,7 @@
+     };
+ 
+     const EGLint contextAttribs[] = {
+-        EGL_CONTEXT_CLIENT_VERSION, 2,
++        EGL_CONTEXT_CLIENT_VERSION, (rlGetVersion() == RL_OPENGL_ES_30)? 3 : 2,
+         EGL_NONE
+     };
+ 
+@@ -970,7 +971,22 @@
+     }
+ 
+     // Get an appropriate EGL framebuffer configuration
+-    eglChooseConfig(platform.device, framebufferAttribs, &platform.config, 1, &numConfigs);
++    EGLBoolean chosen = eglChooseConfig(platform.device, framebufferAttribs, &platform.config, 1, &numConfigs);
++    if ((chosen != EGL_TRUE || numConfigs < 1) && samples > 0)
++    {
++        TRACELOG(LOG_WARNING, "DISPLAY: MSAA configuration unavailable; retrying without multisampling");
++        for (int i = 0; framebufferAttribs[i] != EGL_NONE; i += 2)
++        {
++            if (framebufferAttribs[i] == EGL_SAMPLE_BUFFERS || framebufferAttribs[i] == EGL_SAMPLES) framebufferAttribs[i + 1] = 0;
++        }
++        FLAG_CLEAR(CORE.Window.flags, FLAG_MSAA_4X_HINT);
++        chosen = eglChooseConfig(platform.device, framebufferAttribs, &platform.config, 1, &numConfigs);
++    }
++    if (chosen != EGL_TRUE || numConfigs < 1)
++    {
++        TRACELOG(LOG_WARNING, "DISPLAY: No compatible EGL window configuration");
++        return -1;
++    }
+ 
+     // Set rendering API
+     eglBindAPI(EGL_OPENGL_ES_API);
+@@ -1002,6 +1018,11 @@
+     //ANativeWindow_setBuffersGeometry(platform.app->window, 0, 0, displayFormat);       // Force use of native display size
+ 
+     platform.surface = eglCreateWindowSurface(platform.device, platform.config, platform.app->window, NULL);
++    if (platform.surface == EGL_NO_SURFACE)
++    {
++        TRACELOG(LOG_WARNING, "DISPLAY: Failed to create EGL window surface");
++        return -1;
++    }
+ 
+     // There must be at least one frame displayed before the buffers are swapped
+     //eglSwapInterval(platform.device, 1);
+@@ -1056,18 +1077,27 @@
+                     EGLint displayFormat = 0;
+                     eglGetConfigAttrib(platform.device, platform.config, EGL_NATIVE_VISUAL_ID, &displayFormat);
+ 
+-                    // Adding renderOffset here feels rather hackish, but the viewport scaling is wrong after the
+-                    // context rebinding if the screen is scaled unless offsets are added. There's probably a more
+-                    // appropriate way to fix this
+-                    ANativeWindow_setBuffersGeometry(app->window,
+-                        CORE.Window.render.width + CORE.Window.renderOffset.x,
+-                        CORE.Window.render.height + CORE.Window.renderOffset.y,
+-                        displayFormat);
++                    // Query the new Surface size before choosing logical buffer geometry.
++                    ANativeWindow_setBuffersGeometry(app->window, 0, 0, displayFormat);
++                    CORE.Window.display.width = ANativeWindow_getWidth(app->window);
++                    CORE.Window.display.height = ANativeWindow_getHeight(app->window);
++                    SetupFramebuffer(CORE.Window.display.width, CORE.Window.display.height);
++                    ANativeWindow_setBuffersGeometry(app->window, CORE.Window.render.width, CORE.Window.render.height, displayFormat);
++                    CORE.Window.render.width = CORE.Window.screen.width;
++                    CORE.Window.render.height = CORE.Window.screen.height;
+ 
+                     // Recreate display surface and re-attach OpenGL context
+                     platform.surface = eglCreateWindowSurface(platform.device, platform.config, app->window, NULL);
+-                    eglMakeCurrent(platform.device, platform.surface, platform.surface, platform.context);
++                    if (platform.surface == EGL_NO_SURFACE ||
++                        eglMakeCurrent(platform.device, platform.surface, platform.surface, platform.context) == EGL_FALSE)
++                    {
++                        TRACELOG(LOG_WARNING, "DISPLAY: Failed to restore EGL window surface");
++                        CORE.Window.shouldClose = true;
++                        break;
++                    }
+ 
++                    SetupViewport(CORE.Window.screen.width, CORE.Window.screen.height);
++                    CORE.Window.resizedLastFrame = true;
+                     platform.contextRebindRequired = false;
+                 }
+                 else
+@@ -1076,7 +1106,11 @@
+                     CORE.Window.display.height = ANativeWindow_getHeight(platform.app->window);
+ 
+                     // Initialize graphics device (display device and OpenGL context)
+-                    InitGraphicsDevice();
++                    if (InitGraphicsDevice() < 0)
++                    {
++                        CORE.Window.shouldClose = true;
++                        break;
++                    }
+ 
+                     // Initialize OpenGL context (states and resources)
+                     // NOTE: CORE.Window.currentFbo.width and CORE.Window.currentFbo.height not used, stored as globals in rlgl
+@@ -1162,10 +1196,19 @@
+         case APP_CMD_DESTROY: break;
+         case APP_CMD_CONFIG_CHANGED:
+         {
+-            //AConfiguration_fromAssetManager(platform.app->config, platform.app->activity->assetManager);
+-            //print_cur_config(platform.app);
+-
+-            // Check screen orientation here!
++            if ((app->window != NULL) && !platform.contextRebindRequired &&
++                (platform.surface != EGL_NO_SURFACE))
++            {
++                EGLint format = 0;
++                eglGetConfigAttrib(platform.device, platform.config, EGL_NATIVE_VISUAL_ID, &format);
++                ANativeWindow_setBuffersGeometry(app->window, 0, 0, format);
++                CORE.Window.display.width = ANativeWindow_getWidth(app->window);
++                CORE.Window.display.height = ANativeWindow_getHeight(app->window);
++                SetupFramebuffer(CORE.Window.display.width, CORE.Window.display.height);
++                ANativeWindow_setBuffersGeometry(app->window, CORE.Window.render.width, CORE.Window.render.height, format);
++                SetupViewport(CORE.Window.screen.width, CORE.Window.screen.height);
++                CORE.Window.resizedLastFrame = true;
++            }
+         } break;
+         default: break;
+     }
+@@ -1474,77 +1517,26 @@
+ // NOTE: Global variables CORE.Window.render.width/CORE.Window.render.height and CORE.Window.renderOffset.x/CORE.Window.renderOffset.y can be modified
+ static void SetupFramebuffer(int width, int height)
+ {
+-    // Calculate CORE.Window.render.width and CORE.Window.render.height, having the display size (input params) and the desired screen size (global var)
+-    if ((CORE.Window.screen.width > CORE.Window.display.width) || (CORE.Window.screen.height > CORE.Window.display.height))
++    // Keep the upstream logical UI coordinates. The compositor scales this
++    // buffer to the Surface; border bars and touch mapping use the SAME units.
++    // This avoids mixing physical-pixel offsets with logical coordinates when
++    // the cover/inner display is smaller than the requested 2160x1080 UI.
++    CORE.Window.screenScale = MatrixIdentity();
++    CORE.Window.renderOffset.x = 0;
++    CORE.Window.renderOffset.y = 0;
++    float displayRatio = (float)width/(float)height;
++    float screenRatio = (float)CORE.Window.screen.width/(float)CORE.Window.screen.height;
++    if (displayRatio <= screenRatio)
+     {
+-        TRACELOG(LOG_WARNING, "DISPLAY: Downscaling required: Screen size (%ix%i) is bigger than display size (%ix%i)", CORE.Window.screen.width, CORE.Window.screen.height, CORE.Window.display.width, CORE.Window.display.height);
+-
+-        // Downscaling to fit display with border-bars
+-        float widthRatio = (float)CORE.Window.display.width/(float)CORE.Window.screen.width;
+-        float heightRatio = (float)CORE.Window.display.height/(float)CORE.Window.screen.height;
+-
+-        if (widthRatio <= heightRatio)
+-        {
+-            CORE.Window.render.width = CORE.Window.display.width;
+-            CORE.Window.render.height = (int)round((float)CORE.Window.screen.height*widthRatio);
+-            CORE.Window.renderOffset.x = 0;
+-            CORE.Window.renderOffset.y = (CORE.Window.display.height - CORE.Window.render.height);
+-        }
+-        else
+-        {
+-            CORE.Window.render.width = (int)round((float)CORE.Window.screen.width*heightRatio);
+-            CORE.Window.render.height = CORE.Window.display.height;
+-            CORE.Window.renderOffset.x = (CORE.Window.display.width - CORE.Window.render.width);
+-            CORE.Window.renderOffset.y = 0;
+-        }
+-
+-        // Screen scaling required
+-        float scaleRatio = (float)CORE.Window.render.width/(float)CORE.Window.screen.width;
+-        CORE.Window.screenScale = MatrixScale(scaleRatio, scaleRatio, 1.0f);
+-
+-        // NOTE: Rendering to full display resolution
+-        // Above parameters need to be calculate for downscale matrix and offsets
+-        CORE.Window.render.width = CORE.Window.display.width;
+-        CORE.Window.render.height = CORE.Window.display.height;
+-
+-        TRACELOG(LOG_WARNING, "DISPLAY: Downscale matrix generated, content will be rendered at (%ix%i)", CORE.Window.render.width, CORE.Window.render.height);
++        CORE.Window.render.width = CORE.Window.screen.width;
++        CORE.Window.render.height = (int)round((float)CORE.Window.screen.width/displayRatio);
++        CORE.Window.renderOffset.y = CORE.Window.render.height - CORE.Window.screen.height;
+     }
+-    else if ((CORE.Window.screen.width < CORE.Window.display.width) || (CORE.Window.screen.height < CORE.Window.display.height))
+-    {
+-        // Required screen size is smaller than display size
+-        TRACELOG(LOG_INFO, "DISPLAY: Upscaling required: Screen size (%ix%i) smaller than display size (%ix%i)", CORE.Window.screen.width, CORE.Window.screen.height, CORE.Window.display.width, CORE.Window.display.height);
+-
+-        if ((CORE.Window.screen.width == 0) || (CORE.Window.screen.height == 0))
+-        {
+-            CORE.Window.screen.width = CORE.Window.display.width;
+-            CORE.Window.screen.height = CORE.Window.display.height;
+-        }
+-
+-        // Upscaling to fit display with border-bars
+-        float displayRatio = (float)CORE.Window.display.width/(float)CORE.Window.display.height;
+-        float screenRatio = (float)CORE.Window.screen.width/(float)CORE.Window.screen.height;
+-
+-        if (displayRatio <= screenRatio)
+-        {
+-            CORE.Window.render.width = CORE.Window.screen.width;
+-            CORE.Window.render.height = (int)round((float)CORE.Window.screen.width/displayRatio);
+-            CORE.Window.renderOffset.x = 0;
+-            CORE.Window.renderOffset.y = (CORE.Window.render.height - CORE.Window.screen.height);
+-        }
+-        else
+-        {
+-            CORE.Window.render.width = (int)round((float)CORE.Window.screen.height*displayRatio);
+-            CORE.Window.render.height = CORE.Window.screen.height;
+-            CORE.Window.renderOffset.x = (CORE.Window.render.width - CORE.Window.screen.width);
+-            CORE.Window.renderOffset.y = 0;
+-        }
+-    }
+     else
+     {
+-        CORE.Window.render.width = CORE.Window.screen.width;
+         CORE.Window.render.height = CORE.Window.screen.height;
+-        CORE.Window.renderOffset.x = 0;
+-        CORE.Window.renderOffset.y = 0;
++        CORE.Window.render.width = (int)round((float)CORE.Window.screen.height*displayRatio);
++        CORE.Window.renderOffset.x = CORE.Window.render.width - CORE.Window.screen.width;
+     }
+ }
+ 

@@ -8,6 +8,44 @@ import static org.junit.Assert.*;
 
 @RunWith(AndroidJUnit4.class)
 public class NativeBridgeTest {
+    @Test public void javaPublisherReachesPythonVisionIpcWithoutClaimingCalibration() throws Exception {
+        android.content.Context app = androidx.test.platform.app.InstrumentationRegistry.getInstrumentation().getTargetContext();
+        PythonRuntime.start(app);
+        String directory = new java.io.File(app.getFilesDir(), "ipc").getAbsolutePath();
+        long handle = NativeBridge.createCameraPublisher(directory, new int[]{0}, 4, 2);
+        java.util.concurrent.CountDownLatch ready = new java.util.concurrent.CountDownLatch(1);
+        Thread producer = new Thread(() -> {
+            try { if (!ready.await(15, java.util.concurrent.TimeUnit.SECONDS)) return; }
+            catch (InterruptedException e) { Thread.currentThread().interrupt(); return; }
+            ByteBuffer pixels = ByteBuffer.allocateDirect(12);
+            for (int frame = 1; frame <= 100; frame++) {
+                pixels.clear();
+                for (int i = 0; i < 12; i++) pixels.put((byte)(frame % 128));
+                pixels.rewind();
+                NativeBridge.sendCameraFrame(handle, 0, pixels, 4, 2, frame, 1000000 + frame);
+                android.os.SystemClock.sleep(20);
+            }
+        });
+        try {
+            producer.start();
+            int frames = com.chaquo.python.Python.getInstance().getModule("fold3_runtime")
+                .callAttr("receive_camera_test", app.getFilesDir().getAbsolutePath(), ready).toInt();
+            assertEquals(10, frames);
+        } finally { producer.join(); NativeBridge.closeCameraPublisher(handle); }
+    }
+    @Test public void cameraPublisherRejectsWrongDimensionsAndUnallocatedStreams() {
+        android.content.Context app = androidx.test.platform.app.InstrumentationRegistry.getInstrumentation().getTargetContext();
+        String directory = new java.io.File(app.getFilesDir(), "ipc").getAbsolutePath();
+        long handle = NativeBridge.createCameraPublisher(directory, new int[]{0}, 4, 2);
+        try {
+            for (int[] shape : new int[][]{{0, 8, 2}, {1, 4, 2}}) {
+                try {
+                    NativeBridge.sendCameraFrame(handle, shape[0], ByteBuffer.allocateDirect(24), shape[1], shape[2], 1, 1000001);
+                    fail("Invalid camera stream accepted");
+                } catch (IllegalArgumentException expected) { }
+            }
+        } finally { NativeBridge.closeCameraPublisher(handle); }
+    }
     @Test public void pinnedVisionIpcPreservesFramesAndMetadata() throws Exception {
         android.content.Context app = androidx.test.platform.app.InstrumentationRegistry.getInstrumentation().getTargetContext();
         String path = app.getDir("ipc", 0).getAbsolutePath();

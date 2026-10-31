@@ -7,13 +7,12 @@ from openpilot.common.hardware import COMMA_HARDWARE
 from openpilot.common.realtime import Priority, config_realtime_process, set_core_affinity
 from openpilot.system.ui.lib.application import gui_app
 from openpilot.selfdrive.ui.layouts.main import MainLayout
-from openpilot.selfdrive.ui.mici.layouts.main import MiciMainLayout
 from openpilot.selfdrive.ui.ui_state import ui_state
 
 BIG_UI = gui_app.big_ui()
 
 
-def main():
+def main(progress=None):
   cores = {5, }
   # above plannerd and radard
   config_realtime_process(0, Priority.CTRL_HIGH)
@@ -22,6 +21,7 @@ def main():
   if BIG_UI:
     MainLayout()
   else:
+    from openpilot.selfdrive.ui.mici.layouts.main import MiciMainLayout
     MiciMainLayout()
 
   pm = messaging.PubMaster(['uiDebug'])
@@ -42,6 +42,8 @@ def main():
       msg.uiDebug.cpuTimeMillis = (cpu_time + extra_cpu) * 1000
       msg.uiDebug.frameTimeMillis = frame_time * 1000
       pm.send('uiDebug', msg)
+      if progress is not None:
+        progress(frame_time, cpu_time + extra_cpu)
 
 
 if __name__ == "__main__":

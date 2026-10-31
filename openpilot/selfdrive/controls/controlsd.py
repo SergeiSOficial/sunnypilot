@@ -19,7 +19,7 @@ from openpilot.selfdrive.controls.lib.latcontrol_angle import LatControlAngle, S
 from openpilot.selfdrive.controls.lib.latcontrol_curvature import LatControlCurvature
 from openpilot.selfdrive.controls.lib.latcontrol_torque import LatControlTorque
 from openpilot.selfdrive.controls.lib.longcontrol import LongControl
-from openpilot.selfdrive.modeld.modeld import LAT_SMOOTH_SECONDS
+from openpilot.selfdrive.modeld.constants import LAT_SMOOTH_SECONDS
 from openpilot.selfdrive.locationd.helpers import PoseCalibrator, Pose
 
 from openpilot.sunnypilot.selfdrive.controls.controlsd_ext import ControlsExt
@@ -243,14 +243,18 @@ class Controls(ControlsExt):
     cc_send.carControl = CC
     self.pm.send('carControl', cc_send)
 
-  def run(self):
+  def run(self, progress=None):
+    import time
     rk = Ratekeeper(100, print_delay_threshold=None)
     while True:
       self.update()
+      work_start = time.monotonic_ns()
       CC, lac_log = self.state_control()
       self.publish(CC, lac_log)
       self.get_params_sp(self.sm)
       self.run_ext(self.sm, self.pm)
+      if progress is not None:
+        progress(self.sm.updated['selfdriveState'], time.monotonic_ns() - work_start)
       rk.monitor_time()
 
 

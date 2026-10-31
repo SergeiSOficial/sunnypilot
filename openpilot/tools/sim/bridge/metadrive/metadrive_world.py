@@ -51,6 +51,7 @@ class MetaDriveWorld(World):
     print("----------------------------------------------------------")
 
     self.vehicle_last_pos = self.vehicle_state_recv.recv().position # wait for a state message to ensure metadrive is launched
+    self.vehicle_position = self.vehicle_last_pos
     self.status_q.put(QueueMessage(QueueMessageType.START_STATUS, "started"))
 
     self.steer_ratio = 15
@@ -84,6 +85,7 @@ class MetaDriveWorld(World):
     while self.vehicle_state_recv.poll(0):
       md_vehicle: metadrive_vehicle_state = self.vehicle_state_recv.recv()
       curr_pos = md_vehicle.position
+      self.vehicle_position = curr_pos
 
       state.velocity = md_vehicle.velocity
       state.bearing = md_vehicle.bearing
@@ -129,4 +131,7 @@ class MetaDriveWorld(World):
   def close(self, reason: str):
     self.status_q.put(QueueMessage(QueueMessageType.CLOSE_STATUS, reason))
     self.exit_event.set()
-    self.metadrive_process.join()
+    self.metadrive_process.join(timeout=5)
+    if self.metadrive_process.is_alive():
+      self.metadrive_process.terminate()
+      self.metadrive_process.join(timeout=5)

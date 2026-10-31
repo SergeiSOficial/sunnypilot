@@ -9,6 +9,7 @@ import sys
 import tarfile
 import urllib.request
 import zipfile
+import re
 
 ROOT = Path(__file__).resolve().parents[1]
 LIBUSB_COMMIT = "d52e355daa09f17ce64819122cb067b8a2ee0d4b"  # v1.0.27
@@ -39,6 +40,29 @@ def main():
   if actual != LIBUSB_COMMIT or dirty:
     raise SystemExit("libusb checkout differs from its pin; preserve and inspect it before building")
   print(f"libusb {actual}: clean")
+  for name, url, commit in (
+    ("json11", "https://github.com/dropbox/json11.git", "db00e9369a92aa74bf630a2ffb092a4b0b132c01"),
+    ("raylib-python-cffi", "https://github.com/commaai/raylib-python-cffi.git", "a32e9109c9924abdaae5e6e3d5408e210f939ee1"),
+  ):
+    checkout = ROOT / "build/native" / name
+    if not checkout.exists():
+      subprocess.run(["git", "clone", url, str(checkout)], check=True)
+      subprocess.run(["git", "-C", str(checkout), "checkout", commit], check=True)
+    actual = subprocess.check_output(["git", "-C", str(checkout), "rev-parse", "HEAD"], text=True).strip()
+    if actual != commit or subprocess.check_output(["git", "-C", str(checkout), "status", "--porcelain"], text=True):
+      raise SystemExit(f"{name}: checkout differs from pin")
+    if name == "raylib-python-cffi":
+      subprocess.run(["git", "-C", str(checkout), "submodule", "update", "--init", "--recursive"], check=True)
+      # Patch an exported copy, keeping the pinned source checkout pristine.
+      raylib = ROOT / "build/native/raylib-android"
+      if raylib.exists():
+        shutil.rmtree(raylib)
+      raylib.mkdir()
+      archive = subprocess.check_output(["git", "-C", str(checkout / "raylib-c"), "archive", "HEAD"])
+      with tarfile.open(fileobj=io.BytesIO(archive)) as files:
+        files.extractall(raylib, filter="data")
+      subprocess.run(["git", "apply", "--directory=android/build/native/raylib-android", "android/patches/raylib-android.patch"],
+                     cwd=ROOT.parent, check=True)
   msgq = ROOT / "build/native/msgq"
   source_repo = ROOT.parent / "msgq_repo"
   actual = subprocess.check_output(["git", "-C", str(source_repo), "rev-parse", "HEAD"], text=True).strip()
@@ -79,6 +103,54 @@ def main():
              "0f7f4b8a76a2cdb284fddef20de8306450df6dd031a47a15ac95bc43c3358e09")
   subprocess.run(["git", "apply", "--directory=android/build/native/capnproto-c++-1.0.1",
                   "android/patches/capnp-android.patch"], cwd=ROOT.parent, check=True)
+  # Params references schema enums. Generate matching headers explicitly rather
+  # than accidentally consuming files from an earlier host SCons build.
+  compiler = Path(sys.executable).parent / "capnpc"
+  if not compiler.is_file() or subprocess.check_output([str(compiler), "--version"], text=True).strip() != "Cap'n Proto version 1.0.1":
+    raise SystemExit("Install the locked capnproto host package (compiler 1.0.1) into this Python environment")
+  generated = ROOT / "build/native/generated/openpilot/cereal/gen/cpp"
+  generated.mkdir(parents=True, exist_ok=True)
+  subprocess.run([str(compiler), "--src-prefix=openpilot/cereal", "--src-prefix=opendbc_repo/opendbc/car",
+                  "--import-path=opendbc_repo/opendbc/car", "-o", f"c++:{generated}",
+                  *[f"openpilot/cereal/{s}.capnp" for s in ("log", "deprecated", "custom")],
+                  "opendbc_repo/opendbc/car/car.capnp"], cwd=ROOT.parent, check=True)
+  source_tar("pyzmq-27.2.0.tar.gz",
+             "https://files.pythonhosted.org/packages/e7/8d/5b3d5631c2f4b4b8862f64cd0c9eb777b5710eeb5125b4be8dd0a200a4c0/pyzmq-27.2.0.tar.gz",
+             "54d4259d1bfae24ecdb5ca79f7acc2eac6c286a02d6a0ae617797cb45f0726d3")
+  source_tar("libzmq-4.3.5.tar.gz", "https://codeload.github.com/zeromq/libzmq/tar.gz/refs/tags/v4.3.5",
+             "6c972d1e6a91a0ecd79c3236f04cf0126f2f4dfbbad407d72b4606a7ba93f9c6")
+  source_tar("zstandard-0.25.0.tar.gz",
+             "https://files.pythonhosted.org/packages/fd/aa/3e0508d5a5dd96529cdc5a97011299056e14c6505b678fd58938792794b1/zstandard-0.25.0.tar.gz",
+             "7713e1179d162cf5c7906da876ec2ccb9c3a9dcbdffef0cc7f70c3667a205f0b")
+  zmq = ROOT / "build/native/pyzmq-27.2.0"
+  subprocess.run([sys.executable, "-m", "cython", "--cplus", "-3", "-I", str(zmq),
+                  "--module-name", "zmq.backend.cython._zmq", "-o", str(zmq / "_zmq.cpp"),
+                  str(zmq / "zmq/backend/cython/_zmq.py")], check=True)
+  # Generate the pinned pyray CFFI API without executing a host linker recipe.
+  # CMake below links this C code to the Android Raylib instance.
+  from cffi import FFI
+  ray = ROOT / "build/native/raylib-python-cffi"
+  ffi = FFI()
+  # Same preprocessing as the pinned binding generator, without overwriting its
+  # tracked *.modified files or linking macOS libraries into the target.
+  for header in ("raylib.h", "rlgl.h", "raymath.h"):
+    source = "".join(line for line in (ray / "raylib-c/src" / header).read_text().splitlines(True)
+                     if "#include" not in line and "TraceLogCallback" not in line)
+    defines = ["RL_MATRIX_TYPE", "RL_QUATERNION_TYPE", "RL_VECTOR4_TYPE", "RL_VECTOR3_TYPE", "RL_VECTOR2_TYPE",
+               "RLAPI=", "PHYSACDEF=", "RAYGUIDEF=", "RMAPI=", "GRAPHICS_API_OPENGL_ES3"]
+    source = subprocess.run(["gcc", "-CC", "-P", "-undef", "-nostdinc", *("-D" + d for d in defines), "-dDI", "-E", "-"],
+                            input=source, text=True, capture_output=True, check=True).stdout.replace("va_list", "void *")
+    if header == "raymath.h":
+      source = re.sub(r"\n\{\n(.|\n)*?\n}\n", ";", source)
+    ffi.cdef("\n".join(line for line in source.splitlines() if not line.startswith("#")))
+  ffi.set_source("raylib._raylib_cffi", '#include "raylib.h"\n#include "rlgl.h"\n#include "raymath.h"\n')
+  ffi.emit_c_code(str(ROOT / "build/native/raylib_cffi.c"))
+  import tomllib
+  lock = tomllib.loads((ROOT.parent / "uv.lock").read_text())
+  for package in lock["package"]:
+    if package["name"] == "setproctitle":
+      sdist = package["sdist"]
+      source_tar(f"setproctitle-{package['version']}.tar.gz", sdist["url"], sdist["hash"].removeprefix("sha256:"))
 
 
 if __name__ == "__main__":
