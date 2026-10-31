@@ -6,10 +6,14 @@ import time
 
 
 def benchmark(data_dir, profile="baseline"):
-  if profile not in ("baseline", "image-fp32", "beam1", "fp32", "fp32-image"):
+  if profile not in ("baseline", "image-fp32", "beam1", "fp32", "fp32-image", "ort-cpu", "ort-cpu-4", "ort-nnapi"):
     raise ValueError("Unknown model profile")
   from fold3_runtime import probe
   probe(data_dir)
+  if profile.startswith("ort-"):
+    if profile == "ort-cpu-4":
+      return _benchmark_ort(data_dir, "cpu", threads=4)
+    return _benchmark_ort(data_dir, profile.removeprefix("ort-"))
   from tinygrad.helpers import Context
   # Image-backed buffers are an independently measured layout experiment.
   # FLOAT16=0 leaves the original ONNX precision policy unchanged.
@@ -91,4 +95,60 @@ def _benchmark(data_dir, profile):
   report["completed_utc"] = time.time()  # noqa: TID251 -- UTC evidence timestamp
   destination.write_text(json.dumps(report, indent=2))
   progress.write_text("Model validation complete; model-report.json records parity and measured work times.")
+  return json.dumps(report)
+
+
+def _benchmark_ort(data_dir, backend, threads=2):
+  import numpy as np
+  from fold3_ort import OrtModel
+  assets = Path(__file__).parent
+  references = assets / "fold3_reference"
+  manifest = json.loads((references / "manifest.json").read_text())
+  report = {"backend": f"ONNX Runtime 1.31.1 {backend}", "precision": "original ONNX types",
+            "started_utc": time.time(), "vehicle_tx_enabled": False, "threads": threads,  # noqa: TID251
+            "synthetic_only": True, "replay_validation": "blocked: synthetic cases only",
+            "host_reference": manifest, "models": {}}
+  destination = Path(data_dir) / "model-report.json"
+  progress = Path(data_dir) / "model-progress.txt"
+  for name, metadata in manifest["models"].items():
+    entry = report["models"][name] = {"status": "running"}
+    destination.write_text(json.dumps(report, indent=2))
+    try:
+      path = assets / f"openpilot/selfdrive/modeld/models/{name}.onnx"
+      if hashlib.sha256(path.read_bytes()).hexdigest() != metadata["sha256"]:
+        raise ValueError("model hash differs from host reference")
+      progress.write_text(f"Loading original {name} using ORT {backend}")
+      started = time.monotonic_ns()
+      model = OrtModel(path, backend, threads=threads)
+      with np.load(references / f"{name}-inputs.npz") as source:
+        inputs = {key: source[key] for key in source.files}
+      for _ in range(3):
+        outputs = model(inputs)
+      entry["initialization_ms"] = (time.monotonic_ns() - started) / 1e6
+      parity = {}
+      with np.load(references / f"{name}-outputs.npz") as expected:
+        for key in expected.files:
+          actual = outputs[key]
+          error = np.abs(actual.astype(np.float64) - expected[key].astype(np.float64))
+          parity[key] = {"passed": bool(np.isfinite(actual).all() and np.allclose(actual, expected[key], rtol=1e-3, atol=1e-4)),
+                         "max_abs_error": float(error.max()) if np.isfinite(error).all() else None}
+      samples = []
+      for i in range(100):
+        started = time.monotonic_ns()
+        model(inputs)
+        samples.append((time.monotonic_ns() - started) / 1e6)
+        if i % 10 == 0:
+          progress.write_text(f"ORT {backend} {name}: {i}/100 samples")
+        time.sleep(max(0, .05 - samples[-1] / 1000))
+      entry.update(status="passed" if all(p["passed"] for p in parity.values()) else "failed", parity=parity,
+                   samples=len(samples), work_p50_ms=float(np.percentile(samples, 50)), work_p99_ms=float(np.percentile(samples, 99)),
+                   work_max_ms=max(samples), deadline_misses_50ms=sum(s >= 50 for s in samples))
+      entry["performance_status"] = "passed" if entry["work_p99_ms"] < 50 else "failed"
+    except Exception as exc:
+      import traceback
+      entry.update(status="blocked", error=f"{type(exc).__name__}: {exc}", traceback=traceback.format_exc())
+    destination.write_text(json.dumps(report, indent=2))
+  report["completed_utc"] = time.time()  # noqa: TID251
+  destination.write_text(json.dumps(report, indent=2))
+  progress.write_text("ORT validation complete; parity and timing are separate gates.")
   return json.dumps(report)

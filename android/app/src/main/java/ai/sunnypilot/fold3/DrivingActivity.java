@@ -24,7 +24,7 @@ public final class DrivingActivity extends NativeActivity {
     }
     public void runUi() {
         try { Python.getInstance().getModule("fold3_ui").callAttr("main", getFilesDir().getAbsolutePath(),
-            getIntent().getBooleanExtra("simulation", false)); }
+            getIntent().getBooleanExtra("simulation", false), getIntent().getBooleanExtra("preview", false)); }
         catch (Exception e) {
             try { Files.write(new File(getFilesDir(), "ui-error.txt").toPath(), e.toString().getBytes(java.nio.charset.StandardCharsets.UTF_8)); }
             catch (Exception ignored) { }

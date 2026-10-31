@@ -96,7 +96,9 @@ public final class ManagerService extends Service {
         for (Class<?> type : List.of(WorkerService.Controls.class, WorkerService.Monitoring.class)) {
             Child child = new Child(type); children.add(child); child.bind();
         }
-        if (!simulation) { Child child = new Child(WorkerService.Sensors.class); children.add(child); child.bind(); }
+        if (!simulation) for (Class<?> type : List.of(WorkerService.Sensors.class, WorkerService.RoadModel.class, WorkerService.DriverModel.class)) {
+            Child child = new Child(type); children.add(child); child.bind();
+        }
         if (simulation) { Child child = new Child(WorkerService.Simulator.class); children.add(child); child.bind(); }
         handler.post(monitor);
         return START_NOT_STICKY;

@@ -113,7 +113,13 @@ def run(name, directory, worker, simulation=False):
       from fold3_sim import serve
       serve(report)
     else:
-      {"controlsd": controls, "dmonitoringd": monitoring, "sensord": sensors}[name](report)
+      if name in ("modeld", "dmonitoringmodeld"):
+        if simulation:
+          raise PermissionError("Physical cameras and diagnostic models are excluded from simulator workers")
+        from fold3_vision import run as vision
+        vision(report, driver=name == "dmonitoringmodeld")
+      else:
+        {"controlsd": controls, "dmonitoringd": monitoring, "sensord": sensors}[name](report)
   except Exception:
     report.update("failed", error=traceback.format_exc())
     raise

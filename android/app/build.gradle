@@ -61,6 +61,7 @@ tasks.register('stagePython', Copy) {
     from('../../opendbc_repo') { include 'opendbc/dbc/**', 'opendbc/car/**/*.yaml', 'opendbc/car/**/*.toml', 'opendbc/car/**/*.json'; exclude '**/*.py' }
     from('../build/native/capnproto-c++-1.0.1/src') { include 'capnp/*.capnp' }
     from("$buildDir/native-python") { include '**/*.so' }
+    from('../build/native/panda_protocol') { include '*.py' }
     doLast {
         exec {
             workingDir rootProject.projectDir.parentFile
@@ -75,6 +76,8 @@ tasks.register('stagePython', Copy) {
 tasks.register('stageNotices', Copy) {
     into "$buildDir/generated/notices/third_party"
     from('../build/native/libusb/COPYING') { into 'libusb' }
+    from('../build/native/onnxruntime-1.31.1') { include 'LICENSE', 'ThirdPartyNotices.txt'; into 'onnxruntime' }
+    from('../../panda') { include 'LICENSE'; into 'panda' }
     from('../../') { include 'LICENSE', 'LICENSE.md'; into 'sunnypilot' }
     from('../../tinygrad_repo/LICENSE') { into 'tinygrad' }
     from('../../opendbc_repo') { include 'LICENSE', 'LICENSE.md'; into 'opendbc' }

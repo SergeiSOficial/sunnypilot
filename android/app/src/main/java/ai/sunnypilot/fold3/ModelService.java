@@ -1,6 +1,9 @@
 package ai.sunnypilot.fold3;
 
 import android.app.Service;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.NotificationChannel;
 import android.content.Intent;
 import android.os.IBinder;
 import com.chaquo.python.Python;
@@ -13,6 +16,10 @@ public final class ModelService extends Service {
     private final java.util.concurrent.atomic.AtomicBoolean running = new java.util.concurrent.atomic.AtomicBoolean();
     @Override public int onStartCommand(Intent intent, int flags, int startId) {
         if (!running.compareAndSet(false, true)) return START_NOT_STICKY;
+        NotificationManager notifications = getSystemService(NotificationManager.class);
+        notifications.createNotificationChannel(new NotificationChannel("models", "Model validation", NotificationManager.IMPORTANCE_LOW));
+        startForeground(6, new Notification.Builder(this, "models").setContentTitle("Model performance validation")
+            .setSmallIcon(android.R.drawable.ic_menu_info_details).setContentText("Diagnostic workload; vehicle transmission disabled").build());
         String profile = intent == null ? "baseline" : intent.getStringExtra("model_profile");
         final String selected = profile == null ? "baseline" : profile;
         new Thread(() -> {

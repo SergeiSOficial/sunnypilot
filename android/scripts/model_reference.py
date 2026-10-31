@@ -7,6 +7,8 @@ import hashlib
 import json
 import pathlib
 import argparse
+import base64
+import pickle
 import numpy as np
 import onnxruntime as ort
 
@@ -70,6 +72,10 @@ def main():
     manifest["models"][name] = {"sha256": digest,
                                 "inputs": {key: list(value.shape) for key, value in inputs.items()},
                                 "outputs": {s.name: list(v.shape) for s, v in zip(session.get_outputs(), expected, strict=True)}}
+    # Metadata comes from the same hash-checked model, never a Linux JIT pickle.
+    slices = pickle.loads(base64.b64decode(session.get_modelmeta().custom_metadata_map["output_slices"]))
+    manifest["models"][name]["output_slices"] = {key: [value.start, value.stop, value.step] for key, value in slices.items()}
+    manifest["models"][name]["input_dtypes"] = {key: str(value.dtype) for key, value in inputs.items()}
     if args.fp32:
       original = ort.InferenceSession(str(original_path), options, providers=["CPUExecutionProvider"]).run(None, inputs)
       manifest["models"][name]["original_sha256"] = hashlib.sha256(original_path.read_bytes()).hexdigest()
@@ -77,6 +83,13 @@ def main():
         spec.name: float(np.max(np.abs(a.astype(np.float64) - b.astype(np.float64))))
         for spec, a, b in zip(session.get_outputs(), original, expected, strict=True)}
   (output / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
+  import onnx
+  from onnx import TensorProto, helper
+  graph = helper.make_graph([helper.make_node("Add", ["x", "x"], ["y"])], "android_runtime_check",
+                            [helper.make_tensor_value_info("x", TensorProto.FLOAT, [1, 4])],
+                            [helper.make_tensor_value_info("y", TensorProto.FLOAT, [1, 4])])
+  model = helper.make_model(graph, opset_imports=[helper.make_opsetid("", 13)], ir_version=8)
+  onnx.save(model, output / "runtime-check.onnx")
   print(output)
 
 

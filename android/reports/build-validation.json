@@ -1,20 +1,20 @@
 {
-  "recorded_utc": "2026-10-31T09:19:57.710954+00:00",
+  "recorded_utc": "2026-10-31T11:23:02.656979+00:00",
   "gradle_tasks": [
     ":app:assembleDebug",
     ":app:testDebugUnitTest",
     ":app:assembleDebugAndroidTest"
   ],
-  "build_result": "BUILD SUCCESSFUL in 19s",
+  "build_result": "BUILD SUCCESSFUL in 7s; previous thermal-guard build passed in 35s",
   "jvm_tests": {
     "name": "ai.sunnypilot.fold3.FrameStatsTest",
     "tests": "2",
     "skipped": "0",
     "failures": "0",
     "errors": "0",
-    "timestamp": "2026-10-31T09:15:00",
+    "timestamp": "2026-10-31T10:24:27",
     "hostname": "Mac.home",
-    "time": "0.021"
+    "time": "0.028"
   },
   "test_cases": [
     "monotonicTimestampsAndBoundedSamples",
@@ -25,8 +25,16 @@
   "python_syntax": "passed: compileall on Android runtime/scripts, hardware and simulator sources",
   "note": "Gradle may reuse unchanged unit-test task outputs; the JUnit timestamp above identifies the retained successful run.",
   "host_runtime_tests": {
-    "passed": 58,
-    "report": "host-runtime-tests.txt"
+    "passed": 72,
+    "report": "host-runtime-vision-tests.txt"
   },
-  "application_sha256": "f5010a856d9a530a3b456438f3ab0610e3476b84ca4650e6d6e689020ed2dc25"
+  "application_sha256": "e2ee0027c6a49368bfaf57da8e844d9b73fe3a2721f7e77db302b2f91203e6d2",
+  "packaging_comparison": "Historical pre-thermal-guard comparison: vision-apk-packaging-comparison.json",
+  "onnxruntime_android": "1.31.1",
+  "quality_delta": "unavailable: tool cannot find Git HEAD/baseline for this checkout; no static-analysis pass claimed",
+  "critical_thermal_guard": "emulator-thermal-abort.json",
+  "focused_final_host_tests": {
+    "passed": 22,
+    "report": "host-vision-protocol-final-tests.txt"
+  }
 }

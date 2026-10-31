@@ -19,11 +19,12 @@ public final class MainActivity extends Activity {
     private boolean autoRun;
     private boolean soak;
     private boolean preparingUi;
+    private boolean pendingVision;
     private UsbProbe usb;
     private final Runnable refresh = new Runnable() {
         public void run() {
             StringBuilder text = new StringBuilder();
-            for (String name : new String[]{"progress.txt", "model-progress.txt", "usb-report.json"}) {
+            for (String name : new String[]{"progress.txt", "model-progress.txt", "usb-report.json", "panda-rx.json"}) {
                 File report = new File(getFilesDir(), name);
                 if (!report.isFile()) continue;
                 try {
@@ -57,7 +58,7 @@ public final class MainActivity extends Activity {
         layout.addView(soakButton);
         Button models = new Button(this);
         models.setText("Validate original models on OpenCL");
-        models.setOnClickListener(v -> startService(new Intent(this, ModelService.class)));
+        models.setOnClickListener(v -> startForegroundService(new Intent(this, ModelService.class)));
         layout.addView(models);
         Button stop = new Button(this);
         stop.setText("Stop camera test");
@@ -67,6 +68,22 @@ public final class MainActivity extends Activity {
         panda.setText("Read Panda USB identity (no transmission)");
         panda.setOnClickListener(v -> usb.start());
         layout.addView(panda);
+        Button pandaRx = new Button(this);
+        pandaRx.setText("Start silent Panda receive-only diagnostics");
+        pandaRx.setOnClickListener(v -> usb.start(true));
+        layout.addView(pandaRx);
+        Button stopPanda = new Button(this);
+        stopPanda.setText("Stop Panda receive-only diagnostics");
+        stopPanda.setOnClickListener(v -> stopService(new Intent(this, PandaRxService.class)));
+        layout.addView(stopPanda);
+        Button vision = new Button(this);
+        vision.setText("Start live road + driver visual diagnostics");
+        vision.setOnClickListener(v -> startVision(getIntent()));
+        layout.addView(vision);
+        Button stopVision = new Button(this);
+        stopVision.setText("Stop live cameras");
+        stopVision.setOnClickListener(v -> stopService(new Intent(this, VisionService.class)));
+        layout.addView(stopVision);
         status = new TextView(this);
         status.setText("Ready. Reports are stored locally. Camera testing closes each session before opening the next.");
         ScrollView scroll = new ScrollView(this);
@@ -88,12 +105,27 @@ public final class MainActivity extends Activity {
         if (saved == null && getIntent().getBooleanExtra("run_runtime", false))
             startForegroundService(new Intent(this, ManagerService.class).putExtra("simulation", getIntent().getBooleanExtra("simulation", false)));
         if (saved == null && getIntent().getBooleanExtra("raylib", false)) launchDrivingUi();
-        if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+        if (saved == null && getIntent().getBooleanExtra("run_vision", false)) startVision(getIntent());
+        if (getIntent().getBooleanExtra("stop_vision", false)) stopService(new Intent(this, VisionService.class));
+        if (saved == null && BuildConfig.DEBUG && getIntent().getBooleanExtra("panda_rx", false)) usb.start(true);
+        if (!pendingVision && checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[]{Manifest.permission.CAMERA, Manifest.permission.POST_NOTIFICATIONS}, 1);
         } else if (autoRun) { autoRun = false; start(soak); }
         startService(new Intent(this, RuntimeService.class));
-        if (saved == null && getIntent().getBooleanExtra("run_models", false)) startService(new Intent(this, ModelService.class)
+        if (saved == null && getIntent().getBooleanExtra("run_models", false)) startForegroundService(new Intent(this, ModelService.class)
             .putExtra("model_profile", getIntent().getStringExtra("model_profile")));
+    }
+    private void startVision(Intent intent) {
+        if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            pendingVision = true;
+            requestPermissions(new String[]{Manifest.permission.CAMERA}, 2);
+            return;
+        }
+        stopService(new Intent(this, ProbeService.class));
+        stopService(new Intent(this, ManagerService.class));
+        startForegroundService(new Intent(this, ManagerService.class));
+        startForegroundService(new Intent(this, VisionService.class).putExtra("duration_seconds", intent.getIntExtra("vision_seconds", 1800)));
+        startActivity(new Intent(this, DrivingActivity.class).putExtra("preview", true));
     }
     private void launchDrivingUi() {
         if (preparingUi) return;
@@ -113,14 +145,22 @@ public final class MainActivity extends Activity {
         if (intent.getBooleanExtra("run_runtime", false))
             startForegroundService(new Intent(this, ManagerService.class).putExtra("simulation", intent.getBooleanExtra("simulation", false)));
         if (intent.getBooleanExtra("raylib", false)) launchDrivingUi();
+        if (intent.getBooleanExtra("run_vision", false)) startVision(intent);
+        if (intent.getBooleanExtra("stop_vision", false)) stopService(new Intent(this, VisionService.class));
+        if (BuildConfig.DEBUG && intent.getBooleanExtra("panda_rx", false)) usb.start(true);
+        if (intent.getBooleanExtra("stop_panda", false)) stopService(new Intent(this, PandaRxService.class));
     }
     private void start(boolean runSoak) {
         if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) return;
+        stopService(new Intent(this, VisionService.class));
         startForegroundService(new Intent(this, ProbeService.class).putExtra("soak", runSoak)
             .putExtra("soak_only", getIntent().getBooleanExtra("soak_only", false)));
     }
     @Override public void onRequestPermissionsResult(int request, String[] permissions, int[] results) {
         super.onRequestPermissionsResult(request, permissions, results);
+        if (pendingVision && checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+            pendingVision = false; startVision(getIntent());
+        }
         if (autoRun && checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
             autoRun = false; start(soak);
         }

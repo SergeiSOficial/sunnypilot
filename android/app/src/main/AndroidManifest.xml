@@ -19,8 +19,14 @@
             <meta-data android:name="android.app.lib_name" android:value="raylib" />
         </activity>
         <service android:name=".ProbeService" android:exported="false" android:foregroundServiceType="camera" />
+        <service android:name=".VisionService" android:exported="false" android:process=":camerad" android:foregroundServiceType="camera" />
         <service android:name=".RuntimeService" android:exported="false" android:process=":runtime" />
-        <service android:name=".ModelService" android:exported="false" android:process=":models" />
+        <service android:name=".ModelService" android:exported="false" android:process=":models" android:foregroundServiceType="specialUse">
+            <property android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE" android:value="User-started model numerical and sustained performance validation; no vehicle transmission" />
+        </service>
+        <service android:name=".PandaRxService" android:exported="false" android:process=":panda_rx" android:foregroundServiceType="specialUse">
+            <property android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE" android:value="User-started silent CAN receive-only diagnostics; no vehicle transmission" />
+        </service>
         <service android:name=".ManagerService" android:exported="false" android:process=":manager" android:foregroundServiceType="specialUse">
             <property android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE" android:value="Experimental on-device driving runtime and hardware qualification" />
         </service>
@@ -28,5 +34,7 @@
         <service android:name=".WorkerService$Monitoring" android:exported="false" android:process=":dmonitoringd" />
         <service android:name=".WorkerService$Sensors" android:exported="false" android:process=":sensord" />
         <service android:name=".WorkerService$Simulator" android:exported="false" android:process=":sim_bridge" />
+        <service android:name=".WorkerService$RoadModel" android:exported="false" android:process=":modeld" />
+        <service android:name=".WorkerService$DriverModel" android:exported="false" android:process=":dmonitoringmodeld" />
     </application>
 </manifest>

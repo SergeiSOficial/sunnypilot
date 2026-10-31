@@ -1,138 +1,147 @@
 # Fold 3 port validation
 
-**Overall status: BLOCKED — partial Android runtime implemented; full visual
-driving and vehicle qualification are incomplete.** Vehicle transmission is
-unconditionally compiled out. Neither simulator nor emulator success permits
-physical engagement.
+**Overall: BLOCKED.** The Android runtime and diagnostic visual pipeline are
+implemented, but camera concurrency, original-model parity, calibration and
+physical vehicle qualification prevent a complete driving port. Transmission
+is compiled out and engagement is unconditionally disabled.
 
-Target: stock Android 15 SM-F926B, Snapdragon 888 / Adreno 660; RHD 2019 Hyundai
-Ioniq PHEV, factory ACC, red Panda. All pinned submodules stay at the inspected
-base revisions. The APK is installed without changing Android or Panda firmware.
+Target: stock Android 15 SM-F926B, Snapdragon 888 / Adreno 660; right-hand-drive
+2019 Hyundai Ioniq PHEV, factory ACC, red Panda. Branch
+`codex/fold3-android-port` starts at
+`6f7a2c94c10dffcf9a83b120ab1e6985e4496868`. Pinned submodules are unchanged.
+Android and Panda firmware have not been replaced or flashed. The user confirmed
+that the Panda is disconnected.
 
-## Acceptance matrix
+## Acceptance
 
-| Area | Status | Evidence / limit |
+| Area | Result | Evidence and limit |
 |---|---|---|
-| ARM64 APK, stock Android installation | **Passed** | Native Bionic libraries, Python 3.12; final artifacts/hashes in reports |
-| Cereal, Params, msgq and VisionIPC | **Passed** component checks | Java→native→Python frames plus serialization/shared-memory tests |
-| Android service supervision | **Passed** component checks | Real controlsd process killed/restarted; manager and UI Activity recreation survive |
-| controlsd and dmonitoringd | **Passed** runtime/import checks | Simulator drives real controlsd; physical controls/DM wait for qualified inputs |
-| Raylib upstream landscape UI | **Passed** offroad rendering | Separate UI process and Android settings; visible lifecycle checks pass; onroad camera overlays unqualified |
-| Android IMU/storage/thermal/battery | **Passed** basic acquisition | Raw IMU deliberately invalid: vehicle mounting calibration absent |
-| GNSS and audio alerts | **Blocked** full integration | Public last-known-location/PCM APIs present; no validated live GNSS/alert daemon |
-| Distinct dual rear capture | **Failed** | Public Camera2 rejects rear 0+2 at both tested sizes |
-| Road + driver capture | **Passed** short only; **failed** sustained | Latest 30-minute request stopped at 663.268 s, stale front stream |
-| Two rear + driver | **Failed** | Second rear camera rejected |
-| Calibrated RHD DM and synchronized camera inputs | **Blocked** | All physical VisionIPC frames `valid=false`; no accepted transforms/input pairer |
-| Original-model numerical parity | **Failed** | Host CPU and phone OpenCL discrepancies against original FP16 reference |
-| FP32 own-reference parity | **Passed** synthetic only | Does not establish equivalence to original FP16 model or replay quality |
-| 20 Hz inference / p99 <50 ms | **Failed** | Best original driving p99 74.858 ms; FP32 slower |
-| Controls p99 work <10 ms | **Passed** measured subset only; full loop **blocked** | Phone 6.501 ms / 2,991 iterations, one ≥10 ms sample; reception/pose calibration and reporting excluded |
-| MetaDrive→Android steering | **Passed** fixture | Actual world, real phone controller; synthetic perception and torque-to-angle plant |
-| Factory ACC / steering minimum / cancellation / stale inputs | **Passed** simulator checks | No phone longitudinal activity or lateral activity below pinned minimum |
-| Simulator CAN isolation | **Passed** protocol/component checks | Debug-only, app/ADB UID, isolated Params/IPC; CAN/Panda/output injection rejected |
-| Panda USB | **Blocked** physical qualification | UsbManager→libusb identity IN only; no connected Panda |
-| Hyundai safety | **Passed** host checks | Physical firmware, fingerprint, C harness, bus mapping, ignition/heartbeat unverified |
-| 30-minute combined workload | **Blocked** | Complete visual stack absent and camera-only soaks fail |
-| Physical car / road readiness | **Blocked** | No Panda/vehicle validation; TX disabled |
+| ARM64 build / installation | Passed component checks | Python 3.12, Android Bionic native modules, packaged model assets |
+| IPC, frame conversion and parsers | Passed component checks | Stride/pixel validation, all NV12 rotations, native VisionIPC, original model output slices into invalid upstream Cereal messages |
+| Host runtime / input guards | Passed | [72 tests](reports/host-runtime-vision-tests.txt), including timestamp pairing, missing ultrawide and corrupt/unsafe Panda inputs |
+| Fold 3 / emulator instrumentation | Passed | 14 tests on each device; raw reports below |
+| Raylib lifecycle / display recovery | Passed component checks | Visible TX-disabled banner and preserved worker PIDs; physical fold transition remains untested |
+| MetaDrive steering / factory ACC fixture | Passed component checks | Phone and emulator reruns; synthetic perception, calibration and torque-to-angle plant |
+| Wide + ultrawide / two rear + driver | Failed | [Fresh Camera2 matrix](reports/fold3-camera-vision.json): stock HAL rejects second rear with MAX_CAMERAS_IN_USE |
+| Road + driver preview, 60 seconds | Passed diagnostic | [Fold 3 live run](reports/fold3-live-vision.json): independent streams, no recovery, fresh previews; every input remains invalid |
+| Delivered APK, 60-second live rerun | Failed | [Final Fold 3 run](reports/fold3-live-vision-final.json): road camera disconnected, recovered after three attempts; DM published zero predictions |
+| Sustained combined diagnostic | Failed | [30-minute attempt](reports/fold3-live-vision-30min-summary.json): critical thermal status at 20.8 minutes; operator stopped the workload; zero accepted DM predictions |
+| Critical thermal camera abort | Passed emulator component check | [Startup, active capture, host cleanup and new-activity stop cases](reports/emulator-thermal-abort.json): no thermal retry, override reset; physical thermal protection retained |
+| Emulator live camera/model workload | Failed | Software renderer/cameras miss throughput target and report future sensor timestamps; fixture instrumentation still passes |
+| Original driving / DM numerical parity | Failed | CPU, NNAPI and OpenCL reports in [PERFORMANCE.md](PERFORMANCE.md); no precision/tolerance change accepted |
+| Sustained 20 Hz perception | Failed | OpenCL p99 55.7 ms driving / 82.8 ms DM; isolated CPU DM timing passes, parity does not |
+| Full 100 Hz controls | Blocked | Measured work subset passes in short simulations; physical input chain and complete-loop deadlines are unqualified |
+| Panda receive-only transport | Passed software / blocked physical | Pinned decoder, USB IN-only bindings and negative descriptor tests; no hardware connected |
+| Firmware, harness, ignition and vehicle fingerprint | Blocked | Requires actual Panda + vehicle; signature recording is not firmware approval |
+| Calibration / usable driver monitoring | Blocked | Preview affine and phone mounting transforms are unqualified; late predictions are discarded |
+| Full combined driving acceptance / road use | Blocked | Missing rear stream, numerical failures and physical qualification cannot be established by simulator results |
 
 ## Implemented runtime
 
-- ARM64 cross-compilation of Params, pycapnp/Cereal, msgq/VisionIPC, libusb,
-  pyzmq/libzmq, zstandard, setproctitle and shared Raylib/pyray. Native source
-  exports and patches are reproducible in the main repository.
-- Android foreground manager and separate Python worker services. Binder death,
-  progress checks and bounded restart/backoff replace fork/multiprocessing.
-  Controls, monitoring, raw IMU and debug simulator entry points are hosted.
-- App-private Params, shared memory and sockets. The simulator has separate
-  directories and no CAN/Panda message route. Existing Cereal schemas,
-  controller algorithms and parameter types are retained.
-- Real Camera2 NV12→VisionIPC delivery with bounded rings and actual timestamps;
-  diagnostic calibration validity remains false. Metadata-only capture failures
-  can be observed without immediately aborting an otherwise delivered image.
-- NativeActivity Raylib UI and Android settings. GLES shaders declare the
-  version first, which is required by the tested emulator compiler. Surface
-  changes preserve GL resources and driving workers; Activity completion gets
-  a fresh UI interpreter/renderer. The foreground driving Activity keeps the
-  screen awake using Android's window flag.
-- EGL configuration selection now checks for a compatible window configuration,
-  retries without unsupported MSAA and rejects failed surfaces. The emulator's
-  earlier black surface advanced frame counters, exposing a false-positive
-  lifecycle check. Final lifecycle checks require a visible transmission banner
-  and both the surface and screenshot reaching the requested landscape size.
-- Debug MetaDrive/Cereal relay with finite input ages, ordered bounded packets,
-  typed allowlists and disconnect/cancel/stale withdrawal. Factory ACC remains
-  simulated by the host. The pinned steering minimum is 14.30528 m/s (51.5 km/h).
+The manager supervises separate Controls, Monitoring, Sensors, RoadModel and
+DriverModel Android service processes. Physical controls wait for real vehicle
+parameters. Road inference waits for distinct rear sensors 0 and 2. Driver
+inference consumes timestamp-gated camera 1 frames using the original model,
+reusable projection buffers and upstream Cereal parsers. All messages remain
+invalid; future, duplicate, stale, unsynchronized and non-finite inputs/outputs
+are rejected. Non-finite predictions clear recurrent model state. The uncalibrated
+preview transform is explicitly excluded from driving qualification.
 
-## Test evidence
+Camera2 publishes bounded NV12 rings with sensor metadata, orientation and
+BOOTTIME-to-MONOTONIC timestamp conversion. A cross-process ownership lock keeps
+camera diagnostics and live capture from competing. Startup staleness begins
+only after sessions are configured. Capture recovery is bounded and remains a
+qualification failure. Critical thermal status rejects startup or closes active
+capture within the one-second polling interval, with no retry. The UI displays only frames aged 0..100 ms and clears
+stale previews. Closing/recreating the UI preserves the driving services.
 
-The Android instrumentation suite contains **10 tests per device**. It covers
-NV12 padding/interleaving and invalid layouts, native VisionIPC, Java→Python
-changing frame delivery, Cereal/msgq, native Params, immutable TX disablement,
-USB invalid descriptors, runtime/UI imports and process restart supervision.
-Final raw results and lifecycle reports are under [reports/](reports/).
-The delivered APK passes 10 tests on the Fold 3 (8.985 s) and emulator
-(15.456 s), plus two JVM tests. Installed app and test APK hashes match on both
-devices. Lifecycle and ADB fault reports identify this exact delivered APK.
-MetaDrive and UI/control timing reports identify the preceding build; its only
-delivery difference is the final Activity screen-awake flag. Camera/model
-qualification retains the earlier development measurements and their failures.
-The emulator is dedicated ARM64 Android 15 with software graphics and 4 GiB RAM;
-it does not expose the phone's OpenCL driver or camera combinations.
+The native ONNX wrapper checks the entire input set, shape, dtype and contiguous
+buffer length, releases the GIL for inference and copies typed outputs. Model
+benchmarks run as a foreground service. The CPU four-thread diagnostic profile
+measured lower isolated DM work time but fails original-reference parity. No profile
+is approved for driving.
 
-After validation the Fold 3 was restored to physical diagnostic mode. Its
-[manager snapshot](reports/fold3-physical-manager-final.json) has Controls,
-Monitoring and Sensors, no Simulator, and engagement/TX disabled. Controls wait
-for physical vehicle parameters; monitoring waits for driver-model output. The
-[IMU snapshot](reports/fold3-physical-imu-final.json) reports uncalibrated,
-invalid samples. This startup check does not establish sustained performance.
+The Panda path obtains an Android-authorized descriptor, verifies VID/PID and
+red hardware, checks exact pinned CAN/health versions, then requires silent
+safety mode, clear controls flags and no faults before receiving CAN. Repeated
+health checks, fragmented-packet checksums, disconnect handling and bounded bus
+fingerprints are implemented. CAN messages remain invalid and use host USB
+arrival time, because the protocol has no sensor timestamp. Only whitelisted
+vendor IN reads and bulk endpoint 0x81 exist. No USB OUT, safety-mode change,
+heartbeat, reset or flashing API is exposed. Signatures are recorded without
+claiming approval. [Phone](reports/fold3-panda-receive-only.json) and
+[emulator](reports/emulator-panda-receive-only.json) absence checks report blocked.
 
-[Host runtime tests](reports/host-runtime-tests.txt) cover simulator framing,
-CAN/output injection rejection, sequence/age limits, steering-minimum fixtures,
-Cereal SubMaster list/data/text initialization, Params, longitudinal/lateral
-controllers and driver monitoring. The earlier minimal SCons build passed.
-The final focused runtime suite passes 58 tests. ADB fault validation rejects
-ten malformed/disallowed session types and checks missing-model inactivity,
-recovery and abrupt disconnect. The initial missing-model test exposed an
-active/inactive publication race, retained in
-[the failed regression run](reports/emulator-adb-faults-before-fix.json).
-The fix replaces active states before publishing an invalid packet's inputs.
-The host namespace guard is also regression tested against a misspelled
-environment variable; both fixtures use msgq's actual `OPENPILOT_PREFIX`.
-The final emulator fault run passes with software rendering backgrounded.
-A loaded run with foreground rendering and concurrent host MetaDrive hit the
-unchanged 100 ms socket timeout after 29 accepted packets; it disconnected with
-no worker restart. [That failure is retained](reports/emulator-adb-faults-rendering-timeout.json).
-It prevents a combined emulator scheduling qualification; the timeout was not
-relaxed to make the isolated rerun pass.
-Earlier focused Hyundai/msgq/VisionIPC ran 22 tests: 20 passed, 2 skipped.
-Hyundai safety ran 1,899: 1,701 passed, 198 skipped. Those checks were host-side,
-not Panda firmware execution or actual vehicle integration.
+## Evidence and interpretation
 
-[MetaDrive emulator cancellation](reports/emulator-metadrive-cancel.json) and
-[Fold 3 stale-input run](reports/fold3-metadrive-stale.json) ran 30-second real
-worlds with the phone controller. Perception, calibration and driver output are
-synthetic; the plant is a damped torque-to-angle fixture, not a Hyundai EPS model.
-The final emulator MetaDrive run also backgrounds software rendering.
-No full camera-to-control visual loop is claimed. The validation world uses
-multiple 60 m straight blocks: the initial single long-block fixture ended
-out-of-road even with zero steering and was replaced before successful runs.
+Final instrumentation: [Fold 3](reports/RFCR81Y1TBJ-vision-instrumentation.txt),
+[emulator](reports/emulator-5560-vision-instrumentation.txt). Four perception tests
+extend the original ten with NV12 rotation, native model-wrapper validation,
+pinned Panda decoding/health checks and real upstream model-output serialization.
+The focused host suite runs 72 tests. Earlier unchanged-pin checks passed 20
+Hyundai/IPC tests (2 skipped) and 1,701 Panda safety tests (198 skipped); these
+are software checks, not hardware or road qualification.
 
-## Remaining implementation and gates
+The fresh Fold 3 60-second live diagnostic delivered 1,792 road frames at 29.87
+fps and 1,788 driver frames at 29.83 fps, with no capture recovery. Nearest stream
+skew p99 was 16.59 ms. Raylib averaged 29.31 fps. DM computed 1,489 frames, published
+zero and rejected every prediction as late; work p99 was 57.22 ms. Road inference
+correctly remained blocked on missing sensor 2. Passing this diagnostic does not
+mean valid perception, calibration, driver monitoring or vehicle control.
 
-The full supervised modeld/driver-model, localization, calibration, planner and
-selfdrived pipeline is not integrated. Native estimation/model preprocessing
-extensions and Android NumPy 2 remain outstanding. GNSS freshness and alert
-daemon integration, calibrated mounting/orientation, synchronized valid camera
-feeds and replay-equivalent models are not implemented/qualified. Public Camera2
-concurrency and long-running front capture are physical blockers, and the measured
-OpenCL profiles cannot meet the 20 Hz target.
+The dedicated API 35 ARM64 emulator uses SwiftShader and emulated front/rear
+cameras. The first live run encountered a System UI ANR and stopped advancing
+the UI. Closing the ANR restored rendering. The [full-size rerun](reports/emulator-live-vision-rerun.json)
+still failed combined capture throughput, with ~14 fps cameras and ~11.8 fps UI;
+[1280x720](reports/emulator-live-vision-1280.json) also failed capture throughput.
+Many emulated camera timestamps were slightly future; the freshness guards
+rejected them. Neither guard nor the 100 ms simulator deadline was relaxed.
 
-USB transport currently performs identity reads only. Compatible firmware,
-receive-only CAN, Panda heartbeat/disconnect handling, actual vehicle fingerprint,
-bus/harness routing and all physical vehicle checks remain required. No flashing
-or transmission path was added. Factory ACC, braking/AEB, approximately 51.5 km/h
-steering minimum, torque limits and disengagement/safety checks are retained from
-[pinned Hyundai code](https://github.com/sunnypilot/opendbc/blob/aa9bff6f5442cef8cb8e25e143ef38865c276ce8/opendbc/car/hyundai/values.py).
-Experimental longitudinal remains disabled. All these gates must pass before a
-future actuation implementation can be considered; this APK cannot transmit.
+Simulation uses separate Params/IPC namespaces and an ADB-UID restricted socket
+with a strict service allowlist. It cannot relay CAN or Panda messages. Vehicle
+transmission is false in every response. Factory ACC is preserved; experimental
+longitudinal control is disabled, and the pinned steering minimum remains
+14.30528 m/s (~51.5 km/h). The fixture's synthetic perception/DM/calibration and
+simple torque-to-angle plant do not model Hyundai EPS or prove a visual closed
+loop. A loaded fault run that disconnected is retained alongside isolated reruns.
+
+See [CAMERAS.md](CAMERAS.md) for sustained camera results and
+[PERFORMANCE.md](PERFORMANCE.md) for the measured profiles and rejected precision
+experiments. Full localization, calibrated model projection, planning, physical
+car discovery and vehicle qualification still require implementation/validation.
+
+## Retained development failures
+
+The `*-instrumentation-overlap.json` phone files are invalid harness runs: the
+previous instrumentation teardown stopped the app during validation. The
+`fold3-live-vision-startup-stale-report` files record a harness failure caused
+by an old persisted manager report. The validator now requires a report from
+the current launch. These runs are excluded from acceptance.
+
+The short/initial live files retain the zero-buffer VisionIPC handshake and
+early camera-startup failures fixed before the final APK. The loaded ADB fault
+run, original-model numerical failures, Samsung session rejections and emulator
+throughput failures remain failed results; isolated reruns do not erase them.
+
+The [15-second phone smoke test](reports/fold3-live-vision-15s-preview-failure.json)
+captured 450 road and 434 driver frames without recovery, but its sampled UI
+observed only one fresh driver preview, below the validator's requirement.
+That failed result is retained separately from the longer final smoke test.
+The first final smoke launch also exposed a recent persisted simulator-manager
+report during restart; [that harness failure](reports/fold3-live-vision-final-stale-manager.json)
+is excluded. Validation now requires a new manager PID and matching sensor PID.
+
+The final 60-second APK rerun failed on `camera_disconnected:0`; two recovery
+attempts briefly found camera 0 unavailable, then the last session delivered
+1,415 road / 1,417 driver frames near 30 fps. Recovery remains a qualification
+failure. DM computed 1,115 predictions, discarded all as late and measured
+57.74 ms work p99. Raylib averaged 29.29 fps. No further success is inferred
+from the recovered session.
+
+The compact APK removes 207,896,602 bytes of unused incremental ZIP space
+(44.85%). All 74 packaged entries have identical content hashes to the
+precompact development APK; see [packaging comparison](reports/vision-apk-packaging-comparison.json).
+That comparison predates the final thermal-guard change. The delivered APK was
+rebuilt and tested separately; its identity and limits are recorded below.
+Build pins, APK sizes and hashes are in [artifacts.json](reports/artifacts.json);
+[installed-artifacts.json](reports/installed-artifacts.json) records device hashes.

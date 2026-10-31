@@ -4,6 +4,89 @@
 #include <array>
 #include <cstdint>
 #include <sstream>
+#include <mutex>
+#include <memory>
+#include <vector>
+
+namespace {
+struct Receiver {
+  libusb_context *context = nullptr;
+  libusb_device_handle *handle = nullptr;
+  int fd = -1;
+  bool claimed = false;
+  ~Receiver() {
+    if (claimed) libusb_release_interface(handle, 0);
+    if (handle) libusb_close(handle);
+    if (context) libusb_exit(context);
+    if (fd >= 0) close(fd);
+  }
+};
+std::mutex rx_lock;
+std::unique_ptr<Receiver> receiver;
+jlong generation = 0;
+void fail(JNIEnv *env, const char *reason) {
+  env->ThrowNew(env->FindClass("java/io/IOException"), reason);
+}
+}
+
+extern "C" JNIEXPORT jlong JNICALL
+Java_ai_sunnypilot_fold3_NativeBridge_openPandaReceiver(JNIEnv *env, jclass, jint descriptor) {
+  std::lock_guard<std::mutex> guard(rx_lock);
+  if (receiver) { fail(env, "Panda receiver already open"); return 0; }
+  auto next = std::make_unique<Receiver>();
+  next->fd = descriptor < 0 ? -1 : dup(descriptor);
+  libusb_init_option option{};
+  option.option = LIBUSB_OPTION_NO_DEVICE_DISCOVERY;
+  int error = next->fd < 0 ? LIBUSB_ERROR_INVALID_PARAM : libusb_init_context(&next->context, &option, 1);
+  if (!error) error = libusb_wrap_sys_device(next->context, static_cast<intptr_t>(next->fd), &next->handle);
+  libusb_device_descriptor device{};
+  if (!error) error = libusb_get_device_descriptor(libusb_get_device(next->handle), &device);
+  if (!error && ((device.idVendor != 0xbbaa && device.idVendor != 0x3801) || device.idProduct != 0xddcc)) error = LIBUSB_ERROR_NO_DEVICE;
+  if (!error) error = libusb_claim_interface(next->handle, 0);
+  if (error) { fail(env, libusb_error_name(error)); return 0; }
+  next->claimed = true;
+  receiver = std::move(next);
+  return ++generation;
+}
+
+extern "C" JNIEXPORT jbyteArray JNICALL
+Java_ai_sunnypilot_fold3_NativeBridge_readPandaControl(JNIEnv *env, jclass, jlong token, jint request, jint value, jint length) {
+  std::lock_guard<std::mutex> guard(rx_lock);
+  // This whitelist is deliberately IN-only. No generic USB transfer API exists.
+  bool allowed = request == 0xc1 || request == 0xdd || request == 0xd6 || request == 0xd3 ||
+                 request == 0xd4 || request == 0xd2 || request == 0xc2;
+  if (!receiver || token != generation || !allowed || length < 1 || length > 128 ||
+      (request == 0xc2 ? value < 0 || value > 2 : value != 0)) {
+    fail(env, "Invalid read-only Panda request or closed receiver"); return nullptr;
+  }
+  std::array<unsigned char, 128> bytes{};
+  int size = libusb_control_transfer(receiver->handle, LIBUSB_ENDPOINT_IN | LIBUSB_REQUEST_TYPE_VENDOR | LIBUSB_RECIPIENT_DEVICE,
+                                     request, value, 0, bytes.data(), length, 200);
+  if (size < 0) { fail(env, libusb_error_name(size)); return nullptr; }
+  jbyteArray result = env->NewByteArray(size);
+  if (result) env->SetByteArrayRegion(result, 0, size, reinterpret_cast<jbyte *>(bytes.data()));
+  return result;
+}
+
+extern "C" JNIEXPORT jbyteArray JNICALL
+Java_ai_sunnypilot_fold3_NativeBridge_readPandaCan(JNIEnv *env, jclass, jlong token) {
+  std::lock_guard<std::mutex> guard(rx_lock);
+  if (!receiver || token != generation) { fail(env, "Panda receiver closed"); return nullptr; }
+  std::array<unsigned char, 16384> bytes{};
+  int size = 0;
+  int error = libusb_bulk_transfer(receiver->handle, 0x81, bytes.data(), bytes.size(), &size, 100);
+  // A timed-out transfer can still contain a complete or partial packet.
+  if (error && error != LIBUSB_ERROR_TIMEOUT) { fail(env, libusb_error_name(error)); return nullptr; }
+  jbyteArray result = env->NewByteArray(size);
+  if (result) env->SetByteArrayRegion(result, 0, size, reinterpret_cast<jbyte *>(bytes.data()));
+  return result;
+}
+
+extern "C" JNIEXPORT void JNICALL
+Java_ai_sunnypilot_fold3_NativeBridge_closePandaReceiver(JNIEnv *, jclass, jlong token) {
+  std::lock_guard<std::mutex> guard(rx_lock);
+  if (token == generation) receiver.reset();
+}
 
 // The pinned Panda protocol uses these vendor IN requests (panda/python/__init__.py).
 // No vendor OUT, bulk OUT, safety-mode change, heartbeat, reset or flashing API is exposed.

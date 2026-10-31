@@ -1,0 +1,152 @@
+{
+  "serial": "RFCR81Y1TBJ",
+  "status": "failed",
+  "requested_seconds": 60,
+  "vehicle_tx_enabled": false,
+  "road_readiness": "blocked",
+  "calibration": "unqualified",
+  "model_parity": "failed",
+  "physical_vehicle_verified": false,
+  "last_sample": {
+    "elapsed_s": 0.00023958299425430596,
+    "ui-report": {
+      "pid": 5274,
+      "backend": "Raylib Android NativeActivity",
+      "vehicle_tx_enabled": false,
+      "status": "running",
+      "full_upstream_ui": true,
+      "frames": 30,
+      "mean_fps": 15.291934178885608,
+      "width": 2160,
+      "height": 1080,
+      "surface_size": [
+        2289,
+        840
+      ],
+      "last_frame_seconds": 0.033334165811538696,
+      "last_cpu_seconds": 0.002210365011706017,
+      "recent_p99_frame_ms": 992.3479557037354,
+      "recent_p99_cpu_ms": 8.521145980921574
+    },
+    "manager": {
+      "pid": 4937,
+      "simulation": true,
+      "vehicle_tx_enabled": false,
+      "engagement_allowed": false,
+      "engagement_blocker": "camera calibration, model parity/performance and physical Panda qualification incomplete",
+      "processes": {
+        "Controls": {
+          "daemon": "controlsd",
+          "pid": 4979,
+          "phase": "waiting_for_selfdrive_state",
+          "error": "",
+          "last_progress_ms": 83097702,
+          "ticks": 4257,
+          "restarts": 0
+        },
+        "Monitoring": {
+          "daemon": "dmonitoringd",
+          "pid": 4980,
+          "phase": "running",
+          "error": "",
+          "last_progress_ms": 83097266,
+          "ticks": 3172,
+          "restarts": 0
+        },
+        "Simulator": {
+          "daemon": "sim_bridge",
+          "pid": 4982,
+          "phase": "waiting_for_adb",
+          "error": "",
+          "last_progress_ms": 83097269,
+          "ticks": 3259,
+          "restarts": 0
+        }
+      },
+      "updated_elapsed_ms": 83097721
+    },
+    "dmonitoringmodeld": {
+      "daemon": "dmonitoringmodeld",
+      "pid": 4762,
+      "vehicle_tx_enabled": false,
+      "engagement_allowed": false,
+      "work_samples": 0,
+      "deadline_misses": 0,
+      "phase": "waiting_for_camera",
+      "simulation": false,
+      "missing_physical_sensors": [
+        "1"
+      ],
+      "calibrated": false,
+      "valid": false,
+      "blocker": "Driver camera unavailable"
+    },
+    "modeld": {
+      "daemon": "modeld",
+      "pid": 4751,
+      "vehicle_tx_enabled": false,
+      "engagement_allowed": false,
+      "work_samples": 0,
+      "deadline_misses": 0,
+      "phase": "waiting_for_camera",
+      "simulation": false,
+      "missing_physical_sensors": [
+        "0",
+        "2"
+      ],
+      "calibrated": false,
+      "valid": false,
+      "blocker": "Distinct narrow and wide rear streams are required"
+    },
+    "sensord": {
+      "daemon": "sensord",
+      "pid": 4750,
+      "vehicle_tx_enabled": false,
+      "engagement_allowed": false,
+      "work_samples": 0,
+      "deadline_misses": 0,
+      "phase": "running",
+      "simulation": false,
+      "published_samples": 743,
+      "dropped_samples": 0,
+      "stale_samples": 0,
+      "calibrated": false,
+      "validity_blocker": "phone-to-vehicle mounting rotation has not been calibrated",
+      "thermal_status": 0,
+      "power_watts": 0.0
+    },
+    "vision-report": {
+      "vehicle_tx_enabled": false,
+      "valid": false,
+      "sessions": [],
+      "requested_seconds": 60,
+      "recovery_limit": 3,
+      "started_utc": "2026-10-31T11:23:06.781433Z",
+      "dual_rear": "blocked: public Camera2 rejects wide plus ultrawide on the connected stock Fold 3",
+      "status": "running"
+    },
+    "resources": {
+      "process_pss_kib": [
+        17925,
+        23591,
+        17323,
+        17947,
+        37379,
+        18906,
+        18269,
+        34197,
+        38837,
+        114922
+      ],
+      "total_pss_kib": 339296
+    }
+  },
+  "error": "AssertionError: ",
+  "elapsed_s": 2.5485249999910593,
+  "panda_receive_only": {
+    "status": "blocked",
+    "error": "No application-visible Panda USB device",
+    "vehicle_tx_enabled": false
+  },
+  "cleanup": "Force-stopped the diagnostic application after validation failure"
+}

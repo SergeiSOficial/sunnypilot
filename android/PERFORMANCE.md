@@ -5,7 +5,76 @@ Android controls and Raylib now run, but passing their isolated checks does not
 qualify simultaneous camera, perception, localization, planning and controls.
 No precision change is accepted for driving.
 
-## Models on the exposed OpenCL driver
+## Current foreground-service reruns
+
+Model benchmarks previously used an ordinary background service. They now run
+in an Android foreground service, matching the runtime's process importance.
+The original models are hash checked and compared with the same independent
+host reference (`rtol=1e-3`, `atol=1e-4`). Each row has three warmups and 100
+timed calls, measured separately from live capture. Thermal state and execution
+order vary, so these are observations rather than controlled speedup claims.
+
+| Backend / model | Work p50 | Work p99 | ≥50 ms / 100 | Acceptance |
+|---|---:|---:|---:|---|
+| OpenCL, original DM | 82.39 ms | 82.84 ms | 100 | Failed timing and parity (max abs 0.048828) |
+| OpenCL, original driving | 54.35 ms | 55.69 ms | 100 | Failed timing and parity (outputs 2.90625, features 0.011627) |
+| ORT CPU, 2 threads, DM | 30.53 ms | 36.82 ms | 0 | Timing passed; parity failed (0.078125) |
+| ORT CPU, 2 threads, driving | 155.22 ms | 158.68 ms | 100 | Failed; non-finite outputs/features |
+| ORT CPU, 4 threads, DM | 28.10 ms | 33.03 ms | 0 | Timing passed; parity failed (0.078125) |
+| ORT CPU, 4 threads, driving | 151.57 ms | 154.54 ms | 100 | Failed; non-finite outputs/features |
+| ORT NNAPI provider, DM | 30.49 ms | 39.79 ms | 0 | Parity failed (0.078125); provider may fall back to CPU |
+| ORT NNAPI provider, driving | — | — | — | Blocked: exposed QTI devices cannot run model |
+
+Raw reports: [OpenCL](reports/fold3-model-opencl-foreground.json),
+[CPU two threads](reports/fold3-model-ort-cpu-foreground.json),
+[CPU four threads](reports/fold3-model-ort-cpu-4.json),
+[NNAPI](reports/fold3-model-ort-nnapi-foreground.json).
+The earlier [background CPU four-thread run](reports/fold3-model-ort-cpu-4-background.json)
+measured DM p99 328.95 ms; it has different scheduler/thermal conditions and
+must not be presented as a controlled thread-count comparison. NNAPI's CPU
+device is excluded, but ORT's unsupported-node CPU fallback is still possible.
+
+The 60-second live Fold 3 diagnostic additionally includes camera delivery,
+NV12 projection, Raylib and IMU. DM work p99 was **57.22 ms**, with 46 work
+durations ≥50 ms across 1,489 calls. All 1,489 outputs exceeded the 100 ms input
+age budget and were discarded; zero valid driver predictions were published.
+The road worker waited for sensor 2 throughout. Isolated DM benchmark throughput
+therefore does not establish sustained 20 Hz perception. Every visual diagnostic
+message remains invalid. Non-finite predictions are discarded and reset the
+model's recurrent state.
+
+The later requested 30-minute combined diagnostic failed on heat: Android
+reported critical status 4 at 1,247.94 seconds. The operator stopped the workload;
+the persisted camera report did not finalize. DM computed 20,083 frames and
+discarded all as late, with 14,275 work durations ≥50 ms. Its final rolling work
+p99 was **102.06 ms**. Raylib's last active report averaged 29.91 fps across
+43,050 frames. Active UI samples after 120 seconds measured aggregate PSS from
+966,953 to 1,034,027 KiB. These figures describe the partial diagnostic, not a
+complete driving workload. See the [sustained-run summary](reports/fold3-live-vision-30min-summary.json).
+The delivered APK adds a critical-temperature capture abort; this development
+run does not establish sustained qualification for that APK.
+
+The delivered APK's [60-second rerun](reports/fold3-live-vision-final.json)
+failed camera reliability after three recoveries. DM computed 1,115 frames,
+published zero and discarded all as late; work p99 was 57.74 ms, with 46 work
+durations ≥50 ms. Raylib averaged 29.29 fps. This does not improve the sustained
+or original-model acceptance result.
+
+The live UI averaged 29.31 fps; recent frame-interval p99 was 34.14 ms and CPU
+work p99 8.36 ms. Camera packing p99 was 6.62 ms rear; stream skew p99 was
+16.59 ms. See [the live report](reports/fold3-live-vision.json) for per-stream
+delivery age, frame intervals, drops and model work. No calibrated road model,
+planning or physical control work is included.
+
+Live statistics are bounded: camera timing/skew percentiles use the last 4,096
+frames per stream, UI percentiles the last 3,000 frames, and model-work p99 the
+last 10,000 calls. Cumulative frame/deadline/rejection counters cover the run;
+JSONL samples preserve the progression. A final rolling-window p99 is not a
+whole-run latency distribution. PSS is sampled across package processes and
+includes shared-page proportional accounting; startup model loading must be
+separated from the later memory plateau.
+
+## Earlier OpenCL and precision experiments
 
 The ordinary Android app loads `/vendor/lib64/libOpenCL.so`. The pinned tinygrad
 backend compiles both ONNX models with serial compilation and app-local caches.
@@ -106,7 +175,7 @@ thermal status 0. The newer camera/VisionIPC report records thermal status 0→1
 | 100 Hz controls, p99 work <10 ms | Short controller/publication subset **passed**; complete work/scheduling qualification **blocked** |
 | 30 fps Raylib | Rendering **passed**; sustained combined/folded display qualification **blocked** |
 | No upstream watchdog violations | Service restart check **passed**; complete stack qualification **blocked** |
-| 30-minute combined workload | **Blocked**; camera-only attempts failed early |
+| 30-minute combined workload | Partial camera/DM/UI/IMU attempt **failed** on critical heat; full driving workload **blocked** |
 
 The default backend and precision policy are unchanged. Cached compilation,
 bounded queues and reusable frame buffers are implemented, but model accuracy,

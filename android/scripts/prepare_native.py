@@ -31,6 +31,29 @@ def source_tar(name, url, sha256):
 
 
 def main():
+  subprocess.run([sys.executable, str(ROOT / "scripts/stage_panda.py")], check=True)
+  # The Android ORT build is a separately validated backend, never a replacement
+  # for a failed OpenCL parity check. Headers and Bionic library share one AAR.
+  ort_archive = ROOT / "build/native/onnxruntime-android-1.31.1.aar"
+  if not ort_archive.exists():
+    ort_archive.parent.mkdir(parents=True, exist_ok=True)
+    url = "https://repo.maven.apache.org/maven2/com/microsoft/onnxruntime/onnxruntime-android/1.31.1/onnxruntime-android-1.31.1.aar"
+    with urllib.request.urlopen(url, timeout=60) as response:
+      ort_archive.write_bytes(response.read())
+  if hashlib.sha256(ort_archive.read_bytes()).hexdigest() != "d4d50660300ed2c4f38ffdfd5ab5bfa3a22f995f282dda24f42ea3ea55467b49":
+    raise SystemExit("ONNX Runtime Android archive checksum mismatch")
+  with zipfile.ZipFile(ort_archive) as archive:
+    for name in archive.namelist():
+      if (name.startswith("headers/") and name.endswith(".h") and ".." not in Path(name).parts) or name == "jni/arm64-v8a/libonnxruntime.so":
+        archive.extract(name, ROOT / "build/native/onnxruntime-1.31.1")
+  for name, digest in (("LICENSE", "2f07c72751aed99790b8a4869cf2311df85a860b22ded05fa22803587a48922c"),
+                       ("ThirdPartyNotices.txt", "143764b952fdb1a7c69ce653bfba74a7744d6a8a573bfb73e235fba356c83de3")):
+    notice = ROOT / "build/native/onnxruntime-1.31.1" / name
+    if not notice.exists():
+      with urllib.request.urlopen(f"https://raw.githubusercontent.com/microsoft/onnxruntime/v1.31.1/{name}", timeout=60) as response:
+        notice.write_bytes(response.read())
+    if hashlib.sha256(notice.read_bytes()).hexdigest() != digest:
+      raise SystemExit(f"ONNX Runtime {name} checksum mismatch")
   source = ROOT / "build/native/libusb"
   if not source.exists():
     source.parent.mkdir(parents=True, exist_ok=True)

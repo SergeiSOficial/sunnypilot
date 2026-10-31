@@ -52,4 +52,6 @@ public abstract class WorkerService extends Service {
     public static final class Monitoring extends WorkerService { protected String daemon() { return "dmonitoringd"; } }
     public static final class Sensors extends WorkerService { protected String daemon() { return "sensord"; } }
     public static final class Simulator extends WorkerService { protected String daemon() { return "sim_bridge"; } }
+    public static final class RoadModel extends WorkerService { protected String daemon() { return "modeld"; } }
+    public static final class DriverModel extends WorkerService { protected String daemon() { return "dmonitoringmodeld"; } }
 }

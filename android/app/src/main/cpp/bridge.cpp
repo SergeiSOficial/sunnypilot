@@ -38,6 +38,28 @@ Java_ai_sunnypilot_fold3_NativeBridge_packNv12(JNIEnv *env, jclass, jobject y, j
   return static_cast<jlong>(hash);
 }
 
+extern "C" JNIEXPORT void JNICALL
+Java_ai_sunnypilot_fold3_NativeBridge_rotateNv12(JNIEnv *env, jclass, jobject input, jint w, jint h, jint rotation, jobject output) {
+  auto *src = static_cast<uint8_t *>(env->GetDirectBufferAddress(input));
+  auto *dst = static_cast<uint8_t *>(env->GetDirectBufferAddress(output));
+  int64_t size = static_cast<int64_t>(w) * h * 3 / 2;
+  if (!src || !dst || src == dst || w <= 0 || h <= 0 || w > 4096 || h > 4096 || (w | h) % 2 ||
+      (rotation != 0 && rotation != 90 && rotation != 180 && rotation != 270) ||
+      env->GetDirectBufferCapacity(input) < size || env->GetDirectBufferCapacity(output) < size) {
+    env->ThrowNew(env->FindClass("java/lang/IllegalArgumentException"), "Invalid NV12 rotation/buffer"); return;
+  }
+  auto rotate = [&](int width, int height, int channels, const uint8_t *source, uint8_t *target) {
+    int target_width = rotation % 180 ? height : width;
+    for (int y = 0; y < height; ++y) for (int x = 0; x < width; ++x) {
+      int tx = rotation == 90 ? height - 1 - y : rotation == 180 ? width - 1 - x : rotation == 270 ? y : x;
+      int ty = rotation == 90 ? x : rotation == 180 ? height - 1 - y : rotation == 270 ? width - 1 - x : y;
+      for (int c = 0; c < channels; ++c) target[(ty * target_width + tx) * channels + c] = source[(y * width + x) * channels + c];
+    }
+  };
+  rotate(w, h, 1, src, dst);
+  rotate(w / 2, h / 2, 2, src + w * h, dst + w * h);
+}
+
 // Load the public vendor library through Android's linker namespace.
 extern "C" JNIEXPORT jstring JNICALL
 Java_ai_sunnypilot_fold3_NativeBridge_openClProbe(JNIEnv *env, jclass) {

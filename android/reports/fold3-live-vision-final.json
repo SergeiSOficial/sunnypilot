@@ -1,0 +1,451 @@
+{
+  "serial": "RFCR81Y1TBJ",
+  "status": "failed",
+  "requested_seconds": 60,
+  "vehicle_tx_enabled": false,
+  "road_readiness": "blocked",
+  "calibration": "unqualified",
+  "model_parity": "failed",
+  "physical_vehicle_verified": false,
+  "last_sample": {
+    "elapsed_s": 61.68977470899699,
+    "ui-report": {
+      "pid": 6726,
+      "backend": "Raylib Android NativeActivity",
+      "vehicle_tx_enabled": false,
+      "status": "running",
+      "full_upstream_ui": true,
+      "camera_preview": [
+        {
+          "stream": "road",
+          "frame_id": 1410,
+          "age_ms": 95.498751,
+          "fresh": true
+        },
+        {
+          "stream": "driver",
+          "frame_id": 1406,
+          "age_ms": 110.994237,
+          "fresh": false
+        }
+      ],
+      "frames": 1710,
+      "mean_fps": 29.292952583411974,
+      "width": 2160,
+      "height": 1080,
+      "surface_size": [
+        2289,
+        840
+      ],
+      "last_frame_seconds": 0.03333630412817001,
+      "last_cpu_seconds": 0.003322655989904888,
+      "recent_p99_frame_ms": 34.11005064845085,
+      "recent_p99_cpu_ms": 8.948906004661694
+    },
+    "manager": {
+      "pid": 6722,
+      "simulation": false,
+      "vehicle_tx_enabled": false,
+      "engagement_allowed": false,
+      "engagement_blocker": "camera calibration, model parity/performance and physical Panda qualification incomplete",
+      "processes": {
+        "Controls": {
+          "daemon": "controlsd",
+          "pid": 6834,
+          "phase": "waiting_for_car_params",
+          "error": "",
+          "last_progress_ms": 83220888,
+          "ticks": 119,
+          "restarts": 0
+        },
+        "Monitoring": {
+          "daemon": "dmonitoringd",
+          "pid": 6838,
+          "phase": "waiting_for_driver_model",
+          "error": "",
+          "last_progress_ms": 83219912,
+          "ticks": 60,
+          "restarts": 0
+        },
+        "Sensors": {
+          "daemon": "sensord",
+          "pid": 6845,
+          "phase": "running",
+          "error": "",
+          "last_progress_ms": 83220881,
+          "ticks": 2777,
+          "restarts": 0
+        },
+        "RoadModel": {
+          "daemon": "modeld",
+          "pid": 6849,
+          "phase": "waiting_for_camera",
+          "error": "",
+          "last_progress_ms": 83220880,
+          "ticks": 2748,
+          "restarts": 0
+        },
+        "DriverModel": {
+          "daemon": "dmonitoringmodeld",
+          "pid": 6877,
+          "phase": "waiting_for_synchronized_frames",
+          "error": "",
+          "last_progress_ms": 83220887,
+          "ticks": 3789,
+          "restarts": 0
+        }
+      },
+      "updated_elapsed_ms": 83220890
+    },
+    "dmonitoringmodeld": {
+      "daemon": "dmonitoringmodeld",
+      "pid": 6877,
+      "vehicle_tx_enabled": false,
+      "engagement_allowed": false,
+      "work_samples": 1115,
+      "deadline_misses": 46,
+      "phase": "running",
+      "simulation": false,
+      "rejected_frames": 289,
+      "computed_frames": 1115,
+      "published_frames": 0,
+      "late_outputs": 1115,
+      "valid": false,
+      "calibrated": false,
+      "missing_physical_sensors": [
+        "1"
+      ],
+      "blocker": "Driver camera unavailable",
+      "nonfinite_outputs": 0,
+      "recurrent_resets": 0,
+      "work_ms": 46.722865,
+      "projection": "uncalibrated preview affine; not suitable for driving",
+      "backend": "ORT CPU, 4 threads",
+      "numerical_parity": "failed on original synthetic reference; diagnostic only",
+      "p99_work_ms": 57.7425
+    },
+    "modeld": {
+      "daemon": "modeld",
+      "pid": 6849,
+      "vehicle_tx_enabled": false,
+      "engagement_allowed": false,
+      "work_samples": 0,
+      "deadline_misses": 0,
+      "phase": "waiting_for_camera",
+      "simulation": false,
+      "missing_physical_sensors": [
+        "2"
+      ],
+      "calibrated": false,
+      "valid": false,
+      "blocker": "Distinct narrow and wide rear streams are required"
+    },
+    "sensord": {
+      "daemon": "sensord",
+      "pid": 6845,
+      "vehicle_tx_enabled": false,
+      "engagement_allowed": false,
+      "work_samples": 0,
+      "deadline_misses": 0,
+      "phase": "running",
+      "simulation": false,
+      "published_samples": 24268,
+      "dropped_samples": 0,
+      "stale_samples": 0,
+      "calibrated": false,
+      "validity_blocker": "phone-to-vehicle mounting rotation has not been calibrated",
+      "thermal_status": 3,
+      "power_watts": 0.000590278
+    },
+    "vision-report": {
+      "vehicle_tx_enabled": false,
+      "valid": false,
+      "sessions": [
+        {
+          "camera_ids": [
+            "0",
+            "1"
+          ],
+          "width": 1280,
+          "height": 720,
+          "logical_camera": null,
+          "requested_duration_ms": 59823,
+          "overlap_ns": 0,
+          "nearest_skew_p99_ns": -1,
+          "skew_sampling": "last 4096 timestamps per stream, shared overlap only",
+          "distinct_sensor_evidence": false,
+          "streams": [
+            {
+              "sensor_id": "0",
+              "width": 1280,
+              "height": 720,
+              "image_rotation_applied_degrees": 0,
+              "output_width": 1280,
+              "output_height": 720,
+              "display_degrees_at_session_start": 90,
+              "mirrored": false,
+              "sensor_orientation": 90,
+              "timestamp_source": 1,
+              "intrinsic_calibration": [
+                2777.7778,
+                2777.7778,
+                0,
+                0,
+                0
+              ],
+              "lens_distortion": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "visionipc_valid": false,
+              "visionipc_stream": 0,
+              "focal_lengths_mm": [
+                5
+              ],
+              "frames": 15,
+              "fps": 28.00691714839731,
+              "first_timestamp_ns": 83160896973648,
+              "last_timestamp_ns": 83161396850158,
+              "timestamp_errors": 0,
+              "changed_frames": 14,
+              "metadata_failures": 0,
+              "uncaptured_requests": 0,
+              "lost_buffers": 0,
+              "packing_errors": 0,
+              "packing_p99_ns": 2730521,
+              "delivery_age_p99_ns": 122097865,
+              "delivery_over_100ms": 1,
+              "delivery_future_timestamps": 0,
+              "frame_interval_p99_ns": 66650625
+            },
+            {
+              "sensor_id": "1",
+              "width": 1280,
+              "height": 720,
+              "image_rotation_applied_degrees": 0,
+              "output_width": 1280,
+              "output_height": 720,
+              "display_degrees_at_session_start": 90,
+              "mirrored": false,
+              "sensor_orientation": 270,
+              "timestamp_source": 1,
+              "intrinsic_calibration": [
+                2704.918,
+                2704.918,
+                0,
+                0,
+                0
+              ],
+              "lens_distortion": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "visionipc_valid": false,
+              "visionipc_stream": 1,
+              "focal_lengths_mm": [
+                3.3
+              ],
+              "frames": 0,
+              "fps": 0,
+              "first_timestamp_ns": 0,
+              "last_timestamp_ns": 0,
+              "timestamp_errors": 0,
+              "changed_frames": 0,
+              "metadata_failures": 0,
+              "uncaptured_requests": 0,
+              "lost_buffers": 0,
+              "packing_errors": 0,
+              "packing_p99_ns": 0,
+              "delivery_age_p99_ns": 0,
+              "delivery_over_100ms": 0,
+              "delivery_future_timestamps": 0,
+              "frame_interval_p99_ns": 0
+            }
+          ],
+          "elapsed_ms": 7177,
+          "completed_requested_duration": false,
+          "status": "failed",
+          "error": "camera_disconnected:0"
+        },
+        {
+          "camera_ids": [
+            "0",
+            "1"
+          ],
+          "width": 1280,
+          "height": 720,
+          "logical_camera": null,
+          "requested_duration_ms": 52392,
+          "streams": [],
+          "elapsed_ms": 6,
+          "completed_requested_duration": false,
+          "status": "failed",
+          "error": "IllegalArgumentException: getCameraCharacteristics:1523: Unable to retrieve camera characteristics for unknown device 0: No such file or directory (-2)"
+        },
+        {
+          "camera_ids": [
+            "0",
+            "1"
+          ],
+          "width": 1280,
+          "height": 720,
+          "logical_camera": null,
+          "requested_duration_ms": 51378,
+          "streams": [],
+          "elapsed_ms": 3,
+          "completed_requested_duration": false,
+          "status": "failed",
+          "error": "IllegalArgumentException: getCameraCharacteristics:1523: Unable to retrieve camera characteristics for unknown device 0: No such file or directory (-2)"
+        },
+        {
+          "camera_ids": [
+            "0",
+            "1"
+          ],
+          "width": 1280,
+          "height": 720,
+          "logical_camera": null,
+          "requested_duration_ms": 47370,
+          "overlap_ns": 47196624131,
+          "nearest_skew_p99_ns": 16530906,
+          "skew_sampling": "last 4096 timestamps per stream, shared overlap only",
+          "distinct_sensor_evidence": true,
+          "streams": [
+            {
+              "sensor_id": "0",
+              "width": 1280,
+              "height": 720,
+              "image_rotation_applied_degrees": 0,
+              "output_width": 1280,
+              "output_height": 720,
+              "display_degrees_at_session_start": 90,
+              "mirrored": false,
+              "sensor_orientation": 90,
+              "timestamp_source": 1,
+              "intrinsic_calibration": [
+                2777.7778,
+                2777.7778,
+                0,
+                0,
+                0
+              ],
+              "lens_distortion": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "visionipc_valid": false,
+              "visionipc_stream": 0,
+              "focal_lengths_mm": [
+                5
+              ],
+              "frames": 1415,
+              "fps": 29.817747399620366,
+              "first_timestamp_ns": 83172897241924,
+              "last_timestamp_ns": 83220318664510,
+              "timestamp_errors": 0,
+              "changed_frames": 1414,
+              "metadata_failures": 0,
+              "uncaptured_requests": 0,
+              "lost_buffers": 0,
+              "packing_errors": 0,
+              "packing_p99_ns": 7019740,
+              "delivery_age_p99_ns": 95322189,
+              "delivery_over_100ms": 3,
+              "delivery_future_timestamps": 0,
+              "frame_interval_p99_ns": 33577291
+            },
+            {
+              "sensor_id": "1",
+              "width": 1280,
+              "height": 720,
+              "image_rotation_applied_degrees": 0,
+              "output_width": 1280,
+              "output_height": 720,
+              "display_degrees_at_session_start": 90,
+              "mirrored": false,
+              "sensor_orientation": 270,
+              "timestamp_source": 1,
+              "intrinsic_calibration": [
+                2704.918,
+                2704.918,
+                0,
+                0,
+                0
+              ],
+              "lens_distortion": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "visionipc_valid": false,
+              "visionipc_stream": 1,
+              "focal_lengths_mm": [
+                3.3
+              ],
+              "frames": 1417,
+              "fps": 29.864635796022927,
+              "first_timestamp_ns": 83173122040379,
+              "last_timestamp_ns": 83220535978713,
+              "timestamp_errors": 0,
+              "changed_frames": 1416,
+              "metadata_failures": 0,
+              "uncaptured_requests": 0,
+              "lost_buffers": 0,
+              "packing_errors": 0,
+              "packing_p99_ns": 6704844,
+              "delivery_age_p99_ns": 95280286,
+              "delivery_over_100ms": 1,
+              "delivery_future_timestamps": 0,
+              "frame_interval_p99_ns": 33296355
+            }
+          ],
+          "elapsed_ms": 48710,
+          "completed_requested_duration": true,
+          "status": "passed"
+        }
+      ],
+      "requested_seconds": 60,
+      "recovery_limit": 3,
+      "started_utc": "2026-10-31T11:24:08.214544Z",
+      "dual_rear": "blocked: public Camera2 rejects wide plus ultrawide on the connected stock Fold 3",
+      "status": "failed",
+      "recoveries": 3,
+      "thermal_status": 3,
+      "completed_utc": "2026-10-31T11:25:09.557822Z"
+    },
+    "resources": {
+      "process_pss_kib": [
+        18122,
+        61738,
+        51826,
+        72379,
+        144005,
+        74430,
+        113113,
+        43296,
+        28683,
+        406016
+      ],
+      "total_pss_kib": 1013608
+    }
+  },
+  "error": "AssertionError: Camera capture terminated: {'vehicle_tx_enabled': False, 'valid': False, 'sessions': [{'camera_ids': ['0', '1'], 'width': 1280, 'height': 720, 'logical_camera': None, 'requested_duration_ms': 59823, 'overlap_ns': 0, 'nearest_skew_p99_ns': -1, 'skew_sampling': 'last 4096 timestamps per stream, shared overlap only', 'distinct_sensor_evidence': False, 'streams': [{'sensor_id': '0', 'width': 1280, 'height': 720, 'image_rotation_applied_degrees': 0, 'output_width': 1280, 'output_height': 720, 'display_degrees_at_session_start': 90, 'mirrored': False, 'sensor_orientation': 90, 'timestamp_source': 1, 'intrinsic_calibration': [2777.7778, 2777.7778, 0, 0, 0], 'lens_distortion': [0, 0, 0, 0, 0], 'visionipc_valid': False, 'visionipc_stream': 0, 'focal_lengths_mm': [5], 'frames': 15, 'fps': 28.00691714839731, 'first_timestamp_ns': 83160896973648, 'last_timestamp_ns': 83161396850158, 'timestamp_errors': 0, 'changed_frames': 14, 'metadata_failures': 0, 'uncaptured_requests': 0, 'lost_buffers': 0, 'packing_errors': 0, 'packing_p99_ns': 2730521, 'delivery_age_p99_ns': 122097865, 'delivery_over_100ms': 1, 'delivery_future_timestamps': 0, 'frame_interval_p99_ns': 66650625}, {'sensor_id': '1', 'width': 1280, 'height': 720, 'image_rotation_applied_degrees': 0, 'output_width': 1280, 'output_height': 720, 'display_degrees_at_session_start': 90, 'mirrored': False, 'sensor_orientation': 270, 'timestamp_source': 1, 'intrinsic_calibration': [2704.918, 2704.918, 0, 0, 0], 'lens_distortion': [0, 0, 0, 0, 0], 'visionipc_valid': False, 'visionipc_stream': 1, 'focal_lengths_mm': [3.3], 'frames': 0, 'fps': 0, 'first_timestamp_ns': 0, 'last_timestamp_ns': 0, 'timestamp_errors': 0, 'changed_frames': 0, 'metadata_failures': 0, 'uncaptured_requests': 0, 'lost_buffers': 0, 'packing_errors': 0, 'packing_p99_ns': 0, 'delivery_age_p99_ns': 0, 'delivery_over_100ms': 0, 'delivery_future_timestamps': 0, 'frame_interval_p99_ns': 0}], 'elapsed_ms': 7177, 'completed_requested_duration': False, 'status': 'failed', 'error': 'camera_disconnected:0'}, {'camera_ids': ['0', '1'], 'width': 1280, 'height': 720, 'logical_camera': None, 'requested_duration_ms': 52392, 'streams': [], 'elapsed_ms': 6, 'completed_requested_duration': False, 'status': 'failed', 'error': 'IllegalArgumentException: getCameraCharacteristics:1523: Unable to retrieve camera characteristics for unknown device 0: No such file or directory (-2)'}, {'camera_ids': ['0', '1'], 'width': 1280, 'height': 720, 'logical_camera': None, 'requested_duration_ms': 51378, 'streams': [], 'elapsed_ms': 3, 'completed_requested_duration': False, 'status': 'failed', 'error': 'IllegalArgumentException: getCameraCharacteristics:1523: Unable to retrieve camera characteristics for unknown device 0: No such file or directory (-2)'}, {'camera_ids': ['0', '1'], 'width': 1280, 'height': 720, 'logical_camera': None, 'requested_duration_ms': 47370, 'overlap_ns': 47196624131, 'nearest_skew_p99_ns': 16530906, 'skew_sampling': 'last 4096 timestamps per stream, shared overlap only', 'distinct_sensor_evidence': True, 'streams': [{'sensor_id': '0', 'width': 1280, 'height': 720, 'image_rotation_applied_degrees': 0, 'output_width': 1280, 'output_height': 720, 'display_degrees_at_session_start': 90, 'mirrored': False, 'sensor_orientation': 90, 'timestamp_source': 1, 'intrinsic_calibration': [2777.7778, 2777.7778, 0, 0, 0], 'lens_distortion': [0, 0, 0, 0, 0], 'visionipc_valid': False, 'visionipc_stream': 0, 'focal_lengths_mm': [5], 'frames': 1415, 'fps': 29.817747399620366, 'first_timestamp_ns': 83172897241924, 'last_timestamp_ns': 83220318664510, 'timestamp_errors': 0, 'changed_frames': 1414, 'metadata_failures': 0, 'uncaptured_requests': 0, 'lost_buffers': 0, 'packing_errors': 0, 'packing_p99_ns': 7019740, 'delivery_age_p99_ns': 95322189, 'delivery_over_100ms': 3, 'delivery_future_timestamps': 0, 'frame_interval_p99_ns': 33577291}, {'sensor_id': '1', 'width': 1280, 'height': 720, 'image_rotation_applied_degrees': 0, 'output_width': 1280, 'output_height': 720, 'display_degrees_at_session_start': 90, 'mirrored': False, 'sensor_orientation': 270, 'timestamp_source': 1, 'intrinsic_calibration': [2704.918, 2704.918, 0, 0, 0], 'lens_distortion': [0, 0, 0, 0, 0], 'visionipc_valid': False, 'visionipc_stream': 1, 'focal_lengths_mm': [3.3], 'frames': 1417, 'fps': 29.864635796022927, 'first_timestamp_ns': 83173122040379, 'last_timestamp_ns': 83220535978713, 'timestamp_errors': 0, 'changed_frames': 1416, 'metadata_failures': 0, 'uncaptured_requests': 0, 'lost_buffers': 0, 'packing_errors': 0, 'packing_p99_ns': 6704844, 'delivery_age_p99_ns': 95280286, 'delivery_over_100ms': 1, 'delivery_future_timestamps': 0, 'frame_interval_p99_ns': 33296355}], 'elapsed_ms': 48710, 'completed_requested_duration': True, 'status': 'passed'}], 'requested_seconds': 60, 'recovery_limit': 3, 'started_utc': '2026-10-31T11:24:08.214544Z', 'dual_rear': 'blocked: public Camera2 rejects wide plus ultrawide on the connected stock Fold 3', 'status': 'failed', 'recoveries': 3, 'thermal_status': 3, 'completed_utc': '2026-10-31T11:25:09.557822Z'}",
+  "elapsed_s": 62.920686500001466,
+  "panda_receive_only": {
+    "status": "blocked",
+    "error": "No application-visible Panda USB device",
+    "vehicle_tx_enabled": false
+  },
+  "cleanup": "Force-stopped the diagnostic application after validation failure"
+}

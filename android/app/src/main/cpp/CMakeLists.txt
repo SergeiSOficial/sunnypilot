@@ -110,6 +110,14 @@ target_include_directories(setproctitle_python PRIVATE ${NATIVE_ROOT}/setproctit
 target_compile_definitions(setproctitle_python PRIVATE HAVE_SYS_PRCTL_H=1 SPT_VERSION="1.3.7")
 python_extension(setproctitle_python "setproctitle" "_setproctitle")
 
+set(ORT_ROOT "${NATIVE_ROOT}/onnxruntime-1.31.1")
+add_library(onnxruntime SHARED IMPORTED)
+set_target_properties(onnxruntime PROPERTIES IMPORTED_LOCATION "${ORT_ROOT}/jni/arm64-v8a/libonnxruntime.so")
+add_library(ort_python MODULE ort_python.cpp)
+target_include_directories(ort_python PRIVATE ${ORT_ROOT}/headers)
+target_link_libraries(ort_python PRIVATE onnxruntime)
+python_extension(ort_python "." "fold3_ort_native")
+
 # Keep exactly one Raylib instance shared by NativeActivity and the Python API.
 set(PLATFORM "Android" CACHE STRING "" FORCE)
 set(OPENGL_VERSION "ES 3.0" CACHE STRING "" FORCE)

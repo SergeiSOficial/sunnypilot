@@ -1,0 +1,91 @@
+{
+  "status": "failed",
+  "requested_seconds": 1800,
+  "elapsed_seconds": 1816.7164145000133,
+  "scope": "Partial diagnostic: road/front capture, original driver model, Raylib and IMU. Road inference, planning and active vehicle controls not exercised.",
+  "vehicle_tx_enabled": false,
+  "engagement_allowed": false,
+  "complete_driving_acceptance": "blocked",
+  "source_report": "fold3-live-vision-30min.json",
+  "source_samples": "fold3-live-vision-30min.jsonl",
+  "sample_count": 669,
+  "development_apk_sha256": "68770c0086a38e1390d919bc87198bee5fea872d14f1402dfa42846d0d22ee56",
+  "final_apk_qualification": false,
+  "failure_reason": "Observed critical thermal status 4 during the sustained workload. Operator requested stop/home, then force-stopped the application. Persisted camera report never finalized; requested capture completion is not established.",
+  "last_advancing_ui_observation_seconds": 1443.9141642090108,
+  "camera": {
+    "status": "running",
+    "recoveries": null,
+    "sessions": []
+  },
+  "ui": {
+    "frames": 43050,
+    "mean_fps": 29.908523038442922,
+    "recent_p99_frame_ms": 34.887708723545074,
+    "recent_p99_cpu_ms": 10.46583398419898
+  },
+  "preview_fresh_samples": {
+    "road": 326,
+    "driver": 200
+  },
+  "preview_distinct_sampled_frame_ids": {
+    "road": 529,
+    "driver": 529
+  },
+  "driver_model": {
+    "computed_frames": 20083,
+    "published_frames": 0,
+    "late_outputs": 20083,
+    "deadline_misses": 14275,
+    "rejected_frames": 16616,
+    "nonfinite_outputs": 0,
+    "recurrent_resets": 5081,
+    "p99_work_ms": 102.060833,
+    "backend": "ORT CPU, 4 threads",
+    "numerical_parity": "failed on original synthetic reference; diagnostic only"
+  },
+  "driver_model_timing_status": "failed: no prediction accepted within the frame-age budget; original-model parity remains failed",
+  "max_observed_rolling_model_p99_ms": 156.32224,
+  "road_model": {
+    "daemon": "modeld",
+    "pid": 7489,
+    "vehicle_tx_enabled": false,
+    "engagement_allowed": false,
+    "work_samples": 0,
+    "deadline_misses": 0,
+    "phase": "waiting_for_camera",
+    "simulation": false,
+    "missing_physical_sensors": [
+      "2"
+    ],
+    "calibrated": false,
+    "valid": false,
+    "blocker": "Distinct narrow and wide rear streams are required"
+  },
+  "worker_errors_or_restarts": [],
+  "thermal": {
+    "first_observed_elapsed_seconds_by_status": {
+      "1": 0.0,
+      "2": 187.977,
+      "3": 357.906,
+      "4": 1247.936
+    },
+    "max_status": 4,
+    "protection": "Android thermal protection retained; development APK lacked the new explicit critical-temperature capture abort. No temperature override was used on the phone."
+  },
+  "memory": {
+    "samples": 59,
+    "startup_first_total_pss_kib": 169909,
+    "active_ui_post_120_seconds_min_pss_kib": 966953,
+    "active_ui_post_120_seconds_max_pss_kib": 1034027,
+    "final_total_pss_kib": 0
+  },
+  "percentile_scope": {
+    "camera": "last 4096 frames per stream",
+    "ui": "last 3000 frames",
+    "model_work": "last 10000 calls; maximum above is the maximum sampled rolling p99, not a whole-run p99"
+  },
+  "physical_panda": "blocked: disconnected",
+  "calibration": "blocked: unqualified camera projection and phone mounting",
+  "error": "AssertionError: Camera capture failed or recovered: running"
+}

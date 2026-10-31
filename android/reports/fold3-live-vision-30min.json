@@ -1,0 +1,182 @@
+{
+  "serial": "RFCR81Y1TBJ",
+  "status": "failed",
+  "requested_seconds": 1800,
+  "vehicle_tx_enabled": false,
+  "road_readiness": "blocked",
+  "calibration": "unqualified",
+  "model_parity": "failed",
+  "physical_vehicle_verified": false,
+  "last_sample": {
+    "elapsed_s": 1814.2406467920082,
+    "ui-report": {
+      "pid": 7401,
+      "backend": "Raylib Android NativeActivity",
+      "vehicle_tx_enabled": false,
+      "status": "running",
+      "full_upstream_ui": true,
+      "camera_preview": [
+        {
+          "stream": "road",
+          "frame_id": 42705,
+          "age_ms": 117.031282,
+          "fresh": false
+        },
+        {
+          "stream": "driver",
+          "frame_id": 42686,
+          "age_ms": 107.750489,
+          "fresh": false
+        }
+      ],
+      "frames": 43050,
+      "mean_fps": 29.908523038442922,
+      "width": 2160,
+      "height": 1080,
+      "surface_size": [
+        2289,
+        840
+      ],
+      "last_frame_seconds": 0.03333635255694389,
+      "last_cpu_seconds": 0.004314321995479986,
+      "recent_p99_frame_ms": 34.887708723545074,
+      "recent_p99_cpu_ms": 10.46583398419898
+    },
+    "manager": {
+      "pid": 7383,
+      "simulation": false,
+      "vehicle_tx_enabled": false,
+      "engagement_allowed": false,
+      "engagement_blocker": "camera calibration, model parity/performance and physical Panda qualification incomplete",
+      "processes": {
+        "Controls": {
+          "daemon": "controlsd",
+          "pid": 7474,
+          "phase": "waiting_for_car_params",
+          "error": "",
+          "last_progress_ms": 82481220,
+          "ticks": 3448,
+          "restarts": 0
+        },
+        "Monitoring": {
+          "daemon": "dmonitoringd",
+          "pid": 7475,
+          "phase": "waiting_for_driver_model",
+          "error": "",
+          "last_progress_ms": 82480703,
+          "ticks": 1727,
+          "restarts": 0
+        },
+        "Sensors": {
+          "daemon": "sensord",
+          "pid": 7476,
+          "phase": "running",
+          "error": "",
+          "last_progress_ms": 82481661,
+          "ticks": 70607,
+          "restarts": 0
+        },
+        "RoadModel": {
+          "daemon": "modeld",
+          "pid": 7489,
+          "phase": "waiting_for_camera",
+          "error": "",
+          "last_progress_ms": 82481556,
+          "ticks": 75918,
+          "restarts": 0
+        },
+        "DriverModel": {
+          "daemon": "dmonitoringmodeld",
+          "pid": 7494,
+          "phase": "waiting_for_synchronized_frames",
+          "error": "",
+          "last_progress_ms": 82481672,
+          "ticks": 102382,
+          "restarts": 0
+        }
+      },
+      "updated_elapsed_ms": 82481675
+    },
+    "dmonitoringmodeld": {
+      "daemon": "dmonitoringmodeld",
+      "pid": 7494,
+      "vehicle_tx_enabled": false,
+      "engagement_allowed": false,
+      "work_samples": 20083,
+      "deadline_misses": 14275,
+      "phase": "waiting_for_synchronized_frames",
+      "simulation": false,
+      "rejected_frames": 16616,
+      "computed_frames": 20083,
+      "published_frames": 0,
+      "late_outputs": 20083,
+      "valid": false,
+      "calibrated": false,
+      "nonfinite_outputs": 0,
+      "recurrent_resets": 5081,
+      "work_ms": 67.73599,
+      "projection": "uncalibrated preview affine; not suitable for driving",
+      "backend": "ORT CPU, 4 threads",
+      "numerical_parity": "failed on original synthetic reference; diagnostic only",
+      "p99_work_ms": 102.060833
+    },
+    "modeld": {
+      "daemon": "modeld",
+      "pid": 7489,
+      "vehicle_tx_enabled": false,
+      "engagement_allowed": false,
+      "work_samples": 0,
+      "deadline_misses": 0,
+      "phase": "waiting_for_camera",
+      "simulation": false,
+      "missing_physical_sensors": [
+        "2"
+      ],
+      "calibrated": false,
+      "valid": false,
+      "blocker": "Distinct narrow and wide rear streams are required"
+    },
+    "sensord": {
+      "daemon": "sensord",
+      "pid": 7476,
+      "vehicle_tx_enabled": false,
+      "engagement_allowed": false,
+      "work_samples": 0,
+      "deadline_misses": 0,
+      "phase": "running",
+      "simulation": false,
+      "published_samples": 716016,
+      "dropped_samples": 0,
+      "stale_samples": 0,
+      "calibrated": false,
+      "validity_blocker": "phone-to-vehicle mounting rotation has not been calibrated",
+      "thermal_status": 3,
+      "power_watts": -3.7233e-05
+    },
+    "vision-report": {
+      "vehicle_tx_enabled": false,
+      "valid": false,
+      "sessions": [],
+      "requested_seconds": 1800,
+      "recovery_limit": 3,
+      "started_utc": "2026-10-31T10:43:55.916257Z",
+      "dual_rear": "blocked: public Camera2 rejects wide plus ultrawide on the connected stock Fold 3",
+      "status": "running"
+    }
+  },
+  "fresh_samples": {
+    "road": 326,
+    "driver": 200
+  },
+  "distinct_frame_ids": {
+    "road": 529,
+    "driver": 529
+  },
+  "error": "AssertionError: Camera capture failed or recovered: running",
+  "elapsed_s": 1816.7164145000133,
+  "panda_receive_only": {
+    "status": "blocked",
+    "error": "No application-visible Panda USB device",
+    "vehicle_tx_enabled": false
+  }
+}

@@ -9,6 +9,7 @@ import android.media.Image;
 import android.media.ImageReader;
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.os.PowerManager;
 import android.util.Range;
 import android.util.Size;
 import org.json.JSONArray;
@@ -28,8 +29,19 @@ final class CameraProbe implements AutoCloseable {
     private final Handler handler;
     private final Progress progress;
     private final String ipcDirectory;
+    private final Context context;
+    private final int displayDegrees;
+
+    private void checkThermalStatus() {
+        int status = context.getSystemService(PowerManager.class).getCurrentThermalStatus();
+        if (status >= PowerManager.THERMAL_STATUS_CRITICAL)
+            throw new IllegalStateException("critical_thermal_status:" + status);
+    }
 
     CameraProbe(Context context, Progress progress) {
+        this.context = context;
+        displayDegrees = context.getSystemService(android.hardware.display.DisplayManager.class)
+            .getDisplay(android.view.Display.DEFAULT_DISPLAY).getRotation() * 90;
         manager = context.getSystemService(CameraManager.class);
         ipcDirectory = new java.io.File(context.getFilesDir(), "ipc").getAbsolutePath();
         this.progress = progress;
@@ -98,13 +110,21 @@ final class CameraProbe implements AutoCloseable {
         final FrameStats stats = new FrameStats();
         final ImageReader reader;
         final ByteBuffer nv12;
+        final ByteBuffer packed;
+        final int rotation, outputWidth, outputHeight;
         final JSONObject metadata;
         volatile long lastArrivalMs;
         long metadataFailures, uncapturedRequests, lostBuffers;
         Stream(String id, int width, int height, VisionPublisher publisher) throws Exception {
             label = id;
             CameraCharacteristics c = manager.getCameraCharacteristics(id);
+            rotation = Math.floorMod(c.get(CameraCharacteristics.SENSOR_ORIENTATION) +
+                (Objects.equals(c.get(CameraCharacteristics.LENS_FACING), CameraCharacteristics.LENS_FACING_FRONT) ? displayDegrees : -displayDegrees), 360);
+            outputWidth = rotation % 180 == 0 ? width : height;
+            outputHeight = rotation % 180 == 0 ? height : width;
             metadata = new JSONObject().put("sensor_id", id).put("width", width).put("height", height)
+                .put("image_rotation_applied_degrees", rotation).put("output_width", outputWidth).put("output_height", outputHeight)
+                .put("display_degrees_at_session_start", displayDegrees).put("mirrored", false)
                 .put("sensor_orientation", c.get(CameraCharacteristics.SENSOR_ORIENTATION))
                 .put("timestamp_source", c.get(CameraCharacteristics.SENSOR_INFO_TIMESTAMP_SOURCE))
                 .put("intrinsic_calibration", array(c.get(CameraCharacteristics.LENS_INTRINSIC_CALIBRATION)))
@@ -113,6 +133,11 @@ final class CameraProbe implements AutoCloseable {
                 .put("focal_lengths_mm", array(c.get(CameraCharacteristics.LENS_INFO_AVAILABLE_FOCAL_LENGTHS)));
             reader = ImageReader.newInstance(width, height, ImageFormat.YUV_420_888, 3);
             nv12 = ByteBuffer.allocateDirect(width * height * 3 / 2);
+            packed = rotation == 0 ? nv12 : ByteBuffer.allocateDirect(width * height * 3 / 2);
+            java.nio.file.Path destination = new java.io.File(context.getFilesDir(), "camera-" + id + ".json").toPath();
+            java.nio.file.Path temporary = destination.resolveSibling("camera-" + id + ".tmp");
+            java.nio.file.Files.write(temporary, metadata.toString().getBytes(java.nio.charset.StandardCharsets.UTF_8));
+            java.nio.file.Files.move(temporary, destination, java.nio.file.StandardCopyOption.REPLACE_EXISTING);
             reader.setOnImageAvailableListener(source -> {
                 try (Image image = source.acquireLatestImage()) {
                     if (image == null) return;
@@ -120,12 +145,14 @@ final class CameraProbe implements AutoCloseable {
                     long start = System.nanoTime();
                     long hash = NativeBridge.packNv12(p[0].getBuffer().slice(), p[0].getRowStride(), p[0].getPixelStride(),
                         p[1].getBuffer().slice(), p[1].getRowStride(), p[1].getPixelStride(),
-                        p[2].getBuffer().slice(), p[2].getRowStride(), p[2].getPixelStride(), width, height, nv12);
+                        p[2].getBuffer().slice(), p[2].getRowStride(), p[2].getPixelStride(), width, height, packed);
+                    if (rotation != 0) NativeBridge.rotateNv12(packed, width, height, rotation, nv12);
                     stats.add(image.getTimestamp(), hash, System.nanoTime() - start);
                     long timestamp = image.getTimestamp();
                     if (Objects.equals(c.get(CameraCharacteristics.SENSOR_INFO_TIMESTAMP_SOURCE), CameraCharacteristics.SENSOR_INFO_TIMESTAMP_SOURCE_REALTIME))
                         timestamp -= android.os.SystemClock.elapsedRealtimeNanos() - System.nanoTime();
-                    publisher.send(id, nv12, width, height, stats.frames, timestamp);
+                    stats.deliveryAge(System.nanoTime() - timestamp);
+                    publisher.send(id, nv12, outputWidth, outputHeight, stats.frames, timestamp);
                     lastArrivalMs = android.os.SystemClock.elapsedRealtime();
                 } catch (Exception e) { stats.packingErrors++; }
             }, handler);
@@ -136,6 +163,8 @@ final class CameraProbe implements AutoCloseable {
                 .put("timestamp_errors", stats.timestampErrors).put("changed_frames", stats.changedFrames)
                 .put("metadata_failures", metadataFailures).put("uncaptured_requests", uncapturedRequests).put("lost_buffers", lostBuffers)
                 .put("packing_errors", stats.packingErrors).put("packing_p99_ns", stats.percentile(true, .99))
+                .put("delivery_age_p99_ns", stats.deliveryAgeP99()).put("delivery_over_100ms", stats.lateDeliveries)
+                .put("delivery_future_timestamps", stats.futureDeliveries)
                 .put("frame_interval_p99_ns", stats.percentile(false, .99));
         }
         public void close() { reader.close(); }
@@ -216,12 +245,22 @@ final class CameraProbe implements AutoCloseable {
         AtomicReference<String> failure = new AtomicReference<>();
         long started = android.os.SystemClock.elapsedRealtime();
         VisionPublisher publisher = null;
+        java.nio.channels.FileChannel owner = null;
+        java.nio.channels.FileLock ownership = null;
         try {
+            checkThermalStatus();
+            owner = java.nio.channels.FileChannel.open(new java.io.File(context.getFilesDir(), "camera-owner.lock").toPath(),
+                java.nio.file.StandardOpenOption.CREATE, java.nio.file.StandardOpenOption.WRITE);
+            ownership = owner.tryLock();
+            if (ownership == null) throw new IllegalStateException("Another camera diagnostic is still closing; retry shortly");
             if (logical != null) {
                 Set<String> physicalIds = manager.getCameraCharacteristics(logical).getPhysicalCameraIds();
                 if (!physicalIds.containsAll(Arrays.asList(ids))) throw new IllegalStateException("requested physical IDs not exposed by logical camera");
             }
-            publisher = new VisionPublisher(ipcDirectory, ids, width, height);
+            CameraCharacteristics first = manager.getCameraCharacteristics(ids[0]);
+            int rotation = Math.floorMod(first.get(CameraCharacteristics.SENSOR_ORIENTATION) +
+                (Objects.equals(first.get(CameraCharacteristics.LENS_FACING), CameraCharacteristics.LENS_FACING_FRONT) ? displayDegrees : -displayDegrees), 360);
+            publisher = new VisionPublisher(ipcDirectory, ids, rotation % 180 == 0 ? width : height, rotation % 180 == 0 ? height : width);
             for (String id : ids) streams.add(new Stream(id, width, height, publisher));
             if (logical != null) {
                 CameraDevice device = open(logical, failure); devices.add(device);
@@ -232,13 +271,15 @@ final class CameraProbe implements AutoCloseable {
                     sessions.add(session(device, Collections.singletonList(stream), false, failure));
                 }
             }
-            long end = android.os.SystemClock.elapsedRealtime() + durationMs;
+            long captureStarted = android.os.SystemClock.elapsedRealtime();
+            long end = captureStarted + durationMs;
             while (android.os.SystemClock.elapsedRealtime() < end && failure.get() == null) {
                 Thread.sleep(Math.max(1, Math.min(1000, end - android.os.SystemClock.elapsedRealtime())));
+                checkThermalStatus();
                 long now = android.os.SystemClock.elapsedRealtime();
                 for (Stream stream : streams) {
                     long arrival = stream.lastArrivalMs;
-                    if (now - (arrival == 0 ? started : arrival) > 2000)
+                    if (now - (arrival == 0 ? captureStarted : arrival) > 2000)
                         failure.compareAndSet(null, "stale_camera:" + stream.label);
                 }
                 progress.update("Capturing " + Arrays.toString(ids) + " via " + (logical == null ? "independent sessions" : logical)
@@ -251,6 +292,8 @@ final class CameraProbe implements AutoCloseable {
             // Drain already dispatched image callbacks before reading their final statistics.
             CountDownLatch drained = new CountDownLatch(1); handler.post(drained::countDown); drained.await(3, TimeUnit.SECONDS);
             if (publisher != null) publisher.close();
+            if (ownership != null) ownership.release();
+            if (owner != null) owner.close();
         }
         JSONArray results = new JSONArray();
         boolean healthy = streams.size() == ids.length;

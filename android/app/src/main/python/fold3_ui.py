@@ -9,7 +9,7 @@ import time
 import traceback
 
 
-def main(data_dir, simulation=False):
+def main(data_dir, simulation=False, preview=False):
   from fold3_runtime import configure
   configure(data_dir, simulation)
   os.environ["FPS"] = "30"
@@ -20,6 +20,7 @@ def main(data_dir, simulation=False):
     temporary.write_text(json.dumps(report, indent=2))
     temporary.replace(path)
   report = {"pid": os.getpid(), "backend": "Raylib Android NativeActivity", "vehicle_tx_enabled": False}
+  camera_views = []
   try:
     from openpilot.selfdrive.ui.ui import main as upstream_main
   except Exception:
@@ -35,6 +36,27 @@ def main(data_dir, simulation=False):
       nonlocal frames
       import pyray as rl
       from java import jclass
+      if preview and not simulation:
+        if not camera_views:
+          from openpilot.selfdrive.ui.onroad.cameraview import CameraView
+          from openpilot.cereal.visionipc import VisionStreamType
+          class FreshCameraView(CameraView):
+            def _render_textures(self, source, destination):
+              if 0 <= time.monotonic_ns() - self.client.timestamp_sof <= 100_000_000:
+                super()._render_textures(source, destination)
+          camera_views.extend([FreshCameraView("camerad", stream) for stream in
+                               (VisionStreamType.VISION_STREAM_NARROW_ROAD, VisionStreamType.VISION_STREAM_CABIN)])
+        size = rl.get_screen_width() / 2
+        for i, view in enumerate(camera_views):
+          rect = rl.Rectangle(i * size, 84, size, rl.get_screen_height() - 150)
+          rl.draw_rectangle_rec(rect, rl.BLACK)
+          view.render(rect)
+        report["camera_preview"] = [{"stream": name, "frame_id": view.client.frame_id,
+                                     "age_ms": (time.monotonic_ns() - view.client.timestamp_sof) / 1e6,
+                                     "fresh": 0 <= time.monotonic_ns() - view.client.timestamp_sof <= 100_000_000}
+                                    for name, view in zip(("road", "driver"), camera_views, strict=True)]
+        rl.draw_text_ex(rl.get_font_default(), "UNCALIBRATED CAMERA DIAGNOSTICS - DRIVER AND ROAD MODELS UNQUALIFIED",
+                        rl.Vector2(12, 48), 22, 1, rl.YELLOW)
       rl.draw_rectangle(0, 0, rl.get_screen_width(), 42, rl.Color(120, 0, 0, 240))
       rl.draw_text_ex(rl.get_font_default(), "SIMULATION - VEHICLE TRANSMISSION DISABLED" if simulation else "VEHICLE TRANSMISSION DISABLED",
                       rl.Vector2(12, 8), 26, 1, rl.WHITE)
@@ -59,6 +81,8 @@ def main(data_dir, simulation=False):
       save_report()
       raise
     finally:
+      for view in camera_views:
+        view.close()
       faulthandler.cancel_dump_traceback_later()
       startup_stack.close()
     return

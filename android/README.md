@@ -1,9 +1,11 @@
 # Fold 3 Android runtime port
 
-This branch runs upstream **controlsd, dmonitoringd and the landscape Raylib UI**
+This branch hosts upstream **controlsd, dmonitoringd and the landscape Raylib UI**
 in separate Android processes, with bounded supervision, native Params and
-msgq/VisionIPC. The debug ADB bridge runs the phone's steering controller in a
-host MetaDrive world. **The complete visual driving stack is not operational.**
+msgq/VisionIPC. Camera2 delivers road and driver previews through native VisionIPC;
+diagnostic model workers use original ONNX assets and upstream message parsers.
+The debug ADB bridge runs the phone's steering controller in a host MetaDrive
+world. **The complete visual driving stack is not operational.**
 Vehicle transmission is compiled out and engagement is unconditionally blocked.
 See [VALIDATION.md](VALIDATION.md) for passed, failed and blocked acceptance checks.
 
@@ -54,18 +56,34 @@ Native modules are cross-compiled for Android Bionic; desktop binaries are not
 packaged. The shared Raylib library is used by both NativeActivity and pyray.
 
 The APK contains Python 3.12, NumPy 1.26.2, native Params, pycapnp, msgq/VisionIPC,
-libusb, pyzmq/libzmq, zstandard, setproctitle and Raylib/CFFI. NumPy 1.26.2 does
+libusb, ONNX Runtime 1.31.1, pyzmq/libzmq, zstandard, setproctitle and Raylib/CFFI. NumPy 1.26.2 does
 **not** satisfy upstream's NumPy >=2 requirement; only the exercised subset is
-validated. With optional FP32 assets this debug APK is about 230 MiB after fresh
-packaging. An earlier incremental package contained 214 MiB of unused ZIP space;
-repackaging removed it while preserving every ZIP entry's bytes.
+validated. Artifact sizes and hashes are recorded in the validation report.
 The FP32 assets are diagnostic experiments, not accepted driving models.
 Third party licenses are packaged as assets.
+ONNX Runtime's ARM64 Android AAR is checksum pinned during native preparation.
+The receive-only Panda decoder is generated from the pinned Panda Python and C
+sources, retaining checksum checks even when Python assertions are optimized out.
 
 Outputs (debug key signed):
 
 - `android/app/build/outputs/apk/debug/app-debug.apk`
 - `android/app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk`
+
+## Focused host checks
+
+After preparing the host environment and native modules:
+
+```sh
+.venv/bin/python -m unittest \
+  android.tests.test_vision_panda \
+  openpilot.tools.sim.tests.test_android_protocol
+```
+
+These exercise frame pairing, recurrent-state rejection, NV12 layout, pinned
+Panda decoding/health gates and the ADB transport contract. Android JNI and
+VisionIPC checks run through the device instrumentation command below. The
+retained broader host results and their limits are in [VALIDATION.md](VALIDATION.md).
 
 ## Install, run and inspect
 
@@ -83,11 +101,16 @@ adb -s "$FOLD3_SERIAL" shell am start -n ai.sunnypilot.fold3/.MainActivity \
 ```
 
 Grant camera/location permissions through Android when needed. The foreground
-manager supervises separate controls, monitoring and IMU service processes.
+manager supervises separate controls, monitoring, IMU, road-model and driver-model
+service processes in physical mode. Model benchmarks also use a foreground
+service; background-service CPU limits distorted the earlier measurements.
 Physical controls wait for real `CarParams` and `CarParamsSP`; there is no fake
 fingerprint. DM waits for driver-model output. Raw IMU messages and Camera2
 VisionIPC frames are explicitly invalid until mounting/camera calibration is
-implemented and verified. The Raylib UI has Android connectivity/application
+implemented and verified. Diagnostic NV12 projections are explicitly uncalibrated.
+The road worker requires distinct rear sensors 0 and 2; it never duplicates a
+single camera to satisfy that requirement. Non-finite predictions are discarded
+and clear recurrent state. The Raylib UI has Android connectivity/application
 settings and a permanent transmission-disabled banner. UI backgrounding and
 Surface changes do not restart the driving workers. Finishing the UI creates a
 fresh renderer on the next launch, preserving the service processes.
@@ -103,6 +126,40 @@ minutes of camera capture; it does not run the full combined driving workload.
 Model profiles also include `image-fp32`, `beam1`, `fp32` and `fp32-image`.
 The first two retain FP16 types embedded in ONNX; the latter two promote FP16
 types and weights to FP32 and compare with their own host reference.
+The original models can also be benchmarked with `ort-cpu`, `ort-cpu-4` and
+`ort-nnapi`. CPU fallback remains possible with the NNAPI provider, so its driver
+model timing does not prove DSP/GPU execution. All measured original profiles
+still fail numerical acceptance.
+
+Start the live diagnostic pipeline, or request a bounded combined diagnostic:
+
+```sh
+adb -s "$FOLD3_SERIAL" shell am force-stop ai.sunnypilot.fold3
+adb -s "$FOLD3_SERIAL" shell am start -n ai.sunnypilot.fold3/.MainActivity \
+  --ez run_vision true --ei vision_seconds 1800
+# This script starts its own fresh app session and collects JSON/JSONL evidence:
+.venv/bin/python android/scripts/validate_vision.py --serial "$FOLD3_SERIAL" \
+  --seconds 1800 --report /tmp/fold3-live-vision-30min.json
+```
+
+This runs road/front capture, Raylib, raw IMU and driver inference. Road inference
+and physical controls remain blocked; it is not a complete driving workload.
+The UI clears previews whose timestamps are future or older than 100 ms.
+Capture checks Android's [thermal status](https://developer.android.com/reference/android/os/PowerManager#THERMAL_STATUS_CRITICAL)
+before opening cameras and every second. Critical status (4 or higher) closes
+capture and prevents retries. The host validator aborts and force-stops its
+diagnostic application on critical heat or terminal capture failure.
+
+The dedicated emulator can test startup rejection and an active-session abort.
+This command refuses physical device serials and resets the override on exit:
+
+```sh
+.venv/bin/python android/scripts/validate_thermal.py --serial emulator-5560 \
+  --report android/reports/emulator-thermal-abort.json
+```
+
+It also checks host-validator cleanup and verifies that `stop_vision` works
+when Android creates a new launcher activity over the driving UI.
 
 Reports live in private app storage:
 
@@ -117,9 +174,16 @@ adb -s "$FOLD3_SERIAL" exec-out run-as ai.sunnypilot.fold3 cat files/model-repor
 Check timestamps and PIDs: reports persist across installations and can describe
 an earlier run. Committed reports retain qualification failures as well as passes.
 No camera images, audio recordings or location tracks are retained.
-USB permission wraps Android's authorized descriptor in native libusb. Only
-identity/version IN reads exist: no CAN OUT, safety mode changes, reset or flash.
-Panda firmware compatibility and receive-only CAN integration remain blocked.
+USB permission wraps Android's authorized descriptor in native libusb. The
+launcher offers receive-only Panda start/stop; the debug launch extra is
+`--ez panda_rx true`. Native bindings expose whitelisted vendor IN requests and
+CAN endpoint 0x81 only. No CAN OUT, safety-mode change, heartbeat, reset or flash
+binding exists. The receiver requires red hardware, exact pinned packet versions
+and silent health with every engagement flag clear before reading CAN. It checks
+health repeatedly, handles fragmented/checksummed packets and publishes invalid
+diagnostic CAN with host-arrival timestamps. Signature bytes are recorded without
+claiming firmware qualification. Hardware checks are blocked: the user's Panda
+is disconnected.
 
 ## Emulator and MetaDrive
 
@@ -128,7 +192,8 @@ Panda firmware compatibility and receive-only CAN integration remain blocked.
 echo no | "$ANDROID_HOME/cmdline-tools/latest/bin/avdmanager" create avd \
   --name sunnypilot_fold3_api35 --package 'system-images;android-35;google_apis;arm64-v8a'
 "$ANDROID_HOME/emulator/emulator" -avd sunnypilot_fold3_api35 -port 5560 \
-  -no-window -no-audio -no-boot-anim -no-snapshot -gpu swiftshader_indirect -memory 4096 -cores 2
+  -no-window -no-audio -no-boot-anim -no-snapshot -gpu swiftshader -memory 4096 -cores 2 \
+  -camera-back emulated -camera-front emulated
 uv pip install --python .venv/bin/python -r android/requirements-simulator.txt
 adb -s "$FOLD3_SERIAL" shell am force-stop ai.sunnypilot.fold3
 adb -s "$FOLD3_SERIAL" shell am start -n ai.sunnypilot.fold3/.MainActivity \

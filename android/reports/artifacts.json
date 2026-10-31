@@ -1,8 +1,8 @@
 {
-  "generated_utc": "2026-10-31T09:19:57.710954+00:00",
+  "generated_utc": "2026-10-31T11:26:27.939327+00:00",
   "branch": "codex/fold3-android-port",
   "base_commit": "6f7a2c94c10dffcf9a83b120ab1e6985e4496868",
-  "overall_status": "blocked: Android controls, monitoring, Raylib and simulator runtime implemented; complete visual pipeline, camera/model and physical vehicle gates remain unmet",
+  "overall_status": "blocked: diagnostic visual pipeline and Panda receive-only transport implemented; camera concurrency, original-model parity/timing, critical heat under sustained load, calibration, complete physical runtime and vehicle qualification remain unmet",
   "application_id": "ai.sunnypilot.fold3",
   "version": "0.1.0-port-validation",
   "vehicle_tx_enabled": false,
@@ -23,7 +23,9 @@
     "build_type": "debug; local Android debug signature",
     "raylib": "dff603f4f122163900469e73d113deacd9ec9817",
     "raylib_python_cffi": "a32e9109c9924abdaae5e6e3d5408e210f939ee1",
-    "json11": "db00e9369a92aa74bf630a2ffb092a4b0b132c01"
+    "json11": "db00e9369a92aa74bf630a2ffb092a4b0b132c01",
+    "onnxruntime_android": "1.31.1",
+    "onnxruntime_aar_sha256": "d4d50660300ed2c4f38ffdfd5ab5bfa3a22f995f282dda24f42ea3ea55467b49"
   },
   "submodules": {
     "panda": "8a16e089b88593914823743df29e1c30b7dd3e00",
@@ -51,57 +53,112 @@
     {
       "package": "ai.sunnypilot.fold3",
       "path": "android/app/build/outputs/apk/debug/app-debug.apk",
-      "bytes": 241356342,
-      "sha256": "f5010a856d9a530a3b456438f3ab0610e3476b84ca4650e6d6e689020ed2dc25"
+      "bytes": 255657358,
+      "sha256": "e2ee0027c6a49368bfaf57da8e844d9b73fe3a2721f7e77db302b2f91203e6d2"
     },
     {
       "package": "ai.sunnypilot.fold3.test",
       "path": "android/app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk",
-      "bytes": 4458147,
-      "sha256": "44cb546f9d9af6816fbfe5a1b518a439736240ecb83668968bc5a96ef3fed8fa"
+      "bytes": 4458015,
+      "sha256": "8513779b43e24bb3171449a2fd65f1541b80289ff96b297c26f10c5e531fad5e"
     }
   ],
-  "measurement_scope": "The delivered APK receives final installation/hash verification, instrumentation, visible lifecycle rendering and ADB fault checks. Camera/model, UI/control timing and MetaDrive reports identify development-run scope; the final build adds KEEP_SCREEN_ON. No complete camera-to-control workload exists.",
+  "measurement_scope": "Benchmarks and the failed sustained diagnostic predate the final explicit thermal guard and stop-intent fix. The sustained report is development evidence, not 30-minute acceptance of the delivered APK. It excludes road inference, planning and active controls. Current APK hashes and component validation are recorded separately. Every visual diagnostic message remains invalid.",
   "final_component_validation": {
-    "verified_utc": "2026-10-31T09:19:57.710954+00:00",
+    "verified_utc": "2026-10-31T11:24:39.386363+00:00",
     "installed_hash_verification": "installed-artifacts.json",
     "physical_fold3_instrumentation": {
-      "passed": 10,
-      "report": "fold3-instrumentation.txt"
+      "status": "passed",
+      "passed": 14,
+      "seconds": 9.916,
+      "report": "RFCR81Y1TBJ-vision-instrumentation.txt"
     },
     "api35_arm64_emulator_instrumentation": {
-      "passed": 10,
-      "report": "emulator-instrumentation.txt"
+      "status": "passed",
+      "passed": 14,
+      "seconds": 11.692,
+      "report": "emulator-5560-vision-instrumentation.txt"
     },
     "jvm_tests_passed": 2,
     "host_hyundai_and_ipc_tests_passed": 20,
     "host_hyundai_and_ipc_tests_skipped": 2,
     "host_hyundai_safety_tests_passed": 1701,
     "host_hyundai_safety_tests_skipped": 198,
-    "host_runtime_tests_passed": 58,
-    "lifecycle": {
-      "physical_fold3": "passed",
-      "api35_arm64_emulator": "passed",
-      "physical_fold_transition": "not verified",
+    "host_runtime_tests_passed": 72,
+    "host_runtime_report": "host-runtime-vision-tests.txt",
+    "sustained_diagnostic": {
+      "status": "failed",
+      "report": "fold3-live-vision-30min-summary.json",
+      "critical_thermal_first_seconds": 1247.936,
+      "delivered_apk_qualification": false
+    },
+    "panda_physical_receive_only": {
+      "status": "blocked",
+      "reason": "Panda disconnected; no physical USB/CAN/firmware/vehicle qualification"
+    },
+    "camera_concurrency": {
+      "status": "failed",
+      "report": "fold3-camera-vision.json"
+    },
+    "original_model_parity": {
+      "status": "failed",
       "reports": [
-        "fold3-lifecycle.json",
-        "emulator-lifecycle.json"
+        "fold3-model-opencl-foreground.json",
+        "fold3-model-ort-cpu-4.json",
+        "fold3-model-ort-nnapi-foreground.json"
       ]
     },
-    "adb_faults": {
-      "physical_fold3": "passed",
-      "api35_arm64_emulator": "passed with renderer backgrounded",
-      "negative_cases_per_device": 10,
-      "reports": [
-        "fold3-adb-faults.json",
-        "emulator-adb-faults.json"
-      ]
+    "emulator_combined_workload": {
+      "status": "failed",
+      "report": "emulator-live-vision-rerun.json"
     },
-    "physical_phone_restored": {
-      "simulation": false,
-      "engagement_allowed": false,
-      "vehicle_tx_enabled": false,
-      "report": "fold3-physical-manager-final.json"
+    "physical_fold_transition": {
+      "status": "blocked",
+      "reason": "Not exercised"
+    },
+    "vehicle_tx_enabled": false,
+    "engagement_allowed": false,
+    "thermal_guard": {
+      "status": "passed",
+      "report": "emulator-thermal-abort.json",
+      "physical_temperature_overridden": false
+    },
+    "final_focused_host_tests": {
+      "passed": 22,
+      "report": "host-vision-protocol-final-tests.txt"
+    },
+    "fold3_lifecycle": {
+      "status": "passed",
+      "report": "fold3-vision-lifecycle.json"
+    },
+    "emulator_lifecycle": {
+      "status": "passed",
+      "report": "emulator-vision-lifecycle.json"
+    },
+    "fold3_adb_faults": {
+      "status": "passed",
+      "report": "fold3-vision-adb-faults.json"
+    },
+    "emulator_adb_faults": {
+      "status": "passed",
+      "report": "emulator-vision-adb-faults.json"
+    },
+    "fold3_metadrive": {
+      "status": "passed",
+      "report": "fold3-vision-metadrive.json"
+    },
+    "emulator_metadrive": {
+      "status": "passed",
+      "report": "emulator-vision-metadrive.json"
+    },
+    "physical_fold3_live_camera_smoke": {
+      "status": "failed",
+      "report": "fold3-live-vision-final.json",
+      "reason": "Road camera disconnected; three recoveries. All 1115 driver predictions late; p99 work 57.7425 ms."
+    },
+    "complete_driving_runtime": {
+      "status": "blocked",
+      "reason": "Distinct second rear stream, numerical/replay acceptance, mount calibration, localization/planning, physical car discovery and vehicle qualification incomplete"
     }
   }
 }
