@@ -1,0 +1,27 @@
+Read-only camera HAL evidence for the compatibility APK's 60-second trial.
+APK SHA-256: 0e05c9927a2a12755876ba539ac3eec7d2bcee1f32e89228d2e03c5498cc850a
+Trial: 2026-10-31T15:18:00.430181Z through 2026-10-31T15:19:01.714717Z
+Source: adb -s RFCR81Y1TBJ logcat -d -v threadtime --pid=23821
+Phone logcat timezone offset: +0000
+Logical rear 20 maps pipeline index 0 to camera 2 (IMX258 ultrawide),
+index 1 to camera 0 (IMX555 wide); front public 1 uses internal camera 6 (IMX374).
+The rear activation vector [1:1:0] overlaps application front-frame delivery.
+Only startup and first/last activation lines from this exact trial are retained.
+This proves active hardware pipelines, not calibrated independent road images.
+Addresses and unrelated log fields are redacted.
+
+10-31 15:18:00.566 23821 31533 I SS_3A   :  INFO: AEC: CreateAEC: 612: CreateAECAlgorithm (refcnt:0 cameraId 0 OverrideCameraOpen 1 lensFacing 1 pAECSingletonWrapper->pAECSingleton <address> [sensor:IMX555]
+10-31 15:18:00.588 23821 31539 I SS_3A   :  INFO: AEC: CreateAEC: 612: CreateAECAlgorithm (refcnt:0 cameraId 6 OverrideCameraOpen 1 lensFacing 0 pAECSingletonWrapper->pAECSingleton <address> [sensor:IMX374]
+10-31 15:18:00.650 23821 23891 I SEC_MULTIREC: chxsecusecasemultirecording.cpp:6871 CreateRDIResources(): RDI resolution:4000x2252,camera index:0, cameraId 2 pFullOptions: <address>
+10-31 15:18:00.650 23821 23891 I SEC_MULTIREC: chxsecusecasemultirecording.cpp:6871 CreateRDIResources(): RDI resolution:4000x2252,camera index:1, cameraId 0 pFullOptions: <address>
+10-31 15:18:00.650 23821 23891 I SEC_MULTIREC: chxsecusecasemultirecording.cpp:6871 CreateRDIResources(): RDI resolution:4000x2256,camera index:2, cameraId 3 pFullOptions: <address>
+10-31 15:18:00.834 23821 31573 I SS_3A   :  INFO: AEC: CreateAEC: 612: CreateAECAlgorithm (refcnt:0 cameraId 2 OverrideCameraOpen 1 lensFacing 1 pAECSingletonWrapper->pAECSingleton <address> [sensor:IMX258]
+10-31 15:18:00.853 23821 31590 I SS_3A   :  INFO: AEC: CreateAEC: 612: CreateAECAlgorithm (refcnt:1 cameraId 0 OverrideCameraOpen 1 lensFacing 1 pAECSingletonWrapper->pAECSingleton <address> [sensor:IMX555]
+10-31 15:18:00.868 23821 23891 I SEC_MULTIREC: chxsecusecasemultirecording.cpp:9392 ActivatePendingPipeline(): Activating Pipeline 0
+10-31 15:18:00.882 23821 31596 I SS_3A   :  INFO: AEC: CreateAEC: 612: CreateAECAlgorithm (refcnt:0 cameraId 6 OverrideCameraOpen 1 lensFacing 0 pAECSingletonWrapper->pAECSingleton <address> [sensor:IMX374]
+10-31 15:18:00.883 23821 23891 I SEC_MULTIREC: chxsecusecasemultirecording.cpp:9402 ActivatePendingPipeline(): Success activating for pipeline 0
+10-31 15:18:00.883 23821 23891 I SEC_MULTIREC: chxsecusecasemultirecording.cpp:9392 ActivatePendingPipeline(): Activating Pipeline 1
+10-31 15:18:00.907 23821 23891 I SEC_MULTIREC: chxsecusecasemultirecording.cpp:9402 ActivatePendingPipeline(): Success activating for pipeline 1
+10-31 15:19:01.157 23821 31824 I SS_3A   :  INFO: AEC: CreateAEC: 612: CreateAECAlgorithm (refcnt:0 cameraId 6 OverrideCameraOpen 1 lensFacing 0 pAECSingletonWrapper->pAECSingleton <address> [sensor:IMX374]
+10-31 15:18:00.832 23821 23891 I SEC_MULTIREC: chxsecusecasemultirecording.cpp:8477 ExecuteCaptureRequest(): Dualv : 1 CbReq : 1 (1), Zoom : 1.000000 Active [1:1:0] master : 0
+10-31 15:19:00.987 23821 23821 I SEC_MULTIREC: chxsecusecasemultirecording.cpp:8477 ExecuteCaptureRequest(): Dualv : 1 CbReq : 1 (1), Zoom : 1.000000 Active [1:1:0] master : 0

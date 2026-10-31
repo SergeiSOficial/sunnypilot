@@ -52,6 +52,17 @@ public final class MainActivity extends Activity {
         probe.setText("Test built-in camera combinations");
         probe.setOnClickListener(v -> start(false));
         layout.addView(probe);
+        if (BuildConfig.DEBUG && getPackageName().equals("com.samsung.sunnypilot.fold3")) {
+            Button multiview = new Button(this);
+            multiview.setText("Test Samsung multiview + front (diagnostic)");
+            multiview.setOnClickListener(v -> {
+                if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) return;
+                stopService(new Intent(this, VisionService.class));
+                startForegroundService(new Intent(this, ProbeService.class).putExtra("samsung_multiview", true)
+                    .putExtra("front_camera", true).putExtra("duration_seconds", 10));
+            });
+            layout.addView(multiview);
+        }
         Button soakButton = new Button(this);
         soakButton.setText("Run 30-minute road + driver camera test");
         soakButton.setOnClickListener(v -> start(true));
@@ -158,7 +169,8 @@ public final class MainActivity extends Activity {
     private void start(boolean runSoak) {
         if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) return;
         stopService(new Intent(this, VisionService.class));
-        startForegroundService(new Intent(this, ProbeService.class).putExtra("soak", runSoak)
+        startForegroundService(new Intent(this, ProbeService.class)
+            .putExtras(BuildConfig.DEBUG ? getIntent() : new Intent()).putExtra("soak", runSoak)
             .putExtra("soak_only", getIntent().getBooleanExtra("soak_only", false)));
     }
     @Override public void onRequestPermissionsResult(int request, String[] permissions, int[] results) {

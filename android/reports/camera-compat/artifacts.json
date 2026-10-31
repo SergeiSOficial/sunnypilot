@@ -1,0 +1,29 @@
+{
+  "source_base": "0ce6afe23b7649c5cfc6616c6cf3f135e2e03c0c",
+  "branch": "codex/fold3-android-port",
+  "application_id": "com.samsung.sunnypilot.fold3",
+  "gradle_property": "-Pfold3CameraCompat=true",
+  "vehicle_tx_enabled": false,
+  "engagement_allowed": false,
+  "artifacts": [
+    {
+      "path": "android/app/build/outputs/apk/debug/app-debug.apk",
+      "sha256": "0e05c9927a2a12755876ba539ac3eec7d2bcee1f32e89228d2e03c5498cc850a",
+      "bytes": 325822010
+    },
+    {
+      "path": "android/app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk",
+      "sha256": "6e2643a3a0df006ca113eff0b7598935be7f728f04a2df51446060aa3051f546",
+      "bytes": 4475127
+    }
+  ],
+  "source_files": {
+    "android/app/build.gradle": "c62caac7ee2c07b6720adb719bfd12f57060a206ea98525a803df352a42e165e",
+    "android/app/src/main/java/ai/sunnypilot/fold3/CameraProbe.java": "3e578b9c6c55c7e673dc76fa66b07b937f3f2a277b6182a761dd4678e8005f0b",
+    "android/app/src/main/java/ai/sunnypilot/fold3/CameraPreviewSample.java": "ad8273699f574983c804bc352b65a3df57d073e4b8ca6bd917f7de874d312185",
+    "android/app/src/main/java/ai/sunnypilot/fold3/MainActivity.java": "2690dffad8ddb30658b038caf5af6409cc36841d562147d25a3b06f6f5989baa",
+    "android/app/src/main/java/ai/sunnypilot/fold3/ProbeService.java": "f72f821a389655247f9e1388719b19bba92669efdb7b63c76e99b4db495e88cb",
+    "android/app/src/androidTest/java/ai/sunnypilot/fold3/CameraPreviewSampleTest.java": "e1cb4906d0e4b5cd6fef2b1a3826f3bb1373261bbe33feb218ea3ca834bdacf6"
+  },
+  "build_command": "./gradlew --no-daemon --console plain -Pfold3CameraCompat=true :app:assembleDebug :app:assembleDebugAndroidTest :app:testDebugUnitTest"
+}

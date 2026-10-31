@@ -1,0 +1,45 @@
+{
+  "apk_sha256": "0e05c9927a2a12755876ba539ac3eec7d2bcee1f32e89228d2e03c5498cc850a",
+  "vehicle_tx_enabled": false,
+  "engagement_allowed": false,
+  "checks": {
+    "android_build": "passed",
+    "host_android_tests": {
+      "status": "passed",
+      "count": 29
+    },
+    "host_simulator_protocol_tests": {
+      "status": "passed",
+      "count": 8
+    },
+    "jvm_tests": {
+      "status": "passed",
+      "count": 2,
+      "unchanged_cached_results": true
+    },
+    "fold3_instrumentation": {
+      "status": "passed",
+      "count": 16
+    },
+    "emulator_instrumentation": {
+      "status": "passed",
+      "count": 16
+    },
+    "samsung_multiview_transport": "passed",
+    "wide_ultrawide_front_hardware_concurrency": "passed",
+    "independent_calibrated_rear_images": "blocked",
+    "fold3_rear_front_capture": "passed",
+    "emulator_rear_front_capture": "passed",
+    "emulator_driving_input_timing": "failed",
+    "physical_panda": "blocked"
+  },
+  "models_and_combined_performance": "not rerun; prior failed parity and sustained perception remain failed",
+  "evidence": {
+    "hardware": "fold3-three-camera-evidence.json",
+    "multiview": "fold3-final-samsung-front.json",
+    "fold3_standard": "fold3-final-road-front.json",
+    "emulator_standard": "emulator-final-road-front.json",
+    "fold3_cleanup": "fold3-cleanup.json",
+    "emulator_cleanup": "emulator-cleanup.json"
+  }
+}

@@ -11,6 +11,19 @@ spec.loader.exec_module(experiment)
 
 
 class ExperimentTest(unittest.TestCase):
+  def test_both_package_variants_are_detected_and_stopped(self):
+    state = experiment.parse_state("12 com.samsung.sunnypilot.fold3:camerad\n13 ai.sunnypilot.fold3:models",
+      "Active Camera Clients:\ncom.samsung.sunnypilot.fold3\nAllowed user IDs: 0", "Thermal Status: 0")
+    self.assertEqual(len(state["processes"]), 2)
+    self.assertTrue(state["camera_owned"])
+    device = experiment.Device("phone", package=experiment.CAMERA_COMPAT_PACKAGE)
+    device.command = Mock()
+    device.state = Mock(return_value={"processes": [], "camera_owned": False})
+    device.stop()
+    self.assertEqual([call.args[-1] for call in device.command.call_args_list],
+                     [experiment.PACKAGE, experiment.PACKAGE + ".test",
+                      experiment.CAMERA_COMPAT_PACKAGE, experiment.CAMERA_COMPAT_PACKAGE + ".test"])
+
   def test_active_client_and_test_process_are_detected_without_historic_clients(self):
     state = experiment.parse_state("1 ai.sunnypilot.fold3.test\n2 ai.sunnypilot.fold3:models",
       "Active Camera Clients:\n[]\nAllowed user IDs: 0\nDISCONNECT ai.sunnypilot.fold3",
@@ -40,6 +53,17 @@ class ExperimentTest(unittest.TestCase):
       device.state = Mock(return_value={"processes": [], "camera_owned": False, "thermal_override": False, **change})
       with self.assertRaises(RuntimeError):
         device.cool()
+
+  def test_provider_restart_fails_even_when_workload_returns_success(self):
+    with tempfile.TemporaryDirectory() as directory:
+      device = Mock(serial="phone")
+      device.stop.side_effect = [{"processes": []}, {"processes": [], "camera_provider_processes": ["2 provider"]}]
+      device.cool.return_value = {"camera_provider_processes": ["1 provider"]}
+      device.artifact.return_value = "test"
+      with patch.object(experiment.subprocess, "run", return_value=Mock(returncode=0)):
+        report = experiment.run(device, ["test"], Path(directory) / "result.json")
+      self.assertEqual(report["status"], "failed")
+      self.assertIn("restarted", report["camera_provider_error"])
 
   def test_runtime_starts_after_cooldown_and_startup_failure_still_cleans(self):
     for startup_error in (False, True):

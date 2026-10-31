@@ -2,8 +2,10 @@
 
 **Overall: BLOCKED.** Vehicle transmission is compiled out and engagement remains
 unconditionally disabled. The complete visual driving stack is not operational.
-Dual rear capture, numerical parity, timely driver monitoring, calibration and
-physical vehicle qualification remain unmet.
+Independent rear images for the models, numerical parity, timely driver
+monitoring, calibration and physical vehicle qualification remain unmet.
+Samsung multiview transport with both rear pipelines and the front camera is
+now operational in a separate diagnostic installation.
 
 Target: stock Android 15 SM-F926B, Snapdragon 888 / Adreno 660; right-hand-drive
 2019 Hyundai Ioniq PHEV, factory ACC and red Panda. Branch
@@ -14,13 +16,20 @@ factory ACC/AEB configuration and Panda firmware are preserved. The Panda is
 
 ## Delivery identity and test scope
 
-Current debug APK SHA-256:
+Current Samsung compatibility debug APK (`com.samsung.sunnypilot.fold3`) SHA-256:
+`0e05c9927a2a12755876ba539ac3eec7d2bcee1f32e89228d2e03c5498cc850a`.
+The camera changes, fresh build, host/device checks and each installed hash are
+recorded in the [camera validation report](reports/camera-compat/README.md). This build adds Samsung's
+mode-37 multiview layout, opaque-preview readback and front capture. It retains
+the unconditional engagement and vehicle-transmission blocks.
+
+Previous regular-package debug APK SHA-256:
 `e5347db807f6551886d7de706d6ebb939c51dcd25c5c0ade1cd57b7fb24941ee`.
 [Installed hashes](reports/installed-artifacts.json) match on the Fold 3 and the
 API 35 ARM64 emulator. Build commands are in [README.md](README.md); artifact
 sizes, source pins and hashes are in [artifacts.json](reports/artifacts.json).
 
-The current APK uses two non-spinning model threads. Instrumentation, phone
+That APK uses two non-spinning model threads. Instrumentation, phone
 60-second live capture, the phone soak attempt, emulator lifecycle/resize,
 emulator live capture and thermal-abort tests exercise this APK. The immediately
 preceding `31c9028b…` APK used four live threads. Its unchanged camera APIs,
@@ -34,13 +43,15 @@ These results are not silently attributed to the newer APK.
 | Area | Result | Evidence and limit |
 |---|---|---|
 | ARM64 APK / installation | Passed | Gradle build, native Bionic modules, signing and installed hashes verified |
-| Focused host checks | Passed | 24 Android tests + 8 simulator protocol tests; [Android](reports/host-clean-experiment-tests.txt), [simulator](reports/host-sim-protocol-clean.txt) |
-| JVM tests | Passed, cached | Two unchanged FrameStats tests; actual JUnit timestamp 2026-10-31 10:24:27 retained in build metadata |
-| Fold 3 / emulator instrumentation | Passed | 15 tests each; [phone](reports/fold3-final-instrumentation.txt), [emulator](reports/emulator-final-instrumentation.txt) |
+| Focused host checks | Passed | 29 Android tests and 8 simulator protocol tests; [current results](reports/camera-compat/host-tests.txt), [protocol results](reports/camera-compat/host-simulator-tests.txt) |
+| JVM tests | Passed | Two unchanged FrameStats tests in the compatibility build |
+| Fold 3 / emulator instrumentation | Passed | 16 each, including opaque preview pixels/orientation; [phone](reports/camera-compat/fold3-final-instrumentation.txt), [emulator](reports/camera-compat/emulator-final-instrumentation.txt); each isolation report names its actual APK |
 | Exact preprocessing / IPC | Passed component checks | Padded/rotated NV12, native gather equivalence, malformed buffers, VisionIPC and parser checks |
-| Camera matrix | Partial | Phone 16/26 and emulator 6/12 attempts passed; no disconnects, all readers/devices closed; required dual rear combinations failed |
-| Wide + ultrawide / two rear + driver | Failed | Stock HAL rejects second rear with `camera_error:2:2`; no accessible logical rear physical group |
-| Phone 60-second live diagnostic | Passed capture/preview only | [Current run](reports/fold3-final-live.json): 1,800 rear / 1,794 front frames, no recovery, all DM predictions late |
+| Standard Camera2 matrix (prior build) | Partial | Phone 16/26 and emulator 6/12 attempts passed; no disconnects, all readers/devices closed; ordinary dual rear combinations failed |
+| Samsung rear multiview + front transport | Passed | Mode 37, logical 20 + front 1; 60-second capture, provider remains stable; [camera details](CAMERAS.md) |
+| Independent wide / ultrawide driving inputs | Blocked | Direct physical-output sessions fail; multiview thumbnails/opaque preview need independent extraction and calibration before VisionIPC/model acceptance |
+| Standard rear/front capture regression | Passed capture only | [Phone 60 seconds](reports/camera-compat/fold3-final-road-front.json), [emulator 10 seconds](reports/camera-compat/emulator-final-road-front.json); virtual-camera timing does not qualify model inputs |
+| Phone 60-second live diagnostic (previous regular APK) | Passed capture/preview only | [Previous run](reports/fold3-final-live.json): 1,800 rear / 1,794 front frames, no recovery, all DM predictions late |
 | Phone 30-minute diagnostic attempt | Passed capture; failed perception | [Soak result](reports/fold3-final-soak.json); no full road/planning/control workload |
 | Raylib lifecycle / emulator resize | Passed component checks | [Phone](reports/four-thread-validation/fold3-final-lifecycle.json), [emulator](reports/emulator-final-lifecycle.json); physical fold transition untested |
 | Process fault recovery | Passed component checks | [Phone](reports/four-thread-validation/fold3-final-faults.json), [emulator](reports/four-thread-validation/emulator-final-faults.json) |
@@ -110,7 +121,7 @@ The emulator was left clean with its override reset and then powered off.
 The earlier emulator lifecycle precondition failed while a System UI ANR dialog
 paused rendering; [failure evidence](reports/emulator-systemui-anr.txt) and the
 [failed isolation report](reports/four-thread-validation/emulator-final-lifecycle-isolation.json)
-are retained. After closing that dialog, the final APK lifecycle/resize test
+are retained. After closing that dialog, the previous regular APK lifecycle/resize test
 passed. A fresh cold-boot check again required closing a System UI ANR dialog;
 [checked-in launcher validation](reports/emulator-final-wrapper-validation.json)
 then passed lifecycle/resize, but unattended startup remains failed. Its live throughput still failed. Camera providers were not restarted

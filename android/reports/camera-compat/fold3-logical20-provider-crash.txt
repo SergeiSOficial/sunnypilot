@@ -1,0 +1,46 @@
+10-31 14:09:24.590  8919  8947 F libc    : Fatal signal 11 (SIGSEGV), code 1 (SEGV_MAPERR), fault addr 0x4 in tid 8947 (HwBinder:8919_3), pid 8919 (provider@4.0-se)
+10-31 14:09:24.821 20496 20496 F DEBUG   : *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***
+10-31 14:09:24.821 20496 20496 F DEBUG   : Build fingerprint: 'samsung/q2qxser/q2q:15/AP3A.240905.015.A2/F926BXXSJJZH3:user/release-keys'
+10-31 14:09:24.821 20496 20496 F DEBUG   : Revision: '9'
+10-31 14:09:24.821 20496 20496 F DEBUG   : ABI: 'arm64'
+10-31 14:09:24.821 20496 20496 F DEBUG   : Processor: '5'
+10-31 14:09:24.821 20496 20496 F DEBUG   : Timestamp: 2026-10-31 14:09:24.707657453+0000
+10-31 14:09:24.821 20496 20496 F DEBUG   : Process uptime: 0s
+10-31 14:09:24.821 20496 20496 F DEBUG   : Cmdline: /vendor/bin/hw/vendor.samsung.hardware.camera.provider@4.0-service_64
+10-31 14:09:24.821 20496 20496 F DEBUG   : pid: 8919, tid: 8947, name: HwBinder:8919_3  >>> /vendor/bin/hw/vendor.samsung.hardware.camera.provider@4.0-service_64 <<<
+10-31 14:09:24.821 20496 20496 F DEBUG   : uid: 1047
+10-31 14:09:24.821 20496 20496 F DEBUG   : signal 11 (SIGSEGV), code 1 (SEGV_MAPERR), fault addr 0x0000000000000004
+10-31 14:09:24.821 20496 20496 F DEBUG   : Cause: null pointer dereference
+10-31 14:09:24.821 20496 20496 F DEBUG   :     x0  0000007b30a2a1d8  x1  0000007b307c9ff8  x2  0000007b30a2a1dc  x3  0000007b30a2a1d0
+10-31 14:09:24.821 20496 20496 F DEBUG   :     x4  0000007b30a2a138  x5  000000000000004c  x6  b400007ab38ffda8  x7  000000000510400c
+10-31 14:09:24.821 20496 20496 F DEBUG   :     x8  0000007b30a2a690  x9  0000007b30a2a69c  x10 000000003faaaaab  x11 0000000000000000
+10-31 14:09:24.821 20496 20496 F DEBUG   :     x12 000000007fa30c0a  x13 0000007b30a68c98  x14 0000000000000003  x15 b400007aae7fd640
+10-31 14:09:24.821 20496 20496 F DEBUG   :     x16 b400007d9a5acef0  x17 0000000000000013  x18 0000007b00958000  x19 0000007b307c90a8
+10-31 14:09:24.821 20496 20496 F DEBUG   :     x20 0000000000000003  x21 b400007b7b387278  x22 0000000000000000  x23 b400007ab38dfd68
+10-31 14:09:24.821 20496 20496 F DEBUG   :     x24 0000007b302f72e0  x25 b400007ab390195c  x26 0000000000000002  x27 b400007aae86fe90
+10-31 14:09:24.821 20496 20496 F DEBUG   :     x28 b400007b7b387270  x29 0000007b00dd8fe0
+10-31 14:09:24.821 20496 20496 F DEBUG   :     lr  0000000005104010  sp  0000007b00dd87e0  pc  0000007b306eec80  pst 0000000060001000
+10-31 14:09:24.821 20496 20496 F DEBUG   : 22 total frames
+10-31 14:09:24.821 20496 20496 F DEBUG   : backtrace:
+10-31 14:09:24.821 20496 20496 F DEBUG   :       #00 pc 0000000000497c80  /vendor/lib64/hw/com.qti.chi.override.so (SecUsecaseMultiCamera::Initialize(LogicalCameraInfo*, camera3_stream_configuration*)+19752) (BuildId: f6ea1281a8688db46ff94b2be1861928)
+10-31 14:09:24.821 20496 20496 F DEBUG   :       #01 pc 00000000003ab4a8  /vendor/lib64/hw/com.qti.chi.override.so (UsecaseFactory::CreateUsecaseObject(LogicalCameraInfo*, UsecaseId, camera3_stream_configuration*)+31376) (BuildId: f6ea1281a8688db46ff94b2be1861928)
+10-31 14:09:24.821 20496 20496 F DEBUG   :       #02 pc 000000000029ea6c  /vendor/lib64/hw/com.qti.chi.override.so (ExtensionModule::InitializeOverrideSession(unsigned int, camera3_device const*, chi_hal_ops const*, camera3_stream_configuration*, int*, void**)+14564) (BuildId: f6ea1281a8688db46ff94b2be1861928)
+10-31 14:09:24.821 20496 20496 F DEBUG   :       #03 pc 000000000026e120  /vendor/lib64/hw/com.qti.chi.override.so (chi_initialize_override_session(unsigned int, camera3_device const*, chi_hal_ops const*, camera3_stream_configuration*, int*, void**) (.cfi)+416) (BuildId: f6ea1281a8688db46ff94b2be1861928)
+10-31 14:09:24.821 20496 20496 F DEBUG   :       #04 pc 00000000003c12d4  /vendor/lib64/hw/camera.qcom.so (CamX::configure_streams(camera3_device const*, camera3_stream_configuration*) (.cfi)+6308) (BuildId: fe856fde10084b7b6010445288c7290b)
+10-31 14:09:24.821 20496 20496 F DEBUG   :       #05 pc 000000000010ba04  /vendor/lib64/unihal_main@2.15.so (unihal::CameraDevice::ConfigureStreams(unsigned int, camera3_stream_configuration*)+108) (BuildId: daf82609997071a99602ffaf83a0e9b7)
+10-31 14:09:24.821 20496 20496 F DEBUG   :       #06 pc 000000000010d674  /vendor/lib64/unihal_main@2.15.so (unihal::MultiCameraManager::ConfigureStreams(unsigned int, camera3_stream_configuration*)+108) (BuildId: daf82609997071a99602ffaf83a0e9b7)
+10-31 14:09:24.821 20496 20496 F DEBUG   :       #07 pc 00000000000f4660  /vendor/lib64/unihal_main@2.15.so (unihal::CameraHalUnit::ConfigureStreams(camera3_stream_configuration*)+680) (BuildId: daf82609997071a99602ffaf83a0e9b7)
+10-31 14:09:24.821 20496 20496 F DEBUG   :       #08 pc 00000000000f25c0  /vendor/lib64/unihal_main@2.15.so (unihal::CameraHalManager::ConfigureStreams(camera3_device const*, camera3_stream_configuration*)+288) (BuildId: daf82609997071a99602ffaf83a0e9b7)
+10-31 14:09:24.821 20496 20496 F DEBUG   :       #09 pc 00000000000e5f1c  /vendor/lib64/unihal_main@2.15.so (unihal::uni_configure_streams(camera3_device const*, camera3_stream_configuration*)+484) (BuildId: daf82609997071a99602ffaf83a0e9b7)
+10-31 14:09:24.821 20496 20496 F DEBUG   :       #10 pc 0000000000027728  /vendor/lib64/vendor.samsung.hardware.camera.device@5.0-impl.so (vendor::samsung::hardware::camera::device::V5_0::implementation::SehCameraDeviceSession::sehConfigureStreams(vendor::samsung::hardware::camera::device::V5_0::SehStreamConfiguration const&, std::__1::function<void (android::hardware::camera::common::V1_0::Status, android::hardware::camera::device::V3_4::HalStreamConfiguration const&)>)+820) (BuildId: 8152eafba5a4f7cd5e1e9f0769186840)
+10-31 14:09:24.821 20496 20496 F DEBUG   :       #11 pc 000000000002eb7c  /vendor/lib64/vendor.samsung.hardware.camera.device@5.0-impl.so (vendor::samsung::hardware::camera::device::V5_0::implementation::SehCameraDeviceSession::SehTrampolineSessionInterface::sehConfigureStreams(vendor::samsung::hardware::camera::device::V5_0::SehStreamConfiguration const&, std::__1::function<void (android::hardware::camera::common::V1_0::Status, android::hardware::camera::device::V3_4::HalStreamConfiguration const&)>)+140) (BuildId: 8152eafba5a4f7cd5e1e9f0769186840)
+10-31 14:09:24.821 20496 20496 F DEBUG   :       #12 pc 0000000000037ca8  /vendor/lib64/vendor.samsung.hardware.camera.device@5.0.so (vendor::samsung::hardware::camera::device::V5_0::BnHwSehCameraDeviceSession::_hidl_sehConfigureStreams(android::hidl::base::V1_0::BnHwBase*, android::hardware::Parcel const&, android::hardware::Parcel*, std::__1::function<void (android::hardware::Parcel&)>)+344) (BuildId: 6e32d58315bdc13126bebce219fbfb7b)
+10-31 14:09:24.821 20496 20496 F DEBUG   :       #13 pc 00000000000387f0  /vendor/lib64/vendor.samsung.hardware.camera.device@5.0.so (vendor::samsung::hardware::camera::device::V5_0::BnHwSehCameraDeviceSession::onTransact(unsigned int, android::hardware::Parcel const&, android::hardware::Parcel*, unsigned int, std::__1::function<void (android::hardware::Parcel&)>)+1424) (BuildId: 6e32d58315bdc13126bebce219fbfb7b)
+10-31 14:09:24.821 20496 20496 F DEBUG   :       #14 pc 00000000000826d0  /apex/com.android.vndk.v30/lib64/libhidlbase.so (android::hardware::BHwBinder::transact(unsigned int, android::hardware::Parcel const&, android::hardware::Parcel*, unsigned int, std::__1::function<void (android::hardware::Parcel&)>)+68) (BuildId: bdc764630cb78156de4d84000d90ce5f)
+10-31 14:09:24.821 20496 20496 F DEBUG   :       #15 pc 0000000000086668  /apex/com.android.vndk.v30/lib64/libhidlbase.so (android::hardware::IPCThreadState::getAndExecuteCommand()+1076) (BuildId: bdc764630cb78156de4d84000d90ce5f)
+10-31 14:09:24.821 20496 20496 F DEBUG   :       #16 pc 00000000000878b0  /apex/com.android.vndk.v30/lib64/libhidlbase.so (android::hardware::IPCThreadState::joinThreadPool(bool)+96) (BuildId: bdc764630cb78156de4d84000d90ce5f)
+10-31 14:09:24.821 20496 20496 F DEBUG   :       #17 pc 0000000000096ad4  /apex/com.android.vndk.v30/lib64/libhidlbase.so (android::hardware::PoolThread::threadLoop()+24) (BuildId: bdc764630cb78156de4d84000d90ce5f)
+10-31 14:09:24.821 20496 20496 F DEBUG   :       #18 pc 00000000000154d0  /apex/com.android.vndk.v30/lib64/libutils.so (android::Thread::_threadLoop(void*)+260) (BuildId: 302a93d93d50a20e71c051933fe98b5f)
+10-31 14:09:24.821 20496 20496 F DEBUG   :       #19 pc 0000000000014d94  /apex/com.android.vndk.v30/lib64/libutils.so (thread_data_t::trampoline(thread_data_t const*)+412) (BuildId: 302a93d93d50a20e71c051933fe98b5f)
+10-31 14:09:24.821 20496 20496 F DEBUG   :       #20 pc 000000000006d8bc  /apex/com.android.runtime/lib64/bionic/libc.so (__pthread_start(void*)+196) (BuildId: 514c9b249d6864ca432619be56ec7de7)
+10-31 14:09:24.821 20496 20496 F DEBUG   :       #21 pc 000000000005fd1c  /apex/com.android.runtime/lib64/bionic/libc.so (__start_thread+68) (BuildId: 514c9b249d6864ca432619be56ec7de7)

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.ImageFormat;
 import android.hardware.camera2.*;
 import android.hardware.camera2.params.OutputConfiguration;
+import android.hardware.camera2.params.SessionConfiguration;
 import android.hardware.camera2.params.StreamConfigurationMap;
 import android.media.Image;
 import android.media.ImageReader;
@@ -75,6 +76,22 @@ final class CameraProbe implements AutoCloseable {
         for (Set<String> ids : manager.getConcurrentCameraIds()) concurrent.put(new JSONArray(ids));
         return out.put("cameras", cameras).put("concurrent_id_sets", concurrent);
     }
+    JSONObject logicalAccess() throws Exception {
+        JSONObject out = new JSONObject();
+        // IDs observed in this phone's HAL, including its telephoto physical sensor.
+        for (String id : new String[]{"20", "21", "23", "52"}) {
+            JSONObject result = new JSONObject();
+            try {
+                CameraCharacteristics c = manager.getCameraCharacteristics(id);
+                result.put("accessible", true).put("physical_ids", new JSONArray(c.getPhysicalCameraIds()))
+                    .put("focal_lengths_mm", array(c.get(CameraCharacteristics.LENS_INFO_AVAILABLE_FOCAL_LENGTHS)));
+            } catch (CameraAccessException | IllegalArgumentException | SecurityException e) {
+                result.put("accessible", false).put("error", e.toString());
+            }
+            out.put(id, result);
+        }
+        return out;
+    }
     private static JSONArray array(Object value) throws org.json.JSONException {
         return value == null ? new JSONArray() : new JSONArray(value);
     }
@@ -101,8 +118,8 @@ final class CameraProbe implements AutoCloseable {
         for (String id : manager.getCameraIdList()) {
             if (manager.getCameraCharacteristics(id).getPhysicalCameraIds().size() >= 2) ids.add(id);
         }
-        // Present in the Fold 3 HAL dump. Ordinary app access may be denied: record that result.
-        ids.add("20"); ids.add("23");
+        // Hidden vendor IDs need an explicit targeted trial. Some accepted
+        // configurations crash the provider, so never open them in the default matrix.
         return ids;
     }
     private final class Stream implements AutoCloseable {
@@ -115,7 +132,8 @@ final class CameraProbe implements AutoCloseable {
         final JSONObject metadata;
         volatile long lastArrivalMs;
         volatile boolean closing;
-        long metadataFailures, uncapturedRequests, lostBuffers;
+        long metadataFailures, uncapturedRequests, lostBuffers, physicalMetadataFrames;
+        Float measuredFocalLength;
         Stream(String id, int width, int height, VisionPublisher publisher) throws Exception {
             label = id;
             CameraCharacteristics c = manager.getCameraCharacteristics(id);
@@ -163,6 +181,7 @@ final class CameraProbe implements AutoCloseable {
                 .put("first_timestamp_ns", stats.firstTimestamp).put("last_timestamp_ns", stats.lastTimestamp)
                 .put("timestamp_errors", stats.timestampErrors).put("changed_frames", stats.changedFrames)
                 .put("metadata_failures", metadataFailures).put("uncaptured_requests", uncapturedRequests).put("lost_buffers", lostBuffers)
+                .put("physical_metadata_frames", physicalMetadataFrames).put("measured_focal_length_mm", measuredFocalLength)
                 .put("packing_errors", stats.packingErrors).put("packing_p99_ns", stats.percentile(true, .99))
                 .put("delivery_age_p99_ns", stats.deliveryAgeP99()).put("delivery_over_100ms", stats.lateDeliveries)
                 .put("delivery_future_timestamps", stats.futureDeliveries)
@@ -195,7 +214,7 @@ final class CameraProbe implements AutoCloseable {
         if (device == null || failure.get() != null) throw new IllegalStateException(failure.get());
         return device;
     }
-    private CameraCaptureSession session(CameraDevice camera, List<Stream> streams, boolean physical,
+    private CameraCaptureSession session(CameraDevice camera, List<Stream> streams, boolean physical, ImageReader preview,
                                          AtomicReference<String> failure) throws Exception {
         CountDownLatch done = new CountDownLatch(1);
         AtomicBoolean abandoned = new AtomicBoolean();
@@ -206,21 +225,35 @@ final class CameraProbe implements AutoCloseable {
             if (physical) output.setPhysicalCameraId(stream.label);
             outputs.add(output);
         }
-        camera.createCaptureSessionByOutputConfigurations(outputs, new CameraCaptureSession.StateCallback() {
+        if (preview != null) outputs.add(new OutputConfiguration(preview.getSurface()));
+        Set<String> physicalIds = new HashSet<>();
+        if (physical) for (Stream stream : streams) physicalIds.add(stream.label);
+        CaptureRequest.Builder request = physical ? camera.createCaptureRequest(CameraDevice.TEMPLATE_RECORD, physicalIds) :
+            camera.createCaptureRequest(CameraDevice.TEMPLATE_RECORD);
+        Range<Integer>[] ranges = manager.getCameraCharacteristics(camera.getId()).get(CameraCharacteristics.CONTROL_AE_AVAILABLE_TARGET_FPS_RANGES);
+        if (ranges != null && Arrays.asList(ranges).contains(new Range<>(30, 30)))
+            request.set(CaptureRequest.CONTROL_AE_TARGET_FPS_RANGE, new Range<>(30, 30));
+        if (physical) for (String id : physicalIds) {
+            request.setPhysicalCameraKey(CaptureRequest.CONTROL_MODE, CaptureRequest.CONTROL_MODE_AUTO, id);
+            request.setPhysicalCameraKey(CaptureRequest.CONTROL_AE_MODE, CaptureRequest.CONTROL_AE_MODE_ON, id);
+        }
+        SessionConfiguration configuration = new SessionConfiguration(SessionConfiguration.SESSION_REGULAR, outputs,
+            command -> handler.post(command), new CameraCaptureSession.StateCallback() {
             public void onConfigured(CameraCaptureSession s) {
                 result.set(s);
                 if (abandoned.get()) s.close();
                 done.countDown();
             }
             public void onConfigureFailed(CameraCaptureSession s) { failure.set("session_configuration_failed:" + camera.getId()); s.close(); done.countDown(); }
-        }, handler);
+        });
+        configuration.setSessionParameters(request.build());
+        camera.createCaptureSession(configuration);
         if (!done.await(8, TimeUnit.SECONDS)) {
             abandoned.set(true);
             if (result.get() != null) result.get().close();
             throw new IllegalStateException("session timeout: " + camera.getId());
         }
         if (result.get() == null) throw new IllegalStateException(failure.get());
-        CaptureRequest.Builder request = camera.createCaptureRequest(CameraDevice.TEMPLATE_RECORD);
         // Use only advertised low-latency modes; Samsung's preview processing can
         // otherwise consume most of the 100 ms sensor-to-output budget.
         CameraCharacteristics characteristics = manager.getCameraCharacteristics(camera.getId());
@@ -233,10 +266,17 @@ final class CameraProbe implements AutoCloseable {
         setIfSupported(request, CaptureRequest.LENS_OPTICAL_STABILIZATION_MODE, CaptureRequest.LENS_OPTICAL_STABILIZATION_MODE_OFF,
             characteristics.get(CameraCharacteristics.LENS_INFO_AVAILABLE_OPTICAL_STABILIZATION));
         for (Stream stream : streams) request.addTarget(stream.reader.getSurface());
-        Range<Integer>[] ranges = manager.getCameraCharacteristics(camera.getId()).get(CameraCharacteristics.CONTROL_AE_AVAILABLE_TARGET_FPS_RANGES);
-        if (ranges != null && Arrays.asList(ranges).contains(new Range<>(30, 30)))
-            request.set(CaptureRequest.CONTROL_AE_TARGET_FPS_RANGE, new Range<>(30, 30));
+        if (preview != null) request.addTarget(preview.getSurface());
         result.get().setRepeatingRequest(request.build(), new CameraCaptureSession.CaptureCallback() {
+            public void onCaptureCompleted(CameraCaptureSession s, CaptureRequest r, TotalCaptureResult result) {
+                for (Stream stream : streams) {
+                    CaptureResult sensor = physical ? result.getPhysicalCameraResults().get(stream.label) : result;
+                    if (sensor != null && !stream.closing) {
+                        stream.physicalMetadataFrames++;
+                        stream.measuredFocalLength = sensor.get(CaptureResult.LENS_FOCAL_LENGTH);
+                    }
+                }
+            }
             public void onCaptureFailed(CameraCaptureSession s, CaptureRequest r, CaptureFailure f) {
                 // A request failure is not a device/session death. Keep measuring
                 // recovery and actual frame freshness, but never hide lost metadata.
@@ -252,15 +292,246 @@ final class CameraProbe implements AutoCloseable {
         }, handler);
         return result.get();
     }
+
+    private boolean samsungMultiView(CameraDevice camera) {
+        return "20".equals(camera.getId()) && "com.samsung.sunnypilot.fold3".equals(context.getPackageName());
+    }
+
+    private OutputConfiguration samsungOutput(android.view.Surface surface, int option) throws Exception {
+        // Samsung's public extension marks preview callbacks with option 1.
+        return (OutputConfiguration) OutputConfiguration.class.getMethod("semCreateOutputConfiguration",
+            int.class, android.view.Surface.class, int.class, int.class)
+            .invoke(null, OutputConfiguration.SURFACE_GROUP_ID_NONE, surface, 0, option);
+    }
+
+    private void prepareSamsungMultiView(CameraDevice camera, JSONObject report) throws Exception {
+        if (!(samsungMultiView(camera) || "1".equals(camera.getId()) &&
+            "com.samsung.sunnypilot.fold3".equals(context.getPackageName())))
+            throw new IllegalArgumentException("Samsung multiview needs the compatibility APK and rear 20 or front 1");
+        String parameters = "samsungcamera=true;shootingmode=37;recording-fps=30;";
+        report.put("samsung_parameters_requested", parameters).put("samsung_shooting_mode", 37);
+        // Use Samsung's preinstalled helper, as its camera app does. Do not ship
+        // vendor binaries or relax Android's hidden-API enforcement.
+        ClassLoader loader = new dalvik.system.PathClassLoader("/system/framework/scamera_sdk_util.jar", getClass().getClassLoader());
+        Class<?> helper = Class.forName("com.samsung.android.sdk.camera.impl.internal.CustomInterfaceHelper", true, loader);
+        try {
+            helper.getMethod("setSamsungParameter", CameraDevice.class, String.class).invoke(null, camera, parameters);
+        } catch (java.lang.reflect.InvocationTargetException e) {
+            throw new IllegalStateException("Samsung multiview parameters failed: " + e.getCause(), e);
+        }
+        report.put("samsung_parameters_applied", true);
+    }
     private static void setIfSupported(CaptureRequest.Builder request, CaptureRequest.Key<Integer> key, int value, int[] modes) {
         if (modes != null && Arrays.stream(modes).anyMatch(mode -> mode == value)) request.set(key, value);
     }
+
+    /** Samsung's Director's View transport. Composite thumbnails are not physical streams. */
+    JSONObject samsungMultiview(boolean front, long durationMs) throws Exception {
+        JSONObject out = new JSONObject().put("camera_ids", new JSONArray(front ? new String[]{"0", "2", "1"} : new String[]{"0", "2"}))
+            .put("logical_camera", "20").put("backend", "samsung_multiview").put("requested_duration_ms", durationMs)
+            .put("visionipc_valid", false).put("distinct_sensor_evidence", false);
+        List<CameraDevice> devices = new ArrayList<>();
+        List<CameraCaptureSession> sessions = new ArrayList<>();
+        List<ImageReader> readers = new ArrayList<>();
+        List<CountDownLatch> closures = new ArrayList<>();
+        List<FrameStats> stats = new ArrayList<>();
+        List<CameraPreviewSample> previewSamples = new ArrayList<>();
+        AtomicReference<String> failure = new AtomicReference<>();
+        AtomicReference<int[]> roi = new AtomicReference<>();
+        long[] metadataFrames = {0}, previewFrames = {0}, thumbnailSampleTimestamp = {0};
+        long started = android.os.SystemClock.elapsedRealtime();
+        String error = null;
+        boolean completed = false;
+        java.nio.channels.FileChannel owner = null;
+        java.nio.channels.FileLock ownership = null;
+        try {
+            owner = java.nio.channels.FileChannel.open(new java.io.File(context.getFilesDir(), "camera-owner.lock").toPath(),
+                java.nio.file.StandardOpenOption.CREATE, java.nio.file.StandardOpenOption.WRITE);
+            ownership = owner.tryLock();
+            if (ownership == null) throw new IllegalStateException("Another camera diagnostic still owns the cameras");
+            java.nio.file.Files.deleteIfExists(new java.io.File(context.getFilesDir(), "multiview-960x540.nv12").toPath());
+            java.nio.file.Files.deleteIfExists(new java.io.File(context.getFilesDir(), "multiview-preview.png").toPath());
+            checkThermalStatus();
+            CameraDevice rear = open("20", failure, closures); devices.add(rear);
+            prepareSamsungMultiView(rear, out);
+            if (front) {
+                CameraDevice driver = open("1", failure, closures); devices.add(driver);
+                prepareSamsungMultiView(driver, new JSONObject());
+            }
+            for (CameraDevice device : devices) {
+                boolean logical = "20".equals(device.getId());
+                FrameStats frames = new FrameStats(); stats.add(frames);
+                ImageReader yuv = ImageReader.newInstance(960, 540, ImageFormat.YUV_420_888, 3); readers.add(yuv);
+                ByteBuffer packed = ByteBuffer.allocateDirect(960 * 540 * 3 / 2);
+                yuv.setOnImageAvailableListener(source -> {
+                    try (Image image = source.acquireLatestImage()) {
+                        if (image == null) return;
+                        long before = System.nanoTime();
+                        Image.Plane[] p = image.getPlanes();
+                        long hash = NativeBridge.packNv12(p[0].getBuffer().slice(), p[0].getRowStride(), p[0].getPixelStride(),
+                            p[1].getBuffer().slice(), p[1].getRowStride(), p[1].getPixelStride(),
+                            p[2].getBuffer().slice(), p[2].getRowStride(), p[2].getPixelStride(), 960, 540, packed);
+                        frames.add(image.getTimestamp(), hash, System.nanoTime() - before);
+                        frames.deliveryAge(android.os.SystemClock.elapsedRealtimeNanos() - image.getTimestamp());
+                        if (logical && frames.frames == 30) {
+                            // One local diagnostic sample; never publish a thumbnail as an independent sensor.
+                            ByteBuffer copy = packed.duplicate(); copy.clear();
+                            try (java.nio.channels.FileChannel file = java.nio.channels.FileChannel.open(
+                                new java.io.File(context.getFilesDir(), "multiview-960x540.nv12").toPath(),
+                                java.nio.file.StandardOpenOption.CREATE, java.nio.file.StandardOpenOption.TRUNCATE_EXISTING,
+                                java.nio.file.StandardOpenOption.WRITE)) {
+                                while (copy.hasRemaining()) file.write(copy);
+                            }
+                            thumbnailSampleTimestamp[0] = image.getTimestamp();
+                        }
+                    } catch (Exception e) { frames.packingErrors++; failure.compareAndSet(null, e.toString()); }
+                }, handler);
+                android.view.Surface previewSurface;
+                if (logical) {
+                    CameraPreviewSample sample = new CameraPreviewSample(new java.io.File(context.getFilesDir(), "multiview-preview.png"));
+                    previewSamples.add(sample); previewSurface = sample.surface();
+                } else {
+                    ImageReader preview = ImageReader.newInstance(1920, 1080, ImageFormat.PRIVATE, 3,
+                        android.hardware.HardwareBuffer.USAGE_GPU_SAMPLED_IMAGE); readers.add(preview);
+                    preview.setOnImageAvailableListener(source -> {
+                        try (Image image = source.acquireLatestImage()) { if (image != null) previewFrames[0]++; }
+                    }, handler);
+                    previewSurface = preview.getSurface();
+                }
+                // Samsung configures an untargeted recording output even for preview.
+                ImageReader recording = ImageReader.newInstance(1920, 1080, ImageFormat.PRIVATE, 3); readers.add(recording);
+                List<OutputConfiguration> outputs = Arrays.asList(samsungOutput(previewSurface, 1),
+                    samsungOutput(recording.getSurface(), 0x41), samsungOutput(yuv.getSurface(), 1));
+                CaptureRequest.Builder request = device.createCaptureRequest(CameraDevice.TEMPLATE_RECORD);
+                request.set(CaptureRequest.CONTROL_AE_TARGET_FPS_RANGE, new Range<>(30, 30));
+                request.set(new CaptureRequest.Key<>("samsung.android.control.shootingMode", Integer.class), 37);
+                request.set(new CaptureRequest.Key<>("samsung.android.control.cameraClient", Integer.class), 0);
+                if (logical) {
+                    // The installed Director's View app selects wide as its main view.
+                    int[] selectedView = new int[45]; selectedView[9] = 1;
+                    request.set(new CaptureRequest.Key<>("samsung.android.control.multiviewCropRoi", int[].class), selectedView);
+                }
+                request.addTarget(previewSurface);
+                request.addTarget(yuv.getSurface());
+                CountDownLatch configured = new CountDownLatch(1);
+                AtomicReference<CameraCaptureSession> configuredSession = new AtomicReference<>();
+                AtomicBoolean abandoned = new AtomicBoolean();
+                SessionConfiguration configuration = new SessionConfiguration(SessionConfiguration.SESSION_REGULAR, outputs,
+                    context.getMainExecutor(), new CameraCaptureSession.StateCallback() {
+                        public void onConfigured(CameraCaptureSession session) {
+                            configuredSession.set(session);
+                            if (abandoned.get()) session.close();
+                            configured.countDown();
+                        }
+                        public void onConfigureFailed(CameraCaptureSession session) {
+                            failure.set("session_configuration_failed:" + device.getId()); session.close(); configured.countDown();
+                        }
+                    });
+                configuration.setSessionParameters(request.build());
+                device.createCaptureSession(configuration);
+                if (!configured.await(8, TimeUnit.SECONDS) || configuredSession.get() == null) {
+                    abandoned.set(true);
+                    if (configuredSession.get() != null) configuredSession.get().close();
+                    throw new IllegalStateException("Samsung multiview session failed: " + failure.get());
+                }
+                sessions.add(configuredSession.get());
+                configuredSession.get().setRepeatingRequest(request.build(), new CameraCaptureSession.CaptureCallback() {
+                    public void onCaptureCompleted(CameraCaptureSession session, CaptureRequest r, TotalCaptureResult result) {
+                        if (logical) {
+                            metadataFrames[0]++;
+                            int[] value = result.get(new CaptureResult.Key<>("samsung.android.control.multiviewCropRoi", int[].class));
+                            if (value != null) roi.set(value.clone());
+                        }
+                    }
+                    public void onCaptureFailed(CameraCaptureSession session, CaptureRequest r, CaptureFailure f) {
+                        failure.compareAndSet(null, "capture_failed:" + device.getId() + ":" + f.getReason());
+                    }
+                }, handler);
+            }
+            long captureStartedNs = android.os.SystemClock.elapsedRealtimeNanos();
+            long end = android.os.SystemClock.elapsedRealtime() + durationMs;
+            while (android.os.SystemClock.elapsedRealtime() < end) {
+                if (failure.get() != null) throw new IllegalStateException(failure.get());
+                long nowNs = android.os.SystemClock.elapsedRealtimeNanos();
+                for (int i = 0; i < stats.size(); i++) synchronized (stats.get(i)) {
+                    long timestamp = stats.get(i).lastTimestamp;
+                    if (nowNs - (timestamp == 0 ? captureStartedNs : timestamp) > 2_000_000_000L)
+                        throw new IllegalStateException("stale_multiview_yuv:" + devices.get(i).getId());
+                }
+                for (CameraPreviewSample sample : previewSamples) {
+                    if (sample.error != null) throw new IllegalStateException(sample.error);
+                    if (nowNs - (sample.lastArrivalNs == 0 ? captureStartedNs : sample.lastArrivalNs) > 2_000_000_000L)
+                        throw new IllegalStateException("stale_multiview_preview");
+                }
+                checkThermalStatus();
+                progress.update("Samsung multiview transport: " + stats.get(0).frames + " composite frames; transmission disabled");
+                Thread.sleep(100);
+            }
+            completed = true;
+        } catch (Exception e) { error = e.toString(); }
+        finally {
+            for (CameraCaptureSession session : sessions) {
+                try { session.stopRepeating(); session.abortCaptures(); } catch (CameraAccessException | IllegalStateException ignored) { }
+                session.close();
+            }
+            for (CameraDevice device : devices) device.close();
+            for (CountDownLatch closed : closures) if (!closed.await(5, TimeUnit.SECONDS)) error = "Camera close callback timed out";
+            for (ImageReader reader : readers) reader.setOnImageAvailableListener(null, null);
+            CountDownLatch drained = new CountDownLatch(1); handler.post(drained::countDown);
+            if (!drained.await(5, TimeUnit.SECONDS)) error = "Image callback drain timed out";
+            for (ImageReader reader : readers) reader.close();
+            for (CameraPreviewSample sample : previewSamples) {
+                try { sample.close(); } catch (Exception e) { error = e.toString(); }
+            }
+            if (ownership != null) ownership.release();
+            if (owner != null) owner.close();
+        }
+        FrameStats rear = stats.isEmpty() ? new FrameStats() : stats.get(0);
+        out.put("composite_frames", rear.frames).put("composite_fps", rear.fps()).put("preview_frames", previewFrames[0])
+            .put("metadata_frames", metadataFrames[0]).put("multiview_crop_roi", array(roi.get()))
+            .put("timestamp_errors", rear.timestampErrors).put("packing_errors", rear.packingErrors)
+            .put("packing_p99_ns", rear.percentile(true, .99)).put("late_deliveries", rear.lateDeliveries)
+            .put("future_deliveries", rear.futureDeliveries)
+            .put("delivery_age_p99_ns", rear.deliveryAgeP99()).put("completed_requested_duration", completed)
+            .put("elapsed_ms", android.os.SystemClock.elapsedRealtime() - started)
+            .put("transport_status", completed && error == null && rear.frames >= durationMs * 15 / 1000 &&
+                rear.timestampErrors == 0 && rear.packingErrors == 0 && metadataFrames[0] >= 10 && roi.get() != null ? "passed" : "failed")
+            .put("status", "blocked").put("qualification_blocker", "Composite transport does not establish independent physical sensor delivery");
+        if (front && stats.size() == 2) {
+            FrameStats driver = stats.get(1);
+            out.put("front_frames", driver.frames).put("front_fps", driver.fps())
+                .put("front_packing_p99_ns", driver.percentile(true, .99)).put("front_late_deliveries", driver.lateDeliveries)
+                .put("front_future_deliveries", driver.futureDeliveries)
+                .put("front_timestamp_errors", driver.timestampErrors).put("front_packing_errors", driver.packingErrors)
+                .put("front_delivery_age_p99_ns", driver.deliveryAgeP99());
+            if (driver.frames < durationMs * 15 / 1000 || driver.timestampErrors != 0 || driver.packingErrors != 0)
+                out.put("transport_status", "failed");
+        }
+        if (!previewSamples.isEmpty()) {
+            CameraPreviewSample sample = previewSamples.get(0);
+            out.put("rear_preview_frames", sample.frames).put("preview_sample_timestamp_ns", sample.sampleTimestampNs)
+                .put("preview_sample_texture_transform", array(sample.sampleTextureTransform))
+                .put("thumbnail_sample_timestamp_ns", thumbnailSampleTimestamp[0])
+                .put("preview_timestamp_errors", sample.timestampErrors).put("preview_coalesced_callbacks", sample.coalescedCallbacks)
+                .put("preview_frames", sample.frames + previewFrames[0]);
+            if (sample.error != null) out.put("preview_error", sample.error);
+            if (sample.frames < durationMs * 15 / 1000 || sample.timestampErrors != 0 || sample.sampleTimestampNs == 0 || sample.error != null)
+                out.put("transport_status", "failed");
+        }
+        if (error != null) out.put("error", error);
+        return out;
+    }
+
     JSONObject attempt(String[] ids, String logical, int width, int height, long durationMs) throws Exception {
         JSONObject out = new JSONObject().put("camera_ids", new JSONArray(ids)).put("width", width).put("height", height)
-            .put("logical_camera", logical == null ? JSONObject.NULL : logical).put("requested_duration_ms", durationMs);
+            .put("logical_camera", logical == null ? JSONObject.NULL : logical).put("requested_duration_ms", durationMs)
+            .put("startup_order", "open_all_then_configure");
+        JSONArray opened = new JSONArray();
+        out.put("opened_camera_ids", opened);
         List<CameraDevice> devices = new ArrayList<>();
         List<CameraCaptureSession> sessions = new ArrayList<>();
         List<Stream> streams = new ArrayList<>();
+        List<ImageReader> previews = new ArrayList<>();
         List<CountDownLatch> closures = new ArrayList<>();
         AtomicReference<String> failure = new AtomicReference<>();
         long started = android.os.SystemClock.elapsedRealtime();
@@ -273,23 +544,42 @@ final class CameraProbe implements AutoCloseable {
                 java.nio.file.StandardOpenOption.CREATE, java.nio.file.StandardOpenOption.WRITE);
             ownership = owner.tryLock();
             if (ownership == null) throw new IllegalStateException("Another camera diagnostic is still closing; retry shortly");
-            if (logical != null) {
-                Set<String> physicalIds = manager.getCameraCharacteristics(logical).getPhysicalCameraIds();
-                if (!physicalIds.containsAll(Arrays.asList(ids))) throw new IllegalStateException("requested physical IDs not exposed by logical camera");
-            }
             CameraCharacteristics first = manager.getCameraCharacteristics(ids[0]);
             int rotation = Math.floorMod(first.get(CameraCharacteristics.SENSOR_ORIENTATION) +
                 (Objects.equals(first.get(CameraCharacteristics.LENS_FACING), CameraCharacteristics.LENS_FACING_FRONT) ? displayDegrees : -displayDegrees), 360);
             publisher = new VisionPublisher(ipcDirectory, ids, rotation % 180 == 0 ? width : height, rotation % 180 == 0 ? height : width);
             for (String id : ids) streams.add(new Stream(id, width, height, publisher));
             if (logical != null) {
-                CameraDevice device = open(logical, failure, closures); devices.add(device);
-                sessions.add(session(device, streams, true, failure));
+                Set<String> physicalIds = manager.getCameraCharacteristics(logical).getPhysicalCameraIds();
+                List<Stream> physical = new ArrayList<>(), independent = new ArrayList<>();
+                for (Stream stream : streams) {
+                    if (physicalIds.contains(stream.label)) physical.add(stream);
+                    else independent.add(stream);
+                }
+                if (physical.size() < 2) throw new IllegalArgumentException("Logical camera does not expose two requested physical sensors");
+                CameraDevice device = open(logical, failure, closures); devices.add(device); opened.put(logical);
+                for (Stream stream : independent) {
+                    devices.add(open(stream.label, failure, closures)); opened.put(stream.label);
+                }
+                // Mark the auxiliary logical output as a GPU viewfinder. PRIVATE
+                // with usage 0 is rejected by Samsung's multi-camera pipeline.
+                ImageReader preview = ImageReader.newInstance(width, height, ImageFormat.PRIVATE, 3,
+                    android.hardware.HardwareBuffer.USAGE_GPU_SAMPLED_IMAGE);
+                previews.add(preview);
+                preview.setOnImageAvailableListener(source -> {
+                    try (Image image = source.acquireLatestImage()) { }
+                }, handler);
+                out.put("auxiliary_logical_preview", true);
+                sessions.add(session(device, physical, true, preview, failure));
+                for (int i = 0; i < independent.size(); i++)
+                    sessions.add(session(devices.get(i + 1), Collections.singletonList(independent.get(i)), false, null, failure));
             } else {
                 for (Stream stream : streams) {
-                    CameraDevice device = open(stream.label, failure, closures); devices.add(device);
-                    sessions.add(session(device, Collections.singletonList(stream), false, failure));
+                    devices.add(open(stream.label, failure, closures)); opened.put(stream.label);
                 }
+                // Opening after configuring another camera can reserve resources needed for concurrency.
+                for (int i = 0; i < streams.size(); i++)
+                    sessions.add(session(devices.get(i), Collections.singletonList(streams.get(i)), false, null, failure));
             }
             long captureStarted = android.os.SystemClock.elapsedRealtime();
             long end = captureStarted + durationMs;
@@ -319,7 +609,10 @@ final class CameraProbe implements AutoCloseable {
             for (CameraDevice d : devices) d.close();
             CountDownLatch drained = new CountDownLatch(1);
             handler.post(() -> {
-                try { for (Stream stream : streams) stream.close(); }
+                try {
+                    for (Stream stream : streams) stream.close();
+                    for (ImageReader preview : previews) { preview.setOnImageAvailableListener(null, null); preview.close(); }
+                }
                 finally { drained.countDown(); }
             });
             boolean callbacksDrained = drained.await(3, TimeUnit.SECONDS);
@@ -338,8 +631,21 @@ final class CameraProbe implements AutoCloseable {
             results.put(stream.result());
             healthy &= stream.stats.frames >= Math.max(10, durationMs * 15 / 1000)
                 && stream.stats.timestampErrors == 0 && stream.stats.packingErrors == 0
-                && stream.metadataFailures == 0 && stream.lostBuffers == 0;
+                && stream.metadataFailures == 0 && stream.lostBuffers == 0 && stream.physicalMetadataFrames >= 10;
         }
+        JSONArray pairs = new JSONArray();
+        for (int i = 0; i < streams.size(); i++) for (int j = i + 1; j < streams.size(); j++) {
+            Stream left = streams.get(i), right = streams.get(j);
+            long overlap = Math.min(left.stats.lastTimestamp, right.stats.lastTimestamp) -
+                Math.max(left.stats.firstTimestamp, right.stats.firstTimestamp);
+            boolean distinct = !left.label.equals(right.label) && left.stats.changedFrames > 0 && right.stats.changedFrames > 0
+                && left.stats.firstHash != right.stats.firstHash;
+            pairs.put(new JSONObject().put("camera_ids", new JSONArray(new String[]{left.label, right.label}))
+                .put("overlap_ns", Math.max(0, overlap)).put("distinct_sensor_evidence", distinct)
+                .put("nearest_skew_p99_ns", pairingSkew(left.stats.timestamps(), right.stats.timestamps())));
+            healthy &= overlap > 1_000_000_000L && distinct;
+        }
+        out.put("sensor_pairs", pairs);
         if (streams.size() >= 2) {
             FrameStats a = streams.get(0).stats, b = streams.get(1).stats;
             long overlap = Math.min(a.lastTimestamp, b.lastTimestamp) - Math.max(a.firstTimestamp, b.firstTimestamp);

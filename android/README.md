@@ -76,6 +76,42 @@ Outputs (debug key signed):
 - `android/app/build/outputs/apk/debug/app-debug.apk`
 - `android/app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk`
 
+## Samsung multiview diagnostic build
+
+The tested Samsung firmware exposes hidden logical rear groups to a package
+prefix allowlist. Build a separate compatibility installation with:
+
+```sh
+cd android
+./gradlew --no-daemon --console plain -Pfold3CameraCompat=true \
+  :app:assembleDebug :app:assembleDebugAndroidTest :app:testDebugUnitTest
+cd ..
+adb -s RFCR81Y1TBJ install -r -g android/app/build/outputs/apk/debug/app-debug.apk
+adb -s RFCR81Y1TBJ install -r -g android/app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk
+.venv/bin/python android/scripts/experiment.py \
+  --serial RFCR81Y1TBJ --package com.samsung.sunnypilot.fold3 \
+  --report android/reports/samsung-multiview-isolation.json -- \
+  .venv/bin/python android/scripts/validate_cameras.py \
+  --serial RFCR81Y1TBJ --package com.samsung.sunnypilot.fold3 \
+  --ids 0,2,1 --logical 20 --samsung-multiview --seconds 60 \
+  --output android/reports/samsung-multiview.json
+```
+
+Alternatively, open `com.samsung.sunnypilot.fold3/ai.sunnypilot.fold3.MainActivity`
+and select **Test Samsung multiview + front (diagnostic)**. The package is distinct
+from the regular installation and every system app. Omit the Gradle property to
+build the regular `ai.sunnypilot.fold3` package. Both builds compile out vehicle
+transmission. No vendor binaries are redistributed; the phone's installed
+Samsung helper is loaded only by the compatibility diagnostic.
+
+The validator exits nonzero while physical-sensor qualification is blocked,
+even when `transport_status` passes. Read those fields separately. The diagnostic
+saves one thumbnail NV12 image and one opaque-preview PNG in private application
+storage for comparison; they are overwritten by the next multiview run and are
+never treated as accepted driving inputs. The wrapper stops both package
+variants, waits for cooldown and fails any camera-provider restart. See
+[CAMERAS.md](CAMERAS.md) for measured results and remaining limitations.
+
 ## Focused host checks
 
 After preparing the host environment and native modules:

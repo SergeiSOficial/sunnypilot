@@ -7,7 +7,10 @@ android {
     compileSdk 35
     ndkVersion '28.2.13676358'
     defaultConfig {
-        applicationId 'ai.sunnypilot.fold3'
+        // This firmware exposes logical cameras only to its Samsung package prefix.
+        // Keep a separate, uniquely named compatibility install; never replace a vendor app.
+        applicationId providers.gradleProperty('fold3CameraCompat').getOrElse('false') == 'true' ?
+            'com.samsung.sunnypilot.fold3' : 'ai.sunnypilot.fold3'
         minSdk 35
         targetSdk 35
         versionCode 1

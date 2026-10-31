@@ -1,11 +1,17 @@
 # Fold 3 performance measurements
 
 **Perception accuracy, freshness and sustained deadlines remain failed.**
+
+The Samsung compatibility camera update has separate transport measurements in
+[CAMERAS.md](CAMERAS.md) and [camera-compat](reports/camera-compat/). It does not
+rerun or supersede the model and combined-workload results below, which retain
+their original APK identities. Three active sensor pipelines alone do not
+establish timely, calibrated perception.
 No precision change is accepted. All live model messages remain invalid and
 vehicle transmission stays disabled. See [validation scope](VALIDATION.md) for
 which APK produced each result.
 
-## Preprocessing on the final APK
+## Preprocessing on the previous regular APK
 
 The 15-test instrumentation suite compares exact padded NV12/channel packing,
 random row maps, malformed inputs and the real 1280x720 to 1440x960 driver input.

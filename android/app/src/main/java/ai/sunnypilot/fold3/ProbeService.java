@@ -24,7 +24,8 @@ public final class ProbeService extends Service {
         if (running.compareAndSet(false, true)) {
             boolean soak = intent != null && intent.getBooleanExtra("soak", false);
             boolean matrix = intent == null || !intent.getBooleanExtra("soak_only", false);
-            new Thread(() -> run(soak, matrix), "camera-probe").start();
+            Intent options = intent == null ? new Intent() : new Intent(intent);
+            new Thread(() -> run(soak, matrix, options), "camera-probe").start();
         }
         return START_NOT_STICKY;
     }
@@ -41,14 +42,29 @@ public final class ProbeService extends Service {
     private void save() throws Exception {
         Files.write(new File(getFilesDir(), "camera-report.json").toPath(), report.toString(2).getBytes(java.nio.charset.StandardCharsets.UTF_8));
     }
-    private void run(boolean soak, boolean matrix) {
+    private void run(boolean soak, boolean matrix, Intent options) {
         try (CameraProbe probe = new CameraProbe(this, this::progress)) {
             report = new JSONObject().put("device", Build.MODEL).put("sdk", Build.VERSION.SDK_INT).put("pid", android.os.Process.myPid())
                 .put("fingerprint", Build.FINGERPRINT).put("started_utc", java.time.Instant.now().toString())
+                .put("package", getPackageName()).put("logical_access", probe.logicalAccess())
                 .put("vehicle_tx_enabled", false).put("driving_runtime_ready", false)
                 .put("opencl", new JSONObject(NativeBridge.openClProbe())).put("capabilities", probe.capabilities())
                 .put("attempts", attempts);
             save();
+            if (BuildConfig.DEBUG && options.getBooleanExtra("samsung_multiview", false)) {
+                int seconds = Math.max(3, Math.min(1800, options.getIntExtra("duration_seconds", 10)));
+                attempts.put(probe.samsungMultiview(options.getBooleanExtra("front_camera", true), seconds * 1000L));
+                report.put("completed_utc", java.time.Instant.now().toString()); save();
+                return;
+            }
+            if (BuildConfig.DEBUG && options.hasExtra("camera_ids")) {
+                String[] ids = options.getStringExtra("camera_ids").split(",");
+                int seconds = Math.max(3, Math.min(1800, options.getIntExtra("duration_seconds", 10)));
+                attempts.put(probe.attempt(ids, options.getStringExtra("logical_camera"),
+                    options.getIntExtra("width", 1280), options.getIntExtra("height", 720), seconds * 1000L));
+                report.put("completed_utc", java.time.Instant.now().toString()); save();
+                return;
+            }
             for (String[] ids : matrix ? probe.combinations() : Collections.<String[]>emptyList()) {
                 if (stopping) break;
                 for (int[] size : new int[][]{{1280, 720}, {640, 480}}) {

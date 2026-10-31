@@ -1,0 +1,59 @@
+{
+  "serial": "RFCR81Y1TBJ",
+  "command": [
+    ".venv/bin/python",
+    "android/scripts/validate_cameras.py",
+    "--serial",
+    "RFCR81Y1TBJ",
+    "--adb",
+    "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+    "--package",
+    "com.samsung.sunnypilot.fold3",
+    "--ids",
+    "0,2",
+    "--logical",
+    "20",
+    "--seconds",
+    "10",
+    "--output",
+    "android/reports/camera-compat/fold3-logical20-multiview.json"
+  ],
+  "vehicle_tx_enabled": false,
+  "status": "failed",
+  "before_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "21356 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 27.9,
+    "thermal_override": false
+  },
+  "apk_sha256": "b038ec44aa46e9f3eca3c9a0abf614f613eff86b282605a32ac6d3bcedf94a90",
+  "baseline": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "21356 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 27.6,
+    "thermal_override": false,
+    "idle_seconds": 32.77376170799835
+  },
+  "returncode": 1,
+  "after_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "21356 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 27.6,
+    "thermal_override": false
+  }
+}

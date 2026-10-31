@@ -1,0 +1,61 @@
+{"status": "blocked", "logical_access": {"20": {"accessible": true, "physical_ids": ["0", "2", "52"], "focal_lengths_mm": [5]}, "21": {"accessible": true, "physical_ids": ["0", "52"], "focal_lengths_mm": [6]}, "23": {"accessible": true, "physical_ids": ["0", "2"], "focal_lengths_mm": [5]}, "52": {"accessible": true, "physical_ids": [], "focal_lengths_mm": [6]}}, "attempts": [{"camera_ids": ["0", "2", "1"], "logical_camera": "20", "backend": "samsung_multiview", "requested_duration_ms": 60000, "visionipc_valid": false, "distinct_sensor_evidence": false, "samsung_parameters_requested": "samsungcamera=true;shootingmode=37;recording-fps=30;", "samsung_shooting_mode": 37, "samsung_parameters_applied": true, "composite_frames": 1800, "composite_fps": 29.989645614421374, "preview_frames": 3599, "metadata_frames": 1800, "multiview_crop_roi": [0, 0, 960, 540, 0, 243, 133, 723, 403, 1, 405, 223, 565, 313, 0, 0, 0, 960, 540, 0, 0, 0, 0, 0, 0, 0, 0, 960, 540, 0, 0, 0, 0, 0, 0, 0, 0, 960, 540, 0, 0, 0, 0, 0, 0], "timestamp_errors": 0, "packing_errors": 0, "packing_p99_ns": 2505938, "late_deliveries": 9, "future_deliveries": 0, "delivery_age_p99_ns": 99098417, "completed_requested_duration": true, "elapsed_ms": 61239, "transport_status": "passed", "status": "blocked", "qualification_blocker": "Composite transport does not establish independent physical sensor delivery", "front_frames": 1805, "front_fps": 30.075496278985046, "front_packing_p99_ns": 2086615, "front_late_deliveries": 15, "front_future_deliveries": 0, "front_timestamp_errors": 0, "front_packing_errors": 0, "front_delivery_age_p99_ns": 98884842, "rear_preview_frames": 1794, "preview_sample_timestamp_ns": 97193380131077, "preview_sample_texture_transform": [0, -1, 0, 0, -1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1], "thumbnail_sample_timestamp_ns": 97193380131077, "preview_timestamp_errors": 0, "preview_coalesced_callbacks": 0}], "error": null}
+{
+  "serial": "RFCR81Y1TBJ",
+  "command": [
+    "/Users/sergios/sunnypilot/.venv/bin/python",
+    "android/scripts/validate_cameras.py",
+    "--serial",
+    "RFCR81Y1TBJ",
+    "--adb",
+    "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+    "--package",
+    "com.samsung.sunnypilot.fold3",
+    "--ids",
+    "0,2,1",
+    "--logical",
+    "20",
+    "--samsung-multiview",
+    "--seconds",
+    "60",
+    "--output",
+    "android/reports/camera-compat/fold3-final-samsung-front.json"
+  ],
+  "vehicle_tx_enabled": false,
+  "status": "failed",
+  "before_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 29.0,
+    "thermal_override": false
+  },
+  "apk_sha256": "0e05c9927a2a12755876ba539ac3eec7d2bcee1f32e89228d2e03c5498cc850a",
+  "baseline": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 27.9,
+    "thermal_override": false,
+    "idle_seconds": 33.19720245798817
+  },
+  "returncode": 1,
+  "after_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.7,
+    "thermal_override": false
+  }
+}
