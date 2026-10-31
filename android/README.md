@@ -83,6 +83,8 @@ prefix allowlist. Build a separate compatibility installation with:
 
 ```sh
 cd android
+# Remove an existing incremental APK before final packaging (as above).
+../.venv/bin/python -c 'from pathlib import Path; [p.unlink(missing_ok=True) for p in (Path("app/build/outputs/apk/debug/app-debug.apk"), Path("app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk"))]'
 ./gradlew --no-daemon --console plain -Pfold3CameraCompat=true \
   :app:assembleDebug :app:assembleDebugAndroidTest :app:testDebugUnitTest
 cd ..
@@ -111,6 +113,33 @@ storage for comparison; they are overwritten by the next multiview run and are
 never treated as accepted driving inputs. The wrapper stops both package
 variants, waits for cooldown and fails any camera-provider restart. See
 [CAMERAS.md](CAMERAS.md) for measured results and remaining limitations.
+
+For continuous GL-preview/NV12, thumbnail and front feeds into VisionIPC and the
+diagnostic model workers, use the live validator. This mode saves no images:
+
+```sh
+.venv/bin/python android/scripts/experiment.py \
+  --serial RFCR81Y1TBJ --package com.samsung.sunnypilot.fold3 \
+  --report android/reports/rear-live-isolation.json -- \
+  .venv/bin/python android/scripts/validate_vision.py \
+  --serial RFCR81Y1TBJ --package com.samsung.sunnypilot.fold3 \
+  --samsung-multiview --seconds 60 --report android/reports/rear-live.json
+```
+
+The second rear output remains a sensor-unverified candidate, and optical/final
+mount calibration is absent. Both model workers and all camera messages remain
+invalid. Numerical model faults stop inference until restart; MODERATE thermal
+status pauses model work until ten continuous cool seconds have passed. The
+host validator returns nonzero for blocked qualification even if capture passes.
+See the [current bench report](reports/rear-pipeline/README.md).
+
+Use `validate_instrumentation.py --serial SERIAL --package
+com.samsung.sunnypilot.fold3 --report RESULT.json` inside the experiment wrapper
+to require all 17 JUnit tests. `am instrument` alone can return zero after a
+failed/aborted suite. Secure-keyguard activity tests require manual unlock.
+The model validator's `--profile ort-fp32` compares the diagnostic FP32 backend
+with its host reference **and** the original goldens; original equivalence
+continues to fail and the live runtime retains the original model.
 
 ## Focused host checks
 

@@ -10,6 +10,26 @@ import onnxruntime as ort
 
 
 class ModelReferenceTest(unittest.TestCase):
+  def test_fp32_diagnostics_retain_original_provenance_and_three_cases(self):
+    root = Path(__file__).resolve().parents[2]
+    reference = root / "android/app/build/model-reference"
+    manifest = json.loads((reference / "fp32/manifest.json").read_text())
+    for name, metadata in manifest["models"].items():
+      original = root / f"openpilot/selfdrive/modeld/models/{name}.onnx"
+      self.assertEqual(hashlib.sha256(original.read_bytes()).hexdigest(), metadata["original_sha256"])
+      self.assertEqual(metadata["additional_validation_seeds"], [7, 123])
+      options = ort.SessionOptions()
+      options.intra_op_num_threads = 2
+      model = ort.InferenceSession(str(reference / f"fp32/{name}.onnx"), options, providers=["CPUExecutionProvider"])
+      for suffix in ("", "-case-7", "-case-123"):
+        with np.load(reference / f"fp32/{name}{suffix}-inputs.npz") as inputs, \
+            np.load(reference / f"{name}{suffix}-inputs.npz") as original_inputs, \
+            np.load(reference / f"fp32/{name}{suffix}-outputs.npz") as expected:
+          for key in inputs.files:
+            np.testing.assert_array_equal(inputs[key], original_inputs[key])
+          for spec, value in zip(model.get_outputs(), model.run(None, dict(inputs)), strict=True):
+            np.testing.assert_allclose(value, expected[spec.name], rtol=1e-3, atol=1e-4)
+
   def test_original_reference_and_portable_export_status(self):
     root = Path(__file__).resolve().parents[2]
     reference = root / "android/app/build/model-reference"

@@ -1,0 +1,63 @@
+{
+  "scope": "MetaDrive synthetic perception/driver/calibration fixture; no vehicle qualification",
+  "vehicle_tx_enabled": false,
+  "manager": {
+    "pid": 10288,
+    "simulation": true,
+    "vehicle_tx_enabled": false,
+    "engagement_allowed": false,
+    "engagement_blocker": "camera calibration, model parity/performance and physical Panda qualification incomplete",
+    "processes": {
+      "Controls": {
+        "daemon": "controlsd",
+        "pid": 10305,
+        "phase": "waiting_for_selfdrive_state",
+        "error": "",
+        "last_progress_ms": 1859298,
+        "ticks": 2760,
+        "restarts": 0
+      },
+      "Monitoring": {
+        "daemon": "dmonitoringd",
+        "pid": 10306,
+        "phase": "running",
+        "error": "",
+        "last_progress_ms": 1859095,
+        "ticks": 1800,
+        "restarts": 0
+      },
+      "Simulator": {
+        "daemon": "sim_bridge",
+        "pid": 10308,
+        "phase": "waiting_for_adb",
+        "error": "",
+        "last_progress_ms": 1859097,
+        "ticks": 1831,
+        "restarts": 0
+      }
+    },
+    "updated_elapsed_ms": 1859331
+  },
+  "controlsd": {
+    "daemon": "controlsd",
+    "pid": 10305,
+    "vehicle_tx_enabled": false,
+    "engagement_allowed": false,
+    "work_samples": 1761,
+    "deadline_misses": 68,
+    "phase": "running",
+    "simulation": true,
+    "timing_excludes_input_wait": true,
+    "p99_work_ms": 22.866583
+  },
+  "dmonitoringd": {
+    "daemon": "dmonitoringd",
+    "pid": 10306,
+    "vehicle_tx_enabled": false,
+    "engagement_allowed": false,
+    "work_samples": 0,
+    "deadline_misses": 0,
+    "phase": "running",
+    "simulation": true
+  }
+}

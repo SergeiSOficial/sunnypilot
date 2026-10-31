@@ -1,0 +1,95 @@
+cat: files/panda-rx.json: No such file or directory
+{
+  "serial": "emulator-5560",
+  "status": "passed",
+  "requested_seconds": 30,
+  "vehicle_tx_enabled": false,
+  "road_readiness": "blocked",
+  "calibration": "unqualified",
+  "model_parity": "failed",
+  "physical_vehicle_verified": false,
+  "package": "com.samsung.sunnypilot.fold3",
+  "samsung_multiview": false,
+  "resource_sampling_seconds": 30,
+  "fresh_samples": {
+    "road": 3,
+    "driver": 3
+  },
+  "distinct_frame_ids": {
+    "road": 12,
+    "driver": 12
+  },
+  "transport_status": "passed",
+  "elapsed_s": 36.84935137499997,
+  "panda_receive_only": {},
+  "cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "348 android.hardware.camera.provider.ranchu",
+      "349 android.hardware.camera.provider@2.7-service-google",
+      "435 cameraserver"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.8,
+    "thermal_override": false
+  }
+}
+{
+  "serial": "emulator-5560",
+  "command": [
+    ".venv/bin/python",
+    "android/scripts/validate_vision.py",
+    "--serial",
+    "emulator-5560",
+    "--adb",
+    "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+    "--package",
+    "com.samsung.sunnypilot.fold3",
+    "--seconds",
+    "30",
+    "--report",
+    "android/reports/rear-pipeline/emulator-live-verified.json"
+  ],
+  "vehicle_tx_enabled": false,
+  "status": "passed",
+  "before_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "348 android.hardware.camera.provider.ranchu",
+      "349 android.hardware.camera.provider@2.7-service-google",
+      "435 cameraserver"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.8,
+    "thermal_override": false
+  },
+  "apk_sha256": "f725600b0b9bcd90208429f5ac2dc85c38541175e4fa30eda85c0aabe7d574f5",
+  "baseline": {
+    "processes": [],
+    "camera_provider_processes": [
+      "348 android.hardware.camera.provider.ranchu",
+      "349 android.hardware.camera.provider@2.7-service-google",
+      "435 cameraserver"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.8,
+    "thermal_override": false,
+    "idle_seconds": 31.00309508299688
+  },
+  "returncode": 0,
+  "after_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "348 android.hardware.camera.provider.ranchu",
+      "349 android.hardware.camera.provider@2.7-service-google",
+      "435 cameraserver"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.8,
+    "thermal_override": false
+  }
+}

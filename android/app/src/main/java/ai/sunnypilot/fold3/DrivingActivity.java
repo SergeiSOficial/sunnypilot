@@ -34,7 +34,8 @@ public final class DrivingActivity extends NativeActivity {
         if (!visionStarted && !isFinishing() && width > height && getIntent().getBooleanExtra("start_vision", false)) {
             visionStarted = true;
             startForegroundService(new Intent(this, VisionService.class)
-                .putExtra("duration_seconds", getIntent().getIntExtra("vision_seconds", 1800)));
+                .putExtra("duration_seconds", getIntent().getIntExtra("vision_seconds", 1800))
+                .putExtra("samsung_multiview", getIntent().getBooleanExtra("samsung_multiview", false)));
         }
     }
     public void runUi() {

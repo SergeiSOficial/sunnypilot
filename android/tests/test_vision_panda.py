@@ -13,7 +13,7 @@ import numpy as np
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "android/app/src/main/python"))
-from fold3_vision import DiagnosticWarp, FrameGate, camera_available, carry_model_state, inference_delay_ns
+from fold3_vision import DiagnosticWarp, FrameGate, RoadWarp, ThermalGate, camera_available, carry_model_state, inference_delay_ns, load_road_calibration
 
 spec = importlib.util.spec_from_file_location("stage_panda", ROOT / "android/scripts/stage_panda.py")
 stage = importlib.util.module_from_spec(spec)
@@ -25,6 +25,59 @@ from fold3_panda import Decoder, receive, require_silent
 
 
 class VisionTest(unittest.TestCase):
+  def test_measured_rear_warps_match_upstream_geometry_and_chroma_scaling(self):
+    from openpilot.common.transformations.model import get_warp_matrix, medmodel_intrinsics, sbigmodel_intrinsics
+    data = np.arange(512 * 256 * 3 // 2, dtype=np.uint8)
+    for wide, intrinsic in ((False, medmodel_intrinsics), (True, sbigmodel_intrinsics)):
+      calibration = {"image_size": [512, 256], "intrinsics": intrinsic.tolist(),
+                     "device_from_calib_euler": [0, 0, 0], "opencv_distortion": [0]*5}
+      warp = RoadWarp(512, 256, 512, 512*256, calibration, wide)
+      np.testing.assert_array_equal(warp(data), DiagnosticWarp(512, 256, 512, 512*256, 512, 256)(data))
+      calibration["device_from_calib_euler"] = [.012, -.03, .045]
+      warp = RoadWarp(512, 256, 512, 512*256, calibration, wide)
+      matrix = get_warp_matrix(np.array(calibration["device_from_calib_euler"]), intrinsic, bigmodel_frame=wide)
+      for x, y in ((30, 20), (100, 100), (200, 110)):
+        xy = matrix @ [2*x, 2*y, 1]
+        sx, sy = np.rint(xy[:2] / xy[2] / 2).astype(int)
+        expected = 512*256 + np.clip(sy, 0, 127)*512 + np.clip(sx, 0, 255)*2
+        self.assertEqual(warp.uv_indices[y*256+x], expected)
+      calibration["opencv_distortion"][0] = .01
+      distorted = RoadWarp(512, 256, 512, 512*256, calibration, wide)
+      self.assertFalse(np.array_equal(distorted.y_indices, warp.y_indices))
+      calibration["intrinsics"][0][0] = float("nan")
+      with self.assertRaises(ValueError):
+        RoadWarp(512, 256, 512, 512*256, calibration, wide)
+
+  def test_calibration_rejects_unmounted_changed_and_duplicate_sensor_streams(self):
+    origins = {"0": "test:wide", "2": "test:ultrawide"}
+    data = {"schema_version": 1, "mount_status": "measured", "cameras": {
+      sensor: {"physical_sensor_id": sensor, "stream_origin": source, "measurement_evidence": "test-only"}
+      for sensor, source in origins.items()}}
+    with tempfile.TemporaryDirectory() as directory:
+      path = Path(directory) / "calibration.json"
+      path.write_text(json.dumps(data))
+      self.assertEqual(set(load_road_calibration(path, origins)), {"0", "2"})
+      for change in ("mount", "source", "sensor"):
+        broken = json.loads(json.dumps(data))
+        if change == "mount":
+          broken["mount_status"] = "bench"
+        else:
+          broken["cameras"]["2"]["stream_origin" if change == "source" else "physical_sensor_id"] = "changed" if change == "source" else "0"
+        path.write_text(json.dumps(broken))
+        with self.assertRaises(ValueError):
+          load_road_calibration(path, origins)
+
+  def test_thermal_pause_requires_continuous_cooldown_before_resuming(self):
+    gate = ThermalGate()
+    self.assertFalse(gate.update(0, 0))
+    self.assertTrue(gate.update(2, 1))
+    self.assertTrue(gate.update(1, 2))
+    self.assertTrue(gate.update(0, 9_000_000_002))
+    self.assertTrue(gate.update(3, 9_000_000_003))
+    self.assertTrue(gate.update(0, 10_000_000_003))
+    self.assertTrue(gate.update(1, 19_000_000_003))
+    self.assertFalse(gate.update(0, 20_000_000_003))
+
   def test_model_cadence_is_20hz_without_catchup_after_stalls(self):
     self.assertEqual(inference_delay_ns(100_000_000, 125_000_000), 25_000_000)
     self.assertEqual(inference_delay_ns(100_000_000, 150_000_000), 0)

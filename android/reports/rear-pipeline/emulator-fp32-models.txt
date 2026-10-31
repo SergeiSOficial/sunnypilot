@@ -1,0 +1,238 @@
+{
+  "dmonitoring_model": {
+    "status": "failed",
+    "initialization_ms": 191.692583,
+    "parity": {
+      "outputs": {
+        "passed": true,
+        "max_abs_error": 6.198883056640625e-06
+      }
+    },
+    "additional_cases": {
+      "7": {
+        "outputs": {
+          "passed": true,
+          "max_abs_error": 1.6808509826660156e-05
+        }
+      },
+      "123": {
+        "outputs": {
+          "passed": true,
+          "max_abs_error": 6.67572021484375e-06
+        }
+      }
+    },
+    "backend_parity_status": "passed",
+    "original_model_parity": {
+      "seed42": {
+        "outputs": {
+          "passed": false,
+          "max_abs_error": 0.007004141807556152
+        }
+      },
+      "-case-7": {
+        "outputs": {
+          "passed": false,
+          "max_abs_error": 0.009438514709472656
+        }
+      },
+      "-case-123": {
+        "outputs": {
+          "passed": false,
+          "max_abs_error": 0.005611419677734375
+        }
+      }
+    },
+    "samples": 100,
+    "work_p50_ms": 21.677187500000002,
+    "work_p99_ms": 33.58131083000002,
+    "work_max_ms": 36.408833,
+    "deadline_misses_50ms": 0,
+    "process_cpu_ms": 3527.556147,
+    "timed_wall_ms": 5088.899419,
+    "performance_status": "passed"
+  },
+  "driving_supercombo": {
+    "status": "failed",
+    "initialization_ms": 328.821208,
+    "parity": {
+      "outputs": {
+        "passed": true,
+        "max_abs_error": 0.0001087188720703125
+      },
+      "next_state_img_q": {
+        "passed": true,
+        "max_abs_error": 0.0
+      },
+      "next_state_desire_q": {
+        "passed": true,
+        "max_abs_error": 0.0
+      },
+      "next_state_feat_q": {
+        "passed": true,
+        "max_abs_error": 3.725290298461914e-07
+      }
+    },
+    "additional_cases": {
+      "7": {
+        "outputs": {
+          "passed": true,
+          "max_abs_error": 0.00037384033203125
+        },
+        "next_state_img_q": {
+          "passed": true,
+          "max_abs_error": 0.0
+        },
+        "next_state_desire_q": {
+          "passed": true,
+          "max_abs_error": 0.0
+        },
+        "next_state_feat_q": {
+          "passed": true,
+          "max_abs_error": 4.6566128730773926e-07
+        }
+      },
+      "123": {
+        "outputs": {
+          "passed": true,
+          "max_abs_error": 7.62939453125e-05
+        },
+        "next_state_img_q": {
+          "passed": true,
+          "max_abs_error": 0.0
+        },
+        "next_state_desire_q": {
+          "passed": true,
+          "max_abs_error": 0.0
+        },
+        "next_state_feat_q": {
+          "passed": true,
+          "max_abs_error": 3.427267074584961e-07
+        }
+      }
+    },
+    "backend_parity_status": "passed",
+    "original_model_parity": {
+      "seed42": {
+        "outputs": {
+          "passed": false,
+          "max_abs_error": 0.29607295989990234
+        },
+        "next_state_img_q": {
+          "passed": true,
+          "max_abs_error": 0.0
+        },
+        "next_state_desire_q": {
+          "passed": true,
+          "max_abs_error": 0.0
+        },
+        "next_state_feat_q": {
+          "passed": false,
+          "max_abs_error": 0.000482022762298584
+        }
+      },
+      "-case-7": {
+        "outputs": {
+          "passed": false,
+          "max_abs_error": 0.2746009826660156
+        },
+        "next_state_img_q": {
+          "passed": true,
+          "max_abs_error": 0.0
+        },
+        "next_state_desire_q": {
+          "passed": true,
+          "max_abs_error": 0.0
+        },
+        "next_state_feat_q": {
+          "passed": false,
+          "max_abs_error": 0.0005746632814407349
+        }
+      },
+      "-case-123": {
+        "outputs": {
+          "passed": false,
+          "max_abs_error": 0.15125274658203125
+        },
+        "next_state_img_q": {
+          "passed": true,
+          "max_abs_error": 0.0
+        },
+        "next_state_desire_q": {
+          "passed": true,
+          "max_abs_error": 0.0
+        },
+        "next_state_feat_q": {
+          "passed": false,
+          "max_abs_error": 0.00046826712787151337
+        }
+      }
+    },
+    "samples": 100,
+    "work_p50_ms": 32.7829165,
+    "work_p99_ms": 42.00862416000002,
+    "work_max_ms": 46.302666,
+    "deadline_misses_50ms": 0,
+    "process_cpu_ms": 5492.621228,
+    "timed_wall_ms": 5096.827169,
+    "performance_status": "passed"
+  }
+}
+{
+  "serial": "emulator-5560",
+  "command": [
+    ".venv/bin/python",
+    "android/scripts/validate_models.py",
+    "--serial",
+    "emulator-5560",
+    "--adb",
+    "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+    "--package",
+    "com.samsung.sunnypilot.fold3",
+    "--profile",
+    "ort-fp32",
+    "--report",
+    "android/reports/rear-pipeline/emulator-fp32-models.json"
+  ],
+  "vehicle_tx_enabled": false,
+  "status": "failed",
+  "before_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "348 android.hardware.camera.provider.ranchu",
+      "349 android.hardware.camera.provider@2.7-service-google",
+      "435 cameraserver"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.8,
+    "thermal_override": false
+  },
+  "apk_sha256": "2d2a03f05c7151cfe6277e92c2de642ef9d7b38384cb821c97732d78351082ef",
+  "baseline": {
+    "processes": [],
+    "camera_provider_processes": [
+      "348 android.hardware.camera.provider.ranchu",
+      "349 android.hardware.camera.provider@2.7-service-google",
+      "435 cameraserver"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.8,
+    "thermal_override": false,
+    "idle_seconds": 30.89652379200561
+  },
+  "returncode": 1,
+  "after_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "348 android.hardware.camera.provider.ranchu",
+      "349 android.hardware.camera.provider@2.7-service-google",
+      "435 cameraserver"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.8,
+    "thermal_override": false
+  }
+}

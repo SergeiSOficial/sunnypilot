@@ -21,4 +21,6 @@ public final class NativeBridge {
             ByteBuffer u, int uRow, int uPixel, ByteBuffer v, int vRow, int vPixel,
             int width, int height, ByteBuffer output);
     public static native void rotateNv12(ByteBuffer input, int width, int height, int rotation, ByteBuffer output);
+    // GL readback is bottom-up RGBA; output is top-down, BT.601 limited-range NV12.
+    public static native long rgbaToNv12(ByteBuffer rgba, int width, int height, ByteBuffer output);
 }

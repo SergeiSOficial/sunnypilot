@@ -86,8 +86,9 @@ def main():
     manifest["models"][name]["output_slices"] = {key: [value.start, value.stop, value.step] for key, value in slices.items()}
     manifest["models"][name]["input_dtypes"] = {key: str(value.dtype) for key, value in inputs.items()}
     if not args.fp32:
-      # Apple ORT disables native FP16 kernels. Serialize its explicit FP32
-      # fallback boundaries. Level 3 exports host-specific NhwcFusedConv kernels
+      # Export portable FP32 fallback boundaries. Host optimization also changes
+      # layout/fusion and rounding; this is not equivalent to the original graph.
+      # Level 3 exports host-specific NhwcFusedConv kernels
       # which the portable Android build cannot load. Keep the original outputs
       # as the reference even when the portable graph fails numerical parity.
       compiled = output / "ort-fallback" / f"{name}.onnx"
@@ -120,6 +121,19 @@ def main():
         "reference_parity": "passed" if all(v["passed"] for c in checks for v in c["outputs"].values()) else "failed",
         "checks": checks, "scope": "diagnostic only; original reference, device and replay parity remain mandatory"}
     if args.fp32:
+      seeds = [7, 123]
+      for seed in seeds:
+        case_rng = np.random.default_rng(seed)
+        case_inputs = {key: case_rng.integers(0, 256, value.shape, dtype=np.uint8) if value.dtype == np.uint8 else value.copy()
+                       for key, value in inputs.items()}
+        for key in case_inputs:
+          if key.startswith("state_feat"):
+            case_inputs[key][:] = case_rng.normal(0, .01, case_inputs[key].shape)
+        case_expected = session.run(None, case_inputs)
+        np.savez(output / f"{name}-case-{seed}-inputs.npz", **case_inputs)
+        np.savez(output / f"{name}-case-{seed}-outputs.npz",
+                 **{spec.name: value for spec, value in zip(session.get_outputs(), case_expected, strict=True)})
+      manifest["models"][name]["additional_validation_seeds"] = seeds
       original = ort.InferenceSession(str(original_path), options, providers=["CPUExecutionProvider"]).run(None, inputs)
       manifest["models"][name]["original_sha256"] = hashlib.sha256(original_path.read_bytes()).hexdigest()
       manifest["models"][name]["promotion_max_abs_difference"] = {

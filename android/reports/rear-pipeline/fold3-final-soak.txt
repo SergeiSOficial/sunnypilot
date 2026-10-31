@@ -1,0 +1,92 @@
+cat: files/panda-rx.json: No such file or directory
+{
+  "serial": "RFCR81Y1TBJ",
+  "status": "blocked",
+  "requested_seconds": 1800,
+  "vehicle_tx_enabled": false,
+  "road_readiness": "blocked",
+  "calibration": "unqualified",
+  "model_parity": "failed",
+  "physical_vehicle_verified": false,
+  "package": "com.samsung.sunnypilot.fold3",
+  "samsung_multiview": true,
+  "resource_sampling_seconds": 30,
+  "fresh_samples": {
+    "road": 15,
+    "driver": 92
+  },
+  "distinct_frame_ids": {
+    "road": 680,
+    "driver": 680
+  },
+  "transport_status": "passed",
+  "elapsed_s": 1806.1400227080012,
+  "panda_receive_only": {},
+  "cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 3,
+    "skin_c": 44.6,
+    "thermal_override": false
+  }
+}
+{
+  "serial": "RFCR81Y1TBJ",
+  "command": [
+    ".venv/bin/python",
+    "android/scripts/validate_vision.py",
+    "--serial",
+    "RFCR81Y1TBJ",
+    "--adb",
+    "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+    "--package",
+    "com.samsung.sunnypilot.fold3",
+    "--samsung-multiview",
+    "--seconds",
+    "1800",
+    "--report",
+    "android/reports/rear-pipeline/fold3-final-soak.json"
+  ],
+  "vehicle_tx_enabled": false,
+  "status": "failed",
+  "before_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 27.0,
+    "thermal_override": false
+  },
+  "apk_sha256": "f725600b0b9bcd90208429f5ac2dc85c38541175e4fa30eda85c0aabe7d574f5",
+  "baseline": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 27.3,
+    "thermal_override": false,
+    "idle_seconds": 32.97996525000781
+  },
+  "returncode": 1,
+  "after_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 3,
+    "skin_c": 44.6,
+    "thermal_override": false
+  }
+}

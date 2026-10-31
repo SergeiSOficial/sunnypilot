@@ -21,12 +21,19 @@ import java.nio.FloatBuffer;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-/** Drain an opaque camera preview on its GL thread and save one diagnostic image. */
+/** Drain an opaque preview, optionally publishing reusable NV12 buffers on its GL thread. */
 final class CameraPreviewSample implements AutoCloseable {
     private static final int WIDTH = 960, HEIGHT = 540;
+    interface FrameSink { void receive(ByteBuffer nv12, long frame, long timestamp) throws Exception; }
     private final HandlerThread thread = new HandlerThread("camera-preview-sample");
     private final Handler handler;
     private final File sample;
+    private final FrameSink sink;
+    final FrameStats readback = new FrameStats();
+    private final float[] transform = new float[16];
+    private final FloatBuffer vertices = ByteBuffer.allocateDirect(16 * Float.BYTES).order(ByteOrder.nativeOrder()).asFloatBuffer();
+    private final ByteBuffer pixels = ByteBuffer.allocateDirect(WIDTH * HEIGHT * 4);
+    private final ByteBuffer nv12 = ByteBuffer.allocateDirect(WIDTH * HEIGHT * 3 / 2);
     private EGLDisplay display = EGL14.EGL_NO_DISPLAY;
     private EGLContext context = EGL14.EGL_NO_CONTEXT;
     private EGLSurface eglSurface = EGL14.EGL_NO_SURFACE;
@@ -39,7 +46,12 @@ final class CameraPreviewSample implements AutoCloseable {
     private long lastTimestamp;
 
     CameraPreviewSample(File sample) throws Exception {
-        this.sample = sample;
+        this(sample, null);
+    }
+
+    CameraPreviewSample(File sample, FrameSink sink) throws Exception {
+        this.sample = sample; this.sink = sink;
+        vertices.put(new float[]{-1,-1,0,0, 1,-1,1,0, -1,1,0,1, 1,1,1,1}).rewind();
         thread.start(); handler = new Handler(thread.getLooper());
         CountDownLatch ready = new CountDownLatch(1);
         handler.post(() -> {
@@ -95,7 +107,18 @@ final class CameraPreviewSample implements AutoCloseable {
                 if (timestamp < lastTimestamp) timestampErrors++;
                 lastTimestamp = timestamp; frames++;
                 lastArrivalNs = android.os.SystemClock.elapsedRealtimeNanos();
-                if (frames == 30) { save(); sampleTimestampNs = timestamp; }
+                if (sink != null || frames == 30 && sample != null) {
+                    long started = System.nanoTime();
+                    render();
+                    if (sink != null) {
+                        long hash = NativeBridge.rgbaToNv12(pixels, WIDTH, HEIGHT, nv12);
+                        readback.add(timestamp, hash, System.nanoTime() - started);
+                        readback.deliveryAge(android.os.SystemClock.elapsedRealtimeNanos() - timestamp);
+                        sink.receive(nv12, frames, timestamp);
+                    }
+                    if (frames == 30 && sample != null) save();
+                }
+                if (frames == 30) { sampleTimestampNs = timestamp; sampleTextureTransform = transform.clone(); }
             } catch (Exception e) { error = e.toString(); }
         }, handler);
     }
@@ -110,11 +133,9 @@ final class CameraPreviewSample implements AutoCloseable {
         return shader;
     }
 
-    private void save() throws Exception {
-        float[] transform = new float[16]; texture.getTransformMatrix(transform);
-        sampleTextureTransform = transform.clone();
-        FloatBuffer vertices = ByteBuffer.allocateDirect(16 * Float.BYTES).order(ByteOrder.nativeOrder()).asFloatBuffer();
-        vertices.put(new float[]{-1,-1,0,0, 1,-1,1,0, -1,1,0,1, 1,1,1,1}).rewind();
+    private void render() {
+        texture.getTransformMatrix(transform);
+        vertices.position(0);
         GLES20.glViewport(0, 0, WIDTH, HEIGHT); GLES20.glUseProgram(program);
         GLES20.glUniformMatrix4fv(GLES20.glGetUniformLocation(program, "transform"), 1, false, transform, 0);
         GLES20.glUniform1i(GLES20.glGetUniformLocation(program, "camera"), 0);
@@ -123,9 +144,13 @@ final class CameraPreviewSample implements AutoCloseable {
         GLES20.glVertexAttribPointer(position, 2, GLES20.GL_FLOAT, false, 16, vertices);
         vertices.position(2); GLES20.glVertexAttribPointer(uv, 2, GLES20.GL_FLOAT, false, 16, vertices);
         GLES20.glDrawArrays(GLES20.GL_TRIANGLE_STRIP, 0, 4);
-        ByteBuffer pixels = ByteBuffer.allocateDirect(WIDTH * HEIGHT * 4);
+        pixels.clear();
         GLES20.glReadPixels(0, 0, WIDTH, HEIGHT, GLES20.GL_RGBA, GLES20.GL_UNSIGNED_BYTE, pixels);
         int result = GLES20.glGetError(); if (result != GLES20.GL_NO_ERROR) throw new IllegalStateException("Preview GL error: " + result);
+    }
+
+    private void save() throws Exception {
+        pixels.rewind();
         Bitmap raw = Bitmap.createBitmap(WIDTH, HEIGHT, Bitmap.Config.ARGB_8888); raw.copyPixelsFromBuffer(pixels);
         Matrix flip = new Matrix(); flip.setScale(1, -1);
         Bitmap image = Bitmap.createBitmap(raw, 0, 0, WIDTH, HEIGHT, flip, false);

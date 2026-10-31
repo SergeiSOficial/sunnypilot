@@ -2,14 +2,30 @@
 
 **Perception accuracy, freshness and sustained deadlines remain failed.**
 
-The Samsung compatibility camera update has separate transport measurements in
-[CAMERAS.md](CAMERAS.md) and [camera-compat](reports/camera-compat/). It does not
-rerun or supersede the model and combined-workload results below, which retain
-their original APK identities. Three active sensor pipelines alone do not
-establish timely, calibrated perception.
+Current [rear-pipeline bench results](reports/rear-pipeline/README.md) cover the
+continuous rear GL/NV12 and thumbnail transport, original live road-model
+failure, thermal/numerical work suppression and a new FP32 CPU diagnostic.
+FP32 host-backend parity passes three cases on both devices, with Fold 3
+isolated p99 of 38.01 ms for DM and 46.98 ms for driving. Equivalence to the
+original goldens fails (maximum differences 0.00944 and 0.29613), so the overall
+model gate still fails and FP32 is not adopted. Separate isolated model timings
+do not establish concurrent sustained 20 Hz. The results below retain their
+original APK identities. Three active pipelines alone do not establish
+timely, calibrated perception.
 No precision change is accepted. All live model messages remain invalid and
 vehicle transmission stays disabled. See [validation scope](VALIDATION.md) for
 which APK produced each result.
+
+The final compatibility APK completed 30-minute triple-stream capture without
+recovery, at approximately 30 fps and 29.94 fps UI. This was not sustained
+inference: the road worker latched its first non-finite output, DM discarded
+all 3,313 computed outputs as late (work p99 64.15 ms, 851 deadline misses),
+and thermal pause persisted from 4:09 through completion. Sampled skin reached
+44.6°C with SEVERE thermal status; post-startup PSS was 1,346.6–1,409.8 MiB.
+The [current soak summary](reports/rear-pipeline/fold3-final-soak-summary.json)
+records the distinct workload and clean exits. Its additional rear pipeline
+and retained road model prevent a direct memory/energy comparison with the
+previous regular APK.
 
 ## Preprocessing on the previous regular APK
 
@@ -72,7 +88,7 @@ no catch-up bursts. The corrected battery current/voltage calculation avoids
 integer overflow, but current units and net battery power are not qualified as
 a measurement of whole-phone energy savings.
 
-## Final APK live and sustained diagnostics
+## Previous regular APK live and sustained diagnostics
 
 The [60-second phone run](reports/fold3-final-live.json) passed capture and
 preview with one session, no recovery, 1,800 rear / 1,794 front frames near

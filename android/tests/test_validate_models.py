@@ -7,15 +7,17 @@ import unittest
 from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
-from experiment import PACKAGE
+from experiment import PACKAGE, CAMERA_COMPAT_PACKAGE
 from validate_models import validate
 
 
 class Device:
-  def __init__(self, reports, processes=()):
+  def __init__(self, reports, processes=(), package=PACKAGE):
     self.reports, self.processes = iter(reports), iter(processes)
+    self.package, self.calls = package, []
 
   def command(self, *args):
+    self.calls.append(args)
     if args[0] == "exec-out":
       return json.dumps(next(self.reports))
     if args[:2] == ("shell", "ps"):
@@ -25,7 +27,7 @@ class Device:
 
 class ModelsTest(unittest.TestCase):
   def test_completed_failed_parity_is_evidence(self):
-    report = {"started_utc": 2, "completed_utc": 3, "models": {"driver": {"status": "failed"}}}
+    report = {"started_utc": 2, "completed_utc": 3, "vehicle_tx_enabled": False, "models": {"driver": {"status": "failed"}}}
     with tempfile.TemporaryDirectory() as folder:
       destination = Path(folder) / "report.json"
       expected = {**report, "validation_status": "failed"}
@@ -40,9 +42,20 @@ class ModelsTest(unittest.TestCase):
     with tempfile.TemporaryDirectory() as folder:
       for models, expected in cases:
         with self.subTest(expected=expected):
-          report = {"started_utc": 2, "completed_utc": 3, "models": models}
+          report = {"started_utc": 2, "completed_utc": 3, "vehicle_tx_enabled": False, "models": models}
           result = validate(Device([{}, report]), "ort-cpu", Path(folder) / "report.json")
           self.assertEqual(result["validation_status"], expected)
+
+  def test_compatibility_package_uses_real_activity_class_and_tx_guard(self):
+    report = {"started_utc": 2, "completed_utc": 3, "vehicle_tx_enabled": False, "models": {}}
+    device = Device([{}, report], package=CAMERA_COMPAT_PACKAGE)
+    with tempfile.TemporaryDirectory() as folder:
+      validate(device, "ort-cpu", Path(folder) / "report.json")
+      self.assertIn(CAMERA_COMPAT_PACKAGE + "/ai.sunnypilot.fold3.MainActivity", device.calls[1])
+      self.assertEqual(device.calls[0][2], CAMERA_COMPAT_PACKAGE)
+      for tx in (True, None):
+        with self.assertRaisesRegex(AssertionError, "TX guard"):
+          validate(Device([{}, {**report, "vehicle_tx_enabled": tx}]), "ort-cpu", Path(folder) / "report.json")
 
   @patch("validate_models.time.sleep")
   def test_crash_before_new_report_rejects_stale_completion(self, _sleep):

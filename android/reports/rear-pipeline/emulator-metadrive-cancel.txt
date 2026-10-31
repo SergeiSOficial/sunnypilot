@@ -1,0 +1,114 @@
+[38;20m[INFO] Environment: MetaDriveEnv[0m
+[38;20m[INFO] MetaDrive version: 0.4.2.3[0m
+[38;20m[INFO] Sensors: [lidar: Lidar(), side_detector: SideDetector(), lane_line_detector: LaneLineDetector(), rgb_road: RGBCameraRoad(1928, 1208)][0m
+[38;20m[INFO] Render Mode: offscreen[0m
+[38;20m[INFO] Horizon (Max steps per agent): None[0m
+[38;20m[INFO] Assets version: 0.4.2.3[0m
+[38;20m[INFO] Known Pipes: CocoaGraphicsPipe[0m
+[38;20m[INFO] Assets version: 0.4.2.3[0m
+[38;20m[INFO] Known Pipes: CocoaGraphicsPipe[0m
+[38;20m[INFO] Start Scenario Index: 0, Num Scenarios : 1[0m
+[33;20m[WARNING] env.vehicle will be deprecated soon. Use env.agent instead (base_env.py:733)[0m
+----------------------------------------------------------
+---- Spawning Metadrive world, this might take awhile ----
+----------------------------------------------------------
+{
+  "status": "passed",
+  "vehicle_tx_enabled": false,
+  "physical_vehicle_verified": false,
+  "perception_verified": false,
+  "synthetic_driver_and_calibration": true,
+  "factory_acc_fixture": true,
+  "metadrive": true,
+  "fault": "cancel",
+  "packets": 1816,
+  "active_samples": 979,
+  "inactive_after_fault": 568,
+  "longitudinal_active_samples": 0,
+  "max_abs_steering_deg": 1.4180909636914643,
+  "below_minimum_active_samples": 0,
+  "max_abs_torque": 0.14993728697299957,
+  "steering_plant": "synthetic damped torque-to-angle; not a Hyundai vehicle model",
+  "adb_port": 50576,
+  "metadrive_world_started": true,
+  "perception_source": "synthetic straight-lane curvature from MetaDrive ground truth; not camera inference",
+  "android_profile": {
+    "version": 1,
+    "op": "hello",
+    "simulation": true,
+    "vehicle_tx_enabled": false,
+    "car_fingerprint": "HYUNDAI_IONIQ_PHEV_2019",
+    "factory_acc": true,
+    "min_steer_speed_m_s": 14.305279731750488,
+    "physical_fingerprint_verified": false
+  },
+  "max_lateral_error_m": 0.38788270950317383,
+  "max_speed_m_s": 19.99989724547771,
+  "duration_s": 30.004240750000463,
+  "qualification_blocker": "Synthetic perception/DM/calibration fixture; no visual closed-loop or physical vehicle qualification"
+}
+{
+  "serial": "emulator-5560",
+  "command": [
+    ".venv/bin/python",
+    "-m",
+    "openpilot.tools.sim.android_validation",
+    "--serial",
+    "emulator-5560",
+    "--adb",
+    "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+    "--duration",
+    "30",
+    "--metadrive",
+    "--fault",
+    "cancel",
+    "--report",
+    "android/reports/rear-pipeline/emulator-metadrive-cancel.json"
+  ],
+  "vehicle_tx_enabled": false,
+  "status": "passed",
+  "before_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "348 android.hardware.camera.provider.ranchu",
+      "349 android.hardware.camera.provider@2.7-service-google",
+      "435 cameraserver"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.8,
+    "thermal_override": false
+  },
+  "apk_sha256": "f725600b0b9bcd90208429f5ac2dc85c38541175e4fa30eda85c0aabe7d574f5",
+  "baseline": {
+    "processes": [],
+    "camera_provider_processes": [
+      "348 android.hardware.camera.provider.ranchu",
+      "349 android.hardware.camera.provider@2.7-service-google",
+      "435 cameraserver"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.8,
+    "thermal_override": false,
+    "idle_seconds": 30.832376708000083
+  },
+  "runtime": {
+    "manager_pid": 10288,
+    "ui_pid": 10361,
+    "simulation": true
+  },
+  "returncode": 0,
+  "after_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "348 android.hardware.camera.provider.ranchu",
+      "349 android.hardware.camera.provider@2.7-service-google",
+      "435 cameraserver"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.8,
+    "thermal_override": false
+  }
+}

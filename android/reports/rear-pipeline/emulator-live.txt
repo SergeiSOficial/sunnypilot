@@ -1,0 +1,101 @@
+cat: files/ui-report.json: No such file or directory
+cat: files/vision-report.json: No such file or directory
+cat: files/ui-report.json: No such file or directory
+cat: files/vision-report.json: No such file or directory
+cat: files/ui-report.json: No such file or directory
+cat: files/vision-report.json: No such file or directory
+cat: files/panda-rx.json: No such file or directory
+{
+  "serial": "emulator-5560",
+  "status": "failed",
+  "requested_seconds": 20,
+  "vehicle_tx_enabled": false,
+  "road_readiness": "blocked",
+  "calibration": "unqualified",
+  "model_parity": "failed",
+  "physical_vehicle_verified": false,
+  "package": "com.samsung.sunnypilot.fold3",
+  "samsung_multiview": false,
+  "resource_sampling_seconds": 30,
+  "fresh_samples": {
+    "road": 0,
+    "driver": 0
+  },
+  "distinct_frame_ids": {
+    "road": 7,
+    "driver": 7
+  },
+  "error": "AssertionError: Camera transport failed: running",
+  "elapsed_s": 41.21075541699247,
+  "panda_receive_only": {},
+  "cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "348 android.hardware.camera.provider.ranchu",
+      "349 android.hardware.camera.provider@2.7-service-google",
+      "435 cameraserver"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.8,
+    "thermal_override": false
+  }
+}
+{
+  "serial": "emulator-5560",
+  "command": [
+    ".venv/bin/python",
+    "android/scripts/validate_vision.py",
+    "--serial",
+    "emulator-5560",
+    "--adb",
+    "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+    "--package",
+    "com.samsung.sunnypilot.fold3",
+    "--seconds",
+    "20",
+    "--report",
+    "android/reports/rear-pipeline/emulator-live.json"
+  ],
+  "vehicle_tx_enabled": false,
+  "status": "failed",
+  "before_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "348 android.hardware.camera.provider.ranchu",
+      "349 android.hardware.camera.provider@2.7-service-google",
+      "435 cameraserver"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.8,
+    "thermal_override": false
+  },
+  "apk_sha256": "2d2a03f05c7151cfe6277e92c2de642ef9d7b38384cb821c97732d78351082ef",
+  "baseline": {
+    "processes": [],
+    "camera_provider_processes": [
+      "348 android.hardware.camera.provider.ranchu",
+      "349 android.hardware.camera.provider@2.7-service-google",
+      "435 cameraserver"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.8,
+    "thermal_override": false,
+    "idle_seconds": 30.88572629200644
+  },
+  "returncode": 1,
+  "after_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "348 android.hardware.camera.provider.ranchu",
+      "349 android.hardware.camera.provider@2.7-service-google",
+      "435 cameraserver"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.8,
+    "thermal_override": false
+  }
+}

@@ -1,0 +1,184 @@
+{
+  "serial": "emulator-5560",
+  "package": "com.samsung.sunnypilot.fold3",
+  "vehicle_tx_enabled": false,
+  "status": "failed",
+  "cases": [
+    {
+      "during_capture": false,
+      "abort_wait_seconds": 9.107239083008608,
+      "result": {
+        "vehicle_tx_enabled": false,
+        "valid": false,
+        "sessions": [
+          {
+            "camera_ids": [
+              "0",
+              "1"
+            ],
+            "width": 1280,
+            "height": 720,
+            "logical_camera": null,
+            "requested_duration_ms": 29968,
+            "startup_order": "open_all_then_configure",
+            "opened_camera_ids": [],
+            "image_callbacks_drained": true,
+            "camera_close_callbacks_complete": true,
+            "request_template": "record",
+            "stabilization": "disabled when advertised",
+            "sensor_pairs": [],
+            "streams": [],
+            "elapsed_ms": 7,
+            "completed_requested_duration": false,
+            "status": "failed",
+            "error": "IllegalStateException: critical_thermal_status:4"
+          }
+        ],
+        "requested_seconds": 30,
+        "recovery_limit": 3,
+        "started_utc": "2026-10-31T16:13:15.238012Z",
+        "dual_rear": "not requested",
+        "backend": "camera2",
+        "status": "failed",
+        "recoveries": 0,
+        "thermal_status": 4,
+        "transport_status": "failed",
+        "completed_utc": "2026-10-31T16:13:15.325369Z"
+      }
+    },
+    {
+      "during_capture": true,
+      "abort_wait_seconds": 1.642853915996966,
+      "result": {
+        "vehicle_tx_enabled": false,
+        "valid": false,
+        "sessions": [
+          {
+            "camera_ids": [
+              "0",
+              "1"
+            ],
+            "width": 1280,
+            "height": 720,
+            "logical_camera": null,
+            "requested_duration_ms": 29915,
+            "startup_order": "open_all_then_configure",
+            "opened_camera_ids": [],
+            "image_callbacks_drained": true,
+            "camera_close_callbacks_complete": true,
+            "request_template": "record",
+            "stabilization": "disabled when advertised",
+            "sensor_pairs": [],
+            "streams": [],
+            "elapsed_ms": 19,
+            "completed_requested_duration": false,
+            "status": "failed",
+            "error": "IllegalStateException: critical_thermal_status:4"
+          }
+        ],
+        "requested_seconds": 30,
+        "recovery_limit": 3,
+        "started_utc": "2026-10-31T16:13:26.811940Z",
+        "dual_rear": "not requested",
+        "backend": "camera2",
+        "status": "failed",
+        "recoveries": 0,
+        "thermal_status": 4,
+        "transport_status": "failed",
+        "completed_utc": "2026-10-31T16:13:26.929163Z"
+      }
+    }
+  ],
+  "moderate_pause": {
+    "modeld": {
+      "daemon": "modeld",
+      "pid": 5286,
+      "vehicle_tx_enabled": false,
+      "engagement_allowed": false,
+      "work_samples": 0,
+      "deadline_misses": 0,
+      "phase": "thermal_paused",
+      "simulation": false,
+      "thermal_status": 2,
+      "target_suspended": true,
+      "missing_physical_sensors": [
+        "0",
+        "2"
+      ],
+      "calibrated": false,
+      "valid": false,
+      "blocker": "Bench inference paused at Android MODERATE; requires ten cool seconds before resuming",
+      "target_hz": 20,
+      "computed_frames": 0,
+      "recurrent_resets": 1
+    },
+    "dmonitoringmodeld": {
+      "daemon": "dmonitoringmodeld",
+      "pid": 5296,
+      "vehicle_tx_enabled": false,
+      "engagement_allowed": false,
+      "work_samples": 0,
+      "deadline_misses": 0,
+      "phase": "thermal_paused",
+      "simulation": false,
+      "thermal_status": 2,
+      "target_suspended": true,
+      "missing_physical_sensors": [
+        "1"
+      ],
+      "calibrated": false,
+      "valid": false,
+      "blocker": "Bench inference paused at Android MODERATE; requires ten cool seconds before resuming",
+      "target_hz": 20,
+      "computed_frames": 0,
+      "recurrent_resets": 1
+    }
+  },
+  "moderate_resumed": {
+    "modeld": {
+      "daemon": "modeld",
+      "pid": 5286,
+      "vehicle_tx_enabled": false,
+      "engagement_allowed": false,
+      "work_samples": 0,
+      "deadline_misses": 0,
+      "phase": "waiting_for_camera",
+      "simulation": false,
+      "thermal_status": 0,
+      "target_suspended": false,
+      "missing_physical_sensors": [
+        "0",
+        "2"
+      ],
+      "calibrated": false,
+      "valid": false,
+      "blocker": "Distinct narrow and wide rear streams are required",
+      "target_hz": 20,
+      "computed_frames": 0,
+      "recurrent_resets": 1
+    },
+    "dmonitoringmodeld": {
+      "daemon": "dmonitoringmodeld",
+      "pid": 5296,
+      "vehicle_tx_enabled": false,
+      "engagement_allowed": false,
+      "work_samples": 0,
+      "deadline_misses": 0,
+      "phase": "waiting_for_camera",
+      "simulation": false,
+      "thermal_status": 0,
+      "target_suspended": false,
+      "missing_physical_sensors": [
+        "1"
+      ],
+      "calibrated": false,
+      "valid": false,
+      "blocker": "Driver camera unavailable",
+      "target_hz": 20,
+      "computed_frames": 0,
+      "recurrent_resets": 1
+    }
+  },
+  "error": "AssertionError: Unexpected camera startup/capture evidence",
+  "override_reset": true
+}

@@ -19,17 +19,21 @@ public final class VisionService extends Service {
             .setSmallIcon(android.R.drawable.ic_menu_camera).setContentText("Uncalibrated; vehicle transmission disabled").build());
         int duration = intent == null ? 1800 : intent.getIntExtra("duration_seconds", 1800);
         final int seconds = Math.max(5, Math.min(1800, duration));
-        worker = new Thread(() -> run(seconds), "live-cameras");
+        final boolean samsung = BuildConfig.DEBUG && getPackageName().equals("com.samsung.sunnypilot.fold3") &&
+            intent != null && intent.getBooleanExtra("samsung_multiview", false);
+        worker = new Thread(() -> run(seconds, samsung), "live-cameras");
         worker.start();
         return START_NOT_STICKY;
     }
-    private void run(int seconds) {
+    private void run(int seconds, boolean samsung) {
         JSONObject report = new JSONObject();
         JSONArray sessions = new JSONArray();
         try {
             report.put("vehicle_tx_enabled", false).put("valid", false).put("sessions", sessions)
                 .put("requested_seconds", seconds).put("recovery_limit", 3).put("started_utc", java.time.Instant.now().toString())
-                .put("dual_rear", "blocked: public Camera2 rejects wide plus ultrawide on the connected stock Fold 3");
+                .put("dual_rear", samsung ? "bench candidate feeds; physical identities and calibration unverified" : "not requested")
+                .put("backend", samsung ? "samsung_multiview" : "camera2");
+            Files.deleteIfExists(new java.io.File(getFilesDir(), "vision-sources.json").toPath());
             report.put("status", "running");
             save(report);
             long end = SystemClock.elapsedRealtime() + seconds * 1000L;
@@ -38,17 +42,20 @@ public final class VisionService extends Service {
                 try (CameraProbe camera = new CameraProbe(this, value -> {
                     if (stopping) throw new IllegalStateException("Live camera session stopped");
                 })) {
-                    JSONObject session = camera.attempt(new String[]{"0", "1"}, null, 1280, 720,
-                        Math.max(1, end - SystemClock.elapsedRealtime()));
+                    long remaining = Math.max(1, end - SystemClock.elapsedRealtime());
+                    JSONObject session = samsung ? camera.samsungMultiview(true, remaining, true) :
+                        camera.attempt(new String[]{"0", "1"}, null, 1280, 720, remaining);
                     sessions.put(session);
                     report.put("recoveries", retry).put("thermal_status", getSystemService(PowerManager.class).getCurrentThermalStatus());
                     save(report);
-                    if (session.optString("status").equals("passed") ||
+                    if (session.optString(samsung ? "transport_status" : "status").equals("passed") ||
                         session.optString("error").contains("critical_thermal_status:")) break;
                 }
             }
-            boolean passed = !stopping && sessions.length() == 1 && sessions.getJSONObject(0).optString("status").equals("passed");
-            report.put("status", stopping ? "stopped" : passed ? "passed" : "failed")
+            boolean passed = !stopping && sessions.length() == 1 &&
+                sessions.getJSONObject(0).optString(samsung ? "transport_status" : "status").equals("passed");
+            report.put("transport_status", passed ? "passed" : "failed")
+                .put("status", stopping ? "stopped" : passed ? (samsung ? "blocked" : "passed") : "failed")
                 .put("completed_utc", java.time.Instant.now().toString());
             save(report);
         } catch (Exception e) {

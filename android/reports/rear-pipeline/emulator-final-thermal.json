@@ -1,0 +1,142 @@
+{
+  "serial": "emulator-5560",
+  "package": "com.samsung.sunnypilot.fold3",
+  "vehicle_tx_enabled": false,
+  "status": "failed",
+  "cases": [
+    {
+      "during_capture": false,
+      "abort_wait_seconds": 11.679439250001451,
+      "result": {
+        "vehicle_tx_enabled": false,
+        "valid": false,
+        "sessions": [
+          {
+            "camera_ids": [
+              "0",
+              "1"
+            ],
+            "width": 1280,
+            "height": 720,
+            "logical_camera": null,
+            "requested_duration_ms": 29875,
+            "startup_order": "open_all_then_configure",
+            "opened_camera_ids": [],
+            "image_callbacks_drained": true,
+            "camera_close_callbacks_complete": true,
+            "request_template": "record",
+            "stabilization": "disabled when advertised",
+            "sensor_pairs": [],
+            "streams": [],
+            "elapsed_ms": 27,
+            "completed_requested_duration": false,
+            "status": "failed",
+            "error": "IllegalStateException: critical_thermal_status:4"
+          }
+        ],
+        "requested_seconds": 30,
+        "recovery_limit": 3,
+        "started_utc": "2026-10-31T16:16:13.369900Z",
+        "dual_rear": "not requested",
+        "backend": "camera2",
+        "status": "failed",
+        "recoveries": 0,
+        "thermal_status": 4,
+        "transport_status": "failed",
+        "completed_utc": "2026-10-31T16:16:13.846757Z"
+      }
+    }
+  ],
+  "moderate_pause": {
+    "modeld": {
+      "daemon": "modeld",
+      "pid": 6298,
+      "vehicle_tx_enabled": false,
+      "engagement_allowed": false,
+      "work_samples": 0,
+      "deadline_misses": 0,
+      "phase": "thermal_paused",
+      "simulation": false,
+      "thermal_status": 2,
+      "target_suspended": true,
+      "missing_physical_sensors": [
+        "0",
+        "2"
+      ],
+      "calibrated": false,
+      "valid": false,
+      "blocker": "Bench inference paused at Android MODERATE; requires ten cool seconds before resuming",
+      "target_hz": 20,
+      "computed_frames": 0,
+      "recurrent_resets": 1
+    },
+    "dmonitoringmodeld": {
+      "daemon": "dmonitoringmodeld",
+      "pid": 6301,
+      "vehicle_tx_enabled": false,
+      "engagement_allowed": false,
+      "work_samples": 0,
+      "deadline_misses": 0,
+      "phase": "thermal_paused",
+      "simulation": false,
+      "thermal_status": 2,
+      "target_suspended": true,
+      "missing_physical_sensors": [
+        "1"
+      ],
+      "calibrated": false,
+      "valid": false,
+      "blocker": "Bench inference paused at Android MODERATE; requires ten cool seconds before resuming",
+      "target_hz": 20,
+      "computed_frames": 0,
+      "recurrent_resets": 1
+    }
+  },
+  "moderate_resumed": {
+    "modeld": {
+      "daemon": "modeld",
+      "pid": 6298,
+      "vehicle_tx_enabled": false,
+      "engagement_allowed": false,
+      "work_samples": 0,
+      "deadline_misses": 0,
+      "phase": "waiting_for_camera",
+      "simulation": false,
+      "thermal_status": 0,
+      "target_suspended": false,
+      "missing_physical_sensors": [
+        "0",
+        "2"
+      ],
+      "calibrated": false,
+      "valid": false,
+      "blocker": "Distinct narrow and wide rear streams are required",
+      "target_hz": 20,
+      "computed_frames": 0,
+      "recurrent_resets": 1
+    },
+    "dmonitoringmodeld": {
+      "daemon": "dmonitoringmodeld",
+      "pid": 6301,
+      "vehicle_tx_enabled": false,
+      "engagement_allowed": false,
+      "work_samples": 0,
+      "deadline_misses": 0,
+      "phase": "waiting_for_camera",
+      "simulation": false,
+      "thermal_status": 0,
+      "target_suspended": false,
+      "missing_physical_sensors": [
+        "1"
+      ],
+      "calibrated": false,
+      "valid": false,
+      "blocker": "Driver camera unavailable",
+      "target_hz": 20,
+      "computed_frames": 0,
+      "recurrent_resets": 1
+    }
+  },
+  "error": "AssertionError: Thermal abort exceeded the shutdown budget",
+  "override_reset": true
+}

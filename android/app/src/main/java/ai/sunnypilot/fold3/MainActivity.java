@@ -141,7 +141,8 @@ public final class MainActivity extends Activity {
         stopService(new Intent(this, ManagerService.class));
         startForegroundService(new Intent(this, ManagerService.class));
         startActivity(new Intent(this, DrivingActivity.class).putExtra("preview", true)
-            .putExtra("start_vision", true).putExtra("vision_seconds", intent.getIntExtra("vision_seconds", 1800)));
+            .putExtra("start_vision", true).putExtra("vision_seconds", intent.getIntExtra("vision_seconds", 1800))
+            .putExtra("samsung_multiview", BuildConfig.DEBUG && intent.getBooleanExtra("samsung_multiview", false)));
     }
     private void launchDrivingUi() {
         if (preparingUi) return;

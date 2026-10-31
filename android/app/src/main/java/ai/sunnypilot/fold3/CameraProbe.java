@@ -327,9 +327,17 @@ final class CameraProbe implements AutoCloseable {
 
     /** Samsung's Director's View transport. Composite thumbnails are not physical streams. */
     JSONObject samsungMultiview(boolean front, long durationMs) throws Exception {
+        return samsungMultiview(front, durationMs, false);
+    }
+
+    JSONObject samsungMultiview(boolean front, long durationMs, boolean publish) throws Exception {
         JSONObject out = new JSONObject().put("camera_ids", new JSONArray(front ? new String[]{"0", "2", "1"} : new String[]{"0", "2"}))
             .put("logical_camera", "20").put("backend", "samsung_multiview").put("requested_duration_ms", durationMs)
             .put("visionipc_valid", false).put("distinct_sensor_evidence", false);
+        out.put("visionipc_publishing", publish).put("width", 960).put("height", 540)
+            .put("stream_origins", new JSONObject().put("0", "logical20:selected-wide-preview-rgba-bt601")
+                .put("2", "logical20:multiview-thumbnail-sensor-unverified").put("1", "front1:yuv"))
+            .put("optical_calibration", "missing").put("mount_calibration", "missing");
         List<CameraDevice> devices = new ArrayList<>();
         List<CameraCaptureSession> sessions = new ArrayList<>();
         List<ImageReader> readers = new ArrayList<>();
@@ -338,6 +346,8 @@ final class CameraProbe implements AutoCloseable {
         List<CameraPreviewSample> previewSamples = new ArrayList<>();
         AtomicReference<String> failure = new AtomicReference<>();
         AtomicReference<int[]> roi = new AtomicReference<>();
+        AtomicReference<JSONObject> captureMetadata = new AtomicReference<>();
+        AtomicReference<VisionPublisher> publishing = new AtomicReference<>();
         long[] metadataFrames = {0}, previewFrames = {0}, thumbnailSampleTimestamp = {0};
         long started = android.os.SystemClock.elapsedRealtime();
         String error = null;
@@ -349,6 +359,13 @@ final class CameraProbe implements AutoCloseable {
                 java.nio.file.StandardOpenOption.CREATE, java.nio.file.StandardOpenOption.WRITE);
             ownership = owner.tryLock();
             if (ownership == null) throw new IllegalStateException("Another camera diagnostic still owns the cameras");
+            if (publish) {
+                publishing.set(new VisionPublisher(ipcDirectory, front ? new String[]{"0", "2", "1"} : new String[]{"0", "2"}, 960, 540));
+                java.nio.file.Path destination = new java.io.File(context.getFilesDir(), "vision-sources.json").toPath();
+                java.nio.file.Path temporary = destination.resolveSibling("vision-sources.tmp");
+                java.nio.file.Files.write(temporary, out.toString().getBytes(java.nio.charset.StandardCharsets.UTF_8));
+                java.nio.file.Files.move(temporary, destination, java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+            }
             java.nio.file.Files.deleteIfExists(new java.io.File(context.getFilesDir(), "multiview-960x540.nv12").toPath());
             java.nio.file.Files.deleteIfExists(new java.io.File(context.getFilesDir(), "multiview-preview.png").toPath());
             checkThermalStatus();
@@ -360,6 +377,9 @@ final class CameraProbe implements AutoCloseable {
             }
             for (CameraDevice device : devices) {
                 boolean logical = "20".equals(device.getId());
+                Integer clock = manager.getCameraCharacteristics(device.getId()).get(CameraCharacteristics.SENSOR_INFO_TIMESTAMP_SOURCE);
+                if (publish && !Integer.valueOf(CameraCharacteristics.SENSOR_INFO_TIMESTAMP_SOURCE_REALTIME).equals(clock))
+                    throw new IllegalStateException("Unqualified multiview timestamp clock: " + device.getId() + ":" + clock);
                 FrameStats frames = new FrameStats(); stats.add(frames);
                 ImageReader yuv = ImageReader.newInstance(960, 540, ImageFormat.YUV_420_888, 3); readers.add(yuv);
                 ByteBuffer packed = ByteBuffer.allocateDirect(960 * 540 * 3 / 2);
@@ -373,7 +393,11 @@ final class CameraProbe implements AutoCloseable {
                             p[2].getBuffer().slice(), p[2].getRowStride(), p[2].getPixelStride(), 960, 540, packed);
                         frames.add(image.getTimestamp(), hash, System.nanoTime() - before);
                         frames.deliveryAge(android.os.SystemClock.elapsedRealtimeNanos() - image.getTimestamp());
-                        if (logical && frames.frames == 30) {
+                        if (publishing.get() != null) {
+                            long timestamp = image.getTimestamp() - (android.os.SystemClock.elapsedRealtimeNanos() - System.nanoTime());
+                            publishing.get().send(logical ? "2" : "1", packed, 960, 540, frames.frames, timestamp);
+                        }
+                        if (!publish && logical && frames.frames == 30) {
                             // One local diagnostic sample; never publish a thumbnail as an independent sensor.
                             ByteBuffer copy = packed.duplicate(); copy.clear();
                             try (java.nio.channels.FileChannel file = java.nio.channels.FileChannel.open(
@@ -388,7 +412,9 @@ final class CameraProbe implements AutoCloseable {
                 }, handler);
                 android.view.Surface previewSurface;
                 if (logical) {
-                    CameraPreviewSample sample = new CameraPreviewSample(new java.io.File(context.getFilesDir(), "multiview-preview.png"));
+                    CameraPreviewSample sample = new CameraPreviewSample(publish ? null : new java.io.File(context.getFilesDir(), "multiview-preview.png"),
+                        publish ? (nv12, frame, timestamp) -> publishing.get().send("0", nv12, 960, 540, frame,
+                            timestamp - (android.os.SystemClock.elapsedRealtimeNanos() - System.nanoTime())) : null);
                     previewSamples.add(sample); previewSurface = sample.surface();
                 } else {
                     ImageReader preview = ImageReader.newInstance(1920, 1080, ImageFormat.PRIVATE, 3,
@@ -441,6 +467,21 @@ final class CameraProbe implements AutoCloseable {
                             metadataFrames[0]++;
                             int[] value = result.get(new CaptureResult.Key<>("samsung.android.control.multiviewCropRoi", int[].class));
                             if (value != null) roi.set(value.clone());
+                            if (metadataFrames[0] % 30 == 1) {
+                                JSONObject metadata = new JSONObject();
+                                try {
+                                    metadata.put("active_physical_id", result.get(CaptureResult.LOGICAL_MULTI_CAMERA_ACTIVE_PHYSICAL_ID))
+                                        .put("physical_results", new JSONArray(result.getPhysicalCameraResults().keySet()));
+                                    for (CaptureResult.Key<?> key : result.getKeys()) {
+                                        String name = key.getName();
+                                        if (name.equals("samsung.android.control.runningPhysicalId") ||
+                                            name.equals("samsung.android.control.multiSensorSensitivityList") ||
+                                            name.equals("samsung.android.control.multiExposureTimeList") ||
+                                            name.equals("samsung.android.lens.info.currentInfo")) metadata.put(name, array(result.get(key)));
+                                    }
+                                } catch (Exception e) { try { metadata.put("error", e.toString()); } catch (Exception ignored) { } }
+                                captureMetadata.set(metadata);
+                            }
                         }
                     }
                     public void onCaptureFailed(CameraCaptureSession session, CaptureRequest r, CaptureFailure f) {
@@ -483,12 +524,14 @@ final class CameraProbe implements AutoCloseable {
             for (CameraPreviewSample sample : previewSamples) {
                 try { sample.close(); } catch (Exception e) { error = e.toString(); }
             }
+            if (publishing.get() != null) publishing.get().close();
             if (ownership != null) ownership.release();
             if (owner != null) owner.close();
         }
         FrameStats rear = stats.isEmpty() ? new FrameStats() : stats.get(0);
         out.put("composite_frames", rear.frames).put("composite_fps", rear.fps()).put("preview_frames", previewFrames[0])
             .put("metadata_frames", metadataFrames[0]).put("multiview_crop_roi", array(roi.get()))
+            .put("capture_metadata", captureMetadata.get())
             .put("timestamp_errors", rear.timestampErrors).put("packing_errors", rear.packingErrors)
             .put("packing_p99_ns", rear.percentile(true, .99)).put("late_deliveries", rear.lateDeliveries)
             .put("future_deliveries", rear.futureDeliveries)
@@ -514,6 +557,13 @@ final class CameraProbe implements AutoCloseable {
                 .put("thumbnail_sample_timestamp_ns", thumbnailSampleTimestamp[0])
                 .put("preview_timestamp_errors", sample.timestampErrors).put("preview_coalesced_callbacks", sample.coalescedCallbacks)
                 .put("preview_frames", sample.frames + previewFrames[0]);
+            out.put("preview_readback_frames", sample.readback.frames).put("preview_readback_p99_ns", sample.readback.percentile(true, .99))
+                .put("preview_delivery_age_p99_ns", sample.readback.deliveryAgeP99()).put("preview_late_deliveries", sample.readback.lateDeliveries)
+                .put("preview_future_deliveries", sample.readback.futureDeliveries);
+            if (publish) out.put("rear_candidate_skew_p99_ns", pairingSkew(sample.readback.timestamps(), rear.timestamps()))
+                .put("rear_candidate_overlap_ns", Math.max(0, Math.min(sample.readback.lastTimestamp, rear.lastTimestamp) -
+                    Math.max(sample.readback.firstTimestamp, rear.firstTimestamp)))
+                .put("preview_changed_frames", sample.readback.changedFrames).put("thumbnail_changed_frames", rear.changedFrames);
             if (sample.error != null) out.put("preview_error", sample.error);
             if (sample.frames < durationMs * 15 / 1000 || sample.timestampErrors != 0 || sample.sampleTimestampNs == 0 || sample.error != null)
                 out.put("transport_status", "failed");

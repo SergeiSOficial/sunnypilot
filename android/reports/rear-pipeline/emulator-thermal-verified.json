@@ -1,0 +1,446 @@
+{
+  "serial": "emulator-5560",
+  "package": "com.samsung.sunnypilot.fold3",
+  "vehicle_tx_enabled": false,
+  "status": "passed",
+  "cases": [
+    {
+      "during_capture": false,
+      "abort_wait_seconds": 5.984633959000348,
+      "result": {
+        "vehicle_tx_enabled": false,
+        "valid": false,
+        "sessions": [
+          {
+            "camera_ids": [
+              "0",
+              "1"
+            ],
+            "width": 1280,
+            "height": 720,
+            "logical_camera": null,
+            "requested_duration_ms": 29922,
+            "startup_order": "open_all_then_configure",
+            "opened_camera_ids": [],
+            "image_callbacks_drained": true,
+            "camera_close_callbacks_complete": true,
+            "request_template": "record",
+            "stabilization": "disabled when advertised",
+            "sensor_pairs": [],
+            "streams": [],
+            "elapsed_ms": 4,
+            "completed_requested_duration": false,
+            "status": "failed",
+            "error": "IllegalStateException: critical_thermal_status:4"
+          }
+        ],
+        "requested_seconds": 30,
+        "recovery_limit": 3,
+        "started_utc": "2026-10-31T16:20:38.558979Z",
+        "dual_rear": "not requested",
+        "backend": "camera2",
+        "status": "failed",
+        "recoveries": 0,
+        "thermal_status": 4,
+        "transport_status": "failed",
+        "completed_utc": "2026-10-31T16:20:38.654995Z"
+      },
+      "shutdown_seconds": 0.004,
+      "shutdown_clock": "camera worker startup to rejection"
+    },
+    {
+      "during_capture": true,
+      "abort_wait_seconds": 1.9424702079995768,
+      "result": {
+        "vehicle_tx_enabled": false,
+        "valid": false,
+        "sessions": [
+          {
+            "camera_ids": [
+              "0",
+              "1"
+            ],
+            "width": 1280,
+            "height": 720,
+            "logical_camera": null,
+            "requested_duration_ms": 89960,
+            "startup_order": "open_all_then_configure",
+            "opened_camera_ids": [
+              "0",
+              "1"
+            ],
+            "image_callbacks_drained": true,
+            "camera_close_callbacks_complete": true,
+            "request_template": "record",
+            "stabilization": "disabled when advertised",
+            "sensor_pairs": [
+              {
+                "camera_ids": [
+                  "0",
+                  "1"
+                ],
+                "overlap_ns": 3023503835,
+                "distinct_sensor_evidence": true,
+                "nearest_skew_p99_ns": 227743751
+              }
+            ],
+            "overlap_ns": 3023503835,
+            "nearest_skew_p99_ns": 227743751,
+            "skew_sampling": "last 4096 timestamps per stream, shared overlap only",
+            "distinct_sensor_evidence": true,
+            "streams": [
+              {
+                "sensor_id": "0",
+                "width": 1280,
+                "height": 720,
+                "image_rotation_applied_degrees": 0,
+                "output_width": 1280,
+                "output_height": 720,
+                "display_degrees_at_session_start": 90,
+                "mirrored": false,
+                "sensor_orientation": 90,
+                "timestamp_source": 1,
+                "intrinsic_calibration": [],
+                "lens_distortion": [],
+                "visionipc_valid": false,
+                "visionipc_stream": 0,
+                "focal_lengths_mm": [
+                  3.3
+                ],
+                "frames": 43,
+                "fps": 12.33595323368228,
+                "first_timestamp_ns": 1469857897919,
+                "last_timestamp_ns": 1473262580087,
+                "timestamp_errors": 0,
+                "changed_frames": 42,
+                "metadata_failures": 0,
+                "uncaptured_requests": 0,
+                "lost_buffers": 0,
+                "physical_metadata_frames": 58,
+                "measured_focal_length_mm": 3.3,
+                "packing_errors": 0,
+                "packing_p99_ns": 276602000,
+                "delivery_age_p99_ns": 258726615,
+                "delivery_over_100ms": 5,
+                "delivery_future_timestamps": 29,
+                "frame_interval_p99_ns": 467528125
+              },
+              {
+                "sensor_id": "1",
+                "width": 1280,
+                "height": 720,
+                "image_rotation_applied_degrees": 0,
+                "output_width": 1280,
+                "output_height": 720,
+                "display_degrees_at_session_start": 90,
+                "mirrored": false,
+                "sensor_orientation": 270,
+                "timestamp_source": 1,
+                "intrinsic_calibration": [
+                  3225.7742,
+                  3225.7742,
+                  960.5043,
+                  540.46704,
+                  0
+                ],
+                "lens_distortion": [
+                  0.08807813,
+                  -0.22617353,
+                  0.16460505,
+                  0,
+                  0
+                ],
+                "visionipc_valid": false,
+                "visionipc_stream": 1,
+                "focal_lengths_mm": [
+                  4.38
+                ],
+                "frames": 33,
+                "fps": 10.582637725780067,
+                "first_timestamp_ns": 1470239076252,
+                "last_timestamp_ns": 1473262897045,
+                "timestamp_errors": 0,
+                "changed_frames": 32,
+                "metadata_failures": 0,
+                "uncaptured_requests": 0,
+                "lost_buffers": 0,
+                "physical_metadata_frames": 41,
+                "measured_focal_length_mm": 4.38,
+                "packing_errors": 0,
+                "packing_p99_ns": 34407417,
+                "delivery_age_p99_ns": 477168574,
+                "delivery_over_100ms": 3,
+                "delivery_future_timestamps": 23,
+                "frame_interval_p99_ns": 498584042
+              }
+            ],
+            "elapsed_ms": 5269,
+            "completed_requested_duration": false,
+            "status": "failed",
+            "error": "IllegalStateException: critical_thermal_status:4"
+          }
+        ],
+        "requested_seconds": 90,
+        "recovery_limit": 3,
+        "started_utc": "2026-10-31T16:20:46.522644Z",
+        "dual_rear": "not requested",
+        "backend": "camera2",
+        "status": "failed",
+        "recoveries": 0,
+        "thermal_status": 4,
+        "transport_status": "failed",
+        "completed_utc": "2026-10-31T16:20:51.875410Z"
+      },
+      "shutdown_seconds": 1.9424702079995768,
+      "shutdown_clock": "critical override to completed report"
+    }
+  ],
+  "moderate_pause": {
+    "modeld": {
+      "daemon": "modeld",
+      "pid": 7135,
+      "vehicle_tx_enabled": false,
+      "engagement_allowed": false,
+      "work_samples": 0,
+      "deadline_misses": 0,
+      "phase": "thermal_paused",
+      "simulation": false,
+      "thermal_status": 2,
+      "target_suspended": true,
+      "missing_physical_sensors": [
+        "0",
+        "2"
+      ],
+      "calibrated": false,
+      "valid": false,
+      "blocker": "Bench inference paused at Android MODERATE; requires ten cool seconds before resuming",
+      "target_hz": 20,
+      "computed_frames": 0,
+      "recurrent_resets": 1
+    },
+    "dmonitoringmodeld": {
+      "daemon": "dmonitoringmodeld",
+      "pid": 7145,
+      "vehicle_tx_enabled": false,
+      "engagement_allowed": false,
+      "work_samples": 0,
+      "deadline_misses": 0,
+      "phase": "thermal_paused",
+      "simulation": false,
+      "thermal_status": 2,
+      "target_suspended": true,
+      "missing_physical_sensors": [
+        "1"
+      ],
+      "calibrated": false,
+      "valid": false,
+      "blocker": "Bench inference paused at Android MODERATE; requires ten cool seconds before resuming",
+      "target_hz": 20,
+      "computed_frames": 0,
+      "recurrent_resets": 1
+    }
+  },
+  "moderate_resumed": {
+    "modeld": {
+      "daemon": "modeld",
+      "pid": 7135,
+      "vehicle_tx_enabled": false,
+      "engagement_allowed": false,
+      "work_samples": 0,
+      "deadline_misses": 0,
+      "phase": "waiting_for_camera",
+      "simulation": false,
+      "thermal_status": 0,
+      "target_suspended": false,
+      "missing_physical_sensors": [
+        "0",
+        "2"
+      ],
+      "calibrated": false,
+      "valid": false,
+      "blocker": "Distinct narrow and wide rear streams are required",
+      "target_hz": 20,
+      "computed_frames": 0,
+      "recurrent_resets": 1
+    },
+    "dmonitoringmodeld": {
+      "daemon": "dmonitoringmodeld",
+      "pid": 7145,
+      "vehicle_tx_enabled": false,
+      "engagement_allowed": false,
+      "work_samples": 0,
+      "deadline_misses": 0,
+      "phase": "waiting_for_camera",
+      "simulation": false,
+      "thermal_status": 0,
+      "target_suspended": false,
+      "missing_physical_sensors": [
+        "1"
+      ],
+      "calibrated": false,
+      "valid": false,
+      "blocker": "Driver camera unavailable",
+      "target_hz": 20,
+      "computed_frames": 0,
+      "recurrent_resets": 1
+    }
+  },
+  "live_validator": {
+    "status": "failed",
+    "error": "AssertionError: Camera capture failed; recoveries=0; errors=['IllegalStateException: critical_thermal_status:4']",
+    "cleanup": {
+      "processes": [],
+      "camera_provider_processes": [
+        "348 android.hardware.camera.provider.ranchu",
+        "349 android.hardware.camera.provider@2.7-service-google",
+        "435 cameraserver"
+      ],
+      "camera_owned": false,
+      "thermal_status": 4,
+      "skin_c": 30.8,
+      "thermal_override": true
+    },
+    "elapsed_s": 4.008632875003968
+  },
+  "new_activity_stop": {
+    "vehicle_tx_enabled": false,
+    "valid": false,
+    "sessions": [
+      {
+        "camera_ids": [
+          "0",
+          "1"
+        ],
+        "width": 1280,
+        "height": 720,
+        "logical_camera": null,
+        "requested_duration_ms": 89991,
+        "startup_order": "open_all_then_configure",
+        "opened_camera_ids": [
+          "0",
+          "1"
+        ],
+        "image_callbacks_drained": true,
+        "camera_close_callbacks_complete": true,
+        "request_template": "record",
+        "stabilization": "disabled when advertised",
+        "sensor_pairs": [
+          {
+            "camera_ids": [
+              "0",
+              "1"
+            ],
+            "overlap_ns": 3129968293,
+            "distinct_sensor_evidence": true,
+            "nearest_skew_p99_ns": 124651458
+          }
+        ],
+        "overlap_ns": 3129968293,
+        "nearest_skew_p99_ns": 124651458,
+        "skew_sampling": "last 4096 timestamps per stream, shared overlap only",
+        "distinct_sensor_evidence": true,
+        "streams": [
+          {
+            "sensor_id": "0",
+            "width": 1280,
+            "height": 720,
+            "image_rotation_applied_degrees": 0,
+            "output_width": 1280,
+            "output_height": 720,
+            "display_degrees_at_session_start": 90,
+            "mirrored": false,
+            "sensor_orientation": 90,
+            "timestamp_source": 1,
+            "intrinsic_calibration": [],
+            "lens_distortion": [],
+            "visionipc_valid": false,
+            "visionipc_stream": 0,
+            "focal_lengths_mm": [
+              3.3
+            ],
+            "frames": 71,
+            "fps": 22.00600765706644,
+            "first_timestamp_ns": 1486832446427,
+            "last_timestamp_ns": 1490013395970,
+            "timestamp_errors": 0,
+            "changed_frames": 70,
+            "metadata_failures": 0,
+            "uncaptured_requests": 0,
+            "lost_buffers": 0,
+            "physical_metadata_frames": 79,
+            "measured_focal_length_mm": 3.3,
+            "packing_errors": 0,
+            "packing_p99_ns": 213132042,
+            "delivery_age_p99_ns": 192282116,
+            "delivery_over_100ms": 1,
+            "delivery_future_timestamps": 59,
+            "frame_interval_p99_ns": 164866501
+          },
+          {
+            "sensor_id": "1",
+            "width": 1280,
+            "height": 720,
+            "image_rotation_applied_degrees": 0,
+            "output_width": 1280,
+            "output_height": 720,
+            "display_degrees_at_session_start": 90,
+            "mirrored": false,
+            "sensor_orientation": 270,
+            "timestamp_source": 1,
+            "intrinsic_calibration": [
+              3225.7742,
+              3225.7742,
+              960.5043,
+              540.46704,
+              0
+            ],
+            "lens_distortion": [
+              0.08807813,
+              -0.22617353,
+              0.16460505,
+              0,
+              0
+            ],
+            "visionipc_valid": false,
+            "visionipc_stream": 1,
+            "focal_lengths_mm": [
+              4.38
+            ],
+            "frames": 65,
+            "fps": 20.44749147878988,
+            "first_timestamp_ns": 1486880914802,
+            "last_timestamp_ns": 1490010883095,
+            "timestamp_errors": 0,
+            "changed_frames": 64,
+            "metadata_failures": 0,
+            "uncaptured_requests": 0,
+            "lost_buffers": 0,
+            "physical_metadata_frames": 72,
+            "measured_focal_length_mm": 4.38,
+            "packing_errors": 0,
+            "packing_p99_ns": 4026625,
+            "delivery_age_p99_ns": 119392532,
+            "delivery_over_100ms": 2,
+            "delivery_future_timestamps": 57,
+            "frame_interval_p99_ns": 287124084
+          }
+        ],
+        "elapsed_ms": 4381,
+        "completed_requested_duration": false,
+        "status": "failed",
+        "error": "IllegalStateException: Live camera session stopped"
+      }
+    ],
+    "requested_seconds": 90,
+    "recovery_limit": 3,
+    "started_utc": "2026-10-31T16:21:03.822761Z",
+    "dual_rear": "not requested",
+    "backend": "camera2",
+    "status": "stopped",
+    "recoveries": 0,
+    "thermal_status": 0,
+    "transport_status": "failed",
+    "completed_utc": "2026-10-31T16:21:08.230317Z"
+  },
+  "override_reset": true
+}

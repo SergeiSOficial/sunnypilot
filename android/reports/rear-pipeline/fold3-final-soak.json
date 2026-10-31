@@ -1,0 +1,408 @@
+{
+  "serial": "RFCR81Y1TBJ",
+  "status": "blocked",
+  "requested_seconds": 1800,
+  "vehicle_tx_enabled": false,
+  "road_readiness": "blocked",
+  "calibration": "unqualified",
+  "model_parity": "failed",
+  "physical_vehicle_verified": false,
+  "package": "com.samsung.sunnypilot.fold3",
+  "samsung_multiview": true,
+  "resource_sampling_seconds": 30,
+  "last_sample": {
+    "elapsed_s": 1805.722133000003,
+    "ui-report": {
+      "pid": 7052,
+      "backend": "Raylib Android NativeActivity",
+      "vehicle_tx_enabled": false,
+      "status": "running",
+      "full_upstream_ui": true,
+      "camera_preview": [
+        {
+          "stream": "road",
+          "frame_id": 54006,
+          "age_ms": 943.339793,
+          "fresh": false
+        },
+        {
+          "stream": "driver",
+          "frame_id": 53738,
+          "age_ms": 896.906466,
+          "fresh": false
+        }
+      ],
+      "frames": 53940,
+      "mean_fps": 29.937902100073124,
+      "width": 2160,
+      "height": 1080,
+      "surface_size": [
+        2289,
+        840
+      ],
+      "last_frame_seconds": 0.033334165811538696,
+      "last_cpu_seconds": 0.0015008839982328936,
+      "recent_p99_frame_ms": 34.65661406517029,
+      "recent_p99_cpu_ms": 9.545000997604802
+    },
+    "manager": {
+      "pid": 7050,
+      "simulation": false,
+      "vehicle_tx_enabled": false,
+      "engagement_allowed": false,
+      "engagement_blocker": "camera calibration, model parity/performance and physical Panda qualification incomplete",
+      "processes": {
+        "Controls": {
+          "daemon": "controlsd",
+          "pid": 7090,
+          "phase": "waiting_for_car_params",
+          "error": "",
+          "last_progress_ms": 102272579,
+          "ticks": 3583,
+          "restarts": 0
+        },
+        "Monitoring": {
+          "daemon": "dmonitoringd",
+          "pid": 7092,
+          "phase": "waiting_for_driver_model",
+          "error": "",
+          "last_progress_ms": 102272760,
+          "ticks": 1797,
+          "restarts": 0
+        },
+        "Sensors": {
+          "daemon": "sensord",
+          "pid": 7096,
+          "phase": "running",
+          "error": "",
+          "last_progress_ms": 102272957,
+          "ticks": 81743,
+          "restarts": 0
+        },
+        "RoadModel": {
+          "daemon": "modeld",
+          "pid": 7097,
+          "phase": "thermal_paused",
+          "error": "",
+          "last_progress_ms": 102272821,
+          "ticks": 7157,
+          "restarts": 0
+        },
+        "DriverModel": {
+          "daemon": "dmonitoringmodeld",
+          "pid": 7099,
+          "phase": "thermal_paused",
+          "error": "",
+          "last_progress_ms": 102272750,
+          "ticks": 20435,
+          "restarts": 0
+        }
+      },
+      "updated_elapsed_ms": 102272967
+    },
+    "dmonitoringmodeld": {
+      "daemon": "dmonitoringmodeld",
+      "pid": 7099,
+      "vehicle_tx_enabled": false,
+      "engagement_allowed": false,
+      "work_samples": 3313,
+      "deadline_misses": 851,
+      "phase": "thermal_paused",
+      "simulation": false,
+      "thermal_status": 3,
+      "target_suspended": true,
+      "missing_physical_sensors": [],
+      "calibrated": false,
+      "valid": false,
+      "blocker": "Bench inference paused at Android MODERATE; requires ten cool seconds before resuming",
+      "rejected_frames": 3898,
+      "computed_frames": 3313,
+      "published_frames": 0,
+      "late_outputs": 3313,
+      "stream_origins": {
+        "0": "logical20:selected-wide-preview-rgba-bt601",
+        "2": "logical20:multiview-thumbnail-sensor-unverified",
+        "1": "front1:yuv"
+      },
+      "nonfinite_outputs": 0,
+      "recurrent_resets": 127,
+      "work_ms": 56.750104,
+      "projection": "uncalibrated preview affine; not suitable for driving",
+      "backend": "ORT CPU, 2 threads",
+      "measured_projection_loaded": false,
+      "calibration_blocker": "Measured optical and final mount calibration missing",
+      "input_frame_ids": {
+        "1": 7299
+      },
+      "input_timestamps_ns": {
+        "1": 85073926079443
+      },
+      "input_skew_ns": 0,
+      "numerical_parity": "failed on original synthetic reference; diagnostic only",
+      "target_hz": 20,
+      "stage_sampling": "last 4096 computations",
+      "stage_p99_ms": {
+        "input_age": 99.8316662,
+        "prepare": 8.050354160000007,
+        "inference": 60.63895468000001,
+        "output_age": 161.25546092000002
+      },
+      "p99_work_ms": 64.148855
+    },
+    "modeld": {
+      "daemon": "modeld",
+      "pid": 7097,
+      "vehicle_tx_enabled": false,
+      "engagement_allowed": false,
+      "work_samples": 1,
+      "deadline_misses": 1,
+      "phase": "thermal_paused",
+      "simulation": false,
+      "thermal_status": 3,
+      "target_suspended": true,
+      "missing_physical_sensors": [],
+      "calibrated": false,
+      "valid": false,
+      "blocker": "Bench inference paused at Android MODERATE; requires ten cool seconds before resuming",
+      "rejected_frames": 1,
+      "computed_frames": 1,
+      "published_frames": 0,
+      "late_outputs": 0,
+      "stream_origins": {
+        "0": "logical20:selected-wide-preview-rgba-bt601",
+        "2": "logical20:multiview-thumbnail-sensor-unverified",
+        "1": "front1:yuv"
+      },
+      "nonfinite_outputs": 1,
+      "recurrent_resets": 2,
+      "work_ms": 183.799636,
+      "projection": "uncalibrated preview affine; not suitable for driving",
+      "backend": "ORT CPU, 2 threads",
+      "measured_projection_loaded": false,
+      "calibration_blocker": "[Errno 2] No such file or directory: '/data/user/0/com.samsung.sunnypilot.fold3/files/camera-calibration.json'",
+      "input_frame_ids": {
+        "0": 13,
+        "2": 13
+      },
+      "input_timestamps_ns": {
+        "0": 84830931886824,
+        "2": 84830931886981
+      },
+      "input_skew_ns": 157,
+      "numerical_parity": "failed on original synthetic reference; diagnostic only",
+      "target_hz": 20,
+      "stage_sampling": "last 4096 computations",
+      "numerical_fault_latched": true,
+      "p99_work_ms": 183.799636
+    },
+    "sensord": {
+      "daemon": "sensord",
+      "pid": 7096,
+      "vehicle_tx_enabled": false,
+      "engagement_allowed": false,
+      "work_samples": 0,
+      "deadline_misses": 0,
+      "phase": "running",
+      "simulation": false,
+      "published_samples": 745772,
+      "dropped_samples": 0,
+      "stale_samples": 0,
+      "calibrated": false,
+      "validity_blocker": "phone-to-vehicle mounting rotation has not been calibrated",
+      "thermal_status": 3,
+      "power_watts": -2.0425e-05
+    },
+    "vision-report": {
+      "vehicle_tx_enabled": false,
+      "valid": false,
+      "sessions": [
+        {
+          "camera_ids": [
+            "0",
+            "2",
+            "1"
+          ],
+          "logical_camera": "20",
+          "backend": "samsung_multiview",
+          "requested_duration_ms": 1799996,
+          "visionipc_valid": false,
+          "distinct_sensor_evidence": false,
+          "visionipc_publishing": true,
+          "width": 960,
+          "height": 540,
+          "stream_origins": {
+            "0": "logical20:selected-wide-preview-rgba-bt601",
+            "2": "logical20:multiview-thumbnail-sensor-unverified",
+            "1": "front1:yuv"
+          },
+          "optical_calibration": "missing",
+          "mount_calibration": "missing",
+          "samsung_parameters_requested": "samsungcamera=true;shootingmode=37;recording-fps=30;",
+          "samsung_shooting_mode": 37,
+          "samsung_parameters_applied": true,
+          "composite_frames": 53824,
+          "composite_fps": 29.90097314593743,
+          "preview_frames": 107848,
+          "metadata_frames": 54007,
+          "multiview_crop_roi": [
+            0,
+            0,
+            960,
+            540,
+            0,
+            243,
+            133,
+            723,
+            403,
+            1,
+            405,
+            223,
+            565,
+            313,
+            0,
+            0,
+            0,
+            960,
+            540,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            960,
+            540,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            960,
+            540,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "capture_metadata": {
+            "physical_results": [],
+            "samsung.android.control.runningPhysicalId": [
+              48,
+              0
+            ],
+            "samsung.android.control.multiSensorSensitivityList": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "samsung.android.control.multiExposureTimeList": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "samsung.android.lens.info.currentInfo": [
+              511,
+              1267,
+              3082,
+              1893
+            ]
+          },
+          "timestamp_errors": 0,
+          "packing_errors": 0,
+          "packing_p99_ns": 5322552,
+          "late_deliveries": 33424,
+          "future_deliveries": 0,
+          "delivery_age_p99_ns": 121560523,
+          "completed_requested_duration": true,
+          "elapsed_ms": 1801679,
+          "transport_status": "passed",
+          "status": "blocked",
+          "qualification_blocker": "Composite transport does not establish independent physical sensor delivery",
+          "front_frames": 53738,
+          "front_fps": 29.853835101018575,
+          "front_packing_p99_ns": 5732865,
+          "front_late_deliveries": 7844,
+          "front_future_deliveries": 0,
+          "front_timestamp_errors": 0,
+          "front_packing_errors": 0,
+          "front_delivery_age_p99_ns": 116161241,
+          "rear_preview_frames": 54006,
+          "preview_sample_timestamp_ns": 100472654647482,
+          "preview_sample_texture_transform": [
+            0,
+            -1,
+            0,
+            0,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            1,
+            1,
+            0,
+            1
+          ],
+          "thumbnail_sample_timestamp_ns": 0,
+          "preview_timestamp_errors": 0,
+          "preview_coalesced_callbacks": 0,
+          "preview_readback_frames": 54006,
+          "preview_readback_p99_ns": 28202344,
+          "preview_delivery_age_p99_ns": 152113543,
+          "preview_late_deliveries": 49039,
+          "preview_future_deliveries": 0,
+          "rear_candidate_skew_p99_ns": 0,
+          "rear_candidate_overlap_ns": 1800008416605,
+          "preview_changed_frames": 54005,
+          "thumbnail_changed_frames": 53823
+        }
+      ],
+      "requested_seconds": 1800,
+      "recovery_limit": 3,
+      "started_utc": "2026-10-31T16:12:39.674285Z",
+      "dual_rear": "bench candidate feeds; physical identities and calibration unverified",
+      "backend": "samsung_multiview",
+      "status": "blocked",
+      "recoveries": 0,
+      "thermal_status": 3,
+      "transport_status": "passed",
+      "completed_utc": "2026-10-31T16:42:41.377412Z"
+    }
+  },
+  "fresh_samples": {
+    "road": 15,
+    "driver": 92
+  },
+  "distinct_frame_ids": {
+    "road": 680,
+    "driver": 680
+  },
+  "transport_status": "passed",
+  "elapsed_s": 1806.1400227080012,
+  "panda_receive_only": {},
+  "cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 3,
+    "skin_c": 44.6,
+    "thermal_override": false
+  }
+}

@@ -114,6 +114,86 @@ class DiagnosticWarp:
     return self.output
 
 
+class RoadWarp(DiagnosticWarp):
+  """Measured pinhole/Brown projection with the pinned model's two distinct FOVs.
+
+  Intrinsics/distortion refer to the delivered, oriented image, not a sensor's
+  full active array. Samsung composite/GL outputs require their own measurement.
+  """
+  def __init__(self, width, height, stride, uv_offset, calibration, wide=False):
+    import numpy as np
+    from openpilot.common.transformations.model import get_warp_matrix
+    intrinsics = np.asarray(calibration["intrinsics"], dtype=np.float64)
+    euler = np.asarray(calibration["device_from_calib_euler"], dtype=np.float64)
+    distortion = np.asarray(calibration["opencv_distortion"], dtype=np.float64)
+    if (calibration["image_size"] != [width, height] or intrinsics.shape != (3, 3) or euler.shape != (3,)
+        or distortion.shape != (5,) or not all(np.isfinite(a).all() for a in (intrinsics, euler, distortion))
+        or min(intrinsics[0, 0], intrinsics[1, 1]) <= 0 or not np.array_equal(intrinsics[2], [0, 0, 1])
+        or intrinsics[0, 1] != 0 or intrinsics[1, 0] != 0):
+      raise ValueError("Invalid measured camera geometry")
+    super().__init__(width, height, stride, uv_offset, 512, 256)
+    self.gather = None  # Perspective indices depend on both coordinates.
+    matrix = get_warp_matrix(euler, intrinsics, bigmodel_frame=wide)
+
+    def indices(ow, oh, chroma=False):
+      yy, xx = np.indices((oh, ow), dtype=np.float64)
+      xy = matrix @ np.stack((xx.ravel() * (2 if chroma else 1), yy.ravel() * (2 if chroma else 1), np.ones(ow * oh)))
+      if (xy[2] <= 1e-8).any():
+        raise ValueError("Camera projection crosses the horizon")
+      x, y = xy[:2] / xy[2]
+      x, y = (x - intrinsics[0, 2]) / intrinsics[0, 0], (y - intrinsics[1, 2]) / intrinsics[1, 1]
+      k1, k2, p1, p2, k3 = distortion
+      r2 = x*x + y*y
+      radial = 1 + r2 * (k1 + r2 * (k2 + r2 * k3))
+      dx, dy = x * radial + 2*p1*x*y + p2*(r2 + 2*x*x), y * radial + p1*(r2 + 2*y*y) + 2*p2*x*y
+      scale = 2 if chroma else 1
+      x, y = (dx * intrinsics[0, 0] + intrinsics[0, 2]) / scale, (dy * intrinsics[1, 1] + intrinsics[1, 2]) / scale
+      if not np.isfinite(x).all() or not np.isfinite(y).all():
+        raise ValueError("Nonfinite camera projection")
+      x = np.rint(x).clip(0, width // scale - 1).astype(np.intp)
+      y = np.rint(y).clip(0, height // scale - 1).astype(np.intp)
+      return y * stride + x * scale
+
+    self.y_indices = indices(512, 256)
+    self.uv_indices = uv_offset + indices(256, 128, True)
+    self.v_indices = self.uv_indices + 1
+
+
+def load_road_calibration(path, origins):
+  """A mount or stream change invalidates calibration; never invent defaults."""
+  data = json.loads(Path(path).read_text())
+  if data.get("schema_version") != 1 or data.get("mount_status") != "measured":
+    raise ValueError("Measured final vehicle mount calibration required")
+  cameras = data["cameras"]
+  if set(cameras) != {"0", "2"}:
+    raise ValueError("Both measured rear cameras required")
+  identities = []
+  for sensor, camera in cameras.items():
+    if (not camera.get("measurement_evidence") or not camera.get("physical_sensor_id")
+        or camera.get("stream_origin") != origins.get(sensor) or "unverified" in camera["stream_origin"]):
+      raise ValueError("Camera identity, measurement or stream origin not established")
+    identities.append(camera["physical_sensor_id"])
+  if len(set(identities)) != 2:
+    raise ValueError("Distinct measured rear sensor identities required")
+  return cameras
+
+
+class ThermalGate:
+  """Pause bench model work at Android MODERATE; resume after ten cool seconds."""
+  def __init__(self):
+    self.paused, self.cool_since = False, None
+
+  def update(self, status, now):
+    if status >= 2:
+      self.paused, self.cool_since = True, None
+    elif self.paused:
+      if self.cool_since is None:
+        self.cool_since = now
+      if now - self.cool_since >= 10_000_000_000:
+        self.paused = False
+    return self.paused
+
+
 def model_asset(name):
   root = Path(__file__).parent
   metadata = json.loads((root / "fold3_reference/manifest.json").read_text())["models"][name]
@@ -140,12 +220,17 @@ def run(report, driver=False):
   from msgq.visionipc import VisionIpcClient
   from openpilot.cereal.visionipc import VisionStreamType
   from openpilot.cereal import log, messaging
+  from java import jclass
+  hardware = jclass("ai.sunnypilot.fold3.AndroidHardware")
+  thermal, was_paused = ThermalGate(), False
+  calibration, origins, calibration_blocker = {}, {}, "Measured optical and final mount calibration missing"
   sensors = ("1",) if driver else ("0", "2")
   types = (VisionStreamType.VISION_STREAM_CABIN,) if driver else (VisionStreamType.VISION_STREAM_NARROW_ROAD, VisionStreamType.VISION_STREAM_WIDE_ROAD)
   clients = {sensor: VisionIpcClient("camerad", stream, True) for sensor, stream in zip(sensors, types, strict=True)}
   gate = FrameGate(sensors)
   model, warps, inputs = None, {}, {}
   count, published, late, resets, nonfinite = 0, 0, 0, 0, 0
+  numerical_fault = False
   last_inference, last_retry, last_started = 0, 0, 0
   stages = {name: deque(maxlen=4096) for name in ("input_age", "prepare", "inference", "output_age")}
   pm = messaging.PubMaster(["driverStateV2"] if driver else ["modelV2", "cameraOdometry"])
@@ -156,6 +241,31 @@ def run(report, driver=False):
     from openpilot.selfdrive.modeld.fill_model_msg import PublishState, fill_model_msg, fill_pose_msg
     parser, publish_state = Parser(), PublishState()
   while True:
+    status = int(hardware.thermalStatus())
+    if thermal.update(status, time.monotonic_ns()):
+      if not was_paused:
+        gate = FrameGate(sensors)
+        for key, value in inputs.items():
+          if key.startswith("state_"):
+            value.fill(0)
+        resets += 1
+        last_inference = 0
+      was_paused = True
+      report.update("thermal_paused", thermal_status=status, target_hz=20, target_suspended=True,
+                    valid=False, calibrated=False, computed_frames=count, recurrent_resets=resets,
+                    blocker="Bench inference paused at Android MODERATE; requires ten cool seconds before resuming")
+      time.sleep(.25)
+      continue
+    was_paused = False
+    report.data.update(thermal_status=status, target_suspended=False)
+    if numerical_fault:
+      # A non-finite prediction cannot become a usable input by spending more
+      # CPU on the same unqualified backend. Preserve the fault until restart.
+      report.update("blocked_numerical_fault", valid=False, calibrated=False, computed_frames=count,
+                    published_frames=published, nonfinite_outputs=nonfinite, numerical_fault_latched=True,
+                    blocker="Non-finite model output; inference stopped until the worker is restarted")
+      time.sleep(.25)
+      continue
     delay = inference_delay_ns(last_started, time.monotonic_ns())
     if delay:
       time.sleep(delay / 1e9)
@@ -171,6 +281,7 @@ def run(report, driver=False):
                     blocker="Distinct narrow and wide rear streams are required" if not driver else "Driver camera unavailable")
       time.sleep(.02)
       continue
+    report.data["missing_physical_sensors"] = []
     for sensor, client in clients.items():
       frame = client.recv(timeout_ms=0)
       if frame is None:
@@ -187,6 +298,18 @@ def run(report, driver=False):
       continue
     if model is None:
       report.update("initializing_diagnostic_model")
+      try:
+        sources = json.loads((report.path.parent / "vision-sources.json").read_text())
+        origins = sources["stream_origins"]
+        report.data["stream_origins"] = origins
+      except (OSError, KeyError, ValueError):
+        origins = {}
+      if not driver:
+        try:
+          calibration = load_road_calibration(report.path.parent / "camera-calibration.json", origins)
+          calibration_blocker = "Measured geometry loaded; numerical parity, stream identity and timing still unqualified"
+        except (OSError, KeyError, ValueError) as exc:
+          calibration_blocker = str(exc)
       path, metadata = model_asset("dmonitoring_model" if driver else "driving_supercombo")
       model = OrtModel(path, "cpu", threads=2)
       inputs = {key: np.zeros(shape, dtype=metadata["input_dtypes"][key]) for key, shape in metadata["inputs"].items()}
@@ -210,7 +333,9 @@ def run(report, driver=False):
       key = (sensor, width, height, stride, uv_offset)
       if key not in warps:
         warps = {k: v for k, v in warps.items() if k[0] != sensor}
-        warps[key] = DiagnosticWarp(width, height, stride, uv_offset, 1440 if driver else 512, 960 if driver else 256, luma=driver)
+        warps[key] = (RoadWarp(width, height, stride, uv_offset, calibration[sensor], wide=sensor == "2")
+                      if calibration and not driver else
+                      DiagnosticWarp(width, height, stride, uv_offset, 1440 if driver else 512, 960 if driver else 256, luma=driver))
       prepared = warps[key](data)
       if driver:
         inputs["input_img"][:] = prepared
@@ -237,6 +362,7 @@ def run(report, driver=False):
     if not finite:
       nonfinite += 1
       resets += 1
+      numerical_fault = True
     elif stale:
       late += 1
     elif driver:
@@ -260,6 +386,10 @@ def run(report, driver=False):
       report.data["stage_p99_ms"] = {key: float(np.percentile(values, 99)) / 1e6 for key, values in stages.items()}
     report.update("running", valid=False, calibrated=False, computed_frames=count, published_frames=published,
                   rejected_frames=gate.rejected, late_outputs=late, nonfinite_outputs=nonfinite, recurrent_resets=resets, work_ms=elapsed / 1e6,
-                  projection="uncalibrated preview affine; not suitable for driving", backend="ORT CPU, 2 threads",
+                  projection="measured narrow/large model geometry" if calibration else "uncalibrated preview affine; not suitable for driving",
+                  backend="ORT CPU, 2 threads",
+                  measured_projection_loaded=bool(calibration), calibration_blocker=calibration_blocker,
+                  input_frame_ids={sensor: value[1][0] for sensor, value in pair.items()},
+                  input_timestamps_ns={sensor: value[0] for sensor, value in pair.items()}, input_skew_ns=newest - oldest,
                   numerical_parity="failed on original synthetic reference; diagnostic only", target_hz=20,
                   stage_sampling="last 4096 computations")

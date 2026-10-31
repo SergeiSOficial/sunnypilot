@@ -1,0 +1,66 @@
+
+ai.sunnypilot.fold3.CameraPreviewSampleTest:..
+ai.sunnypilot.fold3.LifecycleTest:
+Error in activitySurvivesRecreation(ai.sunnypilot.fold3.LifecycleTest):
+java.lang.AssertionError: Activity never becomes requested state "[RESUMED]" (last lifecycle transition = "STOPPED")
+	at androidx.test.core.app.ActivityScenario.waitForActivityToBecomeAnyOf(ActivityScenario.java:454)
+	at androidx.test.core.app.ActivityScenario.moveToState(ActivityScenario.java:689)
+	at androidx.test.core.app.ActivityScenario.recreate(ActivityScenario.java:718)
+	at ai.sunnypilot.fold3.LifecycleTest.activitySurvivesRecreation(LifecycleTest.java:13)
+
+ai.sunnypilot.fold3.NativeBridgeTest:.......
+ai.sunnypilot.fold3.PerceptionTest:.....
+ai.sunnypilot.fold3.RuntimeTest:.
+ai.sunnypilot.fold3.SupervisorTest:INSTRUMENTATION_RESULT: shortMsg=Process crashed.
+INSTRUMENTATION_CODE: 0
+{
+  "serial": "RFCR81Y1TBJ",
+  "command": [
+    "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+    "-s",
+    "RFCR81Y1TBJ",
+    "shell",
+    "am",
+    "instrument",
+    "-w",
+    "com.samsung.sunnypilot.fold3.test/androidx.test.runner.AndroidJUnitRunner"
+  ],
+  "vehicle_tx_enabled": false,
+  "status": "passed",
+  "before_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 25.0,
+    "thermal_override": false
+  },
+  "apk_sha256": "2d2a03f05c7151cfe6277e92c2de642ef9d7b38384cb821c97732d78351082ef",
+  "baseline": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 25.1,
+    "thermal_override": false,
+    "idle_seconds": 32.371405124999
+  },
+  "returncode": 0,
+  "after_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 25.8,
+    "thermal_override": false
+  }
+}

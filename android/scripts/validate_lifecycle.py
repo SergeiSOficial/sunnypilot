@@ -11,15 +11,17 @@ import uuid
 import numpy as np
 from PIL import Image
 
+from experiment import PACKAGE, CAMERA_COMPAT_PACKAGE
 
-def validate(serial, adb, resize, report_path):
+
+def validate(serial, adb, resize, report_path, package=PACKAGE):
   if resize and not serial.startswith("emulator-"):
     raise ValueError("display overrides are restricted to the dedicated emulator")
   def command(*args):
     return subprocess.check_output([adb, "-s", serial, *args], text=True, timeout=30)
   def snapshot():
     def read(name):
-      return json.loads(command("shell", "run-as", "ai.sunnypilot.fold3", "cat", f"files/{name}.json"))
+      return json.loads(command("shell", "run-as", package, "cat", f"files/{name}.json"))
     return {"ui": read("ui-report"), "manager": read("manager")}
   def visible_banner():
     # Samsung screencap may prepend a display-selection warning to stdout.
@@ -59,7 +61,7 @@ def validate(serial, adb, resize, report_path):
           return current
       time.sleep(.25)
     raise TimeoutError("Raylib did not resume visible frame delivery with its TX-disabled banner")
-  report = {"serial": serial, "vehicle_tx_enabled": False, "physical_fold_transition_verified": False,
+  report = {"serial": serial, "package": package, "vehicle_tx_enabled": False, "physical_fold_transition_verified": False,
             "status": "starting", "display_override_test": resize}
   restore = None
   try:
@@ -69,7 +71,7 @@ def validate(serial, adb, resize, report_path):
       # Workers change their process title; Android's pidof no longer matches
       # the package name. ps NAME retains the original Android process name.
       live_ui_pids = [line.split()[0] for line in command("shell", "ps", "-A", "-o", "PID,NAME").splitlines()
-                     if line.split()[-1] == "ai.sunnypilot.fold3:ui"]
+                     if line.split()[-1] == package + ":ui"]
       live_ui_pid = live_ui_pids[0] if live_ui_pids else ""
       if first["ui"].get("status") == "running" and str(first["ui"].get("pid")) == live_ui_pid:
         first["visible_rendering"] = visible_banner()
@@ -82,7 +84,7 @@ def validate(serial, adb, resize, report_path):
     command("shell", "input", "keyevent", "KEYCODE_HOME")
     time.sleep(2)
     report["background"] = snapshot()
-    command("shell", "am", "start", "-n", "ai.sunnypilot.fold3/.MainActivity", "--ez", "raylib", "true")
+    command("shell", "am", "start", "-n", package + "/ai.sunnypilot.fold3.MainActivity", "--ez", "raylib", "true")
     report["resumed"] = wait_for_frames(report["background"])
     if resize:
       size = command("shell", "wm", "size")
@@ -97,7 +99,7 @@ def validate(serial, adb, resize, report_path):
     previous = report.get("restored", report["resumed"])
     command("shell", "input", "keyevent", "KEYCODE_BACK")
     time.sleep(2)
-    command("shell", "am", "start", "-n", "ai.sunnypilot.fold3/.MainActivity", "--ez", "raylib", "true",
+    command("shell", "am", "start", "-n", package + "/ai.sunnypilot.fold3.MainActivity", "--ez", "raylib", "true",
             "--ez", "simulation", str(previous["manager"]["simulation"]).lower())
     report["renderer_recreated"] = wait_for_frames(previous, new_renderer=True)
     report["status"] = "passed"
@@ -114,9 +116,10 @@ if __name__ == "__main__":
   parser = argparse.ArgumentParser(description=__doc__)
   parser.add_argument("--serial", required=True)
   parser.add_argument("--adb", default="adb")
+  parser.add_argument("--package", choices=(PACKAGE, CAMERA_COMPAT_PACKAGE), default=PACKAGE)
   parser.add_argument("--resize", action="store_true")
   parser.add_argument("--report", default="android-lifecycle.json")
   args = parser.parse_args()
-  result = validate(args.serial, args.adb, args.resize, args.report)
+  result = validate(args.serial, args.adb, args.resize, args.report, args.package)
   print(json.dumps(result, indent=2))
   raise SystemExit(0 if result["status"] == "passed" else 1)

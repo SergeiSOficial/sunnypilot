@@ -12,6 +12,33 @@ Independent wide/ultrawide images suitable for the driving models remain
 unqualified; HAL activation and composite thumbnails alone cannot qualify
 separate calibrated driving inputs. Transmission remains disabled.
 
+The [current rear-pipeline bench run](reports/rear-pipeline/README.md) continuously
+bridges the selected GL preview, multiview thumbnail and front YUV into
+VisionIPC. In the initial 60-second trial, the rear candidates each delivered
+1,798 frames and the front delivered 1,800, with zero recoveries or provider
+restarts. The original road model received synchronized rear pairs, but its
+outputs were non-finite and remain invalid. The rear physical-result map was
+empty; timestamp overlap and changing buffers do not establish separate sensors.
+This is a transport implementation, not independent-camera qualification.
+
+The final compatibility APK's [30-minute capture](reports/rear-pipeline/fold3-final-soak-summary.json)
+also passed transport with zero recoveries: 54,006 rear-preview, 53,824 thumbnail
+and 53,738 front frames, with a 29.94 fps UI. Provider PIDs stayed unchanged and
+all app/camera clients exited. Physical rear identities remained unproven, and
+sustained inference failed: Android reached SEVERE (44.6°C sampled skin), with
+model workers paused after 4:09. No calibrated driving inputs are claimed.
+
+`fold3_vision.RoadWarp` supports measured delivered-image intrinsics, five
+OpenCV Brown distortion coefficients and per-camera device-from-calibration
+Euler angles, using the pinned narrow/large model projections. An optional
+private `files/camera-calibration.json` must have schema version 1, mount status
+`measured`, cameras `0`/`2`, distinct `physical_sensor_id`, exact `stream_origin`,
+nonempty `measurement_evidence`, `image_size`, a 3×3 `intrinsics` matrix,
+`opencv_distortion` and `device_from_calib_euler`. Unverified stream origins
+cannot load measured calibration. The phone is not mounted, so no such measured
+file has been created; live preprocessing remains an explicitly invalid bench
+affine projection. Driver calibration is also unqualified.
+
 Build with `-Pfold3CameraCompat=true`; see [README.md](README.md). The separate
 package `com.samsung.sunnypilot.fold3` uses this firmware's camera package-prefix
 allowlist without replacing a Samsung application, rooting the phone, changing
@@ -24,12 +51,13 @@ output and a 960x540 YUV callback, with Samsung shooting mode 37 and output
 options 1 / 0x41 / 1. It opens rear and front before configuring either session,
 drains every output, closes devices and callbacks before releasing the camera
 ownership lock, and never publishes the composite as calibrated VisionIPC.
-The rear opaque preview is drained on its own EGL thread. One preview PNG and
-one thumbnail NV12 sample retain sensor timestamps for comparison. The preview
-uses its SurfaceTexture transform; an instrumentation test checks actual pixels
-and orientation. This one-image readback is not a continuous preview-to-NV12
-driving pipeline. [Current results and limits](reports/camera-compat/README.md)
-separate transport success from the remaining physical-image qualification.
+The rear opaque preview is drained on its own EGL thread and uses its
+SurfaceTexture transform; instrumentation checks actual pixels, orientation
+and continuous NV12 output. Standalone diagnostics can save one preview PNG
+and one thumbnail NV12 with timestamps. Live VisionIPC mode instead uses
+reusable buffers and saves no images. [Current results and limits](reports/rear-pipeline/README.md)
+separate continuous transport from physical-image qualification; the earlier
+[one-sample diagnostic](reports/camera-compat/README.md) retains its own evidence.
 Mode 32 or ordinary physical-camera outputs can crash this phone's provider;
 retained targeted failures are under [camera-compat](reports/camera-compat/).
 Hidden cameras are therefore excluded from the automatic session matrix.

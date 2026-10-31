@@ -1,0 +1,176 @@
+{
+  "serial": "emulator-5560",
+  "status": "failed",
+  "requested_seconds": 15,
+  "vehicle_tx_enabled": false,
+  "road_readiness": "blocked",
+  "calibration": "unqualified",
+  "model_parity": "failed",
+  "physical_vehicle_verified": false,
+  "package": "com.samsung.sunnypilot.fold3",
+  "samsung_multiview": false,
+  "resource_sampling_seconds": 30,
+  "last_sample": {
+    "elapsed_s": 3.5621612919931067,
+    "ui-report": {
+      "pid": 8061,
+      "backend": "Raylib Android NativeActivity",
+      "vehicle_tx_enabled": false,
+      "status": "starting",
+      "full_upstream_ui": true
+    },
+    "manager": {
+      "pid": 8060,
+      "simulation": false,
+      "vehicle_tx_enabled": false,
+      "engagement_allowed": false,
+      "engagement_blocker": "camera calibration, model parity/performance and physical Panda qualification incomplete",
+      "processes": {
+        "Controls": {
+          "daemon": "controlsd",
+          "pid": 8116,
+          "phase": "starting",
+          "error": "",
+          "last_progress_ms": 1478261,
+          "ticks": 1,
+          "restarts": 0
+        },
+        "Monitoring": {
+          "daemon": "dmonitoringd",
+          "pid": 8117,
+          "phase": "importing",
+          "error": "",
+          "last_progress_ms": 1479023,
+          "ticks": 2,
+          "restarts": 0
+        },
+        "Sensors": {
+          "daemon": "sensord",
+          "pid": 8118,
+          "phase": "starting",
+          "error": "",
+          "last_progress_ms": 1478654,
+          "ticks": 1,
+          "restarts": 0
+        },
+        "RoadModel": {
+          "daemon": "modeld",
+          "pid": 8119,
+          "phase": "starting",
+          "error": "",
+          "last_progress_ms": 1478663,
+          "ticks": 1,
+          "restarts": 0
+        },
+        "DriverModel": {
+          "daemon": "dmonitoringmodeld",
+          "pid": 8120,
+          "phase": "starting",
+          "error": "",
+          "last_progress_ms": 1478661,
+          "ticks": 1,
+          "restarts": 0
+        }
+      },
+      "updated_elapsed_ms": 1479729
+    },
+    "dmonitoringmodeld": {
+      "daemon": "dmonitoringmodeld",
+      "pid": 7801,
+      "vehicle_tx_enabled": false,
+      "engagement_allowed": false,
+      "work_samples": 0,
+      "deadline_misses": 0,
+      "phase": "importing",
+      "simulation": false
+    },
+    "modeld": {
+      "daemon": "modeld",
+      "pid": 7521,
+      "vehicle_tx_enabled": false,
+      "engagement_allowed": false,
+      "work_samples": 0,
+      "deadline_misses": 0,
+      "phase": "thermal_paused",
+      "simulation": false,
+      "thermal_status": 4,
+      "target_hz": 20,
+      "target_suspended": true,
+      "valid": false,
+      "calibrated": false,
+      "computed_frames": 0,
+      "recurrent_resets": 1,
+      "blocker": "Bench inference paused at Android MODERATE; requires ten cool seconds before resuming"
+    },
+    "sensord": {
+      "daemon": "sensord",
+      "pid": 7520,
+      "vehicle_tx_enabled": false,
+      "engagement_allowed": false,
+      "work_samples": 0,
+      "deadline_misses": 0,
+      "phase": "running",
+      "simulation": false,
+      "published_samples": 251,
+      "dropped_samples": 0,
+      "stale_samples": 0,
+      "calibrated": false,
+      "validity_blocker": "phone-to-vehicle mounting rotation has not been calibrated",
+      "thermal_status": 4,
+      "power_watts": -4.5
+    },
+    "vision-report": {
+      "vehicle_tx_enabled": false,
+      "valid": false,
+      "sessions": [
+        {
+          "camera_ids": [
+            "0",
+            "1"
+          ],
+          "width": 1280,
+          "height": 720,
+          "logical_camera": null,
+          "requested_duration_ms": 14837,
+          "startup_order": "open_all_then_configure",
+          "opened_camera_ids": [],
+          "image_callbacks_drained": true,
+          "camera_close_callbacks_complete": true,
+          "request_template": "record",
+          "stabilization": "disabled when advertised",
+          "sensor_pairs": [],
+          "streams": [],
+          "elapsed_ms": 5,
+          "completed_requested_duration": false,
+          "status": "failed",
+          "error": "IllegalStateException: critical_thermal_status:4"
+        }
+      ],
+      "requested_seconds": 15,
+      "recovery_limit": 3,
+      "started_utc": "2026-10-31T16:20:57.312607Z",
+      "dual_rear": "not requested",
+      "backend": "camera2",
+      "status": "failed",
+      "recoveries": 0,
+      "thermal_status": 4,
+      "transport_status": "failed",
+      "completed_utc": "2026-10-31T16:20:57.503529Z"
+    }
+  },
+  "error": "AssertionError: Camera capture failed; recoveries=0; errors=['IllegalStateException: critical_thermal_status:4']",
+  "elapsed_s": 4.008632875003968,
+  "panda_receive_only": {},
+  "cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "348 android.hardware.camera.provider.ranchu",
+      "349 android.hardware.camera.provider@2.7-service-google",
+      "435 cameraserver"
+    ],
+    "camera_owned": false,
+    "thermal_status": 4,
+    "skin_c": 30.8,
+    "thermal_override": true
+  }
+}

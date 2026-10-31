@@ -1,0 +1,490 @@
+{
+  "backend": "ONNX Runtime 1.31.1 cpu",
+  "precision": "FP32 diagnostic promotion",
+  "started_utc": 1793462895.438105,
+  "vehicle_tx_enabled": false,
+  "threads": 2,
+  "spinning": false,
+  "graph_optimizations": "default",
+  "compiled_host_fallback": false,
+  "optional_sme_sve_kernels": false,
+  "synthetic_only": true,
+  "replay_validation": "blocked: synthetic cases only",
+  "host_reference": {
+    "onnxruntime": "1.31.1",
+    "numpy": "2.5.3",
+    "seed": 42,
+    "precision": "fp32 promotion",
+    "models": {
+      "dmonitoring_model": {
+        "sha256": "57132a022d470ec9d94e8d58e89e3209eb501f1fd99b0ef9b11e1c77f15922c4",
+        "inputs": {
+          "input_img": [
+            1,
+            1382400
+          ],
+          "calib": [
+            1,
+            3
+          ]
+        },
+        "outputs": {
+          "outputs": [
+            1,
+            553
+          ]
+        },
+        "output_slices": {
+          "face_descs_lhd": [
+            0,
+            12,
+            null
+          ],
+          "face_prob_lhd": [
+            12,
+            13,
+            null
+          ],
+          "left_eye_prob_lhd": [
+            13,
+            14,
+            null
+          ],
+          "right_eye_prob_lhd": [
+            14,
+            15,
+            null
+          ],
+          "sunglasses_prob_lhd": [
+            15,
+            16,
+            null
+          ],
+          "left_blink_prob_lhd": [
+            16,
+            17,
+            null
+          ],
+          "right_blink_prob_lhd": [
+            17,
+            18,
+            null
+          ],
+          "using_phone_prob_lhd": [
+            18,
+            19,
+            null
+          ],
+          "sleep_prob_lhd": [
+            19,
+            20,
+            null
+          ],
+          "face_descs_rhd": [
+            20,
+            32,
+            null
+          ],
+          "face_prob_rhd": [
+            32,
+            33,
+            null
+          ],
+          "left_eye_prob_rhd": [
+            33,
+            34,
+            null
+          ],
+          "right_eye_prob_rhd": [
+            34,
+            35,
+            null
+          ],
+          "sunglasses_prob_rhd": [
+            35,
+            36,
+            null
+          ],
+          "left_blink_prob_rhd": [
+            36,
+            37,
+            null
+          ],
+          "right_blink_prob_rhd": [
+            37,
+            38,
+            null
+          ],
+          "using_phone_prob_rhd": [
+            38,
+            39,
+            null
+          ],
+          "sleep_prob_rhd": [
+            39,
+            40,
+            null
+          ],
+          "wheel_on_right": [
+            40,
+            41,
+            null
+          ],
+          "features": [
+            41,
+            553,
+            null
+          ]
+        },
+        "input_dtypes": {
+          "input_img": "uint8",
+          "calib": "float32"
+        },
+        "additional_validation_seeds": [
+          7,
+          123
+        ],
+        "original_sha256": "dee5a294e8afaacc9295ac5d100e00733ecac278e79264b96331e40a3ede1b04",
+        "promotion_max_abs_difference": {
+          "outputs": 0.007000088691711426
+        }
+      },
+      "driving_supercombo": {
+        "sha256": "fa07c7abecc7d662ec37d284fb5f862d6910aaa006137b3da88836dc8647e549",
+        "inputs": {
+          "new_img": [
+            2,
+            6,
+            128,
+            256
+          ],
+          "desire": [
+            8
+          ],
+          "traffic_convention": [
+            1,
+            2
+          ],
+          "action_t": [
+            1,
+            2
+          ],
+          "state_img_q": [
+            2,
+            5,
+            6,
+            128,
+            256
+          ],
+          "state_desire_q": [
+            100,
+            1,
+            8
+          ],
+          "state_feat_q": [
+            96,
+            1,
+            512
+          ]
+        },
+        "outputs": {
+          "outputs": [
+            1,
+            2576
+          ],
+          "next_state_img_q": [
+            2,
+            5,
+            6,
+            128,
+            256
+          ],
+          "next_state_desire_q": [
+            100,
+            1,
+            8
+          ],
+          "next_state_feat_q": [
+            96,
+            1,
+            512
+          ]
+        },
+        "output_slices": {
+          "meta": [
+            0,
+            55,
+            null
+          ],
+          "desire_pred": [
+            55,
+            87,
+            null
+          ],
+          "pose": [
+            87,
+            99,
+            null
+          ],
+          "wide_from_device_euler": [
+            99,
+            105,
+            null
+          ],
+          "road_transform": [
+            105,
+            117,
+            null
+          ],
+          "lane_lines": [
+            117,
+            645,
+            null
+          ],
+          "lane_lines_prob": [
+            645,
+            653,
+            null
+          ],
+          "road_edges": [
+            653,
+            917,
+            null
+          ],
+          "lead": [
+            917,
+            1061,
+            null
+          ],
+          "lead_prob": [
+            1061,
+            1064,
+            null
+          ],
+          "hidden_state": [
+            1064,
+            1576,
+            null
+          ],
+          "plan": [
+            1576,
+            2566,
+            null
+          ],
+          "desire_state": [
+            2566,
+            2574,
+            null
+          ],
+          "pad": [
+            -2,
+            null,
+            null
+          ]
+        },
+        "input_dtypes": {
+          "new_img": "uint8",
+          "desire": "float32",
+          "traffic_convention": "float32",
+          "action_t": "float32",
+          "state_img_q": "uint8",
+          "state_desire_q": "float32",
+          "state_feat_q": "float32"
+        },
+        "additional_validation_seeds": [
+          7,
+          123
+        ],
+        "original_sha256": "65a08adc31d5c456219687d99b7bf5e44d61dae2d49ea67850e76105c7248cce",
+        "promotion_max_abs_difference": {
+          "outputs": 0.296173095703125,
+          "next_state_img_q": 0.0,
+          "next_state_desire_q": 0.0,
+          "next_state_feat_q": 0.0004819817841053009
+        }
+      }
+    }
+  },
+  "models": {
+    "dmonitoring_model": {
+      "status": "failed",
+      "initialization_ms": 136.127656,
+      "parity": {
+        "outputs": {
+          "passed": true,
+          "max_abs_error": 9.5367431640625e-06
+        }
+      },
+      "additional_cases": {
+        "7": {
+          "outputs": {
+            "passed": true,
+            "max_abs_error": 1.71661376953125e-05
+          }
+        },
+        "123": {
+          "outputs": {
+            "passed": true,
+            "max_abs_error": 7.331371307373047e-06
+          }
+        }
+      },
+      "backend_parity_status": "passed",
+      "original_model_parity": {
+        "seed42": {
+          "outputs": {
+            "passed": false,
+            "max_abs_error": 0.006993651390075684
+          }
+        },
+        "-case-7": {
+          "outputs": {
+            "passed": false,
+            "max_abs_error": 0.009435176849365234
+          }
+        },
+        "-case-123": {
+          "outputs": {
+            "passed": false,
+            "max_abs_error": 0.005610466003417969
+          }
+        }
+      },
+      "samples": 100,
+      "work_p50_ms": 34.208098500000006,
+      "work_p99_ms": 38.0119491,
+      "work_max_ms": 39.297969,
+      "deadline_misses_50ms": 0,
+      "process_cpu_ms": 5778.541496,
+      "timed_wall_ms": 5079.619581,
+      "performance_status": "passed"
+    },
+    "driving_supercombo": {
+      "status": "failed",
+      "initialization_ms": 331.978177,
+      "parity": {
+        "outputs": {
+          "passed": true,
+          "max_abs_error": 5.9604644775390625e-05
+        },
+        "next_state_img_q": {
+          "passed": true,
+          "max_abs_error": 0.0
+        },
+        "next_state_desire_q": {
+          "passed": true,
+          "max_abs_error": 0.0
+        },
+        "next_state_feat_q": {
+          "passed": true,
+          "max_abs_error": 3.3155083656311035e-07
+        }
+      },
+      "additional_cases": {
+        "7": {
+          "outputs": {
+            "passed": true,
+            "max_abs_error": 0.0003757476806640625
+          },
+          "next_state_img_q": {
+            "passed": true,
+            "max_abs_error": 0.0
+          },
+          "next_state_desire_q": {
+            "passed": true,
+            "max_abs_error": 0.0
+          },
+          "next_state_feat_q": {
+            "passed": true,
+            "max_abs_error": 3.948807716369629e-07
+          }
+        },
+        "123": {
+          "outputs": {
+            "passed": true,
+            "max_abs_error": 0.000152587890625
+          },
+          "next_state_img_q": {
+            "passed": true,
+            "max_abs_error": 0.0
+          },
+          "next_state_desire_q": {
+            "passed": true,
+            "max_abs_error": 0.0
+          },
+          "next_state_feat_q": {
+            "passed": true,
+            "max_abs_error": 4.507601261138916e-07
+          }
+        }
+      },
+      "backend_parity_status": "passed",
+      "original_model_parity": {
+        "seed42": {
+          "outputs": {
+            "passed": false,
+            "max_abs_error": 0.2961282730102539
+          },
+          "next_state_img_q": {
+            "passed": true,
+            "max_abs_error": 0.0
+          },
+          "next_state_desire_q": {
+            "passed": true,
+            "max_abs_error": 0.0
+          },
+          "next_state_feat_q": {
+            "passed": false,
+            "max_abs_error": 0.0004821084439754486
+          }
+        },
+        "-case-7": {
+          "outputs": {
+            "passed": false,
+            "max_abs_error": 0.27457427978515625
+          },
+          "next_state_img_q": {
+            "passed": true,
+            "max_abs_error": 0.0
+          },
+          "next_state_desire_q": {
+            "passed": true,
+            "max_abs_error": 0.0
+          },
+          "next_state_feat_q": {
+            "passed": false,
+            "max_abs_error": 0.0005749091506004333
+          }
+        },
+        "-case-123": {
+          "outputs": {
+            "passed": false,
+            "max_abs_error": 0.15125274658203125
+          },
+          "next_state_img_q": {
+            "passed": true,
+            "max_abs_error": 0.0
+          },
+          "next_state_desire_q": {
+            "passed": true,
+            "max_abs_error": 0.0
+          },
+          "next_state_feat_q": {
+            "passed": false,
+            "max_abs_error": 0.000468316487967968
+          }
+        }
+      },
+      "samples": 100,
+      "work_p50_ms": 41.476563,
+      "work_p99_ms": 46.982934900000004,
+      "work_max_ms": 47.087865,
+      "deadline_misses_50ms": 0,
+      "process_cpu_ms": 7954.070946,
+      "timed_wall_ms": 5055.44729,
+      "performance_status": "passed"
+    }
+  },
+  "completed_utc": 1793462907.265133,
+  "validation_status": "failed"
+}

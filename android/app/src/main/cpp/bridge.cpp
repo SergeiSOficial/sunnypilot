@@ -8,6 +8,33 @@
 #include <vector>
 
 extern "C" JNIEXPORT jlong JNICALL
+Java_ai_sunnypilot_fold3_NativeBridge_rgbaToNv12(JNIEnv *env, jclass, jobject rgba, jint w, jint h, jobject output) {
+  auto *src = rgba ? static_cast<uint8_t *>(env->GetDirectBufferAddress(rgba)) : nullptr;
+  auto *dst = output ? static_cast<uint8_t *>(env->GetDirectBufferAddress(output)) : nullptr;
+  if (!src || !dst || src == dst || w <= 0 || h <= 0 || w > 4096 || h > 4096 || ((w | h) & 1) ||
+      env->GetDirectBufferCapacity(rgba) < static_cast<int64_t>(w) * h * 4 ||
+      env->GetDirectBufferCapacity(output) < static_cast<int64_t>(w) * h * 3 / 2) {
+    env->ThrowNew(env->FindClass("java/lang/IllegalArgumentException"), "Invalid RGBA/NV12 dimensions or buffer");
+    return 0;
+  }
+  for (int y = 0; y < h; y += 2) for (int x = 0; x < w; x += 2) {
+    int r = 0, g = 0, b = 0;
+    for (int dy = 0; dy < 2; ++dy) for (int dx = 0; dx < 2; ++dx) {
+      const uint8_t *p = src + ((h - 1 - y - dy) * w + x + dx) * 4;
+      dst[(y + dy) * w + x + dx] = ((66 * p[0] + 129 * p[1] + 25 * p[2] + 128) >> 8) + 16;
+      r += p[0]; g += p[1]; b += p[2];
+    }
+    r = (r + 2) / 4; g = (g + 2) / 4; b = (b + 2) / 4;
+    size_t uv = w * h + (y / 2) * w + x;
+    dst[uv] = std::clamp(((-38 * r - 74 * g + 112 * b + 128) >> 8) + 128, 0, 255);
+    dst[uv + 1] = std::clamp(((112 * r - 94 * g - 18 * b + 128) >> 8) + 128, 0, 255);
+  }
+  uint64_t hash = 1469598103934665603ULL;
+  for (int64_t i = 0; i < static_cast<int64_t>(w) * h; i += 64) hash = (hash ^ dst[i]) * 1099511628211ULL;
+  return static_cast<jlong>(hash);
+}
+
+extern "C" JNIEXPORT jlong JNICALL
 Java_ai_sunnypilot_fold3_NativeBridge_packNv12(JNIEnv *env, jclass, jobject y, jint yr, jint yp,
     jobject u, jint ur, jint up, jobject v, jint vr, jint vp, jint w, jint h, jobject output) {
   auto valid = [&](jobject b, int row, int pixel, int width, int height) {
