@@ -7,10 +7,11 @@
   "calibration": "unqualified",
   "model_parity": "failed",
   "physical_vehicle_verified": false,
+  "resource_sampling_seconds": 30,
   "last_sample": {
-    "elapsed_s": 3.4085695419926196,
+    "elapsed_s": 5.598831999988761,
     "ui-report": {
-      "pid": 12652,
+      "pid": 13044,
       "backend": "Raylib Android NativeActivity",
       "vehicle_tx_enabled": false,
       "status": "running",
@@ -19,18 +20,18 @@
         {
           "stream": "road",
           "frame_id": 0,
-          "age_ms": 3876685.016514,
+          "age_ms": 3684631.031589,
           "fresh": false
         },
         {
           "stream": "driver",
           "frame_id": 0,
-          "age_ms": 3876685.018722,
+          "age_ms": 3684631.037089,
           "fresh": false
         }
       ],
       "frames": 1,
-      "mean_fps": 0.9552167708188769,
+      "mean_fps": 0.8009030983337684,
       "width": 2160,
       "height": 1080,
       "surface_size": [
@@ -38,12 +39,12 @@
         1440
       ],
       "last_frame_seconds": 0.0,
-      "last_cpu_seconds": 0.052488791000087076,
+      "last_cpu_seconds": 0.09164925000004587,
       "recent_p99_frame_ms": 0.0,
-      "recent_p99_cpu_ms": 52.488791000087076
+      "recent_p99_cpu_ms": 91.64925000004587
     },
     "manager": {
-      "pid": 12646,
+      "pid": 13043,
       "simulation": false,
       "vehicle_tx_enabled": false,
       "engagement_allowed": false,
@@ -51,55 +52,86 @@
       "processes": {
         "Controls": {
           "daemon": "controlsd",
-          "pid": 12713,
+          "pid": 13074,
           "phase": "importing",
           "error": "",
-          "last_progress_ms": 3876258,
+          "last_progress_ms": 3683890,
           "ticks": 2,
           "restarts": 0
         },
         "Monitoring": {
           "daemon": "dmonitoringd",
-          "pid": 12715,
+          "pid": 13084,
           "phase": "importing",
           "error": "",
-          "last_progress_ms": 3875522,
+          "last_progress_ms": 3682962,
           "ticks": 2,
           "restarts": 0
         },
         "Sensors": {
           "daemon": "sensord",
-          "pid": 12717,
-          "phase": "waiting_for_imu",
+          "pid": 13097,
+          "phase": "starting",
           "error": "",
-          "last_progress_ms": 3876952,
-          "ticks": 3,
+          "last_progress_ms": 3682222,
+          "ticks": 1,
           "restarts": 0
         },
         "RoadModel": {
           "daemon": "modeld",
-          "pid": 12748,
+          "pid": 13099,
           "phase": "starting",
           "error": "",
-          "last_progress_ms": 3875100,
+          "last_progress_ms": 3682239,
           "ticks": 1,
           "restarts": 0
         },
         "DriverModel": {
           "daemon": "dmonitoringmodeld",
-          "pid": 12751,
+          "pid": 13125,
           "phase": "starting",
           "error": "",
-          "last_progress_ms": 3875100,
+          "last_progress_ms": 3682250,
           "ticks": 1,
           "restarts": 0
         }
       },
-      "updated_elapsed_ms": 3876955
+      "updated_elapsed_ms": 3684836
     },
     "dmonitoringmodeld": {
       "daemon": "dmonitoringmodeld",
-      "pid": 12491,
+      "pid": 11828,
+      "vehicle_tx_enabled": false,
+      "engagement_allowed": false,
+      "work_samples": 23,
+      "deadline_misses": 23,
+      "phase": "waiting_for_synchronized_frames",
+      "simulation": false,
+      "rejected_frames": 123,
+      "computed_frames": 23,
+      "published_frames": 2,
+      "late_outputs": 21,
+      "valid": false,
+      "calibrated": false,
+      "stage_p99_ms": {
+        "input_age": 56.12472042999999,
+        "prepare": 44.509551929999986,
+        "inference": 560.9041745,
+        "output_age": 574.2471720699999
+      },
+      "nonfinite_outputs": 0,
+      "recurrent_resets": 22,
+      "work_ms": 317.883834,
+      "projection": "uncalibrated preview affine; not suitable for driving",
+      "backend": "ORT CPU, 2 threads",
+      "numerical_parity": "failed on original synthetic reference; diagnostic only",
+      "target_hz": 20,
+      "stage_sampling": "last 4096 computations",
+      "p99_work_ms": 567.558291
+    },
+    "modeld": {
+      "daemon": "modeld",
+      "pid": 11819,
       "vehicle_tx_enabled": false,
       "engagement_allowed": false,
       "work_samples": 0,
@@ -107,25 +139,15 @@
       "phase": "waiting_for_camera",
       "simulation": false,
       "missing_physical_sensors": [
-        "1"
+        "2"
       ],
       "calibrated": false,
       "valid": false,
-      "blocker": "Driver camera unavailable"
-    },
-    "modeld": {
-      "daemon": "modeld",
-      "pid": 12748,
-      "vehicle_tx_enabled": false,
-      "engagement_allowed": false,
-      "work_samples": 0,
-      "deadline_misses": 0,
-      "phase": "importing",
-      "simulation": false
+      "blocker": "Distinct narrow and wide rear streams are required"
     },
     "sensord": {
       "daemon": "sensord",
-      "pid": 12717,
+      "pid": 13097,
       "vehicle_tx_enabled": false,
       "engagement_allowed": false,
       "work_samples": 0,
@@ -145,9 +167,13 @@
           "width": 1280,
           "height": 720,
           "logical_camera": null,
-          "requested_duration_ms": 14990,
+          "requested_duration_ms": 14988,
+          "image_callbacks_drained": true,
+          "camera_close_callbacks_complete": true,
+          "request_template": "record",
+          "stabilization": "disabled when advertised",
           "streams": [],
-          "elapsed_ms": 67,
+          "elapsed_ms": 1,
           "completed_requested_duration": false,
           "status": "failed",
           "error": "IllegalStateException: critical_thermal_status:4"
@@ -155,20 +181,32 @@
       ],
       "requested_seconds": 15,
       "recovery_limit": 3,
-      "started_utc": "2026-10-31T11:25:53.275390Z",
+      "started_utc": "2026-10-31T13:25:02.894538Z",
       "dual_rear": "blocked: public Camera2 rejects wide plus ultrawide on the connected stock Fold 3",
       "status": "failed",
       "recoveries": 0,
       "thermal_status": 4,
-      "completed_utc": "2026-10-31T11:25:53.378043Z"
+      "completed_utc": "2026-10-31T13:25:02.912117Z"
     }
   },
   "error": "AssertionError: Camera capture failed; recoveries=0; errors=['IllegalStateException: critical_thermal_status:4']",
-  "elapsed_s": 3.6221341249911347,
+  "elapsed_s": 6.751079124995158,
   "panda_receive_only": {
     "status": "blocked",
     "error": "No application-visible Panda USB device",
-    "vehicle_tx_enabled": false
+    "vehicle_tx_enabled": false,
+    "updated_elapsed_ms": 3215035
   },
-  "cleanup": "Force-stopped the diagnostic application after validation failure"
+  "cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "349 android.hardware.camera.provider.ranchu",
+      "350 android.hardware.camera.provider@2.7-service-google",
+      "442 cameraserver"
+    ],
+    "camera_owned": false,
+    "thermal_status": 4,
+    "skin_c": 30.8,
+    "thermal_override": true
+  }
 }

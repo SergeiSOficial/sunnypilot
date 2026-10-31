@@ -1,0 +1,55 @@
+{
+  "serial": "emulator-5560",
+  "command": [
+    "/Users/sergios/sunnypilot/.venv/bin/python",
+    "android/scripts/validate_lifecycle.py",
+    "--serial",
+    "emulator-5560",
+    "--adb",
+    "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+    "--resize",
+    "--report",
+    "android/reports/emulator-final-wrapper-lifecycle.json"
+  ],
+  "vehicle_tx_enabled": false,
+  "status": "failed",
+  "before_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "351 android.hardware.camera.provider.ranchu",
+      "352 android.hardware.camera.provider@2.7-service-google",
+      "443 cameraserver"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.8,
+    "thermal_override": false
+  },
+  "apk_sha256": "e5347db807f6551886d7de706d6ebb939c51dcd25c5c0ade1cd57b7fb24941ee",
+  "baseline": {
+    "processes": [],
+    "camera_provider_processes": [
+      "351 android.hardware.camera.provider.ranchu",
+      "352 android.hardware.camera.provider@2.7-service-google",
+      "443 cameraserver"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.8,
+    "thermal_override": false,
+    "idle_seconds": 30.21819833299378
+  },
+  "error": "TimeoutError: Fresh runtime and Raylib UI did not become ready",
+  "after_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "351 android.hardware.camera.provider.ranchu",
+      "352 android.hardware.camera.provider@2.7-service-google",
+      "443 cameraserver"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.8,
+    "thermal_override": false
+  }
+}

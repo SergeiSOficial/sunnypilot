@@ -42,7 +42,7 @@ export PATH="$ANDROID_HOME/platform-tools:$PATH"
 .venv/bin/python android/scripts/model_reference.py --fp32
 cd android
 # Remove an existing incremental APK before final packaging to avoid ZIP slack.
-../.venv/bin/python -c 'from pathlib import Path; Path("app/build/outputs/apk/debug/app-debug.apk").unlink(missing_ok=True)'
+../.venv/bin/python -c 'from pathlib import Path; [p.unlink(missing_ok=True) for p in (Path("app/build/outputs/apk/debug/app-debug.apk"), Path("app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk"))]'
 ./gradlew --no-daemon --console plain \
   :app:assembleDebug :app:assembleDebugAndroidTest :app:testDebugUnitTest
 ```
@@ -61,7 +61,13 @@ libusb, ONNX Runtime 1.31.1, pyzmq/libzmq, zstandard, setproctitle and Raylib/CF
 validated. Artifact sizes and hashes are recorded in the validation report.
 The FP32 assets are diagnostic experiments, not accepted driving models.
 Third party licenses are packaged as assets.
-ONNX Runtime's ARM64 Android AAR is checksum pinned during native preparation.
+ONNX Runtime 1.31.1 is built from pinned source during native preparation, using
+`android/scripts/build_ort.py`. Optional KleidiAI/SME and SVE kernels are disabled:
+the supplied ARM64 AAR traps an SME instruction on the API 35 emulator. The AAR
+remains checksum pinned for its headers and notices; its executable library is
+replaced by the source build. `android/build/native/onnxruntime-1.31.1/build.json`
+records the source/submodule pins, toolchain, command and library hash. The first
+build can take tens of minutes; subsequent builds reuse the CMake cache.
 The receive-only Panda decoder is generated from the pinned Panda Python and C
 sources, retaining checksum checks even when Python assertions are optimized out.
 
@@ -76,7 +82,8 @@ After preparing the host environment and native modules:
 
 ```sh
 .venv/bin/python -m unittest \
-  android.tests.test_vision_panda \
+  discover -s android/tests
+.venv/bin/python -m unittest \
   openpilot.tools.sim.tests.test_android_protocol
 ```
 
@@ -84,6 +91,39 @@ These exercise frame pairing, recurrent-state rejection, NV12 layout, pinned
 Panda decoding/health gates and the ADB transport contract. Android JNI and
 VisionIPC checks run through the device instrumentation command below. The
 retained broader host results and their limits are in [VALIDATION.md](VALIDATION.md).
+
+Run device experiments one at a time per device. The wrapper stops both the app
+and instrumentation package, verifies no app processes or active camera clients
+remain, waits at least 30 seconds with normal thermal status (and phone skin at
+most 32°C), then always stops and verifies cleanup after the workload:
+
+```sh
+.venv/bin/python android/scripts/experiment.py \
+  --serial RFCR81Y1TBJ --adb "$ANDROID_HOME/platform-tools/adb" \
+  --report android/reports/experiment-isolation.json -- \
+  .venv/bin/python android/scripts/validate_vision.py \
+  --serial RFCR81Y1TBJ --adb "$ANDROID_HOME/platform-tools/adb" \
+  --seconds 60 --report android/reports/vision-experiment.json
+```
+
+Use the same wrapper for instrumentation and model benchmarks. Cleanup preserves
+application data, calibration and caches. Do not restart workers between runs or
+use thermal overrides on the physical phone. Model collection is available via
+`validate_models.py --serial … --profile ort-cpu-4 --report …`; a completed
+benchmark can still fail parity or timing. Read each model's acceptance fields.
+The diagnostic `ort-fallback` profile contains hash-checked portable graphs and
+three synthetic cases. Export disables host-specific NHWC operators; the
+manifest records the resulting numerical failures against the unchanged
+original reference. Export success is not a parity pass. This profile is
+excluded from the live driving runtime.
+
+Live diagnostic inference uses two non-spinning CPU threads and a 20 Hz maximum
+start rate. A native reusable row gather reduces preview preprocessing work and
+index storage; the exact-output instrumentation comparison covers padded NV12
+and the real driver-model input size. Neither optimization changes model
+precision, the 100 ms freshness limit or the 20 ms pairing limit. Isolated timing
+and CPU savings do not establish sustained performance; see
+[PERFORMANCE.md](PERFORMANCE.md) for live and thermal results.
 
 ## Install, run and inspect
 
@@ -93,12 +133,14 @@ Select the device explicitly. These commands also work with `emulator-5560`:
 export FOLD3_SERIAL=RFCR81Y1TBJ
 adb -s "$FOLD3_SERIAL" install -r android/app/build/outputs/apk/debug/app-debug.apk
 adb -s "$FOLD3_SERIAL" install -r android/app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk
-adb -s "$FOLD3_SERIAL" shell am instrument -w -r \
+.venv/bin/python android/scripts/experiment.py --serial "$FOLD3_SERIAL" \
+  --report /tmp/fold3-instrument-isolation.json -- \
+  adb -s "$FOLD3_SERIAL" shell am instrument -w -r \
   ai.sunnypilot.fold3.test/androidx.test.runner.AndroidJUnitRunner
-adb -s "$FOLD3_SERIAL" shell am force-stop ai.sunnypilot.fold3
-adb -s "$FOLD3_SERIAL" shell am start -n ai.sunnypilot.fold3/.MainActivity \
-  --ez run_runtime true --ez raylib true
 ```
+
+Require `OK (15 tests)` in the instrumentation output. An `adb` exit code of
+zero alone does not establish that Android's test runner passed.
 
 Grant camera/location permissions through Android when needed. The foreground
 manager supervises separate controls, monitoring, IMU, road-model and driver-model
@@ -131,14 +173,12 @@ The original models can also be benchmarked with `ort-cpu`, `ort-cpu-4` and
 model timing does not prove DSP/GPU execution. All measured original profiles
 still fail numerical acceptance.
 
-Start the live diagnostic pipeline, or request a bounded combined diagnostic:
+Request a bounded combined diagnostic from a clean, cooled baseline:
 
 ```sh
-adb -s "$FOLD3_SERIAL" shell am force-stop ai.sunnypilot.fold3
-adb -s "$FOLD3_SERIAL" shell am start -n ai.sunnypilot.fold3/.MainActivity \
-  --ez run_vision true --ei vision_seconds 1800
-# This script starts its own fresh app session and collects JSON/JSONL evidence:
-.venv/bin/python android/scripts/validate_vision.py --serial "$FOLD3_SERIAL" \
+.venv/bin/python android/scripts/experiment.py --serial "$FOLD3_SERIAL" \
+  --report /tmp/fold3-soak-isolation.json -- \
+  .venv/bin/python android/scripts/validate_vision.py --serial "$FOLD3_SERIAL" \
   --seconds 1800 --report /tmp/fold3-live-vision-30min.json
 ```
 
@@ -154,7 +194,9 @@ The dedicated emulator can test startup rejection and an active-session abort.
 This command refuses physical device serials and resets the override on exit:
 
 ```sh
-.venv/bin/python android/scripts/validate_thermal.py --serial emulator-5560 \
+.venv/bin/python android/scripts/experiment.py --serial emulator-5560 \
+  --report /tmp/emulator-thermal-isolation.json -- \
+  .venv/bin/python android/scripts/validate_thermal.py --serial emulator-5560 \
   --report android/reports/emulator-thermal-abort.json
 ```
 
@@ -195,15 +237,21 @@ echo no | "$ANDROID_HOME/cmdline-tools/latest/bin/avdmanager" create avd \
   -no-window -no-audio -no-boot-anim -no-snapshot -gpu swiftshader -memory 4096 -cores 2 \
   -camera-back emulated -camera-front emulated
 uv pip install --python .venv/bin/python -r android/requirements-simulator.txt
-adb -s "$FOLD3_SERIAL" shell am force-stop ai.sunnypilot.fold3
-adb -s "$FOLD3_SERIAL" shell am start -n ai.sunnypilot.fold3/.MainActivity \
-  --ez run_runtime true --ez simulation true --ez raylib true
-.venv/bin/python -m openpilot.tools.sim.android_validation --serial "$FOLD3_SERIAL" \
+run_runtime_check() {
+  local fold3_report="$1"
+  shift
+  .venv/bin/python android/scripts/experiment.py --serial "$FOLD3_SERIAL" \
+    --runtime simulation --report "$fold3_report" -- "$@"
+}
+run_runtime_check /tmp/fold3-metadrive-isolation.json \
+  .venv/bin/python -m openpilot.tools.sim.android_validation --serial "$FOLD3_SERIAL" \
   --metadrive --duration 30 --fault stale --report /tmp/fold3-metadrive.json
-.venv/bin/python android/scripts/validate_lifecycle.py --serial "$FOLD3_SERIAL" \
+run_runtime_check /tmp/fold3-lifecycle-isolation.json \
+  .venv/bin/python android/scripts/validate_lifecycle.py --serial "$FOLD3_SERIAL" \
   --report /tmp/fold3-lifecycle.json
 # Only on the dedicated emulator: also add --resize to validate display changes.
-.venv/bin/python android/scripts/validate_adb_faults.py --serial "$FOLD3_SERIAL" \
+run_runtime_check /tmp/fold3-faults-isolation.json \
+  .venv/bin/python android/scripts/validate_adb_faults.py --serial "$FOLD3_SERIAL" \
   --report /tmp/fold3-adb-faults.json
 .venv/bin/python android/scripts/validate_model_reference.py \
   --report /tmp/fold3-host-original-parity.json
@@ -211,6 +259,14 @@ adb -s "$FOLD3_SERIAL" shell am start -n ai.sunnypilot.fold3/.MainActivity \
 .venv/bin/python android/scripts/validate_model_reference.py --fp32 \
   --report /tmp/fold3-host-fp32-parity.json
 ```
+
+`--runtime simulation` starts a fresh manager and Raylib only after cooldown,
+waits up to 60 seconds for new rendered frames, and always stops them afterward.
+`--runtime physical` provides the same setup for physical-namespace component
+checks; it does not enable engagement or vehicle transmission.
+Ensure the dedicated emulator is awake and unlocked after boot. A visible
+System UI ANR dialog paused rendering in retained cold-start attempts. Record
+any manual recovery; a later lifecycle pass does not establish unattended startup.
 
 The debug-only ADB transport uses an app/ADB-UID restricted socket, a strict
 Cereal service allowlist, bounded packets, ordered sequences and input-age checks.

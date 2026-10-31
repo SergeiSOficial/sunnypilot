@@ -33,7 +33,8 @@ def source_tar(name, url, sha256):
 def main():
   subprocess.run([sys.executable, str(ROOT / "scripts/stage_panda.py")], check=True)
   # The Android ORT build is a separately validated backend, never a replacement
-  # for a failed OpenCL parity check. Headers and Bionic library share one AAR.
+  # for a failed OpenCL parity check. Pin headers/notices to the matching AAR;
+  # compile the library without SME/SVE, which the dedicated AVD cannot execute.
   ort_archive = ROOT / "build/native/onnxruntime-android-1.31.1.aar"
   if not ort_archive.exists():
     ort_archive.parent.mkdir(parents=True, exist_ok=True)
@@ -54,6 +55,7 @@ def main():
         notice.write_bytes(response.read())
     if hashlib.sha256(notice.read_bytes()).hexdigest() != digest:
       raise SystemExit(f"ONNX Runtime {name} checksum mismatch")
+  subprocess.run([sys.executable, str(ROOT / "scripts/build_ort.py")], check=True)
   source = ROOT / "build/native/libusb"
   if not source.exists():
     source.parent.mkdir(parents=True, exist_ok=True)

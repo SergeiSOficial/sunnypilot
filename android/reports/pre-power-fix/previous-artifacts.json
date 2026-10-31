@@ -1,0 +1,164 @@
+{
+  "generated_utc": "2026-10-31T11:26:27.939327+00:00",
+  "branch": "codex/fold3-android-port",
+  "base_commit": "6f7a2c94c10dffcf9a83b120ab1e6985e4496868",
+  "overall_status": "blocked: diagnostic visual pipeline and Panda receive-only transport implemented; camera concurrency, original-model parity/timing, critical heat under sustained load, calibration, complete physical runtime and vehicle qualification remain unmet",
+  "application_id": "ai.sunnypilot.fold3",
+  "version": "0.1.0-port-validation",
+  "vehicle_tx_enabled": false,
+  "build": {
+    "abi": "arm64-v8a",
+    "min_sdk": 35,
+    "target_sdk": 35,
+    "ndk": "28.2.13676358",
+    "cmake": "3.31.6",
+    "gradle": "8.9",
+    "android_gradle_plugin": "8.5.2",
+    "chaquopy": "17.2.0",
+    "python": "3.12.15",
+    "diagnostic_numpy": "1.26.2",
+    "pycapnp": "2.1.0",
+    "capnproto": "1.0.1",
+    "libusb_commit": "d52e355daa09f17ce64819122cb067b8a2ee0d4b",
+    "build_type": "debug; local Android debug signature",
+    "raylib": "dff603f4f122163900469e73d113deacd9ec9817",
+    "raylib_python_cffi": "a32e9109c9924abdaae5e6e3d5408e210f939ee1",
+    "json11": "db00e9369a92aa74bf630a2ffb092a4b0b132c01",
+    "onnxruntime_android": "1.31.1",
+    "onnxruntime_aar_sha256": "d4d50660300ed2c4f38ffdfd5ab5bfa3a22f995f282dda24f42ea3ea55467b49"
+  },
+  "submodules": {
+    "panda": "8a16e089b88593914823743df29e1c30b7dd3e00",
+    "opendbc_repo": "aa9bff6f5442cef8cb8e25e143ef38865c276ce8",
+    "msgq_repo": "e7396e76dadbb49e374d4b664ff6bbb43a39bcb0",
+    "rednose_repo": "28d4a7f69e80e1c3e0d24ca0733d7daeaeade3d0",
+    "teleoprtc_repo": "1aa8fc433bef1519a95c0700c96258c3be6dfb34",
+    "tinygrad_repo": "92b742f711c7d216fd3ed7a46a30a959e3c43bd4",
+    "openpilot/sunnypilot/neural_network_data": "03cac2d30e111e0689c0429cb8c1fe6cb5a905af"
+  },
+  "models": {
+    "dmonitoring_model": {
+      "sha256": "dee5a294e8afaacc9295ac5d100e00733ecac278e79264b96331e40a3ede1b04"
+    },
+    "driving_supercombo": {
+      "sha256": "65a08adc31d5c456219687d99b7bf5e44d61dae2d49ea67850e76105c7248cce"
+    }
+  },
+  "host_reference": {
+    "onnxruntime": "1.31.1",
+    "numpy": "2.5.3",
+    "seed": 42
+  },
+  "artifacts": [
+    {
+      "package": "ai.sunnypilot.fold3",
+      "path": "android/app/build/outputs/apk/debug/app-debug.apk",
+      "bytes": 255657358,
+      "sha256": "e2ee0027c6a49368bfaf57da8e844d9b73fe3a2721f7e77db302b2f91203e6d2"
+    },
+    {
+      "package": "ai.sunnypilot.fold3.test",
+      "path": "android/app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk",
+      "bytes": 4458015,
+      "sha256": "8513779b43e24bb3171449a2fd65f1541b80289ff96b297c26f10c5e531fad5e"
+    }
+  ],
+  "measurement_scope": "Benchmarks and the failed sustained diagnostic predate the final explicit thermal guard and stop-intent fix. The sustained report is development evidence, not 30-minute acceptance of the delivered APK. It excludes road inference, planning and active controls. Current APK hashes and component validation are recorded separately. Every visual diagnostic message remains invalid.",
+  "final_component_validation": {
+    "verified_utc": "2026-10-31T11:24:39.386363+00:00",
+    "installed_hash_verification": "installed-artifacts.json",
+    "physical_fold3_instrumentation": {
+      "status": "passed",
+      "passed": 14,
+      "seconds": 9.916,
+      "report": "RFCR81Y1TBJ-vision-instrumentation.txt"
+    },
+    "api35_arm64_emulator_instrumentation": {
+      "status": "passed",
+      "passed": 14,
+      "seconds": 11.692,
+      "report": "emulator-5560-vision-instrumentation.txt"
+    },
+    "jvm_tests_passed": 2,
+    "host_hyundai_and_ipc_tests_passed": 20,
+    "host_hyundai_and_ipc_tests_skipped": 2,
+    "host_hyundai_safety_tests_passed": 1701,
+    "host_hyundai_safety_tests_skipped": 198,
+    "host_runtime_tests_passed": 72,
+    "host_runtime_report": "host-runtime-vision-tests.txt",
+    "sustained_diagnostic": {
+      "status": "failed",
+      "report": "fold3-live-vision-30min-summary.json",
+      "critical_thermal_first_seconds": 1247.936,
+      "delivered_apk_qualification": false
+    },
+    "panda_physical_receive_only": {
+      "status": "blocked",
+      "reason": "Panda disconnected; no physical USB/CAN/firmware/vehicle qualification"
+    },
+    "camera_concurrency": {
+      "status": "failed",
+      "report": "fold3-camera-vision.json"
+    },
+    "original_model_parity": {
+      "status": "failed",
+      "reports": [
+        "fold3-model-opencl-foreground.json",
+        "fold3-model-ort-cpu-4.json",
+        "fold3-model-ort-nnapi-foreground.json"
+      ]
+    },
+    "emulator_combined_workload": {
+      "status": "failed",
+      "report": "emulator-live-vision-rerun.json"
+    },
+    "physical_fold_transition": {
+      "status": "blocked",
+      "reason": "Not exercised"
+    },
+    "vehicle_tx_enabled": false,
+    "engagement_allowed": false,
+    "thermal_guard": {
+      "status": "passed",
+      "report": "emulator-thermal-abort.json",
+      "physical_temperature_overridden": false
+    },
+    "final_focused_host_tests": {
+      "passed": 22,
+      "report": "host-vision-protocol-final-tests.txt"
+    },
+    "fold3_lifecycle": {
+      "status": "passed",
+      "report": "fold3-vision-lifecycle.json"
+    },
+    "emulator_lifecycle": {
+      "status": "passed",
+      "report": "emulator-vision-lifecycle.json"
+    },
+    "fold3_adb_faults": {
+      "status": "passed",
+      "report": "fold3-vision-adb-faults.json"
+    },
+    "emulator_adb_faults": {
+      "status": "passed",
+      "report": "emulator-vision-adb-faults.json"
+    },
+    "fold3_metadrive": {
+      "status": "passed",
+      "report": "fold3-vision-metadrive.json"
+    },
+    "emulator_metadrive": {
+      "status": "passed",
+      "report": "emulator-vision-metadrive.json"
+    },
+    "physical_fold3_live_camera_smoke": {
+      "status": "failed",
+      "report": "fold3-live-vision-final.json",
+      "reason": "Road camera disconnected; three recoveries. All 1115 driver predictions late; p99 work 57.7425 ms."
+    },
+    "complete_driving_runtime": {
+      "status": "blocked",
+      "reason": "Distinct second rear stream, numerical/replay acceptance, mount calibration, localization/planning, physical car discovery and vehicle qualification incomplete"
+    }
+  }
+}

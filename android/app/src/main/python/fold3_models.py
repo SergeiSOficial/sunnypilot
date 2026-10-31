@@ -6,11 +6,21 @@ import time
 
 
 def benchmark(data_dir, profile="baseline"):
-  if profile not in ("baseline", "image-fp32", "beam1", "fp32", "fp32-image", "ort-cpu", "ort-cpu-4", "ort-nnapi"):
+  if profile not in ("baseline", "image-fp32", "beam1", "fp32", "fp32-image", "ort-cpu", "ort-cpu-4", "ort-nnapi",
+                     "ort-cpu-4-spin", "ort-cpu-strict", "ort-fallback"):
     raise ValueError("Unknown model profile")
-  from fold3_runtime import probe
-  probe(data_dir)
+  from fold3_runtime import configure
+  configure(data_dir)
+  # Chaquopy extracts package data when that package is imported. Import only
+  # the model assets, without starting the unrelated dependency/GPU probe.
+  import openpilot.selfdrive.modeld.models  # noqa: F401
   if profile.startswith("ort-"):
+    if profile == "ort-fallback":
+      return _benchmark_ort(data_dir, "cpu", threads=4, strict=True, fallback=True)
+    if profile == "ort-cpu-4-spin":
+      return _benchmark_ort(data_dir, "cpu", threads=4, spinning=True)
+    if profile == "ort-cpu-strict":
+      return _benchmark_ort(data_dir, "cpu", threads=4, strict=True)
     if profile == "ort-cpu-4":
       return _benchmark_ort(data_dir, "cpu", threads=4)
     return _benchmark_ort(data_dir, profile.removeprefix("ort-"))
@@ -98,7 +108,7 @@ def _benchmark(data_dir, profile):
   return json.dumps(report)
 
 
-def _benchmark_ort(data_dir, backend, threads=2):
+def _benchmark_ort(data_dir, backend, threads=2, spinning=False, strict=False, fallback=False):
   import numpy as np
   from fold3_ort import OrtModel
   assets = Path(__file__).parent
@@ -106,6 +116,9 @@ def _benchmark_ort(data_dir, backend, threads=2):
   manifest = json.loads((references / "manifest.json").read_text())
   report = {"backend": f"ONNX Runtime 1.31.1 {backend}", "precision": "original ONNX types",
             "started_utc": time.time(), "vehicle_tx_enabled": False, "threads": threads,  # noqa: TID251
+            "spinning": spinning, "graph_optimizations": "disabled" if strict else "default",
+            "compiled_host_fallback": fallback,
+            "optional_sme_sve_kernels": False,
             "synthetic_only": True, "replay_validation": "blocked: synthetic cases only",
             "host_reference": manifest, "models": {}}
   destination = Path(data_dir) / "model-report.json"
@@ -117,9 +130,13 @@ def _benchmark_ort(data_dir, backend, threads=2):
       path = assets / f"openpilot/selfdrive/modeld/models/{name}.onnx"
       if hashlib.sha256(path.read_bytes()).hexdigest() != metadata["sha256"]:
         raise ValueError("model hash differs from host reference")
+      if fallback:
+        path = references / "ort-fallback" / f"{name}.onnx"
+        if hashlib.sha256(path.read_bytes()).hexdigest() != metadata["ort_fallback"]["sha256"]:
+          raise ValueError("compiled model hash differs from host reference")
       progress.write_text(f"Loading original {name} using ORT {backend}")
       started = time.monotonic_ns()
-      model = OrtModel(path, backend, threads=threads)
+      model = OrtModel(path, backend, threads=threads, spinning=spinning, strict=strict)
       with np.load(references / f"{name}-inputs.npz") as source:
         inputs = {key: source[key] for key in source.files}
       for _ in range(3):
@@ -132,7 +149,18 @@ def _benchmark_ort(data_dir, backend, threads=2):
           error = np.abs(actual.astype(np.float64) - expected[key].astype(np.float64))
           parity[key] = {"passed": bool(np.isfinite(actual).all() and np.allclose(actual, expected[key], rtol=1e-3, atol=1e-4)),
                          "max_abs_error": float(error.max()) if np.isfinite(error).all() else None}
+      cases = {}
+      for seed in metadata.get("additional_validation_seeds", []):
+        with np.load(references / f"{name}-case-{seed}-inputs.npz") as source:
+          case_actual = model({key: source[key] for key in source.files})
+        with np.load(references / f"{name}-case-{seed}-outputs.npz") as expected:
+          cases[str(seed)] = {key: {"passed": bool(np.isfinite(case_actual[key]).all()
+            and np.allclose(case_actual[key], expected[key], rtol=1e-3, atol=1e-4)),
+            "max_abs_error": float(np.max(np.abs(case_actual[key].astype(np.float64) - expected[key])))
+            if np.isfinite(case_actual[key]).all() else None} for key in expected.files}
       samples = []
+      cpu_started = time.process_time_ns()
+      wall_started = time.monotonic_ns()
       for i in range(100):
         started = time.monotonic_ns()
         model(inputs)
@@ -140,9 +168,12 @@ def _benchmark_ort(data_dir, backend, threads=2):
         if i % 10 == 0:
           progress.write_text(f"ORT {backend} {name}: {i}/100 samples")
         time.sleep(max(0, .05 - samples[-1] / 1000))
-      entry.update(status="passed" if all(p["passed"] for p in parity.values()) else "failed", parity=parity,
+      passed = all(p["passed"] for case in [parity, *cases.values()] for p in case.values())
+      entry.update(status="passed" if passed else "failed", parity=parity, additional_cases=cases,
                    samples=len(samples), work_p50_ms=float(np.percentile(samples, 50)), work_p99_ms=float(np.percentile(samples, 99)),
-                   work_max_ms=max(samples), deadline_misses_50ms=sum(s >= 50 for s in samples))
+                   work_max_ms=max(samples), deadline_misses_50ms=sum(s >= 50 for s in samples),
+                   process_cpu_ms=(time.process_time_ns() - cpu_started) / 1e6,
+                   timed_wall_ms=(time.monotonic_ns() - wall_started) / 1e6)
       entry["performance_status"] = "passed" if entry["work_p99_ms"] < 50 else "failed"
     except Exception as exc:
       import traceback

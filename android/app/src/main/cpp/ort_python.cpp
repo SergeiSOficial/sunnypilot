@@ -2,6 +2,7 @@
 #include <Python.h>
 #include <onnxruntime_cxx_api.h>
 #include <nnapi_provider_factory.h>
+#include <algorithm>
 #include <cstring>
 #include <memory>
 #include <string>
@@ -12,9 +13,12 @@ Ort::Env environment(ORT_LOGGING_LEVEL_WARNING, "fold3");
 struct Session {
   Ort::Session model{nullptr};
   std::vector<std::string> inputs, outputs;
-  explicit Session(const char *path, const char *backend, int threads) {
+  explicit Session(const char *path, const char *backend, int threads, bool spinning, bool strict) {
     Ort::SessionOptions options;
     options.SetIntraOpNumThreads(threads).SetInterOpNumThreads(1);
+    options.AddConfigEntry("session.intra_op.allow_spinning", spinning ? "1" : "0");
+    options.AddConfigEntry("session.inter_op.allow_spinning", spinning ? "1" : "0");
+    if (strict) options.SetGraphOptimizationLevel(GraphOptimizationLevel::ORT_DISABLE_ALL).SetDeterministicCompute(true);
     if (std::strcmp(backend, "nnapi") == 0)
       Ort::ThrowOnError(OrtSessionOptionsAppendExecutionProvider_Nnapi(options, NNAPI_FLAG_CPU_DISABLED));
     else if (std::strcmp(backend, "cpu") != 0) throw std::invalid_argument("unsupported ORT backend");
@@ -56,11 +60,11 @@ const char *numpy_type(ONNXTensorElementDataType type) {
 }
 PyObject *create(PyObject *, PyObject *args) {
   const char *path, *backend;
-  int threads;
-  if (!PyArg_ParseTuple(args, "ssi", &path, &backend, &threads)) return nullptr;
+  int threads, spinning = 0, strict = 0;
+  if (!PyArg_ParseTuple(args, "ssi|pp", &path, &backend, &threads, &spinning, &strict)) return nullptr;
   if (threads < 1 || threads > 4) { PyErr_SetString(PyExc_ValueError, "ORT thread count must be 1..4"); return nullptr; }
   try {
-    auto session = std::make_unique<Session>(path, backend, threads);
+    auto session = std::make_unique<Session>(path, backend, threads, spinning, strict);
     PyObject *result = PyCapsule_New(session.get(), capsule_name, destroy);
     if (result) session.release();
     return result;
@@ -125,7 +129,54 @@ PyObject *run(PyObject *, PyObject *args) {
     return result;
   } catch (const std::exception &e) { PyErr_SetString(PyExc_RuntimeError, e.what()); return nullptr; }
 }
-PyMethodDef methods[] = {{"create", create, METH_VARARGS, nullptr}, {"run", run, METH_VARARGS, nullptr}, {nullptr, nullptr, 0, nullptr}};
+PyObject *gather_rows_u8(PyObject *, PyObject *args) {
+  PyObject *source, *rows, *columns, *destination;
+  if (!PyArg_ParseTuple(args, "OOOO", &source, &rows, &columns, &destination)) return nullptr;
+  Buffer input, row_offsets, column_offsets, output;
+  if (PyObject_GetBuffer(source, &input.value, PyBUF_FORMAT | PyBUF_STRIDES) != 0 ||
+      PyObject_GetBuffer(rows, &row_offsets.value, PyBUF_FORMAT | PyBUF_STRIDES) != 0 ||
+      PyObject_GetBuffer(columns, &column_offsets.value, PyBUF_FORMAT | PyBUF_STRIDES) != 0 ||
+      PyObject_GetBuffer(destination, &output.value, PyBUF_FORMAT | PyBUF_STRIDES | PyBUF_WRITABLE) != 0) return nullptr;
+  auto &s = input.value, &r = row_offsets.value, &c = column_offsets.value, &d = output.value;
+  auto index_buffer = [](const Py_buffer &b) {
+    return b.ndim == 1 && b.itemsize == sizeof(Py_ssize_t) &&
+      (!std::strcmp(b.format, "l") || !std::strcmp(b.format, "q") || !std::strcmp(b.format, "n")) && PyBuffer_IsContiguous(&b, 'C');
+  };
+  if (s.itemsize != 1 || std::strcmp(s.format, "B") || d.itemsize != 1 || std::strcmp(d.format, "B") ||
+      !PyBuffer_IsContiguous(&s, 'C') || !PyBuffer_IsContiguous(&d, 'C') || !index_buffer(r) || !index_buffer(c) ||
+      c.len == 0 || r.len == 0 || d.len % (c.len / c.itemsize) || d.len / (c.len / c.itemsize) != r.len / r.itemsize) {
+    PyErr_SetString(PyExc_ValueError, "gather requires contiguous uint8 source/output and matching nonempty intp rows/columns");
+    return nullptr;
+  }
+  try {
+    ReleasedGIL release;
+    auto index = [](const Py_buffer &b, Py_ssize_t n) {
+      Py_ssize_t value;
+      std::memcpy(&value, static_cast<const char *>(b.buf) + n * sizeof(value), sizeof(value));
+      return value;
+    };
+    const Py_ssize_t width = c.len / c.itemsize, height = r.len / r.itemsize;
+    Py_ssize_t max_column = 0;
+    for (Py_ssize_t x = 0; x < width; ++x) {
+      const auto column = index(c, x);
+      if (column < 0 || column >= s.len) throw std::invalid_argument("column outside source");
+      max_column = std::max(max_column, column);
+    }
+    for (Py_ssize_t y = 0; y < height; ++y) {
+      const auto row = index(r, y);
+      if (row < 0 || row >= s.len - max_column) throw std::invalid_argument("row outside source");
+    }
+    for (Py_ssize_t y = 0; y < height; ++y) {
+      const auto row = index(r, y);
+      auto *dest = static_cast<uint8_t *>(d.buf) + y * width;
+      if (y && row == index(r, y - 1)) std::memcpy(dest, dest - width, width);
+      else for (Py_ssize_t x = 0; x < width; ++x) dest[x] = static_cast<const uint8_t *>(s.buf)[row + index(c, x)];
+    }
+  } catch (const std::exception &e) { PyErr_SetString(PyExc_ValueError, e.what()); return nullptr; }
+  Py_RETURN_NONE;
+}
+PyMethodDef methods[] = {{"create", create, METH_VARARGS, nullptr}, {"run", run, METH_VARARGS, nullptr},
+                        {"gather_rows_u8", gather_rows_u8, METH_VARARGS, nullptr}, {nullptr, nullptr, 0, nullptr}};
 PyModuleDef module = {PyModuleDef_HEAD_INIT, "fold3_ort_native", nullptr, -1, methods, nullptr, nullptr, nullptr, nullptr};
 }
 PyMODINIT_FUNC PyInit_fold3_ort_native() { return PyModule_Create(&module); }

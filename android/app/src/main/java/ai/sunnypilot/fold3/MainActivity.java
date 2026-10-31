@@ -60,6 +60,10 @@ public final class MainActivity extends Activity {
         models.setText("Validate original models on OpenCL");
         models.setOnClickListener(v -> startForegroundService(new Intent(this, ModelService.class)));
         layout.addView(models);
+        Button dependencies = new Button(this);
+        dependencies.setText("Inspect runtime dependencies");
+        dependencies.setOnClickListener(v -> startService(new Intent(this, RuntimeService.class)));
+        layout.addView(dependencies);
         Button stop = new Button(this);
         stop.setText("Stop camera test");
         stop.setOnClickListener(v -> stopService(new Intent(this, ProbeService.class)));
@@ -111,7 +115,8 @@ public final class MainActivity extends Activity {
         if (!pendingVision && checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[]{Manifest.permission.CAMERA, Manifest.permission.POST_NOTIFICATIONS}, 1);
         } else if (autoRun) { autoRun = false; start(soak); }
-        startService(new Intent(this, RuntimeService.class));
+        if (saved == null && getIntent().getBooleanExtra("inspect_runtime", false))
+            startService(new Intent(this, RuntimeService.class));
         if (saved == null && getIntent().getBooleanExtra("run_models", false)) startForegroundService(new Intent(this, ModelService.class)
             .putExtra("model_profile", getIntent().getStringExtra("model_profile")));
     }
@@ -124,8 +129,8 @@ public final class MainActivity extends Activity {
         stopService(new Intent(this, ProbeService.class));
         stopService(new Intent(this, ManagerService.class));
         startForegroundService(new Intent(this, ManagerService.class));
-        startForegroundService(new Intent(this, VisionService.class).putExtra("duration_seconds", intent.getIntExtra("vision_seconds", 1800)));
-        startActivity(new Intent(this, DrivingActivity.class).putExtra("preview", true));
+        startActivity(new Intent(this, DrivingActivity.class).putExtra("preview", true)
+            .putExtra("start_vision", true).putExtra("vision_seconds", intent.getIntExtra("vision_seconds", 1800)));
     }
     private void launchDrivingUi() {
         if (preparingUi) return;

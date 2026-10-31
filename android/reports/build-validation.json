@@ -1,11 +1,11 @@
 {
-  "recorded_utc": "2026-10-31T11:23:02.656979+00:00",
+  "recorded_utc": "2026-10-31T13:53:32.717928+00:00",
   "gradle_tasks": [
     ":app:assembleDebug",
     ":app:testDebugUnitTest",
     ":app:assembleDebugAndroidTest"
   ],
-  "build_result": "BUILD SUCCESSFUL in 7s; previous thermal-guard build passed in 35s",
+  "build_result": "BUILD SUCCESSFUL in 1m 3s",
   "jvm_tests": {
     "name": "ai.sunnypilot.fold3.FrameStatsTest",
     "tests": "2",
@@ -20,21 +20,70 @@
     "monotonicTimestampsAndBoundedSamples",
     "nearestTimestampPairing"
   ],
-  "native_sources_preparation": "passed: prepare_native.py rerun; pins and archive hashes verified",
-  "python_lint": "passed: focused Ruff checks including Android, simulator and new hardware/settings sources",
-  "python_syntax": "passed: compileall on Android runtime/scripts, hardware and simulator sources",
-  "note": "Gradle may reuse unchanged unit-test task outputs; the JUnit timestamp above identifies the retained successful run.",
+  "native_sources_preparation": "passed: pinned ORT source build without KleidiAI/SME/SVE; manifest hash checked by CMake",
+  "python_lint": "passed: Ruff on Android runtime, scripts and tests",
+  "python_syntax": "passed: compileall on Android runtime, scripts and tests",
+  "note": "Unchanged JVM tests may be cached: preserve their actual JUnit timestamp. Model accuracy and sustained perception acceptance remain failed; successful Gradle tasks do not establish runtime qualification.",
   "host_runtime_tests": {
     "passed": 72,
     "report": "host-runtime-vision-tests.txt"
   },
-  "application_sha256": "e2ee0027c6a49368bfaf57da8e844d9b73fe3a2721f7e77db302b2f91203e6d2",
-  "packaging_comparison": "Historical pre-thermal-guard comparison: vision-apk-packaging-comparison.json",
-  "onnxruntime_android": "1.31.1",
+  "application_sha256": "e5347db807f6551886d7de706d6ebb939c51dcd25c5c0ade1cd57b7fb24941ee",
+  "onnxruntime_android": {
+    "commit": "6af1a932e2286d5c58166085d24c68783033edee",
+    "onnx_commit": "2bb50465112feca9003e1ed654d77f01ff1415ca",
+    "ndk": "28.2.13676358",
+    "cmake": "3.31.6",
+    "optional_sme_sve_kernels": false,
+    "library_sha256": "1fd1a27bf0ac62a0bf0f2d5f01bd97958ad53ea922047c2c9e18a9166d321316",
+    "command": [
+      "/Users/sergios/sunnypilot/.venv/bin/python",
+      "/Users/sergios/sunnypilot/android/build/native/onnxruntime-source-1.31.1/tools/ci_build/build.py",
+      "--build_dir",
+      "/Users/sergios/sunnypilot/android/build/native/onnxruntime-portable",
+      "--config",
+      "Release",
+      "--update",
+      "--build",
+      "--build_shared_lib",
+      "--parallel",
+      "4",
+      "--skip_tests",
+      "--skip_submodule_sync",
+      "--android",
+      "--android_sdk_path",
+      "/Users/sergios/Library/Android/sdk",
+      "--android_ndk_path",
+      "/Users/sergios/Library/Android/sdk/ndk/28.2.13676358",
+      "--android_abi",
+      "arm64-v8a",
+      "--android_api",
+      "28",
+      "--android_cpp_shared",
+      "--use_nnapi",
+      "--no_kleidiai",
+      "--no_sve",
+      "--cmake_path",
+      "/Users/sergios/Library/Android/sdk/cmake/3.31.6/bin/cmake",
+      "--cmake_generator",
+      "Ninja",
+      "--cmake_extra_defines",
+      "onnxruntime_BUILD_UNIT_TESTS=OFF"
+    ],
+    "vehicle_tx_enabled": false,
+    "packaged_library_sha256": "d95cc521d9e705caf561eac84bb91a387dc3850252278aeca344a623abb52a5f",
+    "packaged_library_bytes": 23933768,
+    "packaging_note": "Android Gradle packaging strips native symbols; source-build and packaged-library hashes are recorded separately."
+  },
   "quality_delta": "unavailable: tool cannot find Git HEAD/baseline for this checkout; no static-analysis pass claimed",
-  "critical_thermal_guard": "emulator-thermal-abort.json",
+  "critical_thermal_guard": "emulator-final-thermal.json",
   "focused_final_host_tests": {
-    "passed": 22,
-    "report": "host-vision-protocol-final-tests.txt"
-  }
+    "tests_run": 32,
+    "status": "passed",
+    "reports": [
+      "host-clean-experiment-tests.txt",
+      "host-sim-protocol-clean.txt"
+    ]
+  },
+  "previous_packaging_comparison": "Historical pre-thermal-guard comparison: vision-apk-packaging-comparison.json"
 }

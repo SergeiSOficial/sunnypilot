@@ -40,7 +40,8 @@ public final class PandaRxService extends Service {
     }
     private void failure(String error) {
         try { Files.write(new java.io.File(getFilesDir(), "panda-rx.json").toPath(),
-            new JSONObject().put("status", "blocked").put("error", error).put("vehicle_tx_enabled", false).toString()
+            new JSONObject().put("status", "blocked").put("error", error).put("vehicle_tx_enabled", false)
+                .put("updated_elapsed_ms", android.os.SystemClock.elapsedRealtime()).toString()
                 .getBytes(java.nio.charset.StandardCharsets.UTF_8)); }
         catch (Exception e) { android.util.Log.e("Fold3Panda", "Cannot save receive report", e); }
     }

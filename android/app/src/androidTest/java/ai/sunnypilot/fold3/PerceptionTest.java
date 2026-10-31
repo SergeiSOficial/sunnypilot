@@ -10,6 +10,15 @@ import static org.junit.Assert.*;
 
 @RunWith(AndroidJUnit4.class)
 public class PerceptionTest {
+    @Test public void nativePreprocessingMatchesNumpyAndRejectsInvalidIndices() throws Exception {
+        android.content.Context app = androidx.test.platform.app.InstrumentationRegistry.getInstrumentation().getTargetContext();
+        PythonRuntime.start(app);
+        JSONObject report = new JSONObject(Python.getInstance().getModule("fold3_checks").callAttr("gather").toString());
+        java.nio.file.Files.write(new java.io.File(app.getFilesDir(), "preprocess-report.json").toPath(),
+            report.toString(2).getBytes(java.nio.charset.StandardCharsets.UTF_8));
+        assertEquals("passed", report.getString("status"));
+        assertFalse(report.getBoolean("vehicle_tx_enabled"));
+    }
     @Test public void modelFixtureOutputsUseUpstreamParsersAndStayInvalid() throws Exception {
         android.content.Context app = androidx.test.platform.app.InstrumentationRegistry.getInstrumentation().getTargetContext();
         PythonRuntime.start(app);

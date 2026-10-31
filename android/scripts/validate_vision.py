@@ -7,6 +7,8 @@ import re
 import subprocess
 import time
 
+from experiment import Device
+
 
 def validate(serial, adb, seconds, output):
   def command(*args):
@@ -20,7 +22,7 @@ def validate(serial, adb, seconds, output):
 
   report = {"serial": serial, "status": "starting", "requested_seconds": seconds, "vehicle_tx_enabled": False,
             "road_readiness": "blocked", "calibration": "unqualified", "model_parity": "failed",
-            "physical_vehicle_verified": False}
+            "physical_vehicle_verified": False, "resource_sampling_seconds": 30}
   output = Path(output)
   output.parent.mkdir(parents=True, exist_ok=True)
   samples = output.with_suffix(".jsonl")
@@ -31,7 +33,7 @@ def validate(serial, adb, seconds, output):
   previous_manager_pid = read("manager").get("pid")
   previous_vision_start = read("vision-report").get("started_utc")
   launch_elapsed_ms = int(float(command("shell", "cat", "/proc/uptime").split()[0]) * 1000)
-  command("shell", "am", "force-stop", "ai.sunnypilot.fold3")
+  Device(serial, adb).stop()
   command("shell", "am", "start", "-n", "ai.sunnypilot.fold3/.MainActivity", "--ez", "run_vision", "true",
           "--ei", "vision_seconds", str(seconds))
   start = time.monotonic()
@@ -45,6 +47,10 @@ def validate(serial, adb, seconds, output):
           memory = command("shell", "dumpsys", "meminfo", "--package", "ai.sunnypilot.fold3")
           pss = [int(value) for value in re.findall(r"TOTAL PSS:\s+(\d+)", memory)]
           sample["resources"] = {"process_pss_kib": pss, "total_pss_kib": sum(pss)}
+          thermal = command("shell", "dumpsys", "thermalservice")
+          skin = re.findall(r"Temperature\{mValue=([\d.]+), mType=3,", thermal)
+          sample["resources"].update(skin_c=max(map(float, skin)) if skin else None,
+                                     thermal_override="IsStatusOverride: true" in thermal)
           next_resources = sample["elapsed_s"] + 30
         log.write(json.dumps(sample) + "\n")
         log.flush()
@@ -89,12 +95,10 @@ def validate(serial, adb, seconds, output):
   finally:
     report["elapsed_s"] = time.monotonic() - start
     report["panda_receive_only"] = read("panda-rx")
-    if report["status"] == "failed":
-      try:
-        command("shell", "am", "force-stop", "ai.sunnypilot.fold3")
-        report["cleanup"] = "Force-stopped the diagnostic application after validation failure"
-      except (subprocess.CalledProcessError, subprocess.TimeoutExpired) as exc:
-        report["cleanup_error"] = str(exc)
+    try:
+      report["cleanup"] = Device(serial, adb).stop()
+    except Exception as exc:
+      report.update(status="failed", cleanup_error=str(exc))
     output.write_text(json.dumps(report, indent=2) + "\n")
   return report
 

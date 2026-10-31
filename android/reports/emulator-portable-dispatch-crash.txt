@@ -1,0 +1,187 @@
+--------- beginning of crash
+10-31 12:08:47.084 14097 14113 F libc    : Fatal signal 4 (SIGILL), code 1 (ILL_ILLOPC), fault addr 0x70e6c42e44 in tid 14113 (model-validatio), pid 14097 (ot.fold3:models)
+10-31 12:08:47.216 14139 14139 F DEBUG   : *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***
+10-31 12:08:47.216 14139 14139 F DEBUG   : Build fingerprint: 'google/sdk_gphone64_arm64/emu64a:15/AE3A.240806.043/12960925:userdebug/dev-keys'
+10-31 12:08:47.216 14139 14139 F DEBUG   : Revision: '0'
+10-31 12:08:47.216 14139 14139 F DEBUG   : ABI: 'arm64'
+10-31 12:08:47.216 14139 14139 F DEBUG   : Timestamp: 2026-10-31 12:08:47.100646741+0000
+10-31 12:08:47.216 14139 14139 F DEBUG   : Process uptime: 3s
+10-31 12:08:47.216 14139 14139 F DEBUG   : Cmdline: ai.sunnypilot.fold3:models
+10-31 12:08:47.216 14139 14139 F DEBUG   : pid: 14097, tid: 14113, name: model-validatio  >>> ai.sunnypilot.fold3:models <<<
+10-31 12:08:47.216 14139 14139 F DEBUG   : uid: 10207
+10-31 12:08:47.216 14139 14139 F DEBUG   : tagged_addr_ctrl: 0000000000000001 (PR_TAGGED_ADDR_ENABLE)
+10-31 12:08:47.216 14139 14139 F DEBUG   : pac_enabled_keys: 000000000000000f (PR_PAC_APIAKEY, PR_PAC_APIBKEY, PR_PAC_APDAKEY, PR_PAC_APDBKEY)
+10-31 12:08:47.216 14139 14139 F DEBUG   : signal 4 (SIGILL), code 1 (ILL_ILLOPC), fault addr 0x00000070e6c42e44
+10-31 12:08:47.216 14139 14139 F DEBUG   :     x0  0000000000000018  x1  0000000000000020  x2  0000000000000018  x3  0000000000000020
+10-31 12:08:47.216 14139 14139 F DEBUG   :     x4  b400007318827628  x5  b4000073188275b8  x6  b400007318827598  x7  b400007318827628
+10-31 12:08:47.216 14139 14139 F DEBUG   :     x8  00000070e7aafcd8  x9  b4000073188275b0  x10 0000000000000000  x11 0000000000000000
+10-31 12:08:47.216 14139 14139 F DEBUG   :     x12 0000000000000000  x13 0000000000000000  x14 0000000000000000  x15 0000000000000000
+10-31 12:08:47.216 14139 14139 F DEBUG   :     x16 00000070e817c5f0  x17 00000074becfc700  x18 0000007196068000  x19 0000000000000020
+10-31 12:08:47.216 14139 14139 F DEBUG   :     x20 0000000000000018  x21 0000000000000070  x22 000000000000006f  x23 00000070e8199450
+10-31 12:08:47.216 14139 14139 F DEBUG   :     x24 00000070e81992a8  x25 0000000000000020  x26 0000000000000018  x27 000000000000006f
+10-31 12:08:47.216 14139 14139 F DEBUG   :     x28 0000007222205ae0  x29 0000007222205850
+10-31 12:08:47.216 14139 14139 F DEBUG   :     lr  00000070e6c49438  sp  0000007222205850  pc  00000070e6c42e44  pst 0000000060000000
+10-31 12:08:47.216 14139 14139 F DEBUG   : 62 total frames
+10-31 12:08:47.216 14139 14139 F DEBUG   : backtrace:
+10-31 12:08:47.216 14139 14139 F DEBUG   :   NOTE: Function names and BuildId information is missing for some frames due
+10-31 12:08:47.216 14139 14139 F DEBUG   :   NOTE: to unreadable libraries. For unwinds of apps, only shared libraries
+10-31 12:08:47.216 14139 14139 F DEBUG   :   NOTE: found under the lib/ directory are readable.
+10-31 12:08:47.216 14139 14139 F DEBUG   :   NOTE: On this device, run setenforce 0 to make the libraries readable.
+10-31 12:08:47.216 14139 14139 F DEBUG   :   NOTE: Unreadable libraries:
+10-31 12:08:47.216 14139 14139 F DEBUG   :   NOTE:   /data/data/ai.sunnypilot.fold3/files/chaquopy/AssetFinder/app/fold3_ort_native.cpython-312.so
+10-31 12:08:47.216 14139 14139 F DEBUG   :       #00 pc 0000000000b62e44  /data/app/~~1zaYeUuto63G9jW55Kxteg==/ai.sunnypilot.fold3-eAd0nSHkNR9ZuQedbuh_Ng==/lib/arm64/libonnxruntime.so (BuildId: bd23a8ba7579c7cc4a3b3d0fdb782643e5f0a513)
+10-31 12:08:47.216 14139 14139 F DEBUG   :       #01 pc 0000000000b69434  /data/app/~~1zaYeUuto63G9jW55Kxteg==/ai.sunnypilot.fold3-eAd0nSHkNR9ZuQedbuh_Ng==/lib/arm64/libonnxruntime.so (BuildId: bd23a8ba7579c7cc4a3b3d0fdb782643e5f0a513)
+10-31 12:08:47.216 14139 14139 F DEBUG   :       #02 pc 000000000198c514  /data/app/~~1zaYeUuto63G9jW55Kxteg==/ai.sunnypilot.fold3-eAd0nSHkNR9ZuQedbuh_Ng==/lib/arm64/libonnxruntime.so (BuildId: bd23a8ba7579c7cc4a3b3d0fdb782643e5f0a513)
+10-31 12:08:47.216 14139 14139 F DEBUG   :       #03 pc 000000000124bb94  /data/app/~~1zaYeUuto63G9jW55Kxteg==/ai.sunnypilot.fold3-eAd0nSHkNR9ZuQedbuh_Ng==/lib/arm64/libonnxruntime.so (BuildId: bd23a8ba7579c7cc4a3b3d0fdb782643e5f0a513)
+10-31 12:08:47.216 14139 14139 F DEBUG   :       #04 pc 000000000124c478  /data/app/~~1zaYeUuto63G9jW55Kxteg==/ai.sunnypilot.fold3-eAd0nSHkNR9ZuQedbuh_Ng==/lib/arm64/libonnxruntime.so (BuildId: bd23a8ba7579c7cc4a3b3d0fdb782643e5f0a513)
+10-31 12:08:47.216 14139 14139 F DEBUG   :       #05 pc 00000000017df3a4  /data/app/~~1zaYeUuto63G9jW55Kxteg==/ai.sunnypilot.fold3-eAd0nSHkNR9ZuQedbuh_Ng==/lib/arm64/libonnxruntime.so (BuildId: bd23a8ba7579c7cc4a3b3d0fdb782643e5f0a513)
+10-31 12:08:47.216 14139 14139 F DEBUG   :       #06 pc 00000000017de1a0  /data/app/~~1zaYeUuto63G9jW55Kxteg==/ai.sunnypilot.fold3-eAd0nSHkNR9ZuQedbuh_Ng==/lib/arm64/libonnxruntime.so (BuildId: bd23a8ba7579c7cc4a3b3d0fdb782643e5f0a513)
+10-31 12:08:47.216 14139 14139 F DEBUG   :       #07 pc 00000000017e7030  /data/app/~~1zaYeUuto63G9jW55Kxteg==/ai.sunnypilot.fold3-eAd0nSHkNR9ZuQedbuh_Ng==/lib/arm64/libonnxruntime.so (BuildId: bd23a8ba7579c7cc4a3b3d0fdb782643e5f0a513)
+10-31 12:08:47.216 14139 14139 F DEBUG   :       #08 pc 00000000017e4768  /data/app/~~1zaYeUuto63G9jW55Kxteg==/ai.sunnypilot.fold3-eAd0nSHkNR9ZuQedbuh_Ng==/lib/arm64/libonnxruntime.so (BuildId: bd23a8ba7579c7cc4a3b3d0fdb782643e5f0a513)
+10-31 12:08:47.216 14139 14139 F DEBUG   :       #09 pc 0000000000c16e98  /data/app/~~1zaYeUuto63G9jW55Kxteg==/ai.sunnypilot.fold3-eAd0nSHkNR9ZuQedbuh_Ng==/lib/arm64/libonnxruntime.so (BuildId: bd23a8ba7579c7cc4a3b3d0fdb782643e5f0a513)
+10-31 12:08:47.216 14139 14139 F DEBUG   :       #10 pc 0000000000c141e0  /data/app/~~1zaYeUuto63G9jW55Kxteg==/ai.sunnypilot.fold3-eAd0nSHkNR9ZuQedbuh_Ng==/lib/arm64/libonnxruntime.so (BuildId: bd23a8ba7579c7cc4a3b3d0fdb782643e5f0a513)
+10-31 12:08:47.216 14139 14139 F DEBUG   :       #11 pc 0000000000cf88f0  /data/app/~~1zaYeUuto63G9jW55Kxteg==/ai.sunnypilot.fold3-eAd0nSHkNR9ZuQedbuh_Ng==/lib/arm64/libonnxruntime.so (BuildId: bd23a8ba7579c7cc4a3b3d0fdb782643e5f0a513)
+10-31 12:08:47.216 14139 14139 F DEBUG   :       #12 pc 0000000000bd380c  /data/app/~~1zaYeUuto63G9jW55Kxteg==/ai.sunnypilot.fold3-eAd0nSHkNR9ZuQedbuh_Ng==/lib/arm64/libonnxruntime.so (BuildId: bd23a8ba7579c7cc4a3b3d0fdb782643e5f0a513)
+10-31 12:08:47.216 14139 14139 F DEBUG   :       #13 pc 000000000000dad0  /data/data/ai.sunnypilot.fold3/files/chaquopy/AssetFinder/app/fold3_ort_native.cpython-312.so
+10-31 12:08:47.216 14139 14139 F DEBUG   :       #14 pc 000000000000b858  /data/data/ai.sunnypilot.fold3/files/chaquopy/AssetFinder/app/fold3_ort_native.cpython-312.so
+10-31 12:08:47.216 14139 14139 F DEBUG   :       #15 pc 00000000002f4324  /data/app/~~1zaYeUuto63G9jW55Kxteg==/ai.sunnypilot.fold3-eAd0nSHkNR9ZuQedbuh_Ng==/lib/arm64/libpython3.12.so (BuildId: 92e1910e755d7f2fe39f4f672b5e6569428b0251)
+10-31 12:08:47.216 14139 14139 F DEBUG   :       #16 pc 00000000002a4ebc  /data/app/~~1zaYeUuto63G9jW55Kxteg==/ai.sunnypilot.fold3-eAd0nSHkNR9ZuQedbuh_Ng==/lib/arm64/libpython3.12.so (_PyObject_MakeTpCall+304) (BuildId: 92e1910e755d7f2fe39f4f672b5e6569428b0251)
+10-31 12:08:47.216 14139 14139 F DEBUG   :       #17 pc 00000000003a992c  /data/app/~~1zaYeUuto63G9jW55Kxteg==/ai.sunnypilot.fold3-eAd0nSHkNR9ZuQedbuh_Ng==/lib/arm64/libpython3.12.so (_PyEval_EvalFrameDefault+18748) (BuildId: 92e1910e755d7f2fe39f4f672b5e6569428b0251)
+10-31 12:08:47.216 14139 14139 F DEBUG   :       #18 pc 00000000002a4c80  /data/app/~~1zaYeUuto63G9jW55Kxteg==/ai.sunnypilot.fold3-eAd0nSHkNR9ZuQedbuh_Ng==/lib/arm64/libpython3.12.so (_PyObject_FastCallDictTstate+136) (BuildId: 92e1910e755d7f2fe39f4f672b5e6569428b0251)
+10-31 12:08:47.216 14139 14139 F DEBUG   :       #19 pc 00000000002a5db0  /data/app/~~1zaYeUuto63G9jW55Kxteg==/ai.sunnypilot.fold3-eAd0nSHkNR9ZuQedbuh_Ng==/lib/arm64/libpython3.12.so (_PyObject_Call_Prepend+140) (BuildId: 92e1910e755d7f2fe39f4f672b5e6569428b0251)
+10-31 12:08:47.216 14139 14139 F DEBUG   :       #20 pc 000000000031549c  /data/app/~~1zaYeUuto63G9jW55Kxteg==/ai.sunnypilot.fold3-eAd0nSHkNR9ZuQedbuh_Ng==/lib/arm64/libpython3.12.so (BuildId: 92e1910e755d7f2fe39f4f672b5e6569428b0251)
+10-31 12:08:47.216 14139 14139 F DEBUG   :       #21 pc 000000000030ded8  /data/app/~~1zaYeUuto63G9jW55Kxteg==/ai.sunnypilot.fold3-eAd0nSHkNR9ZuQedbuh_Ng==/lib/arm64/libpython3.12.so (BuildId: 92e1910e755d7f2fe39f4f672b5e6569428b0251)
+10-31 12:08:47.216 14139 14139 F DEBUG   :       #22 pc 00000000002a4ebc  /data/app/~~1zaYeUuto63G9jW55Kxteg==/ai.sunnypilot.fold3-eAd0nSHkNR9ZuQedbuh_Ng==/lib/arm64/libpython3.12.so (_PyObject_MakeTpCall+304) (BuildId: 92e1910e755d7f2fe39f4f672b5e6569428b0251)
+10-31 12:08:47.216 14139 14139 F DEBUG   :       #23 pc 00000000003a992c  /data/app/~~1zaYeUuto63G9jW55Kxteg==/ai.sunnypilot.fold3-eAd0nSHkNR9ZuQedbuh_Ng==/lib/arm64/libpython3.12.so (_PyEval_EvalFrameDefault+18748) (BuildId: 92e1910e755d7f2fe39f4f672b5e6569428b0251)
+10-31 12:08:47.216 14139 14139 F DEBUG   :       #24 pc 0000000000011c48  /data/app/~~1zaYeUuto63G9jW55Kxteg==/ai.sunnypilot.fold3-eAd0nSHkNR9ZuQedbuh_Ng==/lib/arm64/libchaquopy_java.so (BuildId: 5badb9109527823edf856cbb1ad69439956fcd30)
+10-31 12:08:47.216 14139 14139 F DEBUG   :       #25 pc 00000000000121c8  /data/app/~~1zaYeUuto63G9jW55Kxteg==/ai.sunnypilot.fold3-eAd0nSHkNR9ZuQedbuh_Ng==/lib/arm64/libchaquopy_java.so (Java_com_chaquo_python_PyObject_callAttrThrowsNative+440) (BuildId: 5badb9109527823edf856cbb1ad69439956fcd30)
+10-31 12:08:47.216 14139 14139 F DEBUG   :       #26 pc 0000000000378f70  /apex/com.android.art/lib64/libart.so (art_quick_generic_jni_trampoline+144) (BuildId: dcb9fe2b5c99aa3f1a682a6008427d08)
+10-31 12:08:47.216 14139 14139 F DEBUG   :       #27 pc 0000000000362774  /apex/com.android.art/lib64/libart.so (art_quick_invoke_stub+612) (BuildId: dcb9fe2b5c99aa3f1a682a6008427d08)
+10-31 12:08:47.216 14139 14139 F DEBUG   :       #28 pc 000000000035bd1c  /apex/com.android.art/lib64/libart.so (bool art::interpreter::DoCall<false>(art::ArtMethod*, art::Thread*, art::ShadowFrame&, art::Instruction const*, unsigned short, bool, art::JValue*)+1928) (BuildId: dcb9fe2b5c99aa3f1a682a6008427d08)
+10-31 12:08:47.216 14139 14139 F DEBUG   :       #29 pc 000000000076da48  /apex/com.android.art/lib64/libart.so (void art::interpreter::ExecuteSwitchImplCpp<false>(art::interpreter::SwitchImplContext*)+12208) (BuildId: dcb9fe2b5c99aa3f1a682a6008427d08)
+10-31 12:08:47.216 14139 14139 F DEBUG   :       #30 pc 000000000037b5d8  /apex/com.android.art/lib64/libart.so (ExecuteSwitchImplAsm+8) (BuildId: dcb9fe2b5c99aa3f1a682a6008427d08)
+10-31 12:08:47.216 14139 14139 F DEBUG   :       #31 pc 0000000000002fd0  /data/app/~~1zaYeUuto63G9jW55Kxteg==/ai.sunnypilot.fold3-eAd0nSHkNR9ZuQedbuh_Ng==/base.apk (com.chaquo.python.PyObject.callAttrThrows+0)
+10-31 12:08:47.216 14139 14139 F DEBUG   :       #32 pc 000000000034e21c  /apex/com.android.art/lib64/libart.so (art::interpreter::Execute(art::Thread*, art::CodeItemDataAccessor const&, art::ShadowFrame&, art::JValue, bool, bool) (.__uniq.112435418011751916792819755956732575238.llvm.2845697060370838518)+428) (BuildId: dcb9fe2b5c99aa3f1a682a6008427d08)
+10-31 12:08:47.216 14139 14139 F DEBUG   :       #33 pc 000000000035c5b0  /apex/com.android.art/lib64/libart.so (bool art::interpreter::DoCall<false>(art::ArtMethod*, art::Thread*, art::ShadowFrame&, art::Instruction const*, unsigned short, bool, art::JValue*)+4124) (BuildId: dcb9fe2b5c99aa3f1a682a6008427d08)
+10-31 12:08:47.216 14139 14139 F DEBUG   :       #34 pc 000000000076da48  /apex/com.android.art/lib64/libart.so (void art::interpreter::ExecuteSwitchImplCpp<false>(art::interpreter::SwitchImplContext*)+12208) (BuildId: dcb9fe2b5c99aa3f1a682a6008427d08)
+10-31 12:08:47.216 14139 14139 F DEBUG   :       #35 pc 000000000037b5d8  /apex/com.android.art/lib64/libart.so (ExecuteSwitchImplAsm+8) (BuildId: dcb9fe2b5c99aa3f1a682a6008427d08)
+10-31 12:08:47.216 14139 14139 F DEBUG   :       #36 pc 0000000000002f94  /data/app/~~1zaYeUuto63G9jW55Kxteg==/ai.sunnypilot.fold3-eAd0nSHkNR9ZuQedbuh_Ng==/base.apk (com.chaquo.python.PyObject.callAttr+0)
+10-31 12:08:47.216 14139 14139 F DEBUG   :       #37 pc 000000000034e21c  /apex/com.android.art/lib64/libart.so (art::interpreter::Execute(art::Thread*, art::CodeItemDataAccessor const&, art::ShadowFrame&, art::JValue, bool, bool) (.__uniq.112435418011751916792819755956732575238.llvm.2845697060370838518)+428) (BuildId: dcb9fe2b5c99aa3f1a682a6008427d08)
+10-31 12:08:47.216 14139 14139 F DEBUG   :       #38 pc 000000000035c5b0  /apex/com.android.art/lib64/libart.so (bool art::interpreter::DoCall<false>(art::ArtMethod*, art::Thread*, art::ShadowFrame&, art::Instruction const*, unsigned short, bool, art::JValue*)+4124) (BuildId: dcb9fe2b5c99aa3f1a682a6008427d08)
+10-31 12:08:47.216 14139 14139 F DEBUG   :       #39 pc 000000000076da48  /apex/com.android.art/lib64/libart.so (void art::interpreter::ExecuteSwitchImplCpp<false>(art::interpreter::SwitchImplContext*)+12208) (BuildId: dcb9fe2b5c99aa3f1a682a6008427d08)
+10-31 12:08:47.216 14139 14139 F DEBUG   :       #40 pc 000000000037b5d8  /apex/com.android.art/lib64/libart.so (ExecuteSwitchImplAsm+8) (BuildId: dcb9fe2b5c99aa3f1a682a6008427d08)
+10-31 12:08:47.216 14139 14139 F DEBUG   :       #41 pc 000000000000b098  /data/app/~~1zaYeUuto63G9jW55Kxteg==/ai.sunnypilot.fold3-eAd0nSHkNR9ZuQedbuh_Ng==/base.apk (ai.sunnypilot.fold3.ModelService.lambda$onStartCommand$0+0)
+10-31 12:08:47.216 14139 14139 F DEBUG   :       #42 pc 000000000034e21c  /apex/com.android.art/lib64/libart.so (art::interpreter::Execute(art::Thread*, art::CodeItemDataAccessor const&, art::ShadowFrame&, art::JValue, bool, bool) (.__uniq.112435418011751916792819755956732575238.llvm.2845697060370838518)+428) (BuildId: dcb9fe2b5c99aa3f1a682a6008427d08)
+10-31 12:08:47.216 14139 14139 F DEBUG   :       #43 pc 000000000035c5b0  /apex/com.android.art/lib64/libart.so (bool art::interpreter::DoCall<false>(art::ArtMethod*, art::Thread*, art::ShadowFrame&, art::Instruction const*, unsigned short, bool, art::JValue*)+4124) (BuildId: dcb9fe2b5c99aa3f1a682a6008427d08)
+10-31 12:08:47.216 14139 14139 F DEBUG   :       #44 pc 000000000076da48  /apex/com.android.art/lib64/libart.so (void art::interpreter::ExecuteSwitchImplCpp<false>(art::interpreter::SwitchImplContext*)+12208) (BuildId: dcb9fe2b5c99aa3f1a682a6008427d08)
+10-31 12:08:47.216 14139 14139 F DEBUG   :       #45 pc 000000000037b5d8  /apex/com.android.art/lib64/libart.so (ExecuteSwitchImplAsm+8) (BuildId: dcb9fe2b5c99aa3f1a682a6008427d08)
+10-31 12:08:47.216 14139 14139 F DEBUG   :       #46 pc 000000000000b058  /data/app/~~1zaYeUuto63G9jW55Kxteg==/ai.sunnypilot.fold3-eAd0nSHkNR9ZuQedbuh_Ng==/base.apk (ai.sunnypilot.fold3.ModelService.$r8$lambda$3CmRk_B2f-lxt2PbsCfpFKVfZFQ+0)
+10-31 12:08:47.216 14139 14139 F DEBUG   :       #47 pc 000000000034e21c  /apex/com.android.art/lib64/libart.so (art::interpreter::Execute(art::Thread*, art::CodeItemDataAccessor const&, art::ShadowFrame&, art::JValue, bool, bool) (.__uniq.112435418011751916792819755956732575238.llvm.2845697060370838518)+428) (BuildId: dcb9fe2b5c99aa3f1a682a6008427d08)
+10-31 12:08:47.216 14139 14139 F DEBUG   :       #48 pc 000000000035c5b0  /apex/com.android.art/lib64/libart.so (bool art::interpreter::DoCall<false>(art::ArtMethod*, art::Thread*, art::ShadowFrame&, art::Instruction const*, unsigned short, bool, art::JValue*)+4124) (BuildId: dcb9fe2b5c99aa3f1a682a6008427d08)
+10-31 12:08:47.216 14139 14139 F DEBUG   :       #49 pc 000000000076da48  /apex/com.android.art/lib64/libart.so (void art::interpreter::ExecuteSwitchImplCpp<false>(art::interpreter::SwitchImplContext*)+12208) (BuildId: dcb9fe2b5c99aa3f1a682a6008427d08)
+10-31 12:08:47.216 14139 14139 F DEBUG   :       #50 pc 000000000037b5d8  /apex/com.android.art/lib64/libart.so (ExecuteSwitchImplAsm+8) (BuildId: dcb9fe2b5c99aa3f1a682a6008427d08)
+10-31 12:08:47.216 14139 14139 F DEBUG   :       #51 pc 000000000000af54  /data/app/~~1zaYeUuto63G9jW55Kxteg==/ai.sunnypilot.fold3-eAd0nSHkNR9ZuQedbuh_Ng==/base.apk (ai.sunnypilot.fold3.ModelService$$ExternalSyntheticLambda0.run+0)
+10-31 12:08:47.216 14139 14139 F DEBUG   :       #52 pc 000000000034d5a8  /apex/com.android.art/lib64/libart.so (artQuickToInterpreterBridge+1932) (BuildId: dcb9fe2b5c99aa3f1a682a6008427d08)
+10-31 12:08:47.216 14139 14139 F DEBUG   :       #53 pc 0000000000379098  /apex/com.android.art/lib64/libart.so (art_quick_to_interpreter_bridge+88) (BuildId: dcb9fe2b5c99aa3f1a682a6008427d08)
+10-31 12:08:47.216 14139 14139 F DEBUG   :       #54 pc 000000000001f578  [anon_shmem:dalvik-jit-code-cache] (offset 0x2000000) (java.lang.Thread.run+136)
+10-31 12:08:47.216 14139 14139 F DEBUG   :       #55 pc 0000000000362774  /apex/com.android.art/lib64/libart.so (art_quick_invoke_stub+612) (BuildId: dcb9fe2b5c99aa3f1a682a6008427d08)
+10-31 12:08:47.216 14139 14139 F DEBUG   :       #56 pc 000000000034def0  /apex/com.android.art/lib64/libart.so (art::ArtMethod::Invoke(art::Thread*, unsigned int*, unsigned int, art::JValue*, char const*)+132) (BuildId: dcb9fe2b5c99aa3f1a682a6008427d08)
+10-31 12:08:47.216 14139 14139 F DEBUG   :       #57 pc 00000000009430d8  /apex/com.android.art/lib64/libart.so (art::detail::ShortyTraits<(char)86>::Type art::ArtMethod::InvokeInstance<(char)86>(art::Thread*, art::ObjPtr<art::mirror::Object>, art::detail::ShortyTraits<>::Type...)+60) (BuildId: dcb9fe2b5c99aa3f1a682a6008427d08)
+10-31 12:08:47.216 14139 14139 F DEBUG   :       #58 pc 000000000063e694  /apex/com.android.art/lib64/libart.so (art::Thread::CreateCallback(void*)+1344) (BuildId: dcb9fe2b5c99aa3f1a682a6008427d08)
+10-31 12:08:47.216 14139 14139 F DEBUG   :       #59 pc 000000000063e144  /apex/com.android.art/lib64/libart.so (art::Thread::CreateCallbackWithUffdGc(void*)+8) (BuildId: dcb9fe2b5c99aa3f1a682a6008427d08)
+10-31 12:08:47.216 14139 14139 F DEBUG   :       #60 pc 000000000006c354  /apex/com.android.runtime/lib64/bionic/libc.so (__pthread_start(void*)+196) (BuildId: 1b9fecf834d610f77e641f026ca7269b)
+10-31 12:08:47.216 14139 14139 F DEBUG   :       #61 pc 000000000005efc4  /apex/com.android.runtime/lib64/bionic/libc.so (__start_thread+64) (BuildId: 1b9fecf834d610f77e641f026ca7269b)
+10-31 12:19:40.573 15222 15236 F libc    : Fatal signal 4 (SIGILL), code 1 (ILL_ILLOPC), fault addr 0x70e99d3e44 in tid 15236 (model-validatio), pid 15222 (ot.fold3:models)
+10-31 12:19:40.745 15275 15275 F DEBUG   : *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***
+10-31 12:19:40.745 15275 15275 F DEBUG   : Build fingerprint: 'google/sdk_gphone64_arm64/emu64a:15/AE3A.240806.043/12960925:userdebug/dev-keys'
+10-31 12:19:40.745 15275 15275 F DEBUG   : Revision: '0'
+10-31 12:19:40.745 15275 15275 F DEBUG   : ABI: 'arm64'
+10-31 12:19:40.745 15275 15275 F DEBUG   : Timestamp: 2026-10-31 12:19:40.599109094+0000
+10-31 12:19:40.745 15275 15275 F DEBUG   : Process uptime: 6s
+10-31 12:19:40.745 15275 15275 F DEBUG   : Cmdline: ai.sunnypilot.fold3:models
+10-31 12:19:40.745 15275 15275 F DEBUG   : pid: 15222, tid: 15236, name: model-validatio  >>> ai.sunnypilot.fold3:models <<<
+10-31 12:19:40.745 15275 15275 F DEBUG   : uid: 10207
+10-31 12:19:40.745 15275 15275 F DEBUG   : tagged_addr_ctrl: 0000000000000001 (PR_TAGGED_ADDR_ENABLE)
+10-31 12:19:40.745 15275 15275 F DEBUG   : pac_enabled_keys: 000000000000000f (PR_PAC_APIAKEY, PR_PAC_APIBKEY, PR_PAC_APDAKEY, PR_PAC_APDBKEY)
+10-31 12:19:40.745 15275 15275 F DEBUG   : signal 4 (SIGILL), code 1 (ILL_ILLOPC), fault addr 0x00000070e99d3e44
+10-31 12:19:40.745 15275 15275 F DEBUG   :     x0  0000000000000020  x1  0000000000000009  x2  0000000000000010  x3  0000007222205cd8
+10-31 12:19:40.745 15275 15275 F DEBUG   :     x4  0000000000000010  x5  0000007222205d60  x6  0000007222205cd0  x7  0000007222205b80
+10-31 12:19:40.745 15275 15275 F DEBUG   :     x8  0000000000000010  x9  0000000000000003  x10 0000000000000002  x11 0000000000000003
+10-31 12:19:40.745 15275 15275 F DEBUG   :     x12 0000000000000001  x13 0000000000000001  x14 0000000000000000  x15 0000000000000000
+10-31 12:19:40.745 15275 15275 F DEBUG   :     x16 0000000000000001  x17 00000074bed149e0  x18 00000071969e8000  x19 0000000000000010
+10-31 12:19:40.745 15275 15275 F DEBUG   :     x20 0000000000000009  x21 0000000000000020  x22 0000000000000001  x23 0000000000000020
+10-31 12:19:40.745 15275 15275 F DEBUG   :     x24 0000007222209a80  x25 0000007222209a80  x26 b4000073e8819af0  x27 0000007222205750
+10-31 12:19:40.745 15275 15275 F DEBUG   :     x28 0000000000000000  x29 0000007222205590
+10-31 12:19:40.745 15275 15275 F DEBUG   :     lr  00000070e99d9b90  sp  0000007222205590  pc  00000070e99d3e44  pst 0000000040000000
+10-31 12:19:40.745 15275 15275 F DEBUG   : 64 total frames
+10-31 12:19:40.745 15275 15275 F DEBUG   : backtrace:
+10-31 12:19:40.745 15275 15275 F DEBUG   :   NOTE: Function names and BuildId information is missing for some frames due
+10-31 12:19:40.745 15275 15275 F DEBUG   :   NOTE: to unreadable libraries. For unwinds of apps, only shared libraries
+10-31 12:19:40.745 15275 15275 F DEBUG   :   NOTE: found under the lib/ directory are readable.
+10-31 12:19:40.745 15275 15275 F DEBUG   :   NOTE: On this device, run setenforce 0 to make the libraries readable.
+10-31 12:19:40.745 15275 15275 F DEBUG   :   NOTE: Unreadable libraries:
+10-31 12:19:40.745 15275 15275 F DEBUG   :   NOTE:   /data/data/ai.sunnypilot.fold3/files/chaquopy/AssetFinder/app/fold3_ort_native.cpython-312.so
+10-31 12:19:40.745 15275 15275 F DEBUG   :       #00 pc 0000000000b62e44  /data/app/~~fIgDzlpI8oAV4iI965o3Vw==/ai.sunnypilot.fold3-7B9gI-qEZAv7E-5RY4wWVg==/lib/arm64/libonnxruntime.so (BuildId: bd23a8ba7579c7cc4a3b3d0fdb782643e5f0a513)
+10-31 12:19:40.745 15275 15275 F DEBUG   :       #01 pc 0000000000b68b8c  /data/app/~~fIgDzlpI8oAV4iI965o3Vw==/ai.sunnypilot.fold3-7B9gI-qEZAv7E-5RY4wWVg==/lib/arm64/libonnxruntime.so (BuildId: bd23a8ba7579c7cc4a3b3d0fdb782643e5f0a513)
+10-31 12:19:40.745 15275 15275 F DEBUG   :       #02 pc 000000000136c8f4  /data/app/~~fIgDzlpI8oAV4iI965o3Vw==/ai.sunnypilot.fold3-7B9gI-qEZAv7E-5RY4wWVg==/lib/arm64/libonnxruntime.so (BuildId: bd23a8ba7579c7cc4a3b3d0fdb782643e5f0a513)
+10-31 12:19:40.745 15275 15275 F DEBUG   :       #03 pc 0000000000b750ec  /data/app/~~fIgDzlpI8oAV4iI965o3Vw==/ai.sunnypilot.fold3-7B9gI-qEZAv7E-5RY4wWVg==/lib/arm64/libonnxruntime.so (BuildId: bd23a8ba7579c7cc4a3b3d0fdb782643e5f0a513)
+10-31 12:19:40.745 15275 15275 F DEBUG   :       #04 pc 0000000001369d18  /data/app/~~fIgDzlpI8oAV4iI965o3Vw==/ai.sunnypilot.fold3-7B9gI-qEZAv7E-5RY4wWVg==/lib/arm64/libonnxruntime.so (BuildId: bd23a8ba7579c7cc4a3b3d0fdb782643e5f0a513)
+10-31 12:19:40.745 15275 15275 F DEBUG   :       #05 pc 000000000136adfc  /data/app/~~fIgDzlpI8oAV4iI965o3Vw==/ai.sunnypilot.fold3-7B9gI-qEZAv7E-5RY4wWVg==/lib/arm64/libonnxruntime.so (BuildId: bd23a8ba7579c7cc4a3b3d0fdb782643e5f0a513)
+10-31 12:19:40.745 15275 15275 F DEBUG   :       #06 pc 0000000001813d6c  /data/app/~~fIgDzlpI8oAV4iI965o3Vw==/ai.sunnypilot.fold3-7B9gI-qEZAv7E-5RY4wWVg==/lib/arm64/libonnxruntime.so (BuildId: bd23a8ba7579c7cc4a3b3d0fdb782643e5f0a513)
+10-31 12:19:40.745 15275 15275 F DEBUG   :       #07 pc 00000000018120e4  /data/app/~~fIgDzlpI8oAV4iI965o3Vw==/ai.sunnypilot.fold3-7B9gI-qEZAv7E-5RY4wWVg==/lib/arm64/libonnxruntime.so (BuildId: bd23a8ba7579c7cc4a3b3d0fdb782643e5f0a513)
+10-31 12:19:40.745 15275 15275 F DEBUG   :       #08 pc 000000000182da88  /data/app/~~fIgDzlpI8oAV4iI965o3Vw==/ai.sunnypilot.fold3-7B9gI-qEZAv7E-5RY4wWVg==/lib/arm64/libonnxruntime.so (BuildId: bd23a8ba7579c7cc4a3b3d0fdb782643e5f0a513)
+10-31 12:19:40.745 15275 15275 F DEBUG   :       #09 pc 0000000001816598  /data/app/~~fIgDzlpI8oAV4iI965o3Vw==/ai.sunnypilot.fold3-7B9gI-qEZAv7E-5RY4wWVg==/lib/arm64/libonnxruntime.so (BuildId: bd23a8ba7579c7cc4a3b3d0fdb782643e5f0a513)
+10-31 12:19:40.745 15275 15275 F DEBUG   :       #10 pc 0000000001856764  /data/app/~~fIgDzlpI8oAV4iI965o3Vw==/ai.sunnypilot.fold3-7B9gI-qEZAv7E-5RY4wWVg==/lib/arm64/libonnxruntime.so (BuildId: bd23a8ba7579c7cc4a3b3d0fdb782643e5f0a513)
+10-31 12:19:40.745 15275 15275 F DEBUG   :       #11 pc 00000000018562d8  /data/app/~~fIgDzlpI8oAV4iI965o3Vw==/ai.sunnypilot.fold3-7B9gI-qEZAv7E-5RY4wWVg==/lib/arm64/libonnxruntime.so (BuildId: bd23a8ba7579c7cc4a3b3d0fdb782643e5f0a513)
+10-31 12:19:40.745 15275 15275 F DEBUG   :       #12 pc 0000000001858108  /data/app/~~fIgDzlpI8oAV4iI965o3Vw==/ai.sunnypilot.fold3-7B9gI-qEZAv7E-5RY4wWVg==/lib/arm64/libonnxruntime.so (BuildId: bd23a8ba7579c7cc4a3b3d0fdb782643e5f0a513)
+10-31 12:19:40.745 15275 15275 F DEBUG   :       #13 pc 0000000000c1d52c  /data/app/~~fIgDzlpI8oAV4iI965o3Vw==/ai.sunnypilot.fold3-7B9gI-qEZAv7E-5RY4wWVg==/lib/arm64/libonnxruntime.so (BuildId: bd23a8ba7579c7cc4a3b3d0fdb782643e5f0a513)
+10-31 12:19:40.745 15275 15275 F DEBUG   :       #14 pc 0000000000c1ff04  /data/app/~~fIgDzlpI8oAV4iI965o3Vw==/ai.sunnypilot.fold3-7B9gI-qEZAv7E-5RY4wWVg==/lib/arm64/libonnxruntime.so (BuildId: bd23a8ba7579c7cc4a3b3d0fdb782643e5f0a513)
+10-31 12:19:40.745 15275 15275 F DEBUG   :       #15 pc 0000000000bd3e50  /data/app/~~fIgDzlpI8oAV4iI965o3Vw==/ai.sunnypilot.fold3-7B9gI-qEZAv7E-5RY4wWVg==/lib/arm64/libonnxruntime.so (BuildId: bd23a8ba7579c7cc4a3b3d0fdb782643e5f0a513)
+10-31 12:19:40.745 15275 15275 F DEBUG   :       #16 pc 0000000000010660  /data/data/ai.sunnypilot.fold3/files/chaquopy/AssetFinder/app/fold3_ort_native.cpython-312.so
+10-31 12:19:40.745 15275 15275 F DEBUG   :       #17 pc 000000000000c4b4  /data/data/ai.sunnypilot.fold3/files/chaquopy/AssetFinder/app/fold3_ort_native.cpython-312.so
+10-31 12:19:40.745 15275 15275 F DEBUG   :       #18 pc 00000000002f4324  /data/app/~~fIgDzlpI8oAV4iI965o3Vw==/ai.sunnypilot.fold3-7B9gI-qEZAv7E-5RY4wWVg==/lib/arm64/libpython3.12.so (BuildId: 92e1910e755d7f2fe39f4f672b5e6569428b0251)
+10-31 12:19:40.745 15275 15275 F DEBUG   :       #19 pc 00000000002a4ebc  /data/app/~~fIgDzlpI8oAV4iI965o3Vw==/ai.sunnypilot.fold3-7B9gI-qEZAv7E-5RY4wWVg==/lib/arm64/libpython3.12.so (_PyObject_MakeTpCall+304) (BuildId: 92e1910e755d7f2fe39f4f672b5e6569428b0251)
+10-31 12:19:40.745 15275 15275 F DEBUG   :       #20 pc 00000000003a992c  /data/app/~~fIgDzlpI8oAV4iI965o3Vw==/ai.sunnypilot.fold3-7B9gI-qEZAv7E-5RY4wWVg==/lib/arm64/libpython3.12.so (_PyEval_EvalFrameDefault+18748) (BuildId: 92e1910e755d7f2fe39f4f672b5e6569428b0251)
+10-31 12:19:40.745 15275 15275 F DEBUG   :       #21 pc 00000000002a4cfc  /data/app/~~fIgDzlpI8oAV4iI965o3Vw==/ai.sunnypilot.fold3-7B9gI-qEZAv7E-5RY4wWVg==/lib/arm64/libpython3.12.so (_PyObject_FastCallDictTstate+260) (BuildId: 92e1910e755d7f2fe39f4f672b5e6569428b0251)
+10-31 12:19:40.745 15275 15275 F DEBUG   :       #22 pc 00000000002a5db0  /data/app/~~fIgDzlpI8oAV4iI965o3Vw==/ai.sunnypilot.fold3-7B9gI-qEZAv7E-5RY4wWVg==/lib/arm64/libpython3.12.so (_PyObject_Call_Prepend+140) (BuildId: 92e1910e755d7f2fe39f4f672b5e6569428b0251)
+10-31 12:19:40.745 15275 15275 F DEBUG   :       #23 pc 0000000000314450  /data/app/~~fIgDzlpI8oAV4iI965o3Vw==/ai.sunnypilot.fold3-7B9gI-qEZAv7E-5RY4wWVg==/lib/arm64/libpython3.12.so (BuildId: 92e1910e755d7f2fe39f4f672b5e6569428b0251)
+10-31 12:19:40.745 15275 15275 F DEBUG   :       #24 pc 00000000002a4ebc  /data/app/~~fIgDzlpI8oAV4iI965o3Vw==/ai.sunnypilot.fold3-7B9gI-qEZAv7E-5RY4wWVg==/lib/arm64/libpython3.12.so (_PyObject_MakeTpCall+304) (BuildId: 92e1910e755d7f2fe39f4f672b5e6569428b0251)
+10-31 12:19:40.745 15275 15275 F DEBUG   :       #25 pc 00000000003a992c  /data/app/~~fIgDzlpI8oAV4iI965o3Vw==/ai.sunnypilot.fold3-7B9gI-qEZAv7E-5RY4wWVg==/lib/arm64/libpython3.12.so (_PyEval_EvalFrameDefault+18748) (BuildId: 92e1910e755d7f2fe39f4f672b5e6569428b0251)
+10-31 12:19:40.745 15275 15275 F DEBUG   :       #26 pc 0000000000011c48  /data/app/~~fIgDzlpI8oAV4iI965o3Vw==/ai.sunnypilot.fold3-7B9gI-qEZAv7E-5RY4wWVg==/lib/arm64/libchaquopy_java.so (BuildId: 5badb9109527823edf856cbb1ad69439956fcd30)
+10-31 12:19:40.746 15275 15275 F DEBUG   :       #27 pc 00000000000121c8  /data/app/~~fIgDzlpI8oAV4iI965o3Vw==/ai.sunnypilot.fold3-7B9gI-qEZAv7E-5RY4wWVg==/lib/arm64/libchaquopy_java.so (Java_com_chaquo_python_PyObject_callAttrThrowsNative+440) (BuildId: 5badb9109527823edf856cbb1ad69439956fcd30)
+10-31 12:19:40.746 15275 15275 F DEBUG   :       #28 pc 0000000000378f70  /apex/com.android.art/lib64/libart.so (art_quick_generic_jni_trampoline+144) (BuildId: dcb9fe2b5c99aa3f1a682a6008427d08)
+10-31 12:19:40.746 15275 15275 F DEBUG   :       #29 pc 0000000000362774  /apex/com.android.art/lib64/libart.so (art_quick_invoke_stub+612) (BuildId: dcb9fe2b5c99aa3f1a682a6008427d08)
+10-31 12:19:40.746 15275 15275 F DEBUG   :       #30 pc 000000000035bd1c  /apex/com.android.art/lib64/libart.so (bool art::interpreter::DoCall<false>(art::ArtMethod*, art::Thread*, art::ShadowFrame&, art::Instruction const*, unsigned short, bool, art::JValue*)+1928) (BuildId: dcb9fe2b5c99aa3f1a682a6008427d08)
+10-31 12:19:40.746 15275 15275 F DEBUG   :       #31 pc 000000000076da48  /apex/com.android.art/lib64/libart.so (void art::interpreter::ExecuteSwitchImplCpp<false>(art::interpreter::SwitchImplContext*)+12208) (BuildId: dcb9fe2b5c99aa3f1a682a6008427d08)
+10-31 12:19:40.746 15275 15275 F DEBUG   :       #32 pc 000000000037b5d8  /apex/com.android.art/lib64/libart.so (ExecuteSwitchImplAsm+8) (BuildId: dcb9fe2b5c99aa3f1a682a6008427d08)
+10-31 12:19:40.746 15275 15275 F DEBUG   :       #33 pc 0000000000002fd0  /data/app/~~fIgDzlpI8oAV4iI965o3Vw==/ai.sunnypilot.fold3-7B9gI-qEZAv7E-5RY4wWVg==/base.apk (com.chaquo.python.PyObject.callAttrThrows+0)
+10-31 12:19:40.746 15275 15275 F DEBUG   :       #34 pc 000000000034e21c  /apex/com.android.art/lib64/libart.so (art::interpreter::Execute(art::Thread*, art::CodeItemDataAccessor const&, art::ShadowFrame&, art::JValue, bool, bool) (.__uniq.112435418011751916792819755956732575238.llvm.2845697060370838518)+428) (BuildId: dcb9fe2b5c99aa3f1a682a6008427d08)
+10-31 12:19:40.746 15275 15275 F DEBUG   :       #35 pc 000000000035c5b0  /apex/com.android.art/lib64/libart.so (bool art::interpreter::DoCall<false>(art::ArtMethod*, art::Thread*, art::ShadowFrame&, art::Instruction const*, unsigned short, bool, art::JValue*)+4124) (BuildId: dcb9fe2b5c99aa3f1a682a6008427d08)
+10-31 12:19:40.746 15275 15275 F DEBUG   :       #36 pc 000000000076da48  /apex/com.android.art/lib64/libart.so (void art::interpreter::ExecuteSwitchImplCpp<false>(art::interpreter::SwitchImplContext*)+12208) (BuildId: dcb9fe2b5c99aa3f1a682a6008427d08)
+10-31 12:19:40.746 15275 15275 F DEBUG   :       #37 pc 000000000037b5d8  /apex/com.android.art/lib64/libart.so (ExecuteSwitchImplAsm+8) (BuildId: dcb9fe2b5c99aa3f1a682a6008427d08)
+10-31 12:19:40.746 15275 15275 F DEBUG   :       #38 pc 0000000000002f94  /data/app/~~fIgDzlpI8oAV4iI965o3Vw==/ai.sunnypilot.fold3-7B9gI-qEZAv7E-5RY4wWVg==/base.apk (com.chaquo.python.PyObject.callAttr+0)
+10-31 12:19:40.746 15275 15275 F DEBUG   :       #39 pc 000000000034e21c  /apex/com.android.art/lib64/libart.so (art::interpreter::Execute(art::Thread*, art::CodeItemDataAccessor const&, art::ShadowFrame&, art::JValue, bool, bool) (.__uniq.112435418011751916792819755956732575238.llvm.2845697060370838518)+428) (BuildId: dcb9fe2b5c99aa3f1a682a6008427d08)
+10-31 12:19:40.746 15275 15275 F DEBUG   :       #40 pc 000000000035c5b0  /apex/com.android.art/lib64/libart.so (bool art::interpreter::DoCall<false>(art::ArtMethod*, art::Thread*, art::ShadowFrame&, art::Instruction const*, unsigned short, bool, art::JValue*)+4124) (BuildId: dcb9fe2b5c99aa3f1a682a6008427d08)
+10-31 12:19:40.746 15275 15275 F DEBUG   :       #41 pc 000000000076da48  /apex/com.android.art/lib64/libart.so (void art::interpreter::ExecuteSwitchImplCpp<false>(art::interpreter::SwitchImplContext*)+12208) (BuildId: dcb9fe2b5c99aa3f1a682a6008427d08)
+10-31 12:19:40.746 15275 15275 F DEBUG   :       #42 pc 000000000037b5d8  /apex/com.android.art/lib64/libart.so (ExecuteSwitchImplAsm+8) (BuildId: dcb9fe2b5c99aa3f1a682a6008427d08)
+10-31 12:19:40.746 15275 15275 F DEBUG   :       #43 pc 000000000000b098  /data/app/~~fIgDzlpI8oAV4iI965o3Vw==/ai.sunnypilot.fold3-7B9gI-qEZAv7E-5RY4wWVg==/base.apk (ai.sunnypilot.fold3.ModelService.lambda$onStartCommand$0+0)
+10-31 12:19:40.746 15275 15275 F DEBUG   :       #44 pc 000000000034e21c  /apex/com.android.art/lib64/libart.so (art::interpreter::Execute(art::Thread*, art::CodeItemDataAccessor const&, art::ShadowFrame&, art::JValue, bool, bool) (.__uniq.112435418011751916792819755956732575238.llvm.2845697060370838518)+428) (BuildId: dcb9fe2b5c99aa3f1a682a6008427d08)
+10-31 12:19:40.746 15275 15275 F DEBUG   :       #45 pc 000000000035c5b0  /apex/com.android.art/lib64/libart.so (bool art::interpreter::DoCall<false>(art::ArtMethod*, art::Thread*, art::ShadowFrame&, art::Instruction const*, unsigned short, bool, art::JValue*)+4124) (BuildId: dcb9fe2b5c99aa3f1a682a6008427d08)
+10-31 12:19:40.746 15275 15275 F DEBUG   :       #46 pc 000000000076da48  /apex/com.android.art/lib64/libart.so (void art::interpreter::ExecuteSwitchImplCpp<false>(art::interpreter::SwitchImplContext*)+12208) (BuildId: dcb9fe2b5c99aa3f1a682a6008427d08)
+10-31 12:19:40.746 15275 15275 F DEBUG   :       #47 pc 000000000037b5d8  /apex/com.android.art/lib64/libart.so (ExecuteSwitchImplAsm+8) (BuildId: dcb9fe2b5c99aa3f1a682a6008427d08)
+10-31 12:19:40.746 15275 15275 F DEBUG   :       #48 pc 000000000000b058  /data/app/~~fIgDzlpI8oAV4iI965o3Vw==/ai.sunnypilot.fold3-7B9gI-qEZAv7E-5RY4wWVg==/base.apk (ai.sunnypilot.fold3.ModelService.$r8$lambda$3CmRk_B2f-lxt2PbsCfpFKVfZFQ+0)
+10-31 12:19:40.746 15275 15275 F DEBUG   :       #49 pc 000000000034e21c  /apex/com.android.art/lib64/libart.so (art::interpreter::Execute(art::Thread*, art::CodeItemDataAccessor const&, art::ShadowFrame&, art::JValue, bool, bool) (.__uniq.112435418011751916792819755956732575238.llvm.2845697060370838518)+428) (BuildId: dcb9fe2b5c99aa3f1a682a6008427d08)
+10-31 12:19:40.746 15275 15275 F DEBUG   :       #50 pc 000000000035c5b0  /apex/com.android.art/lib64/libart.so (bool art::interpreter::DoCall<false>(art::ArtMethod*, art::Thread*, art::ShadowFrame&, art::Instruction const*, unsigned short, bool, art::JValue*)+4124) (BuildId: dcb9fe2b5c99aa3f1a682a6008427d08)
+10-31 12:19:40.746 15275 15275 F DEBUG   :       #51 pc 000000000076da48  /apex/com.android.art/lib64/libart.so (void art::interpreter::ExecuteSwitchImplCpp<false>(art::interpreter::SwitchImplContext*)+12208) (BuildId: dcb9fe2b5c99aa3f1a682a6008427d08)
+10-31 12:19:40.746 15275 15275 F DEBUG   :       #52 pc 000000000037b5d8  /apex/com.android.art/lib64/libart.so (ExecuteSwitchImplAsm+8) (BuildId: dcb9fe2b5c99aa3f1a682a6008427d08)
+10-31 12:19:40.746 15275 15275 F DEBUG   :       #53 pc 000000000000af54  /data/app/~~fIgDzlpI8oAV4iI965o3Vw==/ai.sunnypilot.fold3-7B9gI-qEZAv7E-5RY4wWVg==/base.apk (ai.sunnypilot.fold3.ModelService$$ExternalSyntheticLambda0.run+0)
+10-31 12:19:40.746 15275 15275 F DEBUG   :       #54 pc 000000000034d5a8  /apex/com.android.art/lib64/libart.so (artQuickToInterpreterBridge+1932) (BuildId: dcb9fe2b5c99aa3f1a682a6008427d08)
+10-31 12:19:40.746 15275 15275 F DEBUG   :       #55 pc 0000000000379098  /apex/com.android.art/lib64/libart.so (art_quick_to_interpreter_bridge+88) (BuildId: dcb9fe2b5c99aa3f1a682a6008427d08)
+10-31 12:19:40.746 15275 15275 F DEBUG   :       #56 pc 00000000000046a8  [anon_shmem:dalvik-jit-code-cache] (offset 0x2000000) (java.lang.Thread.run+136)
+10-31 12:19:40.746 15275 15275 F DEBUG   :       #57 pc 0000000000362774  /apex/com.android.art/lib64/libart.so (art_quick_invoke_stub+612) (BuildId: dcb9fe2b5c99aa3f1a682a6008427d08)
+10-31 12:19:40.746 15275 15275 F DEBUG   :       #58 pc 000000000034def0  /apex/com.android.art/lib64/libart.so (art::ArtMethod::Invoke(art::Thread*, unsigned int*, unsigned int, art::JValue*, char const*)+132) (BuildId: dcb9fe2b5c99aa3f1a682a6008427d08)
+10-31 12:19:40.746 15275 15275 F DEBUG   :       #59 pc 00000000009430d8  /apex/com.android.art/lib64/libart.so (art::detail::ShortyTraits<(char)86>::Type art::ArtMethod::InvokeInstance<(char)86>(art::Thread*, art::ObjPtr<art::mirror::Object>, art::detail::ShortyTraits<>::Type...)+60) (BuildId: dcb9fe2b5c99aa3f1a682a6008427d08)
+10-31 12:19:40.746 15275 15275 F DEBUG   :       #60 pc 000000000063e694  /apex/com.android.art/lib64/libart.so (art::Thread::CreateCallback(void*)+1344) (BuildId: dcb9fe2b5c99aa3f1a682a6008427d08)
+10-31 12:19:40.746 15275 15275 F DEBUG   :       #61 pc 000000000063e144  /apex/com.android.art/lib64/libart.so (art::Thread::CreateCallbackWithUffdGc(void*)+8) (BuildId: dcb9fe2b5c99aa3f1a682a6008427d08)
+10-31 12:19:40.746 15275 15275 F DEBUG   :       #62 pc 000000000006c354  /apex/com.android.runtime/lib64/bionic/libc.so (__pthread_start(void*)+196) (BuildId: 1b9fecf834d610f77e641f026ca7269b)
+10-31 12:19:40.746 15275 15275 F DEBUG   :       #63 pc 000000000005efc4  /apex/com.android.runtime/lib64/bionic/libc.so (__start_thread+64) (BuildId: 1b9fecf834d610f77e641f026ca7269b)

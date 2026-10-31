@@ -67,6 +67,11 @@ class DiagnosticWarp:
   """
   def __init__(self, width, height, stride, uv_offset, output_width, output_height, luma=False):
     import numpy as np
+    try:
+      from fold3_ort_native import gather_rows_u8
+      self.gather = gather_rows_u8
+    except ImportError:
+      self.gather = None
     if min(width, height) <= 0 or width % 2 or height % 2 or stride < width or uv_offset < stride * height:
       raise ValueError("Invalid NV12 layout")
     self.width, self.height, self.stride, self.uv_offset = width, height, stride, uv_offset
@@ -75,12 +80,17 @@ class DiagnosticWarp:
     if ow % 2 or oh % 2:
       raise ValueError("Even model dimensions required")
     scale = max(width / ow, height / oh)
-    x = np.rint((np.arange(ow) - (ow - 1) / 2) * scale + (width - 1) / 2).clip(0, width - 1).astype(np.int32)
-    y = np.rint((np.arange(oh) - (oh - 1) / 2) * scale + (height - 1) / 2).clip(0, height - 1).astype(np.int32)
-    self.y_indices = (y[:, None] * stride + x[None, :]).ravel()
+    x = np.rint((np.arange(ow) - (ow - 1) / 2) * scale + (width - 1) / 2).clip(0, width - 1).astype(np.intp)
+    y = np.rint((np.arange(oh) - (oh - 1) / 2) * scale + (height - 1) / 2).clip(0, height - 1).astype(np.intp)
+    self.columns, self.rows = x, y * stride
+    # The native path retains 2,400 row/column indices instead of 1,382,400
+    # full offsets for the driver input; repeated scaled rows become memcpy.
+    if self.gather is None:
+      self.y_indices = (self.rows[:, None] + x[None, :]).ravel()
     self.y = np.empty((oh, ow), dtype=np.uint8)
     if not luma:
       self.uv_indices = (uv_offset + (y[::2, None] // 2) * stride + (x[None, ::2] // 2) * 2).ravel()
+      self.v_indices = self.uv_indices + 1
       self.u, self.v = np.empty((oh // 2, ow // 2), dtype=np.uint8), np.empty((oh // 2, ow // 2), dtype=np.uint8)
       self.output = np.empty((6, oh // 2, ow // 2), dtype=np.uint8)
 
@@ -89,11 +99,16 @@ class DiagnosticWarp:
     source = np.frombuffer(data, dtype=np.uint8)
     if len(source) < self.uv_offset + self.stride * self.height // 2:
       raise ValueError("Truncated NV12 frame")
-    np.take(source, self.y_indices, out=self.y.reshape(-1))
+    # All indices were bounded above and the full source length was checked.
+    # clip avoids NumPy's unconditional temporary for mode="raise".
+    if self.gather is None:
+      np.take(source, self.y_indices, out=self.y.reshape(-1), mode="clip")
+    else:
+      self.gather(source, self.rows, self.columns, self.y)
     if self.luma:
       return self.y.reshape(1, -1)
-    np.take(source, self.uv_indices, out=self.u.reshape(-1))
-    np.take(source, self.uv_indices + 1, out=self.v.reshape(-1))
+    np.take(source, self.uv_indices, out=self.u.reshape(-1), mode="clip")
+    np.take(source, self.v_indices, out=self.v.reshape(-1), mode="clip")
     for target, plane in zip(self.output, (self.y[::2, ::2], self.y[1::2, ::2], self.y[::2, 1::2], self.y[1::2, 1::2], self.u, self.v), strict=True):
       target[:] = plane
     return self.output
@@ -114,6 +129,11 @@ def camera_available(client):
   return client.is_connected() and client.num_buffers > 0
 
 
+def inference_delay_ns(last_started, now):
+  # Bound model work to the upstream 20 Hz cadence without catching up after a stall.
+  return max(0, last_started + 50_000_000 - now)
+
+
 def run(report, driver=False):
   import numpy as np
   from fold3_ort import OrtModel
@@ -126,7 +146,8 @@ def run(report, driver=False):
   gate = FrameGate(sensors)
   model, warps, inputs = None, {}, {}
   count, published, late, resets, nonfinite = 0, 0, 0, 0, 0
-  last_inference, last_retry = 0, 0
+  last_inference, last_retry, last_started = 0, 0, 0
+  stages = {name: deque(maxlen=4096) for name in ("input_age", "prepare", "inference", "output_age")}
   pm = messaging.PubMaster(["driverStateV2"] if driver else ["modelV2", "cameraOdometry"])
   if driver:
     from openpilot.selfdrive.modeld.dmonitoringmodeld import slice_outputs, parse_model_output, get_driverstate_packet
@@ -135,6 +156,9 @@ def run(report, driver=False):
     from openpilot.selfdrive.modeld.fill_model_msg import PublishState, fill_model_msg, fill_pose_msg
     parser, publish_state = Parser(), PublishState()
   while True:
+    delay = inference_delay_ns(last_started, time.monotonic_ns())
+    if delay:
+      time.sleep(delay / 1e9)
     now = time.monotonic_ns()
     if now - last_retry > 200_000_000:
       for client in clients.values():
@@ -164,7 +188,7 @@ def run(report, driver=False):
     if model is None:
       report.update("initializing_diagnostic_model")
       path, metadata = model_asset("dmonitoring_model" if driver else "driving_supercombo")
-      model = OrtModel(path, "cpu", threads=4)
+      model = OrtModel(path, "cpu", threads=2)
       inputs = {key: np.zeros(shape, dtype=metadata["input_dtypes"][key]) for key, shape in metadata["inputs"].items()}
       slices = {key: slice(*value) for key, value in metadata["output_slices"].items()}
       if not driver:
@@ -178,6 +202,9 @@ def run(report, driver=False):
           value.fill(0)
       resets += 1
     started = time.monotonic_ns()
+    last_started = started
+    oldest = min(stamp for stamp, _ in pair.values())
+    stages["input_age"].append(started - oldest)
     for i, sensor in enumerate(sensors):
       stamp, (frame_id, data, width, height, stride, uv_offset) = pair[sensor]
       key = (sensor, width, height, stride, uv_offset)
@@ -192,7 +219,9 @@ def run(report, driver=False):
     # Missing mount calibration is deliberately not replaced by learned/default
     # calibration. Zero calib/action/desire below belong only to this invalid
     # diagnostic output, never the qualified driving model runtime.
+    prepared_at = time.monotonic_ns()
     outputs = model(inputs)
+    inferred_at = time.monotonic_ns()
     finite = carry_model_state(inputs, outputs)
     elapsed = time.monotonic_ns() - started
     report.samples.append(elapsed)
@@ -200,7 +229,11 @@ def run(report, driver=False):
     report.data["deadline_misses"] += int(elapsed >= 50_000_000)
     count += 1
     last_inference = newest
-    stale = time.monotonic_ns() - min(stamp for stamp, _ in pair.values()) > gate.age
+    output_age = time.monotonic_ns() - oldest
+    stages["prepare"].append(prepared_at - started)
+    stages["inference"].append(inferred_at - prepared_at)
+    stages["output_age"].append(output_age)
+    stale = output_age > gate.age
     if not finite:
       nonfinite += 1
       resets += 1
@@ -223,7 +256,10 @@ def run(report, driver=False):
       pm.send("modelV2", message)
       pm.send("cameraOdometry", pose)
       published += 1
+    if time.monotonic() - report.last_write >= 1:
+      report.data["stage_p99_ms"] = {key: float(np.percentile(values, 99)) / 1e6 for key, values in stages.items()}
     report.update("running", valid=False, calibrated=False, computed_frames=count, published_frames=published,
                   rejected_frames=gate.rejected, late_outputs=late, nonfinite_outputs=nonfinite, recurrent_resets=resets, work_ms=elapsed / 1e6,
-                  projection="uncalibrated preview affine; not suitable for driving", backend="ORT CPU, 4 threads",
-                  numerical_parity="failed on original synthetic reference; diagnostic only")
+                  projection="uncalibrated preview affine; not suitable for driving", backend="ORT CPU, 2 threads",
+                  numerical_parity="failed on original synthetic reference; diagnostic only", target_hz=20,
+                  stage_sampling="last 4096 computations")

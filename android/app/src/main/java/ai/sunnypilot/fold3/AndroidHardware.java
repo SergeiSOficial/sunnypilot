@@ -23,8 +23,10 @@ public final class AndroidHardware implements SensorEventListener {
         BatteryManager battery = context.getSystemService(BatteryManager.class);
         Intent state = context.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
         if (state == null) return Double.NaN;
-        return -battery.getIntProperty(BatteryManager.BATTERY_PROPERTY_CURRENT_NOW) *
-            state.getIntExtra(BatteryManager.EXTRA_VOLTAGE, 0) / 1e9;
+        int currentMicroamps = battery.getIntProperty(BatteryManager.BATTERY_PROPERTY_CURRENT_NOW);
+        int voltageMillivolts = state.getIntExtra(BatteryManager.EXTRA_VOLTAGE, 0);
+        if (currentMicroamps == Integer.MIN_VALUE || voltageMillivolts <= 0) return Double.NaN;
+        return -(double) currentMicroamps * voltageMillivolts / 1e9;
     }
     public static int thermalStatus() { return context.getSystemService(PowerManager.class).getCurrentThermalStatus(); }
     public static void openNetworkSettings() {

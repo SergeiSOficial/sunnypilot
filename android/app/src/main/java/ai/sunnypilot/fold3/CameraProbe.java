@@ -114,6 +114,7 @@ final class CameraProbe implements AutoCloseable {
         final int rotation, outputWidth, outputHeight;
         final JSONObject metadata;
         volatile long lastArrivalMs;
+        volatile boolean closing;
         long metadataFailures, uncapturedRequests, lostBuffers;
         Stream(String id, int width, int height, VisionPublisher publisher) throws Exception {
             label = id;
@@ -140,7 +141,7 @@ final class CameraProbe implements AutoCloseable {
             java.nio.file.Files.move(temporary, destination, java.nio.file.StandardCopyOption.REPLACE_EXISTING);
             reader.setOnImageAvailableListener(source -> {
                 try (Image image = source.acquireLatestImage()) {
-                    if (image == null) return;
+                    if (image == null || closing) return;
                     Image.Plane[] p = image.getPlanes();
                     long start = System.nanoTime();
                     long hash = NativeBridge.packNv12(p[0].getBuffer().slice(), p[0].getRowStride(), p[0].getPixelStride(),
@@ -167,10 +168,11 @@ final class CameraProbe implements AutoCloseable {
                 .put("delivery_future_timestamps", stats.futureDeliveries)
                 .put("frame_interval_p99_ns", stats.percentile(false, .99));
         }
-        public void close() { reader.close(); }
+        public void close() { reader.setOnImageAvailableListener(null, null); reader.close(); }
     }
-    private CameraDevice open(String id, AtomicReference<String> failure) throws Exception {
+    private CameraDevice open(String id, AtomicReference<String> failure, List<CountDownLatch> closures) throws Exception {
         CountDownLatch done = new CountDownLatch(1);
+        CountDownLatch closed = new CountDownLatch(1);
         AtomicBoolean abandoned = new AtomicBoolean();
         AtomicReference<CameraDevice> result = new AtomicReference<>();
         manager.openCamera(id, new CameraDevice.StateCallback() {
@@ -181,14 +183,16 @@ final class CameraProbe implements AutoCloseable {
             }
             public void onDisconnected(CameraDevice device) { failure.set("camera_disconnected:" + id); device.close(); done.countDown(); }
             public void onError(CameraDevice device, int error) { failure.set("camera_error:" + id + ":" + error); device.close(); done.countDown(); }
+            public void onClosed(CameraDevice device) { closed.countDown(); }
         }, handler);
+        closures.add(closed);
         if (!done.await(8, TimeUnit.SECONDS)) {
             abandoned.set(true);
             if (result.get() != null) result.get().close();
             throw new IllegalStateException("open timeout: " + id);
         }
         CameraDevice device = result.get();
-        if (device == null) throw new IllegalStateException(failure.get());
+        if (device == null || failure.get() != null) throw new IllegalStateException(failure.get());
         return device;
     }
     private CameraCaptureSession session(CameraDevice camera, List<Stream> streams, boolean physical,
@@ -216,7 +220,18 @@ final class CameraProbe implements AutoCloseable {
             throw new IllegalStateException("session timeout: " + camera.getId());
         }
         if (result.get() == null) throw new IllegalStateException(failure.get());
-        CaptureRequest.Builder request = camera.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW);
+        CaptureRequest.Builder request = camera.createCaptureRequest(CameraDevice.TEMPLATE_RECORD);
+        // Use only advertised low-latency modes; Samsung's preview processing can
+        // otherwise consume most of the 100 ms sensor-to-output budget.
+        CameraCharacteristics characteristics = manager.getCameraCharacteristics(camera.getId());
+        setIfSupported(request, CaptureRequest.NOISE_REDUCTION_MODE, CaptureRequest.NOISE_REDUCTION_MODE_OFF,
+            characteristics.get(CameraCharacteristics.NOISE_REDUCTION_AVAILABLE_NOISE_REDUCTION_MODES));
+        setIfSupported(request, CaptureRequest.EDGE_MODE, CaptureRequest.EDGE_MODE_OFF,
+            characteristics.get(CameraCharacteristics.EDGE_AVAILABLE_EDGE_MODES));
+        setIfSupported(request, CaptureRequest.CONTROL_VIDEO_STABILIZATION_MODE, CaptureRequest.CONTROL_VIDEO_STABILIZATION_MODE_OFF,
+            characteristics.get(CameraCharacteristics.CONTROL_AVAILABLE_VIDEO_STABILIZATION_MODES));
+        setIfSupported(request, CaptureRequest.LENS_OPTICAL_STABILIZATION_MODE, CaptureRequest.LENS_OPTICAL_STABILIZATION_MODE_OFF,
+            characteristics.get(CameraCharacteristics.LENS_INFO_AVAILABLE_OPTICAL_STABILIZATION));
         for (Stream stream : streams) request.addTarget(stream.reader.getSurface());
         Range<Integer>[] ranges = manager.getCameraCharacteristics(camera.getId()).get(CameraCharacteristics.CONTROL_AE_AVAILABLE_TARGET_FPS_RANGES);
         if (ranges != null && Arrays.asList(ranges).contains(new Range<>(30, 30)))
@@ -226,15 +241,19 @@ final class CameraProbe implements AutoCloseable {
                 // A request failure is not a device/session death. Keep measuring
                 // recovery and actual frame freshness, but never hide lost metadata.
                 for (Stream stream : streams) {
+                    if (stream.closing) continue;
                     stream.metadataFailures++;
                     if (!f.wasImageCaptured()) stream.uncapturedRequests++;
                 }
             }
             public void onCaptureBufferLost(CameraCaptureSession s, CaptureRequest r, android.view.Surface target, long frame) {
-                for (Stream stream : streams) if (stream.reader.getSurface().equals(target)) stream.lostBuffers++;
+                for (Stream stream : streams) if (!stream.closing && stream.reader.getSurface().equals(target)) stream.lostBuffers++;
             }
         }, handler);
         return result.get();
+    }
+    private static void setIfSupported(CaptureRequest.Builder request, CaptureRequest.Key<Integer> key, int value, int[] modes) {
+        if (modes != null && Arrays.stream(modes).anyMatch(mode -> mode == value)) request.set(key, value);
     }
     JSONObject attempt(String[] ids, String logical, int width, int height, long durationMs) throws Exception {
         JSONObject out = new JSONObject().put("camera_ids", new JSONArray(ids)).put("width", width).put("height", height)
@@ -242,6 +261,7 @@ final class CameraProbe implements AutoCloseable {
         List<CameraDevice> devices = new ArrayList<>();
         List<CameraCaptureSession> sessions = new ArrayList<>();
         List<Stream> streams = new ArrayList<>();
+        List<CountDownLatch> closures = new ArrayList<>();
         AtomicReference<String> failure = new AtomicReference<>();
         long started = android.os.SystemClock.elapsedRealtime();
         VisionPublisher publisher = null;
@@ -263,11 +283,11 @@ final class CameraProbe implements AutoCloseable {
             publisher = new VisionPublisher(ipcDirectory, ids, rotation % 180 == 0 ? width : height, rotation % 180 == 0 ? height : width);
             for (String id : ids) streams.add(new Stream(id, width, height, publisher));
             if (logical != null) {
-                CameraDevice device = open(logical, failure); devices.add(device);
+                CameraDevice device = open(logical, failure, closures); devices.add(device);
                 sessions.add(session(device, streams, true, failure));
             } else {
                 for (Stream stream : streams) {
-                    CameraDevice device = open(stream.label, failure); devices.add(device);
+                    CameraDevice device = open(stream.label, failure, closures); devices.add(device);
                     sessions.add(session(device, Collections.singletonList(stream), false, failure));
                 }
             }
@@ -276,6 +296,9 @@ final class CameraProbe implements AutoCloseable {
             while (android.os.SystemClock.elapsedRealtime() < end && failure.get() == null) {
                 Thread.sleep(Math.max(1, Math.min(1000, end - android.os.SystemClock.elapsedRealtime())));
                 checkThermalStatus();
+                if (context.getSystemService(android.hardware.display.DisplayManager.class)
+                    .getDisplay(android.view.Display.DEFAULT_DISPLAY).getRotation() * 90 != displayDegrees)
+                    failure.compareAndSet(null, "display_rotation_changed");
                 long now = android.os.SystemClock.elapsedRealtime();
                 for (Stream stream : streams) {
                     long arrival = stream.lastArrivalMs;
@@ -287,10 +310,24 @@ final class CameraProbe implements AutoCloseable {
             }
         } catch (Exception e) { failure.set(e.getClass().getSimpleName() + ": " + e.getMessage()); }
         finally {
-            for (CameraCaptureSession s : sessions) s.close();
+            for (Stream stream : streams) stream.closing = true;
+            for (CameraCaptureSession s : sessions) {
+                try { s.stopRepeating(); s.abortCaptures(); }
+                catch (CameraAccessException | IllegalStateException e) { failure.compareAndSet(null, "capture_stop_failed:" + e); }
+                s.close();
+            }
             for (CameraDevice d : devices) d.close();
-            // Drain already dispatched image callbacks before reading their final statistics.
-            CountDownLatch drained = new CountDownLatch(1); handler.post(drained::countDown); drained.await(3, TimeUnit.SECONDS);
+            CountDownLatch drained = new CountDownLatch(1);
+            handler.post(() -> {
+                try { for (Stream stream : streams) stream.close(); }
+                finally { drained.countDown(); }
+            });
+            boolean callbacksDrained = drained.await(3, TimeUnit.SECONDS);
+            boolean camerasClosed = true;
+            for (CountDownLatch closed : closures) camerasClosed &= closed.await(3, TimeUnit.SECONDS);
+            out.put("image_callbacks_drained", callbacksDrained).put("camera_close_callbacks_complete", camerasClosed)
+                .put("request_template", "record").put("stabilization", "disabled when advertised");
+            if (!callbacksDrained || !camerasClosed) failure.compareAndSet(null, "camera_cleanup_timeout");
             if (publisher != null) publisher.close();
             if (ownership != null) ownership.release();
             if (owner != null) owner.close();
@@ -312,7 +349,6 @@ final class CameraProbe implements AutoCloseable {
             out.put("distinct_sensor_evidence", distinct);
             healthy &= overlap > 1_000_000_000L && distinct;
         }
-        for (Stream stream : streams) stream.close();
         out.put("streams", results).put("elapsed_ms", android.os.SystemClock.elapsedRealtime() - started)
             .put("completed_requested_duration", failure.get() == null)
             .put("status", failure.get() == null && healthy ? "passed" : "failed");
@@ -334,5 +370,9 @@ final class CameraProbe implements AutoCloseable {
         Arrays.sort(skew, 0, count);
         return skew[(int)Math.ceil((count - 1) * .99)];
     }
-    public void close() { thread.quitSafely(); }
+    public void close() throws InterruptedException {
+        thread.quitSafely();
+        thread.join(3000);
+        if (thread.isAlive()) throw new IllegalStateException("Camera callback thread did not exit");
+    }
 }

@@ -1,0 +1,53 @@
+{
+  "serial": "RFCR81Y1TBJ",
+  "command": [
+    ".venv/bin/python",
+    "android/scripts/validate_models.py",
+    "--serial",
+    "RFCR81Y1TBJ",
+    "--adb",
+    "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+    "--profile",
+    "ort-fallback",
+    "--report",
+    "android/reports/fold3-model-ort-fallback-assets.json"
+  ],
+  "vehicle_tx_enabled": false,
+  "status": "passed",
+  "before_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "8919 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 28.6,
+    "thermal_override": false
+  },
+  "apk_sha256": "43deee6cc6bedfb170f2503746cb1107fc184394355874f7ec0946fb86754996",
+  "baseline": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "8919 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 28.3,
+    "thermal_override": false,
+    "idle_seconds": 32.4779763330007
+  },
+  "returncode": 0,
+  "after_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "8919 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.4,
+    "thermal_override": false
+  }
+}

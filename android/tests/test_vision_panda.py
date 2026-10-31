@@ -13,7 +13,7 @@ import numpy as np
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "android/app/src/main/python"))
-from fold3_vision import DiagnosticWarp, FrameGate, camera_available, carry_model_state
+from fold3_vision import DiagnosticWarp, FrameGate, camera_available, carry_model_state, inference_delay_ns
 
 spec = importlib.util.spec_from_file_location("stage_panda", ROOT / "android/scripts/stage_panda.py")
 stage = importlib.util.module_from_spec(spec)
@@ -25,6 +25,12 @@ from fold3_panda import Decoder, receive, require_silent
 
 
 class VisionTest(unittest.TestCase):
+  def test_model_cadence_is_20hz_without_catchup_after_stalls(self):
+    self.assertEqual(inference_delay_ns(100_000_000, 125_000_000), 25_000_000)
+    self.assertEqual(inference_delay_ns(100_000_000, 150_000_000), 0)
+    self.assertEqual(inference_delay_ns(100_000_000, 500_000_000), 0)
+    self.assertEqual(inference_delay_ns(500_000_000, 500_000_001), 49_999_999)
+
   def test_nonfinite_prediction_resets_recurrence_and_is_rejected(self):
     inputs = {"state_feat": np.ones((1, 2)), "traffic_convention": np.array([[0., 1.]])}
     for bad in (np.nan, np.inf, -np.inf):

@@ -66,8 +66,11 @@ final class UsbProbe implements AutoCloseable {
         }, "panda-usb-probe").start();
     }
     private void save(String value) {
-        try { Files.write(new java.io.File(context.getFilesDir(), receiveOnly ? "panda-rx.json" : "usb-report.json").toPath(), value.getBytes(java.nio.charset.StandardCharsets.UTF_8)); }
-        catch (java.io.IOException e) { android.util.Log.e("Fold3Usb", "Cannot save report", e); }
+        try {
+            JSONObject report = new JSONObject(value).put("updated_elapsed_ms", android.os.SystemClock.elapsedRealtime());
+            Files.write(new java.io.File(context.getFilesDir(), receiveOnly ? "panda-rx.json" : "usb-report.json").toPath(),
+                report.toString().getBytes(java.nio.charset.StandardCharsets.UTF_8));
+        } catch (java.io.IOException | org.json.JSONException e) { android.util.Log.e("Fold3Usb", "Cannot save report", e); }
     }
     public void close() { context.unregisterReceiver(receiver); }
 }

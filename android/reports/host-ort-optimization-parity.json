@@ -1,0 +1,158 @@
+{
+  "vehicle_tx_enabled": false,
+  "models": {
+    "dmonitoring_model": {
+      "operators": {
+        "Cast": 2,
+        "Sub": 1,
+        "Mul": 1,
+        "Div": 1,
+        "Reshape": 3,
+        "Transpose": 2,
+        "Conv": 46,
+        "Gelu": 30,
+        "Add": 10,
+        "ReduceMean": 1,
+        "Gemm": 53,
+        "Concat": 2,
+        "Relu": 39,
+        "Slice": 10
+      },
+      "initializers": {
+        "10": 201,
+        "7": 8
+      },
+      "profiles": {
+        "strict": {
+          "elapsed_s": 0.07904720900114626,
+          "outputs": {
+            "outputs": {
+              "max_abs_error": 0.00390625,
+              "passed": false
+            }
+          }
+        },
+        "basic": {
+          "elapsed_s": 0.05417745799059048,
+          "outputs": {
+            "outputs": {
+              "max_abs_error": 0.00390625,
+              "passed": false
+            }
+          }
+        },
+        "default": {
+          "elapsed_s": 0.053869750001467764,
+          "outputs": {
+            "outputs": {
+              "max_abs_error": 0.0,
+              "passed": true
+            }
+          }
+        }
+      }
+    },
+    "driving_supercombo": {
+      "operators": {
+        "Slice": 11,
+        "Unsqueeze": 4,
+        "Concat": 8,
+        "Reshape": 9,
+        "Gather": 3,
+        "ReduceMax": 1,
+        "Transpose": 7,
+        "Cast": 7,
+        "Sub": 1,
+        "Div": 3,
+        "Conv": 60,
+        "Gelu": 20,
+        "Mul": 19,
+        "Add": 47,
+        "ReduceMean": 2,
+        "Relu": 64,
+        "Sigmoid": 4,
+        "Gemm": 82,
+        "ReduceL2": 2,
+        "Clip": 2,
+        "Expand": 2,
+        "Identity": 3,
+        "GatherND": 1,
+        "MatMul": 8,
+        "LayerNormalization": 2,
+        "Squeeze": 3,
+        "Where": 1,
+        "Softmax": 1
+      },
+      "initializers": {
+        "7": 29,
+        "10": 315,
+        "9": 1
+      },
+      "profiles": {
+        "strict": {
+          "elapsed_s": 0.0901395829860121,
+          "outputs": {
+            "outputs": {
+              "max_abs_error": 0.21875,
+              "passed": false
+            },
+            "next_state_img_q": {
+              "max_abs_error": 0.0,
+              "passed": true
+            },
+            "next_state_desire_q": {
+              "max_abs_error": 0.0,
+              "passed": true
+            },
+            "next_state_feat_q": {
+              "max_abs_error": 0.000457763671875,
+              "passed": false
+            }
+          }
+        },
+        "basic": {
+          "elapsed_s": 0.09690362500259653,
+          "outputs": {
+            "outputs": {
+              "max_abs_error": 0.03125,
+              "passed": false
+            },
+            "next_state_img_q": {
+              "max_abs_error": 0.0,
+              "passed": true
+            },
+            "next_state_desire_q": {
+              "max_abs_error": 0.0,
+              "passed": true
+            },
+            "next_state_feat_q": {
+              "max_abs_error": 0.0001220703125,
+              "passed": true
+            }
+          }
+        },
+        "default": {
+          "elapsed_s": 0.10817604199110065,
+          "outputs": {
+            "outputs": {
+              "max_abs_error": 0.0,
+              "passed": true
+            },
+            "next_state_img_q": {
+              "max_abs_error": 0.0,
+              "passed": true
+            },
+            "next_state_desire_q": {
+              "max_abs_error": 0.0,
+              "passed": true
+            },
+            "next_state_feat_q": {
+              "max_abs_error": 0.0,
+              "passed": true
+            }
+          }
+        }
+      }
+    }
+  }
+}

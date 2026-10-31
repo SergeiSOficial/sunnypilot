@@ -1,0 +1,64 @@
+{
+  "serial": "emulator-5560",
+  "command": [
+    "/Users/sergios/sunnypilot/.venv/bin/python",
+    "android/scripts/validate_lifecycle.py",
+    "--serial",
+    "emulator-5560",
+    "--adb",
+    "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+    "--resize",
+    "--report",
+    "android/reports/emulator-final-wrapper-lifecycle.json"
+  ],
+  "vehicle_tx_enabled": false,
+  "status": "passed",
+  "before_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "351 android.hardware.camera.provider.ranchu",
+      "352 android.hardware.camera.provider@2.7-service-google",
+      "424 cameraserver"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.8,
+    "thermal_override": false
+  },
+  "apk_sha256": "e5347db807f6551886d7de706d6ebb939c51dcd25c5c0ade1cd57b7fb24941ee",
+  "baseline": {
+    "processes": [],
+    "camera_provider_processes": [
+      "351 android.hardware.camera.provider.ranchu",
+      "352 android.hardware.camera.provider@2.7-service-google",
+      "424 cameraserver"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.8,
+    "thermal_override": false,
+    "idle_seconds": 31.872001290990738
+  },
+  "runtime": {
+    "manager_pid": 3106,
+    "ui_pid": 3183,
+    "simulation": true
+  },
+  "returncode": 0,
+  "after_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "351 android.hardware.camera.provider.ranchu",
+      "352 android.hardware.camera.provider@2.7-service-google",
+      "424 cameraserver"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.8,
+    "thermal_override": false
+  },
+  "manual_intervention": true,
+  "manual_recovery_report": "emulator-wrapper-manual-recovery.json",
+  "unattended_startup_status": "failed",
+  "scope": "Lifecycle/resize passed after closing an observed System UI ANR dialog; does not establish unattended cold-start reliability"
+}

@@ -1,0 +1,80 @@
+{
+  "purpose": "Device validation of the checked-in experiment --runtime launcher",
+  "vehicle_tx_enabled": false,
+  "previous_manager": {
+    "pid": 2672,
+    "simulation": true,
+    "vehicle_tx_enabled": false,
+    "engagement_allowed": false,
+    "engagement_blocker": "camera calibration, model parity/performance and physical Panda qualification incomplete",
+    "processes": {
+      "Controls": {
+        "daemon": "controlsd",
+        "pid": 2708,
+        "phase": "waiting_for_selfdrive_state",
+        "error": "",
+        "last_progress_ms": 135220,
+        "ticks": 2783,
+        "restarts": 0
+      },
+      "Monitoring": {
+        "daemon": "dmonitoringd",
+        "pid": 2711,
+        "phase": "waiting_for_driver_model",
+        "error": "",
+        "last_progress_ms": 134295,
+        "ticks": 50,
+        "restarts": 0
+      },
+      "Simulator": {
+        "daemon": "sim_bridge",
+        "pid": 2712,
+        "phase": "waiting_for_adb",
+        "error": "",
+        "last_progress_ms": 134375,
+        "ticks": 50,
+        "restarts": 0
+      }
+    },
+    "updated_elapsed_ms": 135224
+  },
+  "previous_ui-report": {
+    "pid": 2790,
+    "backend": "Raylib Android NativeActivity",
+    "vehicle_tx_enabled": false,
+    "status": "running",
+    "full_upstream_ui": true,
+    "frames": 1,
+    "mean_fps": 0.5660316482320776,
+    "width": 2160,
+    "height": 1080,
+    "surface_size": [
+      2960,
+      1440
+    ],
+    "last_frame_seconds": 0.0,
+    "last_cpu_seconds": 0.0896720000000073,
+    "recent_p99_frame_ms": 0.0,
+    "recent_p99_cpu_ms": 89.6720000000073
+  },
+  "returncode": 0,
+  "status": "passed",
+  "after_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "351 android.hardware.camera.provider.ranchu",
+      "352 android.hardware.camera.provider@2.7-service-google",
+      "424 cameraserver"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.8,
+    "thermal_override": false
+  },
+  "apk_sha256": "e5347db807f6551886d7de706d6ebb939c51dcd25c5c0ade1cd57b7fb24941ee",
+  "emulator_shutdown": "OK: killing emulator, bye bye\nOK",
+  "manual_intervention": true,
+  "manual_recovery_report": "emulator-wrapper-manual-recovery.json",
+  "unattended_startup_status": "failed",
+  "scope": "Lifecycle/resize passed after closing an observed System UI ANR dialog; does not establish unattended cold-start reliability"
+}

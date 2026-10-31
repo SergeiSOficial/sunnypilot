@@ -22,6 +22,7 @@ public final class ModelService extends Service {
             .setSmallIcon(android.R.drawable.ic_menu_info_details).setContentText("Diagnostic workload; vehicle transmission disabled").build());
         String profile = intent == null ? "baseline" : intent.getStringExtra("model_profile");
         final String selected = profile == null ? "baseline" : profile;
+        final double started = System.currentTimeMillis() / 1000.0;
         new Thread(() -> {
             try {
                 PythonRuntime.start(this);
@@ -29,7 +30,7 @@ public final class ModelService extends Service {
             } catch (Exception e) {
                 try {
                     Files.write(new File(getFilesDir(), "model-progress.txt").toPath(), e.toString().getBytes(StandardCharsets.UTF_8));
-                    String failure = new org.json.JSONObject().put("status", "blocked").put("error", e.toString())
+                    String failure = new org.json.JSONObject().put("status", "blocked").put("error", e.toString()).put("started_utc", started)
                         .put("completed_utc", java.time.Instant.now().toString()).put("vehicle_tx_enabled", false).toString(2);
                     Files.write(new File(getFilesDir(), "model-report.json").toPath(), failure.getBytes(StandardCharsets.UTF_8));
                 } catch (Exception writeError) { android.util.Log.e("Fold3Models", "Cannot save model failure", writeError); }

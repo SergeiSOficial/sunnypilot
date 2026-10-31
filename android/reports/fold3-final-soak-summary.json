@@ -1,0 +1,170 @@
+{
+  "diagnostic_status": "passed",
+  "error": null,
+  "requested_seconds": 1800,
+  "host_observed_seconds": 1817.1772357910086,
+  "camera_status": "passed",
+  "recoveries": 0,
+  "camera_sessions": [
+    {
+      "camera_ids": [
+        "0",
+        "1"
+      ],
+      "width": 1280,
+      "height": 720,
+      "logical_camera": null,
+      "requested_duration_ms": 1799982,
+      "image_callbacks_drained": true,
+      "camera_close_callbacks_complete": true,
+      "request_template": "record",
+      "stabilization": "disabled when advertised",
+      "overlap_ns": 1799725835151,
+      "nearest_skew_p99_ns": 16503014,
+      "skew_sampling": "last 4096 timestamps per stream, shared overlap only",
+      "distinct_sensor_evidence": true,
+      "streams": [
+        {
+          "sensor_id": "0",
+          "width": 1280,
+          "height": 720,
+          "image_rotation_applied_degrees": 0,
+          "output_width": 1280,
+          "output_height": 720,
+          "display_degrees_at_session_start": 90,
+          "mirrored": false,
+          "sensor_orientation": 90,
+          "timestamp_source": 1,
+          "intrinsic_calibration": [
+            2777.7778,
+            2777.7778,
+            0,
+            0,
+            0
+          ],
+          "lens_distortion": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "visionipc_valid": false,
+          "visionipc_stream": 0,
+          "focal_lengths_mm": [
+            5
+          ],
+          "frames": 53964,
+          "fps": 29.98031955588153,
+          "first_timestamp_ns": 90291630856677,
+          "last_timestamp_ns": 92091578315523,
+          "timestamp_errors": 0,
+          "changed_frames": 53963,
+          "metadata_failures": 0,
+          "uncaptured_requests": 0,
+          "lost_buffers": 0,
+          "packing_errors": 0,
+          "packing_p99_ns": 6197135,
+          "delivery_age_p99_ns": 84427637,
+          "delivery_over_100ms": 28,
+          "delivery_future_timestamps": 0,
+          "frame_interval_p99_ns": 33507083
+        },
+        {
+          "sensor_id": "1",
+          "width": 1280,
+          "height": 720,
+          "image_rotation_applied_degrees": 0,
+          "output_width": 1280,
+          "output_height": 720,
+          "display_degrees_at_session_start": 90,
+          "mirrored": false,
+          "sensor_orientation": 270,
+          "timestamp_source": 1,
+          "intrinsic_calibration": [
+            2704.918,
+            2704.918,
+            0,
+            0,
+            0
+          ],
+          "lens_distortion": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "visionipc_valid": false,
+          "visionipc_stream": 1,
+          "focal_lengths_mm": [
+            3.3
+          ],
+          "frames": 54003,
+          "fps": 30.005580853922513,
+          "first_timestamp_ns": 90291852480372,
+          "last_timestamp_ns": 92091584345684,
+          "timestamp_errors": 0,
+          "changed_frames": 54002,
+          "metadata_failures": 0,
+          "uncaptured_requests": 0,
+          "lost_buffers": 0,
+          "packing_errors": 0,
+          "packing_p99_ns": 6179532,
+          "delivery_age_p99_ns": 94310754,
+          "delivery_over_100ms": 64,
+          "delivery_future_timestamps": 0,
+          "frame_interval_p99_ns": 33296355
+        }
+      ],
+      "elapsed_ms": 1801596,
+      "completed_requested_duration": true,
+      "status": "passed"
+    }
+  ],
+  "max_sampled_thermal_status": 3,
+  "max_sampled_skin_c": 44.6,
+  "thermal_override_observed": false,
+  "pss_kib_after_60s_min": 938038,
+  "pss_kib_after_60s_max": 970094,
+  "resource_sample_count": 59,
+  "resource_sampling_seconds": 30,
+  "dm": {
+    "backend": "ORT CPU, 2 threads",
+    "computed_frames": 25909,
+    "published_frames": 0,
+    "late_outputs": 25909,
+    "deadline_misses": 19786,
+    "p99_work_ms": 82.566666,
+    "stage_p99_ms": {
+      "input_age": 99.8853412,
+      "prepare": 3.76633325,
+      "inference": 79.62898125000001,
+      "output_age": 177.68084015
+    },
+    "nonfinite_outputs": 0,
+    "recurrent_resets": 25,
+    "rejected_frames": 17828
+  },
+  "ui": {
+    "frames": 54300,
+    "mean_fps": 29.961289773310174,
+    "recent_p99_frame_ms": 34.24489498138428,
+    "recent_p99_cpu_ms": 7.285625004442409
+  },
+  "cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "8919 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 3,
+    "skin_c": 43.1,
+    "thermal_override": false
+  },
+  "vehicle_tx_enabled": false,
+  "perception_acceptance": "failed",
+  "scope": "Road 0 + driver 1, invalid diagnostic DM, Raylib UI and Android sensors. Road inference waits for missing sensor 2; no localization/planning/active physical controls/Panda.",
+  "percentile_scope": "Camera last 4096 timestamps, model work last 10000 computations, model stages last 4096, UI last 3000 frames. Cumulative counts cover the run; final percentiles are rolling windows."
+}
