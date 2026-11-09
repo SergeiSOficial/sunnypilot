@@ -47,6 +47,31 @@ def tiny_model():
 
 
 class LiteRTHalfBoundariesTest(unittest.TestCase):
+  def test_rounding_only_selected_consumer(self):
+    model = s.ModelT.InitFromObj(s.Model.GetRootAsModel(tiny_model(), 0))
+    graph = model.subgraphs[0]
+    second = s.TensorT()
+    second.name, second.shape, second.type, second.buffer = 'other_output', np.array([1, 1], np.int32), s.TensorType.FLOAT32, 0
+    graph.tensors.append(second)
+    op = s.OperatorT()
+    op.opcodeIndex, op.inputs, op.outputs = 1, np.array([3], np.int32), np.array([5], np.int32)
+    graph.operators.append(op)
+    graph.outputs = np.array([4, 5], np.int32)
+    builder = flatbuffers.Builder(1024)
+    builder.Finish(model.Pack(builder), file_identifier=b'TFL3')
+    source = bytes(builder.Output())
+    modified = patch(source, ['dense'], consumer_outputs=['output'])
+    runner = Interpreter(model_content=modified, num_threads=1,
+                         experimental_op_resolver_type=OpResolverType.BUILTIN_WITHOUT_DEFAULT_DELEGATES)
+    runner.allocate_tensors()
+    runner.set_tensor(runner.get_input_details()[0]['index'], np.array([[0.7, 0.8]], np.float32))
+    runner.invoke()
+    values = {d['name']: runner.get_tensor(d['index']) for d in runner.get_output_details()}
+    self.assertNotEqual(values['output'].item(), values['other_output'].item())
+    np.testing.assert_array_equal(values['output'], values['other_output'].astype(np.float16).astype(np.float32))
+    with self.assertRaisesRegex(ValueError, 'not a direct consumer'):
+      patch(source, ['dense'], consumer_outputs=['input'])
+
   def test_rounding_is_executed_and_source_unchanged(self):
     source = tiny_model()
     modified = patch(source, ['dense'])

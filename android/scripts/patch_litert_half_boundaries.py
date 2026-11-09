@@ -15,9 +15,12 @@ def digest(data):
   return hashlib.sha256(data).hexdigest()
 
 
-def patch(data, names, producer=s.BuiltinOperator.FULLY_CONNECTED):
+def patch(data, names, producer=s.BuiltinOperator.FULLY_CONNECTED, consumer_outputs=None):
   if not names or len(set(names)) != len(names):
     raise ValueError('Tensor names must be nonempty and unique')
+  if consumer_outputs is not None and (len(names) != 1 or not consumer_outputs
+                                        or len(set(consumer_outputs)) != len(consumer_outputs)):
+    raise ValueError('Selective consumers require one target and unique output names')
   if producer not in (s.BuiltinOperator.FULLY_CONNECTED, s.BuiltinOperator.SQRT,
                       s.BuiltinOperator.MUL, s.BuiltinOperator.CONCATENATION, s.BuiltinOperator.ADD,
                       s.BuiltinOperator.RESHAPE):
@@ -48,6 +51,14 @@ def patch(data, names, producer=s.BuiltinOperator.FULLY_CONNECTED):
         producers[int(output)] = index
   if set(producers) != target_ids:
     raise ValueError('Target producer missing')
+  selected = None
+  if consumer_outputs is not None:
+    target = next(iter(target_ids))
+    consumers = {text(graph.tensors[int(out)].name): index
+                 for index, op in enumerate(graph.operators) if target in op.inputs for out in op.outputs}
+    if not set(consumer_outputs) <= consumers.keys():
+      raise ValueError('Selected output is not a direct consumer of the target')
+    selected = {consumers[name] for name in consumer_outputs}
   code = s.OperatorCodeT()
   code.builtinCode = s.BuiltinOperator.CAST
   code.deprecatedBuiltinCode = min(code.builtinCode, 127)
@@ -56,8 +67,9 @@ def patch(data, names, producer=s.BuiltinOperator.FULLY_CONNECTED):
   model.operatorCodes.append(code)
   replacements = {}
   operations = []
-  for operator in graph.operators:
-    operator.inputs = np.array([replacements.get(int(i), int(i)) for i in operator.inputs], dtype=np.int32)
+  for operator_index, operator in enumerate(graph.operators):
+    if selected is None or operator_index in selected:
+      operator.inputs = np.array([replacements.get(int(i), int(i)) for i in operator.inputs], dtype=np.int32)
     operations.append(operator)
     for output in operator.outputs:
       index = int(output)
@@ -104,6 +116,7 @@ def main():
   parser.add_argument('--source-sha256', required=True)
   parser.add_argument('--tensor', action='append', required=True)
   parser.add_argument('--producer', choices=('fully-connected', 'sqrt', 'mul', 'concat', 'add', 'reshape'), default='fully-connected')
+  parser.add_argument('--consumer-output', action='append', help='Limit rounding to this direct consumer output')
   parser.add_argument('--output', type=Path, required=True)
   args = parser.parse_args()
   if args.output.exists():
@@ -114,11 +127,11 @@ def main():
   producer = {'fully-connected': s.BuiltinOperator.FULLY_CONNECTED, 'sqrt': s.BuiltinOperator.SQRT,
               'mul': s.BuiltinOperator.MUL, 'concat': s.BuiltinOperator.CONCATENATION,
               'add': s.BuiltinOperator.ADD, 'reshape': s.BuiltinOperator.RESHAPE}[args.producer]
-  result = patch(source, args.tensor, producer)
+  result = patch(source, args.tensor, producer, args.consumer_output)
   args.output.write_bytes(result)
   print(json.dumps({'diagnostic_only': True, 'qualified': False, 'vehicle_tx_enabled': False,
                     'source_sha256': digest(source), 'derived_sha256': digest(result), 'tensors': args.tensor,
-                    'producer': args.producer}, indent=2))
+                    'producer': args.producer, 'consumer_outputs': args.consumer_output}, indent=2))
 
 
 if __name__ == '__main__':

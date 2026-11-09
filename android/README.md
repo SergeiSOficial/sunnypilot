@@ -1,5 +1,23 @@
 # Fold 3 Android runtime port
 
+## Git LFS for this fork
+
+The upstream model objects use the Hugging Face LFS endpoint in `.lfsconfig`.
+Three diagnostic objects added on this branch are stored in the fork's GitHub
+LFS endpoint. For a fresh checkout, skip automatic LFS downloads, pull the
+upstream objects excluding those three paths, then pull those paths from GitHub:
+
+```sh
+GIT_LFS_SKIP_SMUDGE=1 git clone --branch codex/fold3-android-port https://github.com/SergeiSOficial/sunnypilot.git
+cd sunnypilot
+FOLD3_LFS='android/reports/full-model-controls-20261101/candidate45za-attention-probe.onnx,android/reports/full-model-controls-20261101/diagnostics/sigmoid-tag.onnx,android/reports/remaining-seven-20261104/controls-baseline45zp-sched.txt'
+git lfs pull --exclude="$FOLD3_LFS"
+git -c lfs.url=https://github.com/SergeiSOficial/sunnypilot.git/info/lfs lfs pull --include="$FOLD3_LFS"
+```
+
+Credentials or access may be needed for either endpoint. The configured LFS
+push endpoint is the GitHub fork; do not assume it contains upstream objects.
+
 Latest local artifact: [candidate66 convolution residual recovery](reports/weight-residual-recovery-20261108/README.md). The matching APK is verified on the Fold 3 and ARM64 Android 15 emulator. All 795 original-reference comparisons, 251 host tests and 30 instrumentation tests on each device pass. Inference p99 is 202.939 ms for driver and 383.425 ms for road; all timing samples exceed 50 ms. The shortcut is not accepted as an overall performance improvement. Fold controls work p99 is 2.256 ms; complete-cycle p99 is 12.229 ms and still fails. Three-camera transport works, but freshness and independent rear identity remain unqualified. The host-GPU MetaDrive repeat passes; mounted calibration and physical vehicle checks remain blocked. TX is compiled out, engagement disabled and cooling optimization deferred.
 
 This branch hosts controlsd, driver monitoring, localization, calibration,

@@ -1,5 +1,46 @@
 # Linux converter and emulator follow-up
 
+## 9 November: residual precision and selective consumers
+
+**PARTIAL / NOT QUALIFIED.** Supplying the original pre-cast FP32 residual
+`InsertedPrecisionFreeCast_model/p_add_3` and original `model/p_linear_9`
+simultaneously to the host LiteRT suffix with the original FP16 rounding after
+`p_add_4` clears the suffix output tolerance failures on seeds 42 / 7 / 123
+(baseline for that suffix: **44 / 78 / 5**). This is an intervention with
+reference values, not executable inference using real accelerator inputs.
+The two-output ONNX tap preserved public outputs bit-exactly for these seeds;
+intervention can still change execution. Supplying the rounded half residual
+instead gave **61 / 81 / 73** failures, demonstrating that using the wrong
+side of the rounding boundary changes the result.
+
+The original graph sends the FP32 residual directly to the skip add while a
+cast FP16 value feeds the second layer normalization. The diagnostic rounding
+patcher can now select specific consumers, and a synthetic test confirms the
+untouched branch remains unrounded. Restoring that selective layer-normalization
+input boundary in the suffix that already rounds `p_add_4` yielded **52 / 84 /
+15** output mismatches; all three seeds regress against its **44 / 78 / 5**
+baseline. The derived diagnostic SHA256 is
+`c619bb317cfc34665148759a2fd4ff4474617940c209763678cb1a285d48ab35`.
+Applying only the selective normalization input boundary, without the `p_add_4`
+rounding, also regressed all three seeds: **46 / 34 / 69** against the **42 /
+25 / 62** baseline. Its SHA256 is
+`bc0b990f45a5fded8d36770ecc139dd5a8a61d6ec8f1f8899be6a347d677a01f`.
+Do not promote these graphs. The errors may interact across multiple boundaries;
+the converted prefix, recurrent state, replay and actual GPU remain unqualified.
+
+The intervention and selective rounding helpers passed focused host tests. No
+new APK, device benchmark or production backend change was made. The 50 ms
+deadline, vehicle TX prohibition and engagement block remain unchanged.
+
+To reproduce with fresh output paths, define `VENV` and `BASE` as in the next
+section and use the separately hashed `suffix-history-add4-half.tflite`:
+
+```sh
+"$VENV/bin/python" android/scripts/intervene_litert_suffix.py --sections "$BASE/rewritten-sections" --conversion "$BASE/rewritten-suffix" --model "$BASE/suffix-history-add4-half.tflite" --derived-sha256 9466b986590338782ee9d290338b3ecd4a6040d2300b0fd7e0e5b44442cb10fc --onnx-tensor InsertedPrecisionFreeCast_model/p_add_3 --litert-tensor InsertedPrecisionFreeCast_model/p_add_3 --onnx-tensor model/p_linear_9 --litert-tensor model/p_linear_9 --output "$NEW_INTERVENTION_DIR"
+"$VENV/bin/python" android/scripts/patch_litert_half_boundaries.py --source "$BASE/suffix-history-add4-half.tflite" --source-sha256 9466b986590338782ee9d290338b3ecd4a6040d2300b0fd7e0e5b44442cb10fc --tensor InsertedPrecisionFreeCast_model/p_add_3 --producer add --consumer-output model/p_node_layer_norm_1_layernorm_mean --consumer-output model/p_node_layer_norm_1_layernorm_centered --output "$NEW_SUFFIX"
+"$VENV/bin/python" android/scripts/validate_litert_dense_sections_host.py --sections "$BASE/rewritten-sections" --prefix "$BASE/rewritten-prefix/converted/prefix_float32.tflite" --suffix "$NEW_SUFFIX" --output "$NEW_REPORT"
+```
+
 ## 9 November: policy interventions and output-boundary rounding
 
 **PARTIAL / NOT QUALIFIED.** Two policy projections pass the original tolerance on all three seeds when tested on identical inputs and rounded at the original output boundary. Their results are not always bit-exact. The first eight history slices of the first projection are bit-exact against the individually tapped reference; the current slice differs. These host CPU checks do not establish complete-model or GPU parity.
