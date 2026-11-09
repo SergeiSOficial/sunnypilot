@@ -1,0 +1,1091 @@
+{
+  "scope": "Diagnostic traces; output taps can change fusion and partitioning. No trace result promotes a backend.",
+  "vehicle_tx_enabled": false,
+  "rtol": 0.001,
+  "atol": 0.0001,
+  "results": [
+    {
+      "source_report": "candidate36-qnn-first12.json",
+      "apk_sha256": "02f27f06829b7b15160d555f4cdfb591346fbcd88ab2d1363316bc01414d29c4",
+      "model": "dmonitoring_model",
+      "derived_model_sha256": "845b269cd45654b2ef802395a7ea4914519caa4b30bf94ee4b8b42d010eeb2b1",
+      "original_sha256": "dee5a294e8afaacc9295ac5d100e00733ecac278e79264b96331e40a3ede1b04",
+      "host_instrumented_matches_original": {
+        "outputs": true
+      },
+      "providers": {
+        "QNNExecutionProvider": {
+          "partitions": 1,
+          "nodes": 206
+        }
+      },
+      "cpu_nodes": [],
+      "first_divergence": {
+        "index": 9,
+        "operator": "Conv",
+        "name": "node_Conv_805",
+        "output": "getitem",
+        "dtype": "float16",
+        "shape": [
+          1,
+          32,
+          120,
+          180
+        ],
+        "inputs": [
+          "permute_1",
+          "model._vision._backbone.conv_stem.weight",
+          "model._vision._backbone.conv_stem.weight_bias"
+        ],
+        "domain": "",
+        "layout": "ONNX declared axes; provider transformations recorded separately",
+        "passed": false,
+        "finite": true,
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": false,
+        "max_abs_error": 0.15625,
+        "mismatched_elements": 483698
+      },
+      "first_nonfinite": null,
+      "final_outputs": {
+        "outputs": {
+          "passed": false,
+          "finite": true,
+          "shape": [
+            1,
+            553
+          ],
+          "dtype": "float16",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 0.02734375,
+          "mismatched_elements": 475
+        }
+      },
+      "error": null,
+      "promoted": false
+    },
+    {
+      "source_report": "candidate36-qnn-first12.json",
+      "apk_sha256": "02f27f06829b7b15160d555f4cdfb591346fbcd88ab2d1363316bc01414d29c4",
+      "model": "driving_supercombo",
+      "derived_model_sha256": "c60702ff25ab5bd58bfc4f304858e5b478c1a7b69129c2564d08278093c8281b",
+      "original_sha256": "65a08adc31d5c456219687d99b7bf5e44d61dae2d49ea67850e76105c7248cce",
+      "host_instrumented_matches_original": {
+        "outputs": true,
+        "next_state_img_q": true,
+        "next_state_desire_q": true,
+        "next_state_feat_q": true
+      },
+      "providers": {
+        "CPUExecutionProvider": {
+          "partitions": 4,
+          "nodes": 4
+        },
+        "QNNExecutionProvider": {
+          "partitions": 3,
+          "nodes": 366
+        }
+      },
+      "cpu_nodes": [],
+      "first_divergence": null,
+      "first_nonfinite": null,
+      "final_outputs": {
+        "outputs": {
+          "passed": false,
+          "finite": true,
+          "shape": [
+            1,
+            2576
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 2258.9765625,
+          "mismatched_elements": 2558
+        },
+        "next_state_img_q": {
+          "passed": true,
+          "finite": true,
+          "shape": [
+            2,
+            5,
+            6,
+            128,
+            256
+          ],
+          "dtype": "uint8",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": true,
+          "max_abs_error": 0.0,
+          "mismatched_elements": 0
+        },
+        "next_state_desire_q": {
+          "passed": true,
+          "finite": true,
+          "shape": [
+            100,
+            1,
+            8
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": true,
+          "max_abs_error": 0.0,
+          "mismatched_elements": 0
+        },
+        "next_state_feat_q": {
+          "passed": false,
+          "finite": true,
+          "shape": [
+            96,
+            1,
+            512
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 0.1468505859375,
+          "mismatched_elements": 510
+        }
+      },
+      "error": null,
+      "promoted": false
+    },
+    {
+      "source_report": "candidate36-qnn-conv32.json",
+      "apk_sha256": "02f27f06829b7b15160d555f4cdfb591346fbcd88ab2d1363316bc01414d29c4",
+      "model": "dmonitoring_model",
+      "derived_model_sha256": "2fcc2a373db1b5b01f177e0796b6f0f5646ae977e6ffc6c5857529370a786726",
+      "original_sha256": "dee5a294e8afaacc9295ac5d100e00733ecac278e79264b96331e40a3ede1b04",
+      "host_instrumented_matches_original": {
+        "outputs": true
+      },
+      "providers": {
+        "QNNExecutionProvider": {
+          "partitions": 1,
+          "nodes": 212
+        }
+      },
+      "cpu_nodes": [],
+      "first_divergence": {
+        "index": 14,
+        "operator": "Gelu",
+        "name": "node_gelu",
+        "output": "gelu",
+        "dtype": "float16",
+        "shape": [
+          1,
+          32,
+          120,
+          180
+        ],
+        "inputs": [
+          "getitem"
+        ],
+        "domain": "",
+        "layout": "ONNX declared axes; provider transformations recorded separately",
+        "passed": false,
+        "finite": true,
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": false,
+        "max_abs_error": 0.0078125,
+        "mismatched_elements": 95381
+      },
+      "first_nonfinite": null,
+      "final_outputs": {
+        "outputs": {
+          "passed": false,
+          "finite": true,
+          "shape": [
+            1,
+            553
+          ],
+          "dtype": "float16",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 0.1357421875,
+          "mismatched_elements": 484
+        }
+      },
+      "error": null,
+      "promoted": false
+    },
+    {
+      "source_report": "candidate36-qnn-road-trace.json",
+      "apk_sha256": "02f27f06829b7b15160d555f4cdfb591346fbcd88ab2d1363316bc01414d29c4",
+      "model": "driving_supercombo",
+      "derived_model_sha256": "d3b16c960df55de5a22556d119ac3df56d4db8a06e11123eb0e595a9da313679",
+      "original_sha256": "65a08adc31d5c456219687d99b7bf5e44d61dae2d49ea67850e76105c7248cce",
+      "host_instrumented_matches_original": {
+        "outputs": false,
+        "next_state_img_q": true,
+        "next_state_desire_q": true,
+        "next_state_feat_q": false
+      },
+      "providers": {
+        "CPUExecutionProvider": {
+          "partitions": 4,
+          "nodes": 4
+        },
+        "QNNExecutionProvider": {
+          "partitions": 3,
+          "nodes": 429
+        }
+      },
+      "cpu_nodes": [],
+      "first_divergence": {
+        "index": 26,
+        "operator": "Conv",
+        "name": "model/node_conv2d",
+        "output": "model/conv2d",
+        "dtype": "float16",
+        "shape": [
+          1,
+          64,
+          64,
+          128
+        ],
+        "inputs": [
+          "model/div",
+          "model/vision_model.vision._en.stem.0.reparam_conv.weight",
+          "model/vision_model.vision._en.stem.0.reparam_conv.bias"
+        ],
+        "domain": "",
+        "layout": "ONNX declared axes; provider transformations recorded separately",
+        "passed": false,
+        "finite": true,
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": false,
+        "max_abs_error": 0.5,
+        "mismatched_elements": 241311
+      },
+      "first_nonfinite": null,
+      "final_outputs": {
+        "outputs": {
+          "passed": false,
+          "finite": true,
+          "shape": [
+            1,
+            2576
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 1030.9609375,
+          "mismatched_elements": 2557
+        },
+        "next_state_img_q": {
+          "passed": true,
+          "finite": true,
+          "shape": [
+            2,
+            5,
+            6,
+            128,
+            256
+          ],
+          "dtype": "uint8",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": true,
+          "max_abs_error": 0.0,
+          "mismatched_elements": 0
+        },
+        "next_state_desire_q": {
+          "passed": true,
+          "finite": true,
+          "shape": [
+            100,
+            1,
+            8
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": true,
+          "max_abs_error": 0.0,
+          "mismatched_elements": 0
+        },
+        "next_state_feat_q": {
+          "passed": false,
+          "finite": true,
+          "shape": [
+            96,
+            1,
+            512
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 0.1466064453125,
+          "mismatched_elements": 509
+        }
+      },
+      "error": null,
+      "promoted": false
+    },
+    {
+      "source_report": "candidate36-qnn-portable.json",
+      "apk_sha256": "02f27f06829b7b15160d555f4cdfb591346fbcd88ab2d1363316bc01414d29c4",
+      "model": "dmonitoring_model",
+      "derived_model_sha256": "06f4ff488548709ceb0844c15871a916d821dbe4555935c3256bf19b7e648b23",
+      "original_sha256": "dee5a294e8afaacc9295ac5d100e00733ecac278e79264b96331e40a3ede1b04",
+      "host_instrumented_matches_original": {
+        "outputs": true
+      },
+      "providers": {
+        "QNNExecutionProvider": {
+          "partitions": 1,
+          "nodes": 452
+        }
+      },
+      "cpu_nodes": [],
+      "first_divergence": {
+        "index": 9,
+        "operator": "Conv",
+        "name": "node_Conv_805_token_561",
+        "output": "android_precision_8_result",
+        "dtype": "float32",
+        "shape": [
+          1,
+          32,
+          120,
+          180
+        ],
+        "inputs": [
+          "android_precision_8_nchw",
+          "FusedBack_model._vision._backbone.conv_stem.weight",
+          "FusedBack_model._vision._backbone.conv_stem.weight_bias"
+        ],
+        "domain": "",
+        "layout": "ONNX declared axes; provider transformations recorded separately",
+        "passed": false,
+        "finite": true,
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": false,
+        "max_abs_error": 0.026052474975585938,
+        "mismatched_elements": 166037
+      },
+      "first_nonfinite": null,
+      "final_outputs": {
+        "outputs": {
+          "passed": false,
+          "finite": true,
+          "shape": [
+            1,
+            553
+          ],
+          "dtype": "float16",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 0.0126953125,
+          "mismatched_elements": 312
+        }
+      },
+      "error": null,
+      "promoted": false
+    },
+    {
+      "source_report": "candidate36-qnn-portable.json",
+      "apk_sha256": "02f27f06829b7b15160d555f4cdfb591346fbcd88ab2d1363316bc01414d29c4",
+      "model": "driving_supercombo",
+      "derived_model_sha256": "9b88552a1e2c6955ad8f5e21787777b2d0066c64017505bbd7694cfd04d0c984",
+      "original_sha256": "65a08adc31d5c456219687d99b7bf5e44d61dae2d49ea67850e76105c7248cce",
+      "host_instrumented_matches_original": {
+        "outputs": true,
+        "next_state_img_q": true,
+        "next_state_desire_q": true,
+        "next_state_feat_q": true
+      },
+      "providers": {
+        "CPUExecutionProvider": {
+          "partitions": 5,
+          "nodes": 5
+        },
+        "QNNExecutionProvider": {
+          "partitions": 3,
+          "nodes": 550
+        }
+      },
+      "cpu_nodes": [],
+      "first_divergence": {
+        "index": 5,
+        "operator": "Mul",
+        "name": "",
+        "output": "InsertedPrecisionFreeCast_model/p_silu_2",
+        "dtype": "float32",
+        "shape": [
+          1,
+          512
+        ],
+        "inputs": [
+          "InsertedPrecisionFreeCast_model/p_linear_4",
+          "android_precision_4_sigmoid"
+        ],
+        "domain": "",
+        "layout": "ONNX declared axes; provider transformations recorded separately",
+        "passed": false,
+        "finite": true,
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": false,
+        "max_abs_error": 0.0009162425994873047,
+        "mismatched_elements": 1
+      },
+      "first_nonfinite": null,
+      "final_outputs": {
+        "outputs": {
+          "passed": false,
+          "finite": true,
+          "shape": [
+            1,
+            2576
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 95.15625,
+          "mismatched_elements": 1969
+        },
+        "next_state_img_q": {
+          "passed": true,
+          "finite": true,
+          "shape": [
+            2,
+            5,
+            6,
+            128,
+            256
+          ],
+          "dtype": "uint8",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": true,
+          "max_abs_error": 0.0,
+          "mismatched_elements": 0
+        },
+        "next_state_desire_q": {
+          "passed": true,
+          "finite": true,
+          "shape": [
+            100,
+            1,
+            8
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": true,
+          "max_abs_error": 0.0,
+          "mismatched_elements": 0
+        },
+        "next_state_feat_q": {
+          "passed": false,
+          "finite": true,
+          "shape": [
+            96,
+            1,
+            512
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 0.0006103515625,
+          "mismatched_elements": 160
+        }
+      },
+      "error": null,
+      "promoted": false
+    },
+    {
+      "source_report": "candidate37-qnn-portable.json",
+      "apk_sha256": "e3b7f892e99f73f83fe77b51c0066e514717f515834b6eb9638a16fac13d091f",
+      "model": "dmonitoring_model",
+      "derived_model_sha256": "06f4ff488548709ceb0844c15871a916d821dbe4555935c3256bf19b7e648b23",
+      "original_sha256": "dee5a294e8afaacc9295ac5d100e00733ecac278e79264b96331e40a3ede1b04",
+      "host_instrumented_matches_original": {
+        "outputs": true
+      },
+      "providers": {
+        "QNNExecutionProvider": {
+          "partitions": 1,
+          "nodes": 452
+        }
+      },
+      "cpu_nodes": [],
+      "first_divergence": {
+        "index": 9,
+        "operator": "Conv",
+        "name": "node_Conv_805_token_561",
+        "output": "android_precision_8_result",
+        "dtype": "float32",
+        "shape": [
+          1,
+          32,
+          120,
+          180
+        ],
+        "inputs": [
+          "android_precision_8_nchw",
+          "FusedBack_model._vision._backbone.conv_stem.weight",
+          "FusedBack_model._vision._backbone.conv_stem.weight_bias"
+        ],
+        "domain": "",
+        "layout": "ONNX declared axes; provider transformations recorded separately",
+        "passed": false,
+        "finite": true,
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": false,
+        "max_abs_error": 0.026052474975585938,
+        "mismatched_elements": 166037
+      },
+      "first_nonfinite": null,
+      "final_outputs": {
+        "outputs": {
+          "passed": false,
+          "finite": true,
+          "shape": [
+            1,
+            553
+          ],
+          "dtype": "float16",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 0.0126953125,
+          "mismatched_elements": 312
+        }
+      },
+      "error": null,
+      "promoted": false
+    },
+    {
+      "source_report": "candidate37-qnn-portable.json",
+      "apk_sha256": "e3b7f892e99f73f83fe77b51c0066e514717f515834b6eb9638a16fac13d091f",
+      "model": "driving_supercombo",
+      "derived_model_sha256": "9b88552a1e2c6955ad8f5e21787777b2d0066c64017505bbd7694cfd04d0c984",
+      "original_sha256": "65a08adc31d5c456219687d99b7bf5e44d61dae2d49ea67850e76105c7248cce",
+      "host_instrumented_matches_original": {
+        "outputs": true,
+        "next_state_img_q": true,
+        "next_state_desire_q": true,
+        "next_state_feat_q": true
+      },
+      "providers": {
+        "CPUExecutionProvider": {
+          "partitions": 5,
+          "nodes": 5
+        },
+        "QNNExecutionProvider": {
+          "partitions": 3,
+          "nodes": 550
+        }
+      },
+      "cpu_nodes": [
+        {
+          "provider": "CPUExecutionProvider",
+          "name": "node_slice_1",
+          "domain": "",
+          "operator": "Slice"
+        },
+        {
+          "provider": "CPUExecutionProvider",
+          "name": "node_cat",
+          "domain": "",
+          "operator": "Concat"
+        },
+        {
+          "provider": "CPUExecutionProvider",
+          "name": "node_select_1/GatherSliceToSplitFusion",
+          "domain": "",
+          "operator": "Split"
+        },
+        {
+          "provider": "CPUExecutionProvider",
+          "name": "node_slice_4",
+          "domain": "",
+          "operator": "Slice"
+        },
+        {
+          "provider": "CPUExecutionProvider",
+          "name": "node_slice_3",
+          "domain": "",
+          "operator": "Slice"
+        }
+      ],
+      "first_divergence": {
+        "index": 5,
+        "operator": "Mul",
+        "name": "",
+        "output": "InsertedPrecisionFreeCast_model/p_silu_2",
+        "dtype": "float32",
+        "shape": [
+          1,
+          512
+        ],
+        "inputs": [
+          "InsertedPrecisionFreeCast_model/p_linear_4",
+          "android_precision_4_sigmoid"
+        ],
+        "domain": "",
+        "layout": "ONNX declared axes; provider transformations recorded separately",
+        "passed": false,
+        "finite": true,
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": false,
+        "max_abs_error": 0.0009162425994873047,
+        "mismatched_elements": 1
+      },
+      "first_nonfinite": null,
+      "final_outputs": {
+        "outputs": {
+          "passed": false,
+          "finite": true,
+          "shape": [
+            1,
+            2576
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 95.15625,
+          "mismatched_elements": 1969
+        },
+        "next_state_img_q": {
+          "passed": true,
+          "finite": true,
+          "shape": [
+            2,
+            5,
+            6,
+            128,
+            256
+          ],
+          "dtype": "uint8",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": true,
+          "max_abs_error": 0.0,
+          "mismatched_elements": 0
+        },
+        "next_state_desire_q": {
+          "passed": true,
+          "finite": true,
+          "shape": [
+            100,
+            1,
+            8
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": true,
+          "max_abs_error": 0.0,
+          "mismatched_elements": 0
+        },
+        "next_state_feat_q": {
+          "passed": false,
+          "finite": true,
+          "shape": [
+            96,
+            1,
+            512
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 0.0006103515625,
+          "mismatched_elements": 160
+        }
+      },
+      "error": null,
+      "promoted": false
+    },
+    {
+      "source_report": "candidate37-qnn-float-images.json",
+      "apk_sha256": "e3b7f892e99f73f83fe77b51c0066e514717f515834b6eb9638a16fac13d091f",
+      "model": "dmonitoring_model",
+      "derived_model_sha256": "06f4ff488548709ceb0844c15871a916d821dbe4555935c3256bf19b7e648b23",
+      "original_sha256": "dee5a294e8afaacc9295ac5d100e00733ecac278e79264b96331e40a3ede1b04",
+      "host_instrumented_matches_original": {
+        "outputs": true
+      },
+      "providers": {
+        "QNNExecutionProvider": {
+          "partitions": 1,
+          "nodes": 452
+        }
+      },
+      "cpu_nodes": [],
+      "first_divergence": {
+        "index": 9,
+        "operator": "Conv",
+        "name": "node_Conv_805_token_561",
+        "output": "android_precision_8_result",
+        "dtype": "float32",
+        "shape": [
+          1,
+          32,
+          120,
+          180
+        ],
+        "inputs": [
+          "android_precision_8_nchw",
+          "FusedBack_model._vision._backbone.conv_stem.weight",
+          "FusedBack_model._vision._backbone.conv_stem.weight_bias"
+        ],
+        "domain": "",
+        "layout": "ONNX declared axes; provider transformations recorded separately",
+        "passed": false,
+        "finite": true,
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": false,
+        "max_abs_error": 0.026052474975585938,
+        "mismatched_elements": 166037
+      },
+      "first_nonfinite": null,
+      "final_outputs": {
+        "outputs": {
+          "passed": false,
+          "finite": true,
+          "shape": [
+            1,
+            553
+          ],
+          "dtype": "float16",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 0.0126953125,
+          "mismatched_elements": 312
+        }
+      },
+      "error": null,
+      "promoted": false
+    },
+    {
+      "source_report": "candidate37-qnn-float-images.json",
+      "apk_sha256": "e3b7f892e99f73f83fe77b51c0066e514717f515834b6eb9638a16fac13d091f",
+      "model": "driving_supercombo",
+      "derived_model_sha256": "06c9bf26034d86281a0ad8e112f0d75313d03e493392c7d82332e4343e0b0368",
+      "original_sha256": "65a08adc31d5c456219687d99b7bf5e44d61dae2d49ea67850e76105c7248cce",
+      "host_instrumented_matches_original": {
+        "outputs": true,
+        "next_state_img_q": true,
+        "next_state_desire_q": true,
+        "next_state_feat_q": true
+      },
+      "providers": {
+        "CPUExecutionProvider": {
+          "partitions": 2,
+          "nodes": 2
+        },
+        "QNNExecutionProvider": {
+          "partitions": 2,
+          "nodes": 553
+        }
+      },
+      "cpu_nodes": [
+        {
+          "provider": "CPUExecutionProvider",
+          "name": "node_slice_1",
+          "domain": "",
+          "operator": "Slice"
+        },
+        {
+          "provider": "CPUExecutionProvider",
+          "name": "node_cat",
+          "domain": "",
+          "operator": "Concat"
+        }
+      ],
+      "first_divergence": {
+        "index": 5,
+        "operator": "Mul",
+        "name": "",
+        "output": "InsertedPrecisionFreeCast_model/p_silu_2",
+        "dtype": "float32",
+        "shape": [
+          1,
+          512
+        ],
+        "inputs": [
+          "InsertedPrecisionFreeCast_model/p_linear_4",
+          "android_precision_4_sigmoid"
+        ],
+        "domain": "",
+        "layout": "ONNX declared axes; provider transformations recorded separately",
+        "passed": false,
+        "finite": true,
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": false,
+        "max_abs_error": 0.0009162425994873047,
+        "mismatched_elements": 1
+      },
+      "first_nonfinite": null,
+      "final_outputs": {
+        "outputs": {
+          "passed": false,
+          "finite": true,
+          "shape": [
+            1,
+            2576
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 95.15625,
+          "mismatched_elements": 1969
+        },
+        "next_state_img_q": {
+          "passed": true,
+          "finite": true,
+          "shape": [
+            2,
+            5,
+            6,
+            128,
+            256
+          ],
+          "dtype": "uint8",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": true,
+          "max_abs_error": 0.0,
+          "mismatched_elements": 0
+        },
+        "next_state_desire_q": {
+          "passed": true,
+          "finite": true,
+          "shape": [
+            100,
+            1,
+            8
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": true,
+          "max_abs_error": 0.0,
+          "mismatched_elements": 0
+        },
+        "next_state_feat_q": {
+          "passed": false,
+          "finite": true,
+          "shape": [
+            96,
+            1,
+            512
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 0.0006103515625,
+          "mismatched_elements": 160
+        }
+      },
+      "error": null,
+      "promoted": false
+    },
+    {
+      "source_report": "candidate38-qnn-image-rank4.json",
+      "apk_sha256": "e00e67684a50ed5cd23cd8f55d0bcd7a0337dec049774012feeccbd665b8959f",
+      "model": "dmonitoring_model",
+      "derived_model_sha256": "06f4ff488548709ceb0844c15871a916d821dbe4555935c3256bf19b7e648b23",
+      "original_sha256": "dee5a294e8afaacc9295ac5d100e00733ecac278e79264b96331e40a3ede1b04",
+      "host_instrumented_matches_original": {
+        "outputs": true
+      },
+      "providers": {
+        "QNNExecutionProvider": {
+          "partitions": 1,
+          "nodes": 452
+        }
+      },
+      "cpu_nodes": [],
+      "first_divergence": {
+        "index": 9,
+        "operator": "Conv",
+        "name": "node_Conv_805_token_561",
+        "output": "android_precision_8_result",
+        "dtype": "float32",
+        "shape": [
+          1,
+          32,
+          120,
+          180
+        ],
+        "inputs": [
+          "android_precision_8_nchw",
+          "FusedBack_model._vision._backbone.conv_stem.weight",
+          "FusedBack_model._vision._backbone.conv_stem.weight_bias"
+        ],
+        "domain": "",
+        "layout": "ONNX declared axes; provider transformations recorded separately",
+        "passed": false,
+        "finite": true,
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": false,
+        "max_abs_error": 0.026052474975585938,
+        "mismatched_elements": 166037
+      },
+      "first_nonfinite": null,
+      "final_outputs": {
+        "outputs": {
+          "passed": false,
+          "finite": true,
+          "shape": [
+            1,
+            553
+          ],
+          "dtype": "float16",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 0.0126953125,
+          "mismatched_elements": 312
+        }
+      },
+      "error": null,
+      "promoted": false
+    },
+    {
+      "source_report": "candidate38-qnn-image-rank4.json",
+      "apk_sha256": "e00e67684a50ed5cd23cd8f55d0bcd7a0337dec049774012feeccbd665b8959f",
+      "model": "driving_supercombo",
+      "derived_model_sha256": "8b3ec70bbe8160c487f2b5d1fca45e40dd274714f30608bd98a1df367b35dab2",
+      "original_sha256": "65a08adc31d5c456219687d99b7bf5e44d61dae2d49ea67850e76105c7248cce",
+      "host_instrumented_matches_original": {
+        "outputs": true,
+        "next_state_img_q": true,
+        "next_state_desire_q": true,
+        "next_state_feat_q": true
+      },
+      "providers": {
+        "QNNExecutionProvider": {
+          "partitions": 1,
+          "nodes": 560
+        }
+      },
+      "cpu_nodes": [],
+      "first_divergence": {
+        "index": 5,
+        "operator": "Mul",
+        "name": "",
+        "output": "InsertedPrecisionFreeCast_model/p_silu_2",
+        "dtype": "float32",
+        "shape": [
+          1,
+          512
+        ],
+        "inputs": [
+          "InsertedPrecisionFreeCast_model/p_linear_4",
+          "android_precision_4_sigmoid"
+        ],
+        "domain": "",
+        "layout": "ONNX declared axes; provider transformations recorded separately",
+        "passed": false,
+        "finite": true,
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": false,
+        "max_abs_error": 0.0009162425994873047,
+        "mismatched_elements": 1
+      },
+      "first_nonfinite": null,
+      "final_outputs": {
+        "outputs": {
+          "passed": false,
+          "finite": true,
+          "shape": [
+            1,
+            2576
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 21.546875,
+          "mismatched_elements": 2559
+        },
+        "next_state_img_q": {
+          "passed": false,
+          "finite": true,
+          "shape": [
+            2,
+            5,
+            6,
+            128,
+            256
+          ],
+          "dtype": "uint8",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 255.0,
+          "mismatched_elements": 1958367
+        },
+        "next_state_desire_q": {
+          "passed": true,
+          "finite": true,
+          "shape": [
+            100,
+            1,
+            8
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": true,
+          "max_abs_error": 0.0,
+          "mismatched_elements": 0
+        },
+        "next_state_feat_q": {
+          "passed": false,
+          "finite": true,
+          "shape": [
+            96,
+            1,
+            512
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 0.248443603515625,
+          "mismatched_elements": 511
+        }
+      },
+      "error": null,
+      "promoted": false
+    }
+  ],
+  "result": "failed_numerical_gate",
+  "latest_no_cpu_partition_result": "passed_on_instrumented_graphs_only",
+  "htp": "deferred"
+}

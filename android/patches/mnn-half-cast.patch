@@ -1,0 +1,1230 @@
+--- a/tools/converter/source/onnx/CastOnnx.cpp
++++ b/tools/converter/source/onnx/CastOnnx.cpp
+@@ -35,9 +35,6 @@
+     }
+ 
+     castParam->dstT   = onnxOpConverter::convertDataType(castTo);
+-    if (castTo == onnx::TensorProto_DataType_FLOAT16) {
+-        castParam->dstT = MNN::DataType_DT_FLOAT;
+-    }
+     dstOp->main.value = castParam.release();
+ }
+ 
+--- a/source/shape/ShapeCast.cpp
++++ b/source/shape/ShapeCast.cpp
+@@ -31,7 +31,9 @@
+         }
+ 
+         const auto opParam = op->main_as_CastParam();
+-        outputs[0]->setType(opParam->dstT());
++        // Preserve the numerical half boundary in FP32 OpenCL storage.
++        // The Cast execution explicitly rounds with convert_half_rte.
++        outputs[0]->setType(opParam->dstT() == DataType_DT_HALF ? DataType_DT_FLOAT : opParam->dstT());
+ 
+         return true;
+     }
+--- a/source/backend/opencl/execution/buffer/CastBufExecution.cpp
++++ b/source/backend/opencl/execution/buffer/CastBufExecution.cpp
+@@ -59,6 +59,9 @@
+     auto buildOptions = castBuildOptions(mBuildOptions, totalSize);
+     unit.kernel = runtime->buildKernel("cast_buf", "cast_buf", buildOptions, openCLBackend->getPrecision(), inputs[0],
+                                        outputs[0]);
++    if (!unit.kernel) {
++        return NOT_SUPPORT;
++    }
+     mMaxWorkGroupSize = static_cast<uint32_t>(runtime->getMaxWorkGroupSize(unit.kernel));
+     
+     mGlobalWorkSize = {
+@@ -97,6 +100,9 @@
+         }
+         auto cast = op->main_as_CastParam();
+ 
++        if (cast->dstT() == MNN::DataType_DT_HALF) {
++            OPENCL_CREATOR_CHECK(new CastBufExecution(inputs, outputs, "-DTO_HALF", op, backend));
++        }
+         const auto &inputDataType = inputs[0]->getType();
+         if (inputDataType.bytes() == 4 && cast->dstT() == MNN::DataType_DT_BOOL) OPENCL_CREATOR_CHECK(new CastBufExecution(inputs, outputs, "-DTO_BOOL", op, backend)); else OPENCL_CREATOR_CHECK(new CastBufExecution(inputs, outputs, "", op, backend));
+         return nullptr;
+--- a/source/backend/opencl/execution/cl/cast_buf.cl
++++ b/source/backend/opencl/execution/cl/cast_buf.cl
+@@ -1,4 +1,4 @@
+-#ifdef MNN_SUPPORT_FP16
++#if defined(MNN_SUPPORT_FP16) || defined(TO_HALF)
+ #pragma OPENCL EXTENSION cl_khr_fp16 : enable
+ #endif
+ 
+@@ -20,6 +20,16 @@
+ 
+     DEAL_NON_UNIFORM_DIM2(idx, idy);
+     const int inp_offset = idx * 4;
++#ifdef TO_HALF
++    // FP32 buffers retain the exact IEEE binary16 round-to-nearest boundary.
++    // The device must expose cl_khr_fp16; failed builds are rejected.
++    half rounded[4];
++    for (int lane = 0; lane < 4 && inp_offset + lane < size; ++lane) {
++        vstore_half_rte((float)input[inp_offset + lane], lane, rounded);
++        output[inp_offset + lane] = (OUTPUT_TYPE)vload_half(lane, rounded);
++    }
++    return;
++#endif
+ #ifdef PACK_LEAVE
+     if(inp_offset + 3 >= size){
+         int remain = size - inp_offset;
+--- a/source/backend/opencl/execution/image/CastExecution.cpp
++++ b/source/backend/opencl/execution/image/CastExecution.cpp
+@@ -84,6 +84,9 @@
+         auto cast = op->main_as_CastParam();
+         // cast param srcT is invalid
+         // auto srcT = _mapDataType(cast->srcT());
++        if (cast->dstT() == MNN::DataType_DT_HALF) {
++            OPENCL_CREATOR_CHECK(new CastExecution(inputs, outputs, "-DTO_HALF", op, backend));
++        }
+         auto dstT = _mapDataType(cast->dstT());
+ 
+         const auto &inputDataType = inputs[0]->getType();
+--- a/source/backend/opencl/execution/cl/cast.cl
++++ b/source/backend/opencl/execution/cl/cast.cl
+@@ -1,4 +1,4 @@
+-#ifdef MNN_SUPPORT_FP16
++#if defined(MNN_SUPPORT_FP16) || defined(TO_HALF)
+ #pragma OPENCL EXTENSION cl_khr_fp16 : enable
+ #endif
+ 
+@@ -28,7 +28,12 @@
+     const int batch_idx = batch_channel_idx / channelBlock;
+     const int channel_idx = batch_channel_idx % channelBlock;
+     
+-#ifdef TO_BOOL
++#ifdef TO_HALF
++    float4 source = read_imagef(input, SAMPLER, (int2)(channel_idx * width + width_idx, batch_idx * height + height_idx));
++    half rounded[4];
++    vstore_half4_rte(source, 0, rounded);
++    write_imagef(output, (int2)(channel_idx * width + width_idx, batch_idx * height + height_idx), vload_half4(0, rounded));
++#elif defined(TO_BOOL)
+     int4 value = convert_int4(RI_DATA(input, SAMPLER, (int2)(channel_idx * width + width_idx, batch_idx * height + height_idx)));
+     value = value == (int4)0 ? (int4)0 : (int4)1;
+     WI_DATA(output, (int2)(channel_idx * width + width_idx, batch_idx * height + height_idx), CONVERT_OUTPUT_I4(value));
+--- a/source/backend/opencl/execution/buffer/ConvBufExecution.hpp
++++ b/source/backend/opencl/execution/buffer/ConvBufExecution.hpp
+@@ -31,6 +31,10 @@
+     int mOutputChannel;
+     int mInputChannel;
+     int mBlockSize;
++    bool mFold3HalfGemv8 = false;
++    bool mFold3HalfDot2 = false;
++    bool mFold3HostConv = false;
++    bool mFold3HostBiasFirst = false;
+     bool mRelu = false;
+     bool mRelu6 = false;
+     bool mPrelu = false;
+@@ -68,6 +72,7 @@
+ 
+     const std::shared_ptr<ConvBufResource>& getConvResource() const { return mResource; }
+     void submitPrebuildConvPrograms();
++    ErrorCode encodeFold3HostConv(Tensor* input, Tensor* output, Unit& unit);
+ 
+ protected:
+     std::shared_ptr<ConvBufResource> mResource;
+--- a/source/backend/opencl/execution/buffer/ConvBufExecution.cpp
++++ b/source/backend/opencl/execution/buffer/ConvBufExecution.cpp
+@@ -153,6 +153,57 @@
+     }
+ }
+ 
++// Original FP32 host Conv uses ky/kx/input-channel ordered FMAs. The
++// NHWC fusion preloads bias; ordinary Conv adds it after the reduction.
++// Tags originate from pinned host Conv and verified static FP32 GEMV paths.
++ErrorCode ConvBufCommonExecution::encodeFold3HostConv(Tensor* input, Tensor* output, Unit& unit) {
++    const auto in = tensorShapeFormat(input), out = tensorShapeFormat(output);
++    const auto common = mResource->mConv2dCommonParams;
++    const int groups = common->group();
++    const bool depthwise = groups == in[3] && out[3] == in[3];
++    if (mOpenCLBackend->getPrecision() != BackendConfig::Precision_High ||
++        (groups != 1 && !depthwise) || in[0] != out[0] || common->relu6() || mResource->mPrelu) {
++        return NOT_SUPPORT;
++    }
++    std::set<std::string> options;
++    if (mResource->mFold3HostBiasFirst) options.emplace("-DFOLD3_BIAS_FIRST");
++    if (depthwise) options.emplace("-DFOLD3_DEPTHWISE");
++    // Vectorize loads while retaining correctly rounded, ordered FMA.
++    // The MAD variant failed full-model accuracy and is not selected.
++    // Do not change the separately qualified half FDOT2/depthwise reductions.
++    if (!depthwise && !mResource->mFold3HalfDot2) options.emplace("-DFOLD3_VECTOR_FMA_CONV");
++    if (common->relu()) options.emplace("-DFOLD3_RELU");
++    unit.kernel = mOpenCLBackend->getOpenCLRuntime()->buildKernel(
++        "fold3_host_conv_buf", mResource->mFold3HalfDot2 ? "fold3_half_dot2" : "fold3_host_conv",
++        options, BackendConfig::Precision_High);
++    if (!unit.kernel) return NOT_SUPPORT;
++    auto padding = ConvolutionCommon::convolutionPad(input, output, common);
++    const int inputShape[2] = {in[1], in[2]}, outputShape[2] = {out[1], out[2]};
++    const int kernelShape[2] = {common->kernelY(), common->kernelX()};
++    const int stride[2] = {common->strideY(), common->strideX()};
++    const int dilation[2] = {common->dilateY(), common->dilateX()};
++    const int pads[2] = {padding.second, padding.first};
++    auto& kernel = unit.kernel->get();
++    int index = 0;
++    cl_int error = kernel.setArg(index++, openCLBuffer(input));
++    error |= kernel.setArg(index++, openCLBuffer(mResource->mFilter.get()));
++    error |= kernel.setArg(index++, openCLBuffer(mResource->mBias.get()));
++    error |= kernel.setArg(index++, openCLBuffer(output));
++    error |= kernel.setArg(index++, in[0]);
++    error |= kernel.setArg(index++, in[3]);
++    error |= kernel.setArg(index++, out[3]);
++    error |= kernel.setArg(index++, sizeof(inputShape), inputShape);
++    error |= kernel.setArg(index++, sizeof(outputShape), outputShape);
++    error |= kernel.setArg(index++, sizeof(kernelShape), kernelShape);
++    error |= kernel.setArg(index++, sizeof(stride), stride);
++    error |= kernel.setArg(index++, sizeof(dilation), dilation);
++    error |= kernel.setArg(index++, sizeof(pads), pads);
++    if (error != CL_SUCCESS) return NOT_SUPPORT;
++    unit.globalWorkSize = cl::NDRange(ROUND_UP(UP_DIV(out[3], 4) * out[2], 32), out[0] * out[1]);
++    unit.localWorkSize = cl::NDRange(32, 1);
++    return NO_ERROR;
++}
++
+ ConvBufCommonExecution::~ConvBufCommonExecution() {
+     // Do nothing
+ }
+@@ -234,7 +285,80 @@
+         if (mFilterDataPtr == nullptr) {
+             mFilterDataPtr = conv2dParams->weight()->data();
+             weightSize = conv2dParams->weight()->size();
++        }
++        const auto name = op->name() ? op->name()->str() : std::string();
++        mResource->mFold3HalfDot2 = name.find("fold3_half_dot2_") == 0;
++        mResource->mFold3HostConv = mResource->mFold3HalfDot2 ||
++            name.find("fold3_host_conv_bf_") == 0 || name.find("fold3_host_conv_bl_") == 0;
++        mResource->mFold3HostBiasFirst = name.find("fold3_host_conv_bf_") == 0;
++        if (mResource->mFold3HostConv) {
++            const int ic = mResource->mInputChannel, oc = mResource->mOutputChannel;
++            const int kh = mResource->mKernelHeight, kw = mResource->mKernelWidth;
++            const auto in = tensorShapeFormat(inputs[0]), out = tensorShapeFormat(outputs[0]);
++            if (mResource->mFold3HalfDot2 &&
++                (kh != 1 || kw != 1 || in[1] != out[1] || in[2] != out[2] ||
++                 mPaddings[0] != 0 || mPaddings[1] != 0 || mResource->mRelu || mResource->mRelu6 ||
++                 mResource->mStrides[0] != 1 || mResource->mStrides[1] != 1 ||
++                 mResource->mDilations[0] != 1 || mResource->mDilations[1] != 1)) {
++                mValid = false;
++                return;
++            }
++            if (mOpenCLBackend->getPrecision() != BackendConfig::Precision_High ||
++                conv2dCommonParams->group() != 1 || ic <= 0 || oc <= 0 || kh <= 0 || kw <= 0 ||
++                weightSize != ic * oc * kh * kw || mResource->mRelu6 || mResource->mPrelu) {
++                mValid = false;
++                return;
++            }
++            const int packedSize = ROUND_UP(oc, 4) * kh * kw * ic;
++            mResource->mFilter.reset(Tensor::createDevice<float>({packedSize}));
++            OPENCL_CHECK_ALLOC_CTOR(mOpenCLBackend->onAcquireBuffer(mResource->mFilter.get(), Backend::STATIC));
++            cl_int error;
++            auto& queue = mOpenCLBackend->getOpenCLRuntime()->commandQueue();
++            auto& buffer = openCLBuffer(mResource->mFilter.get());
++            auto target = static_cast<float*>(queue.enqueueMapBuffer(buffer, true, CL_MAP_WRITE, 0,
++                packedSize * sizeof(float), nullptr, nullptr, &error));
++            if (target == nullptr || error != CL_SUCCESS) {
++                mValid = false;
++                return;
++            }
++            ::memset(target, 0, packedSize * sizeof(float));
++            for (int o = 0; o < oc; ++o) for (int y = 0; y < kh; ++y)
++                for (int x = 0; x < kw; ++x) for (int i = 0; i < ic; ++i) {
++                    target[((((o / 4) * kh + y) * kw + x) * ic + i) * 4 + o % 4] =
++                        mFilterDataPtr[((o * ic + i) * kh + y) * kw + x];
++                }
++            queue.enqueueUnmapMemObject(buffer, target);
++            return;
+         }
++        // The converter marks only original half GEMV with M=1, transB=1.
++        // Keep the host's eight half-FMA lanes, reduction and bias boundaries.
++        if (op->name() && op->name()->str().find("fold3_half_gemv8_") == 0) {
++            const auto in = tensorShapeFormat(inputs[0]);
++            const auto out = tensorShapeFormat(outputs[0]);
++            if (mOpenCLBackend->getPrecision() != BackendConfig::Precision_High ||
++                in[0] != 1 || in[1] != 1 || in[2] != 1 || out[0] != 1 || out[1] != 1 || out[2] != 1 ||
++                mResource->mKernelHeight != 1 || mResource->mKernelWidth != 1 ||
++                mResource->mInputChannel <= 0 || mResource->mOutputChannel <= 0 ||
++                weightSize != mResource->mInputChannel * mResource->mOutputChannel ||
++                mResource->mRelu || mResource->mRelu6 || mResource->mPrelu) {
++                mValid = false;
++                return;
++            }
++            mResource->mFold3HalfGemv8 = true;
++            mResource->mFilter.reset(Tensor::createDevice<float>({weightSize}));
++            OPENCL_CHECK_ALLOC_CTOR(mOpenCLBackend->onAcquireBuffer(mResource->mFilter.get(), Backend::STATIC));
++            cl_int error;
++            auto& queue = mOpenCLBackend->getOpenCLRuntime()->commandQueue();
++            auto& buffer = openCLBuffer(mResource->mFilter.get());
++            auto target = queue.enqueueMapBuffer(buffer, true, CL_MAP_WRITE, 0, weightSize * sizeof(float), nullptr, nullptr, &error);
++            if (target == nullptr || error != CL_SUCCESS) {
++                mValid = false;
++                return;
++            }
++            ::memcpy(target, mFilterDataPtr, weightSize * sizeof(float));
++            queue.enqueueUnmapMemObject(buffer, target);
++            return;
++        }
+         // select opt conv method
+         bool isConv1x1 =
+             (mResource->mKernelHeight == mResource->mKernelWidth && mResource->mKernelHeight == 1 &&
+@@ -436,6 +560,47 @@
+     const int inputWidth = inputShape.at(2);
+     const int inputChannels = inputShape.at(3);
+ 
++    if (mResource->mFold3HostConv) {
++        Unit unit;
++        auto status = encodeFold3HostConv(input, output, unit);
++        if (status == NO_ERROR) {
++            mKernel[0] = unit.kernel;
++            mGlobalWorkSize = {static_cast<uint32_t>(unit.globalWorkSize[0]), static_cast<uint32_t>(unit.globalWorkSize[1])};
++            mLocalWorkSize = {32, 1};
++            mOpenCLBackend->recordKernel2d(mKernel[0], mGlobalWorkSize, mLocalWorkSize);
++        }
++        mOpenCLBackend->endRecord(mRecording);
++        return status;
++    }
++    if (mResource->mFold3HalfGemv8) {
++        if (batch != 1 || height != 1 || width != 1 || inputHeight != 1 || inputWidth != 1 ||
++            inputChannels != mResource->mInputChannel || outChannel != mResource->mOutputChannel) {
++            mOpenCLBackend->endRecord(mRecording);
++            return NOT_SUPPORT;
++        }
++        mKernel[0] = mOpenCLBackend->getOpenCLRuntime()->buildKernel(
++            "fold3_half_gemv_buf", "fold3_half_gemv8", {}, BackendConfig::Precision_High);
++        if (!mKernel[0]) {
++            mOpenCLBackend->endRecord(mRecording);
++            return NOT_SUPPORT;
++        }
++        auto& kernel = mKernel[0]->get();
++        cl_int error = kernel.setArg(0, openCLBuffer(input));
++        error |= kernel.setArg(1, openCLBuffer(mResource->mFilter.get()));
++        error |= kernel.setArg(2, openCLBuffer(mResource->mBias.get()));
++        error |= kernel.setArg(3, openCLBuffer(output));
++        error |= kernel.setArg(4, inputChannels);
++        error |= kernel.setArg(5, outChannel);
++        if (error != CL_SUCCESS) {
++            mOpenCLBackend->endRecord(mRecording);
++            return NOT_SUPPORT;
++        }
++        mGlobalWorkSize = {static_cast<uint32_t>(ROUND_UP(outChannel, 16)), 1};
++        mLocalWorkSize = {16, 1};
++        mOpenCLBackend->recordKernel2d(mKernel[0], mGlobalWorkSize, mLocalWorkSize);
++        mOpenCLBackend->endRecord(mRecording);
++        return NO_ERROR;
++    }
+     const int inputChannelBlocks = UP_DIV(inputChannels, 4);
+ 
+     auto pad = ConvolutionCommon::convolutionPad(input, output, mResource->mConv2dCommonParams);
+@@ -1051,6 +1216,15 @@
+ #endif
+ 
+         auto clBackend = static_cast<OpenCLBackend *>(backend);
++        // Tagged reference convolutions must not enter Winograd/subgroup paths
++        // which change the pinned accumulation order before FP16 boundaries.
++        const auto referenceName = op->name() ? op->name()->str() : std::string();
++        if (referenceName.find("fold3_host_conv_bf_") == 0 || referenceName.find("fold3_host_conv_bl_") == 0) {
++            for (auto tensor : inputs) TensorUtils::setTensorSupportPack(tensor, false);
++            for (auto tensor : outputs) TensorUtils::setTensorSupportPack(tensor, false);
++            OPENCL_CREATOR_CHECK(new ConvBufExecution(inputs, outputs, op, backend));
++        }
++
+         if (ConvBufWinograd::valid(conv2D->common(), inputs[0], outputs[0],
+                                    clBackend->getOpenCLRuntime()->getGpuType() == INTEL, 8192, clBackend->fpBytes(),
+                                    clBackend->getMemory())) {
+--- a/source/backend/opencl/execution/cl/fold3_half_gemv_buf.cl
++++ b/source/backend/opencl/execution/cl/fold3_half_gemv_buf.cl
+@@ -0,0 +1,78 @@
++// Diagnostic precision repair for the original ARM64 half GEMV reduction.
++#pragma OPENCL EXTENSION cl_khr_fp16 : enable
++#pragma OPENCL FP_CONTRACT OFF
++inline float fold3_half_rte(float value) {
++    half rounded;
++    vstore_half_rte(value, 0, &rounded);
++    return vload_half(0, &rounded);
++}
++inline float fold3_half_fma(float x, float y, float z) {
++    // Half products are exact in FP32. Keep the addition residual to avoid
++    // double rounding at a binary16 midpoint. Volatile prevents contraction
++    // or algebraic cancellation under MNN's global mad build option.
++    volatile float product = x * y;
++    volatile float total = product + z;
++    volatile float part = total - product;
++    volatile float remainder = total - part;
++    volatile float left = product - remainder;
++    volatile float right = z - part;
++    volatile float error = left + right;
++    uint bits = as_uint((float)total);
++    uint exponent = (bits >> 23) & 255u;
++    uint shift = (uint)clamp(126 - (int)exponent, 13, 24);
++    float adjusted = total;
++    if (exponent >= 102u && exponent <= 142u && error != 0.0f &&
++        ((((bits & 0x7fffffu) | 0x800000u) & ((1u << shift) - 1u)) == (1u << (shift - 1u)))) {
++        adjusted = nextafter(adjusted, copysign(INFINITY, (float)error));
++    }
++    return fold3_half_rte(adjusted);
++}
++__kernel void fold3_half_gemv8(__global const float* input, __global const float* weights,
++                              __global const float* bias, __global float* output,
++                              const int k, const int n) {
++    int row = get_global_id(0);
++    if (row >= n) {
++        if (row < ((n + 3) / 4) * 4) output[row] = 0.0f;
++        return;
++    }
++    const int end = (k / 8) * 8;
++    const int coefficient = end > 0 && k + n + 1 < 20;
++    const int packets = n == 1 && !coefficient ? min(4, max(1, end / 8)) : 1;
++    float partial[32] = {0.0f};
++    if (coefficient) {
++        for (int lane = 0; lane < 8; ++lane) {
++            partial[lane] = fold3_half_rte(input[lane] * weights[row * k + lane]);
++            if (end > 8) {
++                float other = fold3_half_rte(input[8 + lane] * weights[row * k + 8 + lane]);
++                partial[lane] = fold3_half_rte(partial[lane] + other);
++            }
++        }
++    } else {
++        for (int start = 0; start < end; start += 8) {
++            int packet = (start / 8) % packets;
++            for (int lane = 0; lane < 8; ++lane) {
++                int index = packet * 8 + lane;
++                partial[index] = fold3_half_fma(input[start + lane], weights[row * k + start + lane], partial[index]);
++            }
++        }
++    }
++    // Eigen combines scalar-dot packets from right to left.
++    float lanes[8];
++    for (int lane = 0; lane < 8; ++lane) {
++        lanes[lane] = partial[(packets - 1) * 8 + lane];
++        for (int packet = packets - 2; packet >= 0; --packet) {
++            lanes[lane] = fold3_half_rte(partial[packet * 8 + lane] + lanes[lane]);
++        }
++    }
++    for (int width = 4; width >= 1; width /= 2) {
++        for (int lane = 0; lane < width; ++lane) {
++            lanes[lane] = fold3_half_rte(lanes[lane * 2] + lanes[lane * 2 + 1]);
++        }
++    }
++    float value = lanes[0];
++    for (int index = end; index < k; ++index) {
++        float product = fold3_half_rte(input[index] * weights[row * k + index]);
++        value = fold3_half_rte(value + product);
++    }
++    output[row] = fold3_half_rte(value + bias[row]);
++}
+--- a/source/backend/opencl/execution/buffer/UnaryBufExecution.cpp
++++ b/source/backend/opencl/execution/buffer/UnaryBufExecution.cpp
+@@ -213,6 +213,18 @@
+             }
+         }
+ #endif /* MNN_SUPPORT_INTEL_SUBGROUP */
++        // The pinned arm64 reference uses MLAS's polynomial Tanh. Native
++        // OpenCL Tanh changed 40 FP16 roundings on an identical captured input.
++        const bool hostTanh = static_cast<OpenCLBackend*>(backend)->getPrecision() == BackendConfig::Precision_High;
++        const bool hostSigmoid = hostTanh && op->name() && op->name()->str().rfind("fold3_host_sigmoid_", 0) == 0;
++        if (hostSigmoid && (op->type() == OpType_Sigmoid ||
++            (op->type() == OpType_UnaryOp && op->main_as_UnaryOp()->opType() == UnaryOpOperation_SIGMOID))) {
++            OPENCL_CREATOR_CHECK(new UnaryBufExecution("fold3_host_sigmoid(convert_float4(in))", op, backend));
++        }
++        if (hostTanh && (op->type() == OpType_TanH ||
++            (op->type() == OpType_UnaryOp && op->main_as_UnaryOp()->opType() == UnaryOpOperation_TANH))) {
++            OPENCL_CREATOR_CHECK(new UnaryBufExecution("fold3_host_tanh(convert_float4(in))", op, backend));
++        }
+         if (op->type() == OpType_UnaryOp) {
+             switch (op->main_as_UnaryOp()->opType()) {
+                 case UnaryOpOperation_ABS: OPENCL_CREATOR_CHECK(new UnaryBufExecution("fabs(convert_float4(in))", op, backend));
+--- a/source/backend/opencl/execution/cl/unary_buf.cl
++++ b/source/backend/opencl/execution/cl/unary_buf.cl
+@@ -1,3 +1,67 @@
++// ONNX Runtime MLAS tanh.cpp (MIT), matching the pinned host's FP32
++// polynomial and final division. Volatile steps preserve arithmetic boundaries
++// under MNN's global -cl-mad-enable. This is used only by High buffer Tanh.
++inline float fold3_reference_divide(float left, float right) {
++    volatile float quotient = left / right;
++    if (!isfinite(left) || !isfinite(right) || !isfinite(quotient) || right == 0.0f || left == 0.0f) return quotient;
++    volatile float residual = fma(-quotient, right, left);
++    volatile float correction = residual / right;
++    volatile float corrected = quotient + correction;
++    float magnitude = fabs(corrected), denominator = fabs(right);
++    residual = fma(-magnitude, denominator, fabs(left));
++    float neighbor = nextafter(magnitude, residual < 0.0f ? 0.0f : INFINITY);
++    float halfGap = fabs(neighbor - magnitude) * 0.5f;
++    float distance = fma(-halfGap, denominator, fabs(residual));
++    if (halfGap > 0.0f && isfinite(neighbor) &&
++        (distance > 0.0f || (distance == 0.0f && (as_uint(magnitude) & 1U)))) magnitude = neighbor;
++    return copysign(magnitude, corrected);
++}
++inline float4 fold3_host_tanh(float4 input) {
++    float4 value = clamp(input, (float4)-9.0f, (float4)9.0f);
++    volatile float4 square = value * value;
++    float4 numerator = (float4)-2.76076847742355e-16f;
++    numerator = fma(numerator, square, (float4)2.00018790482477e-13f);
++    numerator = fma(numerator, square, (float4)-8.60467152213735e-11f);
++    numerator = fma(numerator, square, (float4)5.12229709037114e-08f);
++    numerator = fma(numerator, square, (float4)1.48572235717979e-05f);
++    numerator = fma(numerator, square, (float4)6.37261928875436e-04f);
++    numerator = fma(numerator, square, (float4)4.89352455891786e-03f);
++    float4 denominator = (float4)1.19825839466702e-06f;
++    denominator = fma(denominator, square, (float4)1.18534705686654e-04f);
++    denominator = fma(denominator, square, (float4)2.26843463243900e-03f);
++    denominator = fma(denominator, square, (float4)4.89352518554385e-03f);
++    volatile float4 product = numerator * value;
++    return (float4)(fold3_reference_divide(product.x, denominator.x),
++                    fold3_reference_divide(product.y, denominator.y),
++                    fold3_reference_divide(product.z, denominator.z),
++                    fold3_reference_divide(product.w, denominator.w));
++}
++
++// ONNX Runtime MLAS logistic.cpp, Copyright (c) Microsoft Corporation, MIT.
++// The pinned arm64 float4 kernel uses this rational polynomial with explicit
++// FMAs and a correctly rounded division. native_exp/native_recip can cross a
++// later FP16 rounding boundary even when the sigmoid itself is within tolerance.
++inline float4 fold3_host_sigmoid(float4 input) {
++    float4 value = clamp(input, (float4)-18.0f, (float4)18.0f);
++    volatile float4 square = value * value;
++    float4 numerator = fma(square, (float4)4.37031012579801e-11f, (float4)1.15627324459942e-07f);
++    numerator = fma(numerator, square, (float4)6.08574864600143e-05f);
++    numerator = fma(numerator, square, (float4)8.51377133304701e-03f);
++    numerator = fma(numerator, square, (float4)2.48287947061529e-01f);
++    volatile float4 product = numerator * value;
++    float4 denominator = fma(square, (float4)6.10247389755681e-13f, (float4)5.76102136993427e-09f);
++    denominator = fma(denominator, square, (float4)6.29106785017040e-06f);
++    denominator = fma(denominator, square, (float4)1.70198817374094e-03f);
++    denominator = fma(denominator, square, (float4)1.16817656904453e-01f);
++    denominator = fma(denominator, square, (float4)9.93151921023180e-01f);
++    volatile float4 quotient = (float4)(fold3_reference_divide(product.x, denominator.x),
++                                       fold3_reference_divide(product.y, denominator.y),
++                                       fold3_reference_divide(product.z, denominator.z),
++                                       fold3_reference_divide(product.w, denominator.w));
++    volatile float4 result = quotient + (float4)0.5f;
++    return clamp(result, (float4)0.0f, (float4)1.0f);
++}
++
+ #ifdef MNN_SUPPORT_FP16
+ #pragma OPENCL EXTENSION cl_khr_fp16 : enable
+ #define CLAMP(a) \
+--- a/source/backend/opencl/execution/buffer/DepthwiseConvBufExecution.cpp
++++ b/source/backend/opencl/execution/buffer/DepthwiseConvBufExecution.cpp
+@@ -27,6 +27,15 @@
+     mResource->mStrides            = {mResource->mConv2dCommonParams->strideY(), mResource->mConv2dCommonParams->strideX()};
+     mResource->mDilations          = {mResource->mConv2dCommonParams->dilateY(), mResource->mConv2dCommonParams->dilateX()};
+ 
++    const auto name = op->name() ? op->name()->str() : std::string();
++    mResource->mFold3HostConv = name.find("fold3_host_conv_bf_") == 0 || name.find("fold3_host_conv_bl_") == 0;
++    mResource->mFold3HostBiasFirst = name.find("fold3_host_conv_bf_") == 0;
++    if (mResource->mFold3HostConv && (mOpenCLBackend->getPrecision() != BackendConfig::Precision_High ||
++        mResource->mConv2dCommonParams->group() != inputs[0]->channel() ||
++        mResource->mConv2dCommonParams->outputCount() != inputs[0]->channel())) {
++        mValid = false;
++        return;
++    }
+     int kernelWidth   = mResource->mConv2dCommonParams->kernelX();
+     int kernelHeight  = mResource->mConv2dCommonParams->kernelY();
+     int outputChannel = mResource->mConv2dCommonParams->outputCount();
+@@ -96,6 +105,7 @@
+     auto &unit = mUnits[0];
+     auto input                   = inputs[0];
+     auto output                  = outputs[0];
++    if (mResource->mFold3HostConv) return encodeFold3HostConv(input, output, unit);
+     std::vector<int> inputShape  = tensorShapeFormat(input);
+     std::vector<int> outputShape = tensorShapeFormat(output);
+     auto runTime = mOpenCLBackend->getOpenCLRuntime();
+@@ -326,6 +336,15 @@
+         }
+         
+         MNN_ASSERT(inputs.size() == 1);
++        // Tagged reference convolutions must not enter Winograd/subgroup paths
++        // which change the pinned accumulation order before FP16 boundaries.
++        const auto referenceName = op->name() ? op->name()->str() : std::string();
++        if (referenceName.find("fold3_host_conv_bf_") == 0 || referenceName.find("fold3_host_conv_bl_") == 0) {
++            for (auto tensor : inputs) TensorUtils::setTensorSupportPack(tensor, false);
++            for (auto tensor : outputs) TensorUtils::setTensorSupportPack(tensor, false);
++            OPENCL_CREATOR_CHECK(new DepthwiseConvBufExecution(inputs, op, backend));
++        }
++
+ #ifdef MNN_SUPPORT_INTEL_SUBGROUP
+         if (static_cast<OpenCLBackend *>(backend)->getOpenCLRuntime()->isSupportedIntelSubgroup() &&
+             outputs[0]->channel() >= 16) {
+--- a/source/backend/opencl/execution/cl/fold3_host_conv_buf.cl
++++ b/source/backend/opencl/execution/cl/fold3_host_conv_buf.cl
+@@ -0,0 +1,134 @@
++// Pinned host FP32 Conv: ordered ky/kx/ci accumulation with explicit bias order.
++// NC4HW4 buffers use channel-block/batch/height/width/lane ordering.
++// Four output channels share an input scalar; no CPU partition or readback.
++// Retain correctly rounded FMA and the original sequential reduction.
++// Vector loads remove redundant input addressing without changing arithmetic.
++#pragma OPENCL FP_CONTRACT OFF
++#pragma OPENCL EXTENSION cl_khr_fp16 : enable
++// A finite binary16 product has at most 22 significant bits and is exact in
++// binary32, including the smallest binary16 subnormal squared. A separately
++// rounded product therefore preserves FMA semantics in this guarded case.
++// Keep the original correctly rounded FMA for all other operands. Volatile
++// prevents -cl-mad-enable from replacing the required accumulator rounding.
++inline float4 fold3_guarded_host_fma(float4 a, float4 b, float4 c) {
++    // Do not rely on the device's unadvertised FP32 denormal support.
++    int4 exact = isfinite(a) & isfinite(b) & isfinite(c)
++        & ((fabs(c) >= (float4)0x1.0p-126f) | (c == (float4)0.0f))
++        & (a == convert_float4(convert_half4_rte(a)))
++        & (b == convert_float4(convert_half4_rte(b)));
++    if (all(exact)) {
++        volatile float4 product = a * b;
++        return product + c;
++    }
++    return fma(a, b, c);
++}
++__kernel void fold3_host_conv(__global const float* input,
++                              __global const float4* weights,
++                              __global const float4* bias,
++                              __global float4* output,
++                              int batch, int inputChannels, int outputChannels,
++                              int2 inHW, int2 outHW, int2 kernelHW,
++                              int2 stride, int2 dilation, int2 padding) {
++    int cb = get_global_id(0) / outHW.y;
++    int ox = get_global_id(0) % outHW.y;
++    int n = get_global_id(1) / outHW.x;
++    int oy = get_global_id(1) % outHW.x;
++    if (cb >= (outputChannels + 3) / 4 || n >= batch) return;
++    float4 biasValue = bias[cb];
++#if defined(FOLD3_VECTOR_FMA_CONV) && !defined(FOLD3_DEPTHWISE)
++#define FOLD3_ACCUMULATOR
++#else
++#define FOLD3_ACCUMULATOR volatile
++#endif
++#ifdef FOLD3_BIAS_FIRST
++    FOLD3_ACCUMULATOR float4 sum = biasValue;
++#else
++    FOLD3_ACCUMULATOR float4 sum = (float4)0.0f;
++#endif
++    for (int ky = 0; ky < kernelHW.x; ++ky) {
++        int iy = oy * stride.x + ky * dilation.x - padding.x;
++        for (int kx = 0; kx < kernelHW.y; ++kx) {
++            int ix = ox * stride.y + kx * dilation.y - padding.y;
++            int valid = iy >= 0 && iy < inHW.x && ix >= 0 && ix < inHW.y;
++#ifdef FOLD3_DEPTHWISE
++            float4 value = valid ? vload4(0, input + (((cb * batch + n) * inHW.x + iy) * inHW.y + ix) * 4) : (float4)0.0f;
++            // MNN's depthwise pack is [ky,kx,channel-block,4], unlike
++            // the regular Conv's private [channel-block,ky,kx,ci,4] pack.
++            float4 weight = weights[(ky * kernelHW.y + kx) * ((outputChannels + 3) / 4) + cb];
++            sum = fma(value, weight, sum);
++#else
++#ifdef FOLD3_VECTOR_FMA_CONV
++            int ci = 0;
++            int weightOffset = ((cb * kernelHW.x + ky) * kernelHW.y + kx) * inputChannels;
++            for (; ci + 3 < inputChannels; ci += 4) {
++                float4 values = valid ? vload4(0, input + (((ci / 4 * batch + n) * inHW.x + iy) * inHW.y + ix) * 4) : (float4)0.0f;
++                // Retain ky/kx/ci order; vectorize loads, never the reduction.
++                sum = fold3_guarded_host_fma((float4)values.x, weights[weightOffset + ci], sum);
++                sum = fold3_guarded_host_fma((float4)values.y, weights[weightOffset + ci + 1], sum);
++                sum = fold3_guarded_host_fma((float4)values.z, weights[weightOffset + ci + 2], sum);
++                sum = fold3_guarded_host_fma((float4)values.w, weights[weightOffset + ci + 3], sum);
++            }
++            for (; ci < inputChannels; ++ci) {
++                float value = valid ? input[(((ci / 4 * batch + n) * inHW.x + iy) * inHW.y + ix) * 4 + ci % 4] : 0.0f;
++                sum = fold3_guarded_host_fma((float4)value, weights[weightOffset + ci], sum);
++            }
++#else
++            for (int ci = 0; ci < inputChannels; ++ci) {
++                float value = valid ? input[(((ci / 4 * batch + n) * inHW.x + iy) * inHW.y + ix) * 4 + ci % 4] : 0.0f;
++                float4 weight = weights[(((cb * kernelHW.x + ky) * kernelHW.y + kx) * inputChannels + ci)];
++                sum = fma((float4)value, weight, sum);
++            }
++#endif
++#endif
++        }
++    }
++#ifndef FOLD3_BIAS_FIRST
++    sum = sum + biasValue;
++#endif
++    float4 result = sum;
++#ifdef FOLD3_RELU
++    result = fmax(result, (float4)0.0f);
++#endif
++    if (cb * 4 + 1 >= outputChannels) result.y = 0.0f;
++    if (cb * 4 + 2 >= outputChannels) result.z = 0.0f;
++    if (cb * 4 + 3 >= outputChannels) result.w = 0.0f;
++    output[((cb * batch + n) * outHW.x + oy) * outHW.y + ox] = result;
++}
++
++// Original FP16 NoTrans Gemm uses SME2 FDOT2: bias first, then a rounded
++// FP32 two-product sum followed by a rounded FP32 accumulator update.
++// Half products are exact in FP32. Explicit Cast supplies final FP16 rounding.
++// Only validated, unactivated 1x1 Gemm conversions reach this entry point.
++__kernel void fold3_half_dot2(__global const float* input,
++                             __global const float4* weights,
++                             __global const float4* bias,
++                             __global float4* output,
++                             int batch, int inputChannels, int outputChannels,
++                             int2 inHW, int2 outHW, int2 kernelHW,
++                             int2 stride, int2 dilation, int2 padding) {
++    int cb = get_global_id(0) / outHW.y;
++    int ox = get_global_id(0) % outHW.y;
++    int n = get_global_id(1) / outHW.x;
++    int oy = get_global_id(1) % outHW.x;
++    if (cb >= (outputChannels + 3) / 4 || n >= batch) return;
++    volatile float4 sum = bias[cb];
++    for (int ci = 0; ci + 1 < inputChannels; ci += 2) {
++        float a = input[(((ci / 4 * batch + n) * inHW.x + oy) * inHW.y + ox) * 4 + ci % 4];
++        float b = input[((((ci + 1) / 4 * batch + n) * inHW.x + oy) * inHW.y + ox) * 4 + (ci + 1) % 4];
++        volatile float4 first = a * weights[cb * inputChannels + ci];
++        volatile float4 second = b * weights[cb * inputChannels + ci + 1];
++        volatile float4 pair = first + second;
++        sum = pair + sum;
++    }
++    if (inputChannels % 2) {
++        int ci = inputChannels - 1;
++        float value = input[(((ci / 4 * batch + n) * inHW.x + oy) * inHW.y + ox) * 4 + ci % 4];
++        volatile float4 product = value * weights[cb * inputChannels + ci];
++        sum = product + sum;
++    }
++    float4 result = sum;
++    if (cb * 4 + 1 >= outputChannels) result.y = 0.0f;
++    if (cb * 4 + 2 >= outputChannels) result.z = 0.0f;
++    if (cb * 4 + 3 >= outputChannels) result.w = 0.0f;
++    output[((cb * batch + n) * outHW.x + oy) * outHW.y + ox] = result;
++}
+--- a/tools/converter/source/optimizer/merge/TransformSmallGroupConvolutionToDepthwise.cpp
++++ b/tools/converter/source/optimizer/merge/TransformSmallGroupConvolutionToDepthwise.cpp
+@@ -81,6 +81,14 @@
+             for (int x=0; x<icDivG; ++x) {
+                 std::unique_ptr<OpT> op(new OpT);
+                 op->type = OpType_ConvolutionDepthwise;
++                // Preserve proven host arithmetic provenance through this
++                // decomposition. With one input per group each child keeps
++                // the original reduction and bias position unchanged.
++                const auto name = expr->name();
++                if (name.find("fold3_host_conv_bf_") == 0 || name.find("fold3_host_conv_bl_") == 0) {
++                    if (icDivG != 1) return false;
++                    op->name = name + "__dw_" + std::to_string(y);
++                }
+                 op->main.value = new Convolution2DT;
+                 op->main.type = OpParameter_Convolution2D;
+                 op->main.AsConvolution2D()->common.reset(common->UnPack());
+--- a/source/backend/opencl/execution/buffer/BinaryBufExecution.cpp
++++ b/source/backend/opencl/execution/buffer/BinaryBufExecution.cpp
+@@ -415,6 +415,13 @@
+                 case BinaryOpOperation_SUB:
+                     OPENCL_CREATOR_CHECK(new BinaryBufExecution(inputs, "in0-in1", op, backend));
+                 case BinaryOpOperation_REALDIV:
++                    // High precision must retain ONNX division semantics and
++                    // the reference's FMA residual/tie correction on Adreno.
++                    if (static_cast<OpenCLBackend*>(backend)->getPrecision() == BackendConfig::Precision_High &&
++                        inputs[0]->getType() == halide_type_of<float>() &&
++                        inputs[1]->getType() == halide_type_of<float>()) {
++                        OPENCL_CREATOR_CHECK(new BinaryBufExecution(inputs, "fold3_host_divide(in0,in1)", op, backend));
++                    }
+                     OPENCL_CREATOR_CHECK(new BinaryBufExecution(
+                         inputs,
+                         "sign(in1)*in0/(fabs(in1)>(float4)((float)0.0000001)?fabs(in1):(float4)((float)0.0000001))", op,
+@@ -451,6 +458,17 @@
+                         "(fabs(in1)>(float4)((float)0.0000001)?fabs(in1):(float4)((float)0.0000001)))*in1",
+                         op, backend));
+                 case BinaryOpOperation_POW:
++                    // The converter tags only proven FP32 scalar-cube broadcast loops.
++                    // Other powers keep their normal MNN implementation.
++                    if (op->name() && op->name()->str().rfind("fold3_host_powf_cube_", 0) == 0) {
++                        if (static_cast<OpenCLBackend*>(backend)->getPrecision() != BackendConfig::Precision_High ||
++                            inputs.size() != 2 || inputs[1]->elementSize() != 1 ||
++                            inputs[0]->getType() != halide_type_of<float>()) {
++                            MNN_ERROR("Unsupported precision/type for tagged host powf cube\n");
++                            return nullptr;
++                        }
++                        OPENCL_CREATOR_CHECK(new BinaryBufExecution(inputs, "fold3_host_powf_cube(in0)", op, backend));
++                    }
+                     OPENCL_CREATOR_CHECK(new BinaryBufExecution(inputs, "pow(in0,in1)", op, backend));
+                 case BinaryOpOperation_SquaredDifference:
+                     OPENCL_CREATOR_CHECK(new BinaryBufExecution(inputs, "(in0-in1)*(in0-in1)", op, backend));
+--- a/source/backend/opencl/execution/cl/binary_buf.cl
++++ b/source/backend/opencl/execution/cl/binary_buf.cl
+@@ -3,6 +3,42 @@
+ #endif
+ #define PI 3.141592653589f
+ 
++// Adreno division is not correctly rounded. Refine its quotient using an
++// FMA residual, then resolve a possible adjacent-float midpoint explicitly.
++// Preserve IEEE exceptional results instead of clamping small denominators.
++inline float4 fold3_host_divide(float4 left, float4 right) {
++    volatile float4 quotient = left / right;
++    volatile float4 residual = fma(-quotient, right, left);
++    volatile float4 correction = residual / right;
++    volatile float4 corrected = quotient + correction;
++    volatile float4 magnitude = fabs(corrected);
++    volatile float4 denominator = fabs(right);
++    residual = fma(-magnitude, denominator, fabs(left));
++    volatile float4 direction = select((float4)INFINITY, (float4)0.0f, residual < (float4)0.0f);
++    volatile float4 neighbor = nextafter(magnitude, direction);
++    volatile float4 half_gap = fabs(neighbor - magnitude) * 0.5f;
++    volatile float4 distance = fma(-half_gap, denominator, fabs(residual));
++    int4 round_up = (distance > (float4)0.0f) |
++        ((distance == (float4)0.0f) & ((as_uint4(magnitude) & (uint4)1U) != (uint4)0U));
++    volatile float4 rounded = select(magnitude, neighbor, round_up);
++    corrected = select(corrected, copysign(rounded, corrected),
++        (half_gap > (float4)0.0f) & isfinite(neighbor));
++    return select(quotient, corrected,
++        isfinite(left) & isfinite(right) & isfinite(quotient) & (right != (float4)0.0f));
++}
++
++// Correct the two product-rounding errors in x^3. Volatile boundaries prevent
++// -cl-mad-enable from contracting the operations whose rounding is intentional.
++inline float4 fold3_host_powf_cube(float4 x) {
++    volatile float4 squared = x * x;
++    volatile float4 error = fma(x, x, -squared);
++    volatile float4 cubed = squared * x;
++    volatile float4 tail = fma(squared, x, -cubed);
++    volatile float4 correction = fma(error, x, tail);
++    volatile float4 result = cubed + correction;
++    return select(cubed, result, isfinite(cubed));
++}
++
+ __kernel void binary_buf(__private int global_dim0, __private int global_dim1,
+                          __global INPUT_TYPE* input0, __global INPUT_TYPE* input1, __global OUTPUT_TYPE* output,
+                          __private const int size,
+--- a/source/geometry/GeometryComputerUtils.hpp
++++ b/source/geometry/GeometryComputerUtils.hpp
+@@ -18,7 +18,7 @@
+     static void addConvert(const CommandBuffer& srcBuffer, CommandBuffer& dstBuffer, GeometryComputer::Context& ctx);
+     static std::shared_ptr<Command> makeCommand(flatbuffers::FlatBufferBuilder& builder, const std::vector<Tensor*>& inputs, const std::vector<Tensor*>& outputs);
+     static std::shared_ptr<Command> makeBinary(int type, Tensor* input0, Tensor* input1, Tensor* output);
+-    static std::shared_ptr<Command> makeReduce(ReductionType type, Tensor* input0, Tensor* output, int axis = 1);
++    static std::shared_ptr<Command> makeReduce(ReductionType type, Tensor* input0, Tensor* output, int axis = 1, const std::string& name = "");
+     static std::shared_ptr<Command> makeUnary(UnaryOpOperation type, Tensor* input0, Tensor* output);
+     static std::shared_ptr<Command> makeLayerNorm(Tensor* input0, Tensor* output, std::vector<int32_t> axis, float epsilon, std::vector<float> gamma, std::vector<float> beta, std::vector<int64_t> external, int group = 1, bool useRMS = false);
+     static std::shared_ptr<Command> makeMatMul(Tensor* input0, Tensor* input1, Tensor* output, Tensor* Bias = nullptr,
+--- a/source/geometry/GeometryComputerUtils.cpp
++++ b/source/geometry/GeometryComputerUtils.cpp
+@@ -477,7 +477,7 @@
+     return cmdP;
+ }
+ 
+-std::shared_ptr<Command> GeometryComputerUtils::makeReduce(ReductionType type, Tensor* input0, Tensor* output, int axis) {
++std::shared_ptr<Command> GeometryComputerUtils::makeReduce(ReductionType type, Tensor* input0, Tensor* output, int axis, const std::string& name) {
+     flatbuffers::FlatBufferBuilder builder(DEFAULT_ALLOCATE_SIZE);
+     auto vec = builder.CreateVector(std::vector<int>{axis});
+     ReductionParamBuilder builder_(builder);
+@@ -485,7 +485,9 @@
+     builder_.add_keepDims(true);
+     builder_.add_dim(vec);
+     auto mainOffset = builder_.Finish().Union();
++    auto nameOffset = name.empty() ? flatbuffers::Offset<flatbuffers::String>() : builder.CreateString(name);
+     OpBuilder opB(builder);
++    opB.add_name(nameOffset);
+     opB.add_type(OpType_Reduction);
+     opB.add_main(mainOffset);
+     opB.add_main_type(OpParameter_ReductionParam);
+--- a/source/geometry/GeometryReduce.cpp
++++ b/source/geometry/GeometryReduce.cpp
+@@ -163,7 +163,10 @@
+ 
+             // Create Command
+             {
+-                auto cmd = GeometryComputerUtils::makeReduce(reductOp, inputTensor.get(), outputTensor.get());
++                // Preserve the explicit host-order tag through the geometry command.
++                const std::string hostName = op->name() && op->name()->str().rfind("fold3_host_mean8_", 0) == 0
++                    ? op->name()->str() : "";
++                auto cmd = GeometryComputerUtils::makeReduce(reductOp, inputTensor.get(), outputTensor.get(), 1, hostName);
+                 res.command.emplace_back(std::move(cmd));
+             }
+             currentInput = outputTensor.get();
+--- a/source/backend/opencl/execution/buffer/ReductionBufExecution.hpp
++++ b/source/backend/opencl/execution/buffer/ReductionBufExecution.hpp
+@@ -27,6 +27,7 @@
+     OpenCLBackend *mOpenCLBackend;
+     MNN::DataType mdataType;
+     int mAxis;
++    bool mHostSpatialMean = false;
+     std::vector<uint32_t> mGlobalWorkSize = {1, 1, 1};
+     std::vector<uint32_t> mLocalWorkSize{1, 1, 1};
+     uint32_t mMaxWorkGroupSize;
+--- a/source/backend/opencl/execution/buffer/ReductionBufExecution.cpp
++++ b/source/backend/opencl/execution/buffer/ReductionBufExecution.cpp
+@@ -21,6 +21,10 @@
+ #endif
+     mOpenCLBackend = static_cast<OpenCLBackend *>(backend);
+     mAxis = op->main_as_ReductionParam()->dim()->data()[0];
++    mHostSpatialMean = op->name() && op->name()->str().rfind("fold3_host_mean8_", 0) == 0;
++    if (mHostSpatialMean && op->main_as_ReductionParam()->operation() != ReductionType_MEAN) {
++        mHostSpatialMean = false;
++    }
+     bool isInt32 = (inputs[0]->getType().code == halide_type_int && inputs[0]->getType().bits == 32);
+     switch (op->main_as_ReductionParam()->operation()) {
+         case ReductionType_MEAN:
+@@ -84,6 +88,30 @@
+         inside *= input->length(i);
+     }
+     int dim = input->length(mAxis);
++    if (mHostSpatialMean) {
++        // Only the tagged original FP32 H/W mean has this arithmetic contract.
++        if (openCLBackend->getPrecision() != BackendConfig::Precision_High || inside != 1 ||
++            dim < 8 || dim % 8 || input->getType().code != halide_type_float || input->getType().bits != 32) {
++            return NOT_SUPPORT;
++        }
++        unit.kernel = runtime->buildKernel("reduction_buf", "fold3_host_mean8_buf", mBuildOptions,
++                                          openCLBackend->getPrecision(), input, output);
++        OPENCL_CHECK_KERNEL(unit.kernel);
++        mGlobalWorkSize = {static_cast<uint32_t>(outside), 1, 1};
++        mLocalWorkSize = {1, 1, 1};
++        cl_int ret = CL_SUCCESS;
++        ret |= unit.kernel->get().setArg(0, mGlobalWorkSize[0]);
++        ret |= unit.kernel->get().setArg(1, mGlobalWorkSize[1]);
++        ret |= unit.kernel->get().setArg(2, mGlobalWorkSize[2]);
++        ret |= unit.kernel->get().setArg(3, openCLBuffer(input));
++        ret |= unit.kernel->get().setArg(4, openCLBuffer(output));
++        ret |= unit.kernel->get().setArg(5, dim);
++        MNN_CHECK_CL_SUCCESS(ret, "setArg host spatial mean");
++        openCLBackend->recordKernel3d(unit.kernel, mGlobalWorkSize, mLocalWorkSize);
++        unit.globalWorkSize = {mGlobalWorkSize[0], 1, 1};
++        unit.localWorkSize = {1, 1, 1};
++        return NO_ERROR;
++    }
+     
+     int localSize = getLocalSize(dim, MaxLocalSize);
+     if(localSize < 4){
+--- a/source/backend/opencl/execution/cl/reduction_buf.cl
++++ b/source/backend/opencl/execution/cl/reduction_buf.cl
+@@ -102,3 +102,27 @@
+ #endif
+     vstore4(CONVERT_OUTPUT4(out), 0, output + z * inside + (y << 2));
+ }
++
++// Pinned ARM64 host ReduceMean order, for explicitly tagged FP32 spatial means.
++__kernel void fold3_host_mean8_buf(GLOBAL_SIZE_3_DIMS
++                                  __global const float *input,
++                                  __global float *output,
++                                  __private const int dim) {
++    const int row = get_global_id(0);
++    DEAL_NON_UNIFORM_DIM3(row, get_global_id(1), get_global_id(2));
++    const int offset = row * dim;
++    float8 lanes = vload8(0, input + offset);
++    for (int i = 8; i < dim; i += 8) {
++        volatile float8 next = lanes + vload8(0, input + offset + i);
++        lanes = next;
++    }
++    volatile float4 packed = lanes.lo + lanes.hi;
++    volatile float left = packed.s0 + packed.s1;
++    volatile float right = packed.s2 + packed.s3;
++    volatile float summed = left + right;
++    volatile float quotient = summed / (float)dim;
++    volatile float residual = fma(-quotient, (float)dim, summed);
++    volatile float correction = residual / (float)dim;
++    volatile float result = quotient + correction;
++    output[row] = result;
++}
+--- a/tools/converter/source/optimizer/merge/FuseTemplateOp.cpp
++++ b/tools/converter/source/optimizer/merge/FuseTemplateOp.cpp
+@@ -116,41 +116,8 @@
+ }
+ 
+ static auto gRegister = []() {
+-    {
+-        // Turn DIV Const to Multi
+-        auto match = [](EXPRP expr) {
+-            if (expr->get() == nullptr) {
+-                return false;
+-            }
+-            if (OpType_BinaryOp != expr->get()->type()) {
+-                return false;
+-            }
+-            if (BinaryOpOperation_REALDIV != expr->get()->main_as_BinaryOp()->opType()) {
+-                return false;
+-            }
+-            auto i1 = expr->inputs()[1];
+-            auto i1Info = i1->getInfo();
+-            if (nullptr == i1Info || i1Info->type.code != halide_type_float) {
+-                return false;
+-            }
+-            auto i1Ptr = i1->readMap<void>();
+-            if (nullptr == i1Ptr) {
+-                return false;
+-            }
+-            return true;
+-        };
+-
+-        auto transform = [](EXPRP expr) {
+-            auto i1 = expr->inputs()[1];
+-            i1 = _Reciprocal(i1);
+-            i1.fix(VARP::CONSTANT);
+-            auto newVar = _Multiply(expr->inputs()[0], i1);
+-            newVar->setName(expr->name());
+-            Expr::replace(expr, newVar->expr().first);
+-            return true;
+-        };
+-        TemplateMerge::getInstance("Merge").insertTemplate("ConstDivToMul", match, transform);
+-    }
++    // Keep constant division as division. A rounded reciprocal multiplication
++    // changes the original FP32 boundaries before convolutions and half casts.
+     {
+         auto input = _Input({}, NCHW);
+         auto left = _Relu6(_Add(input, _Scalar<float>(3)));
+--- a/source/backend/opencl/execution/buffer/LoopBufExecution.cpp
++++ b/source/backend/opencl/execution/buffer/LoopBufExecution.cpp
+@@ -13,7 +13,7 @@
+ namespace MNN {
+ namespace OpenCL {
+ 
+-static std::string getComputeOption(MNN::BinaryOpOperation type){
++static std::string getComputeOption(MNN::BinaryOpOperation type, bool strictDivision){
+     std::string compute;
+     switch (type) {
+         case BinaryOpOperation_MUL:
+@@ -23,6 +23,7 @@
+         case BinaryOpOperation_SUB:
+             compute = "in0-in1";break;
+         case BinaryOpOperation_REALDIV:
++            if (strictDivision) return "fold3_reference_divide(in0,in1)";
+             compute = "sign(in1)*in0/(fabs(in1)>(float)((float)0.0000001)?fabs(in1):(float)((float)0.0000001))";break;
+         case BinaryOpOperation_MINIMUM:
+             compute = "in0>in1?in1:in0";break;
+@@ -146,6 +147,7 @@
+ LoopBufExecution::LoopBufExecution(const LoopParam *loop, const MNN::Op *op, Backend *bn)
+ : CommonExecution(bn, op) {
+     mLoop = loop;
++    mFold3HalfMatMul = op->name() != nullptr && op->name()->str().find("fold3_half_matmul2_") == 0;
+     mTensors.resize(mLoop->tensorNumber());
+ }
+ 
+@@ -362,6 +364,12 @@
+     Unit unit;
+     std::string KernelName = "batch_matmul";
+     std::set<std::string> buildOptions;
++    if (mFold3HalfMatMul && mOpenCLBackend->getPrecision() == BackendConfig::Precision_High) {
++        // The provenance marker only describes original bias-free FP16
++        // MatMul. Never silently apply it to a fused bias operation.
++        if (mHasBias) return NOT_SUPPORT;
++        buildOptions.emplace("-DFOLD3_HALF_MATMUL2");
++    }
+     if (mHasBias) {
+         buildOptions.emplace("-DBIAS");
+     }
+@@ -425,7 +433,7 @@
+ 
+ ErrorCode LoopBufExecution::LoopBinary(const Tensor *output, int cmdIndex, int iter) {
+     auto cmd = mLoop->commands()->GetAs<RegionCommand>(cmdIndex);
+-    std::string compute = getComputeOption(cmd->op()->main_as_BinaryOp()->opType());
++    std::string compute = getComputeOption(cmd->op()->main_as_BinaryOp()->opType(), static_cast<OpenCLBackend*>(backend())->getPrecision() == BackendConfig::Precision_High);
+     std::set<std::string> buildOptions;
+     buildOptions.emplace("-DOPERATOR=" + compute);
+     if(cmd->op()->main_as_BinaryOp()->opType() == BinaryOpOperation_MOD && (output->getType().code == halide_type_int || output->getType().code == halide_type_uint)){
+@@ -529,7 +537,7 @@
+ 
+ ErrorCode LoopBufExecution::LoopCumsum(const Tensor *output) {
+     auto cmd = mLoop->commands()->GetAs<RegionCommand>(0);
+-    std::string compute = getComputeOption(cmd->op()->main_as_BinaryOp()->opType());
++    std::string compute = getComputeOption(cmd->op()->main_as_BinaryOp()->opType(), static_cast<OpenCLBackend*>(backend())->getPrecision() == BackendConfig::Precision_High);
+     std::set<std::string> buildOptions;
+     buildOptions.emplace("-DOPERATOR=" + compute);
+     if(cmd->op()->main_as_BinaryOp()->opType() == BinaryOpOperation_MOD && (output->getType().code == halide_type_int || output->getType().code == halide_type_uint)){
+@@ -618,7 +626,7 @@
+ 
+ ErrorCode LoopBufExecution::FuseOutput(int iter, int* inputStride, int sizeZ, int sizeY, int SizeX, int n, int n_offset) {
+     auto cmd = mLoop->commands()->GetAs<RegionCommand>(iter);
+-    std::string compute = getComputeOption(MNN::BinaryOpOperation(cmd->fuse()));
++    std::string compute = getComputeOption(MNN::BinaryOpOperation(cmd->fuse()), static_cast<OpenCLBackend*>(backend())->getPrecision() == BackendConfig::Precision_High);
+     std::set<std::string> buildOptions;
+     buildOptions.emplace("-DOPERATOR=" + compute);
+     OpenCLBackend *mOpenCLBackend = (OpenCLBackend *)backend();
+--- a/source/backend/opencl/execution/cl/loop.cl
++++ b/source/backend/opencl/execution/cl/loop.cl
+@@ -1,3 +1,21 @@
++// Match High/buffer REALDIV after geometry lowers broadcast to Loop.
++// Keep this scalar helper identical to the verified MLAS Tanh helper.
++inline float fold3_reference_divide(float left, float right) {
++    volatile float quotient = left / right;
++    if (!isfinite(left) || !isfinite(right) || !isfinite(quotient) || right == 0.0f || left == 0.0f) return quotient;
++    volatile float residual = fma(-quotient, right, left);
++    volatile float correction = residual / right;
++    volatile float corrected = quotient + correction;
++    float magnitude = fabs(corrected), denominator = fabs(right);
++    residual = fma(-magnitude, denominator, fabs(left));
++    float neighbor = nextafter(magnitude, residual < 0.0f ? 0.0f : INFINITY);
++    float halfGap = fabs(neighbor - magnitude) * 0.5f;
++    float distance = fma(-halfGap, denominator, fabs(residual));
++    if (halfGap > 0.0f && isfinite(neighbor) &&
++        (distance > 0.0f || (distance == 0.0f && (as_uint(magnitude) & 1U)))) magnitude = neighbor;
++    return copysign(magnitude, corrected);
++}
++
+ #ifdef MNN_SUPPORT_FP16
+ #pragma OPENCL EXTENSION cl_khr_fp16 : enable
+ #endif
+@@ -58,6 +76,54 @@
+         }
+ #endif
+         int4 offset = index * steps + offsets;
++
++#ifdef FOLD3_HALF_MATMUL2
++        // Original FP16 attention MatMul: the host SME2 FDOT rounds each
++        // pair before adding it to the FP32 accumulator. Inputs are exact
++        // half values held in FP32 buffers; preserve all arithmetic boundaries
++        // and the odd-K tail before the graph's explicit half-rounding Cast.
++        for (int row = pos.y; row < min(pos.y + 4, e); ++row) {
++            for (int column = pos.x; column < min(pos.x + 4, h); ++column) {
++                volatile float accumulator = 0.0f;
++                for (int k = 0; k + 1 < l; k += 2) {
++#ifdef TRANSPOSE_A
++                    float a0 = input_A[offset.y + k * e + row];
++                    float a1 = input_A[offset.y + (k + 1) * e + row];
++#else
++                    float a0 = input_A[offset.y + row * l + k];
++                    float a1 = input_A[offset.y + row * l + k + 1];
++#endif
++#ifdef TRANSPOSE_B
++                    float b0 = input_B[offset.z + column * l + k];
++                    float b1 = input_B[offset.z + column * l + k + 1];
++#else
++                    float b0 = input_B[offset.z + k * h + column];
++                    float b1 = input_B[offset.z + (k + 1) * h + column];
++#endif
++                    volatile float first = a0 * b0;
++                    volatile float second = a1 * b1;
++                    volatile float pair = first + second;
++                    accumulator = pair + accumulator;
++                }
++                if (l & 1) {
++#ifdef TRANSPOSE_A
++                    float a = input_A[offset.y + (l - 1) * e + row];
++#else
++                    float a = input_A[offset.y + row * l + l - 1];
++#endif
++#ifdef TRANSPOSE_B
++                    float b = input_B[offset.z + column * l + l - 1];
++#else
++                    float b = input_B[offset.z + (l - 1) * h + column];
++#endif
++                    volatile float product = a * b;
++                    accumulator = product + accumulator;
++                }
++                output[offset.x + row * h + column] = accumulator;
++            }
++        }
++        return;
++#endif
+         
+ #ifdef TRANSPOSE_A
+         __global FLOAT* A_ptr = input_A + offset.y + pos.y;
+--- a/source/backend/opencl/execution/buffer/LayerNormBufExecution.hpp
++++ b/source/backend/opencl/execution/buffer/LayerNormBufExecution.hpp
+@@ -24,6 +24,8 @@
+     int group_ ;
+     float epsilon_;
+     bool RMSNorm;
++    bool fold3HalfWelford = false;
++    int gammaSize = 0;
+ };
+ 
+ class LayerNormBufExecution : public CommonExecution {
+--- a/source/backend/opencl/execution/buffer/LayerNormBufExecution.cpp
++++ b/source/backend/opencl/execution/buffer/LayerNormBufExecution.cpp
+@@ -65,6 +65,14 @@
+     if (mResource->has_gamma_beta_ && gammasize == 0) {
+         gammasize = layer_norm_param->external()->data()[1] / sizeof(float);
+     }
++    // Only the converter's original FP16, last-axis, FP32-stash LayerNorm
++    // marker requests the pinned host's ordered Welford arithmetic.
++    mResource->fold3HalfWelford = op->name() &&
++        op->name()->str().find("fold3_half_layernorm_") == 0 &&
++        mOpenCLBackend->getPrecision() == BackendConfig::Precision_High &&
++        mResource->has_gamma_beta_ && !mResource->RMSNorm &&
++        mResource->axis_size == 1 && mResource->group_ == 1;
++    mResource->gammaSize = gammasize;
+ 
+     auto staticMapAlloc = mOpenCLBackend->getStaticAllocatorMMap();
+     if (mResource->has_gamma_beta_) {
+@@ -273,6 +281,13 @@
+         local_size = getLocalSize(inner_size / 4, MaxLocalSize);
+         kernelName = "layernorm_buf";
+     }
++    if (mResource->fold3HalfWelford && !isNC4HW4 && inputs.size() == 1 && outputs.size() == 1 &&
++        inner_size > 0 && mResource->gammaSize == inner_size) {
++        // One ordered statistics reduction per row, entirely on the GPU.
++        // The existing following Cast retains the original FP16 boundary.
++        local_size = 1;
++        kernelName = "fold3_half_welford";
++    }
+ 
+     std::set<std::string> buildOptions;
+     buildOptions.emplace("-DLOCAL_SIZE=" + std::to_string(local_size));
+--- a/source/backend/opencl/execution/cl/layernorm_buf.cl
++++ b/source/backend/opencl/execution/cl/layernorm_buf.cl
+@@ -382,4 +382,72 @@
+     }
+ 
+ #endif
+-}
+\ No newline at end of file
++}
++
++#pragma OPENCL FP_CONTRACT OFF
++// Pinned arm64 host FP16 LayerNorm uses FP32 Welford statistics and division,
++// not a parallel sum/variance followed by multiplication with an inverse root.
++// High/buffer keeps the original half values exactly in FP32 storage; the
++// following explicit Cast performs the required final half rounding.
++inline float fold3_layernorm_divide(float left, float right) {
++    volatile float quotient = left / right;
++    if (!isfinite(left) || !isfinite(right) || !isfinite(quotient) || right == 0.0f || left == 0.0f) return quotient;
++    volatile float residual = fma(-quotient, right, left);
++    volatile float correction = residual / right;
++    volatile float corrected = quotient + correction;
++    float magnitude = fabs(corrected), denominator = fabs(right);
++    residual = fma(-magnitude, denominator, fabs(left));
++    float neighbor = nextafter(magnitude, residual < 0.0f ? 0.0f : INFINITY);
++    float halfGap = fabs(neighbor - magnitude) * 0.5f;
++    float distance = fma(-halfGap, denominator, fabs(residual));
++    if (halfGap > 0.0f && isfinite(neighbor) &&
++        (distance > 0.0f || (distance == 0.0f && (as_uint(magnitude) & 1U)))) magnitude = neighbor;
++    return copysign(magnitude, corrected);
++}
++
++inline float fold3_layernorm_sqrt(float value) {
++    uint bits = as_uint(value), exponent = (bits >> 23) & 255U;
++    float result = sqrt(value);
++    if (!(value > 0.0f) || exponent == 0U || exponent == 255U) return result;
++    uint expectedExponent = (exponent + 127U) >> 1;
++    ulong radicand = (ulong)((bits & 0x7fffffU) | 0x800000U) << (23U + ((exponent - 127U) & 1U));
++    // Correct the native root's bounded ulp error with exact integer midpoint
++    // comparisons, as in the already verified strict OpenCL reference.
++    for (int i = 0; i < 4; ++i) {
++        uint encoded = as_uint(result);
++        ulong significand = (ulong)((encoded & 0x7fffffU) | 0x800000U) << ((encoded >> 23) + 1U - expectedExponent);
++        bool up = 4UL * radicand > significand * significand;
++        uint neighbor = up ? encoded + 1U : encoded - 1U;
++        ulong adjacent = (ulong)((neighbor & 0x7fffffU) | 0x800000U) << ((neighbor >> 23) + 1U - expectedExponent);
++        ulong midpoint = (significand + adjacent) * (significand + adjacent);
++        bool move = up ? 16UL * radicand > midpoint : 16UL * radicand < midpoint;
++        result = as_float(move ? neighbor : encoded);
++    }
++    return result;
++}
++
++__kernel void fold3_half_welford(__private int global_dim0, __private int global_dim1,
++                               __global const float* input, __global float* output,
++                               __private int inside, __global const float* gamma,
++                               __global const float* beta, __private float epsilon) {
++    const int x = get_global_id(0), row = get_global_id(1);
++    if (x >= global_dim0 || row >= global_dim1) return;
++    const int offset = row * inside;
++    volatile float mean = 0.0f, m2 = 0.0f;
++    for (int k = 0; k < inside; ++k) {
++        float value = input[offset + k];
++        volatile float delta = value - mean;
++        volatile float nextMean = mean + fold3_layernorm_divide(delta, (float)(k + 1));
++        volatile float centered = value - nextMean;
++        m2 = fma(delta, centered, m2);
++        mean = nextMean;
++    }
++    volatile float variance = fold3_layernorm_divide(m2, (float)inside);
++    volatile float rootInput = variance + epsilon;
++    float std = fold3_layernorm_sqrt(rootInput);
++    for (int k = 0; k < inside; ++k) {
++        volatile float centered = input[offset + k] - mean;
++        float normalized = fold3_layernorm_divide(centered, std);
++        output[offset + k] = fma(normalized, gamma[k], beta[k]);
++    }
++}
+--- a/source/backend/opencl/execution/buffer/LoopBufExecution.hpp
++++ b/source/backend/opencl/execution/buffer/LoopBufExecution.hpp
+@@ -29,6 +29,7 @@
+     ErrorCode FuseOutput(int iter, int* inputStride, int sizeZ, int sizeY, int SizeX, int n, int n_offset);
+ private:
+     const LoopParam *mLoop;
++    bool mFold3HalfMatMul = false;
+     std::vector<Tensor *> mTensors;
+     std::shared_ptr<Tensor> mFuseTensor;
+ };

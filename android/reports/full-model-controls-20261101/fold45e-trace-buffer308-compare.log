@@ -1,0 +1,76 @@
+{
+  "dmonitoring_model": {
+    "captured_tensors": 8,
+    "first_tolerance_failure": {
+      "operator": "linear_raster_0",
+      "operator_type": "Raster",
+      "tensor": "fold3_half_source_346_0",
+      "backend": "OpenCL",
+      "layout": "NCHW",
+      "dtype": "float32",
+      "shape": [
+        1,
+        512
+      ],
+      "file": "0004.bin",
+      "original": {
+        "tensor": "fold3_half_source_346_0",
+        "node": "node_linear",
+        "operator": "Gemm",
+        "domain": ""
+      },
+      "parity": {
+        "passed": false,
+        "finite": true,
+        "shape": [
+          1,
+          512
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": false,
+        "max_abs_error": 0.005637764930725098,
+        "mismatched_elements": 275
+      },
+      "original_dtype": "float16"
+    }
+  },
+  "driving_supercombo": {
+    "captured_tensors": 8,
+    "first_tolerance_failure": {
+      "operator": "model/linear_62_raster_0",
+      "operator_type": "Raster",
+      "tensor": "fold3_half_source_430_0",
+      "backend": "OpenCL",
+      "layout": "NCHW",
+      "dtype": "float32",
+      "shape": [
+        1,
+        55
+      ],
+      "file": "0000.bin",
+      "original": {
+        "tensor": "fold3_half_source_430_0",
+        "node": "model/node_linear_62",
+        "operator": "Gemm",
+        "domain": ""
+      },
+      "parity": {
+        "passed": false,
+        "finite": true,
+        "shape": [
+          1,
+          55
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": false,
+        "max_abs_error": 0.010611534118652344,
+        "mismatched_elements": 31
+      },
+      "original_dtype": "float16"
+    }
+  }
+}

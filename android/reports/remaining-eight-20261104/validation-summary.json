@@ -1,0 +1,213 @@
+{
+  "candidate": "candidate45zo",
+  "branch": "codex/fold3-android-port",
+  "apk_sha256": "d3732836486d1c1518b8b05462ce45e520cd06a7d93ae8968f62ebedd2161c45",
+  "vehicle_tx_enabled": false,
+  "physical_engagement_allowed": false,
+  "host": {
+    "status": "passed",
+    "tests": 190,
+    "evidence": "host-suite.log"
+  },
+  "projection_host_sections": {
+    "status": "passed",
+    "exact_checks": 12,
+    "evidence": "projection-prefix-host.json"
+  },
+  "model_accuracy": {
+    "status": "failed",
+    "seed": 42,
+    "parity": {
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        553
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.001953125,
+      "mismatched_elements": 1
+    },
+    "evidence": "prefix-ncnn-seed42.json",
+    "remaining_seeds_and_795_suite": "not advanced after first seed failure",
+    "backend_qualified": false
+  },
+  "controls": {
+    "status": "failed",
+    "evidence": "controls-comparison.json",
+    "comparison": {
+      "qualification": "failed: complete-cycle timing remains above budget; scheduled misses retained",
+      "matched_fixture": true,
+      "workload": "30 second synthetic device-replay steady-input fixture, host GPU ARM64 emulator, no host builds/tests",
+      "runs": [
+        {
+          "candidate": "candidate45zl",
+          "fixture_sha256": "b5ea99327f0ffc121e5556d29b32d4ce8e6e855d14518f46a3f060ea38721f99",
+          "status": "passed",
+          "work_samples": 2710,
+          "p99_work_ms": 1.637041,
+          "p99_complete_cycle_ms": 11.399293,
+          "mean_cycle_hz": 99.85311116743759,
+          "cycle_deadline_misses": 1333,
+          "scheduled_deadline_misses": 1,
+          "skipped_slots_total": 4,
+          "stages": {
+            "input_wait_budget_ms": 0,
+            "cycle_interval_ms": 10.797167,
+            "scheduler_delay_ms": 1.064506,
+            "skipped_slots": 0,
+            "selfdrive_ipc_age_ms": 5.142459,
+            "input_handling_ms": 0.701,
+            "pacing_wait_ms": 10.123292,
+            "computation_ms": 0.449417,
+            "publishing_ms": 0.984292,
+            "parameters_extensions_ms": 0.449792,
+            "cycle_before_reporting_ms": 11.339416,
+            "active_cycle_before_reporting_ms": 1.867084,
+            "release_to_completion_before_reporting_ms": 2.390962,
+            "reporting_ms": 0.18325,
+            "release_to_completion_ms": 2.4002120000000002
+          }
+        },
+        {
+          "candidate": "candidate45zo",
+          "fixture_sha256": "b5ea99327f0ffc121e5556d29b32d4ce8e6e855d14518f46a3f060ea38721f99",
+          "status": "passed",
+          "work_samples": 2711,
+          "p99_work_ms": 1.310042,
+          "p99_complete_cycle_ms": 11.191915999999999,
+          "mean_cycle_hz": 99.99800168199997,
+          "cycle_deadline_misses": 1334,
+          "scheduled_deadline_misses": 1,
+          "skipped_slots_total": 0,
+          "stages": {
+            "input_wait_budget_ms": 0,
+            "cycle_interval_ms": 10.6165,
+            "scheduler_delay_ms": 0.890759,
+            "skipped_slots": 0,
+            "selfdrive_ipc_age_ms": 4.292541,
+            "input_handling_ms": 0.8195,
+            "input_thread_cpu_ms": 0.613167,
+            "active_thread_cpu_ms": 1.373666,
+            "active_off_cpu_ms": 0.715876,
+            "pacing_wait_ms": 10.011334,
+            "computation_ms": 0.436041,
+            "publishing_ms": 0.786375,
+            "parameters_extensions_ms": 0.369791,
+            "cycle_before_reporting_ms": 11.17525,
+            "active_cycle_before_reporting_ms": 1.832125,
+            "release_to_completion_before_reporting_ms": 2.205219,
+            "reporting_ms": 0.131,
+            "release_to_completion_ms": 2.223176
+          }
+        }
+      ]
+    }
+  },
+  "emulator": {
+    "groups": [
+      {
+        "name": "instrumentation",
+        "status": "passed",
+        "isolation_status": "passed"
+      },
+      {
+        "name": "chain-device-steady",
+        "status": "passed",
+        "isolation_status": "passed"
+      },
+      {
+        "name": "chain-device-faults",
+        "status": "passed",
+        "isolation_status": "passed"
+      },
+      {
+        "name": "lifecycle",
+        "status": "passed",
+        "isolation_status": "passed"
+      },
+      {
+        "name": "adb-faults",
+        "status": "passed",
+        "isolation_status": "passed"
+      },
+      {
+        "name": "ipc",
+        "status": "passed",
+        "isolation_status": "passed"
+      },
+      {
+        "name": "metadrive-cancel",
+        "status": "passed",
+        "isolation_status": "passed"
+      },
+      {
+        "name": "metadrive-stale",
+        "status": "passed",
+        "isolation_status": "passed"
+      },
+      {
+        "name": "thermal",
+        "status": "passed",
+        "isolation_status": "passed"
+      },
+      {
+        "name": "camera-timing",
+        "status": "failed",
+        "isolation_status": "passed"
+      }
+    ],
+    "installed_hash": "candidate45zo-installed-emulator.json"
+  },
+  "fold3": {
+    "status": "blocked",
+    "reason": "disconnected; accelerator performance and installed hash unverified"
+  },
+  "physical_gates": {
+    "status": "blocked",
+    "reason": "unmounted phone, deferred rear lens-cover proof, disconnected Panda and vehicle"
+  },
+  "sustained_workload": {
+    "status": "blocked",
+    "reason": "accuracy/timing gates fail; physical Fold 3 disconnected"
+  },
+  "cooling_optimization": "deferred; existing thermal protection and cleanup enforced",
+  "cleanup": {
+    "vehicle_tx_enabled": false,
+    "fold_status": "blocked: disconnected",
+    "emulator": {
+      "state": {
+        "processes": [],
+        "camera_provider_processes": [
+          "379 android.hardware.camera.provider.ranchu",
+          "380 android.hardware.camera.provider@2.7-service-google",
+          "455 cameraserver"
+        ],
+        "camera_owned": false,
+        "thermal_status": 0,
+        "skin_c": 30.8,
+        "thermal_override": false
+      },
+      "baseline": {
+        "processes": [],
+        "camera_provider_processes": [
+          "379 android.hardware.camera.provider.ranchu",
+          "380 android.hardware.camera.provider@2.7-service-google",
+          "455 cameraserver"
+        ],
+        "camera_owned": false,
+        "thermal_status": 0,
+        "skin_c": 30.8,
+        "thermal_override": false,
+        "idle_seconds": 30.85633812501328,
+        "normal_thermal_seconds": 30.751966167008504
+      },
+      "forwards": [],
+      "apk_sha256": "d3732836486d1c1518b8b05462ce45e520cd06a7d93ae8968f62ebedd2161c45"
+    },
+    "emulator_exit_code": 0
+  }
+}

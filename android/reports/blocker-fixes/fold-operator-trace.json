@@ -1,0 +1,2851 @@
+{
+  "scope": "diagnostic: observing intermediate tensors can change fusion/rounding",
+  "vehicle_tx_enabled": false,
+  "models": {
+    "dmonitoring_model": {
+      "instrumented_matches_original": {
+        "outputs": false
+      },
+      "engines": {
+        "ort": {
+          "nodes": [
+            {
+              "index": 0,
+              "operator": "Cast",
+              "name": "node__to_copy",
+              "output": "_to_copy",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                3
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 1,
+              "operator": "Sub",
+              "name": "node_sub",
+              "output": "sub",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                3
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 2,
+              "operator": "Mul",
+              "name": "node_mul",
+              "output": "mul",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                3
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 3,
+              "operator": "Cast",
+              "name": "node__to_copy_1",
+              "output": "_to_copy_1",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                1382400
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 4,
+              "operator": "Div",
+              "name": "node_div",
+              "output": "div",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                1382400
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 5,
+              "operator": "Reshape",
+              "name": "node_view",
+              "output": "view",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                960,
+                360,
+                4
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 6,
+              "operator": "Transpose",
+              "name": "node_permute",
+              "output": "permute",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                360,
+                960,
+                4
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 7,
+              "operator": "Reshape",
+              "name": "node__unsafe_view",
+              "output": "_unsafe_view",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                360,
+                240,
+                16
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 8,
+              "operator": "Transpose",
+              "name": "node_permute_1",
+              "output": "permute_1",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                16,
+                240,
+                360
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 9,
+              "operator": "Conv",
+              "name": "node_Conv_805",
+              "output": "getitem",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                32,
+                120,
+                180
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.234375,
+              "mismatched_elements": 543700
+            },
+            {
+              "index": 10,
+              "operator": "Gelu",
+              "name": "node_gelu",
+              "output": "gelu",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                32,
+                120,
+                180
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.1875,
+              "mismatched_elements": 481700
+            },
+            {
+              "index": 11,
+              "operator": "Conv",
+              "name": "node_Conv_807",
+              "output": "getitem_3",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                32,
+                60,
+                90
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.265625,
+              "mismatched_elements": 152757
+            },
+            {
+              "index": 12,
+              "operator": "Gelu",
+              "name": "node_gelu_1",
+              "output": "gelu_1",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                32,
+                60,
+                90
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.2353515625,
+              "mismatched_elements": 125322
+            },
+            {
+              "index": 13,
+              "operator": "Conv",
+              "name": "node_Conv_809",
+              "output": "getitem_6",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                32,
+                60,
+                90
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.25,
+              "mismatched_elements": 152718
+            },
+            {
+              "index": 14,
+              "operator": "Gelu",
+              "name": "node_gelu_2",
+              "output": "gelu_2",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                32,
+                60,
+                90
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.19921875,
+              "mismatched_elements": 110942
+            },
+            {
+              "index": 15,
+              "operator": "Conv",
+              "name": "node_Conv_811",
+              "output": "getitem_9",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                96,
+                30,
+                45
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.25,
+              "mismatched_elements": 114452
+            },
+            {
+              "index": 16,
+              "operator": "Gelu",
+              "name": "node_gelu_3",
+              "output": "gelu_3",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                96,
+                30,
+                45
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.12890625,
+              "mismatched_elements": 101156
+            },
+            {
+              "index": 17,
+              "operator": "Conv",
+              "name": "node_Conv_813",
+              "output": "getitem_12",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                30,
+                45
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.396484375,
+              "mismatched_elements": 73370
+            },
+            {
+              "index": 18,
+              "operator": "Gelu",
+              "name": "node_gelu_4",
+              "output": "gelu_4",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                30,
+                45
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.400390625,
+              "mismatched_elements": 71270
+            },
+            {
+              "index": 19,
+              "operator": "Conv",
+              "name": "node_Conv_815",
+              "output": "getitem_15",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                30,
+                45
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.17529296875,
+              "mismatched_elements": 68342
+            },
+            {
+              "index": 20,
+              "operator": "Conv",
+              "name": "node_Conv_817",
+              "output": "getitem_18",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                30,
+                45
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.349609375,
+              "mismatched_elements": 237646
+            },
+            {
+              "index": 21,
+              "operator": "Gelu",
+              "name": "node_gelu_5",
+              "output": "gelu_5",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                30,
+                45
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.3193359375,
+              "mismatched_elements": 200871
+            },
+            {
+              "index": 22,
+              "operator": "Conv",
+              "name": "node_Conv_819",
+              "output": "getitem_21",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                15,
+                23
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.15625,
+              "mismatched_elements": 55115
+            },
+            {
+              "index": 23,
+              "operator": "Gelu",
+              "name": "node_gelu_6",
+              "output": "gelu_6",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                15,
+                23
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.15625,
+              "mismatched_elements": 54187
+            },
+            {
+              "index": 24,
+              "operator": "Conv",
+              "name": "node_Conv_821",
+              "output": "getitem_24",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                96,
+                15,
+                23
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.109375,
+              "mismatched_elements": 31008
+            },
+            {
+              "index": 25,
+              "operator": "Conv",
+              "name": "node_Conv_823",
+              "output": "getitem_27",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                15,
+                23
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.234375,
+              "mismatched_elements": 57569
+            },
+            {
+              "index": 26,
+              "operator": "Gelu",
+              "name": "node_gelu_7",
+              "output": "gelu_7",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                15,
+                23
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.22509765625,
+              "mismatched_elements": 56208
+            },
+            {
+              "index": 27,
+              "operator": "Conv",
+              "name": "node_Conv_825",
+              "output": "getitem_30",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                15,
+                23
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.1796875,
+              "mismatched_elements": 55640
+            },
+            {
+              "index": 28,
+              "operator": "Gelu",
+              "name": "node_gelu_8",
+              "output": "gelu_8",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                15,
+                23
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.107421875,
+              "mismatched_elements": 48926
+            },
+            {
+              "index": 29,
+              "operator": "Conv",
+              "name": "node_Conv_827",
+              "output": "getitem_33",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                96,
+                15,
+                23
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0673828125,
+              "mismatched_elements": 30625
+            },
+            {
+              "index": 30,
+              "operator": "Add",
+              "name": "node_add_1",
+              "output": "add_1",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                96,
+                15,
+                23
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.1015625,
+              "mismatched_elements": 30624
+            },
+            {
+              "index": 31,
+              "operator": "Conv",
+              "name": "node_Conv_829",
+              "output": "getitem_36",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                15,
+                23
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.2890625,
+              "mismatched_elements": 58162
+            },
+            {
+              "index": 32,
+              "operator": "Gelu",
+              "name": "node_gelu_9",
+              "output": "gelu_9",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                15,
+                23
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.298828125,
+              "mismatched_elements": 56370
+            },
+            {
+              "index": 33,
+              "operator": "Conv",
+              "name": "node_Conv_831",
+              "output": "getitem_39",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                15,
+                23
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.40625,
+              "mismatched_elements": 56062
+            },
+            {
+              "index": 34,
+              "operator": "Gelu",
+              "name": "node_gelu_10",
+              "output": "gelu_10",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                15,
+                23
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.16015625,
+              "mismatched_elements": 51323
+            },
+            {
+              "index": 35,
+              "operator": "Conv",
+              "name": "node_Conv_833",
+              "output": "getitem_42",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                96,
+                15,
+                23
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0810546875,
+              "mismatched_elements": 30665
+            },
+            {
+              "index": 36,
+              "operator": "Add",
+              "name": "node_add_2",
+              "output": "add_2",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                96,
+                15,
+                23
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.130859375,
+              "mismatched_elements": 30353
+            },
+            {
+              "index": 37,
+              "operator": "Conv",
+              "name": "node_Conv_835",
+              "output": "getitem_45",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                15,
+                23
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.375,
+              "mismatched_elements": 58042
+            },
+            {
+              "index": 38,
+              "operator": "Gelu",
+              "name": "node_gelu_11",
+              "output": "gelu_11",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                15,
+                23
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.25390625,
+              "mismatched_elements": 56534
+            },
+            {
+              "index": 39,
+              "operator": "Conv",
+              "name": "node_Conv_837",
+              "output": "getitem_48",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                15,
+                23
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.1484375,
+              "mismatched_elements": 55944
+            }
+          ],
+          "final": {
+            "outputs": {
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                553
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.078125,
+              "mismatched_elements": 534
+            }
+          },
+          "first_divergence": {
+            "index": 9,
+            "operator": "Conv",
+            "name": "node_Conv_805",
+            "output": "getitem",
+            "passed": false,
+            "finite": true,
+            "shape": [
+              1,
+              32,
+              120,
+              180
+            ],
+            "dtype": "float16",
+            "max_abs_error": 0.234375,
+            "mismatched_elements": 543700
+          },
+          "first_nonfinite": null
+        },
+        "CL": {
+          "nodes": [
+            {
+              "index": 0,
+              "operator": "Cast",
+              "name": "node__to_copy",
+              "output": "_to_copy",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                3
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 1,
+              "operator": "Sub",
+              "name": "node_sub",
+              "output": "sub",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                3
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 2,
+              "operator": "Mul",
+              "name": "node_mul",
+              "output": "mul",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                3
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 3,
+              "operator": "Cast",
+              "name": "node__to_copy_1",
+              "output": "_to_copy_1",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                1382400
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 4,
+              "operator": "Div",
+              "name": "node_div",
+              "output": "div",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                1382400
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.00048828125,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 5,
+              "operator": "Reshape",
+              "name": "node_view",
+              "output": "view",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                960,
+                360,
+                4
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.00048828125,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 6,
+              "operator": "Transpose",
+              "name": "node_permute",
+              "output": "permute",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                360,
+                960,
+                4
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.00048828125,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 7,
+              "operator": "Reshape",
+              "name": "node__unsafe_view",
+              "output": "_unsafe_view",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                360,
+                240,
+                16
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.00048828125,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 8,
+              "operator": "Transpose",
+              "name": "node_permute_1",
+              "output": "permute_1",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                16,
+                240,
+                360
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.00048828125,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 9,
+              "operator": "Conv",
+              "name": "node_Conv_805",
+              "output": "getitem",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                32,
+                120,
+                180
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.03125,
+              "mismatched_elements": 146912
+            },
+            {
+              "index": 10,
+              "operator": "Gelu",
+              "name": "node_gelu",
+              "output": "gelu",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                32,
+                120,
+                180
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.03125,
+              "mismatched_elements": 128598
+            },
+            {
+              "index": 11,
+              "operator": "Conv",
+              "name": "node_Conv_807",
+              "output": "getitem_3",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                32,
+                60,
+                90
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.046875,
+              "mismatched_elements": 79431
+            },
+            {
+              "index": 12,
+              "operator": "Gelu",
+              "name": "node_gelu_1",
+              "output": "gelu_1",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                32,
+                60,
+                90
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.046875,
+              "mismatched_elements": 60616
+            },
+            {
+              "index": 13,
+              "operator": "Conv",
+              "name": "node_Conv_809",
+              "output": "getitem_6",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                32,
+                60,
+                90
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.046875,
+              "mismatched_elements": 104496
+            },
+            {
+              "index": 14,
+              "operator": "Gelu",
+              "name": "node_gelu_2",
+              "output": "gelu_2",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                32,
+                60,
+                90
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.03125,
+              "mismatched_elements": 63598
+            },
+            {
+              "index": 15,
+              "operator": "Conv",
+              "name": "node_Conv_811",
+              "output": "getitem_9",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                96,
+                30,
+                45
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.09375,
+              "mismatched_elements": 79773
+            },
+            {
+              "index": 16,
+              "operator": "Gelu",
+              "name": "node_gelu_3",
+              "output": "gelu_3",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                96,
+                30,
+                45
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0234375,
+              "mismatched_elements": 57840
+            },
+            {
+              "index": 17,
+              "operator": "Conv",
+              "name": "node_Conv_813",
+              "output": "getitem_12",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                30,
+                45
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.078125,
+              "mismatched_elements": 44687
+            },
+            {
+              "index": 18,
+              "operator": "Gelu",
+              "name": "node_gelu_4",
+              "output": "gelu_4",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                30,
+                45
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.078125,
+              "mismatched_elements": 44204
+            },
+            {
+              "index": 19,
+              "operator": "Conv",
+              "name": "node_Conv_815",
+              "output": "getitem_15",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                30,
+                45
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.04296875,
+              "mismatched_elements": 35794
+            },
+            {
+              "index": 20,
+              "operator": "Conv",
+              "name": "node_Conv_817",
+              "output": "getitem_18",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                30,
+                45
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.09375,
+              "mismatched_elements": 173117
+            },
+            {
+              "index": 21,
+              "operator": "Gelu",
+              "name": "node_gelu_5",
+              "output": "gelu_5",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                30,
+                45
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.09375,
+              "mismatched_elements": 124053
+            },
+            {
+              "index": 22,
+              "operator": "Conv",
+              "name": "node_Conv_819",
+              "output": "getitem_21",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                15,
+                23
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0703125,
+              "mismatched_elements": 42741
+            },
+            {
+              "index": 23,
+              "operator": "Gelu",
+              "name": "node_gelu_6",
+              "output": "gelu_6",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                15,
+                23
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0703125,
+              "mismatched_elements": 41670
+            },
+            {
+              "index": 24,
+              "operator": "Conv",
+              "name": "node_Conv_821",
+              "output": "getitem_24",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                96,
+                15,
+                23
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0546875,
+              "mismatched_elements": 28656
+            },
+            {
+              "index": 25,
+              "operator": "Conv",
+              "name": "node_Conv_823",
+              "output": "getitem_27",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                15,
+                23
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.09375,
+              "mismatched_elements": 47975
+            },
+            {
+              "index": 26,
+              "operator": "Gelu",
+              "name": "node_gelu_7",
+              "output": "gelu_7",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                15,
+                23
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0859375,
+              "mismatched_elements": 45856
+            },
+            {
+              "index": 27,
+              "operator": "Conv",
+              "name": "node_Conv_825",
+              "output": "getitem_30",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                15,
+                23
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0859375,
+              "mismatched_elements": 47705
+            },
+            {
+              "index": 28,
+              "operator": "Gelu",
+              "name": "node_gelu_8",
+              "output": "gelu_8",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                15,
+                23
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.05078125,
+              "mismatched_elements": 39170
+            },
+            {
+              "index": 29,
+              "operator": "Conv",
+              "name": "node_Conv_827",
+              "output": "getitem_33",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                96,
+                15,
+                23
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.033203125,
+              "mismatched_elements": 28589
+            },
+            {
+              "index": 30,
+              "operator": "Add",
+              "name": "node_add_1",
+              "output": "add_1",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                96,
+                15,
+                23
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.046875,
+              "mismatched_elements": 28146
+            },
+            {
+              "index": 31,
+              "operator": "Conv",
+              "name": "node_Conv_829",
+              "output": "getitem_36",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                15,
+                23
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.1171875,
+              "mismatched_elements": 50577
+            },
+            {
+              "index": 32,
+              "operator": "Gelu",
+              "name": "node_gelu_9",
+              "output": "gelu_9",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                15,
+                23
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.080078125,
+              "mismatched_elements": 47929
+            },
+            {
+              "index": 33,
+              "operator": "Conv",
+              "name": "node_Conv_831",
+              "output": "getitem_39",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                15,
+                23
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.265625,
+              "mismatched_elements": 48369
+            },
+            {
+              "index": 34,
+              "operator": "Gelu",
+              "name": "node_gelu_10",
+              "output": "gelu_10",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                15,
+                23
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.07421875,
+              "mismatched_elements": 39406
+            },
+            {
+              "index": 35,
+              "operator": "Conv",
+              "name": "node_Conv_833",
+              "output": "getitem_42",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                96,
+                15,
+                23
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.041015625,
+              "mismatched_elements": 29859
+            },
+            {
+              "index": 36,
+              "operator": "Add",
+              "name": "node_add_2",
+              "output": "add_2",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                96,
+                15,
+                23
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0546875,
+              "mismatched_elements": 28037
+            },
+            {
+              "index": 37,
+              "operator": "Conv",
+              "name": "node_Conv_835",
+              "output": "getitem_45",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                15,
+                23
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.1796875,
+              "mismatched_elements": 51539
+            },
+            {
+              "index": 38,
+              "operator": "Gelu",
+              "name": "node_gelu_11",
+              "output": "gelu_11",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                15,
+                23
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.09375,
+              "mismatched_elements": 48854
+            },
+            {
+              "index": 39,
+              "operator": "Conv",
+              "name": "node_Conv_837",
+              "output": "getitem_48",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                15,
+                23
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.1484375,
+              "mismatched_elements": 49638
+            }
+          ],
+          "final": {
+            "outputs": {
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                553
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.029296875,
+              "mismatched_elements": 500
+            }
+          },
+          "first_divergence": {
+            "index": 9,
+            "operator": "Conv",
+            "name": "node_Conv_805",
+            "output": "getitem",
+            "passed": false,
+            "finite": true,
+            "shape": [
+              1,
+              32,
+              120,
+              180
+            ],
+            "dtype": "float16",
+            "max_abs_error": 0.03125,
+            "mismatched_elements": 146912
+          },
+          "first_nonfinite": null
+        }
+      }
+    },
+    "driving_supercombo": {
+      "instrumented_matches_original": {
+        "outputs": false,
+        "next_state_img_q": true,
+        "next_state_desire_q": true,
+        "next_state_feat_q": false
+      },
+      "engines": {
+        "ort": {
+          "nodes": [
+            {
+              "index": 0,
+              "operator": "Slice",
+              "name": "node_slice_1",
+              "output": "slice_1",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                2,
+                4,
+                6,
+                128,
+                256
+              ],
+              "dtype": "uint8",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 1,
+              "operator": "Unsqueeze",
+              "name": "node_unsqueeze",
+              "output": "unsqueeze",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                2,
+                1,
+                6,
+                128,
+                256
+              ],
+              "dtype": "uint8",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 3,
+              "operator": "Reshape",
+              "name": "node_view",
+              "output": "view",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                1,
+                8
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 4,
+              "operator": "Slice",
+              "name": "node_slice_2",
+              "output": "slice_2",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                99,
+                1,
+                8
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 6,
+              "operator": "Gather",
+              "name": "node_select",
+              "output": "select",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                5,
+                6,
+                128,
+                256
+              ],
+              "dtype": "uint8",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 7,
+              "operator": "Slice",
+              "name": "node_slice_3",
+              "output": "slice_3",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                2,
+                6,
+                128,
+                256
+              ],
+              "dtype": "uint8",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 8,
+              "operator": "Reshape",
+              "name": "node__unsafe_view",
+              "output": "_unsafe_view",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                12,
+                128,
+                256
+              ],
+              "dtype": "uint8",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 9,
+              "operator": "Gather",
+              "name": "node_select_1",
+              "output": "select_1",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                5,
+                6,
+                128,
+                256
+              ],
+              "dtype": "uint8",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 10,
+              "operator": "Slice",
+              "name": "node_slice_4",
+              "output": "slice_4",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                2,
+                6,
+                128,
+                256
+              ],
+              "dtype": "uint8",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 11,
+              "operator": "Reshape",
+              "name": "node__unsafe_view_1",
+              "output": "_unsafe_view_1",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                12,
+                128,
+                256
+              ],
+              "dtype": "uint8",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 12,
+              "operator": "Reshape",
+              "name": "node_view_1",
+              "output": "view_1",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                25,
+                4,
+                1,
+                8
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 13,
+              "operator": "ReduceMax",
+              "name": "n0",
+              "output": "amax",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                25,
+                1,
+                8
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 14,
+              "operator": "Transpose",
+              "name": "node_transpose",
+              "output": "transpose",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                25,
+                8
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 15,
+              "operator": "Slice",
+              "name": "node_slice_5",
+              "output": "slice_5",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                24,
+                1,
+                512
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 16,
+              "operator": "Transpose",
+              "name": "node_transpose_1",
+              "output": "transpose_1",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                24,
+                512
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 17,
+              "operator": "Cast",
+              "name": "node__to_copy",
+              "output": "_to_copy",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                25,
+                8
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 18,
+              "operator": "Cast",
+              "name": "node__to_copy_1",
+              "output": "_to_copy_1",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                24,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 19,
+              "operator": "Cast",
+              "name": "node__to_copy_2",
+              "output": "_to_copy_2",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                2
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 20,
+              "operator": "Cast",
+              "name": "node__to_copy_3",
+              "output": "_to_copy_3",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                2
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 21,
+              "operator": "Cast",
+              "name": "model/node__to_copy",
+              "output": "model/_to_copy",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                12,
+                128,
+                256
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 22,
+              "operator": "Cast",
+              "name": "model/node__to_copy_1",
+              "output": "model/_to_copy_1",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                12,
+                128,
+                256
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 23,
+              "operator": "Concat",
+              "name": "model/node_cat",
+              "output": "model/cat",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                24,
+                128,
+                256
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 24,
+              "operator": "Sub",
+              "name": "model/node_sub",
+              "output": "model/sub",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                24,
+                128,
+                256
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 25,
+              "operator": "Div",
+              "name": "model/node_div",
+              "output": "model/div",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                24,
+                128,
+                256
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 26,
+              "operator": "Conv",
+              "name": "model/node_conv2d",
+              "output": "model/conv2d",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                64,
+                128
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.5625,
+              "mismatched_elements": 367345
+            },
+            {
+              "index": 27,
+              "operator": "Gelu",
+              "name": "model/node_gelu",
+              "output": "model/gelu",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                64,
+                128
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.5625,
+              "mismatched_elements": 342248
+            },
+            {
+              "index": 28,
+              "operator": "Conv",
+              "name": "model/node_conv2d_1",
+              "output": "model/conv2d_1",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "dtype": "float16",
+              "max_abs_error": 1.5,
+              "mismatched_elements": 94896
+            },
+            {
+              "index": 29,
+              "operator": "Gelu",
+              "name": "model/node_gelu_1",
+              "output": "model/gelu_1",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.515625,
+              "mismatched_elements": 81666
+            },
+            {
+              "index": 30,
+              "operator": "Conv",
+              "name": "model/node_conv2d_2",
+              "output": "model/conv2d_2",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "dtype": "float16",
+              "max_abs_error": 1.25,
+              "mismatched_elements": 101543
+            },
+            {
+              "index": 31,
+              "operator": "Gelu",
+              "name": "model/node_gelu_2",
+              "output": "model/gelu_2",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.8125,
+              "mismatched_elements": 69141
+            },
+            {
+              "index": 32,
+              "operator": "Conv",
+              "name": "model/node_conv2d_3",
+              "output": "model/conv2d_3",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.15625,
+              "mismatched_elements": 80216
+            },
+            {
+              "index": 33,
+              "operator": "Conv",
+              "name": "model/node_Conv_173",
+              "output": "model/getitem",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "dtype": "float16",
+              "max_abs_error": 2.0,
+              "mismatched_elements": 105894
+            },
+            {
+              "index": 34,
+              "operator": "Conv",
+              "name": "model/node_conv2d_5",
+              "output": "model/conv2d_5",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                32,
+                64
+              ],
+              "dtype": "float16",
+              "max_abs_error": 4.5,
+              "mismatched_elements": 317101
+            },
+            {
+              "index": 35,
+              "operator": "Gelu",
+              "name": "model/node_gelu_3",
+              "output": "model/gelu_3",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                32,
+                64
+              ],
+              "dtype": "float16",
+              "max_abs_error": 1.0283203125,
+              "mismatched_elements": 114078
+            },
+            {
+              "index": 36,
+              "operator": "Conv",
+              "name": "model/node_conv2d_6",
+              "output": "model/conv2d_6",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "dtype": "float16",
+              "max_abs_error": 2.25,
+              "mismatched_elements": 115523
+            },
+            {
+              "index": 37,
+              "operator": "Mul",
+              "name": "model/node_mul",
+              "output": "model/mul",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "dtype": "float16",
+              "max_abs_error": 1.375,
+              "mismatched_elements": 115120
+            },
+            {
+              "index": 38,
+              "operator": "Add",
+              "name": "model/node_add",
+              "output": "model/add",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "dtype": "float16",
+              "max_abs_error": 1.375,
+              "mismatched_elements": 114175
+            },
+            {
+              "index": 39,
+              "operator": "Conv",
+              "name": "model/node_conv2d_7",
+              "output": "model/conv2d_7",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "dtype": "float16",
+              "max_abs_error": 1.375,
+              "mismatched_elements": 115200
+            }
+          ],
+          "final": {
+            "outputs": {
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                2576
+              ],
+              "dtype": "float32",
+              "max_abs_error": null,
+              "mismatched_elements": 2574
+            },
+            "next_state_img_q": {
+              "passed": true,
+              "finite": true,
+              "shape": [
+                2,
+                5,
+                6,
+                128,
+                256
+              ],
+              "dtype": "uint8",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            "next_state_desire_q": {
+              "passed": true,
+              "finite": true,
+              "shape": [
+                100,
+                1,
+                8
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            "next_state_feat_q": {
+              "passed": false,
+              "finite": false,
+              "shape": [
+                96,
+                1,
+                512
+              ],
+              "dtype": "float32",
+              "max_abs_error": null,
+              "mismatched_elements": 512
+            }
+          },
+          "first_divergence": {
+            "index": 26,
+            "operator": "Conv",
+            "name": "model/node_conv2d",
+            "output": "model/conv2d",
+            "passed": false,
+            "finite": true,
+            "shape": [
+              1,
+              64,
+              64,
+              128
+            ],
+            "dtype": "float16",
+            "max_abs_error": 0.5625,
+            "mismatched_elements": 367345
+          },
+          "first_nonfinite": null
+        },
+        "CL": {
+          "nodes": [
+            {
+              "index": 0,
+              "operator": "Slice",
+              "name": "node_slice_1",
+              "output": "slice_1",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                2,
+                4,
+                6,
+                128,
+                256
+              ],
+              "dtype": "uint8",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 1,
+              "operator": "Unsqueeze",
+              "name": "node_unsqueeze",
+              "output": "unsqueeze",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                2,
+                1,
+                6,
+                128,
+                256
+              ],
+              "dtype": "uint8",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 3,
+              "operator": "Reshape",
+              "name": "node_view",
+              "output": "view",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                1,
+                8
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 4,
+              "operator": "Slice",
+              "name": "node_slice_2",
+              "output": "slice_2",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                99,
+                1,
+                8
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 6,
+              "operator": "Gather",
+              "name": "node_select",
+              "output": "select",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                5,
+                6,
+                128,
+                256
+              ],
+              "dtype": "uint8",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 7,
+              "operator": "Slice",
+              "name": "node_slice_3",
+              "output": "slice_3",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                2,
+                6,
+                128,
+                256
+              ],
+              "dtype": "uint8",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 8,
+              "operator": "Reshape",
+              "name": "node__unsafe_view",
+              "output": "_unsafe_view",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                12,
+                128,
+                256
+              ],
+              "dtype": "uint8",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 9,
+              "operator": "Gather",
+              "name": "node_select_1",
+              "output": "select_1",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                5,
+                6,
+                128,
+                256
+              ],
+              "dtype": "uint8",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 10,
+              "operator": "Slice",
+              "name": "node_slice_4",
+              "output": "slice_4",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                2,
+                6,
+                128,
+                256
+              ],
+              "dtype": "uint8",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 11,
+              "operator": "Reshape",
+              "name": "node__unsafe_view_1",
+              "output": "_unsafe_view_1",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                12,
+                128,
+                256
+              ],
+              "dtype": "uint8",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 12,
+              "operator": "Reshape",
+              "name": "node_view_1",
+              "output": "view_1",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                25,
+                4,
+                1,
+                8
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 13,
+              "operator": "ReduceMax",
+              "name": "n0",
+              "output": "amax",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                25,
+                1,
+                8
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 14,
+              "operator": "Transpose",
+              "name": "node_transpose",
+              "output": "transpose",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                25,
+                8
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 15,
+              "operator": "Slice",
+              "name": "node_slice_5",
+              "output": "slice_5",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                24,
+                1,
+                512
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 16,
+              "operator": "Transpose",
+              "name": "node_transpose_1",
+              "output": "transpose_1",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                24,
+                512
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 17,
+              "operator": "Cast",
+              "name": "node__to_copy",
+              "output": "_to_copy",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                25,
+                8
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 18,
+              "operator": "Cast",
+              "name": "node__to_copy_1",
+              "output": "_to_copy_1",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                24,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 19,
+              "operator": "Cast",
+              "name": "node__to_copy_2",
+              "output": "_to_copy_2",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                2
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 20,
+              "operator": "Cast",
+              "name": "node__to_copy_3",
+              "output": "_to_copy_3",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                2
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 21,
+              "operator": "Cast",
+              "name": "model/node__to_copy",
+              "output": "model/_to_copy",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                12,
+                128,
+                256
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 22,
+              "operator": "Cast",
+              "name": "model/node__to_copy_1",
+              "output": "model/_to_copy_1",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                12,
+                128,
+                256
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 23,
+              "operator": "Concat",
+              "name": "model/node_cat",
+              "output": "model/cat",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                24,
+                128,
+                256
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 24,
+              "operator": "Sub",
+              "name": "model/node_sub",
+              "output": "model/sub",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                24,
+                128,
+                256
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 25,
+              "operator": "Div",
+              "name": "model/node_div",
+              "output": "model/div",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                24,
+                128,
+                256
+              ],
+              "dtype": "float16",
+              "max_abs_error": 6.103515625e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 26,
+              "operator": "Conv",
+              "name": "model/node_conv2d",
+              "output": "model/conv2d",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                64,
+                128
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.125,
+              "mismatched_elements": 73238
+            },
+            {
+              "index": 27,
+              "operator": "Gelu",
+              "name": "model/node_gelu",
+              "output": "model/gelu",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                64,
+                128
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.125,
+              "mismatched_elements": 67931
+            },
+            {
+              "index": 28,
+              "operator": "Conv",
+              "name": "model/node_conv2d_1",
+              "output": "model/conv2d_1",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "dtype": "float16",
+              "max_abs_error": 1.0,
+              "mismatched_elements": 47360
+            },
+            {
+              "index": 29,
+              "operator": "Gelu",
+              "name": "model/node_gelu_1",
+              "output": "model/gelu_1",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.1875,
+              "mismatched_elements": 40845
+            },
+            {
+              "index": 30,
+              "operator": "Conv",
+              "name": "model/node_conv2d_2",
+              "output": "model/conv2d_2",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.375,
+              "mismatched_elements": 67544
+            },
+            {
+              "index": 31,
+              "operator": "Gelu",
+              "name": "model/node_gelu_2",
+              "output": "model/gelu_2",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.375,
+              "mismatched_elements": 42005
+            },
+            {
+              "index": 32,
+              "operator": "Conv",
+              "name": "model/node_conv2d_3",
+              "output": "model/conv2d_3",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.09375,
+              "mismatched_elements": 51626
+            },
+            {
+              "index": 33,
+              "operator": "Conv",
+              "name": "model/node_Conv_173",
+              "output": "model/getitem",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "dtype": "float16",
+              "max_abs_error": 1.0,
+              "mismatched_elements": 81645
+            },
+            {
+              "index": 34,
+              "operator": "Conv",
+              "name": "model/node_conv2d_5",
+              "output": "model/conv2d_5",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                32,
+                64
+              ],
+              "dtype": "float16",
+              "max_abs_error": 2.5,
+              "mismatched_elements": 318658
+            },
+            {
+              "index": 35,
+              "operator": "Gelu",
+              "name": "model/node_gelu_3",
+              "output": "model/gelu_3",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                32,
+                64
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.5,
+              "mismatched_elements": 97967
+            },
+            {
+              "index": 36,
+              "operator": "Conv",
+              "name": "model/node_conv2d_6",
+              "output": "model/conv2d_6",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.875,
+              "mismatched_elements": 103814
+            },
+            {
+              "index": 37,
+              "operator": "Mul",
+              "name": "model/node_mul",
+              "output": "model/mul",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.75,
+              "mismatched_elements": 102486
+            },
+            {
+              "index": 38,
+              "operator": "Add",
+              "name": "model/node_add",
+              "output": "model/add",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.75,
+              "mismatched_elements": 101139
+            },
+            {
+              "index": 39,
+              "operator": "Conv",
+              "name": "model/node_conv2d_7",
+              "output": "model/conv2d_7",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.75,
+              "mismatched_elements": 107348
+            }
+          ],
+          "final": {
+            "outputs": {
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                2576
+              ],
+              "dtype": "float32",
+              "max_abs_error": 3.0,
+              "mismatched_elements": 2427
+            },
+            "next_state_img_q": {
+              "passed": true,
+              "finite": true,
+              "shape": [
+                2,
+                5,
+                6,
+                128,
+                256
+              ],
+              "dtype": "uint8",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            "next_state_desire_q": {
+              "passed": true,
+              "finite": true,
+              "shape": [
+                100,
+                1,
+                8
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            "next_state_feat_q": {
+              "passed": false,
+              "finite": true,
+              "shape": [
+                96,
+                1,
+                512
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.011871337890625,
+              "mismatched_elements": 488
+            }
+          },
+          "first_divergence": {
+            "index": 26,
+            "operator": "Conv",
+            "name": "model/node_conv2d",
+            "output": "model/conv2d",
+            "passed": false,
+            "finite": true,
+            "shape": [
+              1,
+              64,
+              64,
+              128
+            ],
+            "dtype": "float16",
+            "max_abs_error": 0.125,
+            "mismatched_elements": 73238
+          },
+          "first_nonfinite": null
+        }
+      }
+    }
+  }
+}

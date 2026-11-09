@@ -1,0 +1,74 @@
+{
+  "serial": "RFCR81Y1TBJ",
+  "command": [
+    "/Users/sergios/sunnypilot/.venv/bin/python",
+    "-m",
+    "openpilot.tools.sim.android_chain_validation",
+    "--seconds",
+    "30",
+    "--device-replay",
+    "--serial",
+    "RFCR81Y1TBJ",
+    "--adb",
+    "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+    "--report",
+    "/Users/sergios/sunnypilot/android/reports/onboarding-readiness-20261105/phone-candidate45zy-steady.json",
+    "--package",
+    "com.samsung.sunnypilot.fold3",
+    "--steady-inputs"
+  ],
+  "vehicle_tx_enabled": false,
+  "status": "passed",
+  "validation_status": "passed",
+  "isolation_status": "passed",
+  "forwards_before": [],
+  "before_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 29.9,
+    "thermal_override": false
+  },
+  "apk_sha256": "0e70a87decb28b63f49d7948f433c559de91336828851701145275b32d8f0811",
+  "baseline": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 27.0,
+    "thermal_override": false,
+    "idle_seconds": 33.87750620901352,
+    "normal_thermal_seconds": 33.388714125030674
+  },
+  "apk_sha256_at_start": "0e70a87decb28b63f49d7948f433c559de91336828851701145275b32d8f0811",
+  "runtime": {
+    "manager_pid": 18281,
+    "ui_pid": 18481,
+    "simulation": true,
+    "startup_elapsed_s": 6.760743000020739,
+    "startup_budget_s": 60
+  },
+  "returncode": 0,
+  "after_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 28.1,
+    "thermal_override": false
+  },
+  "forwards_removed": [],
+  "apk_sha256_after": "0e70a87decb28b63f49d7948f433c559de91336828851701145275b32d8f0811",
+  "artifact_stable": true,
+  "wrapper_status": "passed"
+}

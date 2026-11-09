@@ -1,0 +1,71 @@
+{
+  "serial": "emulator-5554",
+  "command": [
+    "/Users/sergios/sunnypilot/.venv/bin/python",
+    "-m",
+    "openpilot.tools.sim.android_chain_validation",
+    "--serial",
+    "emulator-5554",
+    "--adb",
+    "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+    "--package",
+    "com.samsung.sunnypilot.fold3",
+    "--seconds",
+    "30",
+    "--steady-inputs",
+    "--report",
+    "/Users/sergios/sunnypilot/android/reports/blocker-fixes/emulator-full-chain-steady-candidate25.json"
+  ],
+  "vehicle_tx_enabled": false,
+  "status": "passed",
+  "forwards_before": [],
+  "before_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "358 android.hardware.camera.provider.ranchu",
+      "359 android.hardware.camera.provider@2.7-service-google",
+      "425 cameraserver"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.8,
+    "thermal_override": false
+  },
+  "apk_sha256": "8ddec764b4a54285c5b8933e317756356b1d69f8d5733c16a834727fa47f2912",
+  "baseline": {
+    "processes": [],
+    "camera_provider_processes": [
+      "358 android.hardware.camera.provider.ranchu",
+      "359 android.hardware.camera.provider@2.7-service-google",
+      "425 cameraserver"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.8,
+    "thermal_override": false,
+    "idle_seconds": 30.83844374999171,
+    "normal_thermal_seconds": 30.73341758400784
+  },
+  "apk_sha256_at_start": "8ddec764b4a54285c5b8933e317756356b1d69f8d5733c16a834727fa47f2912",
+  "runtime": {
+    "manager_pid": 27473,
+    "ui_pid": 27684,
+    "simulation": true
+  },
+  "returncode": 0,
+  "after_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "358 android.hardware.camera.provider.ranchu",
+      "359 android.hardware.camera.provider@2.7-service-google",
+      "425 cameraserver"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.8,
+    "thermal_override": false
+  },
+  "forwards_removed": [],
+  "apk_sha256_after": "8ddec764b4a54285c5b8933e317756356b1d69f8d5733c16a834727fa47f2912",
+  "artifact_stable": true
+}

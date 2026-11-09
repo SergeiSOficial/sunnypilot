@@ -1,0 +1,458 @@
+7767517
+456 545
+Input                    in0                      0 1 in0
+Input                    in1                      0 1 in1
+Cast Cast_0 1 1 in0 2 0=1 1=1
+BinaryOp                 div_0                    1 1 2 3 0=3 1=1 2=255.0
+Cast Cast_2 1 1 3 4 0=1 1=2
+Reshape                  reshape_157              1 1 4 5 0=4 1=360 2=960
+Permute                  permute_153              1 1 5 6 0=2
+Reshape                  reshape_158              1 1 6 7 0=16 1=240 2=360
+Cast Cast_6 1 1 7 8 0=2 1=1
+Permute                  permute_154              1 1 8 9 0=5
+Convolution              conv_69                  1 1 9 10 0=32 1=3 11=3 12=1 13=2 14=1 2=1 3=2 4=1 5=1 6=4608
+Permute                  permute_155              1 1 10 11 0=3
+Split                    splitncnn_0              1 3 11 12 13 14
+BinaryOp                 pow_1                    1 1 12 15 0=6 1=1 2=3.0
+BinaryOp                 mul_2                    1 1 15 16 0=2 1=1 2=0.044715
+BinaryOp                 add_3                    2 1 13 16 17 0=0
+BinaryOp                 mul_4                    1 1 17 18 0=2 1=1 2=0.797884524
+TanH                     tanh_39                  1 1 18 19
+BinaryOp                 add_5                    1 1 19 20 0=0 1=1 2=1.0
+BinaryOp                 mul_6                    1 1 14 21 0=2 1=1 2=0.5
+BinaryOp                 mul_7                    2 1 21 20 22 0=2
+Permute                  permute_156              1 1 22 23 0=4
+Convolution              conv_70                  1 1 23 24 0=32 1=3 11=3 12=1 13=2 14=1 2=1 3=2 4=1 5=1 6=9216
+Split                    splitncnn_1              1 3 24 25 26 27
+BinaryOp                 pow_8                    1 1 25 28 0=6 1=1 2=3.0
+BinaryOp                 mul_9                    1 1 28 29 0=2 1=1 2=0.044715
+BinaryOp                 add_10                   2 1 26 29 30 0=0
+BinaryOp                 mul_11                   1 1 30 31 0=2 1=1 2=0.797884524
+TanH                     tanh_40                  1 1 31 32
+BinaryOp                 add_12                   1 1 32 33 0=0 1=1 2=1.0
+BinaryOp                 mul_13                   1 1 27 34 0=2 1=1 2=0.5
+BinaryOp                 mul_14                   2 1 34 33 35 0=2
+Convolution              conv_71                  1 1 35 36 0=32 1=1 11=1 12=1 13=1 14=0 2=1 3=1 4=0 5=1 6=1024
+Split                    splitncnn_2              1 3 36 37 38 39
+BinaryOp                 pow_15                   1 1 37 40 0=6 1=1 2=3.0
+BinaryOp                 mul_16                   1 1 40 41 0=2 1=1 2=0.044715
+BinaryOp                 add_17                   2 1 38 41 42 0=0
+BinaryOp                 mul_18                   1 1 42 43 0=2 1=1 2=0.797884524
+TanH                     tanh_41                  1 1 43 44
+BinaryOp                 add_19                   1 1 44 45 0=0 1=1 2=1.0
+BinaryOp                 mul_20                   1 1 39 46 0=2 1=1 2=0.5
+BinaryOp                 mul_21                   2 1 46 45 47 0=2
+Convolution              conv_72                  1 1 47 48 0=96 1=3 11=3 12=1 13=2 14=1 2=1 3=2 4=1 5=1 6=27648
+Split                    splitncnn_3              1 3 48 49 50 51
+BinaryOp                 pow_22                   1 1 49 52 0=6 1=1 2=3.0
+BinaryOp                 mul_23                   1 1 52 53 0=2 1=1 2=0.044715
+BinaryOp                 add_24                   2 1 50 53 54 0=0
+BinaryOp                 mul_25                   1 1 54 55 0=2 1=1 2=0.797884524
+TanH                     tanh_42                  1 1 55 56
+BinaryOp                 add_26                   1 1 56 57 0=0 1=1 2=1.0
+BinaryOp                 mul_27                   1 1 51 58 0=2 1=1 2=0.5
+BinaryOp                 mul_28                   2 1 58 57 59 0=2
+Convolution              conv_73                  1 1 59 60 0=64 1=1 11=1 12=1 13=1 14=0 2=1 3=1 4=0 5=1 6=6144
+Split                    splitncnn_4              1 3 60 61 62 63
+BinaryOp                 pow_29                   1 1 61 64 0=6 1=1 2=3.0
+BinaryOp                 mul_30                   1 1 64 65 0=2 1=1 2=0.044715
+BinaryOp                 add_31                   2 1 62 65 66 0=0
+BinaryOp                 mul_32                   1 1 66 67 0=2 1=1 2=0.797884524
+TanH                     tanh_43                  1 1 67 68
+BinaryOp                 add_33                   1 1 68 69 0=0 1=1 2=1.0
+BinaryOp                 mul_34                   1 1 63 70 0=2 1=1 2=0.5
+BinaryOp                 mul_35                   2 1 70 69 71 0=2
+ConvolutionDepthWise     convdw_161               1 1 71 72 0=64 1=5 11=5 12=1 13=1 14=2 2=1 3=1 4=2 5=1 6=1600 7=64
+Convolution              conv_74                  1 1 72 73 0=192 1=1 11=1 12=1 13=1 14=0 2=1 3=1 4=0 5=1 6=12288
+Split                    splitncnn_5              1 3 73 74 75 76
+BinaryOp                 pow_36                   1 1 74 77 0=6 1=1 2=3.0
+BinaryOp                 mul_37                   1 1 77 78 0=2 1=1 2=0.044715
+BinaryOp                 add_38                   2 1 75 78 79 0=0
+BinaryOp                 mul_39                   1 1 79 80 0=2 1=1 2=0.797884524
+TanH                     tanh_44                  1 1 80 81
+BinaryOp                 add_40                   1 1 81 82 0=0 1=1 2=1.0
+BinaryOp                 mul_41                   1 1 76 83 0=2 1=1 2=0.5
+BinaryOp                 mul_42                   2 1 83 82 84 0=2
+ConvolutionDepthWise     convdw_162               1 1 84 85 0=192 1=5 11=5 12=1 13=2 14=2 2=1 3=2 4=2 5=1 6=4800 7=192
+Split                    splitncnn_6              1 3 85 86 87 88
+BinaryOp                 pow_43                   1 1 86 89 0=6 1=1 2=3.0
+BinaryOp                 mul_44                   1 1 89 90 0=2 1=1 2=0.044715
+BinaryOp                 add_45                   2 1 87 90 91 0=0
+BinaryOp                 mul_46                   1 1 91 92 0=2 1=1 2=0.797884524
+TanH                     tanh_45                  1 1 92 93
+BinaryOp                 add_47                   1 1 93 94 0=0 1=1 2=1.0
+BinaryOp                 mul_48                   1 1 88 95 0=2 1=1 2=0.5
+BinaryOp                 mul_49                   2 1 95 94 96 0=2
+Convolution              conv_75                  1 1 96 97 0=96 1=1 11=1 12=1 13=1 14=0 2=1 3=1 4=0 5=1 6=18432
+Split                    splitncnn_7              1 2 97 98 99
+Convolution              conv_76                  1 1 99 100 0=192 1=1 11=1 12=1 13=1 14=0 2=1 3=1 4=0 5=1 6=18432
+Split                    splitncnn_8              1 3 100 101 102 103
+BinaryOp                 pow_50                   1 1 101 104 0=6 1=1 2=3.0
+BinaryOp                 mul_51                   1 1 104 105 0=2 1=1 2=0.044715
+BinaryOp                 add_52                   2 1 102 105 106 0=0
+BinaryOp                 mul_53                   1 1 106 107 0=2 1=1 2=0.797884524
+TanH                     tanh_46                  1 1 107 108
+BinaryOp                 add_54                   1 1 108 109 0=0 1=1 2=1.0
+BinaryOp                 mul_55                   1 1 103 110 0=2 1=1 2=0.5
+BinaryOp                 mul_56                   2 1 110 109 111 0=2
+ConvolutionDepthWise     convdw_163               1 1 111 112 0=192 1=3 11=3 12=1 13=1 14=1 2=1 3=1 4=1 5=1 6=1728 7=192
+Split                    splitncnn_9              1 3 112 113 114 115
+BinaryOp                 pow_57                   1 1 113 116 0=6 1=1 2=3.0
+BinaryOp                 mul_58                   1 1 116 117 0=2 1=1 2=0.044715
+BinaryOp                 add_59                   2 1 114 117 118 0=0
+BinaryOp                 mul_60                   1 1 118 119 0=2 1=1 2=0.797884524
+TanH                     tanh_47                  1 1 119 120
+BinaryOp                 add_61                   1 1 120 121 0=0 1=1 2=1.0
+BinaryOp                 mul_62                   1 1 115 122 0=2 1=1 2=0.5
+BinaryOp                 mul_63                   2 1 122 121 123 0=2
+Convolution              conv_77                  1 1 123 124 0=96 1=1 11=1 12=1 13=1 14=0 2=1 3=1 4=0 5=1 6=18432
+BinaryOp                 add_64                   2 1 124 98 125 0=0
+Split                    splitncnn_10             1 2 125 126 127
+Convolution              conv_78                  1 1 127 128 0=192 1=1 11=1 12=1 13=1 14=0 2=1 3=1 4=0 5=1 6=18432
+Split                    splitncnn_11             1 3 128 129 130 131
+BinaryOp                 pow_65                   1 1 129 132 0=6 1=1 2=3.0
+BinaryOp                 mul_66                   1 1 132 133 0=2 1=1 2=0.044715
+BinaryOp                 add_67                   2 1 130 133 134 0=0
+BinaryOp                 mul_68                   1 1 134 135 0=2 1=1 2=0.797884524
+TanH                     tanh_48                  1 1 135 136
+BinaryOp                 add_69                   1 1 136 137 0=0 1=1 2=1.0
+BinaryOp                 mul_70                   1 1 131 138 0=2 1=1 2=0.5
+BinaryOp                 mul_71                   2 1 138 137 139 0=2
+ConvolutionDepthWise     convdw_164               1 1 139 140 0=192 1=3 11=3 12=1 13=1 14=1 2=1 3=1 4=1 5=1 6=1728 7=192
+Split                    splitncnn_12             1 3 140 141 142 143
+BinaryOp                 pow_72                   1 1 141 144 0=6 1=1 2=3.0
+BinaryOp                 mul_73                   1 1 144 145 0=2 1=1 2=0.044715
+BinaryOp                 add_74                   2 1 142 145 146 0=0
+BinaryOp                 mul_75                   1 1 146 147 0=2 1=1 2=0.797884524
+TanH                     tanh_49                  1 1 147 148
+BinaryOp                 add_76                   1 1 148 149 0=0 1=1 2=1.0
+BinaryOp                 mul_77                   1 1 143 150 0=2 1=1 2=0.5
+BinaryOp                 mul_78                   2 1 150 149 151 0=2
+Convolution              conv_79                  1 1 151 152 0=96 1=1 11=1 12=1 13=1 14=0 2=1 3=1 4=0 5=1 6=18432
+BinaryOp                 add_79                   2 1 152 126 153 0=0
+Split                    splitncnn_13             1 2 153 154 155
+Convolution              conv_80                  1 1 155 156 0=192 1=1 11=1 12=1 13=1 14=0 2=1 3=1 4=0 5=1 6=18432
+Split                    splitncnn_14             1 3 156 157 158 159
+BinaryOp                 pow_80                   1 1 157 160 0=6 1=1 2=3.0
+BinaryOp                 mul_81                   1 1 160 161 0=2 1=1 2=0.044715
+BinaryOp                 add_82                   2 1 158 161 162 0=0
+BinaryOp                 mul_83                   1 1 162 163 0=2 1=1 2=0.797884524
+TanH                     tanh_50                  1 1 163 164
+BinaryOp                 add_84                   1 1 164 165 0=0 1=1 2=1.0
+BinaryOp                 mul_85                   1 1 159 166 0=2 1=1 2=0.5
+BinaryOp                 mul_86                   2 1 166 165 167 0=2
+ConvolutionDepthWise     convdw_165               1 1 167 168 0=192 1=3 11=3 12=1 13=1 14=1 2=1 3=1 4=1 5=1 6=1728 7=192
+Split                    splitncnn_15             1 3 168 169 170 171
+BinaryOp                 pow_87                   1 1 169 172 0=6 1=1 2=3.0
+BinaryOp                 mul_88                   1 1 172 173 0=2 1=1 2=0.044715
+BinaryOp                 add_89                   2 1 170 173 174 0=0
+BinaryOp                 mul_90                   1 1 174 175 0=2 1=1 2=0.797884524
+TanH                     tanh_51                  1 1 175 176
+BinaryOp                 add_91                   1 1 176 177 0=0 1=1 2=1.0
+BinaryOp                 mul_92                   1 1 171 178 0=2 1=1 2=0.5
+BinaryOp                 mul_93                   2 1 178 177 179 0=2
+Convolution              conv_81                  1 1 179 180 0=96 1=1 11=1 12=1 13=1 14=0 2=1 3=1 4=0 5=1 6=18432
+BinaryOp                 add_94                   2 1 180 154 181 0=0
+Split                    splitncnn_16             1 2 181 182 183
+Convolution              conv_82                  1 1 183 184 0=192 1=1 11=1 12=1 13=1 14=0 2=1 3=1 4=0 5=1 6=18432
+Split                    splitncnn_17             1 3 184 185 186 187
+BinaryOp                 pow_95                   1 1 185 188 0=6 1=1 2=3.0
+BinaryOp                 mul_96                   1 1 188 189 0=2 1=1 2=0.044715
+BinaryOp                 add_97                   2 1 186 189 190 0=0
+BinaryOp                 mul_98                   1 1 190 191 0=2 1=1 2=0.797884524
+TanH                     tanh_52                  1 1 191 192
+BinaryOp                 add_99                   1 1 192 193 0=0 1=1 2=1.0
+BinaryOp                 mul_100                  1 1 187 194 0=2 1=1 2=0.5
+BinaryOp                 mul_101                  2 1 194 193 195 0=2
+ConvolutionDepthWise     convdw_166               1 1 195 196 0=192 1=3 11=3 12=1 13=1 14=1 2=1 3=1 4=1 5=1 6=1728 7=192
+Split                    splitncnn_18             1 3 196 197 198 199
+BinaryOp                 pow_102                  1 1 197 200 0=6 1=1 2=3.0
+BinaryOp                 mul_103                  1 1 200 201 0=2 1=1 2=0.044715
+BinaryOp                 add_104                  2 1 198 201 202 0=0
+BinaryOp                 mul_105                  1 1 202 203 0=2 1=1 2=0.797884524
+TanH                     tanh_53                  1 1 203 204
+BinaryOp                 add_106                  1 1 204 205 0=0 1=1 2=1.0
+BinaryOp                 mul_107                  1 1 199 206 0=2 1=1 2=0.5
+BinaryOp                 mul_108                  2 1 206 205 207 0=2
+Convolution              conv_83                  1 1 207 208 0=96 1=1 11=1 12=1 13=1 14=0 2=1 3=1 4=0 5=1 6=18432
+BinaryOp                 add_109                  2 1 208 182 209 0=0
+Split                    splitncnn_19             1 2 209 210 211
+ConvolutionDepthWise     convdw_167               1 1 211 212 0=96 1=3 11=3 12=1 13=1 14=1 2=1 3=1 4=1 5=1 6=864 7=96
+Convolution              conv_84                  1 1 212 213 0=384 1=1 11=1 12=1 13=1 14=0 2=1 3=1 4=0 5=1 6=36864
+Split                    splitncnn_20             1 3 213 214 215 216
+BinaryOp                 pow_110                  1 1 214 217 0=6 1=1 2=3.0
+BinaryOp                 mul_111                  1 1 217 218 0=2 1=1 2=0.044715
+BinaryOp                 add_112                  2 1 215 218 219 0=0
+BinaryOp                 mul_113                  1 1 219 220 0=2 1=1 2=0.797884524
+TanH                     tanh_54                  1 1 220 221
+BinaryOp                 add_114                  1 1 221 222 0=0 1=1 2=1.0
+BinaryOp                 mul_115                  1 1 216 223 0=2 1=1 2=0.5
+BinaryOp                 mul_116                  2 1 223 222 224 0=2
+Convolution              conv_85                  1 1 224 225 0=96 1=1 11=1 12=1 13=1 14=0 2=1 3=1 4=0 5=1 6=36864
+BinaryOp                 add_117                  2 1 225 210 226 0=0
+ConvolutionDepthWise     convdw_168               1 1 226 227 0=96 1=3 11=3 12=1 13=1 14=1 2=1 3=1 4=1 5=1 6=864 7=96
+Convolution              conv_86                  1 1 227 228 0=576 1=1 11=1 12=1 13=1 14=0 2=1 3=1 4=0 5=1 6=55296
+Split                    splitncnn_21             1 3 228 229 230 231
+BinaryOp                 pow_118                  1 1 229 232 0=6 1=1 2=3.0
+BinaryOp                 mul_119                  1 1 232 233 0=2 1=1 2=0.044715
+BinaryOp                 add_120                  2 1 230 233 234 0=0
+BinaryOp                 mul_121                  1 1 234 235 0=2 1=1 2=0.797884524
+TanH                     tanh_55                  1 1 235 236
+BinaryOp                 add_122                  1 1 236 237 0=0 1=1 2=1.0
+BinaryOp                 mul_123                  1 1 231 238 0=2 1=1 2=0.5
+BinaryOp                 mul_124                  2 1 238 237 239 0=2
+ConvolutionDepthWise     convdw_169               1 1 239 240 0=576 1=3 11=3 12=1 13=2 14=1 2=1 3=2 4=1 5=1 6=5184 7=576
+Split                    splitncnn_22             1 3 240 241 242 243
+BinaryOp                 pow_125                  1 1 241 244 0=6 1=1 2=3.0
+BinaryOp                 mul_126                  1 1 244 245 0=2 1=1 2=0.044715
+BinaryOp                 add_127                  2 1 242 245 246 0=0
+BinaryOp                 mul_128                  1 1 246 247 0=2 1=1 2=0.797884524
+TanH                     tanh_56                  1 1 247 248
+BinaryOp                 add_129                  1 1 248 249 0=0 1=1 2=1.0
+BinaryOp                 mul_130                  1 1 243 250 0=2 1=1 2=0.5
+BinaryOp                 mul_131                  2 1 250 249 251 0=2
+Convolution              conv_87                  1 1 251 252 0=128 1=1 11=1 12=1 13=1 14=0 2=1 3=1 4=0 5=1 6=73728
+Split                    splitncnn_23             1 2 252 253 254
+ConvolutionDepthWise     convdw_170               1 1 254 255 0=128 1=5 11=5 12=1 13=1 14=2 2=1 3=1 4=2 5=1 6=3200 7=128
+Convolution              conv_88                  1 1 255 256 0=512 1=1 11=1 12=1 13=1 14=0 2=1 3=1 4=0 5=1 6=65536
+Split                    splitncnn_24             1 3 256 257 258 259
+BinaryOp                 pow_132                  1 1 257 260 0=6 1=1 2=3.0
+BinaryOp                 mul_133                  1 1 260 261 0=2 1=1 2=0.044715
+BinaryOp                 add_134                  2 1 258 261 262 0=0
+BinaryOp                 mul_135                  1 1 262 263 0=2 1=1 2=0.797884524
+TanH                     tanh_57                  1 1 263 264
+BinaryOp                 add_136                  1 1 264 265 0=0 1=1 2=1.0
+BinaryOp                 mul_137                  1 1 259 266 0=2 1=1 2=0.5
+BinaryOp                 mul_138                  2 1 266 265 267 0=2
+ConvolutionDepthWise     convdw_171               1 1 267 268 0=512 1=5 11=5 12=1 13=1 14=2 2=1 3=1 4=2 5=1 6=12800 7=512
+Split                    splitncnn_25             1 3 268 269 270 271
+BinaryOp                 pow_139                  1 1 269 272 0=6 1=1 2=3.0
+BinaryOp                 mul_140                  1 1 272 273 0=2 1=1 2=0.044715
+BinaryOp                 add_141                  2 1 270 273 274 0=0
+BinaryOp                 mul_142                  1 1 274 275 0=2 1=1 2=0.797884524
+TanH                     tanh_58                  1 1 275 276
+BinaryOp                 add_143                  1 1 276 277 0=0 1=1 2=1.0
+BinaryOp                 mul_144                  1 1 271 278 0=2 1=1 2=0.5
+BinaryOp                 mul_145                  2 1 278 277 279 0=2
+Convolution              conv_89                  1 1 279 280 0=128 1=1 11=1 12=1 13=1 14=0 2=1 3=1 4=0 5=1 6=65536
+BinaryOp                 add_146                  2 1 280 253 281 0=0
+Split                    splitncnn_26             1 2 281 282 283
+Convolution              conv_90                  1 1 283 284 0=512 1=1 11=1 12=1 13=1 14=0 2=1 3=1 4=0 5=1 6=65536
+Split                    splitncnn_27             1 3 284 285 286 287
+BinaryOp                 pow_147                  1 1 285 288 0=6 1=1 2=3.0
+BinaryOp                 mul_148                  1 1 288 289 0=2 1=1 2=0.044715
+BinaryOp                 add_149                  2 1 286 289 290 0=0
+BinaryOp                 mul_150                  1 1 290 291 0=2 1=1 2=0.797884524
+TanH                     tanh_59                  1 1 291 292
+BinaryOp                 add_151                  1 1 292 293 0=0 1=1 2=1.0
+BinaryOp                 mul_152                  1 1 287 294 0=2 1=1 2=0.5
+BinaryOp                 mul_153                  2 1 294 293 295 0=2
+ConvolutionDepthWise     convdw_172               1 1 295 296 0=512 1=5 11=5 12=1 13=1 14=2 2=1 3=1 4=2 5=1 6=12800 7=512
+Split                    splitncnn_28             1 3 296 297 298 299
+BinaryOp                 pow_154                  1 1 297 300 0=6 1=1 2=3.0
+BinaryOp                 mul_155                  1 1 300 301 0=2 1=1 2=0.044715
+BinaryOp                 add_156                  2 1 298 301 302 0=0
+BinaryOp                 mul_157                  1 1 302 303 0=2 1=1 2=0.797884524
+TanH                     tanh_60                  1 1 303 304
+BinaryOp                 add_158                  1 1 304 305 0=0 1=1 2=1.0
+BinaryOp                 mul_159                  1 1 299 306 0=2 1=1 2=0.5
+BinaryOp                 mul_160                  2 1 306 305 307 0=2
+Convolution              conv_91                  1 1 307 308 0=128 1=1 11=1 12=1 13=1 14=0 2=1 3=1 4=0 5=1 6=65536
+BinaryOp                 add_161                  2 1 308 282 309 0=0
+Split                    splitncnn_29             1 2 309 310 311
+Convolution              conv_92                  1 1 311 312 0=384 1=1 11=1 12=1 13=1 14=0 2=1 3=1 4=0 5=1 6=49152
+Split                    splitncnn_30             1 3 312 313 314 315
+BinaryOp                 pow_162                  1 1 313 316 0=6 1=1 2=3.0
+BinaryOp                 mul_163                  1 1 316 317 0=2 1=1 2=0.044715
+BinaryOp                 add_164                  2 1 314 317 318 0=0
+BinaryOp                 mul_165                  1 1 318 319 0=2 1=1 2=0.797884524
+TanH                     tanh_61                  1 1 319 320
+BinaryOp                 add_166                  1 1 320 321 0=0 1=1 2=1.0
+BinaryOp                 mul_167                  1 1 315 322 0=2 1=1 2=0.5
+BinaryOp                 mul_168                  2 1 322 321 323 0=2
+ConvolutionDepthWise     convdw_173               1 1 323 324 0=384 1=5 11=5 12=1 13=1 14=2 2=1 3=1 4=2 5=1 6=9600 7=384
+Split                    splitncnn_31             1 3 324 325 326 327
+BinaryOp                 pow_169                  1 1 325 328 0=6 1=1 2=3.0
+BinaryOp                 mul_170                  1 1 328 329 0=2 1=1 2=0.044715
+BinaryOp                 add_171                  2 1 326 329 330 0=0
+BinaryOp                 mul_172                  1 1 330 331 0=2 1=1 2=0.797884524
+TanH                     tanh_62                  1 1 331 332
+BinaryOp                 add_173                  1 1 332 333 0=0 1=1 2=1.0
+BinaryOp                 mul_174                  1 1 327 334 0=2 1=1 2=0.5
+BinaryOp                 mul_175                  2 1 334 333 335 0=2
+Convolution              conv_93                  1 1 335 336 0=128 1=1 11=1 12=1 13=1 14=0 2=1 3=1 4=0 5=1 6=49152
+BinaryOp                 add_176                  2 1 336 310 337 0=0
+Split                    splitncnn_32             1 2 337 338 339
+Convolution              conv_94                  1 1 339 340 0=512 1=1 11=1 12=1 13=1 14=0 2=1 3=1 4=0 5=1 6=65536
+Split                    splitncnn_33             1 3 340 341 342 343
+BinaryOp                 pow_177                  1 1 341 344 0=6 1=1 2=3.0
+BinaryOp                 mul_178                  1 1 344 345 0=2 1=1 2=0.044715
+BinaryOp                 add_179                  2 1 342 345 346 0=0
+BinaryOp                 mul_180                  1 1 346 347 0=2 1=1 2=0.797884524
+TanH                     tanh_63                  1 1 347 348
+BinaryOp                 add_181                  1 1 348 349 0=0 1=1 2=1.0
+BinaryOp                 mul_182                  1 1 343 350 0=2 1=1 2=0.5
+BinaryOp                 mul_183                  2 1 350 349 351 0=2
+ConvolutionDepthWise     convdw_174               1 1 351 352 0=512 1=3 11=3 12=1 13=1 14=1 2=1 3=1 4=1 5=1 6=4608 7=512
+Split                    splitncnn_34             1 3 352 353 354 355
+BinaryOp                 pow_184                  1 1 353 356 0=6 1=1 2=3.0
+BinaryOp                 mul_185                  1 1 356 357 0=2 1=1 2=0.044715
+BinaryOp                 add_186                  2 1 354 357 358 0=0
+BinaryOp                 mul_187                  1 1 358 359 0=2 1=1 2=0.797884524
+TanH                     tanh_64                  1 1 359 360
+BinaryOp                 add_188                  1 1 360 361 0=0 1=1 2=1.0
+BinaryOp                 mul_189                  1 1 355 362 0=2 1=1 2=0.5
+BinaryOp                 mul_190                  2 1 362 361 363 0=2
+Convolution              conv_95                  1 1 363 364 0=128 1=1 11=1 12=1 13=1 14=0 2=1 3=1 4=0 5=1 6=65536
+BinaryOp                 add_191                  2 1 364 338 365 0=0
+Split                    splitncnn_35             1 2 365 366 367
+Convolution              conv_96                  1 1 367 368 0=512 1=1 11=1 12=1 13=1 14=0 2=1 3=1 4=0 5=1 6=65536
+Split                    splitncnn_36             1 3 368 369 370 371
+BinaryOp                 pow_192                  1 1 369 372 0=6 1=1 2=3.0
+BinaryOp                 mul_193                  1 1 372 373 0=2 1=1 2=0.044715
+BinaryOp                 add_194                  2 1 370 373 374 0=0
+BinaryOp                 mul_195                  1 1 374 375 0=2 1=1 2=0.797884524
+TanH                     tanh_65                  1 1 375 376
+BinaryOp                 add_196                  1 1 376 377 0=0 1=1 2=1.0
+BinaryOp                 mul_197                  1 1 371 378 0=2 1=1 2=0.5
+BinaryOp                 mul_198                  2 1 378 377 379 0=2
+ConvolutionDepthWise     convdw_175               1 1 379 380 0=512 1=3 11=3 12=1 13=1 14=1 2=1 3=1 4=1 5=1 6=4608 7=512
+Split                    splitncnn_37             1 3 380 381 382 383
+BinaryOp                 pow_199                  1 1 381 384 0=6 1=1 2=3.0
+BinaryOp                 mul_200                  1 1 384 385 0=2 1=1 2=0.044715
+BinaryOp                 add_201                  2 1 382 385 386 0=0
+BinaryOp                 mul_202                  1 1 386 387 0=2 1=1 2=0.797884524
+TanH                     tanh_66                  1 1 387 388
+BinaryOp                 add_203                  1 1 388 389 0=0 1=1 2=1.0
+BinaryOp                 mul_204                  1 1 383 390 0=2 1=1 2=0.5
+BinaryOp                 mul_205                  2 1 390 389 391 0=2
+Convolution              conv_97                  1 1 391 392 0=128 1=1 11=1 12=1 13=1 14=0 2=1 3=1 4=0 5=1 6=65536
+BinaryOp                 add_206                  2 1 392 366 393 0=0
+Convolution              conv_98                  1 1 393 394 0=960 1=1 11=1 12=1 13=1 14=0 2=1 3=1 4=0 5=1 6=122880
+Split                    splitncnn_38             1 3 394 395 396 397
+BinaryOp                 pow_207                  1 1 395 398 0=6 1=1 2=3.0
+BinaryOp                 mul_208                  1 1 398 399 0=2 1=1 2=0.044715
+BinaryOp                 add_209                  2 1 396 399 400 0=0
+BinaryOp                 mul_210                  1 1 400 401 0=2 1=1 2=0.797884524
+TanH                     tanh_67                  1 1 401 402
+BinaryOp                 add_211                  1 1 402 403 0=0 1=1 2=1.0
+BinaryOp                 mul_212                  1 1 397 404 0=2 1=1 2=0.5
+BinaryOp                 mul_213                  2 1 404 403 405 0=2
+Reduction                mean_160                 1 1 405 406 0=3 1=0 -23303=2,2,1 4=1 5=1
+Convolution              conv_99                  1 1 406 407 0=1280 1=1 11=1 12=1 13=1 14=0 2=1 3=1 4=0 5=1 6=1228800
+Split                    splitncnn_39             1 3 407 408 409 410
+BinaryOp                 pow_214                  1 1 408 411 0=6 1=1 2=3.0
+BinaryOp                 mul_215                  1 1 411 412 0=2 1=1 2=0.044715
+BinaryOp                 add_216                  2 1 409 412 413 0=0
+BinaryOp                 mul_217                  1 1 413 414 0=2 1=1 2=0.797884524
+TanH                     tanh_68                  1 1 414 415
+BinaryOp                 add_218                  1 1 415 416 0=0 1=1 2=1.0
+BinaryOp                 mul_219                  1 1 410 417 0=2 1=1 2=0.5
+BinaryOp                 mul_220                  2 1 417 416 418 0=2
+Cast Cast_314 1 1 418 419 0=1 1=2
+Reshape                  reshape_159              1 1 419 420 0=1280
+InnerProduct             linear_100               1 1 420 421 0=512 1=1 2=655360
+Split                    splitncnn_40             1 11 421 422 423 424 425 426 427 428 429 430 431 432
+InnerProduct             linear_101               1 1 432 433 0=32 1=1 2=16384
+Cast Cast_318 1 1 433 434 0=2 1=1
+ReLU                     relu_0                   1 1 434 435
+InnerProduct             fcrelu_0                 1 1 435 436 0=24 1=1 2=768 9=1
+InnerProduct             fcrelu_1                 1 1 436 437 0=16 1=1 2=384 9=1
+Cast Cast_324 1 1 437 438 0=1 1=2
+InnerProduct             linear_104               1 1 438 439 0=3 1=1 2=48
+Slice                    split_0                  1 3 439 440 441 442 -23300=3,1,1,1 1=0
+InnerProduct             linear_105               1 1 431 443 0=32 1=1 2=16384
+Cast Cast_328 1 1 443 444 0=2 1=1
+ReLU                     relu_3                   1 1 444 445
+InnerProduct             fcrelu_2                 1 1 445 446 0=24 1=1 2=768 9=1
+InnerProduct             fcrelu_3                 1 1 446 447 0=16 1=1 2=384 9=1
+Cast Cast_334 1 1 447 448 0=1 1=2
+InnerProduct             linear_108               1 1 448 449 0=2 1=1 2=32
+Slice                    split_1                  1 2 449 450 451 -23300=2,1,1 1=0
+InnerProduct             linear_109               1 1 430 452 0=32 1=1 2=16384
+Cast Cast_338 1 1 452 453 0=2 1=1
+ReLU                     relu_6                   1 1 453 454
+InnerProduct             fcrelu_4                 1 1 454 455 0=24 1=1 2=768 9=1
+InnerProduct             fcrelu_5                 1 1 455 456 0=16 1=1 2=384 9=1
+Cast Cast_344 1 1 456 457 0=1 1=2
+InnerProduct             linear_112               1 1 457 458 0=3 1=1 2=48
+Slice                    split_2                  1 3 458 459 460 461 -23300=3,1,1,1 1=0
+InnerProduct             linear_113               1 1 429 462 0=32 1=1 2=16384
+Cast Cast_348 1 1 462 463 0=2 1=1
+ReLU                     relu_9                   1 1 463 464
+InnerProduct             fcrelu_6                 1 1 464 465 0=24 1=1 2=768 9=1
+InnerProduct             fcrelu_7                 1 1 465 466 0=16 1=1 2=384 9=1
+Cast Cast_354 1 1 466 467 0=1 1=2
+InnerProduct             linear_116               1 1 467 468 0=2 1=1 2=32
+Slice                    split_3                  1 2 468 469 470 -23300=2,1,1 1=0
+InnerProduct             linear_117               1 1 428 471 0=48 1=1 2=24576
+Cast Cast_358 1 1 471 472 0=2 1=1
+ReLU                     relu_12                  1 1 472 473
+InnerProduct             fcrelu_8                 1 1 473 474 0=32 1=1 2=1536 9=1
+InnerProduct             fcrelu_9                 1 1 474 475 0=16 1=1 2=512 9=1
+Cast Cast_364 1 1 475 476 0=1 1=2
+InnerProduct             linear_120               1 1 476 477 0=1 1=1 2=16
+MemoryData               FusedBack_unsqueeze      0 1 478 0=3
+MemoryData               FusedBack_rsqrt          0 1 479 0=3
+BinaryOp                 sub_221                  2 1 in1 478 480 0=1
+BinaryOp                 mul_222                  2 1 480 479 481 0=2
+Cast Cast_368 1 1 481 482 0=1 1=2
+Concat                   cat_0                    2 1 422 482 483 0=0
+Split                    splitncnn_41             1 4 483 484 485 486 487
+InnerProduct             linear_121               1 1 487 488 0=96 1=1 2=49440
+Cast Cast_371 1 1 488 489 0=2 1=1
+ReLU                     relu_15                  1 1 489 490
+InnerProduct             fcrelu_10                1 1 490 491 0=64 1=1 2=6144 9=1
+InnerProduct             fcrelu_11                1 1 491 492 0=32 1=1 2=2048 9=1
+Cast Cast_377 1 1 492 493 0=1 1=2
+InnerProduct             linear_124               1 1 493 494 0=1 1=1 2=32
+InnerProduct             linear_125               1 1 486 495 0=128 1=1 2=65920
+Cast Cast_380 1 1 495 496 0=2 1=1
+ReLU                     relu_18                  1 1 496 497
+InnerProduct             fcrelu_12                1 1 497 498 0=64 1=1 2=8192 9=1
+InnerProduct             fcrelu_13                1 1 498 499 0=32 1=1 2=2048 9=1
+Cast Cast_386 1 1 499 500 0=1 1=2
+InnerProduct             linear_128               1 1 500 501 0=1 1=1 2=32
+InnerProduct             linear_129               1 1 427 502 0=32 1=1 2=16384
+Cast Cast_389 1 1 502 503 0=2 1=1
+ReLU                     relu_21                  1 1 503 504
+InnerProduct             fcrelu_14                1 1 504 505 0=24 1=1 2=768 9=1
+InnerProduct             fcrelu_15                1 1 505 506 0=16 1=1 2=384 9=1
+Cast Cast_395 1 1 506 507 0=1 1=2
+InnerProduct             linear_132               1 1 507 508 0=1 1=1 2=16
+InnerProduct             linear_133               1 1 426 509 0=64 1=1 2=32768
+Cast Cast_398 1 1 509 510 0=2 1=1
+ReLU                     relu_24                  1 1 510 511
+InnerProduct             fcrelu_16                1 1 511 512 0=48 1=1 2=3072 9=1
+InnerProduct             fcrelu_17                1 1 512 513 0=32 1=1 2=1536 9=1
+Cast Cast_404 1 1 513 514 0=1 1=2
+InnerProduct             linear_136               1 1 514 515 0=12 1=1 2=384
+InnerProduct             linear_137               1 1 485 516 0=96 1=1 2=49440
+Cast Cast_407 1 1 516 517 0=2 1=1
+ReLU                     relu_27                  1 1 517 518
+InnerProduct             fcrelu_18                1 1 518 519 0=64 1=1 2=6144 9=1
+InnerProduct             fcrelu_19                1 1 519 520 0=32 1=1 2=2048 9=1
+Cast Cast_413 1 1 520 521 0=1 1=2
+InnerProduct             linear_140               1 1 521 522 0=1 1=1 2=32
+InnerProduct             linear_141               1 1 484 523 0=128 1=1 2=65920
+Cast Cast_416 1 1 523 524 0=2 1=1
+ReLU                     relu_30                  1 1 524 525
+InnerProduct             fcrelu_20                1 1 525 526 0=64 1=1 2=8192 9=1
+InnerProduct             fcrelu_21                1 1 526 527 0=32 1=1 2=2048 9=1
+Cast Cast_422 1 1 527 528 0=1 1=2
+InnerProduct             linear_144               1 1 528 529 0=1 1=1 2=32
+InnerProduct             linear_145               1 1 425 530 0=32 1=1 2=16384
+Cast Cast_425 1 1 530 531 0=2 1=1
+ReLU                     relu_33                  1 1 531 532
+InnerProduct             fcrelu_22                1 1 532 533 0=24 1=1 2=768 9=1
+InnerProduct             fcrelu_23                1 1 533 534 0=16 1=1 2=384 9=1
+Cast Cast_431 1 1 534 535 0=1 1=2
+InnerProduct             linear_148               1 1 535 536 0=1 1=1 2=16
+InnerProduct             linear_149               1 1 424 537 0=64 1=1 2=32768
+Cast Cast_434 1 1 537 538 0=2 1=1
+ReLU                     relu_36                  1 1 538 539
+InnerProduct             fcrelu_24                1 1 539 540 0=48 1=1 2=3072 9=1
+InnerProduct             fcrelu_25                1 1 540 541 0=32 1=1 2=1536 9=1
+Cast Cast_440 1 1 541 542 0=1 1=2
+InnerProduct             linear_152               1 1 542 543 0=12 1=1 2=384
+Concat                   cat_1                    20 1 543 536 440 441 442 450 451 529 522 515 508 459 460 461 469 470 501 494 477 423 out0 0=0

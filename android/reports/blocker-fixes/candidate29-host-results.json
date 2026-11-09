@@ -1,0 +1,40 @@
+{
+  "candidate": "candidate29",
+  "vehicle_tx_enabled": false,
+  "focused_tests": {
+    "status": "passed",
+    "tests_run": 90,
+    "elapsed_seconds": 19.577,
+    "log": "android/build/candidate29-host-tests.log",
+    "log_sha256": "e038299c5e79ba6a74a8478169328f3bad6bdbfb69ee0feccd23ffc2525247fa"
+  },
+  "original_model_reference_gate": {
+    "status": "passed",
+    "report": "candidate29-host-reference-models.json",
+    "seeds": [
+      42,
+      7,
+      123
+    ],
+    "recurrent_frames_per_seed": 32,
+    "camera_replay_frames_per_model": 60,
+    "rtol": 0.001,
+    "atol": 0.0001
+  },
+  "hyundai_panda_protocol": {
+    "status": "passed",
+    "scope": "Car, safety, protocol and native dependencies unchanged since candidate27; earlier host result carried forward, no physical vehicle/Panda claim",
+    "report": "candidate27-host-vehicle-checks.json",
+    "tests_run": 3938,
+    "skipped": 356
+  },
+  "changed_files_since_candidate27": [
+    "android/README.md",
+    "android/app/src/main/python/fold3_host_math.py",
+    "android/app/src/main/python/fold3_model_trace.py",
+    "android/app/src/main/python/fold3_models.py",
+    "android/scripts/compare_camera_trace.py",
+    "android/tests/test_host_math.py",
+    "android/tests/test_model_sequences.py"
+  ]
+}

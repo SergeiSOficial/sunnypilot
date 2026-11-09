@@ -1,0 +1,70 @@
+{
+  "serial": "emulator-5560",
+  "command": [
+    "/Users/sergios/sunnypilot/.venv/bin/python",
+    "-m",
+    "openpilot.tools.sim.android_chain_validation",
+    "--seconds",
+    "30",
+    "--device-replay",
+    "--serial",
+    "emulator-5560",
+    "--adb",
+    "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+    "--report",
+    "/Users/sergios/sunnypilot/android/reports/final-head-20261104/emulator-candidate45zu-steady.json",
+    "--package",
+    "com.samsung.sunnypilot.fold3",
+    "--steady-inputs"
+  ],
+  "vehicle_tx_enabled": false,
+  "status": "failed",
+  "validation_status": "not_run",
+  "isolation_status": "passed",
+  "forwards_before": [],
+  "before_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "384 android.hardware.camera.provider.ranchu",
+      "385 android.hardware.camera.provider@2.7-service-google",
+      "439 cameraserver"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.8,
+    "thermal_override": false
+  },
+  "apk_sha256": "acfb13ca4ac9e1baf280e364d2b796f97529c3c085a0c0a9120b89bf46967dd5",
+  "baseline": {
+    "processes": [],
+    "camera_provider_processes": [
+      "384 android.hardware.camera.provider.ranchu",
+      "385 android.hardware.camera.provider@2.7-service-google",
+      "439 cameraserver"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.8,
+    "thermal_override": false,
+    "idle_seconds": 33.23232745897258,
+    "normal_thermal_seconds": 33.01054541702615
+  },
+  "apk_sha256_at_start": "acfb13ca4ac9e1baf280e364d2b796f97529c3c085a0c0a9120b89bf46967dd5",
+  "error": "TimeoutError: Fresh runtime and Raylib UI did not become ready: manager={'pid': 4735, 'simulation': True, 'full_chain': True, 'vehicle_tx_enabled': False, 'engagement_allowed': False, 'engagement_blocker': 'camera calibration, model parity/performance and physical Panda qualification incomplete', 'processes': {'Controls': {'daemon': 'controlsd', 'pid': 4754, 'phase': 'waiting_for_car_params', 'error': '', 'last_progress_ms': 722431, 'ticks': 50, 'restarts': 0}, 'Monitoring': {'daemon': 'dmonitoringd', 'pid': 4760, 'phase': 'waiting_for_driver_model', 'error': '', 'last_progress_ms': 722281, 'ticks': 12, 'restarts': 0}, 'Vehicle': {'daemon': 'card', 'pid': 4767, 'phase': 'waiting_for_passive_can', 'error': '', 'last_progress_ms': 722701, 'ticks': 78, 'restarts': 0}, 'Localization': {'daemon': 'locationd', 'pid': 4770, 'phase': 'waiting_for_car_params', 'error': '', 'last_progress_ms': 722928, 'ticks': 64, 'restarts': 0}, 'Calibration': {'daemon': 'calibrationd', 'pid': 4771, 'phase': 'waiting_for_car_params', 'error': '', 'last_progress_ms': 722870, 'ticks': 63, 'restarts': 0}, 'Parameters': {'daemon': 'paramsd', 'pid': 4772, 'phase': 'waiting_for_car_params', 'error': '', 'last_progress_ms': 723251, 'ticks': 20, 'restarts': 0}, 'Torque': {'daemon': 'torqued', 'pid': 4773, 'phase': 'waiting_for_car_params', 'error': '', 'last_progress_ms': 722877, 'ticks': 60, 'restarts': 0}, 'Delay': {'daemon': 'lagd', 'pid': 4776, 'phase': 'waiting_for_car_params', 'error': '', 'last_progress_ms': 722876, 'ticks': 53, 'restarts': 0}, 'Radar': {'daemon': 'radard', 'pid': 4780, 'phase': 'waiting_for_car_params', 'error': '', 'last_progress_ms': 723251, 'ticks': 38, 'restarts': 0}, 'Planning': {'daemon': 'plannerd', 'pid': 4793, 'phase': 'waiting_for_car_params', 'error': '', 'last_progress_ms': 723335, 'ticks': 34, 'restarts': 0}, 'Selfdrive': {'daemon': 'selfdrived', 'pid': 4835, 'phase': 'waiting_for_car_params', 'error': '', 'last_progress_ms': 723097, 'ticks': 43, 'restarts': 0}, 'Simulator': {'daemon': 'sim_bridge', 'pid': 4866, 'phase': 'waiting_for_adb', 'error': '', 'last_progress_ms': 722455, 'ticks': 15, 'restarts': 0}}, 'updated_elapsed_ms': 723337}, ui={'pid': 4939, 'backend': 'Raylib Android NativeActivity', 'vehicle_tx_enabled': False, 'status': 'starting', 'full_upstream_ui': True}",
+  "after_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "384 android.hardware.camera.provider.ranchu",
+      "385 android.hardware.camera.provider@2.7-service-google",
+      "439 cameraserver"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.8,
+    "thermal_override": false
+  },
+  "forwards_removed": [],
+  "apk_sha256_after": "acfb13ca4ac9e1baf280e364d2b796f97529c3c085a0c0a9120b89bf46967dd5",
+  "artifact_stable": true,
+  "wrapper_status": "failed"
+}

@@ -1,0 +1,4910 @@
+{
+  "scope": "diagnostic only: ordered bias-first float32 FMA convolution",
+  "models": {
+    "dmonitoring_model": {
+      "seconds": 6.828562665992649,
+      "checks": [
+        {
+          "output": "outputs",
+          "shape": [
+            1,
+            553
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.00390625
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__to_copy_1",
+          "shape": [
+            1,
+            1382400
+          ],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_div",
+          "shape": [
+            1,
+            1382400
+          ],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "div",
+          "shape": [
+            1,
+            1382400
+          ],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "view",
+          "shape": [
+            1,
+            960,
+            360,
+            4
+          ],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "permute",
+          "shape": [
+            1,
+            360,
+            960,
+            4
+          ],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "_unsafe_view",
+          "shape": [
+            1,
+            360,
+            240,
+            16
+          ],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_permute_1_token_572",
+          "shape": [
+            1,
+            360,
+            240,
+            16
+          ],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "Transpose_out0",
+          "shape": [
+            1,
+            240,
+            360,
+            16
+          ],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "node_Conv_805",
+          "shape": [
+            1,
+            120,
+            180,
+            32
+          ],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "_token_574",
+          "shape": [
+            1,
+            120,
+            180,
+            32
+          ],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "_token_576",
+          "shape": [
+            1,
+            120,
+            180,
+            32
+          ],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "_token_578",
+          "shape": [
+            1,
+            120,
+            180,
+            32
+          ],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "_token_580",
+          "shape": [
+            1,
+            120,
+            180,
+            32
+          ],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_SqrtTwoOverPi",
+          "shape": [],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "_token_582",
+          "shape": [
+            1,
+            120,
+            180,
+            32
+          ],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "_token_584",
+          "shape": [
+            1,
+            120,
+            180,
+            32
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 3.5762786865234375e-07
+        },
+        {
+          "output": "_token_586",
+          "shape": [
+            1,
+            120,
+            180,
+            32
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 3.5762786865234375e-07
+        },
+        {
+          "output": "_token_588",
+          "shape": [
+            1,
+            120,
+            180,
+            32
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 9.5367431640625e-07
+        },
+        {
+          "output": "node_Conv_807",
+          "shape": [
+            1,
+            60,
+            90,
+            32
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 3.814697265625e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_getitem_3",
+          "shape": [
+            1,
+            32,
+            60,
+            90
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 3.814697265625e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_0_MultX",
+          "shape": [
+            1,
+            32,
+            60,
+            90
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 1.9073486328125e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_0_XCubed",
+          "shape": [
+            1,
+            32,
+            60,
+            90
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.0078125
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_0_XCubedC0",
+          "shape": [
+            1,
+            32,
+            60,
+            90
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.0003662109375
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_0_XC0XCubed",
+          "shape": [
+            1,
+            32,
+            60,
+            90
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.0003662109375
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_0_SqrtTwoOverPi",
+          "shape": [],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_0_TanhInput",
+          "shape": [
+            1,
+            32,
+            60,
+            90
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.00030517578125
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_0_ErfApprox",
+          "shape": [
+            1,
+            32,
+            60,
+            90
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 1.817941665649414e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_0_PhiApprox",
+          "shape": [
+            1,
+            32,
+            60,
+            90
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 1.7881393432617188e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_gelu_1",
+          "shape": [
+            1,
+            32,
+            60,
+            90
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 3.814697265625e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_getitem_6",
+          "shape": [
+            1,
+            32,
+            60,
+            90
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 4.76837158203125e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_1_MultX",
+          "shape": [
+            1,
+            32,
+            60,
+            90
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 2.384185791015625e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_1_XCubed",
+          "shape": [
+            1,
+            32,
+            60,
+            90
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.009765625
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_1_XCubedC0",
+          "shape": [
+            1,
+            32,
+            60,
+            90
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.00042724609375
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_1_XC0XCubed",
+          "shape": [
+            1,
+            32,
+            60,
+            90
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.00042724609375
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_1_SqrtTwoOverPi",
+          "shape": [],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_1_TanhInput",
+          "shape": [
+            1,
+            32,
+            60,
+            90
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.0003662109375
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_1_ErfApprox",
+          "shape": [
+            1,
+            32,
+            60,
+            90
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 2.8870999813079834e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_1_PhiApprox",
+          "shape": [
+            1,
+            32,
+            60,
+            90
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 2.86102294921875e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_gelu_2",
+          "shape": [
+            1,
+            32,
+            60,
+            90
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 3.814697265625e-06
+        },
+        {
+          "output": "Transpose_token_567_out0",
+          "shape": [
+            1,
+            60,
+            90,
+            32
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 3.814697265625e-06
+        },
+        {
+          "output": "node_Conv_811",
+          "shape": [
+            1,
+            30,
+            45,
+            96
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 7.62939453125e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_getitem_9",
+          "shape": [
+            1,
+            96,
+            30,
+            45
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 7.62939453125e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_2_MultX",
+          "shape": [
+            1,
+            96,
+            30,
+            45
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 3.814697265625e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_2_XCubed",
+          "shape": [
+            1,
+            96,
+            30,
+            45
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.03515625
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_2_XCubedC0",
+          "shape": [
+            1,
+            96,
+            30,
+            45
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.001708984375
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_2_XC0XCubed",
+          "shape": [
+            1,
+            96,
+            30,
+            45
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.001708984375
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_2_SqrtTwoOverPi",
+          "shape": [],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_2_TanhInput",
+          "shape": [
+            1,
+            96,
+            30,
+            45
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.0013427734375
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_2_ErfApprox",
+          "shape": [
+            1,
+            96,
+            30,
+            45
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 2.0489096641540527e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_2_PhiApprox",
+          "shape": [
+            1,
+            96,
+            30,
+            45
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 2.0265579223632812e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_gelu_3",
+          "shape": [
+            1,
+            96,
+            30,
+            45
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 3.814697265625e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_getitem_12",
+          "shape": [
+            1,
+            64,
+            30,
+            45
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 1.430511474609375e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_3_MultX",
+          "shape": [
+            1,
+            64,
+            30,
+            45
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 7.152557373046875e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_3_XCubed",
+          "shape": [
+            1,
+            64,
+            30,
+            45
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.00927734375
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_3_XCubedC0",
+          "shape": [
+            1,
+            64,
+            30,
+            45
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.0004119873046875
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_3_XC0XCubed",
+          "shape": [
+            1,
+            64,
+            30,
+            45
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.00042724609375
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_3_SqrtTwoOverPi",
+          "shape": [],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_3_TanhInput",
+          "shape": [
+            1,
+            64,
+            30,
+            45
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.000335693359375
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_3_ErfApprox",
+          "shape": [
+            1,
+            64,
+            30,
+            45
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 7.584691047668457e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_3_PhiApprox",
+          "shape": [
+            1,
+            64,
+            30,
+            45
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 7.62939453125e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_gelu_4",
+          "shape": [
+            1,
+            64,
+            30,
+            45
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 1.1920928955078125e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_getitem_15",
+          "shape": [
+            1,
+            64,
+            30,
+            45
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 6.67572021484375e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_getitem_18",
+          "shape": [
+            1,
+            192,
+            30,
+            45
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 1.52587890625e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_4_MultX",
+          "shape": [
+            1,
+            192,
+            30,
+            45
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 7.62939453125e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_4_XCubed",
+          "shape": [
+            1,
+            192,
+            30,
+            45
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.029296875
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_4_XCubedC0",
+          "shape": [
+            1,
+            192,
+            30,
+            45
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.00128173828125
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_4_XC0XCubed",
+          "shape": [
+            1,
+            192,
+            30,
+            45
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.00128173828125
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_4_SqrtTwoOverPi",
+          "shape": [],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_4_TanhInput",
+          "shape": [
+            1,
+            192,
+            30,
+            45
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.00103759765625
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_4_ErfApprox",
+          "shape": [
+            1,
+            192,
+            30,
+            45
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 8.255243301391602e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_4_PhiApprox",
+          "shape": [
+            1,
+            192,
+            30,
+            45
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 8.225440979003906e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_gelu_5",
+          "shape": [
+            1,
+            192,
+            30,
+            45
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 1.52587890625e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_getitem_21",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 7.62939453125e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_5_MultX",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 3.814697265625e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_5_XCubed",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.009765625
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_5_XCubedC0",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.00042724609375
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_5_XC0XCubed",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.00042724609375
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_5_SqrtTwoOverPi",
+          "shape": [],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_5_TanhInput",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.000335693359375
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_5_ErfApprox",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 3.0100345611572266e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_5_PhiApprox",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 3.0994415283203125e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_gelu_6",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 7.62939453125e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_getitem_24",
+          "shape": [
+            1,
+            96,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 6.67572021484375e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_getitem_27",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 1.33514404296875e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_6_MultX",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 6.67572021484375e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_6_XCubed",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.004638671875
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_6_XCubedC0",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.00020599365234375
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_6_XC0XCubed",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.000213623046875
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_6_SqrtTwoOverPi",
+          "shape": [],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_6_TanhInput",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.0001678466796875
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_6_ErfApprox",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 8.553266525268555e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_6_PhiApprox",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 8.52346420288086e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_gelu_7",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 1.3589859008789062e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_getitem_30",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 1.33514404296875e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_7_MultX",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 6.67572021484375e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_7_XCubed",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.013671875
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_7_XCubedC0",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.0006103515625
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_7_XC0XCubed",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.0006103515625
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_7_SqrtTwoOverPi",
+          "shape": [],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_7_TanhInput",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.00048828125
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_7_ErfApprox",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 3.5837292671203613e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_7_PhiApprox",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 3.5762786865234375e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_gelu_8",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 6.198883056640625e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_add_1",
+          "shape": [
+            1,
+            96,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 6.67572021484375e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_getitem_36",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 2.002716064453125e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_8_MultX",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 1.0013580322265625e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_8_XCubed",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.0107421875
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_8_XCubedC0",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.00048828125
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_8_XC0XCubed",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.00048828125
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_8_SqrtTwoOverPi",
+          "shape": [],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_8_TanhInput",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.0003814697265625
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_8_ErfApprox",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 1.2286007404327393e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_8_PhiApprox",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 1.2278556823730469e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_gelu_9",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 1.9431114196777344e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_getitem_39",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 2.288818359375e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_9_MultX",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 1.1444091796875e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_9_XCubed",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.056640625
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_9_XCubedC0",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.0025634765625
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_9_XC0XCubed",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.0025634765625
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_9_SqrtTwoOverPi",
+          "shape": [],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_9_TanhInput",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.0020751953125
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_9_ErfApprox",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 5.446374416351318e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_9_PhiApprox",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 5.424022674560547e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_gelu_10",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 1.33514404296875e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_add_2",
+          "shape": [
+            1,
+            96,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 7.152557373046875e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_getitem_45",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 2.384185791015625e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_10_MultX",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 1.1920928955078125e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_10_XCubed",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.01904296875
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_10_XCubedC0",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.000823974609375
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_10_XC0XCubed",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.000823974609375
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_10_SqrtTwoOverPi",
+          "shape": [],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_10_TanhInput",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.000640869140625
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_10_ErfApprox",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 1.7911195755004883e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_10_PhiApprox",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 1.7881393432617188e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_gelu_11",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 1.9311904907226562e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_getitem_48",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 2.09808349609375e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_11_MultX",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 1.049041748046875e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_11_XCubed",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.01318359375
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_11_XCubedC0",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.0005950927734375
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_11_XC0XCubed",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.0006103515625
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_11_SqrtTwoOverPi",
+          "shape": [],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_11_TanhInput",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.00048828125
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_11_ErfApprox",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 1.4483928680419922e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_11_PhiApprox",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 1.4424324035644531e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_gelu_12",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 2.09808349609375e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_add_3",
+          "shape": [
+            1,
+            96,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 1.9073486328125e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_getitem_54",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 2.09808349609375e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_12_MultX",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 1.049041748046875e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_12_XCubed",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.01513671875
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_12_XCubedC0",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.00067138671875
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_12_XC0XCubed",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.0006866455078125
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_12_SqrtTwoOverPi",
+          "shape": [],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_12_TanhInput",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.00054931640625
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_12_ErfApprox",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 9.08365473151207e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_12_PhiApprox",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 9.059906005859375e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_gelu_13",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 2.09808349609375e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_getitem_57",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 2.6702880859375e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_13_MultX",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 1.33514404296875e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_13_XCubed",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.0322265625
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_13_XCubedC0",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.00146484375
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_13_XC0XCubed",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.00146484375
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_13_SqrtTwoOverPi",
+          "shape": [],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_13_TanhInput",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.00115966796875
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_13_ErfApprox",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 5.900859832763672e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_13_PhiApprox",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 5.841255187988281e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_gelu_14",
+          "shape": [
+            1,
+            192,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 2.6702880859375e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_add_4",
+          "shape": [
+            1,
+            96,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 4.38690185546875e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_getitem_63",
+          "shape": [
+            1,
+            96,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 9.5367431640625e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_getitem_66",
+          "shape": [
+            1,
+            384,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 5.7220458984375e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_14_MultX",
+          "shape": [
+            1,
+            384,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 2.86102294921875e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_14_XCubed",
+          "shape": [
+            1,
+            384,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.0015869140625
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_14_XCubedC0",
+          "shape": [
+            1,
+            384,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 6.866455078125e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_14_XC0XCubed",
+          "shape": [
+            1,
+            384,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 6.866455078125e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_14_SqrtTwoOverPi",
+          "shape": [],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_14_TanhInput",
+          "shape": [
+            1,
+            384,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 5.7220458984375e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_14_ErfApprox",
+          "shape": [
+            1,
+            384,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 4.0084123611450195e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_14_PhiApprox",
+          "shape": [
+            1,
+            384,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 3.993511199951172e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_gelu_15",
+          "shape": [
+            1,
+            384,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 4.410743713378906e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_add_5",
+          "shape": [
+            1,
+            96,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.00011873245239257812
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_getitem_72",
+          "shape": [
+            1,
+            96,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 8.58306884765625e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_getitem_75",
+          "shape": [
+            1,
+            576,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 3.0517578125e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_15_MultX",
+          "shape": [
+            1,
+            576,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 1.52587890625e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_15_XCubed",
+          "shape": [
+            1,
+            576,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.013671875
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_15_XCubedC0",
+          "shape": [
+            1,
+            576,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.0006103515625
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_15_XC0XCubed",
+          "shape": [
+            1,
+            576,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.000640869140625
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_15_SqrtTwoOverPi",
+          "shape": [],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_15_TanhInput",
+          "shape": [
+            1,
+            576,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.000518798828125
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_15_ErfApprox",
+          "shape": [
+            1,
+            576,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 1.1028721928596497e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_15_PhiApprox",
+          "shape": [
+            1,
+            576,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 1.0967254638671875e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_gelu_16",
+          "shape": [
+            1,
+            576,
+            15,
+            23
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 2.0384788513183594e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_getitem_78",
+          "shape": [
+            1,
+            576,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 1.3828277587890625e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_16_MultX",
+          "shape": [
+            1,
+            576,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 6.9141387939453125e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_16_XCubed",
+          "shape": [
+            1,
+            576,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.003662109375
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_16_XCubedC0",
+          "shape": [
+            1,
+            576,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.000152587890625
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_16_XC0XCubed",
+          "shape": [
+            1,
+            576,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.000152587890625
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_16_SqrtTwoOverPi",
+          "shape": [],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_16_TanhInput",
+          "shape": [
+            1,
+            576,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.0001220703125
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_16_ErfApprox",
+          "shape": [
+            1,
+            576,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 1.0102987289428711e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_16_PhiApprox",
+          "shape": [
+            1,
+            576,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 1.0132789611816406e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_gelu_17",
+          "shape": [
+            1,
+            576,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 1.1801719665527344e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_getitem_81",
+          "shape": [
+            1,
+            128,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 1.33514404296875e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_getitem_84",
+          "shape": [
+            1,
+            128,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 8.106231689453125e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_getitem_87",
+          "shape": [
+            1,
+            512,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 1.33514404296875e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_17_MultX",
+          "shape": [
+            1,
+            512,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 6.67572021484375e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_17_XCubed",
+          "shape": [
+            1,
+            512,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.01953125
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_17_XCubedC0",
+          "shape": [
+            1,
+            512,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.0008544921875
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_17_XC0XCubed",
+          "shape": [
+            1,
+            512,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.0008544921875
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_17_SqrtTwoOverPi",
+          "shape": [],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_17_TanhInput",
+          "shape": [
+            1,
+            512,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.00067138671875
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_17_ErfApprox",
+          "shape": [
+            1,
+            512,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 7.361173629760742e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_17_PhiApprox",
+          "shape": [
+            1,
+            512,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 7.271766662597656e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_gelu_18",
+          "shape": [
+            1,
+            512,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 1.1444091796875e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_getitem_90",
+          "shape": [
+            1,
+            512,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 9.775161743164062e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_18_MultX",
+          "shape": [
+            1,
+            512,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 4.887580871582031e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_18_XCubed",
+          "shape": [
+            1,
+            512,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.013671875
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_18_XCubedC0",
+          "shape": [
+            1,
+            512,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.0006103515625
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_18_XC0XCubed",
+          "shape": [
+            1,
+            512,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.0006103515625
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_18_SqrtTwoOverPi",
+          "shape": [],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_18_TanhInput",
+          "shape": [
+            1,
+            512,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.00048828125
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_18_ErfApprox",
+          "shape": [
+            1,
+            512,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 5.714595317840576e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_18_PhiApprox",
+          "shape": [
+            1,
+            512,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 5.7220458984375e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_gelu_19",
+          "shape": [
+            1,
+            512,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 8.463859558105469e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_add_6",
+          "shape": [
+            1,
+            128,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 1.52587890625e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_getitem_96",
+          "shape": [
+            1,
+            512,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 1.9073486328125e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_19_MultX",
+          "shape": [
+            1,
+            512,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 9.5367431640625e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_19_XCubed",
+          "shape": [
+            1,
+            512,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.01123046875
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_19_XCubedC0",
+          "shape": [
+            1,
+            512,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.0005035400390625
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_19_XC0XCubed",
+          "shape": [
+            1,
+            512,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.000518798828125
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_19_SqrtTwoOverPi",
+          "shape": [],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_19_TanhInput",
+          "shape": [
+            1,
+            512,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.0004119873046875
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_19_ErfApprox",
+          "shape": [
+            1,
+            512,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 9.775161743164062e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_19_PhiApprox",
+          "shape": [
+            1,
+            512,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 9.775161743164062e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_gelu_20",
+          "shape": [
+            1,
+            512,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 1.9073486328125e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_getitem_99",
+          "shape": [
+            1,
+            512,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 1.2874603271484375e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_20_MultX",
+          "shape": [
+            1,
+            512,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 6.4373016357421875e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_20_XCubed",
+          "shape": [
+            1,
+            512,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.00634765625
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_20_XCubedC0",
+          "shape": [
+            1,
+            512,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.0002899169921875
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_20_XC0XCubed",
+          "shape": [
+            1,
+            512,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.00030517578125
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_20_SqrtTwoOverPi",
+          "shape": [],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_20_TanhInput",
+          "shape": [
+            1,
+            512,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.000244140625
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_20_ErfApprox",
+          "shape": [
+            1,
+            512,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 5.97536563873291e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_20_PhiApprox",
+          "shape": [
+            1,
+            512,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 5.9604644775390625e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_gelu_21",
+          "shape": [
+            1,
+            512,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 1.3113021850585938e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_add_7",
+          "shape": [
+            1,
+            128,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 1.4781951904296875e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_getitem_105",
+          "shape": [
+            1,
+            384,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 1.621246337890625e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_21_MultX",
+          "shape": [
+            1,
+            384,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 8.106231689453125e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_21_XCubed",
+          "shape": [
+            1,
+            384,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.0030517578125
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_21_XCubedC0",
+          "shape": [
+            1,
+            384,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.0001373291015625
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_21_XC0XCubed",
+          "shape": [
+            1,
+            384,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.00014495849609375
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_21_SqrtTwoOverPi",
+          "shape": [],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_21_TanhInput",
+          "shape": [
+            1,
+            384,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.00011444091796875
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_21_ErfApprox",
+          "shape": [
+            1,
+            384,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 8.195638656616211e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_21_PhiApprox",
+          "shape": [
+            1,
+            384,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 8.165836334228516e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_gelu_22",
+          "shape": [
+            1,
+            384,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 1.71661376953125e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_getitem_108",
+          "shape": [
+            1,
+            384,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 1.2636184692382812e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_22_MultX",
+          "shape": [
+            1,
+            384,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 6.318092346191406e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_22_XCubed",
+          "shape": [
+            1,
+            384,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.001953125
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_22_XCubedC0",
+          "shape": [
+            1,
+            384,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 9.1552734375e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_22_XC0XCubed",
+          "shape": [
+            1,
+            384,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 9.918212890625e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_22_SqrtTwoOverPi",
+          "shape": [],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_22_TanhInput",
+          "shape": [
+            1,
+            384,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 7.62939453125e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_22_ErfApprox",
+          "shape": [
+            1,
+            384,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 5.692243576049805e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_22_PhiApprox",
+          "shape": [
+            1,
+            384,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 5.662441253662109e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_gelu_23",
+          "shape": [
+            1,
+            384,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 1.0609626770019531e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_add_8",
+          "shape": [
+            1,
+            128,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 1.52587890625e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_getitem_114",
+          "shape": [
+            1,
+            512,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 1.71661376953125e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_23_MultX",
+          "shape": [
+            1,
+            512,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 8.58306884765625e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_23_XCubed",
+          "shape": [
+            1,
+            512,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.0087890625
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_23_XCubedC0",
+          "shape": [
+            1,
+            512,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.000396728515625
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_23_XC0XCubed",
+          "shape": [
+            1,
+            512,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.000396728515625
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_23_SqrtTwoOverPi",
+          "shape": [],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_23_TanhInput",
+          "shape": [
+            1,
+            512,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.000335693359375
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_23_ErfApprox",
+          "shape": [
+            1,
+            512,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 1.1473894119262695e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_23_PhiApprox",
+          "shape": [
+            1,
+            512,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 1.1444091796875e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_gelu_24",
+          "shape": [
+            1,
+            512,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 1.582503318786621e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_getitem_117",
+          "shape": [
+            1,
+            512,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 1.6450881958007812e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_24_MultX",
+          "shape": [
+            1,
+            512,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 8.225440979003906e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_24_XCubed",
+          "shape": [
+            1,
+            512,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.0029296875
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_24_XCubedC0",
+          "shape": [
+            1,
+            512,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.000152587890625
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_24_XC0XCubed",
+          "shape": [
+            1,
+            512,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.000152587890625
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_24_SqrtTwoOverPi",
+          "shape": [],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_24_TanhInput",
+          "shape": [
+            1,
+            512,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.0001220703125
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_24_ErfApprox",
+          "shape": [
+            1,
+            512,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 7.9423189163208e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_24_PhiApprox",
+          "shape": [
+            1,
+            512,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 7.927417755126953e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_gelu_25",
+          "shape": [
+            1,
+            512,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 9.298324584960938e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_add_9",
+          "shape": [
+            1,
+            128,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 1.71661376953125e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_getitem_123",
+          "shape": [
+            1,
+            512,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 4.1961669921875e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_25_MultX",
+          "shape": [
+            1,
+            512,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 2.09808349609375e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_25_XCubed",
+          "shape": [
+            1,
+            512,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.046875
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_25_XCubedC0",
+          "shape": [
+            1,
+            512,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.0020751953125
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_25_XC0XCubed",
+          "shape": [
+            1,
+            512,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.0020751953125
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_25_SqrtTwoOverPi",
+          "shape": [],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_25_TanhInput",
+          "shape": [
+            1,
+            512,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.001708984375
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_25_ErfApprox",
+          "shape": [
+            1,
+            512,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 3.0249357223510742e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_25_PhiApprox",
+          "shape": [
+            1,
+            512,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 3.0219554901123047e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_gelu_26",
+          "shape": [
+            1,
+            512,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 3.24249267578125e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_getitem_126",
+          "shape": [
+            1,
+            512,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 2.193450927734375e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_26_MultX",
+          "shape": [
+            1,
+            512,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 1.0967254638671875e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_26_XCubed",
+          "shape": [
+            1,
+            512,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.0166015625
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_26_XCubedC0",
+          "shape": [
+            1,
+            512,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.00079345703125
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_26_XC0XCubed",
+          "shape": [
+            1,
+            512,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.0008544921875
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_26_SqrtTwoOverPi",
+          "shape": [],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_26_TanhInput",
+          "shape": [
+            1,
+            512,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.00067138671875
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_26_ErfApprox",
+          "shape": [
+            1,
+            512,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 9.939074516296387e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_26_PhiApprox",
+          "shape": [
+            1,
+            512,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 9.953975677490234e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_gelu_27",
+          "shape": [
+            1,
+            512,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 1.9788742065429688e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_add_10",
+          "shape": [
+            1,
+            128,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 2.288818359375e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_getitem_132",
+          "shape": [
+            1,
+            960,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 1.1444091796875e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_27_MultX",
+          "shape": [
+            1,
+            960,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 5.7220458984375e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_27_XCubed",
+          "shape": [
+            1,
+            960,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.00164794921875
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_27_XCubedC0",
+          "shape": [
+            1,
+            960,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 7.43865966796875e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_27_XC0XCubed",
+          "shape": [
+            1,
+            960,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 8.392333984375e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_27_SqrtTwoOverPi",
+          "shape": [],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_27_TanhInput",
+          "shape": [
+            1,
+            960,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 6.67572021484375e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_27_ErfApprox",
+          "shape": [
+            1,
+            960,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 6.0498714447021484e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_27_PhiApprox",
+          "shape": [
+            1,
+            960,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 6.020069122314453e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_gelu_28",
+          "shape": [
+            1,
+            960,
+            8,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 6.556510925292969e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_mean",
+          "shape": [
+            1,
+            960,
+            1,
+            1
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 4.470348358154297e-07
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_getitem_135",
+          "shape": [
+            1,
+            1280,
+            1,
+            1
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 3.337860107421875e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_28_MultX",
+          "shape": [
+            1,
+            1280,
+            1,
+            1
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 1.6689300537109375e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_28_XCubed",
+          "shape": [
+            1,
+            1280,
+            1,
+            1
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 6.4849853515625e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_28_XCubedC0",
+          "shape": [
+            1,
+            1280,
+            1,
+            1
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 2.9802322387695312e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_28_XC0XCubed",
+          "shape": [
+            1,
+            1280,
+            1,
+            1
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 4.76837158203125e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_28_SqrtTwoOverPi",
+          "shape": [],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_28_TanhInput",
+          "shape": [
+            1,
+            1280,
+            1,
+            1
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 3.814697265625e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_28_ErfApprox",
+          "shape": [
+            1,
+            1280,
+            1,
+            1
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 2.5033950805664062e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_28_PhiApprox",
+          "shape": [
+            1,
+            1280,
+            1,
+            1
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 2.5033950805664062e-06
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_gelu_29",
+          "shape": [
+            1,
+            1280,
+            1,
+            1
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 3.0994415283203125e-06
+        },
+        {
+          "output": "gelu_29",
+          "shape": [
+            1,
+            1280,
+            1,
+            1
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 6.103515625e-05
+        },
+        {
+          "output": "view_1",
+          "shape": [
+            1,
+            1280
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 6.103515625e-05
+        },
+        {
+          "output": "linear",
+          "shape": [
+            1,
+            512
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.00048828125
+        },
+        {
+          "output": "linear_1",
+          "shape": [
+            1,
+            32
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.001953125
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_linear_1",
+          "shape": [
+            1,
+            32
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.001953125
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_relu",
+          "shape": [
+            1,
+            32
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.001953125
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_relu_1",
+          "shape": [
+            1,
+            24
+          ],
+          "exact": false,
+          "mismatched": 2,
+          "max_abs_error": 0.0004410743713378906
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_relu_2",
+          "shape": [
+            1,
+            16
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.00036144256591796875
+        },
+        {
+          "output": "relu_2",
+          "shape": [
+            1,
+            16
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.0001220703125
+        },
+        {
+          "output": "linear_4",
+          "shape": [
+            1,
+            3
+          ],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "slice_1",
+          "shape": [
+            1,
+            1
+          ],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "slice_2",
+          "shape": [
+            1,
+            1
+          ],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "slice_3",
+          "shape": [
+            1,
+            1
+          ],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "linear_5",
+          "shape": [
+            1,
+            32
+          ],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_linear_5",
+          "shape": [
+            1,
+            32
+          ],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_relu_3",
+          "shape": [
+            1,
+            32
+          ],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_relu_4",
+          "shape": [
+            1,
+            24
+          ],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_relu_5",
+          "shape": [
+            1,
+            16
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 5.960464477539063e-08
+        },
+        {
+          "output": "relu_5",
+          "shape": [
+            1,
+            16
+          ],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "linear_8",
+          "shape": [
+            1,
+            2
+          ],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "slice_4",
+          "shape": [
+            1,
+            1
+          ],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "slice_5",
+          "shape": [
+            1,
+            1
+          ],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "linear_25",
+          "shape": [
+            1,
+            32
+          ],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_linear_25",
+          "shape": [
+            1,
+            32
+          ],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_relu_18",
+          "shape": [
+            1,
+            32
+          ],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_relu_19",
+          "shape": [
+            1,
+            24
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 4.76837158203125e-07
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_relu_20",
+          "shape": [
+            1,
+            16
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 2.384185791015625e-07
+        },
+        {
+          "output": "relu_20",
+          "shape": [
+            1,
+            16
+          ],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "linear_28",
+          "shape": [
+            1,
+            3
+          ],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "slice_6",
+          "shape": [
+            1,
+            1
+          ],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "slice_7",
+          "shape": [
+            1,
+            1
+          ],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "slice_8",
+          "shape": [
+            1,
+            1
+          ],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "linear_29",
+          "shape": [
+            1,
+            32
+          ],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_linear_29",
+          "shape": [
+            1,
+            32
+          ],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_relu_21",
+          "shape": [
+            1,
+            32
+          ],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_relu_22",
+          "shape": [
+            1,
+            24
+          ],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_relu_23",
+          "shape": [
+            1,
+            16
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 2.9802322387695312e-08
+        },
+        {
+          "output": "relu_23",
+          "shape": [
+            1,
+            16
+          ],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "linear_32",
+          "shape": [
+            1,
+            2
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.000244140625
+        },
+        {
+          "output": "slice_9",
+          "shape": [
+            1,
+            1
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.000244140625
+        },
+        {
+          "output": "slice_10",
+          "shape": [
+            1,
+            1
+          ],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "linear_49",
+          "shape": [
+            1,
+            48
+          ],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_linear_49",
+          "shape": [
+            1,
+            48
+          ],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_relu_36",
+          "shape": [
+            1,
+            48
+          ],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_relu_37",
+          "shape": [
+            1,
+            32
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 1.1920928955078125e-07
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_relu_38",
+          "shape": [
+            1,
+            16
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 2.384185791015625e-07
+        },
+        {
+          "output": "relu_38",
+          "shape": [
+            1,
+            16
+          ],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "linear_52",
+          "shape": [
+            1,
+            1
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.0009765625
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_sub",
+          "shape": [
+            1,
+            3
+          ],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_mul",
+          "shape": [
+            1,
+            3
+          ],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "mul",
+          "shape": [
+            1,
+            3
+          ],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "cat",
+          "shape": [
+            1,
+            515
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.00048828125
+        },
+        {
+          "output": "linear_45",
+          "shape": [
+            1,
+            96
+          ],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_linear_45",
+          "shape": [
+            1,
+            96
+          ],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_relu_33",
+          "shape": [
+            1,
+            96
+          ],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_relu_34",
+          "shape": [
+            1,
+            64
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 9.5367431640625e-07
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_relu_35",
+          "shape": [
+            1,
+            32
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 9.5367431640625e-07
+        },
+        {
+          "output": "relu_35",
+          "shape": [
+            1,
+            32
+          ],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "linear_48",
+          "shape": [
+            1,
+            1
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.00390625
+        },
+        {
+          "output": "linear_41",
+          "shape": [
+            1,
+            128
+          ],
+          "exact": false,
+          "mismatched": 1,
+          "max_abs_error": 0.00048828125
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_linear_41",
+          "shape": [
+            1,
+            128
+          ],
+          "exact": false,
+          "mismatched": 1,
+          "max_abs_error": 0.00048828125
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_relu_30",
+          "shape": [
+            1,
+            128
+          ],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_relu_31",
+          "shape": [
+            1,
+            64
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 4.76837158203125e-07
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_relu_32",
+          "shape": [
+            1,
+            32
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 2.384185791015625e-07
+        },
+        {
+          "output": "relu_32",
+          "shape": [
+            1,
+            32
+          ],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "linear_44",
+          "shape": [
+            1,
+            1
+          ],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "linear_37",
+          "shape": [
+            1,
+            32
+          ],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_linear_37",
+          "shape": [
+            1,
+            32
+          ],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_relu_27",
+          "shape": [
+            1,
+            32
+          ],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_relu_28",
+          "shape": [
+            1,
+            24
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 4.76837158203125e-07
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_relu_29",
+          "shape": [
+            1,
+            16
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 9.5367431640625e-07
+        },
+        {
+          "output": "relu_29",
+          "shape": [
+            1,
+            16
+          ],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "linear_40",
+          "shape": [
+            1,
+            1
+          ],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "linear_33",
+          "shape": [
+            1,
+            64
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.00048828125
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_linear_33",
+          "shape": [
+            1,
+            64
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.00048828125
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_relu_24",
+          "shape": [
+            1,
+            64
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.00048828125
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_relu_25",
+          "shape": [
+            1,
+            48
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 9.92119312286377e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_relu_26",
+          "shape": [
+            1,
+            32
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 3.1948089599609375e-05
+        },
+        {
+          "output": "relu_26",
+          "shape": [
+            1,
+            32
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 6.103515625e-05
+        },
+        {
+          "output": "linear_36",
+          "shape": [
+            1,
+            12
+          ],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "linear_21",
+          "shape": [
+            1,
+            96
+          ],
+          "exact": false,
+          "mismatched": 2,
+          "max_abs_error": 0.001953125
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_linear_21",
+          "shape": [
+            1,
+            96
+          ],
+          "exact": false,
+          "mismatched": 2,
+          "max_abs_error": 0.001953125
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_relu_15",
+          "shape": [
+            1,
+            96
+          ],
+          "exact": false,
+          "mismatched": 1,
+          "max_abs_error": 0.00048828125
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_relu_16",
+          "shape": [
+            1,
+            64
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.00010633468627929688
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_relu_17",
+          "shape": [
+            1,
+            32
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 4.1484832763671875e-05
+        },
+        {
+          "output": "relu_17",
+          "shape": [
+            1,
+            32
+          ],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "linear_24",
+          "shape": [
+            1,
+            1
+          ],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "linear_17",
+          "shape": [
+            1,
+            128
+          ],
+          "exact": false,
+          "mismatched": 5,
+          "max_abs_error": 0.001953125
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_linear_17",
+          "shape": [
+            1,
+            128
+          ],
+          "exact": false,
+          "mismatched": 5,
+          "max_abs_error": 0.001953125
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_relu_12",
+          "shape": [
+            1,
+            128
+          ],
+          "exact": false,
+          "mismatched": 4,
+          "max_abs_error": 0.001953125
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_relu_13",
+          "shape": [
+            1,
+            64
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.00038242340087890625
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_relu_14",
+          "shape": [
+            1,
+            32
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.00015974044799804688
+        },
+        {
+          "output": "relu_14",
+          "shape": [
+            1,
+            32
+          ],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "linear_20",
+          "shape": [
+            1,
+            1
+          ],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "linear_13",
+          "shape": [
+            1,
+            32
+          ],
+          "exact": false,
+          "mismatched": 1,
+          "max_abs_error": 0.00048828125
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_linear_13",
+          "shape": [
+            1,
+            32
+          ],
+          "exact": false,
+          "mismatched": 1,
+          "max_abs_error": 0.00048828125
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_relu_9",
+          "shape": [
+            1,
+            32
+          ],
+          "exact": false,
+          "mismatched": 1,
+          "max_abs_error": 0.00048828125
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_relu_10",
+          "shape": [
+            1,
+            24
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.00010967254638671875
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_relu_11",
+          "shape": [
+            1,
+            16
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 3.123283386230469e-05
+        },
+        {
+          "output": "relu_11",
+          "shape": [
+            1,
+            16
+          ],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "linear_16",
+          "shape": [
+            1,
+            1
+          ],
+          "exact": true,
+          "mismatched": 0,
+          "max_abs_error": 0.0
+        },
+        {
+          "output": "linear_9",
+          "shape": [
+            1,
+            64
+          ],
+          "exact": false,
+          "mismatched": 1,
+          "max_abs_error": 0.0009765625
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_linear_9",
+          "shape": [
+            1,
+            64
+          ],
+          "exact": false,
+          "mismatched": 1,
+          "max_abs_error": 0.0009765625
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_relu_6",
+          "shape": [
+            1,
+            64
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.000244140625
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_relu_7",
+          "shape": [
+            1,
+            48
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 3.3214688301086426e-05
+        },
+        {
+          "output": "InsertedPrecisionFreeCast_relu_8",
+          "shape": [
+            1,
+            32
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 2.1576881408691406e-05
+        },
+        {
+          "output": "relu_8",
+          "shape": [
+            1,
+            32
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 6.103515625e-05
+        },
+        {
+          "output": "linear_12",
+          "shape": [
+            1,
+            12
+          ],
+          "exact": false,
+          "mismatched": 0,
+          "max_abs_error": 0.00048828125
+        }
+      ],
+      "first_difference": {
+        "index": 15,
+        "operator": "Tanh",
+        "name": "",
+        "output": "_token_584",
+        "shape": [
+          1,
+          120,
+          180,
+          32
+        ],
+        "exact": false,
+        "mismatched": 0,
+        "max_abs_error": 3.5762786865234375e-07
+      },
+      "first_divergence": {
+        "index": 334,
+        "operator": "FusedGemm",
+        "name": "fused node_linear_2",
+        "output": "InsertedPrecisionFreeCast_relu_1",
+        "shape": [
+          1,
+          24
+        ],
+        "exact": false,
+        "mismatched": 2,
+        "max_abs_error": 0.0004410743713378906
+      }
+    }
+  }
+}

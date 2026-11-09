@@ -1,0 +1,61 @@
+{
+  "status": "passed",
+  "diagnostic_only": true,
+  "vehicle_tx_enabled": false,
+  "artifact": "opencl-half-product-probe-artifact.json",
+  "elf_sha256": "57d9f1f4be49f5cbecf385793d68de7617798c93491f0967f3d97b882c0ba942",
+  "returncode": 0,
+  "stderr": "",
+  "half_inputs": true,
+  "single_fp_config": 22,
+  "outputs": 65536,
+  "terms": 128,
+  "variants": [
+    {
+      "name": "fma",
+      "event_mean_ms": 7.065258667,
+      "different_elements": 0,
+      "outside_original_tolerance": 0,
+      "nonfinite": 0,
+      "max_abs_error": 0,
+      "matches_cpu_fma_exactly": true
+    },
+    {
+      "name": "mad",
+      "event_mean_ms": 0.953941333,
+      "different_elements": 0,
+      "outside_original_tolerance": 0,
+      "nonfinite": 0,
+      "max_abs_error": 0,
+      "matches_cpu_fma_exactly": true
+    },
+    {
+      "name": "separate",
+      "event_mean_ms": 0.954282667,
+      "different_elements": 0,
+      "outside_original_tolerance": 0,
+      "nonfinite": 0,
+      "max_abs_error": 0,
+      "matches_cpu_fma_exactly": true
+    },
+    {
+      "name": "pair_fma",
+      "event_mean_ms": 21.597013333,
+      "different_elements": 0,
+      "outside_original_tolerance": 0,
+      "nonfinite": 0,
+      "max_abs_error": 0,
+      "matches_cpu_fma_exactly": true
+    },
+    {
+      "name": "pair_add",
+      "event_mean_ms": 0.636074667,
+      "different_elements": 0,
+      "outside_original_tolerance": 0,
+      "nonfinite": 0,
+      "max_abs_error": 0,
+      "matches_cpu_fma_exactly": true
+    }
+  ],
+  "qualification_scope": "Bounded arithmetic diagnostic only; model accuracy and sustained inference remain separate gates"
+}

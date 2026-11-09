@@ -32,7 +32,7 @@ ACTUATOR_FIELDS = tuple(car.CarControl.Actuators.schema.fields.keys())
 
 
 class Controls(ControlsExt):
-  def __init__(self) -> None:
+  def __init__(self, *, android=False) -> None:
     self.params = Params()
     cloudlog.info("controlsd is waiting for CarParams")
     self.CP = messaging.log_from_bytes(self.params.get("CarParams", block=True), car.CarParams)
@@ -46,7 +46,7 @@ class Controls(ControlsExt):
     self.sm = messaging.SubMaster(['lateralDelay', 'vehicleParameters', 'lateralTorqueParameters', 'modelV2', 'selfdriveState',
                                    'extrinsicsCalibration', 'deviceMotion', 'longitudinalPlan', 'lateralManeuverPlan', 'carState', 'carOutput',
                                    'driverMonitoringState', 'onroadEvents', 'driverAssistance'] + self.sm_services_ext,
-                                  poll='selfdriveState')
+                                  poll='selfdriveState', poll_all=android)
     self.pm = messaging.PubMaster(['carControl', 'controlsState'] + self.pm_services_ext)
 
     self.steer_limited_by_safety = False
@@ -70,8 +70,8 @@ class Controls(ControlsExt):
 
     self.LaC = ControlsExt.initialize_lateral_control(self, self.LaC, self.CI, DT_CTRL)
 
-  def update(self):
-    self.sm.update(15)
+  def update(self, timeout_ms=15):
+    self.sm.update(timeout_ms)
     if self.sm.updated["extrinsicsCalibration"]:
       self.pose_calibrator.feed_extrinsics_calibration(self.sm['extrinsicsCalibration'])
     if self.sm.updated["deviceMotion"]:
@@ -243,18 +243,72 @@ class Controls(ControlsExt):
     cc_send.carControl = CC
     self.pm.send('carControl', cc_send)
 
-  def run(self, progress=None):
+  def run(self, progress=None, android=False, wait_until=None):
     import time
     rk = Ratekeeper(100, print_delay_threshold=None)
+    if android and wait_until is None:
+      from fold3_timing import android_wait_until
+      wait_until = android_wait_until()
+    interval_ns = round(DT_CTRL * 1e9)
+    release_ns = time.monotonic_ns()
+    previous_start_ns = None
     while True:
-      self.update()
+      loop_start = time.monotonic_ns()
+      skipped_slots = 0
+      if android:
+        # Start work at the release, rather than polling and then waiting until
+        # its deadline. A late release still has its remaining slot budget;
+        # only a passed deadline expires the slot. The check below skips all
+        # expired slots together, never executing catch-up steps for them.
+        if loop_start < release_ns:
+          wait_until(release_ns)
+      cycle_start = time.monotonic_ns()
+      if android and cycle_start >= release_ns + interval_ns:
+        # A delayed wake can cross several releases. Use the current slot and
+        # account for every expired one without adding a second pacing wait.
+        expired = (cycle_start - release_ns) // interval_ns
+        skipped_slots += expired
+        release_ns += expired * interval_ns
+      timeout_ms = 0 if android else 15
+      cycle_cpu_start = time.thread_time_ns() if android else 0
+      self.update(timeout_ms)
+      input_end = time.monotonic_ns()
+      input_cpu_end = time.thread_time_ns() if android else 0
       work_start = time.monotonic_ns()
       CC, lac_log = self.state_control()
+      control_end = time.monotonic_ns()
       self.publish(CC, lac_log)
+      publish_end = time.monotonic_ns()
       self.get_params_sp(self.sm)
       self.run_ext(self.sm, self.pm)
+      work_end = time.monotonic_ns()
+      work_cpu_end = time.thread_time_ns() if android else 0
       if progress is not None:
-        progress(self.sm.updated['selfdriveState'], time.monotonic_ns() - work_start)
+        progress(self.sm.updated['selfdriveState'], work_end - work_start, {
+          "input_wait_budget_ms": timeout_ms,
+          "cycle_interval_ms": 0. if previous_start_ns is None else (cycle_start - previous_start_ns) / 1e6,
+          "scheduler_delay_ms": max(0, cycle_start - release_ns) / 1e6 if android else 0.,
+          "skipped_slots": skipped_slots,
+          "selfdrive_ipc_age_ms": (max(0, work_start - self.sm.logMonoTime['selfdriveState']) / 1e6
+                                   if self.sm.logMonoTime['selfdriveState'] > 0 else -1.),
+          "input_handling_ms": (input_end - cycle_start) / 1e6,
+          # Wall time includes IPC waits, GIL waits and scheduler preemption.
+          # Keep it authoritative; CPU time only diagnoses their contribution.
+          "input_thread_cpu_ms": (input_cpu_end - cycle_cpu_start) / 1e6,
+          "active_thread_cpu_ms": (work_cpu_end - cycle_cpu_start) / 1e6,
+          "active_off_cpu_ms": max(0, (work_end - cycle_start) - (work_cpu_end - cycle_cpu_start)) / 1e6 if android else 0.,
+          "pacing_wait_ms": (cycle_start - loop_start) / 1e6,
+          "computation_ms": (control_end - work_start) / 1e6,
+          "publishing_ms": (publish_end - control_end) / 1e6,
+          "parameters_extensions_ms": (work_end - publish_end) / 1e6,
+          # Keep the legacy paced-cycle metric alongside the active work and
+          # absolute release/deadline metrics. Pacing is never hidden.
+          "cycle_before_reporting_ms": (work_end - loop_start) / 1e6,
+          "active_cycle_before_reporting_ms": (work_end - cycle_start) / 1e6,
+          "release_to_completion_before_reporting_ms": (work_end - release_ns) / 1e6 if android else (work_end - cycle_start) / 1e6,
+        })
+      previous_start_ns = cycle_start
+      release_ns += interval_ns
       rk.monitor_time()
 
 

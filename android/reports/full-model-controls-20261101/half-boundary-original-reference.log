@@ -1,0 +1,12 @@
+dmonitoring_model True 159
+Traceback (most recent call last):
+  File "<stdin>", line 11, in <module>
+  File "/Users/sergios/sunnypilot/android/scripts/prepare_accel_models.py", line 149, in check_original
+    sequences = validate(run, references, name)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sergios/sunnypilot/android/app/src/main/python/fold3_sequences.py", line 83, in validate
+    check = {key: compare(value, expected[key][frame]) for key, value in actual.items() if value.dtype != np.uint8}
+                                 ~~~~~~~~^^^^^
+  File "/Users/sergios/sunnypilot/.venv/lib/python3.12/site-packages/numpy/lib/_npyio_impl.py", line 243, in __getitem__
+    raise KeyError(f"{key} is not a file in the archive") from None
+KeyError: 'next_state_img_q is not a file in the archive'

@@ -1,0 +1,1184 @@
+{
+  "preserved_baseline": {
+    "candidate": "candidate35",
+    "apk_sha256": "38645e91f806076517de1497cdb6b5c0cbf4873cfecf5efabb980297a014ad51",
+    "artifact_record": "../blocker-fixes/candidate35-artifact.json",
+    "validation_report": "../blocker-fixes/candidate35-validation.md",
+    "retained_failures": "../blocker-fixes/candidate35-retained-failures.json",
+    "scope": "No baseline measurements or failures overwritten."
+  },
+  "qnn_gpu": [
+    {
+      "candidate": "candidate36",
+      "apk_sha256": "02f27f06829b7b15160d555f4cdfb591346fbcd88ab2d1363316bc01414d29c4",
+      "model": "dmonitoring_model",
+      "source_report": "candidate36-qnn-first12.json",
+      "derived_model_sha256": "845b269cd45654b2ef802395a7ea4914519caa4b30bf94ee4b8b42d010eeb2b1",
+      "first_divergence": {
+        "index": 9,
+        "operator": "Conv",
+        "name": "node_Conv_805",
+        "output": "getitem",
+        "dtype": "float16",
+        "shape": [
+          1,
+          32,
+          120,
+          180
+        ],
+        "inputs": [
+          "permute_1",
+          "model._vision._backbone.conv_stem.weight",
+          "model._vision._backbone.conv_stem.weight_bias"
+        ],
+        "domain": "",
+        "layout": "ONNX declared axes; provider transformations recorded separately",
+        "passed": false,
+        "finite": true,
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": false,
+        "max_abs_error": 0.15625,
+        "mismatched_elements": 483698
+      },
+      "final_outputs": {
+        "outputs": {
+          "passed": false,
+          "finite": true,
+          "shape": [
+            1,
+            553
+          ],
+          "dtype": "float16",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 0.02734375,
+          "mismatched_elements": 475
+        }
+      },
+      "promoted": false,
+      "status": "failed"
+    },
+    {
+      "candidate": "candidate36",
+      "apk_sha256": "02f27f06829b7b15160d555f4cdfb591346fbcd88ab2d1363316bc01414d29c4",
+      "model": "driving_supercombo",
+      "source_report": "candidate36-qnn-first12.json",
+      "derived_model_sha256": "c60702ff25ab5bd58bfc4f304858e5b478c1a7b69129c2564d08278093c8281b",
+      "first_divergence": null,
+      "final_outputs": {
+        "outputs": {
+          "passed": false,
+          "finite": true,
+          "shape": [
+            1,
+            2576
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 2258.9765625,
+          "mismatched_elements": 2558
+        },
+        "next_state_img_q": {
+          "passed": true,
+          "finite": true,
+          "shape": [
+            2,
+            5,
+            6,
+            128,
+            256
+          ],
+          "dtype": "uint8",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": true,
+          "max_abs_error": 0.0,
+          "mismatched_elements": 0
+        },
+        "next_state_desire_q": {
+          "passed": true,
+          "finite": true,
+          "shape": [
+            100,
+            1,
+            8
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": true,
+          "max_abs_error": 0.0,
+          "mismatched_elements": 0
+        },
+        "next_state_feat_q": {
+          "passed": false,
+          "finite": true,
+          "shape": [
+            96,
+            1,
+            512
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 0.1468505859375,
+          "mismatched_elements": 510
+        }
+      },
+      "promoted": false,
+      "status": "failed"
+    },
+    {
+      "candidate": "candidate36",
+      "apk_sha256": "02f27f06829b7b15160d555f4cdfb591346fbcd88ab2d1363316bc01414d29c4",
+      "model": "dmonitoring_model",
+      "source_report": "candidate36-qnn-conv32.json",
+      "derived_model_sha256": "2fcc2a373db1b5b01f177e0796b6f0f5646ae977e6ffc6c5857529370a786726",
+      "first_divergence": {
+        "index": 14,
+        "operator": "Gelu",
+        "name": "node_gelu",
+        "output": "gelu",
+        "dtype": "float16",
+        "shape": [
+          1,
+          32,
+          120,
+          180
+        ],
+        "inputs": [
+          "getitem"
+        ],
+        "domain": "",
+        "layout": "ONNX declared axes; provider transformations recorded separately",
+        "passed": false,
+        "finite": true,
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": false,
+        "max_abs_error": 0.0078125,
+        "mismatched_elements": 95381
+      },
+      "final_outputs": {
+        "outputs": {
+          "passed": false,
+          "finite": true,
+          "shape": [
+            1,
+            553
+          ],
+          "dtype": "float16",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 0.1357421875,
+          "mismatched_elements": 484
+        }
+      },
+      "promoted": false,
+      "status": "failed"
+    },
+    {
+      "candidate": "candidate36",
+      "apk_sha256": "02f27f06829b7b15160d555f4cdfb591346fbcd88ab2d1363316bc01414d29c4",
+      "model": "driving_supercombo",
+      "source_report": "candidate36-qnn-road-trace.json",
+      "derived_model_sha256": "d3b16c960df55de5a22556d119ac3df56d4db8a06e11123eb0e595a9da313679",
+      "first_divergence": {
+        "index": 26,
+        "operator": "Conv",
+        "name": "model/node_conv2d",
+        "output": "model/conv2d",
+        "dtype": "float16",
+        "shape": [
+          1,
+          64,
+          64,
+          128
+        ],
+        "inputs": [
+          "model/div",
+          "model/vision_model.vision._en.stem.0.reparam_conv.weight",
+          "model/vision_model.vision._en.stem.0.reparam_conv.bias"
+        ],
+        "domain": "",
+        "layout": "ONNX declared axes; provider transformations recorded separately",
+        "passed": false,
+        "finite": true,
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": false,
+        "max_abs_error": 0.5,
+        "mismatched_elements": 241311
+      },
+      "final_outputs": {
+        "outputs": {
+          "passed": false,
+          "finite": true,
+          "shape": [
+            1,
+            2576
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 1030.9609375,
+          "mismatched_elements": 2557
+        },
+        "next_state_img_q": {
+          "passed": true,
+          "finite": true,
+          "shape": [
+            2,
+            5,
+            6,
+            128,
+            256
+          ],
+          "dtype": "uint8",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": true,
+          "max_abs_error": 0.0,
+          "mismatched_elements": 0
+        },
+        "next_state_desire_q": {
+          "passed": true,
+          "finite": true,
+          "shape": [
+            100,
+            1,
+            8
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": true,
+          "max_abs_error": 0.0,
+          "mismatched_elements": 0
+        },
+        "next_state_feat_q": {
+          "passed": false,
+          "finite": true,
+          "shape": [
+            96,
+            1,
+            512
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 0.1466064453125,
+          "mismatched_elements": 509
+        }
+      },
+      "promoted": false,
+      "status": "failed"
+    },
+    {
+      "candidate": "candidate36",
+      "apk_sha256": "02f27f06829b7b15160d555f4cdfb591346fbcd88ab2d1363316bc01414d29c4",
+      "model": "dmonitoring_model",
+      "source_report": "candidate36-qnn-portable.json",
+      "derived_model_sha256": "06f4ff488548709ceb0844c15871a916d821dbe4555935c3256bf19b7e648b23",
+      "first_divergence": {
+        "index": 9,
+        "operator": "Conv",
+        "name": "node_Conv_805_token_561",
+        "output": "android_precision_8_result",
+        "dtype": "float32",
+        "shape": [
+          1,
+          32,
+          120,
+          180
+        ],
+        "inputs": [
+          "android_precision_8_nchw",
+          "FusedBack_model._vision._backbone.conv_stem.weight",
+          "FusedBack_model._vision._backbone.conv_stem.weight_bias"
+        ],
+        "domain": "",
+        "layout": "ONNX declared axes; provider transformations recorded separately",
+        "passed": false,
+        "finite": true,
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": false,
+        "max_abs_error": 0.026052474975585938,
+        "mismatched_elements": 166037
+      },
+      "final_outputs": {
+        "outputs": {
+          "passed": false,
+          "finite": true,
+          "shape": [
+            1,
+            553
+          ],
+          "dtype": "float16",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 0.0126953125,
+          "mismatched_elements": 312
+        }
+      },
+      "promoted": false,
+      "status": "failed"
+    },
+    {
+      "candidate": "candidate36",
+      "apk_sha256": "02f27f06829b7b15160d555f4cdfb591346fbcd88ab2d1363316bc01414d29c4",
+      "model": "driving_supercombo",
+      "source_report": "candidate36-qnn-portable.json",
+      "derived_model_sha256": "9b88552a1e2c6955ad8f5e21787777b2d0066c64017505bbd7694cfd04d0c984",
+      "first_divergence": {
+        "index": 5,
+        "operator": "Mul",
+        "name": "",
+        "output": "InsertedPrecisionFreeCast_model/p_silu_2",
+        "dtype": "float32",
+        "shape": [
+          1,
+          512
+        ],
+        "inputs": [
+          "InsertedPrecisionFreeCast_model/p_linear_4",
+          "android_precision_4_sigmoid"
+        ],
+        "domain": "",
+        "layout": "ONNX declared axes; provider transformations recorded separately",
+        "passed": false,
+        "finite": true,
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": false,
+        "max_abs_error": 0.0009162425994873047,
+        "mismatched_elements": 1
+      },
+      "final_outputs": {
+        "outputs": {
+          "passed": false,
+          "finite": true,
+          "shape": [
+            1,
+            2576
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 95.15625,
+          "mismatched_elements": 1969
+        },
+        "next_state_img_q": {
+          "passed": true,
+          "finite": true,
+          "shape": [
+            2,
+            5,
+            6,
+            128,
+            256
+          ],
+          "dtype": "uint8",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": true,
+          "max_abs_error": 0.0,
+          "mismatched_elements": 0
+        },
+        "next_state_desire_q": {
+          "passed": true,
+          "finite": true,
+          "shape": [
+            100,
+            1,
+            8
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": true,
+          "max_abs_error": 0.0,
+          "mismatched_elements": 0
+        },
+        "next_state_feat_q": {
+          "passed": false,
+          "finite": true,
+          "shape": [
+            96,
+            1,
+            512
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 0.0006103515625,
+          "mismatched_elements": 160
+        }
+      },
+      "promoted": false,
+      "status": "failed"
+    },
+    {
+      "candidate": "candidate37",
+      "apk_sha256": "e3b7f892e99f73f83fe77b51c0066e514717f515834b6eb9638a16fac13d091f",
+      "model": "dmonitoring_model",
+      "source_report": "candidate37-qnn-portable.json",
+      "derived_model_sha256": "06f4ff488548709ceb0844c15871a916d821dbe4555935c3256bf19b7e648b23",
+      "first_divergence": {
+        "index": 9,
+        "operator": "Conv",
+        "name": "node_Conv_805_token_561",
+        "output": "android_precision_8_result",
+        "dtype": "float32",
+        "shape": [
+          1,
+          32,
+          120,
+          180
+        ],
+        "inputs": [
+          "android_precision_8_nchw",
+          "FusedBack_model._vision._backbone.conv_stem.weight",
+          "FusedBack_model._vision._backbone.conv_stem.weight_bias"
+        ],
+        "domain": "",
+        "layout": "ONNX declared axes; provider transformations recorded separately",
+        "passed": false,
+        "finite": true,
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": false,
+        "max_abs_error": 0.026052474975585938,
+        "mismatched_elements": 166037
+      },
+      "final_outputs": {
+        "outputs": {
+          "passed": false,
+          "finite": true,
+          "shape": [
+            1,
+            553
+          ],
+          "dtype": "float16",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 0.0126953125,
+          "mismatched_elements": 312
+        }
+      },
+      "promoted": false,
+      "status": "failed"
+    },
+    {
+      "candidate": "candidate37",
+      "apk_sha256": "e3b7f892e99f73f83fe77b51c0066e514717f515834b6eb9638a16fac13d091f",
+      "model": "driving_supercombo",
+      "source_report": "candidate37-qnn-portable.json",
+      "derived_model_sha256": "9b88552a1e2c6955ad8f5e21787777b2d0066c64017505bbd7694cfd04d0c984",
+      "first_divergence": {
+        "index": 5,
+        "operator": "Mul",
+        "name": "",
+        "output": "InsertedPrecisionFreeCast_model/p_silu_2",
+        "dtype": "float32",
+        "shape": [
+          1,
+          512
+        ],
+        "inputs": [
+          "InsertedPrecisionFreeCast_model/p_linear_4",
+          "android_precision_4_sigmoid"
+        ],
+        "domain": "",
+        "layout": "ONNX declared axes; provider transformations recorded separately",
+        "passed": false,
+        "finite": true,
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": false,
+        "max_abs_error": 0.0009162425994873047,
+        "mismatched_elements": 1
+      },
+      "final_outputs": {
+        "outputs": {
+          "passed": false,
+          "finite": true,
+          "shape": [
+            1,
+            2576
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 95.15625,
+          "mismatched_elements": 1969
+        },
+        "next_state_img_q": {
+          "passed": true,
+          "finite": true,
+          "shape": [
+            2,
+            5,
+            6,
+            128,
+            256
+          ],
+          "dtype": "uint8",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": true,
+          "max_abs_error": 0.0,
+          "mismatched_elements": 0
+        },
+        "next_state_desire_q": {
+          "passed": true,
+          "finite": true,
+          "shape": [
+            100,
+            1,
+            8
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": true,
+          "max_abs_error": 0.0,
+          "mismatched_elements": 0
+        },
+        "next_state_feat_q": {
+          "passed": false,
+          "finite": true,
+          "shape": [
+            96,
+            1,
+            512
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 0.0006103515625,
+          "mismatched_elements": 160
+        }
+      },
+      "promoted": false,
+      "status": "failed"
+    },
+    {
+      "candidate": "candidate37",
+      "apk_sha256": "e3b7f892e99f73f83fe77b51c0066e514717f515834b6eb9638a16fac13d091f",
+      "model": "dmonitoring_model",
+      "source_report": "candidate37-qnn-float-images.json",
+      "derived_model_sha256": "06f4ff488548709ceb0844c15871a916d821dbe4555935c3256bf19b7e648b23",
+      "first_divergence": {
+        "index": 9,
+        "operator": "Conv",
+        "name": "node_Conv_805_token_561",
+        "output": "android_precision_8_result",
+        "dtype": "float32",
+        "shape": [
+          1,
+          32,
+          120,
+          180
+        ],
+        "inputs": [
+          "android_precision_8_nchw",
+          "FusedBack_model._vision._backbone.conv_stem.weight",
+          "FusedBack_model._vision._backbone.conv_stem.weight_bias"
+        ],
+        "domain": "",
+        "layout": "ONNX declared axes; provider transformations recorded separately",
+        "passed": false,
+        "finite": true,
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": false,
+        "max_abs_error": 0.026052474975585938,
+        "mismatched_elements": 166037
+      },
+      "final_outputs": {
+        "outputs": {
+          "passed": false,
+          "finite": true,
+          "shape": [
+            1,
+            553
+          ],
+          "dtype": "float16",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 0.0126953125,
+          "mismatched_elements": 312
+        }
+      },
+      "promoted": false,
+      "status": "failed"
+    },
+    {
+      "candidate": "candidate37",
+      "apk_sha256": "e3b7f892e99f73f83fe77b51c0066e514717f515834b6eb9638a16fac13d091f",
+      "model": "driving_supercombo",
+      "source_report": "candidate37-qnn-float-images.json",
+      "derived_model_sha256": "06c9bf26034d86281a0ad8e112f0d75313d03e493392c7d82332e4343e0b0368",
+      "first_divergence": {
+        "index": 5,
+        "operator": "Mul",
+        "name": "",
+        "output": "InsertedPrecisionFreeCast_model/p_silu_2",
+        "dtype": "float32",
+        "shape": [
+          1,
+          512
+        ],
+        "inputs": [
+          "InsertedPrecisionFreeCast_model/p_linear_4",
+          "android_precision_4_sigmoid"
+        ],
+        "domain": "",
+        "layout": "ONNX declared axes; provider transformations recorded separately",
+        "passed": false,
+        "finite": true,
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": false,
+        "max_abs_error": 0.0009162425994873047,
+        "mismatched_elements": 1
+      },
+      "final_outputs": {
+        "outputs": {
+          "passed": false,
+          "finite": true,
+          "shape": [
+            1,
+            2576
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 95.15625,
+          "mismatched_elements": 1969
+        },
+        "next_state_img_q": {
+          "passed": true,
+          "finite": true,
+          "shape": [
+            2,
+            5,
+            6,
+            128,
+            256
+          ],
+          "dtype": "uint8",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": true,
+          "max_abs_error": 0.0,
+          "mismatched_elements": 0
+        },
+        "next_state_desire_q": {
+          "passed": true,
+          "finite": true,
+          "shape": [
+            100,
+            1,
+            8
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": true,
+          "max_abs_error": 0.0,
+          "mismatched_elements": 0
+        },
+        "next_state_feat_q": {
+          "passed": false,
+          "finite": true,
+          "shape": [
+            96,
+            1,
+            512
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 0.0006103515625,
+          "mismatched_elements": 160
+        }
+      },
+      "promoted": false,
+      "status": "failed"
+    },
+    {
+      "candidate": "candidate38",
+      "apk_sha256": "e00e67684a50ed5cd23cd8f55d0bcd7a0337dec049774012feeccbd665b8959f",
+      "model": "dmonitoring_model",
+      "source_report": "candidate38-qnn-image-rank4.json",
+      "derived_model_sha256": "06f4ff488548709ceb0844c15871a916d821dbe4555935c3256bf19b7e648b23",
+      "first_divergence": {
+        "index": 9,
+        "operator": "Conv",
+        "name": "node_Conv_805_token_561",
+        "output": "android_precision_8_result",
+        "dtype": "float32",
+        "shape": [
+          1,
+          32,
+          120,
+          180
+        ],
+        "inputs": [
+          "android_precision_8_nchw",
+          "FusedBack_model._vision._backbone.conv_stem.weight",
+          "FusedBack_model._vision._backbone.conv_stem.weight_bias"
+        ],
+        "domain": "",
+        "layout": "ONNX declared axes; provider transformations recorded separately",
+        "passed": false,
+        "finite": true,
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": false,
+        "max_abs_error": 0.026052474975585938,
+        "mismatched_elements": 166037
+      },
+      "final_outputs": {
+        "outputs": {
+          "passed": false,
+          "finite": true,
+          "shape": [
+            1,
+            553
+          ],
+          "dtype": "float16",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 0.0126953125,
+          "mismatched_elements": 312
+        }
+      },
+      "promoted": false,
+      "status": "failed"
+    },
+    {
+      "candidate": "candidate38",
+      "apk_sha256": "e00e67684a50ed5cd23cd8f55d0bcd7a0337dec049774012feeccbd665b8959f",
+      "model": "driving_supercombo",
+      "source_report": "candidate38-qnn-image-rank4.json",
+      "derived_model_sha256": "8b3ec70bbe8160c487f2b5d1fca45e40dd274714f30608bd98a1df367b35dab2",
+      "first_divergence": {
+        "index": 5,
+        "operator": "Mul",
+        "name": "",
+        "output": "InsertedPrecisionFreeCast_model/p_silu_2",
+        "dtype": "float32",
+        "shape": [
+          1,
+          512
+        ],
+        "inputs": [
+          "InsertedPrecisionFreeCast_model/p_linear_4",
+          "android_precision_4_sigmoid"
+        ],
+        "domain": "",
+        "layout": "ONNX declared axes; provider transformations recorded separately",
+        "passed": false,
+        "finite": true,
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": false,
+        "max_abs_error": 0.0009162425994873047,
+        "mismatched_elements": 1
+      },
+      "final_outputs": {
+        "outputs": {
+          "passed": false,
+          "finite": true,
+          "shape": [
+            1,
+            2576
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 21.546875,
+          "mismatched_elements": 2559
+        },
+        "next_state_img_q": {
+          "passed": false,
+          "finite": true,
+          "shape": [
+            2,
+            5,
+            6,
+            128,
+            256
+          ],
+          "dtype": "uint8",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 255.0,
+          "mismatched_elements": 1958367
+        },
+        "next_state_desire_q": {
+          "passed": true,
+          "finite": true,
+          "shape": [
+            100,
+            1,
+            8
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": true,
+          "max_abs_error": 0.0,
+          "mismatched_elements": 0
+        },
+        "next_state_feat_q": {
+          "passed": false,
+          "finite": true,
+          "shape": [
+            96,
+            1,
+            512
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 0.248443603515625,
+          "mismatched_elements": 511
+        }
+      },
+      "promoted": false,
+      "status": "failed"
+    }
+  ],
+  "rejected_workgroup_regression": {
+    "candidate": "candidate39",
+    "apk_sha256": "000ce250c1b593be165258fd5fbc234faceea86f454a24de6ae3079184532610",
+    "status": "failed",
+    "reason": "Convolution 256 lanes and activation/division 128 lanes regress the matched asynchronous profiles; source reverted to candidate38. Host original-reference gate still passes.",
+    "source_report": "candidate38-gpu-profile-comparison.json"
+  },
+  "candidate38_road_thermal_abort": {
+    "apk_sha256": "e00e67684a50ed5cd23cd8f55d0bcd7a0337dec049774012feeccbd665b8959f",
+    "status": "blocked",
+    "source_report": "fold-candidate38-opencl-reference-road.json",
+    "isolation_report": "fold-candidate38-opencl-reference-road-isolation.json",
+    "reason": "All 636 numerical comparisons completed; MODERATE thermal state aborts the later timing phase. No complete 100-sample road p99 is reported.",
+    "thermal_override": false
+  },
+  "vehicle_tx_enabled": false,
+  "engagement_allowed": false,
+  "candidate38_controls_overspeed": {
+    "apk_sha256": "e00e67684a50ed5cd23cd8f55d0bcd7a0337dec049774012feeccbd665b8959f",
+    "mean_cycle_hz": 114.10085494945565,
+    "reason": "Bounded poll returned early; candidate40 waits for only the residual absolute deadline"
+  },
+  "candidate38_visual_failure": {
+    "apk_sha256": "e00e67684a50ed5cd23cd8f55d0bcd7a0337dec049774012feeccbd665b8959f",
+    "source_report": "fold-candidate38-vision.json",
+    "preview_delivery_p99_ms": 143.01636,
+    "fresh_road_samples": 0
+  },
+  "candidate40_current_failures": {
+    "source": "candidate40-performance-comparison.json",
+    "models": {
+      "driving_supercombo": {
+        "compile_ms": 25890.250927,
+        "performance_status": "blocked",
+        "error": "Unsafe or unavailable Android thermal state: 2"
+      },
+      "dmonitoring_model": {
+        "performance_status": "failed",
+        "samples": 100,
+        "compile_ms": 18104.978899,
+        "work_p50_ms": 319.904219,
+        "work_p99_ms": 381.54413361,
+        "work_max_ms": 383.917917,
+        "deadline_misses_50ms": 100
+      }
+    },
+    "controls_complete_cycle_status": "failed",
+    "combined_visual_status": "failed"
+  },
+  "candidate40_qnn_failures": {
+    "source_report": "candidate40-qnn-diagnostic-summary.json",
+    "apk_sha256": "bd42b65a3538b8ad73834e90826eb10a98d8afeacbe9d5aae5877d43a25e30ec",
+    "results": [
+      {
+        "model": "dmonitoring_model",
+        "exposed_intermediates": true,
+        "providers": {
+          "QNNExecutionProvider": {
+            "partitions": 1,
+            "nodes": 452
+          }
+        },
+        "first_divergence": {
+          "index": 9,
+          "operator": "Conv",
+          "name": "node_Conv_805_token_561",
+          "output": "android_precision_8_result",
+          "dtype": "float32",
+          "shape": [
+            1,
+            32,
+            120,
+            180
+          ],
+          "inputs": [
+            "android_precision_8_nchw",
+            "FusedBack_model._vision._backbone.conv_stem.weight",
+            "FusedBack_model._vision._backbone.conv_stem.weight_bias"
+          ],
+          "domain": "",
+          "layout": "ONNX declared axes; provider transformations recorded separately",
+          "passed": false,
+          "finite": true,
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 0.026052474975585938,
+          "mismatched_elements": 166037
+        },
+        "final": {
+          "outputs": {
+            "passed": false,
+            "finite": true,
+            "shape": [
+              1,
+              553
+            ],
+            "dtype": "float16",
+            "expected_nonfinite_elements": 0,
+            "unexpected_nonfinite_elements": 0,
+            "exact": false,
+            "max_abs_error": 0.0126953125,
+            "mismatched_elements": 312
+          }
+        }
+      },
+      {
+        "model": "driving_supercombo",
+        "exposed_intermediates": true,
+        "providers": {
+          "QNNExecutionProvider": {
+            "partitions": 1,
+            "nodes": 560
+          }
+        },
+        "first_divergence": {
+          "index": 5,
+          "operator": "Mul",
+          "name": "",
+          "output": "InsertedPrecisionFreeCast_model/p_silu_2",
+          "dtype": "float32",
+          "shape": [
+            1,
+            512
+          ],
+          "inputs": [
+            "InsertedPrecisionFreeCast_model/p_linear_4",
+            "android_precision_4_sigmoid"
+          ],
+          "domain": "",
+          "layout": "ONNX declared axes; provider transformations recorded separately",
+          "passed": false,
+          "finite": true,
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 0.0009162425994873047,
+          "mismatched_elements": 1
+        },
+        "final": {
+          "outputs": {
+            "passed": false,
+            "finite": true,
+            "shape": [
+              1,
+              2576
+            ],
+            "dtype": "float32",
+            "expected_nonfinite_elements": 0,
+            "unexpected_nonfinite_elements": 0,
+            "exact": false,
+            "max_abs_error": 21.546875,
+            "mismatched_elements": 2559
+          },
+          "next_state_img_q": {
+            "passed": false,
+            "finite": true,
+            "shape": [
+              2,
+              5,
+              6,
+              128,
+              256
+            ],
+            "dtype": "uint8",
+            "expected_nonfinite_elements": 0,
+            "unexpected_nonfinite_elements": 0,
+            "exact": false,
+            "max_abs_error": 255.0,
+            "mismatched_elements": 1958367
+          },
+          "next_state_desire_q": {
+            "passed": true,
+            "finite": true,
+            "shape": [
+              100,
+              1,
+              8
+            ],
+            "dtype": "float32",
+            "expected_nonfinite_elements": 0,
+            "unexpected_nonfinite_elements": 0,
+            "exact": true,
+            "max_abs_error": 0.0,
+            "mismatched_elements": 0
+          },
+          "next_state_feat_q": {
+            "passed": false,
+            "finite": true,
+            "shape": [
+              96,
+              1,
+              512
+            ],
+            "dtype": "float32",
+            "expected_nonfinite_elements": 0,
+            "unexpected_nonfinite_elements": 0,
+            "exact": false,
+            "max_abs_error": 0.248443603515625,
+            "mismatched_elements": 511
+          }
+        }
+      },
+      {
+        "model": "dmonitoring_model",
+        "exposed_intermediates": false,
+        "providers": {
+          "QNNExecutionProvider": {
+            "partitions": 1,
+            "nodes": 435
+          }
+        },
+        "first_divergence": null,
+        "final": {
+          "outputs": {
+            "passed": false,
+            "finite": true,
+            "shape": [
+              1,
+              553
+            ],
+            "dtype": "float16",
+            "expected_nonfinite_elements": 0,
+            "unexpected_nonfinite_elements": 0,
+            "exact": false,
+            "max_abs_error": 0.0126953125,
+            "mismatched_elements": 312
+          }
+        }
+      },
+      {
+        "model": "driving_supercombo",
+        "exposed_intermediates": false,
+        "providers": {
+          "QNNExecutionProvider": {
+            "partitions": 1,
+            "nodes": 559
+          }
+        },
+        "first_divergence": null,
+        "final": {
+          "outputs": {
+            "passed": false,
+            "finite": false,
+            "shape": [
+              1,
+              2576
+            ],
+            "dtype": "float32",
+            "expected_nonfinite_elements": 0,
+            "unexpected_nonfinite_elements": 998,
+            "exact": false,
+            "max_abs_error": 73.890625,
+            "mismatched_elements": 2569
+          },
+          "next_state_img_q": {
+            "passed": false,
+            "finite": true,
+            "shape": [
+              2,
+              5,
+              6,
+              128,
+              256
+            ],
+            "dtype": "uint8",
+            "expected_nonfinite_elements": 0,
+            "unexpected_nonfinite_elements": 0,
+            "exact": false,
+            "max_abs_error": 255.0,
+            "mismatched_elements": 1958474
+          },
+          "next_state_desire_q": {
+            "passed": true,
+            "finite": true,
+            "shape": [
+              100,
+              1,
+              8
+            ],
+            "dtype": "float32",
+            "expected_nonfinite_elements": 0,
+            "unexpected_nonfinite_elements": 0,
+            "exact": true,
+            "max_abs_error": 0.0,
+            "mismatched_elements": 0
+          },
+          "next_state_feat_q": {
+            "passed": false,
+            "finite": true,
+            "shape": [
+              96,
+              1,
+              512
+            ],
+            "dtype": "float32",
+            "expected_nonfinite_elements": 0,
+            "unexpected_nonfinite_elements": 0,
+            "exact": false,
+            "max_abs_error": 0.092437744140625,
+            "mismatched_elements": 512
+          }
+        }
+      }
+    ]
+  }
+}

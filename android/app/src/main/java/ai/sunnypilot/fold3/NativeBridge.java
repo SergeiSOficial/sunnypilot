@@ -5,6 +5,7 @@ import java.nio.ByteBuffer;
 public final class NativeBridge {
     static { System.loadLibrary("fold3"); }
     private NativeBridge() { }
+    public static native long nv12Hash(ByteBuffer data, int width, int height);
     public static native String openClProbe();
     // Only vendor IN requests are compiled into this diagnostic path.
     public static native String pandaUsbProbe(int authorizedDescriptor);

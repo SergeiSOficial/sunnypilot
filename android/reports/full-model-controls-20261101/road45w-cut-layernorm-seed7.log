@@ -1,0 +1,74 @@
+{
+  "diagnostic_only": true,
+  "candidate": "candidate45w",
+  "apk_sha256": "f2b6f3b01b7b9678acf7d2ab989d59e045196c95d56b210d62ff98c29b866587",
+  "model": "driving_supercombo",
+  "seed": 7,
+  "tensor": "model/p_layer_norm",
+  "captured_sha256": "b28d6aadebe2f3d887820a6eafcb2b0683cb88e3baded303723438d2387695b7",
+  "original_host_graph_sha256": "5078784511c7bfb22f1546a15532ed6b6ed71ee6c3e83237951ff5b95ca9ce80",
+  "diagnostic_graph_sha256": "cdf393d3e739b79d5e2b162a26e064f5d614b9c2a3b8f5cc5f0f19951b9a5f26",
+  "checks": {
+    "outputs": {
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        2576
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.03125,
+      "mismatched_elements": 47
+    },
+    "next_state_img_q": {
+      "passed": true,
+      "finite": true,
+      "shape": [
+        2,
+        5,
+        6,
+        128,
+        256
+      ],
+      "dtype": "uint8",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": true,
+      "max_abs_error": 0.0,
+      "mismatched_elements": 0
+    },
+    "next_state_desire_q": {
+      "passed": true,
+      "finite": true,
+      "shape": [
+        100,
+        1,
+        8
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": true,
+      "max_abs_error": 0.0,
+      "mismatched_elements": 0
+    },
+    "next_state_feat_q": {
+      "passed": true,
+      "finite": true,
+      "shape": [
+        96,
+        1,
+        512
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": true,
+      "max_abs_error": 0.0,
+      "mismatched_elements": 0
+    }
+  }
+}

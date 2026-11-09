@@ -1,0 +1,66 @@
+{
+  "serial": "RFCR81Y1TBJ",
+  "command": [
+    "/Users/sergios/sunnypilot/.venv/bin/python",
+    "android/scripts/validate_models.py",
+    "--serial",
+    "RFCR81Y1TBJ",
+    "--adb",
+    "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+    "--package",
+    "com.samsung.sunnypilot.fold3",
+    "--profile",
+    "mnn-buffer-timing-road",
+    "--timeout",
+    "7200",
+    "--report",
+    "/Users/sergios/sunnypilot/android/reports/performance-followup-20261103/fold45ze-mnn-road-timing.json"
+  ],
+  "vehicle_tx_enabled": false,
+  "status": "failed",
+  "validation_status": "failed",
+  "isolation_status": "passed",
+  "forwards_before": [],
+  "before_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 1,
+    "skin_c": 38.7,
+    "thermal_override": false
+  },
+  "apk_sha256": "54a613533c10795ab754e2737d5bf2facfd387dfb2bd58ef43017260dd063a3f",
+  "baseline": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 31.3,
+    "thermal_override": false,
+    "idle_seconds": 130.0392931670067,
+    "normal_thermal_seconds": 32.36745224997867
+  },
+  "apk_sha256_at_start": "54a613533c10795ab754e2737d5bf2facfd387dfb2bd58ef43017260dd063a3f",
+  "returncode": 1,
+  "after_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 2,
+    "skin_c": 40.1,
+    "thermal_override": false
+  },
+  "forwards_removed": [],
+  "apk_sha256_after": "54a613533c10795ab754e2737d5bf2facfd387dfb2bd58ef43017260dd063a3f",
+  "artifact_stable": true,
+  "wrapper_status": "failed"
+}

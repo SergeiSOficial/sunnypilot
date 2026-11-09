@@ -1,0 +1,1230 @@
+{
+  "scope": "diagnostic: frozen host fusion",
+  "vehicle_tx_enabled": false,
+  "models": {
+    "dmonitoring_model": {
+      "instrumented_matches_original": {
+        "outputs": true
+      },
+      "engines": {
+        "ort": {
+          "nodes": [
+            {
+              "index": 2,
+              "operator": "Cast",
+              "name": "InsertedPrecisionFreeCast_div",
+              "output": "div",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                1382400
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 3,
+              "operator": "Reshape",
+              "name": "node_view",
+              "output": "view",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                960,
+                360,
+                4
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 4,
+              "operator": "Transpose",
+              "name": "node_permute",
+              "output": "permute",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                360,
+                960,
+                4
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 5,
+              "operator": "Reshape",
+              "name": "node__unsafe_view",
+              "output": "_unsafe_view",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                360,
+                240,
+                16
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            }
+          ],
+          "final": {
+            "outputs": {
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                553
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.00390625,
+              "mismatched_elements": 2
+            }
+          },
+          "first_divergence": null,
+          "first_nonfinite": null
+        },
+        "CL": {
+          "nodes": [
+            {
+              "index": 2,
+              "operator": "Cast",
+              "name": "InsertedPrecisionFreeCast_div",
+              "output": "div",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                1382400
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.00048828125,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 3,
+              "operator": "Reshape",
+              "name": "node_view",
+              "output": "view",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                960,
+                360,
+                4
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.00048828125,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 4,
+              "operator": "Transpose",
+              "name": "node_permute",
+              "output": "permute",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                360,
+                960,
+                4
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.00048828125,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 5,
+              "operator": "Reshape",
+              "name": "node__unsafe_view",
+              "output": "_unsafe_view",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                360,
+                240,
+                16
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.00048828125,
+              "mismatched_elements": 0
+            }
+          ],
+          "final": {
+            "outputs": {
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                553
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.1796875,
+              "mismatched_elements": 547
+            }
+          },
+          "first_divergence": null,
+          "first_nonfinite": null
+        }
+      }
+    },
+    "driving_supercombo": {
+      "instrumented_matches_original": {
+        "outputs": true,
+        "next_state_img_q": true,
+        "next_state_desire_q": true,
+        "next_state_feat_q": true
+      },
+      "engines": {
+        "ort": {
+          "nodes": [
+            {
+              "index": 0,
+              "operator": "Slice",
+              "name": "node_slice_7",
+              "output": "slice_7",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                95,
+                1,
+                512
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 1,
+              "operator": "Cast",
+              "name": "node__to_copy_2",
+              "output": "_to_copy_2",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                2
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 2,
+              "operator": "Gemm",
+              "name": "model/p_node_linear_4",
+              "output": "model/p_linear_4",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 5,
+              "operator": "Cast",
+              "name": "InsertedPrecisionFreeCast_model/p_silu_2",
+              "output": "model/p_silu_2",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 6,
+              "operator": "Gemm",
+              "name": "model/p_node_linear_5",
+              "output": "model/p_linear_5",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 7,
+              "operator": "Unsqueeze",
+              "name": "model/p_node_unsqueeze_1",
+              "output": "model/p_unsqueeze_1",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 9,
+              "operator": "Slice",
+              "name": "node_slice_2",
+              "output": "slice_2",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                99,
+                1,
+                8
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 10,
+              "operator": "Reshape",
+              "name": "node_view",
+              "output": "view",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                1,
+                8
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 12,
+              "operator": "Reshape",
+              "name": "node_view_1",
+              "output": "view_1",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                25,
+                4,
+                1,
+                8
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 13,
+              "operator": "ReduceMax",
+              "name": "n0",
+              "output": "amax",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                25,
+                1,
+                8
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 14,
+              "operator": "Transpose",
+              "name": "node_transpose",
+              "output": "transpose",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                25,
+                8
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 15,
+              "operator": "Cast",
+              "name": "node__to_copy",
+              "output": "_to_copy",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                25,
+                8
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 16,
+              "operator": "Reshape",
+              "name": "model/p_node_view",
+              "output": "model/p_view",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                200
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 17,
+              "operator": "Gemm",
+              "name": "model/p_node_linear_2",
+              "output": "model/p_linear_2",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 20,
+              "operator": "Cast",
+              "name": "InsertedPrecisionFreeCast_model/p_silu_1",
+              "output": "model/p_silu_1",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 21,
+              "operator": "Gemm",
+              "name": "model/p_node_linear_3",
+              "output": "model/p_linear_3",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 22,
+              "operator": "Unsqueeze",
+              "name": "model/p_node_unsqueeze",
+              "output": "model/p_unsqueeze",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 27,
+              "operator": "Unsqueeze",
+              "name": "node_unsqueeze",
+              "output": "unsqueeze",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                2,
+                1,
+                6,
+                128,
+                256
+              ],
+              "dtype": "uint8",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 28,
+              "operator": "Slice",
+              "name": "node_slice_1",
+              "output": "slice_1",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                2,
+                4,
+                6,
+                128,
+                256
+              ],
+              "dtype": "uint8",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 31,
+              "operator": "Squeeze",
+              "name": "Squeeze_token_160",
+              "output": "select_1",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                5,
+                6,
+                128,
+                256
+              ],
+              "dtype": "uint8",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 32,
+              "operator": "Slice",
+              "name": "node_slice_4",
+              "output": "slice_4",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                2,
+                6,
+                128,
+                256
+              ],
+              "dtype": "uint8",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 33,
+              "operator": "Reshape",
+              "name": "node__unsafe_view_1",
+              "output": "_unsafe_view_1",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                12,
+                128,
+                256
+              ],
+              "dtype": "uint8",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 34,
+              "operator": "Cast",
+              "name": "model/node__to_copy_1",
+              "output": "model/_to_copy_1",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                12,
+                128,
+                256
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 35,
+              "operator": "Squeeze",
+              "name": "Squeeze",
+              "output": "select",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                5,
+                6,
+                128,
+                256
+              ],
+              "dtype": "uint8",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 36,
+              "operator": "Slice",
+              "name": "node_slice_3",
+              "output": "slice_3",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                2,
+                6,
+                128,
+                256
+              ],
+              "dtype": "uint8",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 37,
+              "operator": "Reshape",
+              "name": "node__unsafe_view",
+              "output": "_unsafe_view",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                12,
+                128,
+                256
+              ],
+              "dtype": "uint8",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 38,
+              "operator": "Cast",
+              "name": "model/node__to_copy",
+              "output": "model/_to_copy",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                12,
+                128,
+                256
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 39,
+              "operator": "Concat",
+              "name": "model/node_cat",
+              "output": "model/cat",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                24,
+                128,
+                256
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            }
+          ],
+          "final": {
+            "outputs": {
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                2576
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.1640625,
+              "mismatched_elements": 664
+            },
+            "next_state_img_q": {
+              "passed": true,
+              "finite": true,
+              "shape": [
+                2,
+                5,
+                6,
+                128,
+                256
+              ],
+              "dtype": "uint8",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            "next_state_desire_q": {
+              "passed": true,
+              "finite": true,
+              "shape": [
+                100,
+                1,
+                8
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            "next_state_feat_q": {
+              "passed": true,
+              "finite": true,
+              "shape": [
+                96,
+                1,
+                512
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0001220703125,
+              "mismatched_elements": 0
+            }
+          },
+          "first_divergence": null,
+          "first_nonfinite": null
+        },
+        "CL": {
+          "nodes": [
+            {
+              "index": 0,
+              "operator": "Slice",
+              "name": "node_slice_7",
+              "output": "slice_7",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                95,
+                1,
+                512
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 1,
+              "operator": "Cast",
+              "name": "node__to_copy_2",
+              "output": "_to_copy_2",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                2
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 2,
+              "operator": "Gemm",
+              "name": "model/p_node_linear_4",
+              "output": "model/p_linear_4",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 5,
+              "operator": "Cast",
+              "name": "InsertedPrecisionFreeCast_model/p_silu_2",
+              "output": "model/p_silu_2",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.00048828125,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 6,
+              "operator": "Gemm",
+              "name": "model/p_node_linear_5",
+              "output": "model/p_linear_5",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.625,
+              "mismatched_elements": 506
+            },
+            {
+              "index": 7,
+              "operator": "Unsqueeze",
+              "name": "model/p_node_unsqueeze_1",
+              "output": "model/p_unsqueeze_1",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.625,
+              "mismatched_elements": 506
+            },
+            {
+              "index": 9,
+              "operator": "Slice",
+              "name": "node_slice_2",
+              "output": "slice_2",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                99,
+                1,
+                8
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 10,
+              "operator": "Reshape",
+              "name": "node_view",
+              "output": "view",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                1,
+                8
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 12,
+              "operator": "Reshape",
+              "name": "node_view_1",
+              "output": "view_1",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                25,
+                4,
+                1,
+                8
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 13,
+              "operator": "ReduceMax",
+              "name": "n0",
+              "output": "amax",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                25,
+                1,
+                8
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 14,
+              "operator": "Transpose",
+              "name": "node_transpose",
+              "output": "transpose",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                25,
+                8
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 15,
+              "operator": "Cast",
+              "name": "node__to_copy",
+              "output": "_to_copy",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                25,
+                8
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 16,
+              "operator": "Reshape",
+              "name": "model/p_node_view",
+              "output": "model/p_view",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                200
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 17,
+              "operator": "Gemm",
+              "name": "model/p_node_linear_2",
+              "output": "model/p_linear_2",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": 3.212690353393555e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 20,
+              "operator": "Cast",
+              "name": "InsertedPrecisionFreeCast_model/p_silu_1",
+              "output": "model/p_silu_1",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": 5.817413330078125e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 21,
+              "operator": "Gemm",
+              "name": "model/p_node_linear_3",
+              "output": "model/p_linear_3",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.009765625,
+              "mismatched_elements": 361
+            },
+            {
+              "index": 22,
+              "operator": "Unsqueeze",
+              "name": "model/p_node_unsqueeze",
+              "output": "model/p_unsqueeze",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.009765625,
+              "mismatched_elements": 361
+            },
+            {
+              "index": 27,
+              "operator": "Unsqueeze",
+              "name": "node_unsqueeze",
+              "output": "unsqueeze",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                2,
+                1,
+                6,
+                128,
+                256
+              ],
+              "dtype": "uint8",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 28,
+              "operator": "Slice",
+              "name": "node_slice_1",
+              "output": "slice_1",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                2,
+                4,
+                6,
+                128,
+                256
+              ],
+              "dtype": "uint8",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 31,
+              "operator": "Squeeze",
+              "name": "Squeeze_token_160",
+              "output": "select_1",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                5,
+                6,
+                128,
+                256
+              ],
+              "dtype": "uint8",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 32,
+              "operator": "Slice",
+              "name": "node_slice_4",
+              "output": "slice_4",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                2,
+                6,
+                128,
+                256
+              ],
+              "dtype": "uint8",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 33,
+              "operator": "Reshape",
+              "name": "node__unsafe_view_1",
+              "output": "_unsafe_view_1",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                12,
+                128,
+                256
+              ],
+              "dtype": "uint8",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 34,
+              "operator": "Cast",
+              "name": "model/node__to_copy_1",
+              "output": "model/_to_copy_1",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                12,
+                128,
+                256
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 35,
+              "operator": "Squeeze",
+              "name": "Squeeze",
+              "output": "select",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                5,
+                6,
+                128,
+                256
+              ],
+              "dtype": "uint8",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 36,
+              "operator": "Slice",
+              "name": "node_slice_3",
+              "output": "slice_3",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                2,
+                6,
+                128,
+                256
+              ],
+              "dtype": "uint8",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 37,
+              "operator": "Reshape",
+              "name": "node__unsafe_view",
+              "output": "_unsafe_view",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                12,
+                128,
+                256
+              ],
+              "dtype": "uint8",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 38,
+              "operator": "Cast",
+              "name": "model/node__to_copy",
+              "output": "model/_to_copy",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                12,
+                128,
+                256
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 39,
+              "operator": "Concat",
+              "name": "model/node_cat",
+              "output": "model/cat",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                24,
+                128,
+                256
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            }
+          ],
+          "final": {
+            "outputs": {
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                2576
+              ],
+              "dtype": "float32",
+              "max_abs_error": 5.09375,
+              "mismatched_elements": 2468
+            },
+            "next_state_img_q": {
+              "passed": true,
+              "finite": true,
+              "shape": [
+                2,
+                5,
+                6,
+                128,
+                256
+              ],
+              "dtype": "uint8",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            "next_state_desire_q": {
+              "passed": true,
+              "finite": true,
+              "shape": [
+                100,
+                1,
+                8
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            "next_state_feat_q": {
+              "passed": false,
+              "finite": true,
+              "shape": [
+                96,
+                1,
+                512
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.011383056640625,
+              "mismatched_elements": 491
+            }
+          },
+          "first_divergence": {
+            "index": 6,
+            "operator": "Gemm",
+            "name": "model/p_node_linear_5",
+            "output": "model/p_linear_5",
+            "passed": false,
+            "finite": true,
+            "shape": [
+              1,
+              512
+            ],
+            "dtype": "float16",
+            "max_abs_error": 0.625,
+            "mismatched_elements": 506
+          },
+          "first_nonfinite": null
+        }
+      }
+    }
+  },
+  "completed": true
+}

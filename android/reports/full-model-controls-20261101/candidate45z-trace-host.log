@@ -1,0 +1,21 @@
+.....................2026-11-02 00:31:49.825 python[51813:49257408] 2026-11-02 00:31:49.825570 [W:onnxruntime:, graph.cc:5777 CleanUnusedInitializersAndNodeArgs] Removing initializer 'p'. It is not used by any node and should be removed from the model.
+2026-11-02 00:31:49.837 python[51813:49257408] 2026-11-02 00:31:49.837315 [W:onnxruntime:, graph.cc:5777 CleanUnusedInitializersAndNodeArgs] Removing initializer 'p'. It is not used by any node and should be removed from the model.
+.F...
+======================================================================
+FAIL: test_selected_driver_frame_keeps_fixture_inputs_and_rejects_reset_feedback (test_accelerators.AcceleratorTest.test_selected_driver_frame_keeps_fixture_inputs_and_rejects_reset_feedback) (name='driving_supercombo', seed=123, frame=27)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sergios/sunnypilot/android/tests/test_accelerators.py", line 84, in test_selected_driver_frame_keeps_fixture_inputs_and_rejects_reset_feedback
+    with self.subTest(name=name, seed=seed, frame=frame), self.assertRaises(ValueError):
+                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+----------------------------------------------------------------------
+Ran 26 tests in 0.738s
+
+FAILED (failures=1)
+..
+----------------------------------------------------------------------
+Ran 2 tests in 0.095s
+
+OK

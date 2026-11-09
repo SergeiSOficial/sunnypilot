@@ -1,0 +1,15 @@
+.................2026-11-01 21:30:18.631 python[61039:48962249] 2026-11-01 21:30:18.631440 [W:onnxruntime:, graph.cc:5777 CleanUnusedInitializersAndNodeArgs] Removing initializer 'p'. It is not used by any node and should be removed from the model.
+2026-11-01 21:30:18.637 python[61039:48962249] 2026-11-01 21:30:18.637905 [W:onnxruntime:, graph.cc:5777 CleanUnusedInitializersAndNodeArgs] Removing initializer 'p'. It is not used by any node and should be removed from the model.
+..................................................F....................................................................................
+======================================================================
+FAIL: test_reporting_heartbeat_is_bounded_and_phase_changes_are_immediate (test_driving.DrivingTest.test_reporting_heartbeat_is_bounded_and_phase_changes_are_immediate)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sergios/sunnypilot/android/tests/test_driving.py", line 268, in test_reporting_heartbeat_is_bounded_and_phase_changes_are_immediate
+    self.assertEqual(worker.progress.call_count, 3)
+AssertionError: 2 != 3
+
+----------------------------------------------------------------------
+Ran 152 tests in 32.173s
+
+FAILED (failures=1)

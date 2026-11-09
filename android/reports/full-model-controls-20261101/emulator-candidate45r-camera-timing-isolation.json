@@ -1,0 +1,69 @@
+{
+  "serial": "emulator-5560",
+  "command": [
+    "/Users/sergios/sunnypilot/.venv/bin/python",
+    "android/scripts/validate_cameras.py",
+    "--ids",
+    "1",
+    "--seconds",
+    "10",
+    "--serial",
+    "emulator-5560",
+    "--adb",
+    "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+    "--output",
+    "/Users/sergios/sunnypilot/android/reports/full-model-controls-20261101/emulator-candidate45r-camera-timing.json",
+    "--package",
+    "com.samsung.sunnypilot.fold3"
+  ],
+  "vehicle_tx_enabled": false,
+  "status": "failed",
+  "validation_status": "failed",
+  "isolation_status": "passed",
+  "forwards_before": [],
+  "before_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "368 android.hardware.camera.provider.ranchu",
+      "369 android.hardware.camera.provider@2.7-service-google",
+      "431 cameraserver"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.8,
+    "thermal_override": false
+  },
+  "apk_sha256": "8d83f5c4e121eff430e6eead6adc4a076f402dc5cc60c8da1fb4f1f7765c0a4c",
+  "baseline": {
+    "processes": [],
+    "camera_provider_processes": [
+      "368 android.hardware.camera.provider.ranchu",
+      "369 android.hardware.camera.provider@2.7-service-google",
+      "431 cameraserver"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.8,
+    "thermal_override": false,
+    "idle_seconds": 30.835970916989027,
+    "normal_thermal_seconds": 30.724951209005667
+  },
+  "apk_sha256_at_start": "8d83f5c4e121eff430e6eead6adc4a076f402dc5cc60c8da1fb4f1f7765c0a4c",
+  "returncode": 1,
+  "after_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "368 android.hardware.camera.provider.ranchu",
+      "369 android.hardware.camera.provider@2.7-service-google",
+      "431 cameraserver"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.8,
+    "thermal_override": false
+  },
+  "forwards_removed": [],
+  "apk_sha256_after": "8d83f5c4e121eff430e6eead6adc4a076f402dc5cc60c8da1fb4f1f7765c0a4c",
+  "artifact_stable": true,
+  "wrapper_status": "failed"
+}

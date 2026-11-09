@@ -23,5 +23,12 @@ public class RuntimeTest {
         assertFalse(report.getJSONObject("cereal_msgq_round_trip").getBoolean("valid"));
         assertFalse(report.getBoolean("driving_runtime_ready"));
         assertFalse(report.getBoolean("vehicle_tx_enabled"));
+        assertEquals(report.toString(), "passed", report.getJSONObject("native_driving").getString("status"));
+        assertEquals("2.5.3", report.getJSONObject("native_driving").getString("numpy"));
+        for (String name : new String[]{"locationd.locationd", "locationd.calibrationd", "locationd.paramsd", "locationd.torqued",
+                "locationd.lagd", "controls.radard", "controls.plannerd", "selfdrived.selfdrived"}) {
+            String module = "openpilot.selfdrive." + name;
+            assertEquals(module + report.toString(), "passed", report.getJSONObject("modules").getJSONObject(module).getString("status"));
+        }
     }
 }

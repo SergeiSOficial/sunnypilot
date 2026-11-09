@@ -1,0 +1,40 @@
+{
+  "serial": "emulator-5560",
+  "command": [
+    "/Users/sergios/sunnypilot/.venv/bin/python",
+    "-m",
+    "openpilot.tools.sim.android_chain_validation",
+    "--seconds",
+    "30",
+    "--device-replay",
+    "--serial",
+    "emulator-5560",
+    "--adb",
+    "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+    "--report",
+    "/Users/sergios/sunnypilot/android/reports/full-model-controls-20261101/emulator-candidate45p-chain-device-faults.json",
+    "--package",
+    "com.samsung.sunnypilot.fold3"
+  ],
+  "vehicle_tx_enabled": false,
+  "status": "failed",
+  "validation_status": "not_run",
+  "isolation_status": "failed",
+  "forwards_before": [],
+  "before_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "377 android.hardware.camera.provider.ranchu",
+      "378 android.hardware.camera.provider@2.7-service-google",
+      "470 cameraserver"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.8,
+    "thermal_override": false
+  },
+  "apk_sha256": "51c3978cff84db0aa1f0dabeadab544c321a339c45d51d60dfada0a4cb4dfbf2",
+  "error": "CalledProcessError: Command '['/Users/sergios/Library/Android/sdk/platform-tools/adb', '-s', 'emulator-5560', 'shell', 'ps', '-A', '-o', 'PID,NAME']' returned non-zero exit status 1.",
+  "cleanup_error": "CalledProcessError: Command '['/Users/sergios/Library/Android/sdk/platform-tools/adb', '-s', 'emulator-5560', 'shell', 'am', 'force-stop', 'ai.sunnypilot.fold3']' returned non-zero exit status 1.",
+  "wrapper_status": "failed"
+}

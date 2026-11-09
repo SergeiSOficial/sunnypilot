@@ -1,0 +1,1372 @@
+{
+  "candidate": "candidate45zj",
+  "apk_sha256": "84c907b4957de484bcd4e72f0bd45436d8964085f46d35d3b3a005efa5d3eb58",
+  "vehicle_tx_enabled": false,
+  "physical_engagement_allowed": false,
+  "host_tests": {
+    "status": "passed",
+    "count": 188,
+    "log": "host-tests-final-trace.log"
+  },
+  "conversion_reference": {
+    "status": "passed",
+    "comparisons": 159,
+    "accelerator_qualification": false
+  },
+  "shader_compilation": [
+    {
+      "mode": "linear-storage0-arithmetic0",
+      "status": "passed",
+      "original_shader_sha256": "43d7ffe9cd2b087cde8c25e33988fc2ed12cdb43a9e38251137817d78922e2fd",
+      "diagnostic_shader_sha256": "d76e5fc9ca25ef702e9164972827a0b1d2cf7eeb5a0488c999a5b3981c877f40",
+      "output": "/Users/sergios/sunnypilot/android/reports/linear-timing-repair-20261103/linear-storage0-arithmetic0.comp\n",
+      "execution_validated": false
+    },
+    {
+      "mode": "linear-storage1-arithmetic0",
+      "status": "passed",
+      "original_shader_sha256": "43d7ffe9cd2b087cde8c25e33988fc2ed12cdb43a9e38251137817d78922e2fd",
+      "diagnostic_shader_sha256": "af338a126910434afcf4a989822d45b6fdb880e8634d118c9a58c0ac6b914d24",
+      "output": "/Users/sergios/sunnypilot/android/reports/linear-timing-repair-20261103/linear-storage1-arithmetic0.comp\n",
+      "execution_validated": false
+    },
+    {
+      "mode": "linear-storage1-arithmetic1",
+      "status": "passed",
+      "original_shader_sha256": "43d7ffe9cd2b087cde8c25e33988fc2ed12cdb43a9e38251137817d78922e2fd",
+      "diagnostic_shader_sha256": "46274dfb1d5cef9c30b3775859d0a4d02e9a65600982a73f7eb05214faefd769",
+      "output": "/Users/sergios/sunnypilot/android/reports/linear-timing-repair-20261103/linear-storage1-arithmetic1.comp\n",
+      "execution_validated": false
+    }
+  ],
+  "shader_host_arithmetic": {
+    "diagnostic_only": true,
+    "gpu_execution_validated": false,
+    "qualified": false,
+    "shader_sha256": "43d7ffe9cd2b087cde8c25e33988fc2ed12cdb43a9e38251137817d78922e2fd",
+    "derived_section_sha256": "072ccd2aba186ee1bcda9619b7a8ba90aa4894ca76d8aa359415fba2e59e7534",
+    "captured_input_sha256": "1985eb97de0c33545f74e8a09e106815d410b84630f6f4a98b4a2c271903c290",
+    "parity": {
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        512
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": true,
+      "max_abs_error": 0.0,
+      "mismatched_elements": 0
+    },
+    "additional_inputs": [
+      {
+        "seed": 42,
+        "parity": {
+          "passed": true,
+          "finite": true,
+          "shape": [
+            1,
+            512
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": true,
+          "max_abs_error": 0.0,
+          "mismatched_elements": 0
+        }
+      },
+      {
+        "seed": 1337,
+        "parity": {
+          "passed": true,
+          "finite": true,
+          "shape": [
+            1,
+            512
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": true,
+          "max_abs_error": 0.0,
+          "mismatched_elements": 0
+        }
+      },
+      {
+        "seed": 2026,
+        "parity": {
+          "passed": true,
+          "finite": true,
+          "shape": [
+            1,
+            512
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": true,
+          "max_abs_error": 0.0,
+          "mismatched_elements": 0
+        }
+      }
+    ]
+  },
+  "emulator_experiments": [
+    {
+      "name": "instrumentation",
+      "status": "passed",
+      "isolation_status": "passed",
+      "log": "emulator-candidate45zj-instrumentation-command.log"
+    },
+    {
+      "name": "chain-device-steady",
+      "status": "passed",
+      "isolation_status": "passed",
+      "log": "emulator-candidate45zj-chain-device-steady-command.log"
+    },
+    {
+      "name": "chain-device-faults",
+      "status": "passed",
+      "isolation_status": "passed",
+      "log": "emulator-candidate45zj-chain-device-faults-command.log"
+    },
+    {
+      "name": "lifecycle",
+      "status": "passed",
+      "isolation_status": "passed",
+      "log": "emulator-candidate45zj-lifecycle-command.log"
+    },
+    {
+      "name": "adb-faults",
+      "status": "passed",
+      "isolation_status": "passed",
+      "log": "emulator-candidate45zj-adb-faults-command.log"
+    },
+    {
+      "name": "ipc",
+      "status": "passed",
+      "isolation_status": "passed",
+      "log": "emulator-candidate45zj-ipc-command.log"
+    },
+    {
+      "name": "metadrive-cancel",
+      "status": "passed",
+      "isolation_status": "passed",
+      "log": "emulator-candidate45zj-metadrive-cancel-command.log"
+    },
+    {
+      "name": "metadrive-stale",
+      "status": "passed",
+      "isolation_status": "passed",
+      "log": "emulator-candidate45zj-metadrive-stale-command.log"
+    },
+    {
+      "name": "thermal",
+      "status": "passed",
+      "isolation_status": "passed",
+      "log": "emulator-candidate45zj-thermal-command.log"
+    },
+    {
+      "name": "camera-timing",
+      "status": "failed",
+      "isolation_status": "passed",
+      "log": "emulator-candidate45zj-camera-timing-command.log"
+    }
+  ],
+  "installed_verification": "passed",
+  "controls_ab": [
+    {
+      "candidate": "candidate45zg",
+      "apk_sha256": "28c7d37923f7b2537c56181a85bc406f65011030a37205f2bbc1524a0e10a3f7",
+      "fixture_sha256": "b5ea99327f0ffc121e5556d29b32d4ce8e6e855d14518f46a3f060ea38721f99",
+      "fixture_status": "passed",
+      "source_deadline_misses": 6,
+      "controls": {
+        "p99_work_ms": 1.25075,
+        "p99_complete_cycle_ms": 11.409459,
+        "mean_cycle_hz": 99.98193075147503,
+        "cycle_deadline_misses": 1306,
+        "scheduled_deadline_misses": 4,
+        "skipped_slots_total": 1,
+        "android_controls_gil_switch_interval_s": null
+      },
+      "p99_stages_ms": {
+        "input_wait_budget_ms": 0,
+        "cycle_interval_ms": 11.30075,
+        "scheduler_delay_ms": 1.568583,
+        "skipped_slots": 0,
+        "selfdrive_ipc_age_ms": 7.643416,
+        "input_handling_ms": 0.713584,
+        "pacing_wait_ms": 10.515875,
+        "computation_ms": 0.441542,
+        "publishing_ms": 0.783917,
+        "parameters_extensions_ms": 0.460042,
+        "cycle_before_reporting_ms": 11.395209,
+        "active_cycle_before_reporting_ms": 1.675625,
+        "release_to_completion_before_reporting_ms": 2.495299,
+        "reporting_ms": 0.126792,
+        "release_to_completion_ms": 2.543961
+      }
+    },
+    {
+      "candidate": "candidate45zi",
+      "apk_sha256": "292136b0d550e2a3bc3910221d33165613d7f9668610f282026041b156bef7f3",
+      "fixture_sha256": "b5ea99327f0ffc121e5556d29b32d4ce8e6e855d14518f46a3f060ea38721f99",
+      "fixture_status": "passed",
+      "source_deadline_misses": 86,
+      "controls": {
+        "p99_work_ms": 5.558833,
+        "p99_complete_cycle_ms": 16.249542,
+        "mean_cycle_hz": 98.50989014306555,
+        "cycle_deadline_misses": 1242,
+        "scheduled_deadline_misses": 18,
+        "skipped_slots_total": 40,
+        "android_controls_gil_switch_interval_s": 0.001
+      },
+      "p99_stages_ms": {
+        "input_wait_budget_ms": 0,
+        "cycle_interval_ms": 12.787875,
+        "scheduler_delay_ms": 3.624711,
+        "skipped_slots": 0,
+        "selfdrive_ipc_age_ms": 15.665625,
+        "input_handling_ms": 2.910042,
+        "pacing_wait_ms": 10.5195,
+        "computation_ms": 2.479875,
+        "publishing_ms": 2.917167,
+        "parameters_extensions_ms": 0.924041,
+        "cycle_before_reporting_ms": 16.163583,
+        "active_cycle_before_reporting_ms": 7.681375,
+        "release_to_completion_before_reporting_ms": 9.096046,
+        "reporting_ms": 0.391958,
+        "release_to_completion_ms": 9.20425
+      }
+    }
+  ],
+  "controls_gil_experiment": "reverted after paired-run regression; timing unresolved",
+  "fold3_accelerator": {
+    "status": "blocked",
+    "reason": "Device disconnected; no new device inference or full 795-comparison result"
+  },
+  "vehicle_qualification": {
+    "status": "blocked",
+    "reason": "Unmounted phone, no independent rear-sensor proof, Panda disconnected"
+  },
+  "cooling_optimization": "deferred; thermal safeguards retained",
+  "excluded_candidate": {
+    "name": "candidate45zh",
+    "reason": "Archive created before build completed; old APK with new graph/provider artifacts; zero completed tests"
+  },
+  "broad_lint": {
+    "status": "failed",
+    "log": "lint.log",
+    "reason": "14 findings in existing portions of accelerator/converter files; focused new checks pass"
+  },
+  "emulator_cleanup": {
+    "vehicle_tx_enabled": false,
+    "fold_status": "blocked: disconnected",
+    "emulator": {
+      "state": {
+        "processes": [],
+        "camera_provider_processes": [
+          "377 android.hardware.camera.provider.ranchu",
+          "378 android.hardware.camera.provider@2.7-service-google",
+          "468 cameraserver"
+        ],
+        "camera_owned": false,
+        "thermal_status": 0,
+        "skin_c": 30.8,
+        "thermal_override": false
+      },
+      "baseline": {
+        "processes": [],
+        "camera_provider_processes": [
+          "377 android.hardware.camera.provider.ranchu",
+          "378 android.hardware.camera.provider@2.7-service-google",
+          "468 cameraserver"
+        ],
+        "camera_owned": false,
+        "thermal_status": 0,
+        "skin_c": 30.8,
+        "thermal_override": false,
+        "idle_seconds": 30.895719833963085,
+        "normal_thermal_seconds": 30.727487791969907
+      },
+      "forwards": [],
+      "apk_sha256": "84c907b4957de484bcd4e72f0bd45436d8964085f46d35d3b3a005efa5d3eb58"
+    },
+    "emulator_exit_code": 0
+  },
+  "controls_ab_cleanup": {
+    "vehicle_tx_enabled": false,
+    "fold_status": "blocked: disconnected",
+    "emulator": {
+      "state": {
+        "processes": [],
+        "camera_provider_processes": [
+          "372 android.hardware.camera.provider.ranchu",
+          "373 android.hardware.camera.provider@2.7-service-google",
+          "445 cameraserver"
+        ],
+        "camera_owned": false,
+        "thermal_status": 0,
+        "skin_c": 30.8,
+        "thermal_override": false
+      },
+      "baseline": {
+        "processes": [],
+        "camera_provider_processes": [
+          "372 android.hardware.camera.provider.ranchu",
+          "373 android.hardware.camera.provider@2.7-service-google",
+          "445 cameraserver"
+        ],
+        "camera_owned": false,
+        "thermal_status": 0,
+        "skin_c": 30.8,
+        "thermal_override": false,
+        "idle_seconds": 30.816706332960166,
+        "normal_thermal_seconds": 30.705836208013352
+      },
+      "forwards": [],
+      "apk_sha256": "292136b0d550e2a3bc3910221d33165613d7f9668610f282026041b156bef7f3"
+    },
+    "emulator_exit_code": 0
+  },
+  "software_vulkan": {
+    "status": "passed",
+    "qualified": false,
+    "diagnostic_only": true,
+    "software_vulkan": true,
+    "vehicle_tx_enabled": false,
+    "build": {
+      "source": "7e36d25cb153092ba87a60530455c7376fedf452",
+      "archive_sha256": "5197a2ea772c97e8bc74547fe37f833d494476603a30bd5216371ea0c1751ba1",
+      "patch_sha256": "5307c5e5a748a89dcee56ab11139c6ebc414fd819f4d60ca13e69ed9f523e705",
+      "recipe_sha256": "a3971aca7a3b0168778bbae6e9d221444e5d51e42b53eacb4cfa8dcba00df5d3",
+      "glslang": "780b6a209132dc74e99458f62ebe5fa7e57c41cf",
+      "glslang_archive_sha256": "9c80e985ae0ea5c7b6a0d59b99de3058ba170fcc0589a913023d12c3473a3617",
+      "ndk": "28.2.13676358",
+      "api": 35,
+      "explicit_half_rounding": true
+    },
+    "probe_sha256": "6b2fdb5fca6e8224be5c7326fce5f25f8e2d58ab3f26ca2f5646144fd15836f8",
+    "files": {
+      "f3linearprobe": "dda91c0a03f0bc1970e64428d5fe503300d1fc70ce46ca198fe694b6c9ac3162",
+      "model.param": "d1ae54a8f2c095205e9027d022507e405f3af8c2d81318cea1df5ca67edae8c4",
+      "model.bin": "cd495fb9e4684004412cd53bce8cd0c4efb889090d23349e60bb7a9b7699f8a4",
+      "input.bin": "1985eb97de0c33545f74e8a09e106815d410b84630f6f4a98b4a2c271903c290",
+      "libncnn.so": "3e596983393bcf418e2b81b8dfe5e149cbbbcb56e890837350e326f1e311a8f7",
+      "libc++_shared.so": "ab4e6c71b96b851de45a8a9bd86369e7dbc2130a44b3b4520564be94847910f2"
+    },
+    "forwards_before": [],
+    "before_cleanup": {
+      "processes": [],
+      "camera_provider_processes": [
+        "373 android.hardware.camera.provider.ranchu",
+        "374 android.hardware.camera.provider@2.7-service-google",
+        "451 cameraserver"
+      ],
+      "camera_owned": false,
+      "thermal_status": 0,
+      "skin_c": 30.8,
+      "thermal_override": false
+    },
+    "baseline": {
+      "processes": [],
+      "camera_provider_processes": [
+        "373 android.hardware.camera.provider.ranchu",
+        "374 android.hardware.camera.provider@2.7-service-google",
+        "451 cameraserver"
+      ],
+      "camera_owned": false,
+      "thermal_status": 0,
+      "skin_c": 30.8,
+      "thermal_override": false,
+      "idle_seconds": 31.289802000042982,
+      "normal_thermal_seconds": 31.150838792033028
+    },
+    "apk_sha256": "292136b0d550e2a3bc3910221d33165613d7f9668610f282026041b156bef7f3",
+    "fingerprint": "google/sdk_gphone64_arm64/emu64a:15/AE3A.240806.043/12960925:userdebug/dev-keys",
+    "returncode": 0,
+    "stdout": "VULKAN_LINEAR_OUTPUT 512\n",
+    "stderr": "[0 SwiftShader Device (LLVM 10.0.0)]  queueC=0[2]  queueT=0[2]  prefer-slm=0  rebar=1  r-score=0\n[0 SwiftShader Device (LLVM 10.0.0)]  fp16-p/s/u/a=1/0/0/0  int8-p/s/u/a=1/0/0/0  bf16-p/s=1/0\n[0 SwiftShader Device (LLVM 10.0.0)]  subgroup=4(4~4)  ops=1/1/1/1/1/1/0/1/0/0\n[0 SwiftShader Device (LLVM 10.0.0)]  fp16-cm=0  int8-cm=0  bf16-cm=0  fp8-cm=0  fp6-cm=0  fp4-cm=0\n",
+    "parity": {
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        512
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": true,
+      "max_abs_error": 0.0,
+      "mismatched_elements": 0
+    },
+    "cpu_rejection": {
+      "passed": true,
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "layer load_param 1 linear_100 failed\nModel/pipeline load failed\n"
+    },
+    "after_cleanup": {
+      "processes": [],
+      "camera_provider_processes": [
+        "373 android.hardware.camera.provider.ranchu",
+        "374 android.hardware.camera.provider@2.7-service-google",
+        "451 cameraserver"
+      ],
+      "camera_owned": false,
+      "thermal_status": 0,
+      "skin_c": 30.8,
+      "thermal_override": false
+    },
+    "forwards_removed": [],
+    "provider_matches_final_candidate45zj": true
+  },
+  "software_vulkan_cleanup": {
+    "vehicle_tx_enabled": false,
+    "fold_status": "blocked: disconnected",
+    "emulator": {
+      "state": {
+        "processes": [],
+        "camera_provider_processes": [
+          "373 android.hardware.camera.provider.ranchu",
+          "374 android.hardware.camera.provider@2.7-service-google",
+          "451 cameraserver"
+        ],
+        "camera_owned": false,
+        "thermal_status": 0,
+        "skin_c": 30.8,
+        "thermal_override": false
+      },
+      "baseline": {
+        "processes": [],
+        "camera_provider_processes": [
+          "373 android.hardware.camera.provider.ranchu",
+          "374 android.hardware.camera.provider@2.7-service-google",
+          "451 cameraserver"
+        ],
+        "camera_owned": false,
+        "thermal_status": 0,
+        "skin_c": 30.8,
+        "thermal_override": false,
+        "idle_seconds": 30.889258125040215,
+        "normal_thermal_seconds": 30.7491897920263
+      },
+      "forwards": [],
+      "apk_sha256": "292136b0d550e2a3bc3910221d33165613d7f9668610f282026041b156bef7f3"
+    },
+    "emulator_exit_code": 0
+  },
+  "full_model_software_vulkan": [
+    {
+      "seed": 42,
+      "returncode": 1,
+      "status": "failed",
+      "report": "ncnn-software-seed42.json",
+      "software_vulkan": true,
+      "qualified": false
+    }
+  ],
+  "full_model_software_cleanup": {
+    "vehicle_tx_enabled": false,
+    "fold_status": "blocked: disconnected",
+    "emulator": {
+      "state": {
+        "processes": [],
+        "camera_provider_processes": [
+          "374 android.hardware.camera.provider.ranchu",
+          "375 android.hardware.camera.provider@2.7-service-google",
+          "469 cameraserver"
+        ],
+        "camera_owned": false,
+        "thermal_status": 0,
+        "skin_c": 30.8,
+        "thermal_override": false
+      },
+      "baseline": {
+        "processes": [],
+        "camera_provider_processes": [
+          "374 android.hardware.camera.provider.ranchu",
+          "375 android.hardware.camera.provider@2.7-service-google",
+          "469 cameraserver"
+        ],
+        "camera_owned": false,
+        "thermal_status": 0,
+        "skin_c": 30.8,
+        "thermal_override": false,
+        "idle_seconds": 30.845457207993604,
+        "normal_thermal_seconds": 30.7422155829845
+      },
+      "forwards": [],
+      "apk_sha256": "84c907b4957de484bcd4e72f0bd45436d8964085f46d35d3b3a005efa5d3eb58"
+    },
+    "emulator_exit_code": 0
+  },
+  "head_trace": {
+    "diagnostic_only": true,
+    "seed": 42,
+    "checks": [
+      {
+        "operator": "pow_224",
+        "original_tensor": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_28_XCubed",
+        "original_shape": [
+          1,
+          1280,
+          1,
+          1
+        ],
+        "original_dtype": "float32",
+        "tapped_graph_sha256": "635379e0ed1dae9f816006c57fd96d4e02162628f2bdf16e1e0546a2b0842bfb",
+        "parity": {
+          "passed": true,
+          "finite": true,
+          "shape": [
+            1,
+            1280,
+            1,
+            1
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 0.0001220703125,
+          "mismatched_elements": 0
+        }
+      },
+      {
+        "operator": "tanh_68",
+        "original_tensor": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_28_ErfApprox",
+        "original_shape": [
+          1,
+          1280,
+          1,
+          1
+        ],
+        "original_dtype": "float32",
+        "tapped_graph_sha256": "3baf32351a002cdf3f29ea86cdbc70e4cc04fd9e70c2481532b2d7a577f19fbe",
+        "parity": {
+          "passed": true,
+          "finite": true,
+          "shape": [
+            1,
+            1280,
+            1,
+            1
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 4.678964614868164e-06,
+          "mismatched_elements": 0
+        }
+      },
+      {
+        "operator": "Cast_324",
+        "original_tensor": "gelu_29",
+        "original_shape": [
+          1,
+          1280,
+          1,
+          1
+        ],
+        "original_dtype": "float16",
+        "tapped_graph_sha256": "636489bc3b2b63d8d372a4359c8a899a11c658dcdaba030f59d10e80222fe8e7",
+        "parity": {
+          "passed": true,
+          "finite": true,
+          "shape": [
+            1,
+            1280,
+            1,
+            1
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 0.00048828125,
+          "mismatched_elements": 0
+        }
+      },
+      {
+        "operator": "linear_100",
+        "original_tensor": "linear",
+        "original_shape": [
+          1,
+          512
+        ],
+        "original_dtype": "float16",
+        "tapped_graph_sha256": "a92d082eebe0b940cb786b2a1dc2d1a75c156d5c3478f9d87f1d1422b9252c8e",
+        "parity": {
+          "passed": false,
+          "finite": true,
+          "shape": [
+            1,
+            512
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 0.0009765625,
+          "mismatched_elements": 3
+        }
+      },
+      {
+        "operator": "linear_101",
+        "original_tensor": "linear_1",
+        "original_shape": [
+          1,
+          32
+        ],
+        "original_dtype": "float16",
+        "tapped_graph_sha256": "ac1e36a877518e2e8bdde114a49c46a15acf053682c347c41f474e84185b6f0c",
+        "parity": {
+          "passed": false,
+          "finite": true,
+          "shape": [
+            1,
+            32
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 0.006683826446533203,
+          "mismatched_elements": 11
+        }
+      },
+      {
+        "operator": "Cast_328",
+        "original_tensor": "InsertedPrecisionFreeCast_linear_1",
+        "original_shape": [
+          1,
+          32
+        ],
+        "original_dtype": "float32",
+        "tapped_graph_sha256": "c45e5760617c104bb71a6d799456e110ee76ff6ae6091f718428f6a0e7e6d67a",
+        "parity": {
+          "passed": false,
+          "finite": true,
+          "shape": [
+            1,
+            32
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 0.006683826446533203,
+          "mismatched_elements": 11
+        }
+      },
+      {
+        "operator": "fcrelu_0",
+        "original_tensor": "InsertedPrecisionFreeCast_relu_1",
+        "original_shape": [
+          1,
+          24
+        ],
+        "original_dtype": "float32",
+        "tapped_graph_sha256": "a4551f96b372a0527895fc45a7c9154d35acb6a6e7d76cdcb805cbeba9f0e233",
+        "parity": {
+          "passed": false,
+          "finite": true,
+          "shape": [
+            1,
+            24
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 0.0027146339416503906,
+          "mismatched_elements": 6
+        }
+      },
+      {
+        "operator": "fcrelu_1",
+        "original_tensor": "InsertedPrecisionFreeCast_relu_2",
+        "original_shape": [
+          1,
+          16
+        ],
+        "original_dtype": "float32",
+        "tapped_graph_sha256": "fd2376c657e92981ef94598e6a54e1ccd6d7ba54341dd7a0ff39c835318c5545",
+        "parity": {
+          "passed": true,
+          "finite": true,
+          "shape": [
+            1,
+            16
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 0.0025925636291503906,
+          "mismatched_elements": 0
+        }
+      },
+      {
+        "operator": "Cast_334",
+        "original_tensor": "relu_2",
+        "original_shape": [
+          1,
+          16
+        ],
+        "original_dtype": "float16",
+        "tapped_graph_sha256": "486be43f2a9dcab52e02f853798ef44da9ac16f8901c092b4721d6c9c88b3be3",
+        "parity": {
+          "passed": true,
+          "finite": true,
+          "shape": [
+            1,
+            16
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 0.00390625,
+          "mismatched_elements": 0
+        }
+      },
+      {
+        "operator": "linear_104",
+        "original_tensor": "linear_4",
+        "original_shape": [
+          1,
+          3
+        ],
+        "original_dtype": "float16",
+        "tapped_graph_sha256": "b4b6049583fc6fcadd74955fb3bc22020b0c3cd3f290bec491407ee066dc79fe",
+        "parity": {
+          "passed": true,
+          "finite": true,
+          "shape": [
+            1,
+            3
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 0.0020432472229003906,
+          "mismatched_elements": 0
+        }
+      },
+      {
+        "operator": "linear_105",
+        "original_tensor": "linear_5",
+        "original_shape": [
+          1,
+          32
+        ],
+        "original_dtype": "float16",
+        "tapped_graph_sha256": "23ab09f5a93a37d50f5909de9e22e2153761a2ba220f7487d3dc58c054ac040b",
+        "parity": {
+          "passed": false,
+          "finite": true,
+          "shape": [
+            1,
+            32
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 0.0041802674531936646,
+          "mismatched_elements": 19
+        }
+      },
+      {
+        "operator": "Cast_338",
+        "original_tensor": "InsertedPrecisionFreeCast_linear_5",
+        "original_shape": [
+          1,
+          32
+        ],
+        "original_dtype": "float32",
+        "tapped_graph_sha256": "86a566fb7ea097a7f8300a61a1d34e3ca74121373286c89ddac3751da41d7600",
+        "parity": {
+          "passed": false,
+          "finite": true,
+          "shape": [
+            1,
+            32
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 0.0041802674531936646,
+          "mismatched_elements": 19
+        }
+      },
+      {
+        "operator": "fcrelu_2",
+        "original_tensor": "InsertedPrecisionFreeCast_relu_4",
+        "original_shape": [
+          1,
+          24
+        ],
+        "original_dtype": "float32",
+        "tapped_graph_sha256": "744b977e7011f311cd30be9e38544f936ff37065cadc4d72f873d42dd17c2761",
+        "parity": {
+          "passed": false,
+          "finite": true,
+          "shape": [
+            1,
+            24
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 0.001588389277458191,
+          "mismatched_elements": 7
+        }
+      },
+      {
+        "operator": "fcrelu_3",
+        "original_tensor": "InsertedPrecisionFreeCast_relu_5",
+        "original_shape": [
+          1,
+          16
+        ],
+        "original_dtype": "float32",
+        "tapped_graph_sha256": "927aca782991c9c8cf77b246d1b1a037cdca86adfd138630422b77eda49bc484",
+        "parity": {
+          "passed": false,
+          "finite": true,
+          "shape": [
+            1,
+            16
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 0.0008953586220741272,
+          "mismatched_elements": 4
+        }
+      },
+      {
+        "operator": "Cast_344",
+        "original_tensor": "relu_5",
+        "original_shape": [
+          1,
+          16
+        ],
+        "original_dtype": "float16",
+        "tapped_graph_sha256": "bd52376fe2862436039401299d06344685f65945b7ef236cdfc6eb10a8a770ad",
+        "parity": {
+          "passed": false,
+          "finite": true,
+          "shape": [
+            1,
+            16
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 0.000885009765625,
+          "mismatched_elements": 4
+        }
+      },
+      {
+        "operator": "linear_108",
+        "original_tensor": "linear_8",
+        "original_shape": [
+          1,
+          2
+        ],
+        "original_dtype": "float16",
+        "tapped_graph_sha256": "7387b84eba4db9d3076be4fb98f9f2d6d2e0cc22d5c7b61e007f37b16e313610",
+        "parity": {
+          "passed": false,
+          "finite": true,
+          "shape": [
+            1,
+            2
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 0.0007454752922058105,
+          "mismatched_elements": 1
+        }
+      },
+      {
+        "operator": "linear_109",
+        "original_tensor": "linear_25",
+        "original_shape": [
+          1,
+          32
+        ],
+        "original_dtype": "float16",
+        "tapped_graph_sha256": "49c2734182139b7c4656975a53c61532c62f7b103ccb2c33b5e35689e173f7b4",
+        "parity": {
+          "passed": false,
+          "finite": true,
+          "shape": [
+            1,
+            32
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 0.004980564117431641,
+          "mismatched_elements": 8
+        }
+      },
+      {
+        "operator": "Cast_348",
+        "original_tensor": "InsertedPrecisionFreeCast_linear_25",
+        "original_shape": [
+          1,
+          32
+        ],
+        "original_dtype": "float32",
+        "tapped_graph_sha256": "a20f64c74c4b7b56659694afe0039dbfa72602113e3cd3aac8d586c07a21d1b5",
+        "parity": {
+          "passed": false,
+          "finite": true,
+          "shape": [
+            1,
+            32
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 0.004980564117431641,
+          "mismatched_elements": 8
+        }
+      },
+      {
+        "operator": "fcrelu_4",
+        "original_tensor": "InsertedPrecisionFreeCast_relu_19",
+        "original_shape": [
+          1,
+          24
+        ],
+        "original_dtype": "float32",
+        "tapped_graph_sha256": "c4b30507f1db1ed8ffa9da1c9c04c30c029d645cd2ec081ca1c4af7807a50319",
+        "parity": {
+          "passed": false,
+          "finite": true,
+          "shape": [
+            1,
+            24
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 0.0016756057739257812,
+          "mismatched_elements": 1
+        }
+      },
+      {
+        "operator": "fcrelu_5",
+        "original_tensor": "InsertedPrecisionFreeCast_relu_20",
+        "original_shape": [
+          1,
+          16
+        ],
+        "original_dtype": "float32",
+        "tapped_graph_sha256": "fc728eb7586e932b41c7d31b1341f5b58f17d441c934237d8f2fd057db1a9038",
+        "parity": {
+          "passed": false,
+          "finite": true,
+          "shape": [
+            1,
+            16
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 0.0007817745208740234,
+          "mismatched_elements": 1
+        }
+      },
+      {
+        "operator": "Cast_354",
+        "original_tensor": "relu_20",
+        "original_shape": [
+          1,
+          16
+        ],
+        "original_dtype": "float16",
+        "tapped_graph_sha256": "f3e1f29f653e5457878228356beb33160a96ad51dd4f0cd35c44f2467b6a2842",
+        "parity": {
+          "passed": false,
+          "finite": true,
+          "shape": [
+            1,
+            16
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 0.001953125,
+          "mismatched_elements": 1
+        }
+      },
+      {
+        "operator": "linear_112",
+        "original_tensor": "linear_28",
+        "original_shape": [
+          1,
+          3
+        ],
+        "original_dtype": "float16",
+        "tapped_graph_sha256": "cd77ab51bd116a2eb8169732d105fecd87777e6c4777ad6108a7138a965583a5",
+        "parity": {
+          "passed": true,
+          "finite": true,
+          "shape": [
+            1,
+            3
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 0.0009722709655761719,
+          "mismatched_elements": 0
+        }
+      },
+      {
+        "operator": "linear_113",
+        "original_tensor": "linear_29",
+        "original_shape": [
+          1,
+          32
+        ],
+        "original_dtype": "float16",
+        "tapped_graph_sha256": "eef651e7d4910772277fc73f282ddfd664426ac20f5965d6008445e3572b1f11",
+        "parity": {
+          "passed": false,
+          "finite": true,
+          "shape": [
+            1,
+            32
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 0.0040264129638671875,
+          "mismatched_elements": 10
+        }
+      },
+      {
+        "operator": "Cast_358",
+        "original_tensor": "InsertedPrecisionFreeCast_linear_29",
+        "original_shape": [
+          1,
+          32
+        ],
+        "original_dtype": "float32",
+        "tapped_graph_sha256": "0168d2e9230cf44fde6dba6152f6a4b4dd84f1997e4f1ca2eac5ca40a1deeffd",
+        "parity": {
+          "passed": false,
+          "finite": true,
+          "shape": [
+            1,
+            32
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 0.0040264129638671875,
+          "mismatched_elements": 10
+        }
+      },
+      {
+        "operator": "fcrelu_6",
+        "original_tensor": "InsertedPrecisionFreeCast_relu_22",
+        "original_shape": [
+          1,
+          24
+        ],
+        "original_dtype": "float32",
+        "tapped_graph_sha256": "f465bdec595c984b8422980408b7c7d66ba9a6ae79fc5e8a6a9ebf3821dea29d",
+        "parity": {
+          "passed": false,
+          "finite": true,
+          "shape": [
+            1,
+            24
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 0.0020478665828704834,
+          "mismatched_elements": 9
+        }
+      },
+      {
+        "operator": "fcrelu_7",
+        "original_tensor": "InsertedPrecisionFreeCast_relu_23",
+        "original_shape": [
+          1,
+          16
+        ],
+        "original_dtype": "float32",
+        "tapped_graph_sha256": "9b370676cfbf9f5f93d53f988101ba6d9758fa4691ab48ebfe88289e8e41f82a",
+        "parity": {
+          "passed": false,
+          "finite": true,
+          "shape": [
+            1,
+            16
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 0.0008108615875244141,
+          "mismatched_elements": 3
+        }
+      },
+      {
+        "operator": "Cast_364",
+        "original_tensor": "relu_23",
+        "original_shape": [
+          1,
+          16
+        ],
+        "original_dtype": "float16",
+        "tapped_graph_sha256": "de589c3997a1094be6fdd46b0f05472bca7ef78aca077e686ee7c1e3fdc9df24",
+        "parity": {
+          "passed": false,
+          "finite": true,
+          "shape": [
+            1,
+            16
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 0.0008544921875,
+          "mismatched_elements": 3
+        }
+      },
+      {
+        "operator": "linear_116",
+        "original_tensor": "linear_32",
+        "original_shape": [
+          1,
+          2
+        ],
+        "original_dtype": "float16",
+        "tapped_graph_sha256": "09b6a80bef6dc40427750e1571dbd977e1e43e166247ae088ae639bc9a7ec87b",
+        "parity": {
+          "passed": true,
+          "finite": true,
+          "shape": [
+            1,
+            2
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 0.00020509958267211914,
+          "mismatched_elements": 0
+        }
+      },
+      {
+        "operator": "linear_117",
+        "original_tensor": "linear_49",
+        "original_shape": [
+          1,
+          48
+        ],
+        "original_dtype": "float16",
+        "tapped_graph_sha256": "67a2414b247f2ba86d6ef4b11af57e9e6e768da7a7bffbcf7551ecdc4d0320e9",
+        "parity": {
+          "passed": false,
+          "finite": true,
+          "shape": [
+            1,
+            48
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 0.005351066589355469,
+          "mismatched_elements": 18
+        }
+      },
+      {
+        "operator": "Cast_368",
+        "original_tensor": "InsertedPrecisionFreeCast_linear_49",
+        "original_shape": [
+          1,
+          48
+        ],
+        "original_dtype": "float32",
+        "tapped_graph_sha256": "a2f6206193b4e19c35e50919724dd6eb21521a981c5fc3584c7718f0444a716c",
+        "parity": {
+          "passed": false,
+          "finite": true,
+          "shape": [
+            1,
+            48
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 0.005351066589355469,
+          "mismatched_elements": 18
+        }
+      }
+    ],
+    "original_graph_sha256": "9589ed38c084d92a8bfd5c8134dca3974fb7b6b06cea4b4abe2559634f13b39c",
+    "first_tolerance_failure": {
+      "operator": "linear_100",
+      "original_tensor": "linear",
+      "original_shape": [
+        1,
+        512
+      ],
+      "original_dtype": "float16",
+      "tapped_graph_sha256": "a92d082eebe0b940cb786b2a1dc2d1a75c156d5c3478f9d87f1d1422b9252c8e",
+      "parity": {
+        "passed": false,
+        "finite": true,
+        "shape": [
+          1,
+          512
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": false,
+        "max_abs_error": 0.0009765625,
+        "mismatched_elements": 3
+      }
+    },
+    "untapped_full_model_parity": {
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        553
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.0046749114990234375,
+      "mismatched_elements": 14
+    }
+  },
+  "head_trace_cleanup": {
+    "vehicle_tx_enabled": false,
+    "fold_status": "blocked: disconnected",
+    "emulator": {
+      "state": {
+        "processes": [],
+        "camera_provider_processes": [
+          "376 android.hardware.camera.provider.ranchu",
+          "377 android.hardware.camera.provider@2.7-service-google",
+          "465 cameraserver"
+        ],
+        "camera_owned": false,
+        "thermal_status": 0,
+        "skin_c": 30.8,
+        "thermal_override": false
+      },
+      "baseline": {
+        "processes": [],
+        "camera_provider_processes": [
+          "376 android.hardware.camera.provider.ranchu",
+          "377 android.hardware.camera.provider@2.7-service-google",
+          "465 cameraserver"
+        ],
+        "camera_owned": false,
+        "thermal_status": 0,
+        "skin_c": 30.8,
+        "thermal_override": false,
+        "idle_seconds": 30.881671708018985,
+        "normal_thermal_seconds": 30.74866004101932
+      },
+      "forwards": [],
+      "apk_sha256": "84c907b4957de484bcd4e72f0bd45436d8964085f46d35d3b3a005efa5d3eb58"
+    },
+    "emulator_exit_code": 0
+  },
+  "repaired_linear_same_input": {
+    "diagnostic_only": true,
+    "qualified": false,
+    "vehicle_tx_enabled": false,
+    "purpose": "Compare Vulkan linear against host using the SAME captured Vulkan input",
+    "derived_section_sha256": "57923a18d122913917d6ae8f45870a4f2126c69ed17277a1444af3d241e9b142",
+    "reference_graph_sha256": "ae1fb1aa9e54fb2af28b26f73e18b4d54ec025912edbcddc05d83bbad3a2ad5f",
+    "input_sha256": "acd572aec70b2f506bf6fd7b741aa5e846bc60d0596ac293e8a459fb6e58e17a",
+    "output_sha256": "a8a17f99d0b05406024d2ec82261d88940b18c11f1c8091c8ab0a4665f2f01ea",
+    "parity": {
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        512
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": true,
+      "max_abs_error": 0.0,
+      "mismatched_elements": 0
+    }
+  },
+  "final_controls": {
+    "p99_work_ms": 8.648375,
+    "p99_complete_cycle_ms": 19.644417,
+    "mean_cycle_hz": 96.40639775066428,
+    "scheduled_deadline_misses": 57,
+    "cycle_deadline_misses": 1247,
+    "skipped_slots_total": 96,
+    "p99_stages_ms": {
+      "input_wait_budget_ms": 0,
+      "cycle_interval_ms": 17.050916,
+      "scheduler_delay_ms": 5.420637,
+      "skipped_slots": 0,
+      "selfdrive_ipc_age_ms": 28.168792,
+      "input_handling_ms": 5.372875,
+      "pacing_wait_ms": 10.442875,
+      "computation_ms": 3.592833,
+      "publishing_ms": 5.918333,
+      "parameters_extensions_ms": 2.2405,
+      "cycle_before_reporting_ms": 19.536292,
+      "active_cycle_before_reporting_ms": 11.577792,
+      "release_to_completion_before_reporting_ms": 14.984596,
+      "reporting_ms": 0.335334,
+      "release_to_completion_ms": 15.026346
+    },
+    "timing_qualification": "failed"
+  }
+}

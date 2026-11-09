@@ -1,0 +1,25 @@
+{
+  "diagnostic_only": true,
+  "vehicle_tx_enabled": false,
+  "apk_sha256": "021948e1e7693d89fd27bd3aaf574de227be19beb28d54115920d5547f2dc59b",
+  "trace": "candidate28-road-camera-trace-comparison.json",
+  "first_difference": "Concat",
+  "source_implementation": "tinygrad_repo/tinygrad/mixin/op.py:Tensor.cat uses sum of zero-padded inputs",
+  "branches": [
+    {
+      "input": "model/linear_64",
+      "offset": 105,
+      "different_elements": 2,
+      "actual": [
+        0.0,
+        0.0
+      ],
+      "independent_read": [
+        1.52587890625e-05,
+        -3.0517578125e-05
+      ],
+      "all_expected_half_subnormal": true,
+      "all_concat_zero": true
+    }
+  ]
+}

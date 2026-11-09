@@ -1,0 +1,72 @@
+{
+  "candidate": "candidate28",
+  "built_utc": "2026-11-01T02:17:05.663852+00:00",
+  "branch": "codex/fold3-android-port",
+  "head": "7631d5248cc9efd10b962107aadacbb908a9f14d",
+  "dirty": true,
+  "package": "com.samsung.sunnypilot.fold3",
+  "vehicle_tx_enabled": false,
+  "engagement_allowed": false,
+  "qnn_enabled": false,
+  "artifacts": {
+    "app-debug.apk": {
+      "sha256": "021948e1e7693d89fd27bd3aaf574de227be19beb28d54115920d5547f2dc59b",
+      "bytes": 815230598
+    },
+    "app-debug-androidTest.apk": {
+      "sha256": "bdf8e6c3f977c5afb521c68a7719e700fec2a1d93209c5ff984aec7821883014",
+      "bytes": 4490455
+    }
+  },
+  "native": {
+    "commit": "6af1a932e2286d5c58166085d24c68783033edee",
+    "onnx_commit": "2bb50465112feca9003e1ed654d77f01ff1415ca",
+    "ndk": "28.2.13676358",
+    "cmake": "3.31.6",
+    "requires_arm64_fp16": true,
+    "optional_sme_sve_kernels": false,
+    "patch_sha256": "d331e37502b486312d8e57bd38a34107c827aca5e145b86183dd79dd68cfb45a",
+    "library_sha256": "a8f99059fd7d4993cd5d10c313e7062ea0439a1c16eb39d433b03790f63c98db",
+    "command": [
+      "/Users/sergios/sunnypilot/.venv/bin/python",
+      "/Users/sergios/sunnypilot/android/build/native/onnxruntime-source-1.31.1/tools/ci_build/build.py",
+      "--build_dir",
+      "/Users/sergios/sunnypilot/android/build/native/onnxruntime-portable",
+      "--config",
+      "Release",
+      "--update",
+      "--build",
+      "--build_shared_lib",
+      "--parallel",
+      "4",
+      "--skip_tests",
+      "--skip_submodule_sync",
+      "--android",
+      "--android_sdk_path",
+      "/Users/sergios/Library/Android/sdk",
+      "--android_ndk_path",
+      "/Users/sergios/Library/Android/sdk/ndk/28.2.13676358",
+      "--android_abi",
+      "arm64-v8a",
+      "--android_api",
+      "28",
+      "--android_cpp_shared",
+      "--use_nnapi",
+      "--no_kleidiai",
+      "--no_sve",
+      "--no_telemetry",
+      "--cmake_path",
+      "/Users/sergios/Library/Android/sdk/cmake/3.31.6/bin/cmake",
+      "--cmake_generator",
+      "Ninja",
+      "--cmake_extra_defines",
+      "onnxruntime_BUILD_UNIT_TESTS=OFF",
+      "CMAKE_CXX_FLAGS=-march=armv8-a+fp16"
+    ],
+    "vehicle_tx_enabled": false
+  },
+  "build_command": "env FOLD3_BUILD_PYTHON=/Users/sergios/sunnypilot/.venv/bin/python ./gradlew --no-daemon --console plain -Pfold3CameraCompat=true :app:cleanPackageDebug :app:assembleDebug :app:assembleDebugAndroidTest :app:testDebugUnitTest",
+  "source_hashes": "/Users/sergios/sunnypilot/android/build/candidates/candidate28/source-hashes.json",
+  "rtol": 0.001,
+  "atol": 0.0001
+}

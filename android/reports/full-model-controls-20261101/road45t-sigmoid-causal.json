@@ -1,0 +1,146 @@
+{
+  "diagnostic_only": true,
+  "candidate": "candidate45t",
+  "injected_tensor": "InsertedPrecisionFreeCast_model/sigmoid",
+  "injected_sha256": "a6ca13d9e34173a8c86d1f74020ce8250cd2583e96eecc2e3e5adf41c9836169",
+  "base_graph_sha256": "8d84a28dd37711292f446dd746498ac5bad985ab02fce34ec3442fda972a427d",
+  "injected_graph_sha256": "7122df08644ed702b9eb357bec20718df4589596a8bece7dc58db0c8de0af47d",
+  "checks": [
+    {
+      "tensor": "fold3_host_mean8_InsertedPrecisionFreeCast_model/mean_1",
+      "base_vs_actual": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          1024,
+          1,
+          1
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": false,
+        "max_abs_error": 3.4691765904426575e-08,
+        "mismatched_elements": 0
+      },
+      "injected_vs_actual": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          1024,
+          1,
+          1
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "injected_unequal": 0
+    },
+    {
+      "tensor": "model/mean_1",
+      "base_vs_actual": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          1024,
+          1,
+          1
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": false,
+        "max_abs_error": 9.5367431640625e-07,
+        "mismatched_elements": 0
+      },
+      "injected_vs_actual": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          1024,
+          1,
+          1
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "injected_unequal": 0
+    },
+    {
+      "tensor": "fold3_half_gemv8_418_0",
+      "base_vs_actual": {
+        "passed": false,
+        "finite": true,
+        "shape": [
+          1,
+          512
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": false,
+        "max_abs_error": 0.0009765625,
+        "mismatched_elements": 1
+      },
+      "injected_vs_actual": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          512
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "injected_unequal": 0
+    },
+    {
+      "tensor": "model/linear_35",
+      "base_vs_actual": {
+        "passed": false,
+        "finite": true,
+        "shape": [
+          1,
+          512
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": false,
+        "max_abs_error": 0.0009765625,
+        "mismatched_elements": 1
+      },
+      "injected_vs_actual": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          512
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "injected_unequal": 0
+    }
+  ]
+}

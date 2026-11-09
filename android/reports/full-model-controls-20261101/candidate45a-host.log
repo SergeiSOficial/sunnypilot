@@ -1,0 +1,58 @@
+................................EE........E...................................................................................
+======================================================================
+ERROR: test_controls_counts_reporting_overhead_in_deadlines (test_driving.DrivingTest.test_controls_counts_reporting_overhead_in_deadlines)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sergios/sunnypilot/android/tests/test_driving.py", line 246, in test_controls_counts_reporting_overhead_in_deadlines
+    report.controls_progress(True, 8_000_000, {"cycle_before_reporting_ms": 8.})
+  File "/Users/sergios/sunnypilot/android/app/src/main/python/fold3_daemons.py", line 139, in controls_progress
+    release_ms = timings["release_to_completion_before_reporting_ms"] + reporting_ns / 1e6
+                 ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyError: 'release_to_completion_before_reporting_ms'
+
+======================================================================
+ERROR: test_controls_reports_cycle_misses_including_input_handling (test_driving.DrivingTest.test_controls_reports_cycle_misses_including_input_handling)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sergios/sunnypilot/android/tests/test_driving.py", line 230, in test_controls_reports_cycle_misses_including_input_handling
+    report.controls_progress(True, 2_000_000, {"input_handling_ms": 13., "cycle_before_reporting_ms": 15.})
+  File "/Users/sergios/sunnypilot/android/app/src/main/python/fold3_daemons.py", line 139, in controls_progress
+    release_ms = timings["release_to_completion_before_reporting_ms"] + reporting_ns / 1e6
+                 ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyError: 'release_to_completion_before_reporting_ms'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/sergios/sunnypilot/android/tests/test_driving.py", line 228, in test_controls_reports_cycle_misses_including_input_handling
+    with tempfile.TemporaryDirectory() as directory:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sergios/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/tempfile.py", line 950, in __exit__
+    self.cleanup()
+  File "/Users/sergios/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/tempfile.py", line 954, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "/Users/sergios/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/tempfile.py", line 934, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "/Users/sergios/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/shutil.py", line 759, in rmtree
+    _rmtree_safe_fd(stack, onexc)
+  File "/Users/sergios/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/shutil.py", line 703, in _rmtree_safe_fd
+    onexc(func, path, err)
+  File "/Users/sergios/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/shutil.py", line 662, in _rmtree_safe_fd
+    os.rmdir(name, dir_fd=dirfd)
+OSError: [Errno 66] Directory not empty: '/var/folders/8z/wn5gq57n6dqffngwg62nm8lc0000gn/T/tmpq9yzoqi7/controlsd-batches'
+
+======================================================================
+ERROR: test_report_disk_io_cannot_block_controls_and_failure_is_flushed (test_driving.DrivingTest.test_report_disk_io_cannot_block_controls_and_failure_is_flushed)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sergios/sunnypilot/android/tests/test_driving.py", line 286, in test_report_disk_io_cannot_block_controls_and_failure_is_flushed
+    report.controls_progress(True, 2_000_000, {"cycle_before_reporting_ms": 2.})
+  File "/Users/sergios/sunnypilot/android/app/src/main/python/fold3_daemons.py", line 139, in controls_progress
+    release_ms = timings["release_to_completion_before_reporting_ms"] + reporting_ns / 1e6
+                 ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyError: 'release_to_completion_before_reporting_ms'
+
+----------------------------------------------------------------------
+Ran 126 tests in 12.953s
+
+FAILED (errors=3)

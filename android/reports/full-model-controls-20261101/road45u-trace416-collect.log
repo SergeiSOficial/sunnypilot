@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/Users/sergios/sunnypilot/android/scripts/collect_accel_trace.py", line 132, in <module>
+    records = collect(args.adb, args.serial, args.package, json.loads(args.report.read_text()), args.artifacts)
+                                                                      ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sergios/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/pathlib.py", line 1027, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sergios/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/pathlib.py", line 1013, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'android/reports/full-model-controls-20261101/road45u-trace416.json'

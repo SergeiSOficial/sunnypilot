@@ -31,7 +31,7 @@ def main(data_dir, simulation=False, preview=False):
     frames, started = 0, time.monotonic()
     intervals, cpu_samples = deque(maxlen=3000), deque(maxlen=3000)
     startup_stack = (Path(data_dir) / "ui-startup-stack.txt").open("w")
-    faulthandler.dump_traceback_later(30, file=startup_stack)
+    faulthandler.dump_traceback_later(30, repeat=True, file=startup_stack)
     def progress(frame_time, cpu_time):
       nonlocal frames
       import pyray as rl
@@ -63,7 +63,7 @@ def main(data_dir, simulation=False, preview=False):
       frames += 1
       intervals.append(frame_time)
       cpu_samples.append(cpu_time)
-      if frames == 1:
+      if frames == 30:
         faulthandler.cancel_dump_traceback_later()
       if frames == 1 or frames % 30 == 0:
         index = math.ceil(len(intervals) * .99) - 1

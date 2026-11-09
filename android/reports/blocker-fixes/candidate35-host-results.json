@@ -1,0 +1,65 @@
+{
+  "candidate": "candidate35",
+  "apk_sha256": "38645e91f806076517de1497cdb6b5c0cbf4873cfecf5efabb980297a014ad51",
+  "build": {
+    "status": "passed",
+    "log": "candidate35-build.log",
+    "unit_tests_included": true
+  },
+  "focused_host": {
+    "status": "passed",
+    "tests": 98,
+    "seconds": 23.29,
+    "log": "candidate35-host-tests.txt"
+  },
+  "hyundai_panda_protocol": {
+    "status": "passed",
+    "tests": 3938,
+    "skipped": 356,
+    "seconds": 14.549,
+    "log": "candidate35-safety-tests.txt"
+  },
+  "host_model_reference": {
+    "status": "passed",
+    "report": "candidate35-host-model-parity.json",
+    "rtol": 0.001,
+    "atol": 0.0001
+  },
+  "ruff": {
+    "status": "passed",
+    "scope": [
+      "fold3_daemons.py",
+      "fold3_host_math.py",
+      "fold3_opencl.py",
+      "fold3_sim.py",
+      "experiment.py",
+      "validate_cameras.py",
+      "test_experiment.py",
+      "test_host_math.py",
+      "test_opencl_precision.py",
+      "android_chain_validation.py",
+      "android_protocol.py",
+      "android_sources.py"
+    ]
+  },
+  "vehicle_tx_enabled": false,
+  "engagement_allowed": false,
+  "final_host_tooling": {
+    "status": "passed",
+    "tests": 100,
+    "seconds": 19.193,
+    "log": "candidate35-host-tests-final-tooling.txt",
+    "scope": "Host validation script fixes only; original 98-test build run retained above",
+    "update": "candidate35-host-tooling-update.json",
+    "ruff": {
+      "status": "passed",
+      "scope": [
+        "android/scripts/experiment.py",
+        "android/scripts/validate_thermal.py",
+        "android/scripts/validate_vision.py",
+        "android/tests/test_experiment.py",
+        "android/tests/test_validate_vision.py"
+      ]
+    }
+  }
+}

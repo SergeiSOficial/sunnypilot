@@ -1,0 +1,61 @@
+{
+  "scope": "diagnostic only: ordered bias-first float32 FMA convolution",
+  "models": {
+    "dmonitoring_model": [
+      {
+        "node": "node_Conv_805_token_561",
+        "shape": [
+          1,
+          120,
+          180,
+          32
+        ],
+        "seconds": 1.0606281250074971,
+        "exact": true,
+        "mismatched": 0,
+        "max_abs_error": 0.0
+      },
+      {
+        "node": "node_Conv_807_token_565",
+        "shape": [
+          1,
+          60,
+          90,
+          32
+        ],
+        "seconds": 0.33131320800748654,
+        "exact": true,
+        "mismatched": 0,
+        "max_abs_error": 0.0
+      },
+      {
+        "node": "node_Conv_811_token_569",
+        "shape": [
+          1,
+          30,
+          45,
+          96
+        ],
+        "seconds": 0.2597601249872241,
+        "exact": true,
+        "mismatched": 0,
+        "max_abs_error": 0.0
+      }
+    ],
+    "driving_supercombo": [
+      {
+        "node": "model/node_conv2d_token_575",
+        "shape": [
+          1,
+          64,
+          128,
+          64
+        ],
+        "seconds": 0.29511258300044574,
+        "exact": true,
+        "mismatched": 0,
+        "max_abs_error": 0.0
+      }
+    ]
+  }
+}

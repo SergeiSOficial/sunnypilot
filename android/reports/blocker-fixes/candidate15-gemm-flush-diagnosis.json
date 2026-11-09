@@ -1,0 +1,29 @@
+{
+  "diagnostic_only": true,
+  "vehicle_tx_enabled": false,
+  "candidate": "candidate15",
+  "apk_sha256": "bed1125c27ca91c94926556216e0b8bb01d885ec9df75799b33c0789c9c7eacc",
+  "source_trace": "fold-trace-fused-candidate15.json",
+  "node": "model/p_node_linear_5",
+  "operator": "Gemm",
+  "actual_expected_dump": "android/build/candidate15-first-gemm.npz",
+  "dump_sha256": "8440a5256e8b0732825cc51a8753b5e22cbb5a5b584692db2ccd504428d13139",
+  "reference": "Eight half FMA lanes, three pairwise half reductions, half bias addition",
+  "float64_reference_matches_original_exactly": true,
+  "float32_reference_matches_original_exactly": true,
+  "actual_vs_original_unequal_elements": 146,
+  "actual_vs_original_tolerance_failures": 18,
+  "actual_vs_original_max_abs_error": 0.001953125,
+  "flush_half_accumulators_and_reductions_to_zero": {
+    "matches_actual_exactly": true,
+    "unequal_elements": 0
+  },
+  "flush_half_inputs_only": {
+    "matches_actual_exactly": false,
+    "unequal_elements": 147
+  },
+  "opencl_half_fp_config": 22,
+  "round_to_nearest_supported": true,
+  "half_denorm_capability": false,
+  "conclusion": "Half accumulator and reduction subnormal flushing exactly reproduces this observed device output. Default RTZ was not established."
+}

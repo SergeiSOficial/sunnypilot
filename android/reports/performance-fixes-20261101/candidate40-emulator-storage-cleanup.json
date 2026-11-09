@@ -1,0 +1,34 @@
+{
+  "scope": "Dedicated emulator; only prior sunnypilot validation application data",
+  "serial": "emulator-5560",
+  "previous_installed_apk_sha256": "38645e91f806076517de1497cdb6b5c0cbf4873cfecf5efabb980297a014ad51",
+  "before": "Filesystem       Size Used Avail Use% Mounted on\n/dev/block/dm-44 5.8G 4.1G  1.4G  75% /data/user/0",
+  "actions": [
+    {
+      "package": "com.samsung.sunnypilot.fold3",
+      "operation": "clear application data",
+      "result": "Success"
+    },
+    {
+      "package": "com.samsung.sunnypilot.fold3.test",
+      "operation": "clear application data",
+      "result": "Success"
+    }
+  ],
+  "after": "Filesystem       Size Used Avail Use% Mounted on\n/dev/block/dm-44 5.8G 3.1G  2.5G  56% /data/user/0",
+  "recorded_utc": "2026-11-01T11:39:10.629815+00:00",
+  "install": {
+    "command": [
+      "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+      "-s",
+      "emulator-5560",
+      "install",
+      "-r",
+      "-t",
+      "-g",
+      "android/build/candidates/candidate40/app-debug.apk"
+    ],
+    "returncode": 0,
+    "output": "Performing Streamed Install\nSuccess\n"
+  }
+}

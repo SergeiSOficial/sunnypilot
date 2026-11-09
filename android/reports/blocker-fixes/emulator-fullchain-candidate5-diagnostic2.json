@@ -1,0 +1,270 @@
+{
+  "status": "failed",
+  "vehicle_tx_enabled": false,
+  "physical_engagement_allowed": false,
+  "synthetic_sources": true,
+  "physical_vehicle_verified": false,
+  "camera_model_parity_verified": false,
+  "derived_inputs_injected": false,
+  "received_services": [],
+  "packets": 342,
+  "unsafe_outputs": 0,
+  "profile": {
+    "version": 1,
+    "op": "hello",
+    "simulation": true,
+    "full_chain": true,
+    "vehicle_tx_enabled": false,
+    "car_fingerprint": "HYUNDAI_IONIQ_PHEV_2019",
+    "factory_acc": true,
+    "min_steer_speed_m_s": 14.305279731750488,
+    "physical_fingerprint_verified": false
+  },
+  "cruise_can_valid_samples": 69,
+  "cruise_can_invalid_samples": 1,
+  "cruise_acc_disabled_samples": 1,
+  "cruise_acc_enabled_samples": 69,
+  "error": "EOFError: ADB stream disconnected",
+  "failure_reports": {
+    "manager": {
+      "pid": 6613,
+      "simulation": true,
+      "full_chain": true,
+      "vehicle_tx_enabled": false,
+      "engagement_allowed": false,
+      "engagement_blocker": "camera calibration, model parity/performance and physical Panda qualification incomplete",
+      "processes": {
+        "Controls": {
+          "daemon": "controlsd",
+          "pid": 6637,
+          "phase": "waiting_for_selfdrive_state",
+          "error": "",
+          "last_progress_ms": 1331506,
+          "ticks": 153,
+          "restarts": 0
+        },
+        "Monitoring": {
+          "daemon": "dmonitoringd",
+          "pid": 6638,
+          "phase": "running",
+          "error": "",
+          "last_progress_ms": 1330712,
+          "ticks": 113,
+          "restarts": 0
+        },
+        "Vehicle": {
+          "daemon": "card",
+          "pid": 6639,
+          "phase": "running",
+          "error": "",
+          "last_progress_ms": 1331503,
+          "ticks": 689,
+          "restarts": 0
+        },
+        "Localization": {
+          "daemon": "locationd",
+          "pid": 6640,
+          "phase": "running",
+          "error": "",
+          "last_progress_ms": 1330717,
+          "ticks": 77,
+          "restarts": 0
+        },
+        "Calibration": {
+          "daemon": "calibrationd",
+          "pid": 6652,
+          "phase": "running",
+          "error": "",
+          "last_progress_ms": 1331496,
+          "ticks": 104,
+          "restarts": 0
+        },
+        "Parameters": {
+          "daemon": "paramsd",
+          "pid": 6656,
+          "phase": "running",
+          "error": "",
+          "last_progress_ms": 1330743,
+          "ticks": 62,
+          "restarts": 0
+        },
+        "Torque": {
+          "daemon": "torqued",
+          "pid": 6662,
+          "phase": "running",
+          "error": "",
+          "last_progress_ms": 1330726,
+          "ticks": 70,
+          "restarts": 0
+        },
+        "Delay": {
+          "daemon": "lagd",
+          "pid": 6717,
+          "phase": "running",
+          "error": "",
+          "last_progress_ms": 1330736,
+          "ticks": 71,
+          "restarts": 0
+        },
+        "Radar": {
+          "daemon": "radard",
+          "pid": 6723,
+          "phase": "running",
+          "error": "",
+          "last_progress_ms": 1330706,
+          "ticks": 102,
+          "restarts": 0
+        },
+        "Planning": {
+          "daemon": "plannerd",
+          "pid": 6735,
+          "phase": "running",
+          "error": "",
+          "last_progress_ms": 1330706,
+          "ticks": 51,
+          "restarts": 0
+        },
+        "Selfdrive": {
+          "daemon": "selfdrived",
+          "pid": 6765,
+          "phase": "initializing_upstream",
+          "error": "",
+          "last_progress_ms": 1325439,
+          "ticks": 32,
+          "restarts": 0
+        },
+        "Simulator": {
+          "daemon": "sim_bridge",
+          "pid": 6782,
+          "phase": "waiting_for_adb",
+          "error": "",
+          "last_progress_ms": 1330713,
+          "ticks": 356,
+          "restarts": 0
+        }
+      },
+      "updated_elapsed_ms": 1331515
+    },
+    "sim_bridge": {
+      "daemon": "sim_bridge",
+      "pid": 6782,
+      "vehicle_tx_enabled": false,
+      "engagement_allowed": false,
+      "work_samples": 0,
+      "deadline_misses": 0,
+      "phase": "waiting_for_adb",
+      "simulation": true,
+      "p99_stages_ms": {},
+      "accepted_packets": 342,
+      "rejected_sessions": 1,
+      "latest_input_services": [
+        "accelerometer",
+        "can",
+        "gyroscope"
+      ],
+      "stale_control_inputs": [],
+      "car_fingerprint": "HYUNDAI_IONIQ_PHEV_2019",
+      "factory_acc": true,
+      "min_steer_speed_m_s": 14.305279731750488,
+      "physical_fingerprint_verified": false,
+      "last_disconnect": "timed out"
+    },
+    "controlsd": {
+      "daemon": "controlsd",
+      "pid": 6637,
+      "vehicle_tx_enabled": false,
+      "engagement_allowed": false,
+      "work_samples": 110,
+      "deadline_misses": 32,
+      "phase": "waiting_for_selfdrive_state",
+      "simulation": true,
+      "p99_stages_ms": {
+        "input_handling_ms": 162.760833,
+        "computation_ms": 32.628458,
+        "publishing_ms": 67.117917,
+        "parameters_extensions_ms": 15.037209,
+        "cycle_before_reporting_ms": 178.4785,
+        "reporting_ms": 28.218792
+      },
+      "updated_input_samples": 0,
+      "input_handling_ms": 47.443958,
+      "computation_ms": 0.538167,
+      "publishing_ms": 1.315416,
+      "parameters_extensions_ms": 2.468042,
+      "cycle_before_reporting_ms": 51.765583,
+      "work_timing_excludes_input_wait": true,
+      "p99_work_ms": 118.249083,
+      "cycle_deadline_misses": 109,
+      "reporting_ms": 0.193166,
+      "complete_cycle_ms": 35.901333,
+      "mean_cycle_hz": 20.351266428428193,
+      "p99_complete_cycle_ms": 178.810125
+    },
+    "selfdrived": {
+      "daemon": "selfdrived",
+      "pid": 6765,
+      "vehicle_tx_enabled": false,
+      "engagement_allowed": false,
+      "work_samples": 0,
+      "deadline_misses": 0,
+      "phase": "running",
+      "simulation": true,
+      "p99_stages_ms": {},
+      "upstream_module": "selfdrived.selfdrived",
+      "updated_services": [
+        "carOutput",
+        "controlsState",
+        "carControl"
+      ],
+      "invalid_services": [
+        "deviceState",
+        "pandaStates",
+        "peripheralState",
+        "modelV2",
+        "extrinsicsCalibration",
+        "driverMonitoringState",
+        "longitudinalPlan",
+        "deviceMotion",
+        "lateralDelay",
+        "managerState",
+        "vehicleParameters",
+        "radarState",
+        "lateralTorqueParameters",
+        "driverAssistance",
+        "alertDebug",
+        "lateralManeuverPlan",
+        "modelDataV2SP",
+        "longitudinalPlanSP",
+        "narrowRoadCameraState",
+        "cabinCameraState",
+        "wideRoadCameraState",
+        "accelerometer",
+        "gyroscope",
+        "gpsLocation"
+      ],
+      "input_handling_ms": 0.381834,
+      "computation_ms": null,
+      "complete_cycle_ms": null,
+      "timing_includes_report_overhead": true
+    },
+    "ui-report": {
+      "pid": 6818,
+      "backend": "Raylib Android NativeActivity",
+      "vehicle_tx_enabled": false,
+      "status": "running",
+      "full_upstream_ui": true,
+      "frames": 120,
+      "mean_fps": 6.596523900745625,
+      "width": 2160,
+      "height": 1080,
+      "surface_size": [
+        1280,
+        720
+      ],
+      "last_frame_seconds": 0.17893370985984802,
+      "last_cpu_seconds": 0.0018756659999326075,
+      "recent_p99_frame_ms": 326.8710970878601,
+      "recent_p99_cpu_ms": 45.93837499987785
+    }
+  }
+}

@@ -1,0 +1,2 @@
+#include <cmath>
+extern "C" void run(const float*x,const float*w,const float*b,float*y,int c,int h,int width,int kernel){int pad=kernel/2;for(int o=0;o<c;o++)for(int yy=0;yy<h;yy++)for(int xx=0;xx<width;xx++){float sum=0;for(int ky=0;ky<kernel;ky++)for(int kx=0;kx<kernel;kx++){int iy=yy+ky-pad,ix=xx+kx-pad;float v=iy<0||iy>=h||ix<0||ix>=width?0:x[(o*h+iy)*width+ix];sum=std::fma(v,w[(o*kernel+ky)*kernel+kx],sum);}y[(o*h+yy)*width+xx]=sum+b[o];}}

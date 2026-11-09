@@ -1,0 +1,66 @@
+{
+  "serial": "emulator-5554",
+  "command": [
+    "/Users/sergios/sunnypilot/.venv/bin/python",
+    "android/scripts/validate_cameras.py",
+    "--serial",
+    "emulator-5554",
+    "--adb",
+    "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+    "--package",
+    "com.samsung.sunnypilot.fold3",
+    "--ids",
+    "1",
+    "--seconds",
+    "10",
+    "--output",
+    "/Users/sergios/sunnypilot/android/reports/blocker-fixes/emulator-camera-timing-candidate32.json"
+  ],
+  "vehicle_tx_enabled": false,
+  "status": "failed",
+  "forwards_before": [],
+  "before_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "358 android.hardware.camera.provider.ranchu",
+      "359 android.hardware.camera.provider@2.7-service-google",
+      "425 cameraserver"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.8,
+    "thermal_override": false
+  },
+  "apk_sha256": "a62b55187b2a60a15c9b7d34cb5e6e462cc00c353971d8d126940960861a2810",
+  "baseline": {
+    "processes": [],
+    "camera_provider_processes": [
+      "358 android.hardware.camera.provider.ranchu",
+      "359 android.hardware.camera.provider@2.7-service-google",
+      "425 cameraserver"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.8,
+    "thermal_override": false,
+    "idle_seconds": 30.811932291981066,
+    "normal_thermal_seconds": 30.720090833987342
+  },
+  "apk_sha256_at_start": "a62b55187b2a60a15c9b7d34cb5e6e462cc00c353971d8d126940960861a2810",
+  "returncode": 1,
+  "after_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "358 android.hardware.camera.provider.ranchu",
+      "359 android.hardware.camera.provider@2.7-service-google",
+      "425 cameraserver"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.8,
+    "thermal_override": false
+  },
+  "forwards_removed": [],
+  "apk_sha256_after": "a62b55187b2a60a15c9b7d34cb5e6e462cc00c353971d8d126940960861a2810",
+  "artifact_stable": true
+}

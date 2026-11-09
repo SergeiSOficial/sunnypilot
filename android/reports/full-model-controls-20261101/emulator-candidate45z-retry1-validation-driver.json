@@ -1,0 +1,32 @@
+[
+  {
+    "name": "thermal",
+    "command": [
+      "/Users/sergios/sunnypilot/.venv/bin/python",
+      "android/scripts/experiment.py",
+      "--serial",
+      "emulator-5560",
+      "--adb",
+      "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+      "--package",
+      "com.samsung.sunnypilot.fold3",
+      "--report",
+      "/Users/sergios/sunnypilot/android/reports/full-model-controls-20261101/emulator-candidate45z-retry1-thermal-isolation.json",
+      "--",
+      "/Users/sergios/sunnypilot/.venv/bin/python",
+      "android/scripts/validate_thermal.py",
+      "--serial",
+      "emulator-5560",
+      "--adb",
+      "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+      "--package",
+      "com.samsung.sunnypilot.fold3",
+      "--report",
+      "/Users/sergios/sunnypilot/android/reports/full-model-controls-20261101/emulator-candidate45z-retry1-thermal.json"
+    ],
+    "status": "passed",
+    "returncode": 0,
+    "log": "emulator-candidate45z-retry1-thermal-command.log",
+    "isolation_status": "passed"
+  }
+]

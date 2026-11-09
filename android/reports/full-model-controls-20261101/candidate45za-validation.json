@@ -1,0 +1,218 @@
+{
+  "candidate": "candidate45za",
+  "apk_sha256": "17a87c7909af196941a6659a68c905ba41d5590dc361b8a309e2c4af53e95822",
+  "branch": "codex/fold3-android-port",
+  "qualification_status": "blocked",
+  "vehicle_tx_enabled": false,
+  "physical_engagement_allowed": false,
+  "host_tests": {
+    "status": "passed",
+    "run": 176,
+    "seconds": 28.946,
+    "skipped": 0,
+    "evidence": "candidate45za-all-host.log"
+  },
+  "hyundai_safety_simulator_protocol_tests": {
+    "status": "passed",
+    "run": 1921,
+    "seconds": 4.335,
+    "skipped": 202,
+    "evidence": "candidate45za-hyundai-safety-sim.log"
+  },
+  "java_unit_build": {
+    "status": "passed",
+    "evidence": "candidate45za-build.log"
+  },
+  "devices": {
+    "fold": {
+      "status": "passed",
+      "installed": {
+        "serial": "RFCR81Y1TBJ",
+        "candidate": "candidate45za",
+        "vehicle_tx_enabled": false,
+        "files": {
+          "app-debug.apk": {
+            "package": "com.samsung.sunnypilot.fold3",
+            "installed_path": "/data/app/~~dJ81ALDpVFKYV7KgLUbBLw==/com.samsung.sunnypilot.fold3-29gOFPke2pGuWlkmMo6q6A==/base.apk",
+            "sha256": "17a87c7909af196941a6659a68c905ba41d5590dc361b8a309e2c4af53e95822",
+            "expected_sha256": "17a87c7909af196941a6659a68c905ba41d5590dc361b8a309e2c4af53e95822",
+            "status": "passed"
+          },
+          "app-debug-androidTest.apk": {
+            "package": "com.samsung.sunnypilot.fold3.test",
+            "installed_path": "/data/app/~~0RibAL7JC1an-KHZL7vWHQ==/com.samsung.sunnypilot.fold3.test-k9BO5pwydisXbjPKPds5Fw==/base.apk",
+            "sha256": "b8336ebab92c8bfbe076f45c42c462acb5fc1f35c0072453dc39ef07c7ab3945",
+            "expected_sha256": "b8336ebab92c8bfbe076f45c42c462acb5fc1f35c0072453dc39ef07c7ab3945",
+            "status": "passed"
+          }
+        },
+        "fingerprint": "samsung/q2qxser/q2q:15/AP3A.240905.015.A2/F926BXXSJJZH3:user/release-keys",
+        "status": "passed"
+      },
+      "inventory": "fold-candidate45za-validation-driver.json",
+      "checks": [
+        {
+          "name": "chain-device-steady",
+          "status": "passed",
+          "isolation_status": "passed",
+          "log": "fold-candidate45za-chain-device-steady-command.log",
+          "apk_sha256": "17a87c7909af196941a6659a68c905ba41d5590dc361b8a309e2c4af53e95822"
+        },
+        {
+          "name": "chain-device-faults",
+          "status": "passed",
+          "isolation_status": "passed",
+          "log": "fold-candidate45za-chain-device-faults-command.log",
+          "apk_sha256": "17a87c7909af196941a6659a68c905ba41d5590dc361b8a309e2c4af53e95822"
+        },
+        {
+          "name": "instrumentation",
+          "status": "passed",
+          "isolation_status": "passed",
+          "log": "fold-candidate45za-instrumentation-command.log",
+          "apk_sha256": "17a87c7909af196941a6659a68c905ba41d5590dc361b8a309e2c4af53e95822"
+        },
+        {
+          "name": "lifecycle",
+          "status": "passed",
+          "isolation_status": "passed",
+          "log": "fold-candidate45za-lifecycle-command.log",
+          "apk_sha256": "17a87c7909af196941a6659a68c905ba41d5590dc361b8a309e2c4af53e95822"
+        },
+        {
+          "name": "adb-faults",
+          "status": "passed",
+          "isolation_status": "passed",
+          "log": "fold-candidate45za-adb-faults-command.log",
+          "apk_sha256": "17a87c7909af196941a6659a68c905ba41d5590dc361b8a309e2c4af53e95822"
+        },
+        {
+          "name": "ipc",
+          "status": "passed",
+          "isolation_status": "passed",
+          "log": "fold-candidate45za-ipc-command.log",
+          "apk_sha256": "17a87c7909af196941a6659a68c905ba41d5590dc361b8a309e2c4af53e95822"
+        }
+      ],
+      "retained_attempts": []
+    },
+    "emulator": {
+      "status": "failed",
+      "installed": {
+        "serial": "emulator-5560",
+        "candidate": "candidate45za",
+        "vehicle_tx_enabled": false,
+        "files": {
+          "app-debug.apk": {
+            "package": "com.samsung.sunnypilot.fold3",
+            "installed_path": "/data/app/~~fboHN9Smj9lDR7DmzAd-qw==/com.samsung.sunnypilot.fold3-zyVz_JYO_9KWX7fwB1QuWw==/base.apk",
+            "sha256": "17a87c7909af196941a6659a68c905ba41d5590dc361b8a309e2c4af53e95822",
+            "expected_sha256": "17a87c7909af196941a6659a68c905ba41d5590dc361b8a309e2c4af53e95822",
+            "status": "passed"
+          },
+          "app-debug-androidTest.apk": {
+            "package": "com.samsung.sunnypilot.fold3.test",
+            "installed_path": "/data/app/~~kSJnTmheLHkVS96zxH38GQ==/com.samsung.sunnypilot.fold3.test-yQem6ktWvRG9MZuZ1NeZhw==/base.apk",
+            "sha256": "b8336ebab92c8bfbe076f45c42c462acb5fc1f35c0072453dc39ef07c7ab3945",
+            "expected_sha256": "b8336ebab92c8bfbe076f45c42c462acb5fc1f35c0072453dc39ef07c7ab3945",
+            "status": "passed"
+          }
+        },
+        "fingerprint": "google/sdk_gphone64_arm64/emu64a:15/AE3A.240806.043/12960925:userdebug/dev-keys",
+        "status": "passed"
+      },
+      "inventory": "emulator-candidate45za-validation-driver.json",
+      "checks": [
+        {
+          "name": "instrumentation",
+          "status": "passed",
+          "isolation_status": "passed",
+          "log": "emulator-candidate45za-instrumentation-command.log",
+          "apk_sha256": "17a87c7909af196941a6659a68c905ba41d5590dc361b8a309e2c4af53e95822"
+        },
+        {
+          "name": "chain-device-steady",
+          "status": "passed",
+          "isolation_status": "passed",
+          "log": "emulator-candidate45za-chain-device-steady-command.log",
+          "apk_sha256": "17a87c7909af196941a6659a68c905ba41d5590dc361b8a309e2c4af53e95822"
+        },
+        {
+          "name": "chain-device-faults",
+          "status": "passed",
+          "isolation_status": "passed",
+          "log": "emulator-candidate45za-chain-device-faults-command.log",
+          "apk_sha256": "17a87c7909af196941a6659a68c905ba41d5590dc361b8a309e2c4af53e95822"
+        },
+        {
+          "name": "lifecycle",
+          "status": "passed",
+          "isolation_status": "passed",
+          "log": "emulator-candidate45za-lifecycle-command.log",
+          "apk_sha256": "17a87c7909af196941a6659a68c905ba41d5590dc361b8a309e2c4af53e95822"
+        },
+        {
+          "name": "adb-faults",
+          "status": "passed",
+          "isolation_status": "passed",
+          "log": "emulator-candidate45za-adb-faults-command.log",
+          "apk_sha256": "17a87c7909af196941a6659a68c905ba41d5590dc361b8a309e2c4af53e95822"
+        },
+        {
+          "name": "ipc",
+          "status": "passed",
+          "isolation_status": "passed",
+          "log": "emulator-candidate45za-ipc-command.log",
+          "apk_sha256": "17a87c7909af196941a6659a68c905ba41d5590dc361b8a309e2c4af53e95822"
+        },
+        {
+          "name": "metadrive-cancel",
+          "status": "passed",
+          "isolation_status": "passed",
+          "log": "emulator-candidate45za-metadrive-cancel-command.log",
+          "apk_sha256": "17a87c7909af196941a6659a68c905ba41d5590dc361b8a309e2c4af53e95822"
+        },
+        {
+          "name": "metadrive-stale",
+          "status": "passed",
+          "isolation_status": "passed",
+          "log": "emulator-candidate45za-metadrive-stale-command.log",
+          "apk_sha256": "17a87c7909af196941a6659a68c905ba41d5590dc361b8a309e2c4af53e95822"
+        },
+        {
+          "name": "thermal",
+          "status": "passed",
+          "isolation_status": "passed",
+          "log": "emulator-candidate45za-thermal-command.log",
+          "apk_sha256": "17a87c7909af196941a6659a68c905ba41d5590dc361b8a309e2c4af53e95822"
+        },
+        {
+          "name": "camera-timing",
+          "status": "failed",
+          "isolation_status": "passed",
+          "log": "emulator-candidate45za-camera-timing-command.log",
+          "apk_sha256": "17a87c7909af196941a6659a68c905ba41d5590dc361b8a309e2c4af53e95822"
+        }
+      ],
+      "retained_attempts": []
+    }
+  },
+  "accuracy_report": "candidate45za-accuracy.json",
+  "performance_report": "candidate45za-performance-comparison.json",
+  "combined_visual_workloads": {
+    "status": "blocked",
+    "stages": [
+      "30 seconds",
+      "2 minutes",
+      "30 minutes"
+    ],
+    "reason": "Accuracy, fresh camera input and timing must pass before advancement"
+  },
+  "physical_gates": {
+    "independent_rear_sensor_identity": "blocked",
+    "mounted_calibration": "blocked",
+    "Panda_firmware_passive_fingerprint_harness_vehicle": "blocked"
+  },
+  "cooling_optimization": "deferred",
+  "thermal_safeguards": "retained"
+}

@@ -1,0 +1,78 @@
+2026-11-01 18:45:38.790 python[69509:46821019] 2026-11-01 18:45:38.790319 [W:onnxruntime:, graph.cc:5777 CleanUnusedInitializersAndNodeArgs] Removing initializer 'model/p_val_6'. It is not used by any node and should be removed from the model.
+2026-11-01 18:45:39.082 python[69509:46821019] 2026-11-01 18:45:39.082610 [W:onnxruntime:, graph.cc:5777 CleanUnusedInitializersAndNodeArgs] Removing initializer 'model/p_val_6'. It is not used by any node and should be removed from the model.
+{
+  "dmonitoring_model": {
+    "captured_tensors": 32,
+    "first_tolerance_failure": {
+      "operator": "linear_raster_0",
+      "operator_type": "Raster",
+      "tensor": "fold3_half_gemv8_346_0",
+      "backend": "OpenCL",
+      "layout": "NCHW",
+      "dtype": "float32",
+      "shape": [
+        1,
+        512
+      ],
+      "file": "0024.bin",
+      "original": {
+        "tensor": "fold3_half_gemv8_346_0",
+        "node": "node_linear",
+        "operator": "Gemm",
+        "domain": ""
+      },
+      "parity": {
+        "passed": false,
+        "finite": true,
+        "shape": [
+          1,
+          512
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": false,
+        "max_abs_error": 0.0009765625,
+        "mismatched_elements": 3
+      },
+      "original_dtype": "float16"
+    }
+  },
+  "driving_supercombo": {
+    "captured_tensors": 32,
+    "first_tolerance_failure": {
+      "operator": "InsertedPrecisionFreeCast_model/add_24",
+      "operator_type": "BinaryOp",
+      "tensor": "InsertedPrecisionFreeCast_model/relu_34",
+      "backend": "OpenCL",
+      "layout": "NCHW",
+      "dtype": "float32",
+      "shape": [
+        1,
+        512
+      ],
+      "file": "0001.bin",
+      "original": {
+        "tensor": "InsertedPrecisionFreeCast_model/relu_34",
+        "node": "model/node_relu_34",
+        "operator": "Relu",
+        "domain": ""
+      },
+      "parity": {
+        "passed": false,
+        "finite": true,
+        "shape": [
+          1,
+          512
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": false,
+        "max_abs_error": 0.0017998218536376953,
+        "mismatched_elements": 3
+      },
+      "original_dtype": "float32"
+    }
+  }
+}

@@ -1,0 +1,1576 @@
+patching file 'src/layer/vulkan/innerproduct_vulkan.cpp'
+patching file 'src/layer/vulkan/innerproduct_vulkan.h'
+patching file 'src/layer/vulkan/shader/binaryop.comp'
+patching file 'src/layer/vulkan/shader/binaryop_pack4.comp'
+patching file 'src/layer/vulkan/shader/cast_fp32_to_fp16.comp'
+patching file 'src/layer/vulkan/shader/cast_fp32_to_fp16_pack4.comp'
+patching file 'src/layer/vulkan/shader/convolution_packed_1x1s1d1.comp'
+patching file 'src/layer/vulkan/shader/innerproduct.comp'
+patching file 'src/layer/vulkan/shader/reduction.comp'
+patching file 'src/layer/vulkan/shader/tanh.comp'
+patching file 'src/layer/vulkan/shader/convolutiondepthwise.comp'
+patching file 'src/layer/vulkan/shader/convolutiondepthwise_pack4.comp'
+patching file 'src/layer/vulkan/shader/convolution_packed.comp'
+patching file 'src/layer/vulkan/shader/innerproduct_pack4.comp'
+patching file 'src/layer/vulkan/shader/convolution_packed_gemm.comp'
+-- CMAKE_TOOLCHAIN_FILE = /Users/sergios/Library/Android/sdk/ndk/28.2.13676358/build/cmake/android.toolchain.cmake
+-- CMAKE_INSTALL_PREFIX = /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/android/install
+-- NCNN_VERSION_STRING = 1.0.20261104
+-- Target arch: arm 64bit
+-- Configuring done (1.7s)
+-- Generating done (0.2s)
+-- Build files have been written to: /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/android
+[1/626] Preprocessing shader source absval.comp
+[2/626] Preprocessing shader source batchnorm.comp
+[3/626] Preprocessing shader source batchnorm_pack4.comp
+[4/626] Preprocessing shader source binaryop.comp
+[5/626] Preprocessing shader source binaryop_broadcast.comp
+[6/626] Preprocessing shader source binaryop_broadcast_pack1to4.comp
+[7/626] Preprocessing shader source binaryop_broadcast_pack4.comp
+[8/626] Preprocessing shader source binaryop_pack4.comp
+[9/626] Preprocessing shader source cast_fp16_to_fp32.comp
+[10/626] Preprocessing shader source cast_fp32_to_fp16.comp
+[11/626] Preprocessing shader source cast_fp32_to_fp16_pack4.comp
+[12/626] Preprocessing shader source cast_fp16_to_fp32_pack4.comp
+[13/626] Preprocessing shader source celu.comp
+[14/626] Preprocessing shader source clip.comp
+[15/626] Preprocessing shader source concat.comp
+[16/626] Preprocessing shader source concat_pack4.comp
+[17/626] Preprocessing shader source convert_ycbcr.comp
+[18/626] Preprocessing shader source concat_pack4to1.comp
+[19/626] Preprocessing shader source convolution1d_packed.comp
+[20/626] Preprocessing shader source convolution1d_packed_1x1s1d1.comp
+[21/626] Preprocessing shader source convolution1d_packed_gemm.comp
+[22/626] Preprocessing shader source convolution1d_1x1s1d1_cm.comp
+[23/626] Preprocessing shader source convolution1d_gemm_cm.comp
+[24/626] Preprocessing shader source convolution_1x1s1d1_cm.comp
+[25/626] Preprocessing shader source convolution_1x1s1d1_int8_cm.comp
+[26/626] Preprocessing shader source convolution_3x3s1d1_winograd23_transform_input.comp
+[27/626] Preprocessing shader source convolution_3x3s1d1_winograd23_transform_input_int8.comp
+[28/626] Preprocessing shader source convolution_3x3s1d1_winograd23_transform_input_int8_cm.comp
+[29/626] Preprocessing shader source convolution_3x3s1d1_winograd23_transform_output.comp
+[30/626] Preprocessing shader source convolution_3x3s1d1_winograd23_transform_output_int8.comp
+[31/626] Preprocessing shader source convolution_3x3s1d1_winograd43_transform_input.comp
+[32/626] Preprocessing shader source convolution_3x3s1d1_winograd43_transform_input_int8.comp
+[33/626] Preprocessing shader source convolution_3x3s1d1_winograd_gemm.comp
+[34/626] Preprocessing shader source convolution_3x3s1d1_winograd43_transform_output.comp
+[35/626] Preprocessing shader source convolution_3x3s1d1_winograd43_transform_input_int8_cm.comp
+[36/626] Preprocessing shader source convolution_3x3s1d1_winograd43_transform_output_int8.comp
+[37/626] Preprocessing shader source convolution_3x3s1d1_winograd_gemm_int8.comp
+[38/626] Preprocessing shader source convolution_3x3s1d1_winograd_gemm_int8_cm.comp
+[39/626] Preprocessing shader source convolution_pack1to4_3x3s1d1_winograd_gemm.comp
+[40/626] Preprocessing shader source convolution_gemm_cm.comp
+[41/626] Preprocessing shader source convolution_gemm_int8_cm.comp
+[42/626] Preprocessing shader source convolution_pack4_3x3s1d1_winograd23_transform_input.comp
+[43/626] Preprocessing shader source convolution_pack4_3x3s1d1_winograd23_transform_input_int8.comp
+[44/626] Preprocessing shader source convolution_pack4_3x3s1d1_winograd23_transform_output.comp
+[45/626] Preprocessing shader source convolution_pack4_3x3s1d1_winograd23_transform_input_int8_cm.comp
+[46/626] Preprocessing shader source convolution_pack4_3x3s1d1_winograd23_transform_output_int8.comp
+[47/626] Preprocessing shader source convolution_pack4_3x3s1d1_winograd43_transform_input.comp
+[48/626] Preprocessing shader source convolution_pack4_3x3s1d1_winograd43_transform_input_int8.comp
+[49/626] Preprocessing shader source convolution_pack4_3x3s1d1_winograd_gemm.comp
+[50/626] Preprocessing shader source convolution_pack4_3x3s1d1_winograd43_transform_input_int8_cm.comp
+[51/626] Preprocessing shader source convolution_pack4_3x3s1d1_winograd43_transform_output.comp
+[52/626] Preprocessing shader source convolution_pack4_3x3s1d1_winograd43_transform_output_int8.comp
+[53/626] Preprocessing shader source convolution_pack4to1_3x3s1d1_winograd_gemm.comp
+[54/626] Preprocessing shader source convolution_packed_1x1s1d1.comp
+[55/626] Preprocessing shader source convolution_packed.comp
+[56/626] Preprocessing shader source convolution_packed_1x1s1d1_int8.comp
+[57/626] Preprocessing shader source convolution_packed_gemm.comp
+[58/626] Preprocessing shader source convolution_packed_int8.comp
+[59/626] Preprocessing shader source convolutiondepthwise.comp
+[60/626] Preprocessing shader source convolution_packed_gemm_int8.comp
+[61/626] Preprocessing shader source convolutiondepthwise_group.comp
+[62/626] Preprocessing shader source convolutiondepthwise_group_pack4.comp
+[63/626] Preprocessing shader source convolutiondepthwise_group_pack1to4.comp
+[64/626] Preprocessing shader source convolution_winograd_gemm_cm.comp
+[65/626] Preprocessing shader source convolutiondepthwise_group_pack4to1.comp
+[66/626] Preprocessing shader source convolutiondepthwise_group_packed_int8.comp
+[67/626] Preprocessing shader source convolutiondepthwise_int8.comp
+[68/626] Preprocessing shader source convolutiondepthwise_pack4.comp
+[69/626] Preprocessing shader source convolutiondepthwise_pack4_int8.comp
+[70/626] Preprocessing shader source crop.comp
+[71/626] Preprocessing shader source crop_pack1to4.comp
+[72/626] Preprocessing shader source crop_pack4.comp
+[73/626] Preprocessing shader source deconvolution_col2im.comp
+[74/626] Preprocessing shader source crop_pack4to1.comp
+[75/626] Preprocessing shader source deconvolution_gemm_cm.comp
+[76/626] Preprocessing shader source deconvolution_pack4_col2im.comp
+[77/626] Preprocessing shader source deconvolution_gemm_packed.comp
+[78/626] Preprocessing shader source deconvolution_packed.comp
+[79/626] Preprocessing shader source deconvolutiondepthwise_group.comp
+[80/626] Preprocessing shader source deconvolutiondepthwise_group_pack1to4.comp
+[81/626] Preprocessing shader source deconvolutiondepthwise_group_pack4.comp
+[82/626] Preprocessing shader source deconvolutiondepthwise.comp
+[83/626] Preprocessing shader source deconvolutiondepthwise_group_pack4to1.comp
+[84/626] Preprocessing shader source deconvolutiondepthwise_pack4.comp
+[85/626] Preprocessing shader source deepcopy.comp
+[86/626] Preprocessing shader source deepcopy_pack4.comp
+[87/626] Preprocessing shader source dequantize.comp
+[88/626] Preprocessing shader source dequantize_pack4.comp
+[89/626] Preprocessing shader source dropout.comp
+[90/626] Preprocessing shader source eltwise.comp
+[91/626] Preprocessing shader source elu.comp
+[92/626] Preprocessing shader source erf.comp
+[93/626] Preprocessing shader source flatten.comp
+[94/626] Preprocessing shader source flatten_int8.comp
+[95/626] Preprocessing shader source flatten_pack1to4.comp
+[96/626] Preprocessing shader source flatten_pack1to4_int8.comp
+[97/626] Preprocessing shader source flatten_pack4.comp
+[98/626] Preprocessing shader source flatten_pack4_int8.comp
+[99/626] Preprocessing shader source gelu.comp
+[100/626] Preprocessing shader source gemm.comp
+[101/626] Preprocessing shader source gemm_int8.comp
+[102/626] Preprocessing shader source gemm_int8_cm.comp
+[103/626] Preprocessing shader source gemm_quantize_A_int8.comp
+[104/626] Preprocessing shader source gemm_quantize_A_packed_int8.comp
+[105/626] Preprocessing shader source gemm_quantize_B_absmax_int8.comp
+[106/626] Preprocessing shader source gemm_quantize_B_descale_int8.comp
+[107/626] Preprocessing shader source gemm_quantize_B_int8.comp
+[108/626] Preprocessing shader source gemm_quantize_B_packed_int8.comp
+[109/626] Preprocessing shader source groupnorm_coeffs_pack4.comp
+[110/626] Preprocessing shader source groupnorm_coeffs.comp
+[111/626] Preprocessing shader source gemm_sg.comp
+[112/626] Preprocessing shader source groupnorm_norm.comp
+[113/626] Preprocessing shader source groupnorm_norm_pack4.comp
+[114/626] Preprocessing shader source groupnorm_reduce_mean.comp
+[115/626] Preprocessing shader source groupnorm_reduce_mean_pack4.comp
+[116/626] Preprocessing shader source groupnorm_reduce_subgroup.comp
+[117/626] Preprocessing shader source gemm_cm.comp
+[118/626] Preprocessing shader source groupnorm_reduce_sum4_fp16_to_fp32.comp
+[119/626] Preprocessing shader source groupnorm_reduce_subgroup_pack4.comp
+[120/626] Preprocessing shader source groupnorm_reduce_sum4_fp32.comp
+[121/626] Preprocessing shader source groupnorm_reduce_sum4_fp16_to_fp32_pack4.comp
+[122/626] Preprocessing shader source groupnorm_reduce_sum4_fp32_pack4.comp
+[123/626] Preprocessing shader source groupnorm_sub_mean_square.comp
+[124/626] Preprocessing shader source groupnorm_sub_mean_square_pack4.comp
+[125/626] Preprocessing shader source hardsigmoid.comp
+[126/626] Preprocessing shader source hardswish.comp
+[127/626] Preprocessing shader source innerproduct.comp
+[128/626] Preprocessing shader source innerproduct_gemm.comp
+[129/626] Preprocessing shader source innerproduct_gemm_wp1to4.comp
+[130/626] Preprocessing shader source innerproduct_gemm_wp4.comp
+[131/626] Preprocessing shader source innerproduct_gemm_int8.comp
+[132/626] Preprocessing shader source innerproduct_gemm_wp4to1.comp
+[133/626] Preprocessing shader source innerproduct_int8.comp
+[134/626] Preprocessing shader source innerproduct_pack1to4.comp
+[135/626] Preprocessing shader source innerproduct_pack4to1.comp
+[136/626] Preprocessing shader source innerproduct_pack4.comp
+[137/626] Preprocessing shader source innerproduct_reduce_sum8.comp
+[138/626] Preprocessing shader source innerproduct_reduce_sum8_int8.comp
+[139/626] Preprocessing shader source innerproduct_sum8.comp
+[140/626] Preprocessing shader source innerproduct_reduce_sum8_pack4.comp
+[141/626] Preprocessing shader source innerproduct_sum8_int8.comp
+[142/626] Preprocessing shader source innerproduct_sum8_pack1to4.comp
+[143/626] Preprocessing shader source innerproduct_sum8_pack4.comp
+[144/626] Preprocessing shader source innerproduct_sum8_pack4to1.comp
+[145/626] Preprocessing shader source instancenorm_coeffs.comp
+[146/626] Preprocessing shader source instancenorm_coeffs_pack4.comp
+[147/626] Preprocessing shader source instancenorm_norm.comp
+[148/626] Preprocessing shader source instancenorm_norm_pack4.comp
+[149/626] Preprocessing shader source instancenorm_reduce_mean.comp
+[150/626] Preprocessing shader source instancenorm_reduce_mean_pack4.comp
+[151/626] Preprocessing shader source instancenorm_reduce_subgroup_pack4.comp
+[152/626] Preprocessing shader source instancenorm_reduce_subgroup.comp
+[153/626] Preprocessing shader source instancenorm_reduce_sum4_fp16_to_fp32.comp
+[154/626] Preprocessing shader source instancenorm_reduce_sum4_fp16_to_fp32_pack4.comp
+[155/626] Preprocessing shader source instancenorm_reduce_sum4_fp32_pack4.comp
+[156/626] Preprocessing shader source instancenorm_reduce_sum4_fp32.comp
+[157/626] Preprocessing shader source instancenorm_sub_mean_square.comp
+[158/626] Preprocessing shader source instancenorm_sub_mean_square_pack4.comp
+[159/626] Preprocessing shader source interp_bicubic.comp
+[160/626] Preprocessing shader source interp.comp
+[161/626] Preprocessing shader source interp_bicubic_pack4.comp
+[162/626] Preprocessing shader source interp_bicubic_coeffs.comp
+[163/626] Preprocessing shader source layernorm_coeffs.comp
+[164/626] Preprocessing shader source interp_pack4.comp
+[165/626] Preprocessing shader source layernorm_coeffs_pack4.comp
+[166/626] Preprocessing shader source layernorm_reduce_mean.comp
+[167/626] Preprocessing shader source layernorm_norm.comp
+[168/626] Preprocessing shader source layernorm_norm_pack4.comp
+[169/626] Preprocessing shader source layernorm_reduce_mean_pack4.comp
+[170/626] Preprocessing shader source layernorm_reduce_subgroup.comp
+[171/626] Preprocessing shader source layernorm_reduce_subgroup_pack4.comp
+[172/626] Preprocessing shader source layernorm_reduce_sum4_fp16_to_fp32.comp
+[173/626] Preprocessing shader source layernorm_reduce_sum4_fp16_to_fp32_pack4.comp
+[174/626] Preprocessing shader source layernorm_reduce_sum4_fp32.comp
+[175/626] Preprocessing shader source layernorm_reduce_sum4_fp32_pack4.comp
+[176/626] Preprocessing shader source layernorm_sub_mean_square.comp
+[177/626] Preprocessing shader source layernorm_sub_mean_square_pack4.comp
+[178/626] Preprocessing shader source lrn_norm.comp
+[179/626] Preprocessing shader source lrn_norm_across_channel_pack4.comp
+[180/626] Preprocessing shader source lrn_norm_within_channel_pack4.comp
+[181/626] Preprocessing shader source lrn_square_pad.comp
+[182/626] Preprocessing shader source lrn_square_pad_across_channel_pack4.comp
+[183/626] Preprocessing shader source lrn_square_pad_within_channel_pack4.comp
+[184/626] Preprocessing shader source mish.comp
+[185/626] Preprocessing shader source multiheadattention_kvcache_append.comp
+[186/626] Preprocessing shader source multiheadattention_kvcache_copy.comp
+[187/626] Preprocessing shader source multiheadattention_kvcache_qk.comp
+[188/626] Preprocessing shader source multiheadattention_kvcache_qkv.comp
+[189/626] Preprocessing shader source multiheadattention_qk_cross_pack1to4.comp
+[190/626] Preprocessing shader source multiheadattention_qk_cross.comp
+[191/626] Preprocessing shader source multiheadattention_qk_cross_pack4.comp
+[192/626] Preprocessing shader source multiheadattention_qk_cross_pack4to1.comp
+[193/626] Preprocessing shader source multiheadattention_qkv_cross.comp
+[194/626] Preprocessing shader source multiheadattention_qkv_cross_pack1to4.comp
+[195/626] Preprocessing shader source multiheadattention_qkv_cross_pack4.comp
+[196/626] Preprocessing shader source multiheadattention_qkv_cross_pack4to1.comp
+[197/626] Preprocessing shader source normalize_coeffs.comp
+[198/626] Preprocessing shader source normalize_coeffs_pack4.comp
+[199/626] Preprocessing shader source normalize_norm.comp
+[200/626] Preprocessing shader source normalize_reduce_sum4_fp16_to_fp32.comp
+[201/626] Preprocessing shader source ncnn_glsl_ext.comp
+[202/626] Preprocessing shader source normalize_norm_pack4.comp
+[203/626] Preprocessing shader source normalize_reduce_sum4_fp16_to_fp32_pack4.comp
+[204/626] Preprocessing shader source packing.comp
+[205/626] Preprocessing shader source normalize_reduce_sum4_fp32.comp
+[206/626] Preprocessing shader source packing_int8.comp
+[207/626] Preprocessing shader source packing_pack1to4.comp
+[208/626] Preprocessing shader source packing_pack1to4_int8.comp
+[209/626] Preprocessing shader source normalize_reduce_sum4_fp32_pack4.comp
+[210/626] Preprocessing shader source packing_pack4to1.comp
+[211/626] Preprocessing shader source packing_pack4to1_int8.comp
+[212/626] Preprocessing shader source padding_3d.comp
+[213/626] Preprocessing shader source padding.comp
+[214/626] Preprocessing shader source padding_3d_int8.comp
+[215/626] Preprocessing shader source padding_3d_pack4.comp
+[216/626] Preprocessing shader source padding_3d_pack4_int8.comp
+[217/626] Preprocessing shader source padding_int8.comp
+[218/626] Preprocessing shader source padding_pack1to4.comp
+[219/626] Preprocessing shader source padding_pack1to4_int8.comp
+[220/626] Preprocessing shader source padding_pack4.comp
+[221/626] Preprocessing shader source padding_pack4_int8.comp
+[222/626] Preprocessing shader source padding_pack4to1.comp
+[223/626] Preprocessing shader source padding_pack4to1_int8.comp
+[224/626] Preprocessing shader source permute.comp
+[225/626] Preprocessing shader source permute_pack1to4.comp
+[226/626] Preprocessing shader source permute_pack4to1.comp
+[227/626] Preprocessing shader source permute_pack4.comp
+[228/626] Preprocessing shader source pixelshuffle.comp
+[229/626] Preprocessing shader source pixelshuffle_pack4to1.comp
+[230/626] Preprocessing shader source pooling.comp
+[231/626] Preprocessing shader source pixelshuffle_pack4.comp
+[232/626] Preprocessing shader source pooling_adaptive.comp
+[233/626] Preprocessing shader source pooling_adaptive_pack4.comp
+[234/626] Preprocessing shader source pooling_global_reduce_max_first.comp
+[235/626] Preprocessing shader source pooling_global_reduce_max.comp
+[236/626] Preprocessing shader source pooling_global_reduce_max_first_pack4.comp
+[237/626] Preprocessing shader source pooling_global_reduce_max_last.comp
+[238/626] Preprocessing shader source pooling_global_reduce_max_last_pack4.comp
+[239/626] Preprocessing shader source pooling_global_reduce_max_pack4.comp
+[240/626] Preprocessing shader source pooling_global_reduce_sum_first.comp
+[241/626] Preprocessing shader source pooling_global_reduce_sum.comp
+[242/626] Preprocessing shader source pooling_global_reduce_sum_last.comp
+[243/626] Preprocessing shader source pooling_global_reduce_sum_first_pack4.comp
+[244/626] Preprocessing shader source pooling_global_reduce_sum_last_pack4.comp
+[245/626] Preprocessing shader source pooling_global_reduce_sum_pack4.comp
+[246/626] Preprocessing shader source pooling_pack4.comp
+[247/626] Preprocessing shader source prelu.comp
+[248/626] Preprocessing shader source prelu_pack4.comp
+[249/626] Preprocessing shader source priorbox.comp
+[250/626] Preprocessing shader source priorbox_mxnet.comp
+[251/626] Preprocessing shader source quantize.comp
+[252/626] Preprocessing shader source quantize_pack4.comp
+[253/626] Preprocessing shader source relu.comp
+[254/626] Preprocessing shader source reorg.comp
+[255/626] Preprocessing shader source reduction.comp
+[256/626] Preprocessing shader source reorg_pack1to4.comp
+[257/626] Preprocessing shader source reorg_pack4.comp
+[258/626] Preprocessing shader source requantize_pack4.comp
+[259/626] Preprocessing shader source requantize.comp
+[260/626] Preprocessing shader source reshape_batch_reorder.comp
+[261/626] Preprocessing shader source reshape.comp
+[262/626] Preprocessing shader source reshape_batch_reorder_pack1to4.comp
+[263/626] Preprocessing shader source reshape_batch_reorder_pack4.comp
+[264/626] Preprocessing shader source reshape_pack1to4.comp
+[265/626] Preprocessing shader source reshape_batch_reorder_pack4to1.comp
+[266/626] Preprocessing shader source reshape_pack4.comp
+[267/626] Preprocessing shader source rmsnorm_coeffs_pack4.comp
+[268/626] Preprocessing shader source reshape_pack4to1.comp
+[269/626] Preprocessing shader source rmsnorm_coeffs.comp
+[270/626] Preprocessing shader source rmsnorm_norm.comp
+[271/626] Preprocessing shader source rmsnorm_reduce_subgroup.comp
+[272/626] Preprocessing shader source rmsnorm_norm_pack4.comp
+[273/626] Preprocessing shader source rmsnorm_reduce_subgroup_pack4.comp
+[274/626] Preprocessing shader source rmsnorm_square_pack4.comp
+[275/626] Preprocessing shader source rmsnorm_square.comp
+[276/626] Preprocessing shader source rotaryembed.comp
+[277/626] Preprocessing shader source scale.comp
+[278/626] Preprocessing shader source rotaryembed_pack4.comp
+[279/626] Preprocessing shader source scale_pack4.comp
+[280/626] Preprocessing shader source sdpa_cross.comp
+[281/626] Preprocessing shader source sdpa_fa.comp
+[282/626] Preprocessing shader source sdpa_kvcache_append.comp
+[283/626] Preprocessing shader source sdpa_kvcache_copy.comp
+[284/626] Preprocessing shader source selu.comp
+[285/626] Preprocessing shader source shrink.comp
+[286/626] Preprocessing shader source shufflechannel.comp
+[287/626] Preprocessing shader source shufflechannel_pack4.comp
+[288/626] Preprocessing shader source sdpa_fa_cm.comp
+[289/626] Preprocessing shader source sigmoid.comp
+[290/626] Preprocessing shader source slice.comp
+[291/626] Preprocessing shader source slice_pack1to4.comp
+[292/626] Preprocessing shader source slice_pack4.comp
+[293/626] Preprocessing shader source softmax_div_sum.comp
+[294/626] Preprocessing shader source softmax_div_sum_pack4.comp
+[295/626] Preprocessing shader source softmax_exp_sub_max.comp
+[296/626] Preprocessing shader source softmax_exp_sub_max_pack4.comp
+[297/626] Preprocessing shader source softmax_reduce_max.comp
+[298/626] Preprocessing shader source softmax_reduce_sum.comp
+[299/626] Preprocessing shader source softmax_reduce_max_pack4.comp
+[300/626] Preprocessing shader source softplus.comp
+[301/626] Preprocessing shader source softmax_reduce_sum_pack4.comp
+[302/626] Preprocessing shader source swish.comp
+[303/626] Preprocessing shader source sdpa_cross_cm.comp
+[304/626] Preprocessing shader source tile.comp
+[305/626] Preprocessing shader source tanh.comp
+[306/626] Preprocessing shader source tile_pack4.comp
+[307/626] Preprocessing shader source unaryop.comp
+[308/626] Preprocessing shader source unfold_im2col_pack1to4.comp
+[309/626] Preprocessing shader source unfold_im2col.comp
+[310/626] Preprocessing shader source unfold_im2col_pack4.comp
+[311/626] Preprocessing shader source unfold_im2col_pack4to1.comp
+[312/626] Preprocessing shader source vulkan_activation.comp
+[313/626] Building CXX object src/CMakeFiles/ncnn.dir/blob.cpp.o
+[314/626] Building CXX object src/CMakeFiles/ncnn.dir/benchmark.cpp.o
+[315/626] Building CXX object src/CMakeFiles/ncnn.dir/c_api.cpp.o
+[316/626] Building CXX object src/CMakeFiles/ncnn.dir/allocator.cpp.o
+[317/626] Building CXX object src/CMakeFiles/ncnn.dir/cpu.cpp.o
+[318/626] Building CXX object src/CMakeFiles/ncnn.dir/datareader.cpp.o
+[319/626] Building CXX object src/CMakeFiles/ncnn.dir/command.cpp.o
+[320/626] Building CXX object src/CMakeFiles/ncnn.dir/expression.cpp.o
+[321/626] Building CXX object src/CMakeFiles/ncnn.dir/layer.cpp.o
+In file included from /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer.cpp:10:
+In file included from /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/android/src/layer_declaration.h:313:
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/vulkan/noop_vulkan.h:17:17: warning: 'ncnn::Noop_vulkan::forward_inplace' hides overloaded virtual function [-Woverloaded-virtual]
+   17 |     virtual int forward_inplace(std::vector<VkMat>& bottom_top_blobs, VkCompute& cmd, const Option& opt) const;
+      |                 ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/noop.h:16:17: note: hidden overloaded virtual function 'ncnn::Noop::forward_inplace' declared here: different number of parameters (2 vs 3)
+   16 |     virtual int forward_inplace(std::vector<Mat>& bottom_top_blobs, const Option& opt) const;
+      |                 ^
+1 warning generated.
+[322/626] Building CXX object src/CMakeFiles/ncnn.dir/mat.cpp.o
+[323/626] Building CXX object src/CMakeFiles/ncnn.dir/mat_pixel_affine.cpp.o
+[324/626] Building CXX object src/CMakeFiles/ncnn.dir/mat_pixel.cpp.o
+[325/626] Building CXX object src/CMakeFiles/ncnn.dir/mat_pixel_drawing.cpp.o
+[326/626] Building CXX object src/CMakeFiles/ncnn.dir/mat_pixel_resize.cpp.o
+[327/626] Building CXX object src/CMakeFiles/ncnn.dir/modelbin.cpp.o
+[328/626] Building CXX object src/CMakeFiles/ncnn.dir/option.cpp.o
+[329/626] Building CXX object src/CMakeFiles/ncnn.dir/gpu.cpp.o
+[330/626] Building CXX object src/CMakeFiles/ncnn.dir/mat_pixel_rotate.cpp.o
+[331/626] Building CXX object src/CMakeFiles/ncnn.dir/pipeline.cpp.o
+[332/626] Building CXX object src/CMakeFiles/ncnn.dir/paramdict.cpp.o
+[333/626] Building CXX object src/CMakeFiles/ncnn.dir/simpleocv.cpp.o
+[334/626] Building CXX object src/CMakeFiles/ncnn.dir/simpleomp.cpp.o
+[335/626] Building CXX object src/CMakeFiles/ncnn.dir/pipelinecache.cpp.o
+[336/626] Building CXX object src/CMakeFiles/ncnn.dir/net.cpp.o
+[337/626] Building CXX object src/CMakeFiles/ncnn.dir/simplestl.cpp.o
+[338/626] Building CXX object src/CMakeFiles/ncnn.dir/simplemath.cpp.o
+[339/626] Building CXX object src/CMakeFiles/ncnn.dir/simplevk.cpp.o
+[340/626] Building CXX object src/CMakeFiles/ncnn.dir/mat_pixel_android.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/mat_pixel_android.cpp:25:9: warning: variable 'elempack' set but not used [-Wunused-but-set-variable]
+   25 |     int elempack;
+      |         ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/mat_pixel_android.cpp:64:9: warning: variable 'elempack' set but not used [-Wunused-but-set-variable]
+   64 |     int elempack;
+      |         ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/mat_pixel_android.cpp:103:9: warning: variable 'elempack' set but not used [-Wunused-but-set-variable]
+  103 |     int elempack;
+      |         ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/mat_pixel_android.cpp:142:9: warning: variable 'elempack' set but not used [-Wunused-but-set-variable]
+  142 |     int elempack;
+      |         ^
+4 warnings generated.
+[341/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/absval.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/absval.cpp:14:65: warning: unused parameter 'opt' [-Wunused-parameter]
+   14 | int AbsVal::forward_inplace(Mat& bottom_top_blob, const Option& opt) const
+      |                                                                 ^
+1 warning generated.
+[342/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/absval_arm.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/absval_arm.cpp:19:69: warning: unused parameter 'opt' [-Wunused-parameter]
+   19 | int AbsVal_arm::forward_inplace(Mat& bottom_top_blob, const Option& opt) const
+      |                                                                     ^
+1 warning generated.
+[343/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/vulkan/absval_vulkan.cpp.o
+[344/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/batchnorm.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/batchnorm.cpp:59:68: warning: unused parameter 'opt' [-Wunused-parameter]
+   59 | int BatchNorm::forward_inplace(Mat& bottom_top_blob, const Option& opt) const
+      |                                                                    ^
+1 warning generated.
+[345/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/batchnorm_arm.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/batchnorm_arm.cpp:243:78: warning: unused parameter 'opt' [-Wunused-parameter]
+  243 | int BatchNorm_arm::forward_inplace_bf16s(Mat& bottom_top_blob, const Option& opt) const
+      |                                                                              ^
+1 warning generated.
+[346/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/vulkan/batchnorm_vulkan.cpp.o
+[347/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/batchnorm_arm_asimdhp.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/batchnorm_arm_asimdhp.cpp:15:78: warning: unused parameter 'opt' [-Wunused-parameter]
+   15 | int BatchNorm_arm::forward_inplace_fp16s(Mat& bottom_top_blob, const Option& opt) const
+      |                                                                              ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/batchnorm_arm_asimdhp.cpp:181:79: warning: unused parameter 'opt' [-Wunused-parameter]
+  181 | int BatchNorm_arm::forward_inplace_fp16sa(Mat& bottom_top_blob, const Option& opt) const
+      |                                                                               ^
+2 warnings generated.
+[348/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/bias.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/bias.cpp:30:63: warning: unused parameter 'opt' [-Wunused-parameter]
+   30 | int Bias::forward_inplace(Mat& bottom_top_blob, const Option& opt) const
+      |                                                               ^
+1 warning generated.
+[349/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/bias_arm.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/bias_arm.cpp:12:67: warning: unused parameter 'opt' [-Wunused-parameter]
+   12 | int Bias_arm::forward_inplace(Mat& bottom_top_blob, const Option& opt) const
+      |                                                                   ^
+1 warning generated.
+[350/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/bnll.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/bnll.cpp:14:63: warning: unused parameter 'opt' [-Wunused-parameter]
+   14 | int BNLL::forward_inplace(Mat& bottom_top_blob, const Option& opt) const
+      |                                                               ^
+1 warning generated.
+[351/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/concat.cpp.o
+[352/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/concat_arm.cpp.o
+[353/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/vulkan/concat_vulkan.cpp.o
+[354/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/convolution.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/convolution.cpp:156:262: warning: unused parameter 'opt' [-Wunused-parameter]
+  156 | static int convolution(const Mat& bottom_blob, Mat& top_blob, const Mat& weight_data, const Mat& bias_data, int kernel_w, int kernel_h, int stride_w, int stride_h, int dilation_w, int dilation_h, int activation_type, const Mat& activation_params, const Option& opt)
+      |                                                                                                                                                                                                                                                                      ^
+1 warning generated.
+[355/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/convolution_arm_asimddp.cpp.o
+[356/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/vulkan/convolution_vulkan.cpp.o
+[357/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/convolution_arm_bf16.cpp.o
+In file included from /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution_arm_bf16.cpp:12:
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution_im2col_gemm_bf16s.h:1809:219: warning: unused parameter 'use_a53_a55_optimized_kernel' [-Wunused-parameter]
+ 1809 | static void convolution_gemm_transB_packed_tile_bf16s(const Mat& AT_tile, const Mat& BT_tile, const Mat& CT_tile, Mat& topT_tile, Mat& top_blob, int i, int max_ii, int j, int max_jj, int k, int max_kk, bool k_end, int use_a53_a55_optimized_kernel)
+      |                                                                                                                                                                                                                           ^
+1 warning generated.
+[358/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/crop.cpp.o
+[359/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/convolution_arm_i8mm.cpp.o
+In file included from /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution_arm_i8mm.cpp:9:
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution_packed_int8.h:517:205: warning: unused parameter 'opt' [-Wunused-parameter]
+  517 | static void convolution_packed_int8(const Mat& bottom_blob, Mat& top_blob, const Mat& weight_data_tm, int kernel_w, int kernel_h, int dilation_w, int dilation_h, int stride_w, int stride_h, const Option& opt)
+      |                                                                                                                                                                                                             ^
+1 warning generated.
+[360/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/convolution_arm_asimdhp.cpp.o
+In file included from /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution_arm_asimdhp.cpp:19:
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution_packed_fp16s.h:445:279: warning: unused parameter 'opt' [-Wunused-parameter]
+  445 | static void convolution_packed_fp16s(const Mat& bottom_blob, Mat& top_blob, const Mat& weight_data_tm, const Mat& bias_data, int kernel_w, int kernel_h, int dilation_w, int dilation_h, int stride_w, int stride_h, int activation_type, const Mat& activation_params, const Option& opt)
+      |                                                                                                                                                                                                                                                                                       ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution_packed_fp16s.h:1220:280: warning: unused parameter 'opt' [-Wunused-parameter]
+ 1220 | static void convolution_packed_fp16sa(const Mat& bottom_blob, Mat& top_blob, const Mat& weight_data_tm, const Mat& bias_data, int kernel_w, int kernel_h, int dilation_w, int dilation_h, int stride_w, int stride_h, int activation_type, const Mat& activation_params, const Option& opt)
+      |                                                                                                                                                                                                                                                                                        ^
+In file included from /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution_arm_asimdhp.cpp:21:
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution_3x3_winograd_fp16s.h:75:121: warning: unused parameter 'nT' [-Wunused-parameter]
+   75 | static void conv3x3s1_winograd_transpose_pack_B_tile_fp16(const Mat& B, Mat& BT, int batch, int max_jj, int max_kk, int nT)
+      |                                                                                                                         ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution_3x3_winograd_fp16s.h:2136:143: warning: unused parameter 'nT' [-Wunused-parameter]
+ 2136 | static inline void conv3x3s1_winograd23_transform_input_tile_fp16sa(const Mat& bottom_blob, Mat& B, int j, int max_jj, int k, int max_kk, int nT)
+      |                                                                                                                                               ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution_3x3_winograd_fp16s.h:3136:143: warning: unused parameter 'nT' [-Wunused-parameter]
+ 3136 | static inline void conv3x3s1_winograd43_transform_input_tile_fp16sa(const Mat& bottom_blob, Mat& B, int j, int max_jj, int k, int max_kk, int nT)
+      |                                                                                                                                               ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution_3x3_winograd_fp16s.h:4499:143: warning: unused parameter 'nT' [-Wunused-parameter]
+ 4499 | static inline void conv3x3s1_winograd63_transform_input_tile_fp16sa(const Mat& bottom_blob, Mat& B, int j, int max_jj, int k, int max_kk, int nT)
+      |                                                                                                                                               ^
+In file included from /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution_arm_asimdhp.cpp:26:
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution_3x3_pack4_fp16s.h:4:131: warning: unused parameter 'opt' [-Wunused-parameter]
+    4 | static void conv3x3s1_pack4_fp16sa_neon(const Mat& bottom_blob, Mat& top_blob, const Mat& kernel, const Mat& _bias, const Option& opt)
+      |                                                                                                                                   ^
+In file included from /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution_arm_asimdhp.cpp:27:
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution_3x3_pack1to8_fp16s.h:4:134: warning: unused parameter 'opt' [-Wunused-parameter]
+    4 | static void conv3x3s1_pack1to8_fp16sa_neon(const Mat& bottom_blob, Mat& top_blob, const Mat& kernel, const Mat& _bias, const Option& opt)
+      |                                                                                                                                      ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution_3x3_pack1to8_fp16s.h:383:134: warning: unused parameter 'opt' [-Wunused-parameter]
+  383 | static void conv3x3s2_pack1to8_fp16sa_neon(const Mat& bottom_blob, Mat& top_blob, const Mat& kernel, const Mat& _bias, const Option& opt)
+      |                                                                                                                                      ^
+In file included from /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution_arm_asimdhp.cpp:28:
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution_3x3_pack1to4_fp16s.h:4:134: warning: unused parameter 'opt' [-Wunused-parameter]
+    4 | static void conv3x3s1_pack1to4_fp16sa_neon(const Mat& bottom_blob, Mat& top_blob, const Mat& kernel, const Mat& _bias, const Option& opt)
+      |                                                                                                                                      ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution_3x3_pack1to4_fp16s.h:383:134: warning: unused parameter 'opt' [-Wunused-parameter]
+  383 | static void conv3x3s2_pack1to4_fp16sa_neon(const Mat& bottom_blob, Mat& top_blob, const Mat& kernel, const Mat& _bias, const Option& opt)
+      |                                                                                                                                      ^
+In file included from /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution_arm_asimdhp.cpp:29:
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution_3x3_pack8_fp16s.h:4:131: warning: unused parameter 'opt' [-Wunused-parameter]
+    4 | static void conv3x3s1_pack8_fp16sa_neon(const Mat& bottom_blob, Mat& top_blob, const Mat& kernel, const Mat& _bias, const Option& opt)
+      |                                                                                                                                   ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution_3x3_pack8_fp16s.h:966:131: warning: unused parameter 'opt' [-Wunused-parameter]
+  966 | static void conv3x3s2_pack8_fp16sa_neon(const Mat& bottom_blob, Mat& top_blob, const Mat& kernel, const Mat& _bias, const Option& opt)
+      |                                                                                                                                   ^
+In file included from /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution_arm_asimdhp.cpp:30:
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution_5x5_pack8_fp16s.h:4:131: warning: unused parameter 'opt' [-Wunused-parameter]
+    4 | static void conv5x5s1_pack8_fp16sa_neon(const Mat& bottom_blob, Mat& top_blob, const Mat& kernel, const Mat& _bias, const Option& opt)
+      |                                                                                                                                   ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution_5x5_pack8_fp16s.h:2253:131: warning: unused parameter 'opt' [-Wunused-parameter]
+ 2253 | static void conv5x5s2_pack8_fp16sa_neon(const Mat& bottom_blob, Mat& top_blob, const Mat& kernel, const Mat& _bias, const Option& opt)
+      |                                                                                                                                   ^
+In file included from /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution_arm_asimdhp.cpp:31:
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution_7x7_pack1to8_fp16s.h:4:134: warning: unused parameter 'opt' [-Wunused-parameter]
+    4 | static void conv7x7s2_pack1to8_fp16sa_neon(const Mat& bottom_blob, Mat& top_blob, const Mat& kernel, const Mat& _bias, const Option& opt)
+      |                                                                                                                                      ^
+16 warnings generated.
+[361/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/crop_arm.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/crop_arm.cpp:460:9: warning: unused variable 'ref_elempack' [-Wunused-variable]
+  460 |     int ref_elempack = reference_blob.elempack;
+      |         ^~~~~~~~~~~~
+1 warning generated.
+[362/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/deconvolution.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/deconvolution.cpp:110:264: warning: unused parameter 'opt' [-Wunused-parameter]
+  110 | static int deconvolution(const Mat& bottom_blob, Mat& top_blob, const Mat& weight_data, const Mat& bias_data, int kernel_w, int kernel_h, int stride_w, int stride_h, int dilation_w, int dilation_h, int activation_type, const Mat& activation_params, const Option& opt)
+      |                                                                                                                                                                                                                                                                        ^
+1 warning generated.
+[363/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/vulkan/crop_vulkan.cpp.o
+[364/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/deconvolution_arm.cpp.o
+In file included from /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/deconvolution_arm.cpp:19:
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/deconvolution_3x3.h:4:121: warning: unused parameter 'opt' [-Wunused-parameter]
+    4 | static void deconv3x3s1_neon(const Mat& bottom_blob, Mat& top_blob, const Mat& _kernel, const Mat& _bias, const Option& opt)
+      |                                                                                                                         ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/deconvolution_3x3.h:130:121: warning: unused parameter 'opt' [-Wunused-parameter]
+  130 | static void deconv3x3s2_neon(const Mat& bottom_blob, Mat& top_blob, const Mat& _kernel, const Mat& _bias, const Option& opt)
+      |                                                                                                                         ^
+In file included from /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/deconvolution_arm.cpp:20:
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/deconvolution_4x4.h:4:121: warning: unused parameter 'opt' [-Wunused-parameter]
+    4 | static void deconv4x4s1_neon(const Mat& bottom_blob, Mat& top_blob, const Mat& _kernel, const Mat& _bias, const Option& opt)
+      |                                                                                                                         ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/deconvolution_4x4.h:173:121: warning: unused parameter 'opt' [-Wunused-parameter]
+  173 | static void deconv4x4s2_neon(const Mat& bottom_blob, Mat& top_blob, const Mat& _kernel, const Mat& _bias, const Option& opt)
+      |                                                                                                                         ^
+4 warnings generated.
+[365/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/vulkan/deconvolution_vulkan.cpp.o
+[366/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/deconvolution_arm_asimdhp.cpp.o
+In file included from /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/deconvolution_arm_asimdhp.cpp:15:
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/deconvolution_4x4_fp16s.h:4:128: warning: unused parameter 'opt' [-Wunused-parameter]
+    4 | static void deconv4x4s2_fp16sa_neon(const Mat& bottom_blob, Mat& top_blob, const Mat& _kernel, const Mat& _bias, const Option& opt)
+      |                                                                                                                                ^
+1 warning generated.
+[367/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/dropout.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/dropout.cpp:21:66: warning: unused parameter 'opt' [-Wunused-parameter]
+   21 | int Dropout::forward_inplace(Mat& bottom_top_blob, const Option& opt) const
+      |                                                                  ^
+1 warning generated.
+[368/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/dropout_arm.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/dropout_arm.cpp:19:70: warning: unused parameter 'opt' [-Wunused-parameter]
+   19 | int Dropout_arm::forward_inplace(Mat& bottom_top_blob, const Option& opt) const
+      |                                                                      ^
+1 warning generated.
+[369/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/vulkan/dropout_vulkan.cpp.o
+[370/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/eltwise.cpp.o
+[371/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/vulkan/eltwise_vulkan.cpp.o
+[372/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/eltwise_arm.cpp.o
+[373/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/elu.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/elu.cpp:21:62: warning: unused parameter 'opt' [-Wunused-parameter]
+   21 | int ELU::forward_inplace(Mat& bottom_top_blob, const Option& opt) const
+      |                                                              ^
+1 warning generated.
+[374/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/eltwise_arm_asimdhp.cpp.o
+[375/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/elu_arm.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/elu_arm.cpp:87:72: warning: unused parameter 'opt' [-Wunused-parameter]
+   87 | int ELU_arm::forward_inplace_bf16s(Mat& bottom_top_blob, const Option& opt) const
+      |                                                                        ^
+1 warning generated.
+[376/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/vulkan/elu_vulkan.cpp.o
+[377/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/elu_arm_asimdhp.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/elu_arm_asimdhp.cpp:18:72: warning: unused parameter 'opt' [-Wunused-parameter]
+   18 | int ELU_arm::forward_inplace_fp16s(Mat& bottom_top_blob, const Option& opt) const
+      |                                                                        ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/elu_arm_asimdhp.cpp:68:73: warning: unused parameter 'opt' [-Wunused-parameter]
+   68 | int ELU_arm::forward_inplace_fp16sa(Mat& bottom_top_blob, const Option& opt) const
+      |                                                                         ^
+2 warnings generated.
+[378/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/embed.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/embed.cpp:50:133: warning: unused parameter 'opt' [-Wunused-parameter]
+   50 | static void embed(const Mat& bottom_blob, const Mat& weight_data, const Mat& bias_data, Mat& top_blob, int input_dim, const Option& opt)
+      |                                                                                                                                     ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/embed.cpp:86:168: warning: unused parameter 'opt' [-Wunused-parameter]
+   86 | static void embed_int8(const Mat& bottom_blob, const Mat& weight_data, float weight_data_int8_scale, const Mat& bias_data, Mat& top_blob, int input_dim, const Option& opt)
+      |                                                                                                                                                                        ^
+2 warnings generated.
+[379/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/exp.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/exp.cpp:23:62: warning: unused parameter 'opt' [-Wunused-parameter]
+   23 | int Exp::forward_inplace(Mat& bottom_top_blob, const Option& opt) const
+      |                                                              ^
+1 warning generated.
+[380/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/flatten.cpp.o
+[381/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/flatten_arm.cpp.o
+[382/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/vulkan/flatten_vulkan.cpp.o
+[383/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/innerproduct.cpp.o
+[384/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/innerproduct_arm_vfpv4.cpp.o
+[385/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/innerproduct_arm.cpp.o
+[386/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/vulkan/innerproduct_vulkan.cpp.o
+[387/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/innerproduct_arm_asimdfhm.cpp.o
+In file included from /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/innerproduct_arm_asimdfhm.cpp:17:
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/innerproduct_fp16s.h:16:198: warning: unused parameter 'opt' [-Wunused-parameter]
+   16 | static void innerproduct_pack4_fp16s_neon(const Mat& bottom_blob, Mat& top_blob, const Mat& weight_data_fp16, const Mat& bias_data, int activation_type, const Mat& activation_params, const Option& opt)
+      |                                                                                                                                                                                                      ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/innerproduct_fp16s.h:280:192: warning: unused parameter 'opt' [-Wunused-parameter]
+  280 | static void innerproduct_fp16s_neon(const Mat& bottom_blob, Mat& top_blob, const Mat& weight_data_fp16, const Mat& bias_data, int activation_type, const Mat& activation_params, const Option& opt)
+      |                                                                                                                                                                                                ^
+2 warnings generated.
+[388/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/innerproduct_arm_bf16.cpp.o
+In file included from /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/innerproduct_arm_bf16.cpp:18:
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/innerproduct_bf16s.h:11:198: warning: unused parameter 'opt' [-Wunused-parameter]
+   11 | static void innerproduct_pack4_bf16s_neon(const Mat& bottom_blob, Mat& top_blob, const Mat& weight_data_bf16, const Mat& bias_data, int activation_type, const Mat& activation_params, const Option& opt)
+      |                                                                                                                                                                                                      ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/innerproduct_bf16s.h:125:192: warning: unused parameter 'opt' [-Wunused-parameter]
+  125 | static void innerproduct_bf16s_neon(const Mat& bottom_blob, Mat& top_blob, const Mat& weight_data_bf16, const Mat& bias_data, int activation_type, const Mat& activation_params, const Option& opt)
+      |                                                                                                                                                                                                ^
+2 warnings generated.
+[389/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/innerproduct_arm_asimdhp.cpp.o
+[390/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/input.cpp.o
+[391/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/convolution_arm.cpp.o
+In file included from /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution_arm.cpp:20:
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution_1x1.h:4:119: warning: unused parameter 'opt' [-Wunused-parameter]
+    4 | static void conv1x1s1_neon(const Mat& bottom_blob, Mat& top_blob, const Mat& _kernel, const Mat& _bias, const Option& opt)
+      |                                                                                                                       ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution_1x1.h:1767:119: warning: unused parameter 'opt' [-Wunused-parameter]
+ 1767 | static void conv1x1s2_neon(const Mat& bottom_blob, Mat& top_blob, const Mat& _kernel, const Mat& _bias, const Option& opt)
+      |                                                                                                                       ^
+In file included from /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution_arm.cpp:21:
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution_2x2.h:4:119: warning: unused parameter 'opt' [-Wunused-parameter]
+    4 | static void conv2x2s1_neon(const Mat& bottom_blob, Mat& top_blob, const Mat& _kernel, const Mat& _bias, const Option& opt)
+      |                                                                                                                       ^
+In file included from /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution_arm.cpp:22:
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution_3x3.h:4:119: warning: unused parameter 'opt' [-Wunused-parameter]
+    4 | static void conv3x3s1_neon(const Mat& bottom_blob, Mat& top_blob, const Mat& _kernel, const Mat& _bias, const Option& opt)
+      |                                                                                                                       ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution_3x3.h:1290:119: warning: unused parameter 'opt' [-Wunused-parameter]
+ 1290 | static void conv3x3s2_neon(const Mat& bottom_blob, Mat& top_blob, const Mat& _kernel, const Mat& _bias, const Option& opt)
+      |                                                                                                                       ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution_3x3.h:1929:126: warning: unused parameter 'opt' [-Wunused-parameter]
+ 1929 | static void conv3x3s2_packed_neon(const Mat& bottom_blob, Mat& top_blob, const Mat& _kernel, const Mat& _bias, const Option& opt)
+      |                                                                                                                              ^
+In file included from /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution_arm.cpp:23:
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution_4x4.h:4:119: warning: unused parameter 'opt' [-Wunused-parameter]
+    4 | static void conv4x4s4_neon(const Mat& bottom_blob, Mat& top_blob, const Mat& _kernel, const Mat& _bias, const Option& opt)
+      |                                                                                                                       ^
+In file included from /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution_arm.cpp:24:
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution_5x5.h:4:119: warning: unused parameter 'opt' [-Wunused-parameter]
+    4 | static void conv5x5s1_neon(const Mat& bottom_blob, Mat& top_blob, const Mat& _kernel, const Mat& _bias, const Option& opt)
+      |                                                                                                                       ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution_5x5.h:962:119: warning: unused parameter 'opt' [-Wunused-parameter]
+  962 | static void conv5x5s2_neon(const Mat& bottom_blob, Mat& top_blob, const Mat& _kernel, const Mat& _bias, const Option& opt)
+      |                                                                                                                       ^
+In file included from /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution_arm.cpp:25:
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution_7x7.h:4:119: warning: unused parameter 'opt' [-Wunused-parameter]
+    4 | static void conv7x7s1_neon(const Mat& bottom_blob, Mat& top_blob, const Mat& _kernel, const Mat& _bias, const Option& opt)
+      |                                                                                                                       ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution_7x7.h:691:119: warning: unused parameter 'opt' [-Wunused-parameter]
+  691 | static void conv7x7s2_neon(const Mat& bottom_blob, Mat& top_blob, const Mat& _kernel, const Mat& _bias, const Option& opt)
+      |                                                                                                                       ^
+In file included from /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution_arm.cpp:28:
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution_packed.h:496:273: warning: unused parameter 'opt' [-Wunused-parameter]
+  496 | static void convolution_packed(const Mat& bottom_blob, Mat& top_blob, const Mat& weight_data_tm, const Mat& bias_data, int kernel_w, int kernel_h, int dilation_w, int dilation_h, int stride_w, int stride_h, int activation_type, const Mat& activation_params, const Option& opt)
+      |                                                                                                                                                                                                                                                                                 ^
+In file included from /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution_arm.cpp:29:
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution_3x3_winograd.h:79:116: warning: unused parameter 'nT' [-Wunused-parameter]
+   79 | static void conv3x3s1_winograd_transpose_pack_B_tile(const Mat& B, Mat& BT, int batch, int max_jj, int max_kk, int nT)
+      |                                                                                                                    ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution_3x3_winograd.h:4666:136: warning: unused parameter 'nT' [-Wunused-parameter]
+ 4666 | static inline void conv3x3s1_winograd23_transform_input_tile(const Mat& bottom_blob, Mat& B, int j, int max_jj, int k, int max_kk, int nT)
+      |                                                                                                                                        ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution_3x3_winograd.h:5798:136: warning: unused parameter 'nT' [-Wunused-parameter]
+ 5798 | static inline void conv3x3s1_winograd43_transform_input_tile(const Mat& bottom_blob, Mat& B, int j, int max_jj, int k, int max_kk, int nT)
+      |                                                                                                                                        ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution_3x3_winograd.h:7493:136: warning: unused parameter 'nT' [-Wunused-parameter]
+ 7493 | static inline void conv3x3s1_winograd63_transform_input_tile(const Mat& bottom_blob, Mat& B, int j, int max_jj, int k, int max_kk, int nT)
+      |                                                                                                                                        ^
+In file included from /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution_arm.cpp:33:
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution_packed_bf16s.h:496:279: warning: unused parameter 'opt' [-Wunused-parameter]
+  496 | static void convolution_packed_bf16s(const Mat& bottom_blob, Mat& top_blob, const Mat& weight_data_tm, const Mat& bias_data, int kernel_w, int kernel_h, int dilation_w, int dilation_h, int stride_w, int stride_h, int activation_type, const Mat& activation_params, const Option& opt)
+      |                                                                                                                                                                                                                                                                                       ^
+In file included from /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution_arm.cpp:34:
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution_3x3_winograd_bf16s.h:4:142: warning: unused parameter 'nT' [-Wunused-parameter]
+    4 | static inline void conv3x3s1_winograd23_transform_input_tile_bf16s(const Mat& bottom_blob, Mat& B, int j, int max_jj, int k, int max_kk, int nT)
+      |                                                                                                                                              ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution_3x3_winograd_bf16s.h:1034:142: warning: unused parameter 'nT' [-Wunused-parameter]
+ 1034 | static inline void conv3x3s1_winograd43_transform_input_tile_bf16s(const Mat& bottom_blob, Mat& B, int j, int max_jj, int k, int max_kk, int nT)
+      |                                                                                                                                              ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution_3x3_winograd_bf16s.h:2621:142: warning: unused parameter 'nT' [-Wunused-parameter]
+ 2621 | static inline void conv3x3s1_winograd63_transform_input_tile_bf16s(const Mat& bottom_blob, Mat& B, int j, int max_jj, int k, int max_kk, int nT)
+      |                                                                                                                                              ^
+In file included from /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution_arm.cpp:41:
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution_3x3_winograd_int8.h:88:102: warning: unused parameter 'nT' [-Wunused-parameter]
+   88 | static void transpose_pack_B_tile_int8(const Mat& B, Mat& BT, int batch, int max_jj, int max_kk, int nT)
+      |                                                                                                      ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution_3x3_winograd_int8.h:3617:141: warning: unused parameter 'nT' [-Wunused-parameter]
+ 3617 | static inline void conv3x3s1_winograd23_transform_input_tile_int8(const Mat& bottom_blob, Mat& B, int j, int max_jj, int k, int max_kk, int nT)
+      |                                                                                                                                             ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution_3x3_winograd_int8.h:4473:141: warning: unused parameter 'nT' [-Wunused-parameter]
+ 4473 | static inline void conv3x3s1_winograd43_transform_input_tile_int8(const Mat& bottom_blob, Mat& B, int j, int max_jj, int k, int max_kk, int nT)
+      |                                                                                                                                             ^
+In file included from /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution_arm.cpp:48:
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution_3x3_pack1to4.h:4:127: warning: unused parameter 'opt' [-Wunused-parameter]
+    4 | static void conv3x3s1_pack1to4_neon(const Mat& bottom_blob, Mat& top_blob, const Mat& kernel, const Mat& _bias, const Option& opt)
+      |                                                                                                                               ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution_3x3_pack1to4.h:887:127: warning: unused parameter 'opt' [-Wunused-parameter]
+  887 | static void conv3x3s2_pack1to4_neon(const Mat& bottom_blob, Mat& top_blob, const Mat& kernel, const Mat& _bias, const Option& opt)
+      |                                                                                                                               ^
+In file included from /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution_arm.cpp:49:
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution_3x3_pack4.h:4:124: warning: unused parameter 'opt' [-Wunused-parameter]
+    4 | static void conv3x3s2_pack4_neon(const Mat& bottom_blob, Mat& top_blob, const Mat& kernel, const Mat& _bias, const Option& opt)
+      |                                                                                                                            ^
+In file included from /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution_arm.cpp:50:
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution_3x3_pack4to1.h:4:127: warning: unused parameter 'opt' [-Wunused-parameter]
+    4 | static void conv3x3s1_pack4to1_neon(const Mat& bottom_blob, Mat& top_blob, const Mat& kernel, const Mat& _bias, const Option& opt)
+      |                                                                                                                               ^
+In file included from /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution_arm.cpp:51:
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution_5x5_pack4.h:4:124: warning: unused parameter 'opt' [-Wunused-parameter]
+    4 | static void conv5x5s1_pack4_neon(const Mat& bottom_blob, Mat& top_blob, const Mat& kernel, const Mat& _bias, const Option& opt)
+      |                                                                                                                            ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution_5x5_pack4.h:2472:124: warning: unused parameter 'opt' [-Wunused-parameter]
+ 2472 | static void conv5x5s2_pack4_neon(const Mat& bottom_blob, Mat& top_blob, const Mat& kernel, const Mat& _bias, const Option& opt)
+      |                                                                                                                            ^
+In file included from /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution_arm.cpp:52:
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution_7x7_pack1to4.h:4:127: warning: unused parameter 'opt' [-Wunused-parameter]
+    4 | static void conv7x7s2_pack1to4_neon(const Mat& bottom_blob, Mat& top_blob, const Mat& kernel, const Mat& _bias, const Option& opt)
+      |                                                                                                                               ^
+30 warnings generated.
+[392/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/log.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/log.cpp:23:62: warning: unused parameter 'opt' [-Wunused-parameter]
+   23 | int Log::forward_inplace(Mat& bottom_top_blob, const Option& opt) const
+      |                                                              ^
+1 warning generated.
+[393/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/lrn.cpp.o
+[394/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/lrn_arm.cpp.o
+[395/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/vulkan/lrn_vulkan.cpp.o
+[396/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/memorydata.cpp.o
+[397/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/vulkan/memorydata_vulkan.cpp.o
+[398/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/mvn.cpp.o
+[399/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/pooling.cpp.o
+[400/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/pooling_arm.cpp.o
+In file included from /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/pooling_arm.cpp:19:
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/pooling_2x2.h:4:88: warning: unused parameter 'opt' [-Wunused-parameter]
+    4 | static void pooling2x2s2_max_neon(const Mat& bottom_blob, Mat& top_blob, const Option& opt)
+      |                                                                                        ^
+In file included from /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/pooling_arm.cpp:20:
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/pooling_3x3.h:4:88: warning: unused parameter 'opt' [-Wunused-parameter]
+    4 | static void pooling3x3s2_max_neon(const Mat& bottom_blob, Mat& top_blob, const Option& opt)
+      |                                                                                        ^
+In file included from /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/pooling_arm.cpp:23:
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/pooling_2x2_pack4.h:4:94: warning: unused parameter 'opt' [-Wunused-parameter]
+    4 | static void pooling2x2s2_max_pack4_neon(const Mat& bottom_blob, Mat& top_blob, const Option& opt)
+      |                                                                                              ^
+In file included from /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/pooling_arm.cpp:24:
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/pooling_3x3_pack4.h:4:94: warning: unused parameter 'opt' [-Wunused-parameter]
+    4 | static void pooling3x3s2_max_pack4_neon(const Mat& bottom_blob, Mat& top_blob, const Option& opt)
+      |                                                                                              ^
+In file included from /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/pooling_arm.cpp:25:
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/pooling_2x2_pack4_bf16s.h:4:100: warning: unused parameter 'opt' [-Wunused-parameter]
+    4 | static void pooling2x2s2_max_pack4_bf16s_neon(const Mat& bottom_blob, Mat& top_blob, const Option& opt)
+      |                                                                                                    ^
+In file included from /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/pooling_arm.cpp:26:
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/pooling_3x3_pack4_bf16s.h:4:100: warning: unused parameter 'opt' [-Wunused-parameter]
+    4 | static void pooling3x3s2_max_pack4_bf16s_neon(const Mat& bottom_blob, Mat& top_blob, const Option& opt)
+      |                                                                                                    ^
+6 warnings generated.
+[401/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/power.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/power.cpp:23:64: warning: unused parameter 'opt' [-Wunused-parameter]
+   23 | int Power::forward_inplace(Mat& bottom_top_blob, const Option& opt) const
+      |                                                                ^
+1 warning generated.
+[402/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/vulkan/pooling_vulkan.cpp.o
+[403/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/pooling_arm_asimdhp.cpp.o
+[404/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/prelu.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/prelu.cpp:30:64: warning: unused parameter 'opt' [-Wunused-parameter]
+   30 | int PReLU::forward_inplace(Mat& bottom_top_blob, const Option& opt) const
+      |                                                                ^
+1 warning generated.
+[405/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/vulkan/prelu_vulkan.cpp.o
+[406/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/prelu_arm.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/prelu_arm.cpp:303:74: warning: unused parameter 'opt' [-Wunused-parameter]
+  303 | int PReLU_arm::forward_inplace_bf16s(Mat& bottom_top_blob, const Option& opt) const
+      |                                                                          ^
+1 warning generated.
+[407/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/prelu_arm_asimdhp.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/prelu_arm_asimdhp.cpp:14:74: warning: unused parameter 'opt' [-Wunused-parameter]
+   14 | int PReLU_arm::forward_inplace_fp16s(Mat& bottom_top_blob, const Option& opt) const
+      |                                                                          ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/prelu_arm_asimdhp.cpp:228:75: warning: unused parameter 'opt' [-Wunused-parameter]
+  228 | int PReLU_arm::forward_inplace_fp16sa(Mat& bottom_top_blob, const Option& opt) const
+      |                                                                           ^
+2 warnings generated.
+[408/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/proposal.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/proposal.cpp:182:104: warning: unused parameter 'opt' [-Wunused-parameter]
+  182 | int Proposal::forward(const std::vector<Mat>& bottom_blobs, std::vector<Mat>& top_blobs, const Option& opt) const
+      |                                                                                                        ^
+1 warning generated.
+[409/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/relu.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/relu.cpp:21:63: warning: unused parameter 'opt' [-Wunused-parameter]
+   21 | int ReLU::forward_inplace(Mat& bottom_top_blob, const Option& opt) const
+      |                                                               ^
+1 warning generated.
+[410/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/vulkan/reduction_vulkan.cpp.o
+[411/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/relu_arm.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/relu_arm.cpp:253:73: warning: unused parameter 'opt' [-Wunused-parameter]
+  253 | int ReLU_arm::forward_inplace_bf16s(Mat& bottom_top_blob, const Option& opt) const
+      |                                                                         ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/relu_arm.cpp:503:72: warning: unused parameter 'opt' [-Wunused-parameter]
+  503 | int ReLU_arm::forward_inplace_int8(Mat& bottom_top_blob, const Option& opt) const
+      |                                                                        ^
+2 warnings generated.
+[412/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/reduction.cpp.o
+[413/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/relu_arm_asimdhp.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/relu_arm_asimdhp.cpp:14:73: warning: unused parameter 'opt' [-Wunused-parameter]
+   14 | int ReLU_arm::forward_inplace_fp16s(Mat& bottom_top_blob, const Option& opt) const
+      |                                                                         ^
+1 warning generated.
+[414/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/vulkan/relu_vulkan.cpp.o
+[415/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/roipooling.cpp.o
+[416/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/reshape_arm.cpp.o
+[417/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/reshape.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/reshape.cpp:470:48: warning: unused parameter 'opt' [-Wunused-parameter]
+  470 |                                  const Option& opt) const
+      |                                                ^
+1 warning generated.
+[418/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/vulkan/reshape_vulkan.cpp.o
+[419/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/scale.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/scale.cpp:44:78: warning: unused parameter 'opt' [-Wunused-parameter]
+   44 | int Scale::forward_inplace(std::vector<Mat>& bottom_top_blobs, const Option& opt) const
+      |                                                                              ^
+1 warning generated.
+[420/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/scale_arm.cpp.o
+[421/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/sigmoid.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/sigmoid.cpp:14:66: warning: unused parameter 'opt' [-Wunused-parameter]
+   14 | int Sigmoid::forward_inplace(Mat& bottom_top_blob, const Option& opt) const
+      |                                                                  ^
+1 warning generated.
+[422/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/vulkan/scale_vulkan.cpp.o
+[423/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/sigmoid_arm.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/sigmoid_arm.cpp:112:76: warning: unused parameter 'opt' [-Wunused-parameter]
+  112 | int Sigmoid_arm::forward_inplace_bf16s(Mat& bottom_top_blob, const Option& opt) const
+      |                                                                            ^
+1 warning generated.
+[424/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/vulkan/sigmoid_vulkan.cpp.o
+[425/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/sigmoid_arm_asimdhp.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/sigmoid_arm_asimdhp.cpp:18:76: warning: unused parameter 'opt' [-Wunused-parameter]
+   18 | int Sigmoid_arm::forward_inplace_fp16s(Mat& bottom_top_blob, const Option& opt) const
+      |                                                                            ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/sigmoid_arm_asimdhp.cpp:82:77: warning: unused parameter 'opt' [-Wunused-parameter]
+   82 | int Sigmoid_arm::forward_inplace_fp16sa(Mat& bottom_top_blob, const Option& opt) const
+      |                                                                             ^
+2 warnings generated.
+[426/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/slice.cpp.o
+[427/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/softmax.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/softmax.cpp:102:66: warning: unused parameter 'opt' [-Wunused-parameter]
+  102 | int Softmax::forward_inplace(Mat& bottom_top_blob, const Option& opt) const
+      |                                                                  ^
+1 warning generated.
+[428/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/slice_arm.cpp.o
+[429/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/vulkan/slice_vulkan.cpp.o
+[430/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/softmax_arm.cpp.o
+[431/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/vulkan/softmax_vulkan.cpp.o
+[432/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/vulkan/split_vulkan.cpp.o
+[433/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/split.cpp.o
+[434/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/softmax_arm_asimdhp.cpp.o
+[435/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/tanh.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/tanh.cpp:14:63: warning: unused parameter 'opt' [-Wunused-parameter]
+   14 | int TanH::forward_inplace(Mat& bottom_top_blob, const Option& opt) const
+      |                                                               ^
+1 warning generated.
+[436/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/tanh_arm.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/tanh_arm.cpp:109:73: warning: unused parameter 'opt' [-Wunused-parameter]
+  109 | int TanH_arm::forward_inplace_bf16s(Mat& bottom_top_blob, const Option& opt) const
+      |                                                                         ^
+1 warning generated.
+[437/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/vulkan/tanh_vulkan.cpp.o
+[438/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/tanh_arm_asimdhp.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/tanh_arm_asimdhp.cpp:18:73: warning: unused parameter 'opt' [-Wunused-parameter]
+   18 | int TanH_arm::forward_inplace_fp16s(Mat& bottom_top_blob, const Option& opt) const
+      |                                                                         ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/tanh_arm_asimdhp.cpp:73:74: warning: unused parameter 'opt' [-Wunused-parameter]
+   73 | int TanH_arm::forward_inplace_fp16sa(Mat& bottom_top_blob, const Option& opt) const
+      |                                                                          ^
+2 warnings generated.
+[439/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/threshold.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/threshold.cpp:21:68: warning: unused parameter 'opt' [-Wunused-parameter]
+   21 | int Threshold::forward_inplace(Mat& bottom_top_blob, const Option& opt) const
+      |                                                                    ^
+1 warning generated.
+[440/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/tile.cpp.o
+[441/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/vulkan/tile_vulkan.cpp.o
+[442/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/rnn.cpp.o
+[443/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/rnn_arm_vfpv4.cpp.o
+In file included from /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/rnn_arm_vfpv4.cpp:12:
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/rnn_int8.h:223:122: warning: unused parameter 'opt' [-Wunused-parameter]
+  223 | static void rnn_int8_gate_output(const Mat& gates, Mat& hidden_state, Mat& top_blob, int ti, int elemtype, const Option& opt)
+      |                                                                                                                          ^
+1 warning generated.
+[444/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/rnn_arm_asimdhp.cpp.o
+[445/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/rnn_arm.cpp.o
+In file included from /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/rnn_arm.cpp:18:
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/rnn_int8.h:223:122: warning: unused parameter 'opt' [-Wunused-parameter]
+  223 | static void rnn_int8_gate_output(const Mat& gates, Mat& hidden_state, Mat& top_blob, int ti, int elemtype, const Option& opt)
+      |                                                                                                                          ^
+1 warning generated.
+[446/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/rnn_arm_asimddp.cpp.o
+In file included from /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/rnn_arm_asimddp.cpp:12:
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/rnn_int8.h:13:302: warning: unused parameter 'opt' [-Wunused-parameter]
+   13 | static void rnn_transform_weight_int8(const Mat& weight_xc, const Mat& weight_xc_int8_scales, const Mat& weight_hc, const Mat& weight_hc_int8_scales, const Mat& bias_c, Mat& weight_data_tm, Mat& weight_data_tm_int8_descales, Mat& bias_c_tm, int size, int num_output, int num_directions, const Option& opt)
+      |                                                                                                                                                                                                                                                                                                              ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/rnn_int8.h:223:122: warning: unused parameter 'opt' [-Wunused-parameter]
+  223 | static void rnn_int8_gate_output(const Mat& gates, Mat& hidden_state, Mat& top_blob, int ti, int elemtype, const Option& opt)
+      |                                                                                                                          ^
+2 warnings generated.
+[447/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/lstm.cpp.o
+[448/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/lstm_arm_vfpv4.cpp.o
+In file included from /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/lstm_arm_vfpv4.cpp:12:
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/lstm_int8.h:192:185: warning: unused parameter 'opt' [-Wunused-parameter]
+  192 | static void lstm_int8_gate_output(const Mat& gates, const Mat& weight_hr, Mat& hidden_state, Mat& tmp_hidden_state, Mat& cell_state, Mat& top_blob, int ti, int elemtype, const Option& opt)
+      |                                                                                                                                                                                         ^
+1 warning generated.
+[449/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/lstm_arm_asimdhp.cpp.o
+[450/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/lstm_arm_asimddp.cpp.o
+In file included from /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/lstm_arm_asimddp.cpp:12:
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/lstm_int8.h:13:320: warning: unused parameter 'opt' [-Wunused-parameter]
+   13 | static void lstm_transform_weight_int8(const Mat& weight_xc, const Mat& weight_xc_int8_scales, const Mat& weight_hc, const Mat& weight_hc_int8_scales, const Mat& bias_c, Mat& weight_data_tm, Mat& weight_data_tm_int8_descales, Mat& bias_c_tm, int size, int num_output, int num_directions, int hidden_size, const Option& opt)
+      |                                                                                                                                                                                                                                                                                                                                ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/lstm_int8.h:192:185: warning: unused parameter 'opt' [-Wunused-parameter]
+  192 | static void lstm_int8_gate_output(const Mat& gates, const Mat& weight_hr, Mat& hidden_state, Mat& tmp_hidden_state, Mat& cell_state, Mat& top_blob, int ti, int elemtype, const Option& opt)
+      |                                                                                                                                                                                         ^
+2 warnings generated.
+[451/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/lstm_arm.cpp.o
+In file included from /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/lstm_arm.cpp:17:
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/lstm_int8.h:192:185: warning: unused parameter 'opt' [-Wunused-parameter]
+  192 | static void lstm_int8_gate_output(const Mat& gates, const Mat& weight_hr, Mat& hidden_state, Mat& tmp_hidden_state, Mat& cell_state, Mat& top_blob, int ti, int elemtype, const Option& opt)
+      |                                                                                                                                                                                         ^
+1 warning generated.
+[452/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/binaryop.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/binaryop.cpp:38:83: warning: unused parameter 'opt' [-Wunused-parameter]
+   38 | static void binary_op_broadcast(const Mat& a, const Mat& b, Mat& c, const Option& opt)
+      |                                                                                   ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/binaryop.cpp:119:69: warning: unused parameter 'opt' [-Wunused-parameter]
+  119 | static void binary_op_scalar_inplace(Mat& a, float b, const Option& opt)
+      |                                                                     ^
+2 warnings generated.
+[453/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/vulkan/binaryop_vulkan.cpp.o
+[454/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/unaryop.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/unaryop.cpp:30:51: warning: unused parameter 'opt' [-Wunused-parameter]
+   30 | static int unary_op_inplace(Mat& a, const Option& opt)
+      |                                                   ^
+1 warning generated.
+[455/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/vulkan/unaryop_vulkan.cpp.o
+[456/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/binaryop_arm.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/binaryop_arm.cpp:318:88: warning: unused parameter 'opt' [-Wunused-parameter]
+  318 | static void binary_op_scalar(const Mat& a, float b, Mat& c, int op_type, const Option& opt)
+      |                                                                                        ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/binaryop_arm.cpp:333:99: warning: unused parameter 'opt' [-Wunused-parameter]
+  333 | static void binary_op_no_broadcast(const Mat& a, const Mat& b, Mat& c, int op_type, const Option& opt)
+      |                                                                                                   ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/binaryop_arm.cpp:438:82: warning: unused parameter 'opt' [-Wunused-parameter]
+  438 | static void binary_op_scalar_inplace(Mat& a, float b, int op_type, const Option& opt)
+      |                                                                                  ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/binaryop_arm.cpp:932:94: warning: unused parameter 'opt' [-Wunused-parameter]
+  932 | static void binary_op_scalar_bf16s(const Mat& a, float b, Mat& c, int op_type, const Option& opt)
+      |                                                                                              ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/binaryop_arm.cpp:947:105: warning: unused parameter 'opt' [-Wunused-parameter]
+  947 | static void binary_op_no_broadcast_bf16s(const Mat& a, const Mat& b, Mat& c, int op_type, const Option& opt)
+      |                                                                                                         ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/binaryop_arm.cpp:1052:88: warning: unused parameter 'opt' [-Wunused-parameter]
+ 1052 | static void binary_op_scalar_inplace_bf16s(Mat& a, float b, int op_type, const Option& opt)
+      |                                                                                        ^
+6 warnings generated.
+[457/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/unaryop_arm.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/unaryop_arm.cpp:35:51: warning: unused parameter 'opt' [-Wunused-parameter]
+   35 | static int unary_op_inplace(Mat& a, const Option& opt)
+      |                                                   ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/unaryop_arm.cpp:679:57: warning: unused parameter 'opt' [-Wunused-parameter]
+  679 | static int unary_op_inplace_bf16s(Mat& a, const Option& opt)
+      |                                                         ^
+2 warnings generated.
+[458/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/binaryop_arm_asimdhp.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/binaryop_arm_asimdhp.cpp:443:95: warning: unused parameter 'opt' [-Wunused-parameter]
+  443 | static void binary_op_scalar_fp16s(const Mat& a, __fp16 b, Mat& c, int op_type, const Option& opt)
+      |                                                                                               ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/binaryop_arm_asimdhp.cpp:458:105: warning: unused parameter 'opt' [-Wunused-parameter]
+  458 | static void binary_op_no_broadcast_fp16s(const Mat& a, const Mat& b, Mat& c, int op_type, const Option& opt)
+      |                                                                                                         ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/binaryop_arm_asimdhp.cpp:563:89: warning: unused parameter 'opt' [-Wunused-parameter]
+  563 | static void binary_op_scalar_inplace_fp16s(Mat& a, __fp16 b, int op_type, const Option& opt)
+      |                                                                                         ^
+3 warnings generated.
+[459/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/unaryop_arm_asimdhp.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/unaryop_arm_asimdhp.cpp:21:57: warning: unused parameter 'opt' [-Wunused-parameter]
+   21 | static int unary_op_inplace_fp16s(Mat& a, const Option& opt)
+      |                                                         ^
+1 warning generated.
+[460/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/convolutiondepthwise.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/convolutiondepthwise.cpp:189:282: warning: unused parameter 'opt' [-Wunused-parameter]
+  189 | static int convolutiondepthwise(const Mat& bottom_blob, Mat& top_blob, const Mat& weight_data, const Mat& bias_data, int kernel_w, int kernel_h, int stride_w, int stride_h, int dilation_w, int dilation_h, int group, int activation_type, const Mat& activation_params, const Option& opt)
+      |                                                                                                                                                                                                                                                                                          ^
+1 warning generated.
+[461/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/convolutiondepthwise_arm_asimdhp.cpp.o
+In file included from /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolutiondepthwise_arm_asimdhp.cpp:20:
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolutiondepthwise_3x3_fp16s.h:4:128: warning: unused parameter 'opt' [-Wunused-parameter]
+    4 | static void convdw3x3s1_fp16sa_neon(const Mat& bottom_blob, Mat& top_blob, const Mat& _kernel, const Mat& _bias, const Option& opt)
+      |                                                                                                                                ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolutiondepthwise_3x3_fp16s.h:306:128: warning: unused parameter 'opt' [-Wunused-parameter]
+  306 | static void convdw3x3s2_fp16sa_neon(const Mat& bottom_blob, Mat& top_blob, const Mat& _kernel, const Mat& _bias, const Option& opt)
+      |                                                                                                                                ^
+In file included from /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolutiondepthwise_arm_asimdhp.cpp:21:
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolutiondepthwise_3x3_pack8_fp16s.h:4:133: warning: unused parameter 'opt' [-Wunused-parameter]
+    4 | static void convdw3x3s1_pack8_fp16sa_neon(const Mat& bottom_blob, Mat& top_blob, const Mat& kernel, const Mat& _bias, const Option& opt)
+      |                                                                                                                                     ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolutiondepthwise_3x3_pack8_fp16s.h:614:133: warning: unused parameter 'opt' [-Wunused-parameter]
+  614 | static void convdw3x3s2_pack8_fp16sa_neon(const Mat& bottom_blob, Mat& top_blob, const Mat& kernel, const Mat& _bias, const Option& opt)
+      |                                                                                                                                     ^
+In file included from /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolutiondepthwise_arm_asimdhp.cpp:22:
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolutiondepthwise_5x5_pack8_fp16s.h:4:133: warning: unused parameter 'opt' [-Wunused-parameter]
+    4 | static void convdw5x5s1_pack8_fp16sa_neon(const Mat& bottom_blob, Mat& top_blob, const Mat& kernel, const Mat& _bias, const Option& opt)
+      |                                                                                                                                     ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolutiondepthwise_5x5_pack8_fp16s.h:1262:133: warning: unused parameter 'opt' [-Wunused-parameter]
+ 1262 | static void convdw5x5s2_pack8_fp16sa_neon(const Mat& bottom_blob, Mat& top_blob, const Mat& kernel, const Mat& _bias, const Option& opt)
+      |                                                                                                                                     ^
+6 warnings generated.
+[462/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/padding.cpp.o
+[463/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/vulkan/convolutiondepthwise_vulkan.cpp.o
+[464/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/convolutiondepthwise_arm.cpp.o
+In file included from /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolutiondepthwise_arm.cpp:19:
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolutiondepthwise_3x3.h:4:121: warning: unused parameter 'opt' [-Wunused-parameter]
+    4 | static void convdw3x3s1_neon(const Mat& bottom_blob, Mat& top_blob, const Mat& _kernel, const Mat& _bias, const Option& opt)
+      |                                                                                                                         ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolutiondepthwise_3x3.h:816:121: warning: unused parameter 'opt' [-Wunused-parameter]
+  816 | static void convdw3x3s2_neon(const Mat& bottom_blob, Mat& top_blob, const Mat& _kernel, const Mat& _bias, const Option& opt)
+      |                                                                                                                         ^
+In file included from /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolutiondepthwise_arm.cpp:20:
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolutiondepthwise_5x5.h:4:121: warning: unused parameter 'opt' [-Wunused-parameter]
+    4 | static void convdw5x5s1_neon(const Mat& bottom_blob, Mat& top_blob, const Mat& _kernel, const Mat& _bias, const Option& opt)
+      |                                                                                                                         ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolutiondepthwise_5x5.h:1650:121: warning: unused parameter 'opt' [-Wunused-parameter]
+ 1650 | static void convdw5x5s2_neon(const Mat& bottom_blob, Mat& top_blob, const Mat& _kernel, const Mat& _bias, const Option& opt)
+      |                                                                                                                         ^
+In file included from /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolutiondepthwise_arm.cpp:23:
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolutiondepthwise_3x3_int8.h:4:108: warning: unused parameter 'opt' [-Wunused-parameter]
+    4 | static void convdw3x3s1_int8_neon(const Mat& bottom_blob, Mat& top_blob, const Mat& _kernel, const Option& opt)
+      |                                                                                                            ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolutiondepthwise_3x3_int8.h:546:108: warning: unused parameter 'opt' [-Wunused-parameter]
+  546 | static void convdw3x3s2_int8_neon(const Mat& bottom_blob, Mat& top_blob, const Mat& _kernel, const Option& opt)
+      |                                                                                                            ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolutiondepthwise_3x3_int8.h:777:169: warning: unused parameter 'opt' [-Wunused-parameter]
+  777 | static void convdw3x3s1_int8_requant_neon(const Mat& bottom_blob, Mat& top_blob, const Mat& _kernel, const Mat& _bias, std::vector<float> scales_requant, const Option& opt)
+      |                                                                                                                                                                         ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolutiondepthwise_3x3_int8.h:1491:169: warning: unused parameter 'opt' [-Wunused-parameter]
+ 1491 | static void convdw3x3s2_int8_requant_neon(const Mat& bottom_blob, Mat& top_blob, const Mat& _kernel, const Mat& _bias, std::vector<float> scales_requant, const Option& opt)
+      |                                                                                                                                                                         ^
+In file included from /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolutiondepthwise_arm.cpp:27:
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolutiondepthwise_3x3_pack4.h:4:126: warning: unused parameter 'opt' [-Wunused-parameter]
+    4 | static void convdw3x3s1_pack4_neon(const Mat& bottom_blob, Mat& top_blob, const Mat& kernel, const Mat& _bias, const Option& opt)
+      |                                                                                                                              ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolutiondepthwise_3x3_pack4.h:793:126: warning: unused parameter 'opt' [-Wunused-parameter]
+  793 | static void convdw3x3s2_pack4_neon(const Mat& bottom_blob, Mat& top_blob, const Mat& kernel, const Mat& _bias, const Option& opt)
+      |                                                                                                                              ^
+In file included from /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolutiondepthwise_arm.cpp:28:
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolutiondepthwise_5x5_pack4.h:4:126: warning: unused parameter 'opt' [-Wunused-parameter]
+    4 | static void convdw5x5s1_pack4_neon(const Mat& bottom_blob, Mat& top_blob, const Mat& kernel, const Mat& _bias, const Option& opt)
+      |                                                                                                                              ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolutiondepthwise_5x5_pack4.h:1208:126: warning: unused parameter 'opt' [-Wunused-parameter]
+ 1208 | static void convdw5x5s2_pack4_neon(const Mat& bottom_blob, Mat& top_blob, const Mat& kernel, const Mat& _bias, const Option& opt)
+      |                                                                                                                              ^
+In file included from /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolutiondepthwise_arm.cpp:31:
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolutiondepthwise_3x3_pack4_bf16s.h:4:132: warning: unused parameter 'opt' [-Wunused-parameter]
+    4 | static void convdw3x3s1_pack4_bf16s_neon(const Mat& bottom_blob, Mat& top_blob, const Mat& kernel, const Mat& _bias, const Option& opt)
+      |                                                                                                                                    ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolutiondepthwise_3x3_pack4_bf16s.h:1042:132: warning: unused parameter 'opt' [-Wunused-parameter]
+ 1042 | static void convdw3x3s2_pack4_bf16s_neon(const Mat& bottom_blob, Mat& top_blob, const Mat& kernel, const Mat& _bias, const Option& opt)
+      |                                                                                                                                    ^
+In file included from /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolutiondepthwise_arm.cpp:32:
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolutiondepthwise_5x5_pack4_bf16s.h:4:132: warning: unused parameter 'opt' [-Wunused-parameter]
+    4 | static void convdw5x5s1_pack4_bf16s_neon(const Mat& bottom_blob, Mat& top_blob, const Mat& kernel, const Mat& _bias, const Option& opt)
+      |                                                                                                                                    ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolutiondepthwise_5x5_pack4_bf16s.h:2353:132: warning: unused parameter 'opt' [-Wunused-parameter]
+ 2353 | static void convdw5x5s2_pack4_bf16s_neon(const Mat& bottom_blob, Mat& top_blob, const Mat& kernel, const Mat& _bias, const Option& opt)
+      |                                                                                                                                    ^
+In file included from /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolutiondepthwise_arm.cpp:36:
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolutiondepthwise_3x3_pack8_int8.h:4:113: warning: unused parameter 'opt' [-Wunused-parameter]
+    4 | static void convdw3x3s1_pack8_int8_neon(const Mat& bottom_blob, Mat& top_blob, const Mat& kernel, const Option& opt)
+      |                                                                                                                 ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolutiondepthwise_3x3_pack8_int8.h:322:113: warning: unused parameter 'opt' [-Wunused-parameter]
+  322 | static void convdw3x3s2_pack8_int8_neon(const Mat& bottom_blob, Mat& top_blob, const Mat& kernel, const Option& opt)
+      |                                                                                                                 ^
+18 warnings generated.
+[465/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/squeeze.cpp.o
+[466/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/padding_arm.cpp.o
+[467/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/vulkan/padding_vulkan.cpp.o
+[468/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/expanddims.cpp.o
+[469/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/normalize.cpp.o
+[470/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/vulkan/normalize_vulkan.cpp.o
+[471/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/permute.cpp.o
+[472/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/vulkan/permute_vulkan.cpp.o
+[473/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/priorbox.cpp.o
+[474/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/vulkan/priorbox_vulkan.cpp.o
+[475/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/interp.cpp.o
+[476/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/detectionoutput.cpp.o
+[477/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/vulkan/interp_vulkan.cpp.o
+[478/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/deconvolutiondepthwise.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/deconvolutiondepthwise.cpp:114:284: warning: unused parameter 'opt' [-Wunused-parameter]
+  114 | static int deconvolutiondepthwise(const Mat& bottom_blob, Mat& top_blob, const Mat& weight_data, const Mat& bias_data, int kernel_w, int kernel_h, int stride_w, int stride_h, int dilation_w, int dilation_h, int group, int activation_type, const Mat& activation_params, const Option& opt)
+      |                                                                                                                                                                                                                                                                                            ^
+1 warning generated.
+[479/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/interp_arm.cpp.o
+[480/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/deconvolutiondepthwise_arm.cpp.o
+[481/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/interp_arm_asimdhp.cpp.o
+[482/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/deconvolutiondepthwise_arm_asimdhp.cpp.o
+[483/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/vulkan/deconvolutiondepthwise_vulkan.cpp.o
+[484/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/shufflechannel.cpp.o
+[485/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/vulkan/shufflechannel_vulkan.cpp.o
+[486/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/shufflechannel_arm.cpp.o
+[487/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/instancenorm.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/instancenorm.cpp:39:71: warning: unused parameter 'opt' [-Wunused-parameter]
+   39 | int InstanceNorm::forward_inplace(Mat& bottom_top_blob, const Option& opt) const
+      |                                                                       ^
+1 warning generated.
+[488/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/instancenorm_arm.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/instancenorm_arm.cpp:217:81: warning: unused parameter 'opt' [-Wunused-parameter]
+  217 | int InstanceNorm_arm::forward_inplace_bf16s(Mat& bottom_top_blob, const Option& opt) const
+      |                                                                                 ^
+1 warning generated.
+[489/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/clip.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/clip.cpp:24:63: warning: unused parameter 'opt' [-Wunused-parameter]
+   24 | int Clip::forward_inplace(Mat& bottom_top_blob, const Option& opt) const
+      |                                                               ^
+1 warning generated.
+[490/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/instancenorm_arm_asimdhp.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/instancenorm_arm_asimdhp.cpp:14:81: warning: unused parameter 'opt' [-Wunused-parameter]
+   14 | int InstanceNorm_arm::forward_inplace_fp16s(Mat& bottom_top_blob, const Option& opt) const
+      |                                                                                 ^
+1 warning generated.
+[491/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/clip_arm.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/clip_arm.cpp:156:73: warning: unused parameter 'opt' [-Wunused-parameter]
+  156 | int Clip_arm::forward_inplace_bf16s(Mat& bottom_top_blob, const Option& opt) const
+      |                                                                         ^
+1 warning generated.
+[492/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/vulkan/instancenorm_vulkan.cpp.o
+[493/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/clip_arm_asimdhp.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/clip_arm_asimdhp.cpp:14:73: warning: unused parameter 'opt' [-Wunused-parameter]
+   14 | int Clip_arm::forward_inplace_fp16s(Mat& bottom_top_blob, const Option& opt) const
+      |                                                                         ^
+1 warning generated.
+[494/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/vulkan/clip_vulkan.cpp.o
+[495/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/reorg.cpp.o
+[496/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/vulkan/reorg_vulkan.cpp.o
+[497/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/quantize.cpp.o
+[498/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/yolodetectionoutput.cpp.o
+[499/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/vulkan/quantize_vulkan.cpp.o
+[500/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/quantize_arm.cpp.o
+[501/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/quantize_arm_asimdhp.cpp.o
+[502/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/dequantize.cpp.o
+[503/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/dequantize_arm.cpp.o
+[504/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/vulkan/dequantize_vulkan.cpp.o
+[505/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/dequantize_arm_asimdhp.cpp.o
+[506/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/psroipooling.cpp.o
+[507/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/roialign.cpp.o
+[508/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/yolov3detectionoutput.cpp.o
+[509/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/packing.cpp.o
+[510/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/requantize.cpp.o
+[511/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/vulkan/packing_vulkan.cpp.o
+[512/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/requantize_arm.cpp.o
+[513/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/packing_arm.cpp.o
+[514/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/vulkan/requantize_vulkan.cpp.o
+[515/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/cast.cpp.o
+[516/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/cast_arm.cpp.o
+In file included from /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/cast_arm.cpp:16:
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/cast_fp16.h:9:89: warning: unused parameter 'opt' [-Wunused-parameter]
+    9 | static void cast_fp32_to_fp16_neon(const Mat& bottom_blob, Mat& top_blob, const Option& opt)
+      |                                                                                         ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/cast_fp16.h:171:89: warning: unused parameter 'opt' [-Wunused-parameter]
+  171 | static void cast_fp16_to_fp32_neon(const Mat& bottom_blob, Mat& top_blob, const Option& opt)
+      |                                                                                         ^
+2 warnings generated.
+[517/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/cast_arm_vfpv4.cpp.o
+In file included from /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/cast_arm_vfpv4.cpp:9:
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/cast_fp16.h:9:89: warning: unused parameter 'opt' [-Wunused-parameter]
+    9 | static void cast_fp32_to_fp16_neon(const Mat& bottom_blob, Mat& top_blob, const Option& opt)
+      |                                                                                         ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/cast_fp16.h:171:89: warning: unused parameter 'opt' [-Wunused-parameter]
+  171 | static void cast_fp16_to_fp32_neon(const Mat& bottom_blob, Mat& top_blob, const Option& opt)
+      |                                                                                         ^
+2 warnings generated.
+[518/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/cast_arm_bf16.cpp.o
+In file included from /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/cast_arm_bf16.cpp:9:
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/cast_bf16.h:9:89: warning: unused parameter 'opt' [-Wunused-parameter]
+    9 | static void cast_fp32_to_bf16_neon(const Mat& bottom_blob, Mat& top_blob, const Option& opt)
+      |                                                                                         ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/cast_bf16.h:177:89: warning: unused parameter 'opt' [-Wunused-parameter]
+  177 | static void cast_bf16_to_fp32_neon(const Mat& bottom_blob, Mat& top_blob, const Option& opt)
+      |                                                                                         ^
+2 warnings generated.
+[519/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/vulkan/cast_vulkan.cpp.o
+[520/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/hardsigmoid.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/hardsigmoid.cpp:26:70: warning: unused parameter 'opt' [-Wunused-parameter]
+   26 | int HardSigmoid::forward_inplace(Mat& bottom_top_blob, const Option& opt) const
+      |                                                                      ^
+1 warning generated.
+[521/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/hardsigmoid_arm_asimdhp.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/hardsigmoid_arm_asimdhp.cpp:14:80: warning: unused parameter 'opt' [-Wunused-parameter]
+   14 | int HardSigmoid_arm::forward_inplace_fp16s(Mat& bottom_top_blob, const Option& opt) const
+      |                                                                                ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/hardsigmoid_arm_asimdhp.cpp:76:81: warning: unused parameter 'opt' [-Wunused-parameter]
+   76 | int HardSigmoid_arm::forward_inplace_fp16sa(Mat& bottom_top_blob, const Option& opt) const
+      |                                                                                 ^
+2 warnings generated.
+[522/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/hardsigmoid_arm.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/hardsigmoid_arm.cpp:191:80: warning: unused parameter 'opt' [-Wunused-parameter]
+  191 | int HardSigmoid_arm::forward_inplace_bf16s(Mat& bottom_top_blob, const Option& opt) const
+      |                                                                                ^
+1 warning generated.
+[523/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/vulkan/hardsigmoid_vulkan.cpp.o
+[524/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/selu.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/selu.cpp:22:63: warning: unused parameter 'opt' [-Wunused-parameter]
+   22 | int SELU::forward_inplace(Mat& bottom_top_blob, const Option& opt) const
+      |                                                               ^
+1 warning generated.
+[525/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/selu_arm.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/selu_arm.cpp:92:73: warning: unused parameter 'opt' [-Wunused-parameter]
+   92 | int SELU_arm::forward_inplace_bf16s(Mat& bottom_top_blob, const Option& opt) const
+      |                                                                         ^
+1 warning generated.
+[526/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/vulkan/selu_vulkan.cpp.o
+[527/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/selu_arm_asimdhp.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/selu_arm_asimdhp.cpp:18:73: warning: unused parameter 'opt' [-Wunused-parameter]
+   18 | int SELU_arm::forward_inplace_fp16s(Mat& bottom_top_blob, const Option& opt) const
+      |                                                                         ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/selu_arm_asimdhp.cpp:73:74: warning: unused parameter 'opt' [-Wunused-parameter]
+   73 | int SELU_arm::forward_inplace_fp16sa(Mat& bottom_top_blob, const Option& opt) const
+      |                                                                          ^
+2 warnings generated.
+[528/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/hardswish.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/hardswish.cpp:26:68: warning: unused parameter 'opt' [-Wunused-parameter]
+   26 | int HardSwish::forward_inplace(Mat& bottom_top_blob, const Option& opt) const
+      |                                                                    ^
+1 warning generated.
+[529/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/hardswish_arm.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/hardswish_arm.cpp:206:78: warning: unused parameter 'opt' [-Wunused-parameter]
+  206 | int HardSwish_arm::forward_inplace_bf16s(Mat& bottom_top_blob, const Option& opt) const
+      |                                                                              ^
+1 warning generated.
+[530/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/hardswish_arm_asimdhp.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/hardswish_arm_asimdhp.cpp:14:78: warning: unused parameter 'opt' [-Wunused-parameter]
+   14 | int HardSwish_arm::forward_inplace_fp16s(Mat& bottom_top_blob, const Option& opt) const
+      |                                                                              ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/hardswish_arm_asimdhp.cpp:79:79: warning: unused parameter 'opt' [-Wunused-parameter]
+   79 | int HardSwish_arm::forward_inplace_fp16sa(Mat& bottom_top_blob, const Option& opt) const
+      |                                                                               ^
+2 warnings generated.
+[531/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/vulkan/hardswish_vulkan.cpp.o
+[532/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/noop.cpp.o
+[533/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/vulkan/noop_vulkan.cpp.o
+In file included from /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/vulkan/noop_vulkan.cpp:4:
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/vulkan/noop_vulkan.h:17:17: warning: 'ncnn::Noop_vulkan::forward_inplace' hides overloaded virtual function [-Woverloaded-virtual]
+   17 |     virtual int forward_inplace(std::vector<VkMat>& bottom_top_blobs, VkCompute& cmd, const Option& opt) const;
+      |                 ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/noop.h:16:17: note: hidden overloaded virtual function 'ncnn::Noop::forward_inplace' declared here: different number of parameters (2 vs 3)
+   16 |     virtual int forward_inplace(std::vector<Mat>& bottom_top_blobs, const Option& opt) const;
+      |                 ^
+1 warning generated.
+[534/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/pixelshuffle.cpp.o
+[535/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/vulkan/pixelshuffle_vulkan.cpp.o
+[536/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/pixelshuffle_arm.cpp.o
+[537/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/deepcopy.cpp.o
+[538/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/vulkan/deepcopy_vulkan.cpp.o
+[539/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/mish.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/mish.cpp:14:63: warning: unused parameter 'opt' [-Wunused-parameter]
+   14 | int Mish::forward_inplace(Mat& bottom_top_blob, const Option& opt) const
+      |                                                               ^
+1 warning generated.
+[540/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/mish_arm.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/mish_arm.cpp:109:73: warning: unused parameter 'opt' [-Wunused-parameter]
+  109 | int Mish_arm::forward_inplace_bf16s(Mat& bottom_top_blob, const Option& opt) const
+      |                                                                         ^
+1 warning generated.
+[541/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/vulkan/mish_vulkan.cpp.o
+[542/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/mish_arm_asimdhp.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/mish_arm_asimdhp.cpp:18:73: warning: unused parameter 'opt' [-Wunused-parameter]
+   18 | int Mish_arm::forward_inplace_fp16s(Mat& bottom_top_blob, const Option& opt) const
+      |                                                                         ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/mish_arm_asimdhp.cpp:73:74: warning: unused parameter 'opt' [-Wunused-parameter]
+   73 | int Mish_arm::forward_inplace_fp16sa(Mat& bottom_top_blob, const Option& opt) const
+      |                                                                          ^
+2 warnings generated.
+[543/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/statisticspooling.cpp.o
+[544/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/swish.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/swish.cpp:14:64: warning: unused parameter 'opt' [-Wunused-parameter]
+   14 | int Swish::forward_inplace(Mat& bottom_top_blob, const Option& opt) const
+      |                                                                ^
+1 warning generated.
+[545/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/swish_arm.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/swish_arm.cpp:112:74: warning: unused parameter 'opt' [-Wunused-parameter]
+  112 | int Swish_arm::forward_inplace_bf16s(Mat& bottom_top_blob, const Option& opt) const
+      |                                                                          ^
+1 warning generated.
+[546/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/vulkan/swish_vulkan.cpp.o
+[547/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/swish_arm_asimdhp.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/swish_arm_asimdhp.cpp:18:74: warning: unused parameter 'opt' [-Wunused-parameter]
+   18 | int Swish_arm::forward_inplace_fp16s(Mat& bottom_top_blob, const Option& opt) const
+      |                                                                          ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/swish_arm_asimdhp.cpp:84:75: warning: unused parameter 'opt' [-Wunused-parameter]
+   84 | int Swish_arm::forward_inplace_fp16sa(Mat& bottom_top_blob, const Option& opt) const
+      |                                                                           ^
+2 warnings generated.
+[548/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/gemm.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/gemm.cpp:437:166: warning: unused parameter 'opt' [-Wunused-parameter]
+  437 | static void gemm_transB(const Mat& A, const Mat& BT, const Mat& C, Mat& top_blob, float alpha, float beta, int broadcast_type_C, int output_transpose, const Option& opt)
+      |                                                                                                                                                                      ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/gemm.cpp:669:228: warning: unused parameter 'opt' [-Wunused-parameter]
+  669 | static void gemm_transB_int8(const Mat& A_int8, const Mat& BT_int8, const Mat& A_int8_scales, float BT_int8_scale, const Mat& C, Mat& top_blob, float alpha, float beta, int broadcast_type_C, int output_transpose, const Option& opt)
+      |                                                                                                                                                                                                                                    ^
+2 warnings generated.
+[549/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/vulkan/gemm_vulkan.cpp.o
+[550/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/gemm_arm_asimdhp.cpp.o
+[551/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/gemm_arm_asimdfhm.cpp.o
+[552/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/gemm_arm_vfpv4.cpp.o
+[553/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/gemm_arm_bf16.cpp.o
+[554/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/groupnorm.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/groupnorm.cpp:104:68: warning: unused parameter 'opt' [-Wunused-parameter]
+  104 | int GroupNorm::forward_inplace(Mat& bottom_top_blob, const Option& opt) const
+      |                                                                    ^
+1 warning generated.
+[555/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/groupnorm_arm.cpp.o
+[556/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/vulkan/groupnorm_vulkan.cpp.o
+[557/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/groupnorm_arm_asimdhp.cpp.o
+[558/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/layernorm.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/layernorm.cpp:77:68: warning: unused parameter 'opt' [-Wunused-parameter]
+   77 | int LayerNorm::forward_inplace(Mat& bottom_top_blob, const Option& opt) const
+      |                                                                    ^
+1 warning generated.
+[559/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/gemm_arm.cpp.o
+[560/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/gemm_arm_asimddp.cpp.o
+[561/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/layernorm_arm.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/layernorm_arm.cpp:490:78: warning: unused parameter 'opt' [-Wunused-parameter]
+  490 | int LayerNorm_arm::forward_inplace_bf16s(Mat& bottom_top_blob, const Option& opt) const
+      |                                                                              ^
+1 warning generated.
+[562/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/vulkan/layernorm_vulkan.cpp.o
+[563/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/softplus.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/softplus.cpp:14:67: warning: unused parameter 'opt' [-Wunused-parameter]
+   14 | int Softplus::forward_inplace(Mat& bottom_top_blob, const Option& opt) const
+      |                                                                   ^
+1 warning generated.
+[564/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/layernorm_arm_asimdhp.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/layernorm_arm_asimdhp.cpp:283:78: warning: unused parameter 'opt' [-Wunused-parameter]
+  283 | int LayerNorm_arm::forward_inplace_fp16s(Mat& bottom_top_blob, const Option& opt) const
+      |                                                                              ^
+1 warning generated.
+[565/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/vulkan/softplus_vulkan.cpp.o
+[566/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/gemm_arm_i8mm.cpp.o
+In file included from /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/gemm_arm_i8mm.cpp:12:
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/gemm_int8.h:9859:102: warning: unused parameter 'i' [-Wunused-parameter]
+ 9859 | static void gemm_transB_packed_tile_int8(const Mat& AT_tile, const Mat& BT_tile, Mat& topT_tile, int i, int max_ii, int j, int max_jj, int k, int max_kk)
+      |                                                                                                      ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/gemm_int8.h:9859:121: warning: unused parameter 'j' [-Wunused-parameter]
+ 9859 | static void gemm_transB_packed_tile_int8(const Mat& AT_tile, const Mat& BT_tile, Mat& topT_tile, int i, int max_ii, int j, int max_jj, int k, int max_kk)
+      |                                                                                                                         ^
+2 warnings generated.
+[567/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/gru.cpp.o
+[568/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/gru_arm_vfpv4.cpp.o
+In file included from /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/gru_arm_vfpv4.cpp:12:
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/gru_int8.h:519:122: warning: unused parameter 'opt' [-Wunused-parameter]
+  519 | static void gru_int8_gate_output(const Mat& gates, Mat& hidden_state, Mat& top_blob, int ti, int elemtype, const Option& opt)
+      |                                                                                                                          ^
+1 warning generated.
+[569/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/gru_arm_asimdhp.cpp.o
+[570/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/gru_arm.cpp.o
+In file included from /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/gru_arm.cpp:18:
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/gru_int8.h:519:122: warning: unused parameter 'opt' [-Wunused-parameter]
+  519 | static void gru_int8_gate_output(const Mat& gates, Mat& hidden_state, Mat& top_blob, int ti, int elemtype, const Option& opt)
+      |                                                                                                                          ^
+1 warning generated.
+[571/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/gru_arm_asimddp.cpp.o
+In file included from /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/gru_arm_asimddp.cpp:12:
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/gru_int8.h:13:302: warning: unused parameter 'opt' [-Wunused-parameter]
+   13 | static void gru_transform_weight_int8(const Mat& weight_xc, const Mat& weight_xc_int8_scales, const Mat& weight_hc, const Mat& weight_hc_int8_scales, const Mat& bias_c, Mat& weight_data_tm, Mat& weight_data_tm_int8_descales, Mat& bias_c_tm, int size, int num_output, int num_directions, const Option& opt)
+      |                                                                                                                                                                                                                                                                                                              ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/gru_int8.h:519:122: warning: unused parameter 'opt' [-Wunused-parameter]
+  519 | static void gru_int8_gate_output(const Mat& gates, Mat& hidden_state, Mat& top_blob, int ti, int elemtype, const Option& opt)
+      |                                                                                                                          ^
+2 warnings generated.
+[572/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/gelu.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/gelu.cpp:21:63: warning: unused parameter 'opt' [-Wunused-parameter]
+   21 | int GELU::forward_inplace(Mat& bottom_top_blob, const Option& opt) const
+      |                                                               ^
+1 warning generated.
+[573/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/multiheadattention.cpp.o
+[574/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/multiheadattention_arm.cpp.o
+[575/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/vulkan/multiheadattention_vulkan.cpp.o
+[576/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/gelu_arm.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/gelu_arm.cpp:116:73: warning: unused parameter 'opt' [-Wunused-parameter]
+  116 | int GELU_arm::forward_inplace_bf16s(Mat& bottom_top_blob, const Option& opt) const
+      |                                                                         ^
+1 warning generated.
+[577/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/vulkan/gelu_vulkan.cpp.o
+[578/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/convolution1d.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/convolution1d.cpp:102:220: warning: unused parameter 'opt' [-Wunused-parameter]
+  102 | static int convolution1d(const Mat& bottom_blob, Mat& top_blob, const Mat& weight_data, const Mat& bias_data, int kernel_w, int stride_w, int dilation_w, int activation_type, const Mat& activation_params, const Option& opt)
+      |                                                                                                                                                                                                                            ^
+1 warning generated.
+[579/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/gelu_arm_asimdhp.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/gelu_arm_asimdhp.cpp:18:73: warning: unused parameter 'opt' [-Wunused-parameter]
+   18 | int GELU_arm::forward_inplace_fp16s(Mat& bottom_top_blob, const Option& opt) const
+      |                                                                         ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/gelu_arm_asimdhp.cpp:83:74: warning: unused parameter 'opt' [-Wunused-parameter]
+   83 | int GELU_arm::forward_inplace_fp16sa(Mat& bottom_top_blob, const Option& opt) const
+      |                                                                          ^
+2 warnings generated.
+[580/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/pooling1d.cpp.o
+[581/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/vulkan/convolution1d_vulkan.cpp.o
+[582/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/convolutiondepthwise1d.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/convolutiondepthwise1d.cpp:108:240: warning: unused parameter 'opt' [-Wunused-parameter]
+  108 | static int convolutiondepthwise1d(const Mat& bottom_blob, Mat& top_blob, const Mat& weight_data, const Mat& bias_data, int kernel_w, int stride_w, int dilation_w, int group, int activation_type, const Mat& activation_params, const Option& opt)
+      |                                                                                                                                                                                                                                                ^
+1 warning generated.
+[583/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/convolution1d_arm.cpp.o
+In file included from /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution1d_arm.cpp:18:
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution1d_packed.h:494:231: warning: unused parameter 'opt' [-Wunused-parameter]
+  494 | static void convolution1d_packed(const Mat& bottom_blob, Mat& top_blob, const Mat& weight_data_tm, const Mat& bias_data, int kernel_w, int dilation_w, int stride_w, int activation_type, const Mat& activation_params, const Option& opt)
+      |                                                                                                                                                                                                                                       ^
+In file included from /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution1d_arm.cpp:20:
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution1d_packed_bf16s.h:494:237: warning: unused parameter 'opt' [-Wunused-parameter]
+  494 | static void convolution1d_packed_bf16s(const Mat& bottom_blob, Mat& top_blob, const Mat& weight_data_tm, const Mat& bias_data, int kernel_w, int dilation_w, int stride_w, int activation_type, const Mat& activation_params, const Option& opt)
+      |                                                                                                                                                                                                                                             ^
+2 warnings generated.
+[584/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/convolution1d_arm_asimdhp.cpp.o
+In file included from /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution1d_arm_asimdhp.cpp:18:
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution1d_packed_fp16s.h:443:237: warning: unused parameter 'opt' [-Wunused-parameter]
+  443 | static void convolution1d_packed_fp16s(const Mat& bottom_blob, Mat& top_blob, const Mat& weight_data_tm, const Mat& bias_data, int kernel_w, int dilation_w, int stride_w, int activation_type, const Mat& activation_params, const Option& opt)
+      |                                                                                                                                                                                                                                             ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/convolution1d_packed_fp16s.h:1192:238: warning: unused parameter 'opt' [-Wunused-parameter]
+ 1192 | static void convolution1d_packed_fp16sa(const Mat& bottom_blob, Mat& top_blob, const Mat& weight_data_tm, const Mat& bias_data, int kernel_w, int dilation_w, int stride_w, int activation_type, const Mat& activation_params, const Option& opt)
+      |                                                                                                                                                                                                                                              ^
+2 warnings generated.
+[585/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/convolution3d.cpp.o
+[586/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/convolutiondepthwise3d.cpp.o
+[587/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/pooling3d.cpp.o
+[588/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/matmul.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/matmul.cpp:21:60: warning: unused parameter 'opt' [-Wunused-parameter]
+   21 | static void transpose(const Mat& X, Mat& XT, const Option& opt)
+      |                                                            ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/matmul.cpp:40:84: warning: unused parameter 'opt' [-Wunused-parameter]
+   40 | static void matmul_transb(const Mat& A, const Mat& B, Mat& top_blob, const Option& opt)
+      |                                                                                    ^
+2 warnings generated.
+[589/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/matmul_arm.cpp.o
+[590/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/deconvolution1d.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/deconvolution1d.cpp:103:222: warning: unused parameter 'opt' [-Wunused-parameter]
+  103 | static int deconvolution1d(const Mat& bottom_blob, Mat& top_blob, const Mat& weight_data, const Mat& bias_data, int kernel_w, int stride_w, int dilation_w, int activation_type, const Mat& activation_params, const Option& opt)
+      |                                                                                                                                                                                                                              ^
+1 warning generated.
+[591/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/deconvolutiondepthwise1d.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/deconvolutiondepthwise1d.cpp:107:242: warning: unused parameter 'opt' [-Wunused-parameter]
+  107 | static int deconvolutiondepthwise1d(const Mat& bottom_blob, Mat& top_blob, const Mat& weight_data, const Mat& bias_data, int kernel_w, int stride_w, int dilation_w, int group, int activation_type, const Mat& activation_params, const Option& opt)
+      |                                                                                                                                                                                                                                                  ^
+1 warning generated.
+[592/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/deconvolution3d.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/deconvolution3d.cpp:101:310: warning: unused parameter 'opt' [-Wunused-parameter]
+  101 | static int deconvolution3d(const Mat& bottom_blob, Mat& top_blob, const Mat& weight_data, const Mat& bias_data, int kernel_w, int kernel_h, int kernel_d, int stride_w, int stride_h, int stride_d, int dilation_w, int dilation_h, int dilation_d, int activation_type, const Mat& activation_params, const Option& opt)
+      |                                                                                                                                                                                                                                                                                                                      ^
+1 warning generated.
+[593/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/deconvolutiondepthwise3d.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/deconvolutiondepthwise3d.cpp:105:330: warning: unused parameter 'opt' [-Wunused-parameter]
+  105 | static int deconvolutiondepthwise3d(const Mat& bottom_blob, Mat& top_blob, const Mat& weight_data, const Mat& bias_data, int kernel_w, int kernel_h, int kernel_d, int stride_w, int stride_h, int stride_d, int dilation_w, int dilation_h, int dilation_d, int group, int activation_type, const Mat& activation_params, const Option& opt)
+      |                                                                                                                                                                                                                                                                                                                                          ^
+1 warning generated.
+[594/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/einsum.cpp.o
+[595/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/deformableconv2d.cpp.o
+[596/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/fold.cpp.o
+[597/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/glu.cpp.o
+[598/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/unfold.cpp.o
+[599/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/vulkan/unfold_vulkan.cpp.o
+[600/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/cumulativesum.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/cumulativesum.cpp:21:72: warning: unused parameter 'opt' [-Wunused-parameter]
+   21 | int CumulativeSum::forward_inplace(Mat& bottom_top_blob, const Option& opt) const
+      |                                                                        ^
+1 warning generated.
+[601/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/copyto.cpp.o
+[602/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/gridsample.cpp.o
+[603/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/erf.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/erf.cpp:14:62: warning: unused parameter 'opt' [-Wunused-parameter]
+   14 | int Erf::forward_inplace(Mat& bottom_top_blob, const Option& opt) const
+      |                                                              ^
+1 warning generated.
+[604/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/erf_arm.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/erf_arm.cpp:93:72: warning: unused parameter 'opt' [-Wunused-parameter]
+   93 | int Erf_arm::forward_inplace_bf16s(Mat& bottom_top_blob, const Option& opt) const
+      |                                                                        ^
+1 warning generated.
+[605/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/vulkan/erf_vulkan.cpp.o
+[606/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/diag.cpp.o
+[607/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/erf_arm_asimdhp.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/erf_arm_asimdhp.cpp:18:72: warning: unused parameter 'opt' [-Wunused-parameter]
+   18 | int Erf_arm::forward_inplace_fp16s(Mat& bottom_top_blob, const Option& opt) const
+      |                                                                        ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/erf_arm_asimdhp.cpp:75:73: warning: unused parameter 'opt' [-Wunused-parameter]
+   75 | int Erf_arm::forward_inplace_fp16sa(Mat& bottom_top_blob, const Option& opt) const
+      |                                                                         ^
+2 warnings generated.
+[608/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/celu.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/celu.cpp:21:63: warning: unused parameter 'opt' [-Wunused-parameter]
+   21 | int CELU::forward_inplace(Mat& bottom_top_blob, const Option& opt) const
+      |                                                               ^
+1 warning generated.
+[609/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/vulkan/celu_vulkan.cpp.o
+[610/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/shrink.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/shrink.cpp:22:65: warning: unused parameter 'opt' [-Wunused-parameter]
+   22 | int Shrink::forward_inplace(Mat& bottom_top_blob, const Option& opt) const
+      |                                                                 ^
+1 warning generated.
+[611/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/vulkan/shrink_vulkan.cpp.o
+[612/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/rmsnorm.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/rmsnorm.cpp:63:66: warning: unused parameter 'opt' [-Wunused-parameter]
+   63 | int RMSNorm::forward_inplace(Mat& bottom_top_blob, const Option& opt) const
+      |                                                                  ^
+1 warning generated.
+[613/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/rmsnorm_arm_asimdhp.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/rmsnorm_arm_asimdhp.cpp:204:76: warning: unused parameter 'opt' [-Wunused-parameter]
+  204 | int RMSNorm_arm::forward_inplace_fp16s(Mat& bottom_top_blob, const Option& opt) const
+      |                                                                            ^
+1 warning generated.
+[614/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/rmsnorm_arm.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/arm/rmsnorm_arm.cpp:390:76: warning: unused parameter 'opt' [-Wunused-parameter]
+  390 | int RMSNorm_arm::forward_inplace_bf16s(Mat& bottom_top_blob, const Option& opt) const
+      |                                                                            ^
+1 warning generated.
+[615/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/vulkan/rmsnorm_vulkan.cpp.o
+[616/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/spectrogram.cpp.o
+[617/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/inversespectrogram.cpp.o
+[618/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/flip.cpp.o
+[619/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/sdpa.cpp.o
+[620/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/sdpa_arm.cpp.o
+[621/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/rotaryembed.cpp.o
+[622/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/vulkan/sdpa_vulkan.cpp.o
+[623/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/rotaryembed_arm.cpp.o
+[624/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/vulkan/rotaryembed_vulkan.cpp.o
+[625/626] Building CXX object src/CMakeFiles/ncnn.dir/layer/arm/rotaryembed_arm_asimdhp.cpp.o
+[626/626] Linking CXX shared library src/libncnn.so
+-- Install configuration: "Release"
+-- Installing: /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/install/lib/libncnn.so
+-- Installing: /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/install/include/ncnn/allocator.h
+-- Installing: /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/install/include/ncnn/benchmark.h
+-- Installing: /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/install/include/ncnn/blob.h
+-- Installing: /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/install/include/ncnn/c_api.h
+-- Installing: /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/install/include/ncnn/command.h
+-- Installing: /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/install/include/ncnn/cpu.h
+-- Installing: /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/install/include/ncnn/datareader.h
+-- Installing: /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/install/include/ncnn/expression.h
+-- Installing: /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/install/include/ncnn/gpu.h
+-- Installing: /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/install/include/ncnn/layer.h
+-- Installing: /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/install/include/ncnn/layer_shader_type.h
+-- Installing: /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/install/include/ncnn/layer_type.h
+-- Installing: /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/install/include/ncnn/mat.h
+-- Installing: /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/install/include/ncnn/modelbin.h
+-- Installing: /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/install/include/ncnn/net.h
+-- Installing: /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/install/include/ncnn/option.h
+-- Installing: /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/install/include/ncnn/paramdict.h
+-- Installing: /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/install/include/ncnn/pipeline.h
+-- Installing: /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/install/include/ncnn/pipelinecache.h
+-- Installing: /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/install/include/ncnn/simpleocv.h
+-- Installing: /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/install/include/ncnn/simpleomp.h
+-- Installing: /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/install/include/ncnn/simplestl.h
+-- Installing: /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/install/include/ncnn/simplemath.h
+-- Installing: /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/install/include/ncnn/simplevk.h
+-- Installing: /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/install/include/ncnn/vulkan_header_fix.h
+-- Up-to-date: /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/install/include/ncnn/ncnn_export.h
+-- Up-to-date: /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/install/include/ncnn/layer_shader_type_enum.h
+-- Up-to-date: /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/install/include/ncnn/layer_type_enum.h
+-- Up-to-date: /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/install/include/ncnn/platform.h
+-- Up-to-date: /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/install/lib/cmake/ncnn/ncnn.cmake
+-- Up-to-date: /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/install/lib/cmake/ncnn/ncnn-release.cmake
+-- Up-to-date: /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/install/lib/cmake/ncnn/ncnnConfig.cmake
+-- Up-to-date: /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/install/lib/cmake/ncnn/ncnnConfigVersion.cmake
+-- Up-to-date: /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/install/lib/pkgconfig/ncnn.pc

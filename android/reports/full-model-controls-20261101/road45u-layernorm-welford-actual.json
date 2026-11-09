@@ -1,0 +1,49 @@
+{
+  "candidate": "candidate45u",
+  "apk_sha256": "e34f7d2979bd37b1457b8f83052bdf9436c4b10c491097988078822c87b29319",
+  "diagnostic_only": true,
+  "node": "model/p_node_layer_norm",
+  "tensor": "model/p_layer_norm",
+  "seed": 42,
+  "captured_gpu": {
+    "parity": {
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        9,
+        512
+      ],
+      "dtype": "float16",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 6.103515625e-05,
+      "mismatched_elements": 0
+    },
+    "unequal_elements": 15
+  },
+  "ordered_welford": {
+    "parity": {
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        9,
+        512
+      ],
+      "dtype": "float16",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": true,
+      "max_abs_error": 0.0,
+      "mismatched_elements": 0
+    },
+    "unequal_elements": 0
+  },
+  "input_sha256": {
+    "model/p_add_2": "4be38665c55fb1793ae5656275c1ba4413e28e071e5235edfa0e08a1a9f4bb19"
+  },
+  "original_host_graph_sha256": "5078784511c7bfb22f1546a15532ed6b6ed71ee6c3e83237951ff5b95ca9ce80",
+  "diagnostic_graph_sha256": "e7524a76ead66a73e64660144f80bf49120e35a4ecee1dd2be42dd3feb81adfa"
+}

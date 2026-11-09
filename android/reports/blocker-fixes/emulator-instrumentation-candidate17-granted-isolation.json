@@ -1,0 +1,66 @@
+{
+  "serial": "emulator-5554",
+  "command": [
+    ".venv/bin/python",
+    "android/scripts/validate_instrumentation.py",
+    "--serial",
+    "emulator-5554",
+    "--adb",
+    "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+    "--package",
+    "com.samsung.sunnypilot.fold3",
+    "--expected-tests",
+    "19",
+    "--report",
+    "android/reports/blocker-fixes/emulator-instrumentation-candidate17-granted.json",
+    "--output",
+    "android/build/emulator-instrumentation-candidate17-granted.txt"
+  ],
+  "vehicle_tx_enabled": false,
+  "status": "passed",
+  "forwards_before": [],
+  "before_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "352 android.hardware.camera.provider.ranchu",
+      "353 android.hardware.camera.provider@2.7-service-google",
+      "431 cameraserver"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.8,
+    "thermal_override": false
+  },
+  "apk_sha256": "2e2c04c2edf912a446b387822c071b152be2f5f3e81938aad5fea09d65aefcdd",
+  "baseline": {
+    "processes": [],
+    "camera_provider_processes": [
+      "352 android.hardware.camera.provider.ranchu",
+      "353 android.hardware.camera.provider@2.7-service-google",
+      "431 cameraserver"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.8,
+    "thermal_override": false,
+    "idle_seconds": 30.860019332991214,
+    "normal_thermal_seconds": 30.745650708005996
+  },
+  "apk_sha256_at_start": "2e2c04c2edf912a446b387822c071b152be2f5f3e81938aad5fea09d65aefcdd",
+  "returncode": 0,
+  "after_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "352 android.hardware.camera.provider.ranchu",
+      "353 android.hardware.camera.provider@2.7-service-google",
+      "431 cameraserver"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.8,
+    "thermal_override": false
+  },
+  "forwards_removed": [],
+  "apk_sha256_after": "2e2c04c2edf912a446b387822c071b152be2f5f3e81938aad5fea09d65aefcdd",
+  "artifact_stable": true
+}

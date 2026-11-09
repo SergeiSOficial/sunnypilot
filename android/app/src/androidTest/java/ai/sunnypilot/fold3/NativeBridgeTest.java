@@ -8,30 +8,54 @@ import static org.junit.Assert.*;
 
 @RunWith(AndroidJUnit4.class)
 public class NativeBridgeTest {
+    @Test public void lowLatencyFpsRespectsStreamDurationAndAdvertisedRanges() {
+        android.util.Range<Integer>[] ranges = new android.util.Range[]{
+            new android.util.Range<>(15, 30), new android.util.Range<>(30, 30), new android.util.Range<>(60, 60)};
+        assertEquals(new android.util.Range<>(60, 60), CameraProbe.regularFps(ranges, 16_666_667L));
+        assertEquals(new android.util.Range<>(30, 30), CameraProbe.regularFps(ranges, 33_333_333L));
+        assertNull(CameraProbe.regularFps(ranges, 50_000_000L));
+        assertNull(CameraProbe.regularFps(null, 0));
+    }
+
     @Test public void javaPublisherReachesPythonVisionIpcWithoutClaimingCalibration() throws Exception {
         android.content.Context app = androidx.test.platform.app.InstrumentationRegistry.getInstrumentation().getTargetContext();
         PythonRuntime.start(app);
         String directory = new java.io.File(app.getFilesDir(), "ipc").getAbsolutePath();
         long handle = NativeBridge.createCameraPublisher(directory, new int[]{0}, 4, 2);
         java.util.concurrent.CountDownLatch ready = new java.util.concurrent.CountDownLatch(1);
+        java.util.concurrent.atomic.AtomicBoolean stopped = new java.util.concurrent.atomic.AtomicBoolean();
+        java.util.concurrent.atomic.AtomicReference<Throwable> failure = new java.util.concurrent.atomic.AtomicReference<>();
         Thread producer = new Thread(() -> {
-            try { if (!ready.await(15, java.util.concurrent.TimeUnit.SECONDS)) return; }
-            catch (InterruptedException e) { Thread.currentThread().interrupt(); return; }
-            ByteBuffer pixels = ByteBuffer.allocateDirect(12);
-            for (int frame = 1; frame <= 100; frame++) {
-                pixels.clear();
-                for (int i = 0; i < 12; i++) pixels.put((byte)(frame % 128));
-                pixels.rewind();
-                NativeBridge.sendCameraFrame(handle, 0, pixels, 4, 2, frame, 1000000 + frame);
-                android.os.SystemClock.sleep(20);
-            }
+            try {
+                if (!ready.await(30, java.util.concurrent.TimeUnit.SECONDS))
+                    throw new AssertionError("Python camera receiver never became ready");
+                ByteBuffer pixels = ByteBuffer.allocateDirect(12);
+                long deadline = android.os.SystemClock.elapsedRealtime() + 10000;
+                for (int frame = 1; !stopped.get() && android.os.SystemClock.elapsedRealtime() < deadline; frame++) {
+                    pixels.clear();
+                    for (int i = 0; i < 12; i++) pixels.put((byte)(frame % 128));
+                    pixels.rewind();
+                    NativeBridge.sendCameraFrame(handle, 0, pixels, 4, 2, frame, 1000000 + frame);
+                    android.os.SystemClock.sleep(20);
+                }
+            } catch (Throwable error) { failure.set(error); }
         });
         try {
+            // Import before starting a bounded producer: cold imports are not IPC latency.
+            com.chaquo.python.PyObject module = com.chaquo.python.Python.getInstance().getModule("fold3_runtime");
             producer.start();
-            int frames = com.chaquo.python.Python.getInstance().getModule("fold3_runtime")
-                .callAttr("receive_camera_test", app.getFilesDir().getAbsolutePath(), ready).toInt();
+            int frames = module.callAttr("receive_camera_test", app.getFilesDir().getAbsolutePath(), ready).toInt();
             assertEquals(10, frames);
-        } finally { producer.join(); NativeBridge.closeCameraPublisher(handle); }
+        } finally {
+            stopped.set(true);
+            ready.countDown();
+            producer.join(2000);
+            if (producer.isAlive()) { producer.interrupt(); producer.join(2000); }
+            // Never close the publisher while its producer can still access the handle.
+            if (!producer.isAlive()) NativeBridge.closeCameraPublisher(handle);
+        }
+        assertFalse("Camera test producer failed to exit", producer.isAlive());
+        if (failure.get() != null) throw new AssertionError("Camera test producer failed", failure.get());
     }
     @Test public void cameraPublisherRejectsWrongDimensionsAndUnallocatedStreams() {
         android.content.Context app = androidx.test.platform.app.InstrumentationRegistry.getInstrumentation().getTargetContext();

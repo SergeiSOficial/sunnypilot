@@ -1,0 +1,1434 @@
+{
+  "scope": "diagnostic sequence operator trace; not device qualification",
+  "model": "dmonitoring_model",
+  "seed": 42,
+  "sequence": "camera-replay",
+  "frame": 21,
+  "seconds": 19.080731624999316,
+  "source_sha256": {
+    "fold3_opencl": "8a1acf64995b13888203a4c3731cf160617aad716be22296a5a7fb5e6b9a7a56",
+    "fold3_host_math": "52c83731488ad6165a0524827c330aed12fec3949b8c1599d2fdceef070c66f0"
+  },
+  "first_difference": {
+    "index": 320,
+    "operator": "Pow",
+    "name": "",
+    "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_28_XCubed",
+    "passed": true,
+    "finite": true,
+    "shape": [
+      1,
+      1280,
+      1,
+      1
+    ],
+    "dtype": "float32",
+    "expected_nonfinite_elements": 0,
+    "unexpected_nonfinite_elements": 0,
+    "exact": false,
+    "max_abs_error": 1.9073486328125e-06,
+    "mismatched_elements": 0
+  },
+  "first_divergence": {
+    "index": 334,
+    "operator": "FusedGemm",
+    "name": "fused node_linear_2",
+    "output": "InsertedPrecisionFreeCast_relu_1",
+    "passed": false,
+    "finite": true,
+    "shape": [
+      1,
+      24
+    ],
+    "dtype": "float32",
+    "expected_nonfinite_elements": 0,
+    "unexpected_nonfinite_elements": 0,
+    "exact": false,
+    "max_abs_error": 0.0008192062377929688,
+    "mismatched_elements": 1
+  },
+  "different_operators": [
+    {
+      "index": 320,
+      "operator": "Pow",
+      "name": "",
+      "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_28_XCubed",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        1280,
+        1,
+        1
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 1.9073486328125e-06,
+      "mismatched_elements": 0
+    },
+    {
+      "index": 321,
+      "operator": "Mul",
+      "name": "",
+      "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_28_XCubedC0",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        1280,
+        1,
+        1
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 1.1920928955078125e-07,
+      "mismatched_elements": 0
+    },
+    {
+      "index": 322,
+      "operator": "Sum",
+      "name": "",
+      "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_28_XC0XCubed",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        1280,
+        1,
+        1
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 2.384185791015625e-07,
+      "mismatched_elements": 0
+    },
+    {
+      "index": 324,
+      "operator": "Mul",
+      "name": "",
+      "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_28_TanhInput",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        1280,
+        1,
+        1
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 2.384185791015625e-07,
+      "mismatched_elements": 0
+    },
+    {
+      "index": 325,
+      "operator": "Tanh",
+      "name": "",
+      "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_28_ErfApprox",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        1280,
+        1,
+        1
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 1.7881393432617188e-07,
+      "mismatched_elements": 0
+    },
+    {
+      "index": 326,
+      "operator": "Sum",
+      "name": "",
+      "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_28_PhiApprox",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        1280,
+        1,
+        1
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 1.7881393432617188e-07,
+      "mismatched_elements": 0
+    },
+    {
+      "index": 327,
+      "operator": "Mul",
+      "name": "",
+      "output": "InsertedPrecisionFreeCast_gelu_29",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        1280,
+        1,
+        1
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 2.1979212760925293e-07,
+      "mismatched_elements": 0
+    },
+    {
+      "index": 328,
+      "operator": "Cast",
+      "name": "InsertedPrecisionFreeCast_gelu_29",
+      "output": "gelu_29",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        1280,
+        1,
+        1
+      ],
+      "dtype": "float16",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 1.52587890625e-05,
+      "mismatched_elements": 0
+    },
+    {
+      "index": 329,
+      "operator": "Reshape",
+      "name": "node_view_1",
+      "output": "view_1",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        1280
+      ],
+      "dtype": "float16",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 1.52587890625e-05,
+      "mismatched_elements": 0
+    },
+    {
+      "index": 330,
+      "operator": "Gemm",
+      "name": "node_linear",
+      "output": "linear",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        512
+      ],
+      "dtype": "float16",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.00048828125,
+      "mismatched_elements": 0
+    },
+    {
+      "index": 331,
+      "operator": "Gemm",
+      "name": "node_linear_1",
+      "output": "linear_1",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        32
+      ],
+      "dtype": "float16",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.001953125,
+      "mismatched_elements": 0
+    },
+    {
+      "index": 332,
+      "operator": "Cast",
+      "name": "InsertedPrecisionFreeCast_linear_1",
+      "output": "InsertedPrecisionFreeCast_linear_1",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        32
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.001953125,
+      "mismatched_elements": 0
+    },
+    {
+      "index": 333,
+      "operator": "Relu",
+      "name": "node_relu",
+      "output": "InsertedPrecisionFreeCast_relu",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        32
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.001953125,
+      "mismatched_elements": 0
+    },
+    {
+      "index": 334,
+      "operator": "FusedGemm",
+      "name": "fused node_linear_2",
+      "output": "InsertedPrecisionFreeCast_relu_1",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        24
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.0008192062377929688,
+      "mismatched_elements": 1
+    },
+    {
+      "index": 335,
+      "operator": "FusedGemm",
+      "name": "fused node_linear_3",
+      "output": "InsertedPrecisionFreeCast_relu_2",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        16
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.0005972385406494141,
+      "mismatched_elements": 1
+    },
+    {
+      "index": 336,
+      "operator": "Cast",
+      "name": "InsertedPrecisionFreeCast_relu_2",
+      "output": "relu_2",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        16
+      ],
+      "dtype": "float16",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.00390625,
+      "mismatched_elements": 1
+    },
+    {
+      "index": 339,
+      "operator": "Gemm",
+      "name": "node_linear_5",
+      "output": "linear_5",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        32
+      ],
+      "dtype": "float16",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.0001220703125,
+      "mismatched_elements": 0
+    },
+    {
+      "index": 340,
+      "operator": "Cast",
+      "name": "InsertedPrecisionFreeCast_linear_5",
+      "output": "InsertedPrecisionFreeCast_linear_5",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        32
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.0001220703125,
+      "mismatched_elements": 0
+    },
+    {
+      "index": 347,
+      "operator": "Gemm",
+      "name": "node_linear_25",
+      "output": "linear_25",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        32
+      ],
+      "dtype": "float16",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.001953125,
+      "mismatched_elements": 0
+    },
+    {
+      "index": 348,
+      "operator": "Cast",
+      "name": "InsertedPrecisionFreeCast_linear_25",
+      "output": "InsertedPrecisionFreeCast_linear_25",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        32
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.001953125,
+      "mismatched_elements": 0
+    },
+    {
+      "index": 355,
+      "operator": "Gemm",
+      "name": "node_linear_29",
+      "output": "linear_29",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        32
+      ],
+      "dtype": "float16",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.000244140625,
+      "mismatched_elements": 1
+    },
+    {
+      "index": 356,
+      "operator": "Cast",
+      "name": "InsertedPrecisionFreeCast_linear_29",
+      "output": "InsertedPrecisionFreeCast_linear_29",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        32
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.000244140625,
+      "mismatched_elements": 1
+    },
+    {
+      "index": 373,
+      "operator": "Concat",
+      "name": "node_cat",
+      "output": "cat",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        515
+      ],
+      "dtype": "float16",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.00048828125,
+      "mismatched_elements": 0
+    },
+    {
+      "index": 374,
+      "operator": "Gemm",
+      "name": "node_linear_45",
+      "output": "linear_45",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        96
+      ],
+      "dtype": "float16",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.00048828125,
+      "mismatched_elements": 2
+    },
+    {
+      "index": 375,
+      "operator": "Cast",
+      "name": "InsertedPrecisionFreeCast_linear_45",
+      "output": "InsertedPrecisionFreeCast_linear_45",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        96
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.00048828125,
+      "mismatched_elements": 2
+    },
+    {
+      "index": 376,
+      "operator": "Relu",
+      "name": "node_relu_33",
+      "output": "InsertedPrecisionFreeCast_relu_33",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        96
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.00048828125,
+      "mismatched_elements": 0
+    },
+    {
+      "index": 377,
+      "operator": "FusedGemm",
+      "name": "fused node_linear_46",
+      "output": "InsertedPrecisionFreeCast_relu_34",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        64
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.0001239776611328125,
+      "mismatched_elements": 0
+    },
+    {
+      "index": 378,
+      "operator": "FusedGemm",
+      "name": "fused node_linear_47",
+      "output": "InsertedPrecisionFreeCast_relu_35",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        32
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 4.3511390686035156e-05,
+      "mismatched_elements": 0
+    },
+    {
+      "index": 379,
+      "operator": "Cast",
+      "name": "InsertedPrecisionFreeCast_relu_35",
+      "output": "relu_35",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        32
+      ],
+      "dtype": "float16",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.00048828125,
+      "mismatched_elements": 0
+    },
+    {
+      "index": 395,
+      "operator": "Gemm",
+      "name": "node_linear_33",
+      "output": "linear_33",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        64
+      ],
+      "dtype": "float16",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.0009765625,
+      "mismatched_elements": 0
+    },
+    {
+      "index": 396,
+      "operator": "Cast",
+      "name": "InsertedPrecisionFreeCast_linear_33",
+      "output": "InsertedPrecisionFreeCast_linear_33",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        64
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.0009765625,
+      "mismatched_elements": 0
+    },
+    {
+      "index": 397,
+      "operator": "Relu",
+      "name": "node_relu_24",
+      "output": "InsertedPrecisionFreeCast_relu_24",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        64
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.0009765625,
+      "mismatched_elements": 0
+    },
+    {
+      "index": 398,
+      "operator": "FusedGemm",
+      "name": "fused node_linear_34",
+      "output": "InsertedPrecisionFreeCast_relu_25",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        48
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.00014019012451171875,
+      "mismatched_elements": 0
+    },
+    {
+      "index": 399,
+      "operator": "FusedGemm",
+      "name": "fused node_linear_35",
+      "output": "InsertedPrecisionFreeCast_relu_26",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        32
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 7.748603820800781e-05,
+      "mismatched_elements": 0
+    },
+    {
+      "index": 400,
+      "operator": "Cast",
+      "name": "InsertedPrecisionFreeCast_relu_26",
+      "output": "relu_26",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        32
+      ],
+      "dtype": "float16",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.000244140625,
+      "mismatched_elements": 0
+    },
+    {
+      "index": 401,
+      "operator": "Gemm",
+      "name": "node_linear_36",
+      "output": "linear_36",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        12
+      ],
+      "dtype": "float16",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.0001220703125,
+      "mismatched_elements": 1
+    },
+    {
+      "index": 402,
+      "operator": "Gemm",
+      "name": "node_linear_21",
+      "output": "linear_21",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        96
+      ],
+      "dtype": "float16",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.0009765625,
+      "mismatched_elements": 1
+    },
+    {
+      "index": 403,
+      "operator": "Cast",
+      "name": "InsertedPrecisionFreeCast_linear_21",
+      "output": "InsertedPrecisionFreeCast_linear_21",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        96
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.0009765625,
+      "mismatched_elements": 1
+    },
+    {
+      "index": 404,
+      "operator": "Relu",
+      "name": "node_relu_15",
+      "output": "InsertedPrecisionFreeCast_relu_15",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        96
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.000244140625,
+      "mismatched_elements": 1
+    },
+    {
+      "index": 405,
+      "operator": "FusedGemm",
+      "name": "fused node_linear_22",
+      "output": "InsertedPrecisionFreeCast_relu_16",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        64
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 7.295608520507812e-05,
+      "mismatched_elements": 0
+    },
+    {
+      "index": 406,
+      "operator": "FusedGemm",
+      "name": "fused node_linear_23",
+      "output": "InsertedPrecisionFreeCast_relu_17",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        32
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 4.851818084716797e-05,
+      "mismatched_elements": 0
+    },
+    {
+      "index": 409,
+      "operator": "Gemm",
+      "name": "node_linear_17",
+      "output": "linear_17",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        128
+      ],
+      "dtype": "float16",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.0009765625,
+      "mismatched_elements": 4
+    },
+    {
+      "index": 410,
+      "operator": "Cast",
+      "name": "InsertedPrecisionFreeCast_linear_17",
+      "output": "InsertedPrecisionFreeCast_linear_17",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        128
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.0009765625,
+      "mismatched_elements": 4
+    },
+    {
+      "index": 411,
+      "operator": "Relu",
+      "name": "node_relu_12",
+      "output": "InsertedPrecisionFreeCast_relu_12",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        128
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.00048828125,
+      "mismatched_elements": 2
+    },
+    {
+      "index": 412,
+      "operator": "FusedGemm",
+      "name": "fused node_linear_18",
+      "output": "InsertedPrecisionFreeCast_relu_13",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        64
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 6.4849853515625e-05,
+      "mismatched_elements": 0
+    },
+    {
+      "index": 413,
+      "operator": "FusedGemm",
+      "name": "fused node_linear_19",
+      "output": "InsertedPrecisionFreeCast_relu_14",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        32
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 3.266334533691406e-05,
+      "mismatched_elements": 0
+    },
+    {
+      "index": 416,
+      "operator": "Gemm",
+      "name": "node_linear_13",
+      "output": "linear_13",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        32
+      ],
+      "dtype": "float16",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.00048828125,
+      "mismatched_elements": 1
+    },
+    {
+      "index": 417,
+      "operator": "Cast",
+      "name": "InsertedPrecisionFreeCast_linear_13",
+      "output": "InsertedPrecisionFreeCast_linear_13",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        32
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.00048828125,
+      "mismatched_elements": 1
+    },
+    {
+      "index": 423,
+      "operator": "Gemm",
+      "name": "node_linear_9",
+      "output": "linear_9",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        64
+      ],
+      "dtype": "float16",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.0009765625,
+      "mismatched_elements": 2
+    },
+    {
+      "index": 424,
+      "operator": "Cast",
+      "name": "InsertedPrecisionFreeCast_linear_9",
+      "output": "InsertedPrecisionFreeCast_linear_9",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        64
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.0009765625,
+      "mismatched_elements": 2
+    },
+    {
+      "index": 425,
+      "operator": "Relu",
+      "name": "node_relu_6",
+      "output": "InsertedPrecisionFreeCast_relu_6",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        64
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.0009765625,
+      "mismatched_elements": 1
+    },
+    {
+      "index": 426,
+      "operator": "FusedGemm",
+      "name": "fused node_linear_10",
+      "output": "InsertedPrecisionFreeCast_relu_7",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        48
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.00010889768600463867,
+      "mismatched_elements": 0
+    },
+    {
+      "index": 427,
+      "operator": "FusedGemm",
+      "name": "fused node_linear_11",
+      "output": "InsertedPrecisionFreeCast_relu_8",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        32
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 6.276369094848633e-05,
+      "mismatched_elements": 0
+    },
+    {
+      "index": 428,
+      "operator": "Cast",
+      "name": "InsertedPrecisionFreeCast_relu_8",
+      "output": "relu_8",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        32
+      ],
+      "dtype": "float16",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.000244140625,
+      "mismatched_elements": 0
+    },
+    {
+      "index": 429,
+      "operator": "Gemm",
+      "name": "node_linear_12",
+      "output": "linear_12",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        12
+      ],
+      "dtype": "float16",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.001953125,
+      "mismatched_elements": 0
+    }
+  ],
+  "failed_operators": [
+    {
+      "index": 334,
+      "operator": "FusedGemm",
+      "name": "fused node_linear_2",
+      "output": "InsertedPrecisionFreeCast_relu_1",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        24
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.0008192062377929688,
+      "mismatched_elements": 1
+    },
+    {
+      "index": 335,
+      "operator": "FusedGemm",
+      "name": "fused node_linear_3",
+      "output": "InsertedPrecisionFreeCast_relu_2",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        16
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.0005972385406494141,
+      "mismatched_elements": 1
+    },
+    {
+      "index": 336,
+      "operator": "Cast",
+      "name": "InsertedPrecisionFreeCast_relu_2",
+      "output": "relu_2",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        16
+      ],
+      "dtype": "float16",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.00390625,
+      "mismatched_elements": 1
+    },
+    {
+      "index": 355,
+      "operator": "Gemm",
+      "name": "node_linear_29",
+      "output": "linear_29",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        32
+      ],
+      "dtype": "float16",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.000244140625,
+      "mismatched_elements": 1
+    },
+    {
+      "index": 356,
+      "operator": "Cast",
+      "name": "InsertedPrecisionFreeCast_linear_29",
+      "output": "InsertedPrecisionFreeCast_linear_29",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        32
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.000244140625,
+      "mismatched_elements": 1
+    },
+    {
+      "index": 374,
+      "operator": "Gemm",
+      "name": "node_linear_45",
+      "output": "linear_45",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        96
+      ],
+      "dtype": "float16",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.00048828125,
+      "mismatched_elements": 2
+    },
+    {
+      "index": 375,
+      "operator": "Cast",
+      "name": "InsertedPrecisionFreeCast_linear_45",
+      "output": "InsertedPrecisionFreeCast_linear_45",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        96
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.00048828125,
+      "mismatched_elements": 2
+    },
+    {
+      "index": 401,
+      "operator": "Gemm",
+      "name": "node_linear_36",
+      "output": "linear_36",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        12
+      ],
+      "dtype": "float16",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.0001220703125,
+      "mismatched_elements": 1
+    },
+    {
+      "index": 402,
+      "operator": "Gemm",
+      "name": "node_linear_21",
+      "output": "linear_21",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        96
+      ],
+      "dtype": "float16",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.0009765625,
+      "mismatched_elements": 1
+    },
+    {
+      "index": 403,
+      "operator": "Cast",
+      "name": "InsertedPrecisionFreeCast_linear_21",
+      "output": "InsertedPrecisionFreeCast_linear_21",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        96
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.0009765625,
+      "mismatched_elements": 1
+    },
+    {
+      "index": 404,
+      "operator": "Relu",
+      "name": "node_relu_15",
+      "output": "InsertedPrecisionFreeCast_relu_15",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        96
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.000244140625,
+      "mismatched_elements": 1
+    },
+    {
+      "index": 409,
+      "operator": "Gemm",
+      "name": "node_linear_17",
+      "output": "linear_17",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        128
+      ],
+      "dtype": "float16",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.0009765625,
+      "mismatched_elements": 4
+    },
+    {
+      "index": 410,
+      "operator": "Cast",
+      "name": "InsertedPrecisionFreeCast_linear_17",
+      "output": "InsertedPrecisionFreeCast_linear_17",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        128
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.0009765625,
+      "mismatched_elements": 4
+    },
+    {
+      "index": 411,
+      "operator": "Relu",
+      "name": "node_relu_12",
+      "output": "InsertedPrecisionFreeCast_relu_12",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        128
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.00048828125,
+      "mismatched_elements": 2
+    },
+    {
+      "index": 416,
+      "operator": "Gemm",
+      "name": "node_linear_13",
+      "output": "linear_13",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        32
+      ],
+      "dtype": "float16",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.00048828125,
+      "mismatched_elements": 1
+    },
+    {
+      "index": 417,
+      "operator": "Cast",
+      "name": "InsertedPrecisionFreeCast_linear_13",
+      "output": "InsertedPrecisionFreeCast_linear_13",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        32
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.00048828125,
+      "mismatched_elements": 1
+    },
+    {
+      "index": 423,
+      "operator": "Gemm",
+      "name": "node_linear_9",
+      "output": "linear_9",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        64
+      ],
+      "dtype": "float16",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.0009765625,
+      "mismatched_elements": 2
+    },
+    {
+      "index": 424,
+      "operator": "Cast",
+      "name": "InsertedPrecisionFreeCast_linear_9",
+      "output": "InsertedPrecisionFreeCast_linear_9",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        64
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.0009765625,
+      "mismatched_elements": 2
+    },
+    {
+      "index": 425,
+      "operator": "Relu",
+      "name": "node_relu_6",
+      "output": "InsertedPrecisionFreeCast_relu_6",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        64
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.0009765625,
+      "mismatched_elements": 1
+    }
+  ],
+  "outputs": {
+    "outputs": {
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        553
+      ],
+      "dtype": "float16",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.001953125,
+      "mismatched_elements": 1
+    }
+  },
+  "fixture": {
+    "outputs": {
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        553
+      ],
+      "dtype": "float16",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": true,
+      "max_abs_error": 0.0,
+      "mismatched_elements": 0
+    }
+  }
+}

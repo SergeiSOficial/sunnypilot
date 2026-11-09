@@ -1,0 +1,64 @@
+{
+  "serial": "emulator-5554",
+  "command": [
+    ".venv/bin/python",
+    "android/scripts/validate_instrumentation.py",
+    "--serial",
+    "emulator-5554",
+    "--adb",
+    "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+    "--expected-tests",
+    "19",
+    "--output",
+    "android/reports/blocker-fixes/emulator-instrumentation-candidate18.txt",
+    "--report",
+    "android/reports/blocker-fixes/emulator-instrumentation-candidate18.json"
+  ],
+  "vehicle_tx_enabled": false,
+  "status": "failed",
+  "forwards_before": [],
+  "before_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "352 android.hardware.camera.provider.ranchu",
+      "353 android.hardware.camera.provider@2.7-service-google",
+      "431 cameraserver"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.8,
+    "thermal_override": false
+  },
+  "apk_sha256": "286b3134f50c809f08a4308c792ef28ee982e323e06887d5b956b538320a2de9",
+  "baseline": {
+    "processes": [],
+    "camera_provider_processes": [
+      "352 android.hardware.camera.provider.ranchu",
+      "353 android.hardware.camera.provider@2.7-service-google",
+      "431 cameraserver"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.8,
+    "thermal_override": false,
+    "idle_seconds": 30.84672537498409,
+    "normal_thermal_seconds": 30.744753999984823
+  },
+  "apk_sha256_at_start": "286b3134f50c809f08a4308c792ef28ee982e323e06887d5b956b538320a2de9",
+  "returncode": 1,
+  "after_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "352 android.hardware.camera.provider.ranchu",
+      "353 android.hardware.camera.provider@2.7-service-google",
+      "431 cameraserver"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.8,
+    "thermal_override": false
+  },
+  "forwards_removed": [],
+  "apk_sha256_after": "286b3134f50c809f08a4308c792ef28ee982e323e06887d5b956b538320a2de9",
+  "artifact_stable": true
+}

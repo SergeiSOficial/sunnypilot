@@ -1,4 +1,5 @@
 import sys
+import os
 import json
 import ctypes
 import weakref
@@ -116,6 +117,8 @@ class UnknownKeyName(Exception):
 
 class Params:
   def __init__(self, d=""):
+    if d == "/dev/shm/params" and os.environ.get("ANDROID_PARAMS_MEMORY_ROOT"):
+      d = os.environ["ANDROID_PARAMS_MEMORY_ROOT"]
     path = ensure_bytes(d)
     self.p = params_create(path, len(path))
     self._finalizer = weakref.finalize(self, params_destroy, self.p)

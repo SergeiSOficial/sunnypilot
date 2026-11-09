@@ -1,0 +1,2239 @@
+{
+  "diagnostic_only": true,
+  "started_utc": 1793497151.9039936,
+  "profile": "trace-camera",
+  "scope": "Unmodified graph, retained operator tensors; tensor reads can change scheduling",
+  "vehicle_tx_enabled": false,
+  "frame": 41,
+  "models": {
+    "dmonitoring_model": {
+      "identity": {
+        "name": "dmonitoring_model",
+        "fingerprint": "samsung/q2qxser/q2q:15/AP3A.240905.015.A2/F926BXXSJJZH3:user/release-keys",
+        "sha256": {
+          "model": "30f0326378aea3a8c2a59da73cb4e50c38272bb4fc487c810ebbe6f0daabc7b7",
+          "original_references": "610f877bd0f98353a6e7228698ee869d02a5b2976430234b96d097e96e773381",
+          "sequences": "6acb2ec99babfe57b5ec33b601e262ee9f5b4e54a2fd185f2b59e939256ca3d6",
+          "driver": "f64d432f19fd3f2732cd95050b47328e0c84837b7b60376d55fd7a73a6e9dc8c",
+          "runner": "f1bf182407cedcc91c80e10deb57ec98dac289d49bc65c8794bf80ed45fca046",
+          "host_math": "56db9558282616cf0ede0cc11e7743f065212cd13c4a9a16b31b63d90ae826c1",
+          "tinygrad": "b6d9a25ff5fae3ff239e0d275d3cd24d7cd261424a0019fb9daa0934edce6140",
+          "uops": "802e695f3919889da88d155d6b51567d38335fc9f3a1ce967feee3c1aa46fc15",
+          "renderer": "2acf0bf3826461b95abb49852b1e5bb8b934a33c1979117babbc7beff5a49a6f",
+          "compiler": "29045056038e4e199413fabe913f2f9be54f891b4397eac3e7e87a4ee774e127"
+        }
+      },
+      "final": {
+        "outputs": {
+          "passed": false,
+          "finite": true,
+          "shape": [
+            1,
+            553
+          ],
+          "dtype": "float16",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 0.00390625,
+          "mismatched_elements": 6
+        }
+      },
+      "performance_status": "blocked",
+      "status": "blocked",
+      "archive": "model-camera-trace-dmonitoring_model.npz",
+      "nodes": [
+        {
+          "index": 0,
+          "operator": "Cast",
+          "output": "InsertedPrecisionFreeCast__to_copy_1"
+        },
+        {
+          "index": 1,
+          "operator": "Div",
+          "output": "InsertedPrecisionFreeCast_div"
+        },
+        {
+          "index": 2,
+          "operator": "Cast",
+          "output": "div"
+        },
+        {
+          "index": 3,
+          "operator": "Reshape",
+          "output": "view"
+        },
+        {
+          "index": 4,
+          "operator": "Transpose",
+          "output": "permute"
+        },
+        {
+          "index": 5,
+          "operator": "Reshape",
+          "output": "_unsafe_view"
+        },
+        {
+          "index": 6,
+          "operator": "Cast",
+          "output": "InsertedPrecisionFreeCast_permute_1_token_572"
+        },
+        {
+          "index": 7,
+          "operator": "Transpose",
+          "output": "Transpose_out0"
+        },
+        {
+          "index": 8,
+          "operator": "NhwcFusedConv",
+          "output": "node_Conv_805"
+        },
+        {
+          "index": 9,
+          "operator": "Mul",
+          "output": "_token_574"
+        },
+        {
+          "index": 10,
+          "operator": "Pow",
+          "output": "_token_576"
+        },
+        {
+          "index": 11,
+          "operator": "Mul",
+          "output": "_token_578"
+        },
+        {
+          "index": 12,
+          "operator": "Sum",
+          "output": "_token_580"
+        },
+        {
+          "index": 13,
+          "operator": "Sqrt",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_SqrtTwoOverPi"
+        },
+        {
+          "index": 14,
+          "operator": "Mul",
+          "output": "_token_582"
+        },
+        {
+          "index": 15,
+          "operator": "Tanh",
+          "output": "_token_584"
+        },
+        {
+          "index": 16,
+          "operator": "Sum",
+          "output": "_token_586"
+        },
+        {
+          "index": 17,
+          "operator": "Mul",
+          "output": "_token_588"
+        },
+        {
+          "index": 18,
+          "operator": "NhwcFusedConv",
+          "output": "node_Conv_807"
+        },
+        {
+          "index": 19,
+          "operator": "Transpose",
+          "output": "InsertedPrecisionFreeCast_getitem_3"
+        },
+        {
+          "index": 20,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_0_MultX"
+        },
+        {
+          "index": 21,
+          "operator": "Pow",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_0_XCubed"
+        },
+        {
+          "index": 22,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_0_XCubedC0"
+        },
+        {
+          "index": 23,
+          "operator": "Sum",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_0_XC0XCubed"
+        },
+        {
+          "index": 24,
+          "operator": "Sqrt",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_0_SqrtTwoOverPi"
+        },
+        {
+          "index": 25,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_0_TanhInput"
+        },
+        {
+          "index": 26,
+          "operator": "Tanh",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_0_ErfApprox"
+        },
+        {
+          "index": 27,
+          "operator": "Sum",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_0_PhiApprox"
+        },
+        {
+          "index": 28,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast_gelu_1"
+        },
+        {
+          "index": 29,
+          "operator": "Conv",
+          "output": "InsertedPrecisionFreeCast_getitem_6"
+        },
+        {
+          "index": 30,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_1_MultX"
+        },
+        {
+          "index": 31,
+          "operator": "Pow",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_1_XCubed"
+        },
+        {
+          "index": 32,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_1_XCubedC0"
+        },
+        {
+          "index": 33,
+          "operator": "Sum",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_1_XC0XCubed"
+        },
+        {
+          "index": 34,
+          "operator": "Sqrt",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_1_SqrtTwoOverPi"
+        },
+        {
+          "index": 35,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_1_TanhInput"
+        },
+        {
+          "index": 36,
+          "operator": "Tanh",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_1_ErfApprox"
+        },
+        {
+          "index": 37,
+          "operator": "Sum",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_1_PhiApprox"
+        },
+        {
+          "index": 38,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast_gelu_2"
+        },
+        {
+          "index": 39,
+          "operator": "Transpose",
+          "output": "Transpose_token_567_out0"
+        },
+        {
+          "index": 40,
+          "operator": "NhwcFusedConv",
+          "output": "node_Conv_811"
+        },
+        {
+          "index": 41,
+          "operator": "Transpose",
+          "output": "InsertedPrecisionFreeCast_getitem_9"
+        },
+        {
+          "index": 42,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_2_MultX"
+        },
+        {
+          "index": 43,
+          "operator": "Pow",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_2_XCubed"
+        },
+        {
+          "index": 44,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_2_XCubedC0"
+        },
+        {
+          "index": 45,
+          "operator": "Sum",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_2_XC0XCubed"
+        },
+        {
+          "index": 46,
+          "operator": "Sqrt",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_2_SqrtTwoOverPi"
+        },
+        {
+          "index": 47,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_2_TanhInput"
+        },
+        {
+          "index": 48,
+          "operator": "Tanh",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_2_ErfApprox"
+        },
+        {
+          "index": 49,
+          "operator": "Sum",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_2_PhiApprox"
+        },
+        {
+          "index": 50,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast_gelu_3"
+        },
+        {
+          "index": 51,
+          "operator": "Conv",
+          "output": "InsertedPrecisionFreeCast_getitem_12"
+        },
+        {
+          "index": 52,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_3_MultX"
+        },
+        {
+          "index": 53,
+          "operator": "Pow",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_3_XCubed"
+        },
+        {
+          "index": 54,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_3_XCubedC0"
+        },
+        {
+          "index": 55,
+          "operator": "Sum",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_3_XC0XCubed"
+        },
+        {
+          "index": 56,
+          "operator": "Sqrt",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_3_SqrtTwoOverPi"
+        },
+        {
+          "index": 57,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_3_TanhInput"
+        },
+        {
+          "index": 58,
+          "operator": "Tanh",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_3_ErfApprox"
+        },
+        {
+          "index": 59,
+          "operator": "Sum",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_3_PhiApprox"
+        },
+        {
+          "index": 60,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast_gelu_4"
+        },
+        {
+          "index": 61,
+          "operator": "Conv",
+          "output": "InsertedPrecisionFreeCast_getitem_15"
+        },
+        {
+          "index": 62,
+          "operator": "Conv",
+          "output": "InsertedPrecisionFreeCast_getitem_18"
+        },
+        {
+          "index": 63,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_4_MultX"
+        },
+        {
+          "index": 64,
+          "operator": "Pow",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_4_XCubed"
+        },
+        {
+          "index": 65,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_4_XCubedC0"
+        },
+        {
+          "index": 66,
+          "operator": "Sum",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_4_XC0XCubed"
+        },
+        {
+          "index": 67,
+          "operator": "Sqrt",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_4_SqrtTwoOverPi"
+        },
+        {
+          "index": 68,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_4_TanhInput"
+        },
+        {
+          "index": 69,
+          "operator": "Tanh",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_4_ErfApprox"
+        },
+        {
+          "index": 70,
+          "operator": "Sum",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_4_PhiApprox"
+        },
+        {
+          "index": 71,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast_gelu_5"
+        },
+        {
+          "index": 72,
+          "operator": "Conv",
+          "output": "InsertedPrecisionFreeCast_getitem_21"
+        },
+        {
+          "index": 73,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_5_MultX"
+        },
+        {
+          "index": 74,
+          "operator": "Pow",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_5_XCubed"
+        },
+        {
+          "index": 75,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_5_XCubedC0"
+        },
+        {
+          "index": 76,
+          "operator": "Sum",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_5_XC0XCubed"
+        },
+        {
+          "index": 77,
+          "operator": "Sqrt",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_5_SqrtTwoOverPi"
+        },
+        {
+          "index": 78,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_5_TanhInput"
+        },
+        {
+          "index": 79,
+          "operator": "Tanh",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_5_ErfApprox"
+        },
+        {
+          "index": 80,
+          "operator": "Sum",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_5_PhiApprox"
+        },
+        {
+          "index": 81,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast_gelu_6"
+        },
+        {
+          "index": 82,
+          "operator": "Conv",
+          "output": "InsertedPrecisionFreeCast_getitem_24"
+        },
+        {
+          "index": 83,
+          "operator": "Conv",
+          "output": "InsertedPrecisionFreeCast_getitem_27"
+        },
+        {
+          "index": 84,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_6_MultX"
+        },
+        {
+          "index": 85,
+          "operator": "Pow",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_6_XCubed"
+        },
+        {
+          "index": 86,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_6_XCubedC0"
+        },
+        {
+          "index": 87,
+          "operator": "Sum",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_6_XC0XCubed"
+        },
+        {
+          "index": 88,
+          "operator": "Sqrt",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_6_SqrtTwoOverPi"
+        },
+        {
+          "index": 89,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_6_TanhInput"
+        },
+        {
+          "index": 90,
+          "operator": "Tanh",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_6_ErfApprox"
+        },
+        {
+          "index": 91,
+          "operator": "Sum",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_6_PhiApprox"
+        },
+        {
+          "index": 92,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast_gelu_7"
+        },
+        {
+          "index": 93,
+          "operator": "Conv",
+          "output": "InsertedPrecisionFreeCast_getitem_30"
+        },
+        {
+          "index": 94,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_7_MultX"
+        },
+        {
+          "index": 95,
+          "operator": "Pow",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_7_XCubed"
+        },
+        {
+          "index": 96,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_7_XCubedC0"
+        },
+        {
+          "index": 97,
+          "operator": "Sum",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_7_XC0XCubed"
+        },
+        {
+          "index": 98,
+          "operator": "Sqrt",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_7_SqrtTwoOverPi"
+        },
+        {
+          "index": 99,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_7_TanhInput"
+        },
+        {
+          "index": 100,
+          "operator": "Tanh",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_7_ErfApprox"
+        },
+        {
+          "index": 101,
+          "operator": "Sum",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_7_PhiApprox"
+        },
+        {
+          "index": 102,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast_gelu_8"
+        },
+        {
+          "index": 103,
+          "operator": "FusedConv",
+          "output": "InsertedPrecisionFreeCast_add_1"
+        },
+        {
+          "index": 104,
+          "operator": "Conv",
+          "output": "InsertedPrecisionFreeCast_getitem_36"
+        },
+        {
+          "index": 105,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_8_MultX"
+        },
+        {
+          "index": 106,
+          "operator": "Pow",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_8_XCubed"
+        },
+        {
+          "index": 107,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_8_XCubedC0"
+        },
+        {
+          "index": 108,
+          "operator": "Sum",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_8_XC0XCubed"
+        },
+        {
+          "index": 109,
+          "operator": "Sqrt",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_8_SqrtTwoOverPi"
+        },
+        {
+          "index": 110,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_8_TanhInput"
+        },
+        {
+          "index": 111,
+          "operator": "Tanh",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_8_ErfApprox"
+        },
+        {
+          "index": 112,
+          "operator": "Sum",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_8_PhiApprox"
+        },
+        {
+          "index": 113,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast_gelu_9"
+        },
+        {
+          "index": 114,
+          "operator": "Conv",
+          "output": "InsertedPrecisionFreeCast_getitem_39"
+        },
+        {
+          "index": 115,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_9_MultX"
+        },
+        {
+          "index": 116,
+          "operator": "Pow",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_9_XCubed"
+        },
+        {
+          "index": 117,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_9_XCubedC0"
+        },
+        {
+          "index": 118,
+          "operator": "Sum",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_9_XC0XCubed"
+        },
+        {
+          "index": 119,
+          "operator": "Sqrt",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_9_SqrtTwoOverPi"
+        },
+        {
+          "index": 120,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_9_TanhInput"
+        },
+        {
+          "index": 121,
+          "operator": "Tanh",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_9_ErfApprox"
+        },
+        {
+          "index": 122,
+          "operator": "Sum",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_9_PhiApprox"
+        },
+        {
+          "index": 123,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast_gelu_10"
+        },
+        {
+          "index": 124,
+          "operator": "FusedConv",
+          "output": "InsertedPrecisionFreeCast_add_2"
+        },
+        {
+          "index": 125,
+          "operator": "Conv",
+          "output": "InsertedPrecisionFreeCast_getitem_45"
+        },
+        {
+          "index": 126,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_10_MultX"
+        },
+        {
+          "index": 127,
+          "operator": "Pow",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_10_XCubed"
+        },
+        {
+          "index": 128,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_10_XCubedC0"
+        },
+        {
+          "index": 129,
+          "operator": "Sum",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_10_XC0XCubed"
+        },
+        {
+          "index": 130,
+          "operator": "Sqrt",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_10_SqrtTwoOverPi"
+        },
+        {
+          "index": 131,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_10_TanhInput"
+        },
+        {
+          "index": 132,
+          "operator": "Tanh",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_10_ErfApprox"
+        },
+        {
+          "index": 133,
+          "operator": "Sum",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_10_PhiApprox"
+        },
+        {
+          "index": 134,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast_gelu_11"
+        },
+        {
+          "index": 135,
+          "operator": "Conv",
+          "output": "InsertedPrecisionFreeCast_getitem_48"
+        },
+        {
+          "index": 136,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_11_MultX"
+        },
+        {
+          "index": 137,
+          "operator": "Pow",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_11_XCubed"
+        },
+        {
+          "index": 138,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_11_XCubedC0"
+        },
+        {
+          "index": 139,
+          "operator": "Sum",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_11_XC0XCubed"
+        },
+        {
+          "index": 140,
+          "operator": "Sqrt",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_11_SqrtTwoOverPi"
+        },
+        {
+          "index": 141,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_11_TanhInput"
+        },
+        {
+          "index": 142,
+          "operator": "Tanh",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_11_ErfApprox"
+        },
+        {
+          "index": 143,
+          "operator": "Sum",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_11_PhiApprox"
+        },
+        {
+          "index": 144,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast_gelu_12"
+        },
+        {
+          "index": 145,
+          "operator": "FusedConv",
+          "output": "InsertedPrecisionFreeCast_add_3"
+        },
+        {
+          "index": 146,
+          "operator": "Conv",
+          "output": "InsertedPrecisionFreeCast_getitem_54"
+        },
+        {
+          "index": 147,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_12_MultX"
+        },
+        {
+          "index": 148,
+          "operator": "Pow",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_12_XCubed"
+        },
+        {
+          "index": 149,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_12_XCubedC0"
+        },
+        {
+          "index": 150,
+          "operator": "Sum",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_12_XC0XCubed"
+        },
+        {
+          "index": 151,
+          "operator": "Sqrt",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_12_SqrtTwoOverPi"
+        },
+        {
+          "index": 152,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_12_TanhInput"
+        },
+        {
+          "index": 153,
+          "operator": "Tanh",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_12_ErfApprox"
+        },
+        {
+          "index": 154,
+          "operator": "Sum",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_12_PhiApprox"
+        },
+        {
+          "index": 155,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast_gelu_13"
+        },
+        {
+          "index": 156,
+          "operator": "Conv",
+          "output": "InsertedPrecisionFreeCast_getitem_57"
+        },
+        {
+          "index": 157,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_13_MultX"
+        },
+        {
+          "index": 158,
+          "operator": "Pow",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_13_XCubed"
+        },
+        {
+          "index": 159,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_13_XCubedC0"
+        },
+        {
+          "index": 160,
+          "operator": "Sum",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_13_XC0XCubed"
+        },
+        {
+          "index": 161,
+          "operator": "Sqrt",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_13_SqrtTwoOverPi"
+        },
+        {
+          "index": 162,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_13_TanhInput"
+        },
+        {
+          "index": 163,
+          "operator": "Tanh",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_13_ErfApprox"
+        },
+        {
+          "index": 164,
+          "operator": "Sum",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_13_PhiApprox"
+        },
+        {
+          "index": 165,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast_gelu_14"
+        },
+        {
+          "index": 166,
+          "operator": "FusedConv",
+          "output": "InsertedPrecisionFreeCast_add_4"
+        },
+        {
+          "index": 167,
+          "operator": "Conv",
+          "output": "InsertedPrecisionFreeCast_getitem_63"
+        },
+        {
+          "index": 168,
+          "operator": "Conv",
+          "output": "InsertedPrecisionFreeCast_getitem_66"
+        },
+        {
+          "index": 169,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_14_MultX"
+        },
+        {
+          "index": 170,
+          "operator": "Pow",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_14_XCubed"
+        },
+        {
+          "index": 171,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_14_XCubedC0"
+        },
+        {
+          "index": 172,
+          "operator": "Sum",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_14_XC0XCubed"
+        },
+        {
+          "index": 173,
+          "operator": "Sqrt",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_14_SqrtTwoOverPi"
+        },
+        {
+          "index": 174,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_14_TanhInput"
+        },
+        {
+          "index": 175,
+          "operator": "Tanh",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_14_ErfApprox"
+        },
+        {
+          "index": 176,
+          "operator": "Sum",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_14_PhiApprox"
+        },
+        {
+          "index": 177,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast_gelu_15"
+        },
+        {
+          "index": 178,
+          "operator": "FusedConv",
+          "output": "InsertedPrecisionFreeCast_add_5"
+        },
+        {
+          "index": 179,
+          "operator": "Conv",
+          "output": "InsertedPrecisionFreeCast_getitem_72"
+        },
+        {
+          "index": 180,
+          "operator": "Conv",
+          "output": "InsertedPrecisionFreeCast_getitem_75"
+        },
+        {
+          "index": 181,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_15_MultX"
+        },
+        {
+          "index": 182,
+          "operator": "Pow",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_15_XCubed"
+        },
+        {
+          "index": 183,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_15_XCubedC0"
+        },
+        {
+          "index": 184,
+          "operator": "Sum",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_15_XC0XCubed"
+        },
+        {
+          "index": 185,
+          "operator": "Sqrt",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_15_SqrtTwoOverPi"
+        },
+        {
+          "index": 186,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_15_TanhInput"
+        },
+        {
+          "index": 187,
+          "operator": "Tanh",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_15_ErfApprox"
+        },
+        {
+          "index": 188,
+          "operator": "Sum",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_15_PhiApprox"
+        },
+        {
+          "index": 189,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast_gelu_16"
+        },
+        {
+          "index": 190,
+          "operator": "Conv",
+          "output": "InsertedPrecisionFreeCast_getitem_78"
+        },
+        {
+          "index": 191,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_16_MultX"
+        },
+        {
+          "index": 192,
+          "operator": "Pow",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_16_XCubed"
+        },
+        {
+          "index": 193,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_16_XCubedC0"
+        },
+        {
+          "index": 194,
+          "operator": "Sum",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_16_XC0XCubed"
+        },
+        {
+          "index": 195,
+          "operator": "Sqrt",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_16_SqrtTwoOverPi"
+        },
+        {
+          "index": 196,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_16_TanhInput"
+        },
+        {
+          "index": 197,
+          "operator": "Tanh",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_16_ErfApprox"
+        },
+        {
+          "index": 198,
+          "operator": "Sum",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_16_PhiApprox"
+        },
+        {
+          "index": 199,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast_gelu_17"
+        },
+        {
+          "index": 200,
+          "operator": "Conv",
+          "output": "InsertedPrecisionFreeCast_getitem_81"
+        },
+        {
+          "index": 201,
+          "operator": "Conv",
+          "output": "InsertedPrecisionFreeCast_getitem_84"
+        },
+        {
+          "index": 202,
+          "operator": "Conv",
+          "output": "InsertedPrecisionFreeCast_getitem_87"
+        },
+        {
+          "index": 203,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_17_MultX"
+        },
+        {
+          "index": 204,
+          "operator": "Pow",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_17_XCubed"
+        },
+        {
+          "index": 205,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_17_XCubedC0"
+        },
+        {
+          "index": 206,
+          "operator": "Sum",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_17_XC0XCubed"
+        },
+        {
+          "index": 207,
+          "operator": "Sqrt",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_17_SqrtTwoOverPi"
+        },
+        {
+          "index": 208,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_17_TanhInput"
+        },
+        {
+          "index": 209,
+          "operator": "Tanh",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_17_ErfApprox"
+        },
+        {
+          "index": 210,
+          "operator": "Sum",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_17_PhiApprox"
+        },
+        {
+          "index": 211,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast_gelu_18"
+        },
+        {
+          "index": 212,
+          "operator": "Conv",
+          "output": "InsertedPrecisionFreeCast_getitem_90"
+        },
+        {
+          "index": 213,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_18_MultX"
+        },
+        {
+          "index": 214,
+          "operator": "Pow",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_18_XCubed"
+        },
+        {
+          "index": 215,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_18_XCubedC0"
+        },
+        {
+          "index": 216,
+          "operator": "Sum",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_18_XC0XCubed"
+        },
+        {
+          "index": 217,
+          "operator": "Sqrt",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_18_SqrtTwoOverPi"
+        },
+        {
+          "index": 218,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_18_TanhInput"
+        },
+        {
+          "index": 219,
+          "operator": "Tanh",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_18_ErfApprox"
+        },
+        {
+          "index": 220,
+          "operator": "Sum",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_18_PhiApprox"
+        },
+        {
+          "index": 221,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast_gelu_19"
+        },
+        {
+          "index": 222,
+          "operator": "FusedConv",
+          "output": "InsertedPrecisionFreeCast_add_6"
+        },
+        {
+          "index": 223,
+          "operator": "Conv",
+          "output": "InsertedPrecisionFreeCast_getitem_96"
+        },
+        {
+          "index": 224,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_19_MultX"
+        },
+        {
+          "index": 225,
+          "operator": "Pow",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_19_XCubed"
+        },
+        {
+          "index": 226,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_19_XCubedC0"
+        },
+        {
+          "index": 227,
+          "operator": "Sum",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_19_XC0XCubed"
+        },
+        {
+          "index": 228,
+          "operator": "Sqrt",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_19_SqrtTwoOverPi"
+        },
+        {
+          "index": 229,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_19_TanhInput"
+        },
+        {
+          "index": 230,
+          "operator": "Tanh",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_19_ErfApprox"
+        },
+        {
+          "index": 231,
+          "operator": "Sum",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_19_PhiApprox"
+        },
+        {
+          "index": 232,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast_gelu_20"
+        },
+        {
+          "index": 233,
+          "operator": "Conv",
+          "output": "InsertedPrecisionFreeCast_getitem_99"
+        },
+        {
+          "index": 234,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_20_MultX"
+        },
+        {
+          "index": 235,
+          "operator": "Pow",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_20_XCubed"
+        },
+        {
+          "index": 236,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_20_XCubedC0"
+        },
+        {
+          "index": 237,
+          "operator": "Sum",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_20_XC0XCubed"
+        },
+        {
+          "index": 238,
+          "operator": "Sqrt",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_20_SqrtTwoOverPi"
+        },
+        {
+          "index": 239,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_20_TanhInput"
+        },
+        {
+          "index": 240,
+          "operator": "Tanh",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_20_ErfApprox"
+        },
+        {
+          "index": 241,
+          "operator": "Sum",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_20_PhiApprox"
+        },
+        {
+          "index": 242,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast_gelu_21"
+        },
+        {
+          "index": 243,
+          "operator": "FusedConv",
+          "output": "InsertedPrecisionFreeCast_add_7"
+        },
+        {
+          "index": 244,
+          "operator": "Conv",
+          "output": "InsertedPrecisionFreeCast_getitem_105"
+        },
+        {
+          "index": 245,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_21_MultX"
+        },
+        {
+          "index": 246,
+          "operator": "Pow",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_21_XCubed"
+        },
+        {
+          "index": 247,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_21_XCubedC0"
+        },
+        {
+          "index": 248,
+          "operator": "Sum",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_21_XC0XCubed"
+        },
+        {
+          "index": 249,
+          "operator": "Sqrt",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_21_SqrtTwoOverPi"
+        },
+        {
+          "index": 250,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_21_TanhInput"
+        },
+        {
+          "index": 251,
+          "operator": "Tanh",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_21_ErfApprox"
+        },
+        {
+          "index": 252,
+          "operator": "Sum",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_21_PhiApprox"
+        },
+        {
+          "index": 253,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast_gelu_22"
+        },
+        {
+          "index": 254,
+          "operator": "Conv",
+          "output": "InsertedPrecisionFreeCast_getitem_108"
+        },
+        {
+          "index": 255,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_22_MultX"
+        },
+        {
+          "index": 256,
+          "operator": "Pow",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_22_XCubed"
+        },
+        {
+          "index": 257,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_22_XCubedC0"
+        },
+        {
+          "index": 258,
+          "operator": "Sum",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_22_XC0XCubed"
+        },
+        {
+          "index": 259,
+          "operator": "Sqrt",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_22_SqrtTwoOverPi"
+        },
+        {
+          "index": 260,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_22_TanhInput"
+        },
+        {
+          "index": 261,
+          "operator": "Tanh",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_22_ErfApprox"
+        },
+        {
+          "index": 262,
+          "operator": "Sum",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_22_PhiApprox"
+        },
+        {
+          "index": 263,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast_gelu_23"
+        },
+        {
+          "index": 264,
+          "operator": "FusedConv",
+          "output": "InsertedPrecisionFreeCast_add_8"
+        },
+        {
+          "index": 265,
+          "operator": "Conv",
+          "output": "InsertedPrecisionFreeCast_getitem_114"
+        },
+        {
+          "index": 266,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_23_MultX"
+        },
+        {
+          "index": 267,
+          "operator": "Pow",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_23_XCubed"
+        },
+        {
+          "index": 268,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_23_XCubedC0"
+        },
+        {
+          "index": 269,
+          "operator": "Sum",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_23_XC0XCubed"
+        },
+        {
+          "index": 270,
+          "operator": "Sqrt",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_23_SqrtTwoOverPi"
+        },
+        {
+          "index": 271,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_23_TanhInput"
+        },
+        {
+          "index": 272,
+          "operator": "Tanh",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_23_ErfApprox"
+        },
+        {
+          "index": 273,
+          "operator": "Sum",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_23_PhiApprox"
+        },
+        {
+          "index": 274,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast_gelu_24"
+        },
+        {
+          "index": 275,
+          "operator": "Conv",
+          "output": "InsertedPrecisionFreeCast_getitem_117"
+        },
+        {
+          "index": 276,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_24_MultX"
+        },
+        {
+          "index": 277,
+          "operator": "Pow",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_24_XCubed"
+        },
+        {
+          "index": 278,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_24_XCubedC0"
+        },
+        {
+          "index": 279,
+          "operator": "Sum",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_24_XC0XCubed"
+        },
+        {
+          "index": 280,
+          "operator": "Sqrt",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_24_SqrtTwoOverPi"
+        },
+        {
+          "index": 281,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_24_TanhInput"
+        },
+        {
+          "index": 282,
+          "operator": "Tanh",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_24_ErfApprox"
+        },
+        {
+          "index": 283,
+          "operator": "Sum",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_24_PhiApprox"
+        },
+        {
+          "index": 284,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast_gelu_25"
+        },
+        {
+          "index": 285,
+          "operator": "FusedConv",
+          "output": "InsertedPrecisionFreeCast_add_9"
+        },
+        {
+          "index": 286,
+          "operator": "Conv",
+          "output": "InsertedPrecisionFreeCast_getitem_123"
+        },
+        {
+          "index": 287,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_25_MultX"
+        },
+        {
+          "index": 288,
+          "operator": "Pow",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_25_XCubed"
+        },
+        {
+          "index": 289,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_25_XCubedC0"
+        },
+        {
+          "index": 290,
+          "operator": "Sum",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_25_XC0XCubed"
+        },
+        {
+          "index": 291,
+          "operator": "Sqrt",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_25_SqrtTwoOverPi"
+        },
+        {
+          "index": 292,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_25_TanhInput"
+        },
+        {
+          "index": 293,
+          "operator": "Tanh",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_25_ErfApprox"
+        },
+        {
+          "index": 294,
+          "operator": "Sum",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_25_PhiApprox"
+        },
+        {
+          "index": 295,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast_gelu_26"
+        },
+        {
+          "index": 296,
+          "operator": "Conv",
+          "output": "InsertedPrecisionFreeCast_getitem_126"
+        },
+        {
+          "index": 297,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_26_MultX"
+        },
+        {
+          "index": 298,
+          "operator": "Pow",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_26_XCubed"
+        },
+        {
+          "index": 299,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_26_XCubedC0"
+        },
+        {
+          "index": 300,
+          "operator": "Sum",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_26_XC0XCubed"
+        },
+        {
+          "index": 301,
+          "operator": "Sqrt",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_26_SqrtTwoOverPi"
+        },
+        {
+          "index": 302,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_26_TanhInput"
+        },
+        {
+          "index": 303,
+          "operator": "Tanh",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_26_ErfApprox"
+        },
+        {
+          "index": 304,
+          "operator": "Sum",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_26_PhiApprox"
+        },
+        {
+          "index": 305,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast_gelu_27"
+        },
+        {
+          "index": 306,
+          "operator": "FusedConv",
+          "output": "InsertedPrecisionFreeCast_add_10"
+        },
+        {
+          "index": 307,
+          "operator": "Conv",
+          "output": "InsertedPrecisionFreeCast_getitem_132"
+        },
+        {
+          "index": 308,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_27_MultX"
+        },
+        {
+          "index": 309,
+          "operator": "Pow",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_27_XCubed"
+        },
+        {
+          "index": 310,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_27_XCubedC0"
+        },
+        {
+          "index": 311,
+          "operator": "Sum",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_27_XC0XCubed"
+        },
+        {
+          "index": 312,
+          "operator": "Sqrt",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_27_SqrtTwoOverPi"
+        },
+        {
+          "index": 313,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_27_TanhInput"
+        },
+        {
+          "index": 314,
+          "operator": "Tanh",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_27_ErfApprox"
+        },
+        {
+          "index": 315,
+          "operator": "Sum",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_27_PhiApprox"
+        },
+        {
+          "index": 316,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast_gelu_28"
+        },
+        {
+          "index": 317,
+          "operator": "ReduceMean",
+          "output": "InsertedPrecisionFreeCast_mean"
+        },
+        {
+          "index": 318,
+          "operator": "Conv",
+          "output": "InsertedPrecisionFreeCast_getitem_135"
+        },
+        {
+          "index": 319,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_28_MultX"
+        },
+        {
+          "index": 320,
+          "operator": "Pow",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_28_XCubed"
+        },
+        {
+          "index": 321,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_28_XCubedC0"
+        },
+        {
+          "index": 322,
+          "operator": "Sum",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_28_XC0XCubed"
+        },
+        {
+          "index": 323,
+          "operator": "Sqrt",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_28_SqrtTwoOverPi"
+        },
+        {
+          "index": 324,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_28_TanhInput"
+        },
+        {
+          "index": 325,
+          "operator": "Tanh",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_28_ErfApprox"
+        },
+        {
+          "index": 326,
+          "operator": "Sum",
+          "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_28_PhiApprox"
+        },
+        {
+          "index": 327,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast_gelu_29"
+        },
+        {
+          "index": 328,
+          "operator": "Cast",
+          "output": "gelu_29"
+        },
+        {
+          "index": 329,
+          "operator": "Reshape",
+          "output": "view_1"
+        },
+        {
+          "index": 330,
+          "operator": "Gemm",
+          "output": "linear"
+        },
+        {
+          "index": 331,
+          "operator": "Gemm",
+          "output": "linear_1"
+        },
+        {
+          "index": 332,
+          "operator": "Cast",
+          "output": "InsertedPrecisionFreeCast_linear_1"
+        },
+        {
+          "index": 333,
+          "operator": "Relu",
+          "output": "InsertedPrecisionFreeCast_relu"
+        },
+        {
+          "index": 334,
+          "operator": "FusedGemm",
+          "output": "InsertedPrecisionFreeCast_relu_1"
+        },
+        {
+          "index": 335,
+          "operator": "FusedGemm",
+          "output": "InsertedPrecisionFreeCast_relu_2"
+        },
+        {
+          "index": 336,
+          "operator": "Cast",
+          "output": "relu_2"
+        },
+        {
+          "index": 337,
+          "operator": "Gemm",
+          "output": "linear_4"
+        },
+        {
+          "index": 338,
+          "operator": "Split",
+          "output": "slice_1"
+        },
+        {
+          "index": 338,
+          "operator": "Split",
+          "output": "slice_2"
+        },
+        {
+          "index": 338,
+          "operator": "Split",
+          "output": "slice_3"
+        },
+        {
+          "index": 339,
+          "operator": "Gemm",
+          "output": "linear_5"
+        },
+        {
+          "index": 340,
+          "operator": "Cast",
+          "output": "InsertedPrecisionFreeCast_linear_5"
+        },
+        {
+          "index": 341,
+          "operator": "Relu",
+          "output": "InsertedPrecisionFreeCast_relu_3"
+        },
+        {
+          "index": 342,
+          "operator": "FusedGemm",
+          "output": "InsertedPrecisionFreeCast_relu_4"
+        },
+        {
+          "index": 343,
+          "operator": "FusedGemm",
+          "output": "InsertedPrecisionFreeCast_relu_5"
+        },
+        {
+          "index": 344,
+          "operator": "Cast",
+          "output": "relu_5"
+        },
+        {
+          "index": 345,
+          "operator": "Gemm",
+          "output": "linear_8"
+        },
+        {
+          "index": 346,
+          "operator": "Split",
+          "output": "slice_4"
+        },
+        {
+          "index": 346,
+          "operator": "Split",
+          "output": "slice_5"
+        },
+        {
+          "index": 347,
+          "operator": "Gemm",
+          "output": "linear_25"
+        },
+        {
+          "index": 348,
+          "operator": "Cast",
+          "output": "InsertedPrecisionFreeCast_linear_25"
+        },
+        {
+          "index": 349,
+          "operator": "Relu",
+          "output": "InsertedPrecisionFreeCast_relu_18"
+        },
+        {
+          "index": 350,
+          "operator": "FusedGemm",
+          "output": "InsertedPrecisionFreeCast_relu_19"
+        },
+        {
+          "index": 351,
+          "operator": "FusedGemm",
+          "output": "InsertedPrecisionFreeCast_relu_20"
+        },
+        {
+          "index": 352,
+          "operator": "Cast",
+          "output": "relu_20"
+        },
+        {
+          "index": 353,
+          "operator": "Gemm",
+          "output": "linear_28"
+        },
+        {
+          "index": 354,
+          "operator": "Split",
+          "output": "slice_6"
+        },
+        {
+          "index": 354,
+          "operator": "Split",
+          "output": "slice_7"
+        },
+        {
+          "index": 354,
+          "operator": "Split",
+          "output": "slice_8"
+        },
+        {
+          "index": 355,
+          "operator": "Gemm",
+          "output": "linear_29"
+        },
+        {
+          "index": 356,
+          "operator": "Cast",
+          "output": "InsertedPrecisionFreeCast_linear_29"
+        },
+        {
+          "index": 357,
+          "operator": "Relu",
+          "output": "InsertedPrecisionFreeCast_relu_21"
+        },
+        {
+          "index": 358,
+          "operator": "FusedGemm",
+          "output": "InsertedPrecisionFreeCast_relu_22"
+        },
+        {
+          "index": 359,
+          "operator": "FusedGemm",
+          "output": "InsertedPrecisionFreeCast_relu_23"
+        },
+        {
+          "index": 360,
+          "operator": "Cast",
+          "output": "relu_23"
+        },
+        {
+          "index": 361,
+          "operator": "Gemm",
+          "output": "linear_32"
+        },
+        {
+          "index": 362,
+          "operator": "Split",
+          "output": "slice_9"
+        },
+        {
+          "index": 362,
+          "operator": "Split",
+          "output": "slice_10"
+        },
+        {
+          "index": 363,
+          "operator": "Gemm",
+          "output": "linear_49"
+        },
+        {
+          "index": 364,
+          "operator": "Cast",
+          "output": "InsertedPrecisionFreeCast_linear_49"
+        },
+        {
+          "index": 365,
+          "operator": "Relu",
+          "output": "InsertedPrecisionFreeCast_relu_36"
+        },
+        {
+          "index": 366,
+          "operator": "FusedGemm",
+          "output": "InsertedPrecisionFreeCast_relu_37"
+        },
+        {
+          "index": 367,
+          "operator": "FusedGemm",
+          "output": "InsertedPrecisionFreeCast_relu_38"
+        },
+        {
+          "index": 368,
+          "operator": "Cast",
+          "output": "relu_38"
+        },
+        {
+          "index": 369,
+          "operator": "Gemm",
+          "output": "linear_52"
+        },
+        {
+          "index": 370,
+          "operator": "Sub",
+          "output": "InsertedPrecisionFreeCast_sub"
+        },
+        {
+          "index": 371,
+          "operator": "Mul",
+          "output": "InsertedPrecisionFreeCast_mul"
+        },
+        {
+          "index": 372,
+          "operator": "Cast",
+          "output": "mul"
+        },
+        {
+          "index": 373,
+          "operator": "Concat",
+          "output": "cat"
+        },
+        {
+          "index": 374,
+          "operator": "Gemm",
+          "output": "linear_45"
+        },
+        {
+          "index": 375,
+          "operator": "Cast",
+          "output": "InsertedPrecisionFreeCast_linear_45"
+        },
+        {
+          "index": 376,
+          "operator": "Relu",
+          "output": "InsertedPrecisionFreeCast_relu_33"
+        },
+        {
+          "index": 377,
+          "operator": "FusedGemm",
+          "output": "InsertedPrecisionFreeCast_relu_34"
+        },
+        {
+          "index": 378,
+          "operator": "FusedGemm",
+          "output": "InsertedPrecisionFreeCast_relu_35"
+        },
+        {
+          "index": 379,
+          "operator": "Cast",
+          "output": "relu_35"
+        },
+        {
+          "index": 380,
+          "operator": "Gemm",
+          "output": "linear_48"
+        },
+        {
+          "index": 381,
+          "operator": "Gemm",
+          "output": "linear_41"
+        },
+        {
+          "index": 382,
+          "operator": "Cast",
+          "output": "InsertedPrecisionFreeCast_linear_41"
+        },
+        {
+          "index": 383,
+          "operator": "Relu",
+          "output": "InsertedPrecisionFreeCast_relu_30"
+        },
+        {
+          "index": 384,
+          "operator": "FusedGemm",
+          "output": "InsertedPrecisionFreeCast_relu_31"
+        },
+        {
+          "index": 385,
+          "operator": "FusedGemm",
+          "output": "InsertedPrecisionFreeCast_relu_32"
+        },
+        {
+          "index": 386,
+          "operator": "Cast",
+          "output": "relu_32"
+        },
+        {
+          "index": 387,
+          "operator": "Gemm",
+          "output": "linear_44"
+        },
+        {
+          "index": 388,
+          "operator": "Gemm",
+          "output": "linear_37"
+        },
+        {
+          "index": 389,
+          "operator": "Cast",
+          "output": "InsertedPrecisionFreeCast_linear_37"
+        },
+        {
+          "index": 390,
+          "operator": "Relu",
+          "output": "InsertedPrecisionFreeCast_relu_27"
+        },
+        {
+          "index": 391,
+          "operator": "FusedGemm",
+          "output": "InsertedPrecisionFreeCast_relu_28"
+        },
+        {
+          "index": 392,
+          "operator": "FusedGemm",
+          "output": "InsertedPrecisionFreeCast_relu_29"
+        },
+        {
+          "index": 393,
+          "operator": "Cast",
+          "output": "relu_29"
+        },
+        {
+          "index": 394,
+          "operator": "Gemm",
+          "output": "linear_40"
+        },
+        {
+          "index": 395,
+          "operator": "Gemm",
+          "output": "linear_33"
+        },
+        {
+          "index": 396,
+          "operator": "Cast",
+          "output": "InsertedPrecisionFreeCast_linear_33"
+        },
+        {
+          "index": 397,
+          "operator": "Relu",
+          "output": "InsertedPrecisionFreeCast_relu_24"
+        },
+        {
+          "index": 398,
+          "operator": "FusedGemm",
+          "output": "InsertedPrecisionFreeCast_relu_25"
+        },
+        {
+          "index": 399,
+          "operator": "FusedGemm",
+          "output": "InsertedPrecisionFreeCast_relu_26"
+        },
+        {
+          "index": 400,
+          "operator": "Cast",
+          "output": "relu_26"
+        },
+        {
+          "index": 401,
+          "operator": "Gemm",
+          "output": "linear_36"
+        },
+        {
+          "index": 402,
+          "operator": "Gemm",
+          "output": "linear_21"
+        },
+        {
+          "index": 403,
+          "operator": "Cast",
+          "output": "InsertedPrecisionFreeCast_linear_21"
+        },
+        {
+          "index": 404,
+          "operator": "Relu",
+          "output": "InsertedPrecisionFreeCast_relu_15"
+        },
+        {
+          "index": 405,
+          "operator": "FusedGemm",
+          "output": "InsertedPrecisionFreeCast_relu_16"
+        },
+        {
+          "index": 406,
+          "operator": "FusedGemm",
+          "output": "InsertedPrecisionFreeCast_relu_17"
+        },
+        {
+          "index": 407,
+          "operator": "Cast",
+          "output": "relu_17"
+        },
+        {
+          "index": 408,
+          "operator": "Gemm",
+          "output": "linear_24"
+        },
+        {
+          "index": 409,
+          "operator": "Gemm",
+          "output": "linear_17"
+        },
+        {
+          "index": 410,
+          "operator": "Cast",
+          "output": "InsertedPrecisionFreeCast_linear_17"
+        },
+        {
+          "index": 411,
+          "operator": "Relu",
+          "output": "InsertedPrecisionFreeCast_relu_12"
+        },
+        {
+          "index": 412,
+          "operator": "FusedGemm",
+          "output": "InsertedPrecisionFreeCast_relu_13"
+        },
+        {
+          "index": 413,
+          "operator": "FusedGemm",
+          "output": "InsertedPrecisionFreeCast_relu_14"
+        },
+        {
+          "index": 414,
+          "operator": "Cast",
+          "output": "relu_14"
+        },
+        {
+          "index": 415,
+          "operator": "Gemm",
+          "output": "linear_20"
+        },
+        {
+          "index": 416,
+          "operator": "Gemm",
+          "output": "linear_13"
+        },
+        {
+          "index": 417,
+          "operator": "Cast",
+          "output": "InsertedPrecisionFreeCast_linear_13"
+        },
+        {
+          "index": 418,
+          "operator": "Relu",
+          "output": "InsertedPrecisionFreeCast_relu_9"
+        },
+        {
+          "index": 419,
+          "operator": "FusedGemm",
+          "output": "InsertedPrecisionFreeCast_relu_10"
+        },
+        {
+          "index": 420,
+          "operator": "FusedGemm",
+          "output": "InsertedPrecisionFreeCast_relu_11"
+        },
+        {
+          "index": 421,
+          "operator": "Cast",
+          "output": "relu_11"
+        },
+        {
+          "index": 422,
+          "operator": "Gemm",
+          "output": "linear_16"
+        },
+        {
+          "index": 423,
+          "operator": "Gemm",
+          "output": "linear_9"
+        },
+        {
+          "index": 424,
+          "operator": "Cast",
+          "output": "InsertedPrecisionFreeCast_linear_9"
+        },
+        {
+          "index": 425,
+          "operator": "Relu",
+          "output": "InsertedPrecisionFreeCast_relu_6"
+        },
+        {
+          "index": 426,
+          "operator": "FusedGemm",
+          "output": "InsertedPrecisionFreeCast_relu_7"
+        },
+        {
+          "index": 427,
+          "operator": "FusedGemm",
+          "output": "InsertedPrecisionFreeCast_relu_8"
+        },
+        {
+          "index": 428,
+          "operator": "Cast",
+          "output": "relu_8"
+        },
+        {
+          "index": 429,
+          "operator": "Gemm",
+          "output": "linear_12"
+        },
+        {
+          "index": 430,
+          "operator": "Concat",
+          "output": "outputs"
+        }
+      ],
+      "archive_sha256": "246228cc811955335956af75a8c15f2970b3b26d64575c62568f04a5fab40643",
+      "archive_bytes": 102920779
+    }
+  },
+  "completed": true,
+  "completed_utc": 1793497180.123582,
+  "validation_status": "blocked"
+}

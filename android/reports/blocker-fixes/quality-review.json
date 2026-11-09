@@ -1,0 +1,2113 @@
+{
+  "exit_code": 2,
+  "header": {
+    "baseline": "git-HEAD",
+    "regressions": "77203",
+    "minor": "12327",
+    "acked": "0",
+    "stale": "0",
+    "preexisting-worse": "45",
+    "new-symbol": "77158",
+    "gating": "33",
+    "register-macro-excluded": "10",
+    "at": "7631d5248+dirty"
+  },
+  "existing_findings": [
+    {
+      "kind": "complexity",
+      "sym": "android/scripts/experiment.py::Device::cool",
+      "was": "11",
+      "now": "17",
+      "bar": "15",
+      "p": "android/scripts/experiment.py:68",
+      "gating": "1",
+      "next": "--expand=android/scripts/experiment.py:cool"
+    },
+    {
+      "kind": "complexity",
+      "sym": "Stream",
+      "was": "13",
+      "now": "17",
+      "bar": "15",
+      "p": "android/app/src/main/java/ai/sunnypilot/fold3/CameraProbe.java:130",
+      "gating": "1",
+      "next": "--expand=android/app/src/main/java/ai/sunnypilot/fold3/CameraProbe.java:Stream"
+    },
+    {
+      "kind": "complexity",
+      "sym": "_benchmark",
+      "was": "24",
+      "now": "30",
+      "bar": "15",
+      "p": "android/app/src/main/python/fold3_models.py:40",
+      "gating": "1",
+      "next": "--expand=android/app/src/main/python/fold3_models.py:_benchmark"
+    },
+    {
+      "kind": "complexity",
+      "sym": "close",
+      "was": "20",
+      "now": "22",
+      "bar": "15",
+      "sev": "minor",
+      "p": "android/app/src/main/java/ai/sunnypilot/fold3/CameraPreviewSample.java:207"
+    },
+    {
+      "kind": "complexity",
+      "sym": "initialize",
+      "was": "26",
+      "now": "42",
+      "bar": "15",
+      "p": "android/app/src/main/java/ai/sunnypilot/fold3/CameraPreviewSample.java:75",
+      "gating": "1",
+      "next": "--expand=android/app/src/main/java/ai/sunnypilot/fold3/CameraPreviewSample.java:initialize"
+    },
+    {
+      "kind": "complexity",
+      "sym": "main",
+      "was": "51",
+      "now": "52",
+      "bar": "15",
+      "sev": "minor",
+      "p": "android/scripts/model_reference.py:47"
+    },
+    {
+      "kind": "complexity",
+      "sym": "serve",
+      "was": "62",
+      "now": "96",
+      "bar": "15",
+      "p": "android/app/src/main/python/fold3_sim.py:65",
+      "gating": "1",
+      "next": "--expand=android/app/src/main/python/fold3_sim.py:serve"
+    },
+    {
+      "kind": "complexity",
+      "sym": "validate",
+      "was": "39",
+      "now": "43",
+      "bar": "15",
+      "p": "android/scripts/validate_lifecycle.py:17",
+      "gating": "1",
+      "next": "--expand=android/scripts/validate_lifecycle.py:validate"
+    },
+    {
+      "kind": "dead-code",
+      "sym": "progress",
+      "p": "android/app/src/main/python/fold3_ui.py:35",
+      "gating": "1",
+      "next": "--expand=android/app/src/main/python/fold3_ui.py:progress"
+    },
+    {
+      "kind": "duplication",
+      "members": "android/tests/test_vision_panda.py::VisionTest::test_model_cadence_is_20hz_without_catchup_after_stalls | tinygrad_repo/test/null/test_helpers.py::TestCStyleDivMod::test_div_pos",
+      "tokens": "68",
+      "p": "android/tests/test_vision_panda.py:90",
+      "gating": "1"
+    },
+    {
+      "kind": "duplication",
+      "members": "android/tests/test_vision_panda.py::VisionTest::test_model_cadence_is_20hz_without_catchup_after_stalls | tinygrad_repo/test/null/test_helpers.py::TestCStyleDivMod::test_mod_pos",
+      "tokens": "69",
+      "p": "android/tests/test_vision_panda.py:90",
+      "gating": "1"
+    },
+    {
+      "kind": "duplication",
+      "members": "android/tests/test_vision_panda.py::VisionTest::test_model_cadence_is_20hz_without_catchup_after_stalls | tinygrad_repo/test/null/test_helpers.py::TestCeilDiv::test_int",
+      "tokens": "52",
+      "p": "android/tests/test_vision_panda.py:90",
+      "gating": "1"
+    },
+    {
+      "kind": "duplication",
+      "members": "openpilot/tools/cabana/ui/tools/findsignal.cc::SignalSearch::reset | onConfigureFailed",
+      "tokens": "27",
+      "p": "openpilot/tools/cabana/ui/tools/findsignal.cc:58",
+      "gating": "1"
+    },
+    {
+      "kind": "duplication",
+      "members": "openpilot/tools/cabana/ui/tools/findsignal.cc::SignalSearch::reset | onDisconnected",
+      "tokens": "23",
+      "p": "openpilot/tools/cabana/ui/tools/findsignal.cc:58",
+      "gating": "1"
+    },
+    {
+      "kind": "duplication",
+      "members": "openpilot/tools/cabana/ui/tools/findsignal.cc::SignalSearch::reset | onError",
+      "tokens": "27",
+      "p": "openpilot/tools/cabana/ui/tools/findsignal.cc:58",
+      "gating": "1"
+    },
+    {
+      "kind": "duplication",
+      "members": "check | checkThermalStatus",
+      "tokens": "36",
+      "p": "android/app/src/main/java/ai/sunnypilot/fold3/GpuNv12.java:100",
+      "gating": "1"
+    },
+    {
+      "kind": "duplication",
+      "members": "modelFixtureOutputsUseUpstreamParsersAndStayInvalid | numericalTimingAndThermalFaultsFailClosed",
+      "tokens": "117",
+      "p": "android/app/src/androidTest/java/ai/sunnypilot/fold3/PerceptionTest.java:32",
+      "gating": "1"
+    },
+    {
+      "kind": "duplication",
+      "members": "nativePreprocessingMatchesNumpyAndRejectsInvalidIndices | numericalTimingAndThermalFaultsFailClosed",
+      "tokens": "134",
+      "p": "android/app/src/androidTest/java/ai/sunnypilot/fold3/PerceptionTest.java:23",
+      "gating": "1"
+    },
+    {
+      "kind": "duplication",
+      "members": "numericalTimingAndThermalFaultsFailClosed | originalOnnxRuntimeAcceptsChangingInputsAndRejectsWrongLayouts",
+      "tokens": "117",
+      "p": "android/app/src/androidTest/java/ai/sunnypilot/fold3/PerceptionTest.java:13",
+      "gating": "1"
+    },
+    {
+      "kind": "duplication",
+      "members": "shader | shader",
+      "tokens": "93",
+      "p": "android/app/src/main/java/ai/sunnypilot/fold3/CameraPreviewSample.java:168",
+      "gating": "1"
+    },
+    {
+      "kind": "nesting",
+      "sym": "initialize",
+      "was": "3",
+      "now": "5",
+      "bar": "4",
+      "p": "android/app/src/main/java/ai/sunnypilot/fold3/CameraPreviewSample.java:75",
+      "gating": "1",
+      "next": "--expand=android/app/src/main/java/ai/sunnypilot/fold3/CameraPreviewSample.java:initialize"
+    },
+    {
+      "kind": "nesting",
+      "sym": "serve",
+      "was": "4",
+      "now": "6",
+      "bar": "4",
+      "p": "android/app/src/main/python/fold3_sim.py:65",
+      "gating": "1",
+      "next": "--expand=android/app/src/main/python/fold3_sim.py:serve"
+    },
+    {
+      "kind": "verbosity",
+      "sym": "android/app/src/main/python/fold3_vision.py::FrameGate::FrameGate",
+      "was": "34",
+      "now": "67",
+      "bar": "60",
+      "p": "android/app/src/main/python/fold3_vision.py:14",
+      "gating": "1",
+      "next": "--expand=android/app/src/main/python/fold3_vision.py:FrameGate"
+    },
+    {
+      "kind": "verbosity",
+      "sym": "android/scripts/experiment.py::Device::Device",
+      "was": "63",
+      "now": "79",
+      "bar": "60",
+      "p": "android/scripts/experiment.py:27",
+      "gating": "1",
+      "next": "--expand=android/scripts/experiment.py:Device"
+    },
+    {
+      "kind": "verbosity",
+      "sym": "android/tests/test_experiment.py::ExperimentTest::ExperimentTest",
+      "was": "71",
+      "now": "108",
+      "bar": "60",
+      "p": "android/tests/test_experiment.py:13",
+      "gating": "1",
+      "next": "--expand=android/tests/test_experiment.py:ExperimentTest"
+    },
+    {
+      "kind": "verbosity",
+      "sym": "android/tests/test_vision_panda.py::VisionTest::VisionTest",
+      "was": "122",
+      "now": "172",
+      "bar": "60",
+      "p": "android/tests/test_vision_panda.py:27",
+      "gating": "1",
+      "next": "--expand=android/tests/test_vision_panda.py:VisionTest"
+    },
+    {
+      "kind": "verbosity",
+      "sym": "CameraPreviewSample",
+      "was": "158",
+      "now": "205",
+      "bar": "60",
+      "p": "android/app/src/main/java/ai/sunnypilot/fold3/CameraPreviewSample.java:25",
+      "gating": "1",
+      "next": "--expand=android/app/src/main/java/ai/sunnypilot/fold3/CameraPreviewSample.java:CameraPreviewSample"
+    },
+    {
+      "kind": "verbosity",
+      "sym": "CameraProbe",
+      "was": "709",
+      "now": "727",
+      "bar": "60",
+      "p": "android/app/src/main/java/ai/sunnypilot/fold3/CameraProbe.java:26",
+      "gating": "1",
+      "next": "--expand=android/app/src/main/java/ai/sunnypilot/fold3/CameraProbe.java:CameraProbe"
+    },
+    {
+      "kind": "verbosity",
+      "sym": "FrameStats",
+      "was": "53",
+      "now": "64",
+      "bar": "60",
+      "p": "android/app/src/main/java/ai/sunnypilot/fold3/FrameStats.java:6",
+      "gating": "1",
+      "next": "--expand=android/app/src/main/java/ai/sunnypilot/fold3/FrameStats.java:FrameStats"
+    },
+    {
+      "kind": "verbosity",
+      "sym": "MainActivity",
+      "was": "174",
+      "now": "177",
+      "bar": "60",
+      "sev": "minor",
+      "p": "android/app/src/main/java/ai/sunnypilot/fold3/MainActivity.java:16"
+    },
+    {
+      "kind": "verbosity",
+      "sym": "ManagerService",
+      "was": "96",
+      "now": "112",
+      "bar": "60",
+      "p": "android/app/src/main/java/ai/sunnypilot/fold3/ManagerService.java:13",
+      "gating": "1",
+      "next": "--expand=android/app/src/main/java/ai/sunnypilot/fold3/ManagerService.java:ManagerService"
+    },
+    {
+      "kind": "verbosity",
+      "sym": "PerceptionTest",
+      "was": "51",
+      "now": "61",
+      "bar": "60",
+      "p": "android/app/src/androidTest/java/ai/sunnypilot/fold3/PerceptionTest.java:12",
+      "gating": "1",
+      "next": "--expand=android/app/src/androidTest/java/ai/sunnypilot/fold3/PerceptionTest.java:PerceptionTest"
+    },
+    {
+      "kind": "verbosity",
+      "sym": "Stream",
+      "was": "67",
+      "now": "70",
+      "bar": "60",
+      "sev": "minor",
+      "p": "android/app/src/main/java/ai/sunnypilot/fold3/CameraProbe.java:130"
+    },
+    {
+      "kind": "verbosity",
+      "sym": "_benchmark",
+      "was": "75",
+      "now": "90",
+      "bar": "60",
+      "p": "android/app/src/main/python/fold3_models.py:40",
+      "gating": "1",
+      "next": "--expand=android/app/src/main/python/fold3_models.py:_benchmark"
+    },
+    {
+      "kind": "verbosity",
+      "sym": "attempt",
+      "was": "140",
+      "now": "142",
+      "bar": "60",
+      "sev": "minor",
+      "p": "android/app/src/main/java/ai/sunnypilot/fold3/CameraProbe.java:591"
+    },
+    {
+      "kind": "verbosity",
+      "sym": "initialize",
+      "was": "56",
+      "now": "71",
+      "bar": "60",
+      "p": "android/app/src/main/java/ai/sunnypilot/fold3/CameraPreviewSample.java:75",
+      "gating": "1",
+      "next": "--expand=android/app/src/main/java/ai/sunnypilot/fold3/CameraPreviewSample.java:initialize"
+    },
+    {
+      "kind": "verbosity",
+      "sym": "main",
+      "was": "146",
+      "now": "148",
+      "bar": "60",
+      "sev": "minor",
+      "p": "android/scripts/prepare_native.py:33"
+    },
+    {
+      "kind": "verbosity",
+      "sym": "main",
+      "was": "104",
+      "now": "109",
+      "bar": "60",
+      "sev": "minor",
+      "p": "android/scripts/model_reference.py:47"
+    },
+    {
+      "kind": "verbosity",
+      "sym": "onCreate",
+      "was": "96",
+      "now": "97",
+      "bar": "60",
+      "sev": "minor",
+      "p": "android/app/src/main/java/ai/sunnypilot/fold3/MainActivity.java:38"
+    },
+    {
+      "kind": "verbosity",
+      "sym": "probe",
+      "was": "52",
+      "now": "68",
+      "bar": "60",
+      "p": "android/app/src/main/python/fold3_runtime.py:41",
+      "gating": "1",
+      "next": "--expand=android/app/src/main/python/fold3_runtime.py:probe"
+    },
+    {
+      "kind": "verbosity",
+      "sym": "run",
+      "was": "179",
+      "now": "181",
+      "bar": "60",
+      "sev": "minor",
+      "p": "android/app/src/main/python/fold3_vision.py:253"
+    },
+    {
+      "kind": "verbosity",
+      "sym": "samsungMultiview",
+      "was": "241",
+      "now": "249",
+      "bar": "60",
+      "sev": "minor",
+      "p": "android/app/src/main/java/ai/sunnypilot/fold3/CameraProbe.java:337"
+    },
+    {
+      "kind": "verbosity",
+      "sym": "serve",
+      "was": "93",
+      "now": "105",
+      "bar": "60",
+      "p": "android/app/src/main/python/fold3_sim.py:65",
+      "gating": "1",
+      "next": "--expand=android/app/src/main/python/fold3_sim.py:serve"
+    },
+    {
+      "kind": "verbosity",
+      "sym": "validate",
+      "was": "104",
+      "now": "105",
+      "bar": "60",
+      "sev": "minor",
+      "p": "android/scripts/validate_vision.py:13"
+    },
+    {
+      "kind": "verbosity",
+      "sym": "validate",
+      "was": "96",
+      "now": "103",
+      "bar": "60",
+      "sev": "minor",
+      "p": "android/scripts/validate_lifecycle.py:17"
+    }
+  ],
+  "review_notes": [
+    "This graph includes newly populated pinned submodules and generated report data; 77,158 new-symbol rows do not describe only this patch.",
+    "33 existing major flags remain; this is not a clean quality gate. Complexity in validation, camera configuration and relay handling is reviewed against the focused tests and device evidence.",
+    "fold3_ui.progress is passed explicitly as upstream_main(progress=progress); its dead-code flag is a graph false positive.",
+    "Test numeric-loop and small shader/error-handler similarities are retained; no safety checks were removed to reduce the score."
+  ],
+  "final_scan": {
+    "exit_code": 2,
+    "header": {
+      "baseline": "git-HEAD",
+      "regressions": "77189",
+      "minor": "12326",
+      "acked": "0",
+      "stale": "0",
+      "preexisting-worse": "45",
+      "new-symbol": "77144",
+      "gating": "34",
+      "register-macro-excluded": "10",
+      "at": "7631d5248+dirty"
+    },
+    "major_findings": [
+      {
+        "kind": "complexity",
+        "sym": "android/scripts/experiment.py::Device::cool",
+        "was": "11",
+        "now": "17",
+        "bar": "15",
+        "p": "android/scripts/experiment.py:68",
+        "gating": "1",
+        "next": "--expand=android/scripts/experiment.py:cool"
+      },
+      {
+        "kind": "complexity",
+        "sym": "Stream",
+        "was": "13",
+        "now": "17",
+        "bar": "15",
+        "p": "android/app/src/main/java/ai/sunnypilot/fold3/CameraProbe.java:130",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/java/ai/sunnypilot/fold3/CameraProbe.java:Stream"
+      },
+      {
+        "kind": "complexity",
+        "sym": "_benchmark",
+        "was": "24",
+        "now": "30",
+        "bar": "15",
+        "p": "android/app/src/main/python/fold3_models.py:40",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/python/fold3_models.py:_benchmark"
+      },
+      {
+        "kind": "complexity",
+        "sym": "initialize",
+        "was": "26",
+        "now": "42",
+        "bar": "15",
+        "p": "android/app/src/main/java/ai/sunnypilot/fold3/CameraPreviewSample.java:75",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/java/ai/sunnypilot/fold3/CameraPreviewSample.java:initialize"
+      },
+      {
+        "kind": "complexity",
+        "sym": "serve",
+        "was": "62",
+        "now": "96",
+        "bar": "15",
+        "p": "android/app/src/main/python/fold3_sim.py:65",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/python/fold3_sim.py:serve"
+      },
+      {
+        "kind": "complexity",
+        "sym": "validate",
+        "was": "39",
+        "now": "43",
+        "bar": "15",
+        "p": "android/scripts/validate_lifecycle.py:17",
+        "gating": "1",
+        "next": "--expand=android/scripts/validate_lifecycle.py:validate"
+      },
+      {
+        "kind": "dead-code",
+        "sym": "progress",
+        "p": "android/app/src/main/python/fold3_ui.py:35",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/python/fold3_ui.py:progress"
+      },
+      {
+        "kind": "duplication",
+        "members": "android/tests/test_vision_panda.py::VisionTest::test_model_cadence_is_20hz_without_catchup_after_stalls | tinygrad_repo/test/null/test_helpers.py::TestCStyleDivMod::test_div_pos",
+        "tokens": "68",
+        "p": "android/tests/test_vision_panda.py:90",
+        "gating": "1"
+      },
+      {
+        "kind": "duplication",
+        "members": "android/tests/test_vision_panda.py::VisionTest::test_model_cadence_is_20hz_without_catchup_after_stalls | tinygrad_repo/test/null/test_helpers.py::TestCStyleDivMod::test_mod_pos",
+        "tokens": "69",
+        "p": "android/tests/test_vision_panda.py:90",
+        "gating": "1"
+      },
+      {
+        "kind": "duplication",
+        "members": "android/tests/test_vision_panda.py::VisionTest::test_model_cadence_is_20hz_without_catchup_after_stalls | tinygrad_repo/test/null/test_helpers.py::TestCeilDiv::test_int",
+        "tokens": "52",
+        "p": "android/tests/test_vision_panda.py:90",
+        "gating": "1"
+      },
+      {
+        "kind": "duplication",
+        "members": "openpilot/tools/cabana/ui/tools/findsignal.cc::SignalSearch::reset | onConfigureFailed",
+        "tokens": "27",
+        "p": "openpilot/tools/cabana/ui/tools/findsignal.cc:58",
+        "gating": "1"
+      },
+      {
+        "kind": "duplication",
+        "members": "openpilot/tools/cabana/ui/tools/findsignal.cc::SignalSearch::reset | onDisconnected",
+        "tokens": "23",
+        "p": "openpilot/tools/cabana/ui/tools/findsignal.cc:58",
+        "gating": "1"
+      },
+      {
+        "kind": "duplication",
+        "members": "openpilot/tools/cabana/ui/tools/findsignal.cc::SignalSearch::reset | onError",
+        "tokens": "27",
+        "p": "openpilot/tools/cabana/ui/tools/findsignal.cc:58",
+        "gating": "1"
+      },
+      {
+        "kind": "duplication",
+        "members": "check | checkThermalStatus",
+        "tokens": "36",
+        "p": "android/app/src/main/java/ai/sunnypilot/fold3/GpuNv12.java:100",
+        "gating": "1"
+      },
+      {
+        "kind": "duplication",
+        "members": "modelFixtureOutputsUseUpstreamParsersAndStayInvalid | numericalTimingAndThermalFaultsFailClosed",
+        "tokens": "117",
+        "p": "android/app/src/androidTest/java/ai/sunnypilot/fold3/PerceptionTest.java:32",
+        "gating": "1"
+      },
+      {
+        "kind": "duplication",
+        "members": "nativePreprocessingMatchesNumpyAndRejectsInvalidIndices | numericalTimingAndThermalFaultsFailClosed",
+        "tokens": "134",
+        "p": "android/app/src/androidTest/java/ai/sunnypilot/fold3/PerceptionTest.java:23",
+        "gating": "1"
+      },
+      {
+        "kind": "duplication",
+        "members": "numericalTimingAndThermalFaultsFailClosed | originalOnnxRuntimeAcceptsChangingInputsAndRejectsWrongLayouts",
+        "tokens": "117",
+        "p": "android/app/src/androidTest/java/ai/sunnypilot/fold3/PerceptionTest.java:13",
+        "gating": "1"
+      },
+      {
+        "kind": "duplication",
+        "members": "shader | shader",
+        "tokens": "93",
+        "p": "android/app/src/main/java/ai/sunnypilot/fold3/CameraPreviewSample.java:168",
+        "gating": "1"
+      },
+      {
+        "kind": "nesting",
+        "sym": "initialize",
+        "was": "3",
+        "now": "5",
+        "bar": "4",
+        "p": "android/app/src/main/java/ai/sunnypilot/fold3/CameraPreviewSample.java:75",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/java/ai/sunnypilot/fold3/CameraPreviewSample.java:initialize"
+      },
+      {
+        "kind": "nesting",
+        "sym": "serve",
+        "was": "4",
+        "now": "6",
+        "bar": "4",
+        "p": "android/app/src/main/python/fold3_sim.py:65",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/python/fold3_sim.py:serve"
+      },
+      {
+        "kind": "verbosity",
+        "sym": "android/app/src/main/python/fold3_vision.py::FrameGate::FrameGate",
+        "was": "34",
+        "now": "67",
+        "bar": "60",
+        "p": "android/app/src/main/python/fold3_vision.py:14",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/python/fold3_vision.py:FrameGate"
+      },
+      {
+        "kind": "verbosity",
+        "sym": "android/scripts/experiment.py::Device::Device",
+        "was": "63",
+        "now": "79",
+        "bar": "60",
+        "p": "android/scripts/experiment.py:27",
+        "gating": "1",
+        "next": "--expand=android/scripts/experiment.py:Device"
+      },
+      {
+        "kind": "verbosity",
+        "sym": "android/tests/test_experiment.py::ExperimentTest::ExperimentTest",
+        "was": "71",
+        "now": "108",
+        "bar": "60",
+        "p": "android/tests/test_experiment.py:13",
+        "gating": "1",
+        "next": "--expand=android/tests/test_experiment.py:ExperimentTest"
+      },
+      {
+        "kind": "verbosity",
+        "sym": "android/tests/test_vision_panda.py::VisionTest::VisionTest",
+        "was": "122",
+        "now": "172",
+        "bar": "60",
+        "p": "android/tests/test_vision_panda.py:27",
+        "gating": "1",
+        "next": "--expand=android/tests/test_vision_panda.py:VisionTest"
+      },
+      {
+        "kind": "verbosity",
+        "sym": "CameraPreviewSample",
+        "was": "158",
+        "now": "205",
+        "bar": "60",
+        "p": "android/app/src/main/java/ai/sunnypilot/fold3/CameraPreviewSample.java:25",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/java/ai/sunnypilot/fold3/CameraPreviewSample.java:CameraPreviewSample"
+      },
+      {
+        "kind": "verbosity",
+        "sym": "CameraProbe",
+        "was": "709",
+        "now": "735",
+        "bar": "60",
+        "p": "android/app/src/main/java/ai/sunnypilot/fold3/CameraProbe.java:26",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/java/ai/sunnypilot/fold3/CameraProbe.java:CameraProbe"
+      },
+      {
+        "kind": "verbosity",
+        "sym": "FrameStats",
+        "was": "53",
+        "now": "64",
+        "bar": "60",
+        "p": "android/app/src/main/java/ai/sunnypilot/fold3/FrameStats.java:6",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/java/ai/sunnypilot/fold3/FrameStats.java:FrameStats"
+      },
+      {
+        "kind": "verbosity",
+        "sym": "ManagerService",
+        "was": "96",
+        "now": "112",
+        "bar": "60",
+        "p": "android/app/src/main/java/ai/sunnypilot/fold3/ManagerService.java:13",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/java/ai/sunnypilot/fold3/ManagerService.java:ManagerService"
+      },
+      {
+        "kind": "verbosity",
+        "sym": "PerceptionTest",
+        "was": "51",
+        "now": "61",
+        "bar": "60",
+        "p": "android/app/src/androidTest/java/ai/sunnypilot/fold3/PerceptionTest.java:12",
+        "gating": "1",
+        "next": "--expand=android/app/src/androidTest/java/ai/sunnypilot/fold3/PerceptionTest.java:PerceptionTest"
+      },
+      {
+        "kind": "verbosity",
+        "sym": "_benchmark",
+        "was": "75",
+        "now": "90",
+        "bar": "60",
+        "p": "android/app/src/main/python/fold3_models.py:40",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/python/fold3_models.py:_benchmark"
+      },
+      {
+        "kind": "verbosity",
+        "sym": "initialize",
+        "was": "56",
+        "now": "71",
+        "bar": "60",
+        "p": "android/app/src/main/java/ai/sunnypilot/fold3/CameraPreviewSample.java:75",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/java/ai/sunnypilot/fold3/CameraPreviewSample.java:initialize"
+      },
+      {
+        "kind": "verbosity",
+        "sym": "probe",
+        "was": "52",
+        "now": "68",
+        "bar": "60",
+        "p": "android/app/src/main/python/fold3_runtime.py:41",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/python/fold3_runtime.py:probe"
+      },
+      {
+        "kind": "verbosity",
+        "sym": "samsungMultiview",
+        "was": "241",
+        "now": "254",
+        "bar": "60",
+        "p": "android/app/src/main/java/ai/sunnypilot/fold3/CameraProbe.java:340",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/java/ai/sunnypilot/fold3/CameraProbe.java:samsungMultiview"
+      },
+      {
+        "kind": "verbosity",
+        "sym": "serve",
+        "was": "93",
+        "now": "105",
+        "bar": "60",
+        "p": "android/app/src/main/python/fold3_sim.py:65",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/python/fold3_sim.py:serve"
+      }
+    ],
+    "review_note": "Additional UI callback lifetime fix increases onCreate complexity. Runtime lifecycle tests remain the correctness gate. No scan finding has been suppressed."
+  },
+  "delivery_scan": {
+    "exit_code": 2,
+    "header": {
+      "baseline": "git-HEAD",
+      "regressions": "77224",
+      "minor": "12327",
+      "acked": "0",
+      "stale": "0",
+      "preexisting-worse": "48",
+      "new-symbol": "77176",
+      "gating": "36",
+      "register-macro-excluded": "10",
+      "at": "7631d5248+dirty"
+    },
+    "gating_findings": [
+      {
+        "kind": "complexity",
+        "sym": "android/scripts/experiment.py::Device::cool",
+        "was": "11",
+        "now": "17",
+        "bar": "15",
+        "p": "android/scripts/experiment.py:68",
+        "gating": "1",
+        "next": "--expand=android/scripts/experiment.py:cool"
+      },
+      {
+        "kind": "complexity",
+        "sym": "Stream",
+        "was": "13",
+        "now": "17",
+        "bar": "15",
+        "p": "android/app/src/main/java/ai/sunnypilot/fold3/CameraProbe.java:130",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/java/ai/sunnypilot/fold3/CameraProbe.java:Stream"
+      },
+      {
+        "kind": "complexity",
+        "sym": "_benchmark",
+        "was": "24",
+        "now": "30",
+        "bar": "15",
+        "p": "android/app/src/main/python/fold3_models.py:40",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/python/fold3_models.py:_benchmark"
+      },
+      {
+        "kind": "complexity",
+        "sym": "initialize",
+        "was": "26",
+        "now": "42",
+        "bar": "15",
+        "p": "android/app/src/main/java/ai/sunnypilot/fold3/CameraPreviewSample.java:75",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/java/ai/sunnypilot/fold3/CameraPreviewSample.java:initialize"
+      },
+      {
+        "kind": "complexity",
+        "sym": "serve",
+        "was": "62",
+        "now": "96",
+        "bar": "15",
+        "p": "android/app/src/main/python/fold3_sim.py:65",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/python/fold3_sim.py:serve"
+      },
+      {
+        "kind": "complexity",
+        "sym": "validate",
+        "was": "39",
+        "now": "43",
+        "bar": "15",
+        "p": "android/scripts/validate_lifecycle.py:17",
+        "gating": "1",
+        "next": "--expand=android/scripts/validate_lifecycle.py:validate"
+      },
+      {
+        "kind": "complexity",
+        "sym": "validate",
+        "was": "25",
+        "now": "30",
+        "bar": "15",
+        "p": "android/scripts/validate_adb_faults.py:22",
+        "gating": "1",
+        "next": "--expand=android/scripts/validate_adb_faults.py:validate"
+      },
+      {
+        "kind": "dead-code",
+        "sym": "progress",
+        "p": "android/app/src/main/python/fold3_ui.py:35",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/python/fold3_ui.py:progress"
+      },
+      {
+        "kind": "duplication",
+        "members": "android/tests/test_vision_panda.py::VisionTest::test_model_cadence_is_20hz_without_catchup_after_stalls | tinygrad_repo/test/null/test_helpers.py::TestCStyleDivMod::test_div_pos",
+        "tokens": "68",
+        "p": "android/tests/test_vision_panda.py:90",
+        "gating": "1"
+      },
+      {
+        "kind": "duplication",
+        "members": "android/tests/test_vision_panda.py::VisionTest::test_model_cadence_is_20hz_without_catchup_after_stalls | tinygrad_repo/test/null/test_helpers.py::TestCStyleDivMod::test_mod_pos",
+        "tokens": "69",
+        "p": "android/tests/test_vision_panda.py:90",
+        "gating": "1"
+      },
+      {
+        "kind": "duplication",
+        "members": "android/tests/test_vision_panda.py::VisionTest::test_model_cadence_is_20hz_without_catchup_after_stalls | tinygrad_repo/test/null/test_helpers.py::TestCeilDiv::test_int",
+        "tokens": "52",
+        "p": "android/tests/test_vision_panda.py:90",
+        "gating": "1"
+      },
+      {
+        "kind": "duplication",
+        "members": "openpilot/tools/cabana/ui/tools/findsignal.cc::SignalSearch::reset | onConfigureFailed",
+        "tokens": "27",
+        "p": "openpilot/tools/cabana/ui/tools/findsignal.cc:58",
+        "gating": "1"
+      },
+      {
+        "kind": "duplication",
+        "members": "openpilot/tools/cabana/ui/tools/findsignal.cc::SignalSearch::reset | onDisconnected",
+        "tokens": "23",
+        "p": "openpilot/tools/cabana/ui/tools/findsignal.cc:58",
+        "gating": "1"
+      },
+      {
+        "kind": "duplication",
+        "members": "openpilot/tools/cabana/ui/tools/findsignal.cc::SignalSearch::reset | onError",
+        "tokens": "27",
+        "p": "openpilot/tools/cabana/ui/tools/findsignal.cc:58",
+        "gating": "1"
+      },
+      {
+        "kind": "duplication",
+        "members": "check | checkThermalStatus",
+        "tokens": "36",
+        "p": "android/app/src/main/java/ai/sunnypilot/fold3/GpuNv12.java:100",
+        "gating": "1"
+      },
+      {
+        "kind": "duplication",
+        "members": "modelFixtureOutputsUseUpstreamParsersAndStayInvalid | numericalTimingAndThermalFaultsFailClosed",
+        "tokens": "117",
+        "p": "android/app/src/androidTest/java/ai/sunnypilot/fold3/PerceptionTest.java:32",
+        "gating": "1"
+      },
+      {
+        "kind": "duplication",
+        "members": "nativePreprocessingMatchesNumpyAndRejectsInvalidIndices | numericalTimingAndThermalFaultsFailClosed",
+        "tokens": "134",
+        "p": "android/app/src/androidTest/java/ai/sunnypilot/fold3/PerceptionTest.java:23",
+        "gating": "1"
+      },
+      {
+        "kind": "duplication",
+        "members": "numericalTimingAndThermalFaultsFailClosed | originalOnnxRuntimeAcceptsChangingInputsAndRejectsWrongLayouts",
+        "tokens": "117",
+        "p": "android/app/src/androidTest/java/ai/sunnypilot/fold3/PerceptionTest.java:13",
+        "gating": "1"
+      },
+      {
+        "kind": "duplication",
+        "members": "shader | shader",
+        "tokens": "93",
+        "p": "android/app/src/main/java/ai/sunnypilot/fold3/CameraPreviewSample.java:168",
+        "gating": "1"
+      },
+      {
+        "kind": "error-masking",
+        "sym": "validate",
+        "was": "0",
+        "now": "1",
+        "p": "android/scripts/validate_adb_faults.py:22",
+        "gating": "1",
+        "next": "--expand=android/scripts/validate_adb_faults.py:validate"
+      },
+      {
+        "kind": "nesting",
+        "sym": "initialize",
+        "was": "3",
+        "now": "5",
+        "bar": "4",
+        "p": "android/app/src/main/java/ai/sunnypilot/fold3/CameraPreviewSample.java:75",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/java/ai/sunnypilot/fold3/CameraPreviewSample.java:initialize"
+      },
+      {
+        "kind": "nesting",
+        "sym": "serve",
+        "was": "4",
+        "now": "6",
+        "bar": "4",
+        "p": "android/app/src/main/python/fold3_sim.py:65",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/python/fold3_sim.py:serve"
+      },
+      {
+        "kind": "verbosity",
+        "sym": "android/app/src/main/python/fold3_vision.py::FrameGate::FrameGate",
+        "was": "34",
+        "now": "67",
+        "bar": "60",
+        "p": "android/app/src/main/python/fold3_vision.py:14",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/python/fold3_vision.py:FrameGate"
+      },
+      {
+        "kind": "verbosity",
+        "sym": "android/scripts/experiment.py::Device::Device",
+        "was": "63",
+        "now": "79",
+        "bar": "60",
+        "p": "android/scripts/experiment.py:27",
+        "gating": "1",
+        "next": "--expand=android/scripts/experiment.py:Device"
+      },
+      {
+        "kind": "verbosity",
+        "sym": "android/tests/test_experiment.py::ExperimentTest::ExperimentTest",
+        "was": "71",
+        "now": "108",
+        "bar": "60",
+        "p": "android/tests/test_experiment.py:13",
+        "gating": "1",
+        "next": "--expand=android/tests/test_experiment.py:ExperimentTest"
+      },
+      {
+        "kind": "verbosity",
+        "sym": "android/tests/test_vision_panda.py::VisionTest::VisionTest",
+        "was": "122",
+        "now": "172",
+        "bar": "60",
+        "p": "android/tests/test_vision_panda.py:27",
+        "gating": "1",
+        "next": "--expand=android/tests/test_vision_panda.py:VisionTest"
+      },
+      {
+        "kind": "verbosity",
+        "sym": "CameraPreviewSample",
+        "was": "158",
+        "now": "205",
+        "bar": "60",
+        "p": "android/app/src/main/java/ai/sunnypilot/fold3/CameraPreviewSample.java:25",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/java/ai/sunnypilot/fold3/CameraPreviewSample.java:CameraPreviewSample"
+      },
+      {
+        "kind": "verbosity",
+        "sym": "CameraProbe",
+        "was": "709",
+        "now": "735",
+        "bar": "60",
+        "p": "android/app/src/main/java/ai/sunnypilot/fold3/CameraProbe.java:26",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/java/ai/sunnypilot/fold3/CameraProbe.java:CameraProbe"
+      },
+      {
+        "kind": "verbosity",
+        "sym": "FrameStats",
+        "was": "53",
+        "now": "64",
+        "bar": "60",
+        "p": "android/app/src/main/java/ai/sunnypilot/fold3/FrameStats.java:6",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/java/ai/sunnypilot/fold3/FrameStats.java:FrameStats"
+      },
+      {
+        "kind": "verbosity",
+        "sym": "ManagerService",
+        "was": "96",
+        "now": "112",
+        "bar": "60",
+        "p": "android/app/src/main/java/ai/sunnypilot/fold3/ManagerService.java:13",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/java/ai/sunnypilot/fold3/ManagerService.java:ManagerService"
+      },
+      {
+        "kind": "verbosity",
+        "sym": "PerceptionTest",
+        "was": "51",
+        "now": "61",
+        "bar": "60",
+        "p": "android/app/src/androidTest/java/ai/sunnypilot/fold3/PerceptionTest.java:12",
+        "gating": "1",
+        "next": "--expand=android/app/src/androidTest/java/ai/sunnypilot/fold3/PerceptionTest.java:PerceptionTest"
+      },
+      {
+        "kind": "verbosity",
+        "sym": "_benchmark",
+        "was": "75",
+        "now": "90",
+        "bar": "60",
+        "p": "android/app/src/main/python/fold3_models.py:40",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/python/fold3_models.py:_benchmark"
+      },
+      {
+        "kind": "verbosity",
+        "sym": "initialize",
+        "was": "56",
+        "now": "71",
+        "bar": "60",
+        "p": "android/app/src/main/java/ai/sunnypilot/fold3/CameraPreviewSample.java:75",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/java/ai/sunnypilot/fold3/CameraPreviewSample.java:initialize"
+      },
+      {
+        "kind": "verbosity",
+        "sym": "probe",
+        "was": "52",
+        "now": "68",
+        "bar": "60",
+        "p": "android/app/src/main/python/fold3_runtime.py:41",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/python/fold3_runtime.py:probe"
+      },
+      {
+        "kind": "verbosity",
+        "sym": "samsungMultiview",
+        "was": "241",
+        "now": "254",
+        "bar": "60",
+        "p": "android/app/src/main/java/ai/sunnypilot/fold3/CameraProbe.java:340",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/java/ai/sunnypilot/fold3/CameraProbe.java:samsungMultiview"
+      },
+      {
+        "kind": "verbosity",
+        "sym": "serve",
+        "was": "93",
+        "now": "105",
+        "bar": "60",
+        "p": "android/app/src/main/python/fold3_sim.py:65",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/python/fold3_sim.py:serve"
+      }
+    ],
+    "report": "android/build/blocker-quality-delta-delivery.xml",
+    "acknowledgements_added": false
+  },
+  "candidate9_scan": {
+    "exit_code": 2,
+    "header": {
+      "baseline": "git-HEAD",
+      "regressions": "77254",
+      "minor": "12327",
+      "acked": "0",
+      "stale": "0",
+      "preexisting-worse": "48",
+      "new-symbol": "77206",
+      "gating": "36",
+      "register-macro-excluded": "10",
+      "at": "7631d5248+dirty"
+    },
+    "gating_findings": [
+      {
+        "kind": "complexity",
+        "sym": "android/scripts/experiment.py::Device::cool",
+        "was": "11",
+        "now": "17",
+        "bar": "15",
+        "p": "android/scripts/experiment.py:68",
+        "gating": "1",
+        "next": "--expand=android/scripts/experiment.py:cool"
+      },
+      {
+        "kind": "complexity",
+        "sym": "Stream",
+        "was": "13",
+        "now": "17",
+        "bar": "15",
+        "p": "android/app/src/main/java/ai/sunnypilot/fold3/CameraProbe.java:130",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/java/ai/sunnypilot/fold3/CameraProbe.java:Stream"
+      },
+      {
+        "kind": "complexity",
+        "sym": "_benchmark",
+        "was": "24",
+        "now": "30",
+        "bar": "15",
+        "p": "android/app/src/main/python/fold3_models.py:40",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/python/fold3_models.py:_benchmark"
+      },
+      {
+        "kind": "complexity",
+        "sym": "initialize",
+        "was": "26",
+        "now": "42",
+        "bar": "15",
+        "p": "android/app/src/main/java/ai/sunnypilot/fold3/CameraPreviewSample.java:75",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/java/ai/sunnypilot/fold3/CameraPreviewSample.java:initialize"
+      },
+      {
+        "kind": "complexity",
+        "sym": "serve",
+        "was": "62",
+        "now": "96",
+        "bar": "15",
+        "p": "android/app/src/main/python/fold3_sim.py:65",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/python/fold3_sim.py:serve"
+      },
+      {
+        "kind": "complexity",
+        "sym": "validate",
+        "was": "25",
+        "now": "30",
+        "bar": "15",
+        "p": "android/scripts/validate_adb_faults.py:22",
+        "gating": "1",
+        "next": "--expand=android/scripts/validate_adb_faults.py:validate"
+      },
+      {
+        "kind": "complexity",
+        "sym": "validate",
+        "was": "39",
+        "now": "43",
+        "bar": "15",
+        "p": "android/scripts/validate_lifecycle.py:17",
+        "gating": "1",
+        "next": "--expand=android/scripts/validate_lifecycle.py:validate"
+      },
+      {
+        "kind": "dead-code",
+        "sym": "progress",
+        "p": "android/app/src/main/python/fold3_ui.py:35",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/python/fold3_ui.py:progress"
+      },
+      {
+        "kind": "duplication",
+        "members": "android/tests/test_vision_panda.py::VisionTest::test_model_cadence_is_20hz_without_catchup_after_stalls | tinygrad_repo/test/null/test_helpers.py::TestCStyleDivMod::test_div_pos",
+        "tokens": "68",
+        "p": "android/tests/test_vision_panda.py:90",
+        "gating": "1"
+      },
+      {
+        "kind": "duplication",
+        "members": "android/tests/test_vision_panda.py::VisionTest::test_model_cadence_is_20hz_without_catchup_after_stalls | tinygrad_repo/test/null/test_helpers.py::TestCStyleDivMod::test_mod_pos",
+        "tokens": "69",
+        "p": "android/tests/test_vision_panda.py:90",
+        "gating": "1"
+      },
+      {
+        "kind": "duplication",
+        "members": "android/tests/test_vision_panda.py::VisionTest::test_model_cadence_is_20hz_without_catchup_after_stalls | tinygrad_repo/test/null/test_helpers.py::TestCeilDiv::test_int",
+        "tokens": "52",
+        "p": "android/tests/test_vision_panda.py:90",
+        "gating": "1"
+      },
+      {
+        "kind": "duplication",
+        "members": "openpilot/tools/cabana/ui/tools/findsignal.cc::SignalSearch::reset | onConfigureFailed",
+        "tokens": "27",
+        "p": "openpilot/tools/cabana/ui/tools/findsignal.cc:58",
+        "gating": "1"
+      },
+      {
+        "kind": "duplication",
+        "members": "openpilot/tools/cabana/ui/tools/findsignal.cc::SignalSearch::reset | onDisconnected",
+        "tokens": "23",
+        "p": "openpilot/tools/cabana/ui/tools/findsignal.cc:58",
+        "gating": "1"
+      },
+      {
+        "kind": "duplication",
+        "members": "openpilot/tools/cabana/ui/tools/findsignal.cc::SignalSearch::reset | onError",
+        "tokens": "27",
+        "p": "openpilot/tools/cabana/ui/tools/findsignal.cc:58",
+        "gating": "1"
+      },
+      {
+        "kind": "duplication",
+        "members": "check | checkThermalStatus",
+        "tokens": "36",
+        "p": "android/app/src/main/java/ai/sunnypilot/fold3/GpuNv12.java:100",
+        "gating": "1"
+      },
+      {
+        "kind": "duplication",
+        "members": "modelFixtureOutputsUseUpstreamParsersAndStayInvalid | numericalTimingAndThermalFaultsFailClosed",
+        "tokens": "117",
+        "p": "android/app/src/androidTest/java/ai/sunnypilot/fold3/PerceptionTest.java:32",
+        "gating": "1"
+      },
+      {
+        "kind": "duplication",
+        "members": "nativePreprocessingMatchesNumpyAndRejectsInvalidIndices | numericalTimingAndThermalFaultsFailClosed",
+        "tokens": "134",
+        "p": "android/app/src/androidTest/java/ai/sunnypilot/fold3/PerceptionTest.java:23",
+        "gating": "1"
+      },
+      {
+        "kind": "duplication",
+        "members": "numericalTimingAndThermalFaultsFailClosed | originalOnnxRuntimeAcceptsChangingInputsAndRejectsWrongLayouts",
+        "tokens": "117",
+        "p": "android/app/src/androidTest/java/ai/sunnypilot/fold3/PerceptionTest.java:13",
+        "gating": "1"
+      },
+      {
+        "kind": "duplication",
+        "members": "shader | shader",
+        "tokens": "93",
+        "p": "android/app/src/main/java/ai/sunnypilot/fold3/CameraPreviewSample.java:168",
+        "gating": "1"
+      },
+      {
+        "kind": "error-masking",
+        "sym": "validate",
+        "was": "0",
+        "now": "1",
+        "p": "android/scripts/validate_adb_faults.py:22",
+        "gating": "1",
+        "next": "--expand=android/scripts/validate_adb_faults.py:validate"
+      },
+      {
+        "kind": "nesting",
+        "sym": "initialize",
+        "was": "3",
+        "now": "5",
+        "bar": "4",
+        "p": "android/app/src/main/java/ai/sunnypilot/fold3/CameraPreviewSample.java:75",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/java/ai/sunnypilot/fold3/CameraPreviewSample.java:initialize"
+      },
+      {
+        "kind": "nesting",
+        "sym": "serve",
+        "was": "4",
+        "now": "6",
+        "bar": "4",
+        "p": "android/app/src/main/python/fold3_sim.py:65",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/python/fold3_sim.py:serve"
+      },
+      {
+        "kind": "verbosity",
+        "sym": "android/app/src/main/python/fold3_vision.py::FrameGate::FrameGate",
+        "was": "34",
+        "now": "67",
+        "bar": "60",
+        "p": "android/app/src/main/python/fold3_vision.py:14",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/python/fold3_vision.py:FrameGate"
+      },
+      {
+        "kind": "verbosity",
+        "sym": "android/scripts/experiment.py::Device::Device",
+        "was": "63",
+        "now": "79",
+        "bar": "60",
+        "p": "android/scripts/experiment.py:27",
+        "gating": "1",
+        "next": "--expand=android/scripts/experiment.py:Device"
+      },
+      {
+        "kind": "verbosity",
+        "sym": "android/tests/test_experiment.py::ExperimentTest::ExperimentTest",
+        "was": "71",
+        "now": "108",
+        "bar": "60",
+        "p": "android/tests/test_experiment.py:13",
+        "gating": "1",
+        "next": "--expand=android/tests/test_experiment.py:ExperimentTest"
+      },
+      {
+        "kind": "verbosity",
+        "sym": "android/tests/test_vision_panda.py::VisionTest::VisionTest",
+        "was": "122",
+        "now": "172",
+        "bar": "60",
+        "p": "android/tests/test_vision_panda.py:27",
+        "gating": "1",
+        "next": "--expand=android/tests/test_vision_panda.py:VisionTest"
+      },
+      {
+        "kind": "verbosity",
+        "sym": "CameraPreviewSample",
+        "was": "158",
+        "now": "205",
+        "bar": "60",
+        "p": "android/app/src/main/java/ai/sunnypilot/fold3/CameraPreviewSample.java:25",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/java/ai/sunnypilot/fold3/CameraPreviewSample.java:CameraPreviewSample"
+      },
+      {
+        "kind": "verbosity",
+        "sym": "CameraProbe",
+        "was": "709",
+        "now": "735",
+        "bar": "60",
+        "p": "android/app/src/main/java/ai/sunnypilot/fold3/CameraProbe.java:26",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/java/ai/sunnypilot/fold3/CameraProbe.java:CameraProbe"
+      },
+      {
+        "kind": "verbosity",
+        "sym": "FrameStats",
+        "was": "53",
+        "now": "64",
+        "bar": "60",
+        "p": "android/app/src/main/java/ai/sunnypilot/fold3/FrameStats.java:6",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/java/ai/sunnypilot/fold3/FrameStats.java:FrameStats"
+      },
+      {
+        "kind": "verbosity",
+        "sym": "ManagerService",
+        "was": "96",
+        "now": "112",
+        "bar": "60",
+        "p": "android/app/src/main/java/ai/sunnypilot/fold3/ManagerService.java:13",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/java/ai/sunnypilot/fold3/ManagerService.java:ManagerService"
+      },
+      {
+        "kind": "verbosity",
+        "sym": "PerceptionTest",
+        "was": "51",
+        "now": "61",
+        "bar": "60",
+        "p": "android/app/src/androidTest/java/ai/sunnypilot/fold3/PerceptionTest.java:12",
+        "gating": "1",
+        "next": "--expand=android/app/src/androidTest/java/ai/sunnypilot/fold3/PerceptionTest.java:PerceptionTest"
+      },
+      {
+        "kind": "verbosity",
+        "sym": "_benchmark",
+        "was": "75",
+        "now": "90",
+        "bar": "60",
+        "p": "android/app/src/main/python/fold3_models.py:40",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/python/fold3_models.py:_benchmark"
+      },
+      {
+        "kind": "verbosity",
+        "sym": "initialize",
+        "was": "56",
+        "now": "71",
+        "bar": "60",
+        "p": "android/app/src/main/java/ai/sunnypilot/fold3/CameraPreviewSample.java:75",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/java/ai/sunnypilot/fold3/CameraPreviewSample.java:initialize"
+      },
+      {
+        "kind": "verbosity",
+        "sym": "probe",
+        "was": "52",
+        "now": "68",
+        "bar": "60",
+        "p": "android/app/src/main/python/fold3_runtime.py:41",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/python/fold3_runtime.py:probe"
+      },
+      {
+        "kind": "verbosity",
+        "sym": "samsungMultiview",
+        "was": "241",
+        "now": "254",
+        "bar": "60",
+        "p": "android/app/src/main/java/ai/sunnypilot/fold3/CameraProbe.java:340",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/java/ai/sunnypilot/fold3/CameraProbe.java:samsungMultiview"
+      },
+      {
+        "kind": "verbosity",
+        "sym": "serve",
+        "was": "93",
+        "now": "105",
+        "bar": "60",
+        "p": "android/app/src/main/python/fold3_sim.py:65",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/python/fold3_sim.py:serve"
+      }
+    ]
+  },
+  "candidate10_scan": {
+    "exit_code": 2,
+    "header": {
+      "baseline": "git-HEAD",
+      "regressions": "77275",
+      "minor": "12327",
+      "acked": "0",
+      "stale": "0",
+      "preexisting-worse": "48",
+      "new-symbol": "77227",
+      "gating": "36",
+      "register-macro-excluded": "10",
+      "at": "7631d5248+dirty"
+    },
+    "gating_findings": [
+      {
+        "kind": "complexity",
+        "sym": "android/scripts/experiment.py::Device::cool",
+        "was": "11",
+        "now": "17",
+        "bar": "15",
+        "p": "android/scripts/experiment.py:68",
+        "gating": "1",
+        "next": "--expand=android/scripts/experiment.py:cool"
+      },
+      {
+        "kind": "complexity",
+        "sym": "Stream",
+        "was": "13",
+        "now": "17",
+        "bar": "15",
+        "p": "android/app/src/main/java/ai/sunnypilot/fold3/CameraProbe.java:130",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/java/ai/sunnypilot/fold3/CameraProbe.java:Stream"
+      },
+      {
+        "kind": "complexity",
+        "sym": "_benchmark",
+        "was": "24",
+        "now": "30",
+        "bar": "15",
+        "p": "android/app/src/main/python/fold3_models.py:40",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/python/fold3_models.py:_benchmark"
+      },
+      {
+        "kind": "complexity",
+        "sym": "initialize",
+        "was": "26",
+        "now": "42",
+        "bar": "15",
+        "p": "android/app/src/main/java/ai/sunnypilot/fold3/CameraPreviewSample.java:75",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/java/ai/sunnypilot/fold3/CameraPreviewSample.java:initialize"
+      },
+      {
+        "kind": "complexity",
+        "sym": "serve",
+        "was": "62",
+        "now": "96",
+        "bar": "15",
+        "p": "android/app/src/main/python/fold3_sim.py:65",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/python/fold3_sim.py:serve"
+      },
+      {
+        "kind": "complexity",
+        "sym": "validate",
+        "was": "39",
+        "now": "43",
+        "bar": "15",
+        "p": "android/scripts/validate_lifecycle.py:17",
+        "gating": "1",
+        "next": "--expand=android/scripts/validate_lifecycle.py:validate"
+      },
+      {
+        "kind": "complexity",
+        "sym": "validate",
+        "was": "25",
+        "now": "30",
+        "bar": "15",
+        "p": "android/scripts/validate_adb_faults.py:22",
+        "gating": "1",
+        "next": "--expand=android/scripts/validate_adb_faults.py:validate"
+      },
+      {
+        "kind": "dead-code",
+        "sym": "progress",
+        "p": "android/app/src/main/python/fold3_ui.py:35",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/python/fold3_ui.py:progress"
+      },
+      {
+        "kind": "duplication",
+        "members": "android/tests/test_vision_panda.py::VisionTest::test_model_cadence_is_20hz_without_catchup_after_stalls | tinygrad_repo/test/null/test_helpers.py::TestCStyleDivMod::test_div_pos",
+        "tokens": "68",
+        "p": "android/tests/test_vision_panda.py:90",
+        "gating": "1"
+      },
+      {
+        "kind": "duplication",
+        "members": "android/tests/test_vision_panda.py::VisionTest::test_model_cadence_is_20hz_without_catchup_after_stalls | tinygrad_repo/test/null/test_helpers.py::TestCStyleDivMod::test_mod_pos",
+        "tokens": "69",
+        "p": "android/tests/test_vision_panda.py:90",
+        "gating": "1"
+      },
+      {
+        "kind": "duplication",
+        "members": "android/tests/test_vision_panda.py::VisionTest::test_model_cadence_is_20hz_without_catchup_after_stalls | tinygrad_repo/test/null/test_helpers.py::TestCeilDiv::test_int",
+        "tokens": "52",
+        "p": "android/tests/test_vision_panda.py:90",
+        "gating": "1"
+      },
+      {
+        "kind": "duplication",
+        "members": "openpilot/tools/cabana/ui/tools/findsignal.cc::SignalSearch::reset | onConfigureFailed",
+        "tokens": "27",
+        "p": "openpilot/tools/cabana/ui/tools/findsignal.cc:58",
+        "gating": "1"
+      },
+      {
+        "kind": "duplication",
+        "members": "openpilot/tools/cabana/ui/tools/findsignal.cc::SignalSearch::reset | onDisconnected",
+        "tokens": "23",
+        "p": "openpilot/tools/cabana/ui/tools/findsignal.cc:58",
+        "gating": "1"
+      },
+      {
+        "kind": "duplication",
+        "members": "openpilot/tools/cabana/ui/tools/findsignal.cc::SignalSearch::reset | onError",
+        "tokens": "27",
+        "p": "openpilot/tools/cabana/ui/tools/findsignal.cc:58",
+        "gating": "1"
+      },
+      {
+        "kind": "duplication",
+        "members": "check | checkThermalStatus",
+        "tokens": "36",
+        "p": "android/app/src/main/java/ai/sunnypilot/fold3/GpuNv12.java:100",
+        "gating": "1"
+      },
+      {
+        "kind": "duplication",
+        "members": "modelFixtureOutputsUseUpstreamParsersAndStayInvalid | numericalTimingAndThermalFaultsFailClosed",
+        "tokens": "117",
+        "p": "android/app/src/androidTest/java/ai/sunnypilot/fold3/PerceptionTest.java:32",
+        "gating": "1"
+      },
+      {
+        "kind": "duplication",
+        "members": "nativePreprocessingMatchesNumpyAndRejectsInvalidIndices | numericalTimingAndThermalFaultsFailClosed",
+        "tokens": "134",
+        "p": "android/app/src/androidTest/java/ai/sunnypilot/fold3/PerceptionTest.java:23",
+        "gating": "1"
+      },
+      {
+        "kind": "duplication",
+        "members": "numericalTimingAndThermalFaultsFailClosed | originalOnnxRuntimeAcceptsChangingInputsAndRejectsWrongLayouts",
+        "tokens": "117",
+        "p": "android/app/src/androidTest/java/ai/sunnypilot/fold3/PerceptionTest.java:13",
+        "gating": "1"
+      },
+      {
+        "kind": "duplication",
+        "members": "shader | shader",
+        "tokens": "93",
+        "p": "android/app/src/main/java/ai/sunnypilot/fold3/CameraPreviewSample.java:168",
+        "gating": "1"
+      },
+      {
+        "kind": "error-masking",
+        "sym": "validate",
+        "was": "0",
+        "now": "1",
+        "p": "android/scripts/validate_adb_faults.py:22",
+        "gating": "1",
+        "next": "--expand=android/scripts/validate_adb_faults.py:validate"
+      },
+      {
+        "kind": "nesting",
+        "sym": "initialize",
+        "was": "3",
+        "now": "5",
+        "bar": "4",
+        "p": "android/app/src/main/java/ai/sunnypilot/fold3/CameraPreviewSample.java:75",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/java/ai/sunnypilot/fold3/CameraPreviewSample.java:initialize"
+      },
+      {
+        "kind": "nesting",
+        "sym": "serve",
+        "was": "4",
+        "now": "6",
+        "bar": "4",
+        "p": "android/app/src/main/python/fold3_sim.py:65",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/python/fold3_sim.py:serve"
+      },
+      {
+        "kind": "verbosity",
+        "sym": "android/app/src/main/python/fold3_vision.py::FrameGate::FrameGate",
+        "was": "34",
+        "now": "67",
+        "bar": "60",
+        "p": "android/app/src/main/python/fold3_vision.py:14",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/python/fold3_vision.py:FrameGate"
+      },
+      {
+        "kind": "verbosity",
+        "sym": "android/scripts/experiment.py::Device::Device",
+        "was": "63",
+        "now": "79",
+        "bar": "60",
+        "p": "android/scripts/experiment.py:27",
+        "gating": "1",
+        "next": "--expand=android/scripts/experiment.py:Device"
+      },
+      {
+        "kind": "verbosity",
+        "sym": "android/tests/test_experiment.py::ExperimentTest::ExperimentTest",
+        "was": "71",
+        "now": "108",
+        "bar": "60",
+        "p": "android/tests/test_experiment.py:13",
+        "gating": "1",
+        "next": "--expand=android/tests/test_experiment.py:ExperimentTest"
+      },
+      {
+        "kind": "verbosity",
+        "sym": "android/tests/test_vision_panda.py::VisionTest::VisionTest",
+        "was": "122",
+        "now": "172",
+        "bar": "60",
+        "p": "android/tests/test_vision_panda.py:27",
+        "gating": "1",
+        "next": "--expand=android/tests/test_vision_panda.py:VisionTest"
+      },
+      {
+        "kind": "verbosity",
+        "sym": "CameraPreviewSample",
+        "was": "158",
+        "now": "205",
+        "bar": "60",
+        "p": "android/app/src/main/java/ai/sunnypilot/fold3/CameraPreviewSample.java:25",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/java/ai/sunnypilot/fold3/CameraPreviewSample.java:CameraPreviewSample"
+      },
+      {
+        "kind": "verbosity",
+        "sym": "CameraProbe",
+        "was": "709",
+        "now": "735",
+        "bar": "60",
+        "p": "android/app/src/main/java/ai/sunnypilot/fold3/CameraProbe.java:26",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/java/ai/sunnypilot/fold3/CameraProbe.java:CameraProbe"
+      },
+      {
+        "kind": "verbosity",
+        "sym": "FrameStats",
+        "was": "53",
+        "now": "64",
+        "bar": "60",
+        "p": "android/app/src/main/java/ai/sunnypilot/fold3/FrameStats.java:6",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/java/ai/sunnypilot/fold3/FrameStats.java:FrameStats"
+      },
+      {
+        "kind": "verbosity",
+        "sym": "ManagerService",
+        "was": "96",
+        "now": "112",
+        "bar": "60",
+        "p": "android/app/src/main/java/ai/sunnypilot/fold3/ManagerService.java:13",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/java/ai/sunnypilot/fold3/ManagerService.java:ManagerService"
+      },
+      {
+        "kind": "verbosity",
+        "sym": "PerceptionTest",
+        "was": "51",
+        "now": "61",
+        "bar": "60",
+        "p": "android/app/src/androidTest/java/ai/sunnypilot/fold3/PerceptionTest.java:12",
+        "gating": "1",
+        "next": "--expand=android/app/src/androidTest/java/ai/sunnypilot/fold3/PerceptionTest.java:PerceptionTest"
+      },
+      {
+        "kind": "verbosity",
+        "sym": "_benchmark",
+        "was": "75",
+        "now": "90",
+        "bar": "60",
+        "p": "android/app/src/main/python/fold3_models.py:40",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/python/fold3_models.py:_benchmark"
+      },
+      {
+        "kind": "verbosity",
+        "sym": "initialize",
+        "was": "56",
+        "now": "71",
+        "bar": "60",
+        "p": "android/app/src/main/java/ai/sunnypilot/fold3/CameraPreviewSample.java:75",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/java/ai/sunnypilot/fold3/CameraPreviewSample.java:initialize"
+      },
+      {
+        "kind": "verbosity",
+        "sym": "probe",
+        "was": "52",
+        "now": "68",
+        "bar": "60",
+        "p": "android/app/src/main/python/fold3_runtime.py:41",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/python/fold3_runtime.py:probe"
+      },
+      {
+        "kind": "verbosity",
+        "sym": "samsungMultiview",
+        "was": "241",
+        "now": "254",
+        "bar": "60",
+        "p": "android/app/src/main/java/ai/sunnypilot/fold3/CameraProbe.java:340",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/java/ai/sunnypilot/fold3/CameraProbe.java:samsungMultiview"
+      },
+      {
+        "kind": "verbosity",
+        "sym": "serve",
+        "was": "93",
+        "now": "105",
+        "bar": "60",
+        "p": "android/app/src/main/python/fold3_sim.py:65",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/python/fold3_sim.py:serve"
+      }
+    ]
+  },
+  "candidate10_final_scan": {
+    "exit_code": 2,
+    "header": {
+      "baseline": "git-HEAD",
+      "regressions": "77316",
+      "minor": "12327",
+      "acked": "0",
+      "stale": "0",
+      "preexisting-worse": "48",
+      "new-symbol": "77268",
+      "gating": "36",
+      "register-macro-excluded": "10",
+      "at": "7631d5248+dirty"
+    },
+    "major_gates": [
+      {
+        "kind": "complexity",
+        "sym": "android/scripts/experiment.py::Device::cool",
+        "was": "11",
+        "now": "17",
+        "bar": "15",
+        "p": "android/scripts/experiment.py:68",
+        "gating": "1",
+        "next": "--expand=android/scripts/experiment.py:cool"
+      },
+      {
+        "kind": "complexity",
+        "sym": "Stream",
+        "was": "13",
+        "now": "17",
+        "bar": "15",
+        "p": "android/app/src/main/java/ai/sunnypilot/fold3/CameraProbe.java:130",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/java/ai/sunnypilot/fold3/CameraProbe.java:Stream"
+      },
+      {
+        "kind": "complexity",
+        "sym": "_benchmark",
+        "was": "24",
+        "now": "30",
+        "bar": "15",
+        "p": "android/app/src/main/python/fold3_models.py:40",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/python/fold3_models.py:_benchmark"
+      },
+      {
+        "kind": "complexity",
+        "sym": "initialize",
+        "was": "26",
+        "now": "42",
+        "bar": "15",
+        "p": "android/app/src/main/java/ai/sunnypilot/fold3/CameraPreviewSample.java:75",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/java/ai/sunnypilot/fold3/CameraPreviewSample.java:initialize"
+      },
+      {
+        "kind": "complexity",
+        "sym": "serve",
+        "was": "62",
+        "now": "96",
+        "bar": "15",
+        "p": "android/app/src/main/python/fold3_sim.py:65",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/python/fold3_sim.py:serve"
+      },
+      {
+        "kind": "complexity",
+        "sym": "validate",
+        "was": "39",
+        "now": "43",
+        "bar": "15",
+        "p": "android/scripts/validate_lifecycle.py:17",
+        "gating": "1",
+        "next": "--expand=android/scripts/validate_lifecycle.py:validate"
+      },
+      {
+        "kind": "complexity",
+        "sym": "validate",
+        "was": "25",
+        "now": "30",
+        "bar": "15",
+        "p": "android/scripts/validate_adb_faults.py:22",
+        "gating": "1",
+        "next": "--expand=android/scripts/validate_adb_faults.py:validate"
+      },
+      {
+        "kind": "dead-code",
+        "sym": "progress",
+        "p": "android/app/src/main/python/fold3_ui.py:35",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/python/fold3_ui.py:progress"
+      },
+      {
+        "kind": "duplication",
+        "members": "android/tests/test_vision_panda.py::VisionTest::test_model_cadence_is_20hz_without_catchup_after_stalls | tinygrad_repo/test/null/test_helpers.py::TestCStyleDivMod::test_div_pos",
+        "tokens": "68",
+        "p": "android/tests/test_vision_panda.py:90",
+        "gating": "1"
+      },
+      {
+        "kind": "duplication",
+        "members": "android/tests/test_vision_panda.py::VisionTest::test_model_cadence_is_20hz_without_catchup_after_stalls | tinygrad_repo/test/null/test_helpers.py::TestCStyleDivMod::test_mod_pos",
+        "tokens": "69",
+        "p": "android/tests/test_vision_panda.py:90",
+        "gating": "1"
+      },
+      {
+        "kind": "duplication",
+        "members": "android/tests/test_vision_panda.py::VisionTest::test_model_cadence_is_20hz_without_catchup_after_stalls | tinygrad_repo/test/null/test_helpers.py::TestCeilDiv::test_int",
+        "tokens": "52",
+        "p": "android/tests/test_vision_panda.py:90",
+        "gating": "1"
+      },
+      {
+        "kind": "duplication",
+        "members": "openpilot/tools/cabana/ui/tools/findsignal.cc::SignalSearch::reset | onConfigureFailed",
+        "tokens": "27",
+        "p": "openpilot/tools/cabana/ui/tools/findsignal.cc:58",
+        "gating": "1"
+      },
+      {
+        "kind": "duplication",
+        "members": "openpilot/tools/cabana/ui/tools/findsignal.cc::SignalSearch::reset | onDisconnected",
+        "tokens": "23",
+        "p": "openpilot/tools/cabana/ui/tools/findsignal.cc:58",
+        "gating": "1"
+      },
+      {
+        "kind": "duplication",
+        "members": "openpilot/tools/cabana/ui/tools/findsignal.cc::SignalSearch::reset | onError",
+        "tokens": "27",
+        "p": "openpilot/tools/cabana/ui/tools/findsignal.cc:58",
+        "gating": "1"
+      },
+      {
+        "kind": "duplication",
+        "members": "check | checkThermalStatus",
+        "tokens": "36",
+        "p": "android/app/src/main/java/ai/sunnypilot/fold3/GpuNv12.java:100",
+        "gating": "1"
+      },
+      {
+        "kind": "duplication",
+        "members": "modelFixtureOutputsUseUpstreamParsersAndStayInvalid | numericalTimingAndThermalFaultsFailClosed",
+        "tokens": "117",
+        "p": "android/app/src/androidTest/java/ai/sunnypilot/fold3/PerceptionTest.java:32",
+        "gating": "1"
+      },
+      {
+        "kind": "duplication",
+        "members": "nativePreprocessingMatchesNumpyAndRejectsInvalidIndices | numericalTimingAndThermalFaultsFailClosed",
+        "tokens": "134",
+        "p": "android/app/src/androidTest/java/ai/sunnypilot/fold3/PerceptionTest.java:23",
+        "gating": "1"
+      },
+      {
+        "kind": "duplication",
+        "members": "numericalTimingAndThermalFaultsFailClosed | originalOnnxRuntimeAcceptsChangingInputsAndRejectsWrongLayouts",
+        "tokens": "117",
+        "p": "android/app/src/androidTest/java/ai/sunnypilot/fold3/PerceptionTest.java:13",
+        "gating": "1"
+      },
+      {
+        "kind": "duplication",
+        "members": "shader | shader",
+        "tokens": "93",
+        "p": "android/app/src/main/java/ai/sunnypilot/fold3/CameraPreviewSample.java:168",
+        "gating": "1"
+      },
+      {
+        "kind": "error-masking",
+        "sym": "validate",
+        "was": "0",
+        "now": "1",
+        "p": "android/scripts/validate_adb_faults.py:22",
+        "gating": "1",
+        "next": "--expand=android/scripts/validate_adb_faults.py:validate"
+      },
+      {
+        "kind": "nesting",
+        "sym": "initialize",
+        "was": "3",
+        "now": "5",
+        "bar": "4",
+        "p": "android/app/src/main/java/ai/sunnypilot/fold3/CameraPreviewSample.java:75",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/java/ai/sunnypilot/fold3/CameraPreviewSample.java:initialize"
+      },
+      {
+        "kind": "nesting",
+        "sym": "serve",
+        "was": "4",
+        "now": "6",
+        "bar": "4",
+        "p": "android/app/src/main/python/fold3_sim.py:65",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/python/fold3_sim.py:serve"
+      },
+      {
+        "kind": "verbosity",
+        "sym": "android/app/src/main/python/fold3_vision.py::FrameGate::FrameGate",
+        "was": "34",
+        "now": "67",
+        "bar": "60",
+        "p": "android/app/src/main/python/fold3_vision.py:14",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/python/fold3_vision.py:FrameGate"
+      },
+      {
+        "kind": "verbosity",
+        "sym": "android/scripts/experiment.py::Device::Device",
+        "was": "63",
+        "now": "79",
+        "bar": "60",
+        "p": "android/scripts/experiment.py:27",
+        "gating": "1",
+        "next": "--expand=android/scripts/experiment.py:Device"
+      },
+      {
+        "kind": "verbosity",
+        "sym": "android/tests/test_experiment.py::ExperimentTest::ExperimentTest",
+        "was": "71",
+        "now": "108",
+        "bar": "60",
+        "p": "android/tests/test_experiment.py:13",
+        "gating": "1",
+        "next": "--expand=android/tests/test_experiment.py:ExperimentTest"
+      },
+      {
+        "kind": "verbosity",
+        "sym": "android/tests/test_vision_panda.py::VisionTest::VisionTest",
+        "was": "122",
+        "now": "172",
+        "bar": "60",
+        "p": "android/tests/test_vision_panda.py:27",
+        "gating": "1",
+        "next": "--expand=android/tests/test_vision_panda.py:VisionTest"
+      },
+      {
+        "kind": "verbosity",
+        "sym": "CameraPreviewSample",
+        "was": "158",
+        "now": "205",
+        "bar": "60",
+        "p": "android/app/src/main/java/ai/sunnypilot/fold3/CameraPreviewSample.java:25",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/java/ai/sunnypilot/fold3/CameraPreviewSample.java:CameraPreviewSample"
+      },
+      {
+        "kind": "verbosity",
+        "sym": "CameraProbe",
+        "was": "709",
+        "now": "735",
+        "bar": "60",
+        "p": "android/app/src/main/java/ai/sunnypilot/fold3/CameraProbe.java:26",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/java/ai/sunnypilot/fold3/CameraProbe.java:CameraProbe"
+      },
+      {
+        "kind": "verbosity",
+        "sym": "FrameStats",
+        "was": "53",
+        "now": "64",
+        "bar": "60",
+        "p": "android/app/src/main/java/ai/sunnypilot/fold3/FrameStats.java:6",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/java/ai/sunnypilot/fold3/FrameStats.java:FrameStats"
+      },
+      {
+        "kind": "verbosity",
+        "sym": "ManagerService",
+        "was": "96",
+        "now": "112",
+        "bar": "60",
+        "p": "android/app/src/main/java/ai/sunnypilot/fold3/ManagerService.java:13",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/java/ai/sunnypilot/fold3/ManagerService.java:ManagerService"
+      },
+      {
+        "kind": "verbosity",
+        "sym": "PerceptionTest",
+        "was": "51",
+        "now": "61",
+        "bar": "60",
+        "p": "android/app/src/androidTest/java/ai/sunnypilot/fold3/PerceptionTest.java:12",
+        "gating": "1",
+        "next": "--expand=android/app/src/androidTest/java/ai/sunnypilot/fold3/PerceptionTest.java:PerceptionTest"
+      },
+      {
+        "kind": "verbosity",
+        "sym": "_benchmark",
+        "was": "75",
+        "now": "90",
+        "bar": "60",
+        "p": "android/app/src/main/python/fold3_models.py:40",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/python/fold3_models.py:_benchmark"
+      },
+      {
+        "kind": "verbosity",
+        "sym": "initialize",
+        "was": "56",
+        "now": "71",
+        "bar": "60",
+        "p": "android/app/src/main/java/ai/sunnypilot/fold3/CameraPreviewSample.java:75",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/java/ai/sunnypilot/fold3/CameraPreviewSample.java:initialize"
+      },
+      {
+        "kind": "verbosity",
+        "sym": "probe",
+        "was": "52",
+        "now": "68",
+        "bar": "60",
+        "p": "android/app/src/main/python/fold3_runtime.py:41",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/python/fold3_runtime.py:probe"
+      },
+      {
+        "kind": "verbosity",
+        "sym": "samsungMultiview",
+        "was": "241",
+        "now": "254",
+        "bar": "60",
+        "p": "android/app/src/main/java/ai/sunnypilot/fold3/CameraProbe.java:340",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/java/ai/sunnypilot/fold3/CameraProbe.java:samsungMultiview"
+      },
+      {
+        "kind": "verbosity",
+        "sym": "serve",
+        "was": "93",
+        "now": "105",
+        "bar": "60",
+        "p": "android/app/src/main/python/fold3_sim.py:65",
+        "gating": "1",
+        "next": "--expand=android/app/src/main/python/fold3_sim.py:serve"
+      }
+    ],
+    "acknowledged": false,
+    "scope": "Final code including absolute host source pacing; correctness test passes do not clear the static review gate"
+  },
+  "latest_candidate": "candidate10",
+  "latest_scan_key": "candidate10_final_scan"
+}

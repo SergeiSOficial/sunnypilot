@@ -1,0 +1,72 @@
+{
+  "serial": "RFCR81Y1TBJ",
+  "command": [
+    ".venv/bin/python",
+    "-m",
+    "openpilot.tools.sim.android_chain_validation",
+    "--seconds",
+    "30",
+    "--device-replay",
+    "--steady-inputs",
+    "--serial",
+    "RFCR81Y1TBJ",
+    "--adb",
+    "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+    "--report",
+    "android/reports/full-model-controls-20261101/fold45c-chain-repeat.json",
+    "--package",
+    "com.samsung.sunnypilot.fold3"
+  ],
+  "vehicle_tx_enabled": false,
+  "status": "passed",
+  "validation_status": "passed",
+  "isolation_status": "passed",
+  "forwards_before": [],
+  "before_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 26.9,
+    "thermal_override": false
+  },
+  "apk_sha256": "6528e64471a2c0ad18a949037748e02338442f038c431c1d36815f9b70d84379",
+  "baseline": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 26.8,
+    "thermal_override": false,
+    "idle_seconds": 33.30986900001881,
+    "normal_thermal_seconds": 32.84901279202313
+  },
+  "apk_sha256_at_start": "6528e64471a2c0ad18a949037748e02338442f038c431c1d36815f9b70d84379",
+  "runtime": {
+    "manager_pid": 5824,
+    "ui_pid": 6011,
+    "simulation": true
+  },
+  "returncode": 0,
+  "after_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 28.9,
+    "thermal_override": false
+  },
+  "forwards_removed": [],
+  "apk_sha256_after": "6528e64471a2c0ad18a949037748e02338442f038c431c1d36815f9b70d84379",
+  "artifact_stable": true,
+  "wrapper_status": "passed"
+}

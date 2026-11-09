@@ -1,0 +1,37 @@
+{
+  "exit_code": 0,
+  "status": "blocked",
+  "sha256": "7bfee0cf097ed448fe30448e28b60bf8c51642fabd3e9e26bd464ac2a3ca77bd",
+  "weights_sha256": "dc70b6ee3a245fbfd93d08323a69349c12360bf5370655f1042ce2fb7605fafc",
+  "input_batch_axes": {
+    "new_img": null,
+    "desire": null,
+    "traffic_convention": 0,
+    "action_t": null,
+    "state_img_q": null,
+    "state_desire_q": null,
+    "state_feat_q": 1
+  },
+  "output_batch_axes": {
+    "outputs": 0,
+    "next_state_img_q": null,
+    "next_state_desire_q": null,
+    "next_state_feat_q": 1
+  },
+  "unsupported_operators": [
+    "GatherND",
+    "ReduceMax",
+    "Tensor.reshape",
+    "Tensor.slice",
+    "pnnx.Expression",
+    "torch.where"
+  ],
+  "unsupported_inputs": [
+    "state_img_q"
+  ],
+  "error": "pnnx left unsupported operators or unrepresentable tensor ranks",
+  "diagnostic_only": true,
+  "qualified": false,
+  "vehicle_tx_enabled": false,
+  "original_graph_provenance_verified": false
+}

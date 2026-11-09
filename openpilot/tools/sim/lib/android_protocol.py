@@ -10,6 +10,14 @@ INBOUND = frozenset(("carState", "modelV2", "selfdriveState", "extrinsicsCalibra
                      "selfdriveStateSP", "carOutput", "accelerometer", "gyroscope", "gpsLocationExternal"))
 OUTBOUND = ("carControl", "carControlSP", "controlsState", "driverMonitoringState")
 CONTROL_INPUTS = frozenset(("carState", "modelV2", "selfdriveState", "selfdriveStateSP", "driverStateV2"))
+# Complete-chain tests inject sources only. Derived state must come from the
+# Android processes; accepting host plans/calibration here would mask failures.
+CHAIN_INBOUND = frozenset(("can", "modelV2", "driverStateV2", "cameraOdometry", "accelerometer", "gyroscope",
+                           "gpsLocationExternal", "deviceState", "pandaStates", "peripheralState",
+                           "narrowRoadCameraState", "wideRoadCameraState", "cabinCameraState"))
+CHAIN_OUTBOUND = OUTBOUND + ("carState", "carOutput", "radarTracks", "radarState", "deviceMotion",
+                            "extrinsicsCalibration", "vehicleParameters", "lateralTorqueParameters", "lateralDelay",
+                            "longitudinalPlan", "driverAssistance", "selfdriveState", "selfdriveStateSP", "onroadEvents")
 
 
 def stale_control_inputs(timestamps, now_ns):
@@ -45,13 +53,13 @@ def send(connection, packet):
   connection.sendall(struct.pack("!I", len(data)) + data)
 
 
-def validate_exchange(packet, previous_sequence):
+def validate_exchange(packet, previous_sequence, allowed=INBOUND):
   sequence = packet.get("sequence")
   if type(sequence) is not int or sequence != previous_sequence + 1:
     raise ValueError("out-of-order ADB packet")
   messages = packet.get("messages", {})
   ages = packet.get("ages_ms", {})
-  if not isinstance(messages, dict) or not messages.keys() <= INBOUND or not isinstance(ages, dict) or not ages.keys() <= messages.keys():
+  if not isinstance(messages, dict) or not messages.keys() <= allowed or not isinstance(ages, dict) or not ages.keys() <= messages.keys():
     raise ValueError("disallowed simulator service")
   if any(not isinstance(data, str) for data in messages.values()):
     raise ValueError("Cereal payload must be base64")
@@ -60,3 +68,11 @@ def validate_exchange(packet, previous_sequence):
   if packet.get("fault") not in (None, "cancel", "stale", "disconnect"):
     raise ValueError("unsupported simulator fault")
   return sequence
+
+
+def validate_replay(packet, full_chain):
+  if (not full_chain or packet.get("op") != "replay" or packet.get("messages") or packet.get("fault") is not None or
+      packet.get("ages_ms") or type(packet.get("seconds")) is not int or not 10 <= packet["seconds"] <= 120 or
+      type(packet.get("steady_inputs")) is not bool):
+    raise ValueError("Invalid complete-chain debug replay")
+  return packet["seconds"], packet["steady_inputs"]

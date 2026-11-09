@@ -1,0 +1,303 @@
+{
+  "candidate": "candidate40",
+  "apk_sha256": "bd42b65a3538b8ad73834e90826eb10a98d8afeacbe9d5aae5877d43a25e30ec",
+  "baseline35_apk_sha256": "38645e91f806076517de1497cdb6b5c0cbf4873cfecf5efabb980297a014ad51",
+  "baseline35_source": "../blocker-fixes/candidate35-model-accuracy-gate.json",
+  "scope": "Same model gate requests and phone firmware, emulator stopped, separate cooled runs. Only completed 100-sample timing is compared; five-sample profiles cannot establish p99. Earlier profiles and failures retain their actual APK identities.",
+  "models": [
+    {
+      "model": "driving_supercombo",
+      "baseline35_timing": {
+        "performance_status": "failed",
+        "samples": 100,
+        "compile_ms": 26404.431448,
+        "work_p50_ms": 845.979479,
+        "work_p99_ms": 881.5674370800001,
+        "work_max_ms": 900.407343,
+        "deadline_misses_50ms": 100
+      },
+      "comparisons": 636,
+      "candidate40_timing": {
+        "compile_ms": 25890.250927,
+        "performance_status": "blocked",
+        "error": "Unsafe or unavailable Android thermal state: 2"
+      },
+      "candidate40_numerical_status": "passed"
+    },
+    {
+      "model": "dmonitoring_model",
+      "baseline35_timing": {
+        "performance_status": "failed",
+        "samples": 100,
+        "compile_ms": 18444.219837,
+        "work_p50_ms": 522.9349475,
+        "work_p99_ms": 560.16029585,
+        "work_max_ms": 561.024947,
+        "deadline_misses_50ms": 100
+      },
+      "comparisons": 159,
+      "candidate40_timing": {
+        "performance_status": "failed",
+        "samples": 100,
+        "compile_ms": 18104.978899,
+        "work_p50_ms": 319.904219,
+        "work_p99_ms": 381.54413361,
+        "work_max_ms": 383.917917,
+        "deadline_misses_50ms": 100
+      },
+      "candidate40_numerical_status": "passed",
+      "p99_reduction_percent": 31.88661594962987
+    }
+  ],
+  "async_kernel_profiles": "candidate38-gpu-profile-comparison.json",
+  "camera_profiles": "candidate40-camera-comparison.json",
+  "controls": {
+    "source_report": "fold-candidate40-chain-device-steady.json",
+    "fixture_status": "passed",
+    "source_mean_hz": 99.99416947669258,
+    "unsafe_outputs": 0,
+    "worker_failures": {},
+    "metrics": {
+      "daemon": "controlsd",
+      "pid": 10761,
+      "vehicle_tx_enabled": false,
+      "engagement_allowed": false,
+      "work_samples": 2755,
+      "deadline_misses": 15,
+      "phase": "running",
+      "simulation": true,
+      "updated_input_samples": 2462,
+      "input_wait_budget_ms": 3,
+      "cycle_interval_ms": 12.534739,
+      "scheduler_delay_ms": 0.100937,
+      "selfdrive_ipc_age_ms": 7.44474,
+      "input_handling_ms": 0.463334,
+      "pacing_wait_ms": 3.602031,
+      "computation_ms": 1.11974,
+      "publishing_ms": 1.145885,
+      "parameters_extensions_ms": 0.715,
+      "cycle_before_reporting_ms": 7.04599,
+      "work_timing_excludes_input_wait": true,
+      "cycle_deadline_misses": 1368,
+      "reporting_ms": 0.151458,
+      "complete_cycle_ms": 12.437343,
+      "mean_cycle_hz": 99.8312225729036,
+      "p99_work_ms": 8.826146,
+      "p99_complete_cycle_ms": 18.288646,
+      "p99_stages_ms": {
+        "input_wait_budget_ms": 9,
+        "cycle_interval_ms": 18.364427,
+        "scheduler_delay_ms": 6.872284,
+        "selfdrive_ipc_age_ms": 21.104532,
+        "input_handling_ms": 11.539115,
+        "pacing_wait_ms": 10.816823,
+        "computation_ms": 6.497761,
+        "publishing_ms": 4.020625,
+        "parameters_extensions_ms": 2.39677,
+        "cycle_before_reporting_ms": 17.934375,
+        "reporting_ms": 1.285989
+      }
+    },
+    "baseline35": {
+      "work_p99_ms": 9.013,
+      "complete_cycle_p99_ms": 23.49,
+      "cycle_deadline_misses": 1303,
+      "mean_cycle_hz": 98.79
+    },
+    "candidate38_rejected_overspeed": {
+      "apk_sha256": "e00e67684a50ed5cd23cd8f55d0bcd7a0337dec049774012feeccbd665b8959f",
+      "mean_cycle_hz": 114.10085494945565,
+      "reason": "Bounded poll returned early; candidate40 waits for only the residual absolute deadline"
+    },
+    "work_p99_status": "passed",
+    "complete_cycle_status": "failed"
+  },
+  "combined_workload": {
+    "source_report": "fold-candidate40-vision.json",
+    "requested_seconds": 30,
+    "status": "failed",
+    "error": "AssertionError: Insufficient fresh preview samples: {'road': 0, 'driver': 5}",
+    "fresh_samples": {
+      "road": 0,
+      "driver": 5
+    },
+    "ui": {
+      "pid": 15146,
+      "backend": "Raylib Android NativeActivity",
+      "vehicle_tx_enabled": false,
+      "status": "running",
+      "full_upstream_ui": true,
+      "camera_preview": [
+        {
+          "stream": "road",
+          "frame_id": 898,
+          "age_ms": 2464.908595,
+          "fresh": false
+        },
+        {
+          "stream": "driver",
+          "frame_id": 896,
+          "age_ms": 2450.810837,
+          "fresh": false
+        }
+      ],
+      "frames": 990,
+      "mean_fps": 29.75407301833389,
+      "width": 2160,
+      "height": 1080,
+      "surface_size": [
+        2289,
+        840
+      ],
+      "last_frame_seconds": 0.03333562612533569,
+      "last_cpu_seconds": 0.005435364000732079,
+      "recent_p99_frame_ms": 33.9159369468689,
+      "recent_p99_cpu_ms": 14.888958976371214
+    },
+    "modeld": {
+      "daemon": "modeld",
+      "pid": 15214,
+      "vehicle_tx_enabled": false,
+      "engagement_allowed": false,
+      "work_samples": 263,
+      "deadline_misses": 187,
+      "phase": "waiting_for_synchronized_frames",
+      "simulation": false,
+      "thermal_status": 1,
+      "target_suspended": false,
+      "missing_physical_sensors": [],
+      "rejected_frames": 1011,
+      "computed_frames": 263,
+      "published_frames": 0,
+      "late_outputs": 263,
+      "valid": false,
+      "calibrated": false,
+      "stream_origins": {
+        "0": "logical20:selected-wide-preview-rgba-bt601",
+        "2": "logical20:multiview-thumbnail-sensor-unverified",
+        "1": "front1:yuv"
+      },
+      "stage_p50_ms": {
+        "receive_copy": 0.267136,
+        "input_age": 93.454272,
+        "prepare": 1.3792445,
+        "inference": 51.4520835,
+        "output_age": 147.6343765
+      },
+      "stage_p95_ms": {
+        "receive_copy": 1.494948,
+        "input_age": 99.74111525,
+        "prepare": 5.340830949999995,
+        "inference": 68.78568209999999,
+        "output_age": 168.0891261
+      },
+      "stage_p99_ms": {
+        "receive_copy": 3.9846197999999844,
+        "input_age": 100.51421698,
+        "prepare": 12.944528760000031,
+        "inference": 114.97294959000003,
+        "output_age": 214.83020531000003
+      },
+      "nonfinite_outputs": 0,
+      "recurrent_resets": 95,
+      "work_ms": 52.531875,
+      "projection": "uncalibrated preview affine; not suitable for driving",
+      "backend": "ORT CPU, 2 threads; OpenCL qualification blocked",
+      "measured_projection_loaded": false,
+      "calibration_blocker": "[Errno 2] No such file or directory: '/data/user/0/com.samsung.sunnypilot.fold3/files/camera-calibration.json'",
+      "input_frame_ids": {
+        "0": 894,
+        "2": 890
+      },
+      "input_timestamps_ns": {
+        "0": 154356297180593,
+        "2": 154356297180645
+      },
+      "input_skew_ns": 52,
+      "numerical_parity": "failed on original synthetic reference; diagnostic only",
+      "target_hz": 20,
+      "stage_sampling": "last 4096 computations",
+      "p99_work_ms": 123.464687,
+      "p99_stages_ms": {}
+    },
+    "dmonitoringmodeld": {
+      "daemon": "dmonitoringmodeld",
+      "pid": 15236,
+      "vehicle_tx_enabled": false,
+      "engagement_allowed": false,
+      "work_samples": 406,
+      "deadline_misses": 7,
+      "phase": "waiting_for_synchronized_frames",
+      "simulation": false,
+      "thermal_status": 1,
+      "target_suspended": false,
+      "missing_physical_sensors": [],
+      "rejected_frames": 422,
+      "computed_frames": 406,
+      "published_frames": 0,
+      "late_outputs": 406,
+      "valid": false,
+      "calibrated": false,
+      "stream_origins": {
+        "0": "logical20:selected-wide-preview-rgba-bt601",
+        "2": "logical20:multiview-thumbnail-sensor-unverified",
+        "1": "front1:yuv"
+      },
+      "nonfinite_outputs": 0,
+      "recurrent_resets": 4,
+      "work_ms": 31.138229,
+      "projection": "uncalibrated preview affine; not suitable for driving",
+      "backend": "ORT CPU, 2 threads; OpenCL qualification blocked",
+      "measured_projection_loaded": false,
+      "calibration_blocker": "Measured optical and final mount calibration missing",
+      "input_frame_ids": {
+        "1": 896
+      },
+      "input_timestamps_ns": {
+        "1": 154356444554288
+      },
+      "input_skew_ns": 0,
+      "numerical_parity": "failed on original synthetic reference; diagnostic only",
+      "target_hz": 20,
+      "stage_sampling": "last 4096 computations",
+      "stage_p50_ms": {
+        "receive_copy": 0.099791,
+        "input_age": 90.5774305,
+        "prepare": 1.2564585,
+        "inference": 27.020156,
+        "output_age": 119.777499
+      },
+      "stage_p95_ms": {
+        "receive_copy": 0.6717370500000001,
+        "input_age": 98.61129455,
+        "prepare": 2.6949737999999823,
+        "inference": 38.16893764999999,
+        "output_age": 134.31362479999999
+      },
+      "stage_p99_ms": {
+        "receive_copy": 1.6978340999999937,
+        "input_age": 99.84317406999999,
+        "prepare": 9.407369899999988,
+        "inference": 50.06154718,
+        "output_age": 142.49872706999994
+      },
+      "p99_work_ms": 51.491302,
+      "p99_stages_ms": {}
+    },
+    "camera": {
+      "distinct_sensor_evidence": false,
+      "timestamp_errors": 0,
+      "packing_errors": 0,
+      "late_deliveries": 1,
+      "capture_result_age_p99_ns": 113324325,
+      "preview_readback_p99_ns": 13073229,
+      "preview_delivery_age_p99_ns": 119370835,
+      "preview_late_deliveries": 214,
+      "preview_acquisition_age_p99_ns": 114433022
+    }
+  },
+  "vehicle_tx_enabled": false,
+  "engagement_allowed": false,
+  "sustained_acceptance_status": "blocked",
+  "reason": "20Hz inference, fresh combined inputs and complete control deadlines are not all qualified. Two-minute and 30-minute workloads are not started."
+}

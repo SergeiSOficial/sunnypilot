@@ -115,6 +115,8 @@ def main():
     for name in archive.namelist():
       if name.startswith("include/") or name == "jniLibs/arm64-v8a/libpython3.12.so":
         archive.extract(name, ROOT / "build/native/python")
+  subprocess.run([sys.executable, str(ROOT / "scripts/build_numpy.py")], check=True)
+  subprocess.run([sys.executable, str(ROOT / "scripts/prepare_driving.py")], check=True)
   for module in ("msgq.ipc_pyx", "msgq.visionipc.visionipc_pyx"):
     path = msgq / (module.replace(".", "/") + ".pyx")
     subprocess.run([sys.executable, "-m", "cython", "--cplus", "-3", "-I", str(msgq),

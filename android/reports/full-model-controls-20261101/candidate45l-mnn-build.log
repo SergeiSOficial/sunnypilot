@@ -1,0 +1,285 @@
+patching file 'tools/converter/source/onnx/CastOnnx.cpp'
+patching file 'source/shape/ShapeCast.cpp'
+patching file 'source/backend/opencl/execution/buffer/CastBufExecution.cpp'
+patching file 'source/backend/opencl/execution/cl/cast_buf.cl'
+patching file 'source/backend/opencl/execution/image/CastExecution.cpp'
+patching file 'source/backend/opencl/execution/cl/cast.cl'
+patching file 'source/backend/opencl/execution/buffer/CastBufExecution.cpp'
+patching file 'source/backend/opencl/execution/buffer/ConvBufExecution.hpp'
+patching file 'source/backend/opencl/execution/buffer/ConvBufExecution.cpp'
+patching file 'source/backend/opencl/execution/cl/fold3_half_gemv_buf.cl'
+patching file 'source/backend/opencl/execution/buffer/UnaryBufExecution.cpp'
+patching file 'source/backend/opencl/execution/cl/unary_buf.cl'
+patching file 'source/backend/opencl/execution/buffer/ConvBufExecution.hpp'
+patching file 'source/backend/opencl/execution/buffer/ConvBufExecution.cpp'
+patching file 'source/backend/opencl/execution/buffer/DepthwiseConvBufExecution.cpp'
+patching file 'source/backend/opencl/execution/cl/fold3_host_conv_buf.cl'
+patching file 'source/backend/opencl/execution/buffer/ConvBufExecution.cpp'
+patching file 'source/backend/opencl/execution/buffer/DepthwiseConvBufExecution.cpp'
+patching file 'tools/converter/source/optimizer/merge/TransformSmallGroupConvolutionToDepthwise.cpp'
+patching file 'source/backend/opencl/execution/buffer/BinaryBufExecution.cpp'
+patching file 'source/backend/opencl/execution/cl/binary_buf.cl'
+patching file 'source/geometry/GeometryComputerUtils.hpp'
+patching file 'source/geometry/GeometryComputerUtils.cpp'
+patching file 'source/geometry/GeometryReduce.cpp'
+patching file 'source/backend/opencl/execution/buffer/ReductionBufExecution.hpp'
+patching file 'source/backend/opencl/execution/buffer/ReductionBufExecution.cpp'
+patching file 'source/backend/opencl/execution/cl/reduction_buf.cl'
+CMake Deprecation Warning at CMakeLists.txt:1 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+
+CMake Deprecation Warning at 3rd_party/protobuf/cmake/CMakeLists.txt:2 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+
+-- 
+-- 3.19.0.0
+-- Use Threadpool, forbid openmp
+-- >>>>>>>>>>>>>
+-- MNN BUILD INFO:
+-- 	System: Darwin
+-- 	Processor: arm64
+-- 	Version: 3.6.2
+-- 	Metal: OFF
+-- 	OpenCL: OFF
+-- 	OpenGL: OFF
+-- 	Vulkan: OFF
+-- 	ARM82: ON
+-- 	KleidiAI: OFF
+-- 	oneDNN: OFF
+-- 	TensorRT: OFF
+-- 	CoreML: OFF
+-- 	NNAPI: OFF
+-- 	QNN: OFF
+-- 	CUDA: OFF
+-- 	MUSA: OFF
+-- 	OpenMP: OFF
+-- 	BF16: OFF
+-- 	ThreadPool: ON
+-- 	Hidden: TRUE
+-- 	Build Path: /Users/sergios/sunnypilot/android/build/native/accelerators/mnn-patched/host
+-- 	CUDA PROFILE: OFF
+-- WIN_USE_ASM: 
+-- Enabling AArch64 Assemblies
+-- Configuring done (0.1s)
+-- Generating done (0.5s)
+-- Build files have been written to: /Users/sergios/sunnypilot/android/build/native/accelerators/mnn-patched/host
+[1/43] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryBinary.cpp.o
+[2/43] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryBatchMatMul.cpp.o
+[3/43] Building CXX object CMakeFiles/MNNCore.dir/source/core/Schedule.cpp.o
+[4/43] Building CXX object CMakeFiles/MNNCore.dir/source/core/Pipeline.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/mnn-patched/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d/source/core/Pipeline.cpp:135:13: warning: 'sprintf' is deprecated: This function is provided for compatibility reasons only.  Due to security concerns inherent in the design of sprintf(3), it is highly recommended that you use snprintf(3) instead. [-Wdeprecated-declarations]
+  135 |             sprintf(buffer, "%d", index);
+      |             ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.5.sdk/usr/include/_stdio.h:278:1: note: 'sprintf' has been explicitly marked deprecated here
+  278 | __deprecated_msg("This function is provided for compatibility reasons only.  Due to security concerns inherent in the design of sprintf(3), it is highly recommended that you use snprintf(3) instead.")
+      | ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.5.sdk/usr/include/sys/cdefs.h:227:48: note: expanded from macro '__deprecated_msg'
+  227 |         #define __deprecated_msg(_msg) __attribute__((__deprecated__(_msg)))
+      |                                                       ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/mnn-patched/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d/source/core/Pipeline.cpp:139:13: warning: 'sprintf' is deprecated: This function is provided for compatibility reasons only.  Due to security concerns inherent in the design of sprintf(3), it is highly recommended that you use snprintf(3) instead. [-Wdeprecated-declarations]
+  139 |             sprintf(buffer, "_raster_%d", totalIndex);
+      |             ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.5.sdk/usr/include/_stdio.h:278:1: note: 'sprintf' has been explicitly marked deprecated here
+  278 | __deprecated_msg("This function is provided for compatibility reasons only.  Due to security concerns inherent in the design of sprintf(3), it is highly recommended that you use snprintf(3) instead.")
+      | ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.5.sdk/usr/include/sys/cdefs.h:227:48: note: expanded from macro '__deprecated_msg'
+  227 |         #define __deprecated_msg(_msg) __attribute__((__deprecated__(_msg)))
+      |                                                       ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/mnn-patched/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d/source/core/Pipeline.cpp:960:51: warning: format specifies type 'int' but the argument has type 'size_t' (aka 'unsigned long') [-Wformat]
+  960 |     MNN_PRINT("Fix: %d - Total: %d, rate = %f\n", fixNumber, totalNumber, (float)fixNumber / (float)totalNumber);
+      |                     ~~                            ^~~~~~~~~
+      |                     %zu
+/Users/sergios/sunnypilot/android/build/native/accelerators/mnn-patched/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d/include/MNN/MNNDefine.h:38:49: note: expanded from macro 'MNN_PRINT'
+   38 | #define MNN_PRINT(format, ...) printf(format, ##__VA_ARGS__)
+      |                                       ~~~~~~    ^~~~~~~~~~~
+/Users/sergios/sunnypilot/android/build/native/accelerators/mnn-patched/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d/source/core/Pipeline.cpp:960:62: warning: format specifies type 'int' but the argument has type 'size_t' (aka 'unsigned long') [-Wformat]
+  960 |     MNN_PRINT("Fix: %d - Total: %d, rate = %f\n", fixNumber, totalNumber, (float)fixNumber / (float)totalNumber);
+      |                                 ~~                           ^~~~~~~~~~~
+      |                                 %zu
+/Users/sergios/sunnypilot/android/build/native/accelerators/mnn-patched/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d/include/MNN/MNNDefine.h:38:49: note: expanded from macro 'MNN_PRINT'
+   38 | #define MNN_PRINT(format, ...) printf(format, ##__VA_ARGS__)
+      |                                       ~~~~~~    ^~~~~~~~~~~
+4 warnings generated.
+[5/43] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryConv2D.cpp.o
+[6/43] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryComputerUtils.cpp.o
+[7/43] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryConv2DBackPropFilter.cpp.o
+[8/43] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryConv3D.cpp.o
+[9/43] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryConvUtils.cpp.o
+[10/43] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryConvert.cpp.o
+[11/43] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryCosineSimilarity.cpp.o
+[12/43] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryDilation2D.cpp.o
+[13/43] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryCumSum.cpp.o
+[14/43] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryELU.cpp.o
+[15/43] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryFusedProj.cpp.o
+[16/43] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryGatedRMSNorm.cpp.o
+[17/43] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryInnerProduct.cpp.o
+[18/43] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryImageOp.cpp.o
+[19/43] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryGather.cpp.o
+[20/43] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryLRN.cpp.o
+[21/43] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryLayernorm.cpp.o
+[22/43] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryPooling3D.cpp.o
+[23/43] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryReduce.cpp.o
+[24/43] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryLSTM.cpp.o
+[25/43] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryPoolGrad.cpp.o
+[26/43] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryScatter.cpp.o
+[27/43] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometrySpatialProduct.cpp.o
+[28/43] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryShape.cpp.o
+[29/43] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryTensorArray.cpp.o
+[30/43] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryThreshold.cpp.o
+[31/43] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryUnary.cpp.o
+[32/43] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryTopK.cpp.o
+[33/43] Building CXX object CMakeFiles/MNNTransform.dir/source/shape/ShapeCast.cpp.o
+[34/43] Linking CXX shared library libMNN.dylib
+[35/43] Building CXX object tools/converter/CMakeFiles/MNNConverterONNX.dir/source/onnx/CastOnnx.cpp.o
+[36/43] Building CXX object express/CMakeFiles/MNN_Express.dir/Executor.cpp.o
+[37/43] Building CXX object tools/converter/CMakeFiles/MNNConverterOpt.dir/source/optimizer/merge/TransformSmallGroupConvolutionToDepthwise.cpp.o
+[38/43] Building CXX object express/CMakeFiles/MNN_Express.dir/Expr.cpp.o
+In file included from /Users/sergios/sunnypilot/android/build/native/accelerators/mnn-patched/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d/express/Expr.cpp:24:
+/Users/sergios/sunnypilot/android/build/native/accelerators/mnn-patched/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d/3rd_party/half/half.hpp:223:19: warning: identifier '_h' preceded by whitespace in a literal operator declaration is deprecated [-Wdeprecated-literal-operator]
+  223 |                 half operator"" _h(long double);
+      |                      ~~~~~~~~~~~^~
+      |                      operator""_h
+/Users/sergios/sunnypilot/android/build/native/accelerators/mnn-patched/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d/3rd_party/half/half.hpp:1034:35: warning: identifier '_h' preceded by whitespace in a literal operator declaration is deprecated [-Wdeprecated-literal-operator]
+ 1034 |                 friend half literal::operator"" _h(long double);
+      |                                      ~~~~~~~~~~~^~
+      |                                      operator""_h
+/Users/sergios/sunnypilot/android/build/native/accelerators/mnn-patched/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d/3rd_party/half/half.hpp:1145:26: warning: identifier '_h' preceded by whitespace in a literal operator declaration is deprecated [-Wdeprecated-literal-operator]
+ 1145 |                 inline half operator"" _h(long double value) { return half(detail::binary, detail::float2half<half::round_style>(value)); }
+      |                             ~~~~~~~~~~~^~
+      |                             operator""_h
+3 warnings generated.
+[39/43] Building CXX object express/CMakeFiles/MNN_Express.dir/module/PipelineModule.cpp.o
+[40/43] Linking CXX shared library express/libMNN_Express.dylib
+[41/43] Building CXX object tools/converter/CMakeFiles/MNNConvertDeps.dir/source/common/convertToStaticModel.cpp.o
+[42/43] Linking CXX shared library tools/converter/libMNNConvertDeps.dylib
+[43/43] Linking CXX executable MNNConvert
+CMake Deprecation Warning at CMakeLists.txt:1 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+
+-- Use Threadpool, forbid openmp
+-- >>>>>>>>>>>>>
+-- MNN BUILD INFO:
+-- 	System: Android
+-- 	Processor: aarch64
+-- 	Version: 3.6.2
+-- 	Metal: OFF
+-- 	OpenCL: ON
+-- 	OpenGL: OFF
+-- 	Vulkan: OFF
+-- 	ARM82: ON
+-- 	KleidiAI: OFF
+-- 	oneDNN: OFF
+-- 	TensorRT: OFF
+-- 	CoreML: OFF
+-- 	NNAPI: OFF
+-- 	QNN: OFF
+-- 	CUDA: OFF
+-- 	MUSA: OFF
+-- 	OpenMP: OFF
+-- 	BF16: OFF
+-- 	ThreadPool: ON
+-- 	Hidden: TRUE
+-- 	Build Path: /Users/sergios/sunnypilot/android/build/native/accelerators/mnn-patched/android
+-- 	CUDA PROFILE: OFF
+-- WIN_USE_ASM: 
+-- Enabling AArch64 Assemblies
+-- Configuring done (0.3s)
+-- Generating done (0.3s)
+-- Build files have been written to: /Users/sergios/sunnypilot/android/build/native/accelerators/mnn-patched/android
+[1/138] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryBinary.cpp.o
+[2/138] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryBatchMatMul.cpp.o
+[3/138] Building CXX object CMakeFiles/MNNCore.dir/source/core/Schedule.cpp.o
+[4/138] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryConv2D.cpp.o
+[5/138] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryComputerUtils.cpp.o
+[6/138] Building CXX object CMakeFiles/MNNCore.dir/source/core/Pipeline.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/mnn-patched/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d/source/core/Pipeline.cpp:960:51: warning: format specifies type 'int' but the argument has type 'size_t' (aka 'unsigned long') [-Wformat]
+  960 |     MNN_PRINT("Fix: %d - Total: %d, rate = %f\n", fixNumber, totalNumber, (float)fixNumber / (float)totalNumber);
+      |                     ~~                            ^~~~~~~~~
+      |                     %zu
+/Users/sergios/sunnypilot/android/build/native/accelerators/mnn-patched/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d/include/MNN/MNNDefine.h:30:90: note: expanded from macro 'MNN_PRINT'
+   30 | #define MNN_PRINT(format, ...) __android_log_print(ANDROID_LOG_INFO, "MNNJNI", format, ##__VA_ARGS__)
+      |                                                                                ~~~~~~    ^~~~~~~~~~~
+/Users/sergios/sunnypilot/android/build/native/accelerators/mnn-patched/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d/source/core/Pipeline.cpp:960:62: warning: format specifies type 'int' but the argument has type 'size_t' (aka 'unsigned long') [-Wformat]
+  960 |     MNN_PRINT("Fix: %d - Total: %d, rate = %f\n", fixNumber, totalNumber, (float)fixNumber / (float)totalNumber);
+      |                                 ~~                           ^~~~~~~~~~~
+      |                                 %zu
+/Users/sergios/sunnypilot/android/build/native/accelerators/mnn-patched/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d/include/MNN/MNNDefine.h:30:90: note: expanded from macro 'MNN_PRINT'
+   30 | #define MNN_PRINT(format, ...) __android_log_print(ANDROID_LOG_INFO, "MNNJNI", format, ##__VA_ARGS__)
+      |                                                                                ~~~~~~    ^~~~~~~~~~~
+2 warnings generated.
+[7/138] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryConv2DBackPropFilter.cpp.o
+[8/138] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryConvert.cpp.o
+[9/138] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryConvUtils.cpp.o
+[10/138] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryConv3D.cpp.o
+[11/138] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryCosineSimilarity.cpp.o
+[12/138] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryFusedProj.cpp.o
+[13/138] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryDilation2D.cpp.o
+[14/138] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryELU.cpp.o
+[15/138] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryCumSum.cpp.o
+[16/138] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryGatedRMSNorm.cpp.o
+[17/138] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryInnerProduct.cpp.o
+[18/138] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryImageOp.cpp.o
+[19/138] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryGather.cpp.o
+[20/138] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryLRN.cpp.o
+[21/138] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryLayernorm.cpp.o
+[22/138] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryPooling3D.cpp.o
+[23/138] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryReduce.cpp.o
+[24/138] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryScatter.cpp.o
+[25/138] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryLSTM.cpp.o
+[26/138] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryPoolGrad.cpp.o
+[27/138] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryShape.cpp.o
+[28/138] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometrySpatialProduct.cpp.o
+[29/138] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryThreshold.cpp.o
+[30/138] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryTopK.cpp.o
+[31/138] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryTensorArray.cpp.o
+[32/138] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryUnary.cpp.o
+[33/138] Building CXX object CMakeFiles/MNNTransform.dir/source/shape/ShapeCast.cpp.o
+[34/138] Linking CXX shared library libs/arm64-v8a/libMNN.so
+[35/138] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/buffer/BinaryBufExecution.cpp.o
+[36/138] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/core/OpenCLRunningUtils.cpp.o
+[37/138] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/buffer/CastBufExecution.cpp.o
+[38/138] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/buffer/DeconvBufExecution.cpp.o
+[39/138] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/buffer/ConvBufWinograd.cpp.o
+[40/138] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/buffer/ConvBufExecution.cpp.o
+[41/138] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/core/runtime/OpenCLRuntime.cpp.o
+[42/138] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/buffer/FuseBufExecution.cpp.o
+[43/138] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/buffer/ReductionBufExecution.cpp.o
+FAILED: source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/buffer/ReductionBufExecution.cpp.o 
+/Users/sergios/Library/Android/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++ --target=aarch64-none-linux-android35 --sysroot=/Users/sergios/Library/Android/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -DCL_HPP_TARGET_OPENCL_VERSION=110 -DMNN_BUILD_FOR_ANDROID -DMNN_CL_EXPORTS -DMNN_OPENCL_SEP_BUILD -DMNN_OPENCL_SVM_ENABLE -DMNN_SME2 -DMNN_SUPPORT_DEPRECATED_OPV2 -DMNN_SUPPORT_QUANT_EXTEND -DMNN_USE_LIB_WRAPPER -DMNN_USE_LOGCAT -DMNN_USE_NEON -DMNN_USE_THREAD_POOL -I/Users/sergios/sunnypilot/android/build/native/accelerators/mnn-patched/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d/include -I/Users/sergios/sunnypilot/android/build/native/accelerators/mnn-patched/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d/source -I/Users/sergios/sunnypilot/android/build/native/accelerators/mnn-patched/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d/express -I/Users/sergios/sunnypilot/android/build/native/accelerators/mnn-patched/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d/tools -I/Users/sergios/sunnypilot/android/build/native/accelerators/mnn-patched/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d/codegen -I/Users/sergios/sunnypilot/android/build/native/accelerators/mnn-patched/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d/schema/current -I/Users/sergios/sunnypilot/android/build/native/accelerators/mnn-patched/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d/3rd_party -I/Users/sergios/sunnypilot/android/build/native/accelerators/mnn-patched/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d/3rd_party/flatbuffers/include -I/Users/sergios/sunnypilot/android/build/native/accelerators/mnn-patched/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d/3rd_party/half -I/Users/sergios/sunnypilot/android/build/native/accelerators/mnn-patched/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d/3rd_party/imageHelper -I/Users/sergios/sunnypilot/android/build/native/accelerators/mnn-patched/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d/3rd_party/OpenCLHeaders -I/Users/sergios/sunnypilot/android/build/native/accelerators/mnn-patched/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d/source/backend/opencl/schema/current -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -std=c++11 -O3 -fvisibility-inlines-hidden -fvisibility=hidden -fomit-frame-pointer -funwind-tables -fstrict-aliasing -ffunction-sections -fdata-sections -fno-rtti -fno-exceptions  -O3 -DNDEBUG  -std=gnu++11 -fPIC   -fPIC -MD -MT source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/buffer/ReductionBufExecution.cpp.o -MF source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/buffer/ReductionBufExecution.cpp.o.d -o source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/buffer/ReductionBufExecution.cpp.o -c /Users/sergios/sunnypilot/android/build/native/accelerators/mnn-patched/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d/source/backend/opencl/execution/buffer/ReductionBufExecution.cpp
+/Users/sergios/sunnypilot/android/build/native/accelerators/mnn-patched/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d/source/backend/opencl/execution/buffer/ReductionBufExecution.cpp:99:9: error: non-void function 'onEncode' should return a value [-Wreturn-mismatch]
+   99 |         OPENCL_CHECK_KERNEL_CTOR(unit.kernel);
+      |         ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/mnn-patched/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d/source/backend/opencl/execution/image/CommonExecution.hpp:23:9: note: expanded from macro 'OPENCL_CHECK_KERNEL_CTOR'
+   23 |         return;                           \
+      |         ^
+1 error generated.
+[44/138] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/buffer/DepthwiseConvBufExecution.cpp.o
+[45/138] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/buffer/SharedGatherBufExecution.cpp.o
+[46/138] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/buffer/UnaryBufExecution.cpp.o
+ninja: build stopped: subcommand failed.
+Traceback (most recent call last):
+  File "/Users/sergios/sunnypilot/android/scripts/build_mnn.py", line 74, in <module>
+    main()
+  File "/Users/sergios/sunnypilot/android/scripts/build_mnn.py", line 69, in main
+    subprocess.run([str(cmake), "--build", str(android), "--target", "MNN", "MNN_CL", "-j", "4"], check=True)
+  File "/Users/sergios/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['/Users/sergios/Library/Android/sdk/cmake/3.31.6/bin/cmake', '--build', '/Users/sergios/sunnypilot/android/build/native/accelerators/mnn-patched/android', '--target', 'MNN', 'MNN_CL', '-j', '4']' returned non-zero exit status 1.

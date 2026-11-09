@@ -1,0 +1,2 @@
+#include <cmath>
+extern "C" void run(const float*x,const float*w,const float*b,float*y,int c,int n,int h,int width,int kh,int kw,int sh,int sw,int ph,int pw,int oh,int ow,int mode){for(int o=0;o<n;o++)for(int yy=0;yy<oh;yy++)for(int xx=0;xx<ow;xx++){float sum=(mode&1)?b[o]:0;for(int q=0;q<c*kh*kw;q++){int ci=(mode&2)?q/(kh*kw):q%c,ky=(mode&2)?(q/kw)%kh:q/(kw*c),kx=(mode&2)?q%kw:(q/c)%kw;int iy=yy*sh+ky-ph,ix=xx*sw+kx-pw;float v=iy<0||iy>=h||ix<0||ix>=width?0:x[(ci*h+iy)*width+ix];sum=std::fma(v,w[((o*c+ci)*kh+ky)*kw+kx],sum);}y[(o*oh+yy)*ow+xx]=(mode&1)?sum:sum+b[o];}}

@@ -1,0 +1,25 @@
+{
+  "daemon": "lagd",
+  "pid": 28355,
+  "vehicle_tx_enabled": false,
+  "engagement_allowed": false,
+  "work_samples": 0,
+  "deadline_misses": 0,
+  "phase": "failed",
+  "simulation": true,
+  "upstream_module": "locationd.lagd",
+  "updated_services": [
+    "deviceMotion",
+    "carState",
+    "controlsState",
+    "carControl"
+  ],
+  "invalid_services": [
+    "extrinsicsCalibration"
+  ],
+  "input_handling_ms": 29.864427,
+  "computation_ms": null,
+  "complete_cycle_ms": null,
+  "timing_includes_report_overhead": true,
+  "error": "Traceback (most recent call last):\n  File \"/data/data/com.samsung.sunnypilot.fold3/files/chaquopy/AssetFinder/app/fold3_daemons.py\", line 135, in run\n  File \"/data/data/com.samsung.sunnypilot.fold3/files/chaquopy/AssetFinder/app/fold3_driving.py\", line 52, in upstream\n  File \"/data/data/com.samsung.sunnypilot.fold3/files/chaquopy/AssetFinder/app/openpilot/selfdrive/locationd/lagd.py\", line 417, in main\n    lag_learner.update_estimate()\n  File \"/data/data/com.samsung.sunnypilot.fold3/files/chaquopy/AssetFinder/app/openpilot/selfdrive/locationd/lagd.py\", line 326, in update_estimate\n    delay, corr, confidence = self.actuator_delay(desired, actual, okay, self.dt, MIN_LAG, MAX_LAG)\n                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/data/data/com.samsung.sunnypilot.fold3/files/chaquopy/AssetFinder/app/openpilot/selfdrive/locationd/lagd.py\", line 340, in actuator_delay\n    ncc = masked_normalized_cross_correlation(expected_sig, actual_sig, mask, padded_size)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/data/data/com.samsung.sunnypilot.fold3/files/chaquopy/AssetFinder/app/openpilot/selfdrive/locationd/lagd.py\", line 74, in masked_normalized_cross_correlation\n    fft = partial(np.fft.fft, n=n)\n                  ^^^^^^\n  File \"/data/data/com.samsung.sunnypilot.fold3/files/chaquopy/AssetFinder/app/numpy/__init__.py\", line 708, in __getattr__\n    import numpy.fft as fft\n  File \"import.pxi\", line 60, in java.chaquopy.import_override\n  File \"/data/data/com.samsung.sunnypilot.fold3/files/chaquopy/AssetFinder/app/numpy/fft/__init__.py\", line 203, in <module>\n    from . import _helper, _pocketfft\n  File \"/data/data/com.samsung.sunnypilot.fold3/files/chaquopy/AssetFinder/app/numpy/fft/_pocketfft.py\", line 48, in <module>\n    from . import _pocketfft_umath as pfu\nImportError: dlopen failed: cannot locate symbol \"PyExc_ImportError\" referenced by \"/data/data/com.samsung.sunnypilot.fold3/files/chaquopy/AssetFinder/app/numpy/fft/_pocketfft_umath.so\"...\n"
+}

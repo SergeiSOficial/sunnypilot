@@ -1,0 +1,686 @@
+{
+  "candidate": "candidate45zg",
+  "apk_sha256": "28c7d37923f7b2537c56181a85bc406f65011030a37205f2bbc1524a0e10a3f7",
+  "branch": "codex/fold3-android-port",
+  "vehicle_tx_enabled": false,
+  "physical_engagement_allowed": false,
+  "qualification_status": "blocked",
+  "host_tests": {
+    "status": "passed",
+    "count": 186,
+    "evidence": "host-tests-final2.log"
+  },
+  "android_build": {
+    "status": "passed",
+    "log": "../../build/candidate45zg-build.log"
+  },
+  "devices": {
+    "fold": {
+      "status": "passed",
+      "checks": [
+        {
+          "name": "chain-device-steady",
+          "status": "passed",
+          "isolation_status": "passed",
+          "log": "fold-candidate45zg-chain-device-steady-command.log"
+        },
+        {
+          "name": "chain-device-faults",
+          "status": "passed",
+          "isolation_status": "passed",
+          "log": "fold-candidate45zg-chain-device-faults-command.log"
+        },
+        {
+          "name": "instrumentation",
+          "status": "passed",
+          "isolation_status": "passed",
+          "log": "fold-candidate45zg-instrumentation-command.log"
+        },
+        {
+          "name": "lifecycle",
+          "status": "passed",
+          "isolation_status": "passed",
+          "log": "fold-candidate45zg-lifecycle-command.log"
+        },
+        {
+          "name": "adb-faults",
+          "status": "passed",
+          "isolation_status": "passed",
+          "log": "fold-candidate45zg-adb-faults-command.log"
+        },
+        {
+          "name": "ipc",
+          "status": "passed",
+          "isolation_status": "passed",
+          "log": "fold-candidate45zg-ipc-command.log"
+        }
+      ],
+      "installed_hash_status": "passed"
+    },
+    "emulator": {
+      "status": "failed",
+      "checks": [
+        {
+          "name": "instrumentation",
+          "status": "passed",
+          "isolation_status": "passed",
+          "log": "emulator-candidate45zg-instrumentation-command.log"
+        },
+        {
+          "name": "chain-device-steady",
+          "status": "passed",
+          "isolation_status": "passed",
+          "log": "emulator-candidate45zg-chain-device-steady-command.log"
+        },
+        {
+          "name": "chain-device-faults",
+          "status": "passed",
+          "isolation_status": "passed",
+          "log": "emulator-candidate45zg-chain-device-faults-command.log"
+        },
+        {
+          "name": "lifecycle",
+          "status": "passed",
+          "isolation_status": "passed",
+          "log": "emulator-candidate45zg-lifecycle-command.log"
+        },
+        {
+          "name": "adb-faults",
+          "status": "passed",
+          "isolation_status": "passed",
+          "log": "emulator-candidate45zg-adb-faults-command.log"
+        },
+        {
+          "name": "ipc",
+          "status": "passed",
+          "isolation_status": "passed",
+          "log": "emulator-candidate45zg-ipc-command.log"
+        },
+        {
+          "name": "metadrive-cancel",
+          "status": "passed",
+          "isolation_status": "passed",
+          "log": "emulator-candidate45zg-metadrive-cancel-command.log"
+        },
+        {
+          "name": "metadrive-stale",
+          "status": "passed",
+          "isolation_status": "passed",
+          "log": "emulator-candidate45zg-metadrive-stale-command.log"
+        },
+        {
+          "name": "thermal",
+          "status": "passed",
+          "isolation_status": "passed",
+          "log": "emulator-candidate45zg-thermal-command.log"
+        },
+        {
+          "name": "camera-timing",
+          "status": "failed",
+          "isolation_status": "passed",
+          "log": "emulator-candidate45zg-camera-timing-command.log"
+        }
+      ],
+      "installed_hash_status": "passed"
+    }
+  },
+  "accelerator_validation": {
+    "status": "failed",
+    "checks": [
+      {
+        "name": "mnn-native-initial",
+        "status": "failed",
+        "isolation_status": "passed",
+        "log": "fold-candidate45zg-accuracy-mnn-native-initial-command.log"
+      },
+      {
+        "name": "ncnn-vulkan-models",
+        "status": "failed",
+        "isolation_status": "passed",
+        "log": "fold-candidate45zg-accuracy-ncnn-vulkan-models-command.log"
+      }
+    ]
+  },
+  "mnn_native_driver": {
+    "status": "failed",
+    "comparisons_run": 3,
+    "failed": 3,
+    "required_driver_comparisons": 159,
+    "total_original_reference_comparisons_required": 795,
+    "rtol": 0.001,
+    "atol": 0.0001,
+    "identity": {
+      "name": "dmonitoring_model",
+      "backend": "mnn-opencl",
+      "memory_mode": "buffer",
+      "cpu_fallback": false,
+      "fingerprint": "samsung/q2qxser/q2q:15/AP3A.240905.015.A2/F926BXXSJJZH3:user/release-keys",
+      "sha256": {
+        "model": "ebb31832cb447c0e71b1e62317eba223079e7d65cae93f204a1f83ca8136c831",
+        "original_model": "dee5a294e8afaacc9295ac5d100e00733ecac278e79264b96331e40a3ede1b04",
+        "references": "610f877bd0f98353a6e7228698ee869d02a5b2976430234b96d097e96e773381",
+        "sequences": "6acb2ec99babfe57b5ec33b601e262ee9f5b4e54a2fd185f2b59e939256ca3d6",
+        "conversion": "b08e675e70d52d287f86e95bb5cb646753888cbc8aeec46c11bf666ae5e8a41d",
+        "apk": "28c7d37923f7b2537c56181a85bc406f65011030a37205f2bbc1524a0e10a3f7",
+        "provider": "e36918faa1de962635a70fb980f84302b69f0a82dbe36861e8930bf77fa7188e",
+        "opencl_plugin": "b85b8da1146fb8bea73da01a57934985a273485eae8b057c45120f2810d2ac4d",
+        "driver": "f64d432f19fd3f2732cd95050b47328e0c84837b7b60376d55fd7a73a6e9dc8c",
+        "implementation": "3b85900e496a2941b8145e4376a14677e3b9bfabfc9598354ba915d3895a538a",
+        "native": "96d1f85ddc4b55c3827f77a722a42172e72f89aa38762249f61880bd57243cc5"
+      }
+    },
+    "seed_checks": [
+      {
+        "outputs": {
+          "passed": false,
+          "finite": true,
+          "shape": [
+            1,
+            553
+          ],
+          "dtype": "float16",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 0.00390625,
+          "mismatched_elements": 4
+        }
+      },
+      {
+        "outputs": {
+          "passed": false,
+          "finite": true,
+          "shape": [
+            1,
+            553
+          ],
+          "dtype": "float16",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 0.00390625,
+          "mismatched_elements": 6
+        }
+      },
+      {
+        "outputs": {
+          "passed": false,
+          "finite": true,
+          "shape": [
+            1,
+            553
+          ],
+          "dtype": "float16",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 0.00390625,
+          "mismatched_elements": 7
+        }
+      }
+    ],
+    "remaining_sequence_replay_and_timing": "blocked",
+    "no_cpu_fallback": true,
+    "same_input_gemv": {
+      "diagnostic_only": true,
+      "qualified": false,
+      "vehicle_tx_enabled": false,
+      "purpose": "Compare strict GEMV against host using the SAME captured native-convolution input",
+      "derived_section_sha256": "7f591cea08bd8485a44812e766524950af07e3686431d733fb562d83e05bd84b",
+      "reference_graph_sha256": "ae1fb1aa9e54fb2af28b26f73e18b4d54ec025912edbcddc05d83bbad3a2ad5f",
+      "input_sha256": "953cb8fd0afbcdd2ec5eae451636961f4aa1394d02874b9a0a93aef1fd7f90e3",
+      "output_sha256": "f79ffc143fdcd42c2c1c8371d9cd95ee3f5ecf19f41458a52bc493b889dc775a",
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          512
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      }
+    }
+  },
+  "ncnn_vulkan_diagnostics": [
+    {
+      "evidence": "ncnn-driver-seed42-trace.json",
+      "sha256": "e5620681c23f72e98f74f8ef872f53df4339b4637b47c4b000ca93d6a17c88fd",
+      "status": "failed",
+      "installed_apk_sha256": "54a613533c10795ab754e2737d5bf2facfd387dfb2bd58ef43017260dd063a3f",
+      "provider_sha256": "2c3b7c3307ee573ff39719c4265a4f172db6d18ec0592073f16903079be54aa4",
+      "parity": {
+        "passed": false,
+        "finite": true,
+        "shape": [
+          1,
+          553
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": false,
+        "max_abs_error": 7.278254508972168,
+        "mismatched_elements": 553
+      },
+      "diagnostic_only": true,
+      "qualified": false
+    },
+    {
+      "evidence": "ncnn-driver-seed42-rne.json",
+      "sha256": "625db1c704c6f6f57813d292785f8ae64e7c91ed1a8bc1924998f40f53dd18cd",
+      "status": "failed",
+      "installed_apk_sha256": "54a613533c10795ab754e2737d5bf2facfd387dfb2bd58ef43017260dd063a3f",
+      "provider_sha256": "9ca28d3450eecbd812058b54e59ca760ed155f59d4b9abe0f8f2604ad89e61d1",
+      "parity": {
+        "passed": false,
+        "finite": true,
+        "shape": [
+          1,
+          553
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": false,
+        "max_abs_error": 7.285840034484863,
+        "mismatched_elements": 553
+      },
+      "diagnostic_only": true,
+      "qualified": false
+    },
+    {
+      "evidence": "ncnn-driver-seed42-rne-deep.json",
+      "sha256": "5011884a7ab9edef7c1da50be3b388182b443e29501446036c3b798f7ac70685",
+      "status": "failed",
+      "installed_apk_sha256": "54a613533c10795ab754e2737d5bf2facfd387dfb2bd58ef43017260dd063a3f",
+      "provider_sha256": "9ca28d3450eecbd812058b54e59ca760ed155f59d4b9abe0f8f2604ad89e61d1",
+      "parity": {
+        "passed": false,
+        "finite": true,
+        "shape": [
+          1,
+          553
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": false,
+        "max_abs_error": 7.285840034484863,
+        "mismatched_elements": 553
+      },
+      "diagnostic_only": true,
+      "qualified": false
+    },
+    {
+      "evidence": "ncnn-driver-seed42-cube.json",
+      "sha256": "9064a0f42bedcc9affbe94c915d76082ba09eb4a6a2f57fbf5890ef9048ab30b",
+      "status": "failed",
+      "installed_apk_sha256": "54a613533c10795ab754e2737d5bf2facfd387dfb2bd58ef43017260dd063a3f",
+      "provider_sha256": "ef04214c0b094c7b1e0d3e535ab1d0b215c9becf53f102a053b61c24907833fe",
+      "parity": {
+        "passed": false,
+        "finite": true,
+        "shape": [
+          1,
+          553
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": false,
+        "max_abs_error": 3.391547203063965,
+        "mismatched_elements": 552
+      },
+      "diagnostic_only": true,
+      "qualified": false
+    },
+    {
+      "evidence": "ncnn-driver-seed42-head.json",
+      "sha256": "4b6185b1272ed1cfbf83cd0bbd2bba341233109cc3c799c7801e163882bc573c",
+      "status": "failed",
+      "installed_apk_sha256": "54a613533c10795ab754e2737d5bf2facfd387dfb2bd58ef43017260dd063a3f",
+      "provider_sha256": "ef04214c0b094c7b1e0d3e535ab1d0b215c9becf53f102a053b61c24907833fe",
+      "parity": {
+        "passed": false,
+        "finite": true,
+        "shape": [
+          1,
+          553
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": false,
+        "max_abs_error": 3.391547203063965,
+        "mismatched_elements": 552
+      },
+      "diagnostic_only": true,
+      "qualified": false
+    },
+    {
+      "evidence": "ncnn-driver-seed42-reduction.json",
+      "sha256": "9b2d969a32de9a7d16a8b8391298bdf1faea25374193c41b62781f319cd00a72",
+      "status": "failed",
+      "installed_apk_sha256": "a00cdb3472f869b0165cf14a3e72577fd8d8f69823aa644b244cd62bfbcadf1d",
+      "provider_sha256": "0521d0c21c01c488616aaf24e573fd671607466810741bf2ebc09b0c63f0c0da",
+      "parity": {
+        "passed": false,
+        "finite": true,
+        "shape": [
+          1,
+          553
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": false,
+        "max_abs_error": 0.005660295486450195,
+        "mismatched_elements": 293
+      },
+      "diagnostic_only": true,
+      "qualified": false
+    }
+  ],
+  "matched_controls": [
+    {
+      "candidate": "candidate44",
+      "report": "npu-recovery-20261101/fold-candidate44-chain-device-steady.json",
+      "apk_sha256": "f18262c93c2132b1e61a1746af6b2c55dcae8820e3d8a9db0dd84bc5472c6360",
+      "fixture_sha256": "b5ea99327f0ffc121e5556d29b32d4ce8e6e855d14518f46a3f060ea38721f99",
+      "functional_status": "passed",
+      "timing_status": "failed",
+      "samples": 2705,
+      "mean_hz": 99.909663972664,
+      "work_p99_ms": 7.304167,
+      "legacy_complete_cycle_p99_ms": 16.612917,
+      "stages_p99_ms": {
+        "input_wait_budget_ms": 9,
+        "cycle_interval_ms": 16.720417,
+        "scheduler_delay_ms": 6.20619,
+        "selfdrive_ipc_age_ms": 20.499115,
+        "input_handling_ms": 10.354531,
+        "pacing_wait_ms": 10.797709,
+        "computation_ms": 4.410521,
+        "publishing_ms": 2.614167,
+        "parameters_extensions_ms": 1.950209,
+        "cycle_before_reporting_ms": 15.843334,
+        "reporting_ms": 1.300313
+      },
+      "work_deadline_misses": 8,
+      "legacy_cycle_deadline_misses": 1350,
+      "scheduled_deadline_misses": null,
+      "skipped_slots": null,
+      "ui_mean_fps": 29.675004522902988,
+      "source_mean_hz": 99.99968927430768,
+      "source_deadline_misses": 202,
+      "timing_schema_version": 1,
+      "metrics_process": "controls",
+      "synthetic_sources": true,
+      "vehicle_tx_enabled": false
+    },
+    {
+      "candidate": "candidate45ze",
+      "report": "performance-followup-20261103/fold-candidate45ze-chain-device-steady.json",
+      "apk_sha256": "54a613533c10795ab754e2737d5bf2facfd387dfb2bd58ef43017260dd063a3f",
+      "fixture_sha256": "b5ea99327f0ffc121e5556d29b32d4ce8e6e855d14518f46a3f060ea38721f99",
+      "functional_status": "passed",
+      "timing_status": "failed",
+      "samples": 2661,
+      "mean_hz": 100.00335698111049,
+      "work_p99_ms": 2.668698,
+      "legacy_complete_cycle_p99_ms": 13.549531,
+      "stages_p99_ms": {
+        "input_wait_budget_ms": 0,
+        "cycle_interval_ms": 12.584896,
+        "scheduler_delay_ms": 2.836246,
+        "skipped_slots": 0,
+        "selfdrive_ipc_age_ms": 19.039843,
+        "input_handling_ms": 1.677605,
+        "pacing_wait_ms": 10.402343,
+        "computation_ms": 1.018489,
+        "publishing_ms": 0.925209,
+        "parameters_extensions_ms": 0.800938,
+        "cycle_before_reporting_ms": 13.521406,
+        "active_cycle_before_reporting_ms": 3.94875,
+        "release_to_completion_before_reporting_ms": 5.879837,
+        "reporting_ms": 0.356927,
+        "release_to_completion_ms": 5.914314999999999
+      },
+      "work_deadline_misses": 0,
+      "legacy_cycle_deadline_misses": 1214,
+      "scheduled_deadline_misses": 0,
+      "skipped_slots": 0,
+      "ui_mean_fps": 29.69308041479472,
+      "source_mean_hz": 99.99964535129304,
+      "source_deadline_misses": 228,
+      "timing_schema_version": 2,
+      "metrics_process": "manager",
+      "synthetic_sources": true,
+      "vehicle_tx_enabled": false
+    },
+    {
+      "candidate": "candidate45zg",
+      "report": "gpu-runtime-recovery-20261103/fold-candidate45zg-chain-device-steady.json",
+      "apk_sha256": "28c7d37923f7b2537c56181a85bc406f65011030a37205f2bbc1524a0e10a3f7",
+      "fixture_sha256": "b5ea99327f0ffc121e5556d29b32d4ce8e6e855d14518f46a3f060ea38721f99",
+      "functional_status": "passed",
+      "timing_status": "failed",
+      "samples": 2657,
+      "mean_hz": 100.00413746033533,
+      "work_p99_ms": 2.867604,
+      "legacy_complete_cycle_p99_ms": 14.122188,
+      "stages_p99_ms": {
+        "input_wait_budget_ms": 0,
+        "cycle_interval_ms": 12.642657,
+        "scheduler_delay_ms": 2.793229,
+        "skipped_slots": 0,
+        "selfdrive_ipc_age_ms": 18.124428,
+        "input_handling_ms": 1.457761,
+        "pacing_wait_ms": 10.55177,
+        "computation_ms": 1.029896,
+        "publishing_ms": 1.042135,
+        "parameters_extensions_ms": 0.688177,
+        "cycle_before_reporting_ms": 14.095938,
+        "active_cycle_before_reporting_ms": 4.074062,
+        "release_to_completion_before_reporting_ms": 6.18026,
+        "reporting_ms": 0.362396,
+        "release_to_completion_ms": 6.22244
+      },
+      "work_deadline_misses": 0,
+      "legacy_cycle_deadline_misses": 1273,
+      "scheduled_deadline_misses": 0,
+      "skipped_slots": 0,
+      "ui_mean_fps": 29.550378639692838,
+      "source_mean_hz": 99.99912712767035,
+      "source_deadline_misses": 238,
+      "timing_schema_version": 2,
+      "metrics_process": "manager",
+      "synthetic_sources": true,
+      "vehicle_tx_enabled": false
+    }
+  ],
+  "ncnn_final_apk": {
+    "driver": {
+      "status": "failed",
+      "identity": {
+        "name": "dmonitoring_model",
+        "backend": "ncnn-vulkan",
+        "memory_mode": "image",
+        "cpu_fallback": false,
+        "fingerprint": "samsung/q2qxser/q2q:15/AP3A.240905.015.A2/F926BXXSJJZH3:user/release-keys",
+        "sha256": {
+          "model": "bf840477f9d75b50070741d054f39b577d778185631b4ea25a2c91bb8eb1dba1",
+          "original_model": "dee5a294e8afaacc9295ac5d100e00733ecac278e79264b96331e40a3ede1b04",
+          "references": "610f877bd0f98353a6e7228698ee869d02a5b2976430234b96d097e96e773381",
+          "sequences": "6acb2ec99babfe57b5ec33b601e262ee9f5b4e54a2fd185f2b59e939256ca3d6",
+          "conversion": "b08e675e70d52d287f86e95bb5cb646753888cbc8aeec46c11bf666ae5e8a41d",
+          "apk": "28c7d37923f7b2537c56181a85bc406f65011030a37205f2bbc1524a0e10a3f7",
+          "weights": "fedce423a6843909b02d5f4356675e0bc9ab877c6fb5d9842ca5dac3cd27cd1e",
+          "driver": "81463feeb42eba7d2f2c6922c553875d0059116ad9dacb49242f3f2a51c979ce",
+          "provider": "c8af3304cfd5ed1d1e5d9cb6d03b633d7e710262170ae73d52c60bcacdb9deee",
+          "implementation": "3b85900e496a2941b8145e4376a14677e3b9bfabfc9598354ba915d3895a538a",
+          "native": "96d1f85ddc4b55c3827f77a722a42172e72f89aa38762249f61880bd57243cc5"
+        }
+      },
+      "seed_checks": [
+        {
+          "outputs": {
+            "passed": false,
+            "finite": true,
+            "shape": [
+              1,
+              553
+            ],
+            "dtype": "float16",
+            "expected_nonfinite_elements": 0,
+            "unexpected_nonfinite_elements": 0,
+            "exact": false,
+            "max_abs_error": 0.005859375,
+            "mismatched_elements": 293
+          }
+        },
+        {
+          "outputs": {
+            "passed": false,
+            "finite": true,
+            "shape": [
+              1,
+              553
+            ],
+            "dtype": "float16",
+            "expected_nonfinite_elements": 0,
+            "unexpected_nonfinite_elements": 0,
+            "exact": false,
+            "max_abs_error": 0.0078125,
+            "mismatched_elements": 312
+          }
+        },
+        {
+          "outputs": {
+            "passed": false,
+            "finite": true,
+            "shape": [
+              1,
+              553
+            ],
+            "dtype": "float16",
+            "expected_nonfinite_elements": 0,
+            "unexpected_nonfinite_elements": 0,
+            "exact": false,
+            "max_abs_error": 0.00445556640625,
+            "mismatched_elements": 297
+          }
+        }
+      ],
+      "no_cpu_fallback": true,
+      "qualified": false
+    },
+    "road": {
+      "status": "blocked",
+      "error": "KeyError: 'ncnn'",
+      "reason": "No converted ncnn road entry in this APK"
+    }
+  },
+  "cleanup": {
+    "vehicle_tx_enabled": false,
+    "fold": {
+      "state": {
+        "processes": [],
+        "camera_provider_processes": [
+          "1707 cameraserver",
+          "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+        ],
+        "camera_owned": false,
+        "thermal_status": 0,
+        "skin_c": 27.5,
+        "thermal_override": false
+      },
+      "baseline": {
+        "processes": [],
+        "camera_provider_processes": [
+          "1707 cameraserver",
+          "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+        ],
+        "camera_owned": false,
+        "thermal_status": 0,
+        "skin_c": 26.8,
+        "thermal_override": false,
+        "idle_seconds": 32.85347683302825,
+        "normal_thermal_seconds": 32.498962875048164
+      },
+      "forwards": []
+    },
+    "emulator": {
+      "state": {
+        "processes": [],
+        "camera_provider_processes": [
+          "371 android.hardware.camera.provider.ranchu",
+          "372 android.hardware.camera.provider@2.7-service-google",
+          "469 cameraserver"
+        ],
+        "camera_owned": false,
+        "thermal_status": 0,
+        "skin_c": 30.8,
+        "thermal_override": false
+      },
+      "baseline": {
+        "processes": [],
+        "camera_provider_processes": [
+          "371 android.hardware.camera.provider.ranchu",
+          "372 android.hardware.camera.provider@2.7-service-google",
+          "469 cameraserver"
+        ],
+        "camera_owned": false,
+        "thermal_status": 0,
+        "skin_c": 30.8,
+        "thermal_override": false,
+        "idle_seconds": 30.84512645797804,
+        "normal_thermal_seconds": 30.746873541967943
+      },
+      "forwards": [],
+      "apk_sha256": "28c7d37923f7b2537c56181a85bc406f65011030a37205f2bbc1524a0e10a3f7"
+    },
+    "emulator_exit_code": 0
+  },
+  "combined_workloads": {
+    "status": "blocked",
+    "stages": [
+      "30 seconds",
+      "2 minutes",
+      "30 minutes"
+    ],
+    "reason": "Full-model accuracy, inference timing, camera freshness and complete-cycle controls gates remain uncleared"
+  },
+  "retained_baselines": [
+    "candidate35",
+    "candidate40",
+    "candidate44",
+    "candidate45ze",
+    "candidate45zf"
+  ],
+  "historical_accuracy": {
+    "candidate": "candidate45ze",
+    "comparisons": 795,
+    "status": "passed",
+    "evidence": "../performance-followup-20261103/candidate45ze-accuracy.json",
+    "qualifies_new_apk": false
+  },
+  "physical_gates": {
+    "rear_sensor_identity": "blocked",
+    "mounted_calibration": "blocked",
+    "Panda_vehicle": "blocked"
+  },
+  "cooling_optimization": "deferred",
+  "thermal_safeguards": "enforced",
+  "notes": [
+    "Functional fixture success does not qualify camera perception, accelerator timing or vehicle use",
+    "Vulkan shell probes bind their provider hash separately from the installed APK",
+    "Candidate45zf lacks the portable reduction patch; candidate45zg packages it",
+    "MNN native convolution remains diagnostic; strict accurate reference preserved in candidate45ze"
+  ]
+}

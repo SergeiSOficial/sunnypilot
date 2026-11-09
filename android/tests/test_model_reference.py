@@ -1,5 +1,6 @@
 """Keep original references and expose portable-export numerical failures."""
 import hashlib
+import importlib.util
 import json
 from pathlib import Path
 import unittest
@@ -10,6 +11,26 @@ import onnxruntime as ort
 
 
 class ModelReferenceTest(unittest.TestCase):
+  def test_frozen_trace_includes_custom_precision_boundaries(self):
+    root = Path(__file__).resolve().parents[2]
+    spec = importlib.util.spec_from_file_location("model_trace", root / "android/scripts/model_trace.py")
+    trace = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(trace)
+    x = onnx.helper.make_tensor_value_info("x", onnx.TensorProto.FLOAT, [1, 2])
+    w = onnx.numpy_helper.from_array(np.ones((2, 2), dtype=np.float32), "w")
+    graph = onnx.helper.make_graph([
+      onnx.helper.make_node("FusedGemm", ["x", "w"], ["dense"], domain="com.microsoft"),
+      onnx.helper.make_node("QuickGelu", ["dense"], ["gelu"], domain="com.microsoft"),
+      onnx.helper.make_node("Mul", ["gelu", "gelu"], ["square"])], "trace", [x], [], [w])
+    model = onnx.helper.make_model(graph, opset_imports=[onnx.helper.make_opsetid("", 17),
+                                                       onnx.helper.make_opsetid("com.microsoft", 1)])
+    inferred = trace.infer_trace_types(model)
+    types = {v.name: v.type.tensor_type.elem_type for v in inferred.graph.value_info}
+    self.assertEqual(types, {"dense": onnx.TensorProto.FLOAT, "gelu": onnx.TensorProto.FLOAT,
+                             "square": onnx.TensorProto.FLOAT})
+    self.assertEqual(model.graph.node, inferred.graph.node)
+    np.testing.assert_array_equal(onnx.numpy_helper.to_array(inferred.graph.initializer[0]), np.ones((2, 2)))
+
   def test_fp32_diagnostics_retain_original_provenance_and_three_cases(self):
     root = Path(__file__).resolve().parents[2]
     reference = root / "android/app/build/model-reference"

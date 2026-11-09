@@ -1,0 +1,70 @@
+{
+  "status": "passed",
+  "serial": "RFCR81Y1TBJ",
+  "msgq_pin": "e7396e76dadbb49e374d4b664ff6bbb43a39bcb0",
+  "patch_sha256": "ac042b653437d3d51569beaaa1bdda8e0401411267f5979d8a45ab0809dbf5fe",
+  "binary_sha256": "2a0bb582014b76e72d4c9819838daa71e986982ed75fbd888a5cf6c4839a2647",
+  "empty_slots_ignored": true,
+  "wrong_process_rejected": true,
+  "registered_reader_woken": true
+}
+{
+  "serial": "RFCR81Y1TBJ",
+  "command": [
+    "/Users/sergios/sunnypilot/.venv/bin/python",
+    "android/scripts/validate_msgq_wakeup.py",
+    "--serial",
+    "RFCR81Y1TBJ",
+    "--adb",
+    "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+    "--output",
+    "/Users/sergios/sunnypilot/android/reports/blocker-fixes/fold-candidate35-ipc.json"
+  ],
+  "vehicle_tx_enabled": false,
+  "status": "passed",
+  "validation_status": "passed",
+  "isolation_status": "passed",
+  "forwards_before": [],
+  "before_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 36.4,
+    "thermal_override": false
+  },
+  "apk_sha256": "38645e91f806076517de1497cdb6b5c0cbf4873cfecf5efabb980297a014ad51",
+  "baseline": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 31.3,
+    "thermal_override": false,
+    "idle_seconds": 81.08611400000518,
+    "normal_thermal_seconds": 32.31270437501371
+  },
+  "apk_sha256_at_start": "38645e91f806076517de1497cdb6b5c0cbf4873cfecf5efabb980297a014ad51",
+  "returncode": 0,
+  "after_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 31.3,
+    "thermal_override": false
+  },
+  "forwards_removed": [],
+  "apk_sha256_after": "38645e91f806076517de1497cdb6b5c0cbf4873cfecf5efabb980297a014ad51",
+  "artifact_stable": true,
+  "wrapper_status": "passed"
+}

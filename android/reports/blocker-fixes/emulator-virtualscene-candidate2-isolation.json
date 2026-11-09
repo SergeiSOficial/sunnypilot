@@ -1,0 +1,66 @@
+{
+  "serial": "emulator-5554",
+  "command": [
+    ".venv/bin/python",
+    "android/scripts/validate_cameras.py",
+    "--serial",
+    "emulator-5554",
+    "--adb",
+    "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+    "--package",
+    "com.samsung.sunnypilot.fold3",
+    "--ids",
+    "10",
+    "--seconds",
+    "15",
+    "--output",
+    "android/reports/blocker-fixes/emulator-virtualscene-candidate2.json"
+  ],
+  "vehicle_tx_enabled": false,
+  "status": "failed",
+  "forwards_before": [],
+  "before_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "379 android.hardware.camera.provider.ranchu",
+      "380 android.hardware.camera.provider@2.7-service-google",
+      "460 cameraserver"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.8,
+    "thermal_override": false
+  },
+  "apk_sha256": "382395f99794658fe0aa6ed058a8ae74d726bc1cc6515c43d6c89374e0888159",
+  "baseline": {
+    "processes": [],
+    "camera_provider_processes": [
+      "379 android.hardware.camera.provider.ranchu",
+      "380 android.hardware.camera.provider@2.7-service-google",
+      "460 cameraserver"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.8,
+    "thermal_override": false,
+    "idle_seconds": 31.28306179199717,
+    "normal_thermal_seconds": 31.106237999978475
+  },
+  "apk_sha256_at_start": "382395f99794658fe0aa6ed058a8ae74d726bc1cc6515c43d6c89374e0888159",
+  "returncode": 1,
+  "after_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "379 android.hardware.camera.provider.ranchu",
+      "380 android.hardware.camera.provider@2.7-service-google",
+      "460 cameraserver"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.8,
+    "thermal_override": false
+  },
+  "forwards_removed": [],
+  "apk_sha256_after": "382395f99794658fe0aa6ed058a8ae74d726bc1cc6515c43d6c89374e0888159",
+  "artifact_stable": true
+}

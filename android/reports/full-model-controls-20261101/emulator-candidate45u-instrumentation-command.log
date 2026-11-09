@@ -1,0 +1,113 @@
+
+ai.sunnypilot.fold3.AcceleratorTest:.
+ai.sunnypilot.fold3.CameraPreviewSampleTest:....
+ai.sunnypilot.fold3.ControlsMetricsIntegrationTest:.....
+ai.sunnypilot.fold3.GpuNv12Test:.
+ai.sunnypilot.fold3.LifecycleTest:
+Error in activitySurvivesRecreation(ai.sunnypilot.fold3.LifecycleTest):
+java.lang.AssertionError: Activity never becomes requested state "[RESUMED]" (last lifecycle transition = "PAUSED")
+	at androidx.test.core.app.ActivityScenario.waitForActivityToBecomeAnyOf(ActivityScenario.java:454)
+	at androidx.test.core.app.ActivityScenario.moveToState(ActivityScenario.java:689)
+	at androidx.test.core.app.ActivityScenario.recreate(ActivityScenario.java:718)
+	at ai.sunnypilot.fold3.LifecycleTest.activitySurvivesRecreation(LifecycleTest.java:13)
+
+ai.sunnypilot.fold3.NativeBridgeTest:.......
+ai.sunnypilot.fold3.PerceptionTest:.......
+ai.sunnypilot.fold3.RuntimeTest:.
+ai.sunnypilot.fold3.SupervisorTest:
+Error in controlProcessRestartsAndActivityRecreationPreservesManager(ai.sunnypilot.fold3.SupervisorTest):
+java.lang.AssertionError: Activity never becomes requested state "[RESUMED]" (last lifecycle transition = "PAUSED")
+	at androidx.test.core.app.ActivityScenario.waitForActivityToBecomeAnyOf(ActivityScenario.java:454)
+	at androidx.test.core.app.ActivityScenario.moveToState(ActivityScenario.java:689)
+	at androidx.test.core.app.ActivityScenario.recreate(ActivityScenario.java:718)
+	at ai.sunnypilot.fold3.SupervisorTest.controlProcessRestartsAndActivityRecreationPreservesManager(SupervisorTest.java:44)
+
+
+Time: 119.513
+There were 2 failures:
+1) activitySurvivesRecreation(ai.sunnypilot.fold3.LifecycleTest)
+java.lang.AssertionError: Activity never becomes requested state "[RESUMED]" (last lifecycle transition = "PAUSED")
+	at androidx.test.core.app.ActivityScenario.waitForActivityToBecomeAnyOf(ActivityScenario.java:454)
+	at androidx.test.core.app.ActivityScenario.moveToState(ActivityScenario.java:689)
+	at androidx.test.core.app.ActivityScenario.recreate(ActivityScenario.java:718)
+	at ai.sunnypilot.fold3.LifecycleTest.activitySurvivesRecreation(LifecycleTest.java:13)
+2) controlProcessRestartsAndActivityRecreationPreservesManager(ai.sunnypilot.fold3.SupervisorTest)
+java.lang.AssertionError: Activity never becomes requested state "[RESUMED]" (last lifecycle transition = "PAUSED")
+	at androidx.test.core.app.ActivityScenario.waitForActivityToBecomeAnyOf(ActivityScenario.java:454)
+	at androidx.test.core.app.ActivityScenario.moveToState(ActivityScenario.java:689)
+	at androidx.test.core.app.ActivityScenario.recreate(ActivityScenario.java:718)
+	at ai.sunnypilot.fold3.SupervisorTest.controlProcessRestartsAndActivityRecreationPreservesManager(SupervisorTest.java:44)
+
+FAILURES!!!
+Tests run: 28,  Failures: 2
+
+
+{
+  "serial": "emulator-5560",
+  "command": [
+    "/Users/sergios/sunnypilot/.venv/bin/python",
+    "android/scripts/validate_instrumentation.py",
+    "--expected-tests",
+    "28",
+    "--output",
+    "/Users/sergios/sunnypilot/android/reports/full-model-controls-20261101/emulator-candidate45u-instrumentation.txt",
+    "--serial",
+    "emulator-5560",
+    "--adb",
+    "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+    "--report",
+    "/Users/sergios/sunnypilot/android/reports/full-model-controls-20261101/emulator-candidate45u-instrumentation.json",
+    "--package",
+    "com.samsung.sunnypilot.fold3"
+  ],
+  "vehicle_tx_enabled": false,
+  "status": "failed",
+  "validation_status": "failed",
+  "isolation_status": "passed",
+  "forwards_before": [],
+  "before_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "375 android.hardware.camera.provider.ranchu",
+      "378 android.hardware.camera.provider@2.7-service-google",
+      "468 cameraserver"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.8,
+    "thermal_override": false
+  },
+  "apk_sha256": "e34f7d2979bd37b1457b8f83052bdf9436c4b10c491097988078822c87b29319",
+  "baseline": {
+    "processes": [],
+    "camera_provider_processes": [
+      "375 android.hardware.camera.provider.ranchu",
+      "378 android.hardware.camera.provider@2.7-service-google",
+      "468 cameraserver"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.8,
+    "thermal_override": false,
+    "idle_seconds": 30.89980045799166,
+    "normal_thermal_seconds": 30.776310416986234
+  },
+  "apk_sha256_at_start": "e34f7d2979bd37b1457b8f83052bdf9436c4b10c491097988078822c87b29319",
+  "returncode": 1,
+  "after_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "375 android.hardware.camera.provider.ranchu",
+      "378 android.hardware.camera.provider@2.7-service-google",
+      "468 cameraserver"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.8,
+    "thermal_override": false
+  },
+  "forwards_removed": [],
+  "apk_sha256_after": "e34f7d2979bd37b1457b8f83052bdf9436c4b10c491097988078822c87b29319",
+  "artifact_stable": true,
+  "wrapper_status": "failed"
+}

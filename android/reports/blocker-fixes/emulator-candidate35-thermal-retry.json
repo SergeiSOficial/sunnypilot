@@ -1,0 +1,3219 @@
+{
+  "serial": "emulator-5560",
+  "package": "com.samsung.sunnypilot.fold3",
+  "vehicle_tx_enabled": false,
+  "status": "passed",
+  "cases": [
+    {
+      "during_capture": false,
+      "abort_wait_seconds": 4.768187082983786,
+      "result": {
+        "vehicle_tx_enabled": false,
+        "valid": false,
+        "sessions": [
+          {
+            "camera_ids": [
+              "0",
+              "1"
+            ],
+            "width": 1280,
+            "height": 720,
+            "logical_camera": null,
+            "requested_duration_ms": 29957,
+            "startup_order": "open_all_then_configure",
+            "opened_camera_ids": [],
+            "image_callbacks_drained": true,
+            "camera_close_callbacks_complete": true,
+            "request_template": "record",
+            "stabilization": "disabled when advertised",
+            "sensor_pairs": [],
+            "streams": [],
+            "elapsed_ms": 16,
+            "completed_requested_duration": false,
+            "status": "failed",
+            "error": "IllegalStateException: critical_thermal_status:4"
+          }
+        ],
+        "requested_seconds": 30,
+        "recovery_limit": 3,
+        "started_utc": "2026-11-01T09:36:46.275065Z",
+        "dual_rear": "not requested",
+        "backend": "camera2",
+        "status": "failed",
+        "recoveries": 0,
+        "thermal_status": 4,
+        "transport_status": "failed",
+        "completed_utc": "2026-11-01T09:36:46.345865Z"
+      },
+      "shutdown_seconds": 0.016,
+      "shutdown_clock": "camera worker startup to rejection"
+    },
+    {
+      "during_capture": true,
+      "abort_wait_seconds": 0.6533284170145635,
+      "result": {
+        "vehicle_tx_enabled": false,
+        "valid": false,
+        "sessions": [
+          {
+            "camera_ids": [
+              "0",
+              "1"
+            ],
+            "width": 1280,
+            "height": 720,
+            "logical_camera": null,
+            "requested_duration_ms": 89922,
+            "startup_order": "open_all_then_configure",
+            "opened_camera_ids": [
+              "0",
+              "1"
+            ],
+            "image_callbacks_drained": true,
+            "camera_close_callbacks_complete": true,
+            "request_template": "record",
+            "stabilization": "disabled when advertised",
+            "sensor_pairs": [
+              {
+                "camera_ids": [
+                  "0",
+                  "1"
+                ],
+                "overlap_ns": 942033042,
+                "distinct_sensor_evidence": true,
+                "nearest_skew_p99_ns": 4513209
+              }
+            ],
+            "overlap_ns": 942033042,
+            "nearest_skew_p99_ns": 4513209,
+            "skew_sampling": "last 4096 timestamps per stream, shared overlap only",
+            "distinct_sensor_evidence": true,
+            "streams": [
+              {
+                "sensor_id": "0",
+                "width": 1280,
+                "height": 720,
+                "image_rotation_applied_degrees": 0,
+                "output_width": 1280,
+                "output_height": 720,
+                "display_degrees_at_session_start": 90,
+                "mirrored": false,
+                "sensor_orientation": 90,
+                "timestamp_source": 1,
+                "intrinsic_calibration": [],
+                "lens_distortion": [],
+                "visionipc_valid": false,
+                "visionipc_stream": 0,
+                "focal_lengths_mm": [
+                  3.3
+                ],
+                "frames": 32,
+                "fps": 29.65728019265461,
+                "first_timestamp_ns": 83722961549,
+                "last_timestamp_ns": 84768236092,
+                "timestamp_errors": 0,
+                "changed_frames": 31,
+                "metadata_failures": 0,
+                "uncaptured_requests": 0,
+                "lost_buffers": 0,
+                "physical_metadata_frames": 31,
+                "measured_focal_length_mm": 3.3,
+                "packing_errors": 0,
+                "packing_p99_ns": 741125,
+                "delivery_age_available": true,
+                "delivery_age_p50_ns": -29406115,
+                "delivery_age_p95_ns": -17939218,
+                "delivery_age_p99_ns": -11907635,
+                "delivery_over_100ms": 0,
+                "acquisition_age_p50_ns": -29776885,
+                "acquisition_age_p95_ns": -18138843,
+                "acquisition_age_p99_ns": -12127010,
+                "delivery_future_timestamps": 32,
+                "clock_sample_columns": "sensor_raw,elapsed_before,monotonic,elapsed_after",
+                "clock_samples_ns": [
+                  [
+                    83722961549,
+                    83697505956,
+                    83697506123,
+                    83697506248
+                  ],
+                  [
+                    83757395383,
+                    83745485581,
+                    83745485706,
+                    83745485831
+                  ],
+                  [
+                    83791172549,
+                    83763385956,
+                    83763386123,
+                    83763386248
+                  ],
+                  [
+                    83824660549,
+                    83806231748,
+                    83806231914,
+                    83806231998
+                  ],
+                  [
+                    83858127716,
+                    83832865789,
+                    83832865914,
+                    83832866039
+                  ],
+                  [
+                    83891616466,
+                    83865280331,
+                    83865280498,
+                    83865280623
+                  ],
+                  [
+                    83925094174,
+                    83907153456,
+                    83907153581,
+                    83907153706
+                  ],
+                  [
+                    83958620883,
+                    83927451623,
+                    83927451748,
+                    83927451873
+                  ],
+                  [
+                    83992124883,
+                    83963038539,
+                    83963038664,
+                    83963038789
+                  ],
+                  [
+                    84027719133,
+                    83996714998,
+                    83996715165,
+                    83996715290
+                  ],
+                  [
+                    84061880758,
+                    84031182456,
+                    84031182623,
+                    84031182748
+                  ],
+                  [
+                    84095323883,
+                    84064497540,
+                    84064497665,
+                    84064497790
+                  ],
+                  [
+                    84128764050,
+                    84097998665,
+                    84097998831,
+                    84097998956
+                  ],
+                  [
+                    84162232675,
+                    84131022748,
+                    84131022873,
+                    84131022998
+                  ],
+                  [
+                    84195680591,
+                    84165008790,
+                    84165008915,
+                    84165009040
+                  ],
+                  [
+                    84229122133,
+                    84198905748,
+                    84198905873,
+                    84198905998
+                  ],
+                  [
+                    84262567008,
+                    84231481915,
+                    84231482081,
+                    84231482206
+                  ],
+                  [
+                    84296010550,
+                    84266602998,
+                    84266603165,
+                    84266603290
+                  ],
+                  [
+                    84329399925,
+                    84298041206,
+                    84298041331,
+                    84298041456
+                  ],
+                  [
+                    84362846758,
+                    84332738123,
+                    84332738290,
+                    84332738415
+                  ],
+                  [
+                    84397614675,
+                    84375083456,
+                    84375083623,
+                    84375083748
+                  ],
+                  [
+                    84431075425,
+                    84399439373,
+                    84399439498,
+                    84399439623
+                  ],
+                  [
+                    84464516758,
+                    84435441581,
+                    84435441790,
+                    84435441915
+                  ],
+                  [
+                    84497942091,
+                    84466829581,
+                    84466829831,
+                    84466829998
+                  ],
+                  [
+                    84531452550,
+                    84502034706,
+                    84502034915,
+                    84502035040
+                  ],
+                  [
+                    84564999341,
+                    84536111915,
+                    84536112373,
+                    84536112498
+                  ],
+                  [
+                    84598516050,
+                    84568914790,
+                    84568914915,
+                    84568915040
+                  ],
+                  [
+                    84632039550,
+                    84605486790,
+                    84605486956,
+                    84605487081
+                  ],
+                  [
+                    84665504383,
+                    84640534831,
+                    84640534956,
+                    84640535081
+                  ],
+                  [
+                    84699181175,
+                    84673406456,
+                    84673406665,
+                    84673406790
+                  ],
+                  [
+                    84734701758,
+                    84703641915,
+                    84703642082,
+                    84703642207
+                  ],
+                  [
+                    84768236092,
+                    84741158707,
+                    84741158873,
+                    84741158998
+                  ]
+                ],
+                "capture_sample_columns": "sensor_raw,frame_number,exposure,duration,elapsed_before,monotonic,elapsed_after",
+                "capture_samples_ns": [
+                  [
+                    83722961549,
+                    0,
+                    15000000,
+                    33331760,
+                    83706004539,
+                    83706005081,
+                    83706005206
+                  ],
+                  [
+                    83757395383,
+                    1,
+                    12833294,
+                    33331760,
+                    83772259956,
+                    83772260748,
+                    83772260914
+                  ],
+                  [
+                    83791172549,
+                    2,
+                    11099929,
+                    33331760,
+                    83772321289,
+                    83772321456,
+                    83772321581
+                  ],
+                  [
+                    83824660549,
+                    3,
+                    9713237,
+                    33331760,
+                    83806697706,
+                    83806697998,
+                    83806698123
+                  ],
+                  [
+                    83858127716,
+                    4,
+                    8603884,
+                    33331760,
+                    83839080956,
+                    83839081623,
+                    83839081706
+                  ],
+                  [
+                    83891616466,
+                    5,
+                    7716401,
+                    33331760,
+                    83872193164,
+                    83872194081,
+                    83872194206
+                  ],
+                  [
+                    83925094174,
+                    6,
+                    7006415,
+                    33331760,
+                    83915461123,
+                    83915462456,
+                    83915462581
+                  ],
+                  [
+                    83958620883,
+                    7,
+                    6438426,
+                    33331760,
+                    83928838123,
+                    83928838414,
+                    83928838539
+                  ],
+                  [
+                    83992124883,
+                    8,
+                    5984035,
+                    33331760,
+                    83964841373,
+                    83964841706,
+                    83964841789
+                  ],
+                  [
+                    84027719133,
+                    9,
+                    5620522,
+                    33331760,
+                    83998901206,
+                    83998901373,
+                    83998901456
+                  ],
+                  [
+                    84061880758,
+                    10,
+                    5329711,
+                    33331760,
+                    84036422040,
+                    84036422790,
+                    84036422915
+                  ],
+                  [
+                    84095323883,
+                    11,
+                    5097063,
+                    33331760,
+                    84070748915,
+                    84070749456,
+                    84070749581
+                  ],
+                  [
+                    84128764050,
+                    12,
+                    4910944,
+                    33331760,
+                    84099339206,
+                    84099339540,
+                    84099339665
+                  ],
+                  [
+                    84162232675,
+                    13,
+                    4762049,
+                    33331760,
+                    84146360665,
+                    84146361665,
+                    84146361748
+                  ],
+                  [
+                    84195680591,
+                    14,
+                    4642933,
+                    33331760,
+                    84166080456,
+                    84166080790,
+                    84166080915
+                  ],
+                  [
+                    84229122133,
+                    15,
+                    4547640,
+                    33331760,
+                    84199055498,
+                    84199055706,
+                    84199055831
+                  ],
+                  [
+                    84262567008,
+                    16,
+                    4547640,
+                    33331760,
+                    84232515373,
+                    84232515831,
+                    84232515998
+                  ],
+                  [
+                    84296010550,
+                    17,
+                    4547640,
+                    33331760,
+                    84270044540,
+                    84270044748,
+                    84270044873
+                  ],
+                  [
+                    84329399925,
+                    18,
+                    4547640,
+                    33331760,
+                    84298819456,
+                    84298819665,
+                    84298819790
+                  ],
+                  [
+                    84362846758,
+                    19,
+                    4547640,
+                    33331760,
+                    84338227540,
+                    84338228415,
+                    84338228540
+                  ],
+                  [
+                    84397614675,
+                    20,
+                    4547640,
+                    33331760,
+                    84384820873,
+                    84384822331,
+                    84384822456
+                  ],
+                  [
+                    84431075425,
+                    21,
+                    4547640,
+                    33331760,
+                    84406263998,
+                    84406264706,
+                    84406264831
+                  ],
+                  [
+                    84464516758,
+                    22,
+                    4547640,
+                    33331760,
+                    84440155790,
+                    84440156290,
+                    84440156415
+                  ],
+                  [
+                    84497942091,
+                    23,
+                    4547640,
+                    33331760,
+                    84470672331,
+                    84470672581,
+                    84470672706
+                  ],
+                  [
+                    84531452550,
+                    24,
+                    4547640,
+                    33331760,
+                    84508948998,
+                    84508949123,
+                    84508949290
+                  ],
+                  [
+                    84564999341,
+                    25,
+                    4547640,
+                    33331760,
+                    84540339790,
+                    84540340123,
+                    84540340206
+                  ],
+                  [
+                    84598516050,
+                    26,
+                    4547640,
+                    33331760,
+                    84571702706,
+                    84571702873,
+                    84571702956
+                  ],
+                  [
+                    84632039550,
+                    27,
+                    4547640,
+                    33331760,
+                    84609175831,
+                    84609176040,
+                    84609176123
+                  ],
+                  [
+                    84665504383,
+                    28,
+                    4547640,
+                    33331760,
+                    84649218290,
+                    84649219040,
+                    84649219165
+                  ],
+                  [
+                    84699181175,
+                    29,
+                    4547640,
+                    33331760,
+                    84673874665,
+                    84673874831,
+                    84673874956
+                  ],
+                  [
+                    84734701758,
+                    30,
+                    4547640,
+                    33331760,
+                    84712115457,
+                    84712115873,
+                    84712115998
+                  ]
+                ],
+                "frame_interval_p99_ns": 35594250
+              },
+              {
+                "sensor_id": "1",
+                "width": 1280,
+                "height": 720,
+                "image_rotation_applied_degrees": 0,
+                "output_width": 1280,
+                "output_height": 720,
+                "display_degrees_at_session_start": 90,
+                "mirrored": false,
+                "sensor_orientation": 270,
+                "timestamp_source": 1,
+                "intrinsic_calibration": [
+                  3225.7742,
+                  3225.7742,
+                  960.5043,
+                  540.46704,
+                  0
+                ],
+                "lens_distortion": [
+                  0.08807813,
+                  -0.22617353,
+                  0.16460505,
+                  0,
+                  0
+                ],
+                "visionipc_valid": false,
+                "visionipc_stream": 1,
+                "focal_lengths_mm": [
+                  4.38
+                ],
+                "frames": 29,
+                "fps": 29.722948932400612,
+                "first_timestamp_ns": 83822960758,
+                "last_timestamp_ns": 84764993800,
+                "timestamp_errors": 0,
+                "changed_frames": 28,
+                "metadata_failures": 0,
+                "uncaptured_requests": 0,
+                "lost_buffers": 0,
+                "physical_metadata_frames": 29,
+                "measured_focal_length_mm": 4.38,
+                "packing_errors": 0,
+                "packing_p99_ns": 2798625,
+                "delivery_age_available": true,
+                "delivery_age_p50_ns": -27521198,
+                "delivery_age_p95_ns": -18330218,
+                "delivery_age_p99_ns": -17338198,
+                "delivery_over_100ms": 0,
+                "acquisition_age_p50_ns": -27841177,
+                "acquisition_age_p95_ns": -18518885,
+                "acquisition_age_p99_ns": -17733010,
+                "delivery_future_timestamps": 29,
+                "clock_sample_columns": "sensor_raw,elapsed_before,monotonic,elapsed_after",
+                "clock_samples_ns": [
+                  [
+                    83822960758,
+                    83805621039,
+                    83805621206,
+                    83805621331
+                  ],
+                  [
+                    83856396133,
+                    83833154831,
+                    83833154998,
+                    83833155123
+                  ],
+                  [
+                    83890036591,
+                    83864596789,
+                    83864596914,
+                    83864597039
+                  ],
+                  [
+                    83923703174,
+                    83898245664,
+                    83898245831,
+                    83898245956
+                  ],
+                  [
+                    83957187758,
+                    83928405164,
+                    83928405289,
+                    83928405456
+                  ],
+                  [
+                    83990786299,
+                    83962118498,
+                    83962118664,
+                    83962118789
+                  ],
+                  [
+                    84024394091,
+                    83998698040,
+                    83998698165,
+                    83998698290
+                  ],
+                  [
+                    84058025883,
+                    84031519498,
+                    84031519623,
+                    84031519748
+                  ],
+                  [
+                    84091536758,
+                    84064088790,
+                    84064089040,
+                    84064089165
+                  ],
+                  [
+                    84124983841,
+                    84096733456,
+                    84096733623,
+                    84096733748
+                  ],
+                  [
+                    84158458508,
+                    84130691748,
+                    84130691915,
+                    84130692040
+                  ],
+                  [
+                    84192066008,
+                    84164542790,
+                    84164542956,
+                    84164543081
+                  ],
+                  [
+                    84225564300,
+                    84196471165,
+                    84196471331,
+                    84196471456
+                  ],
+                  [
+                    84259066258,
+                    84227664498,
+                    84227664665,
+                    84227664748
+                  ],
+                  [
+                    84292567216,
+                    84262376790,
+                    84262376956,
+                    84262377081
+                  ],
+                  [
+                    84326073466,
+                    84294580456,
+                    84294580581,
+                    84294580706
+                  ],
+                  [
+                    84359519216,
+                    84330540956,
+                    84330541123,
+                    84330541248
+                  ],
+                  [
+                    84393101466,
+                    84374769498,
+                    84374769706,
+                    84374769831
+                  ],
+                  [
+                    84426910133,
+                    84398182831,
+                    84398182998,
+                    84398183123
+                  ],
+                  [
+                    84460351966,
+                    84432949248,
+                    84432949415,
+                    84432949540
+                  ],
+                  [
+                    84493837466,
+                    84469826998,
+                    84469827165,
+                    84469827290
+                  ],
+                  [
+                    84528800133,
+                    84498619998,
+                    84498620165,
+                    84498620290
+                  ],
+                  [
+                    84562252841,
+                    84532655665,
+                    84532655831,
+                    84532655956
+                  ],
+                  [
+                    84597456883,
+                    84568565498,
+                    84568565873,
+                    84568566040
+                  ],
+                  [
+                    84631060091,
+                    84603012331,
+                    84603012456,
+                    84603012581
+                  ],
+                  [
+                    84664627633,
+                    84639449206,
+                    84639449373,
+                    84639449456
+                  ],
+                  [
+                    84698080800,
+                    84673719373,
+                    84673719498,
+                    84673719623
+                  ],
+                  [
+                    84731530800,
+                    84708067832,
+                    84708068498,
+                    84708068623
+                  ],
+                  [
+                    84764993800,
+                    84740823040,
+                    84740823207,
+                    84740823332
+                  ]
+                ],
+                "capture_sample_columns": "sensor_raw,frame_number,exposure,duration,elapsed_before,monotonic,elapsed_after",
+                "capture_samples_ns": [
+                  [
+                    83822960758,
+                    0,
+                    15000000,
+                    33331760,
+                    83812985998,
+                    83812986456,
+                    83812986623
+                  ],
+                  [
+                    83856396133,
+                    1,
+                    12416647,
+                    33331760,
+                    83839137581,
+                    83839137748,
+                    83839137873
+                  ],
+                  [
+                    83890036591,
+                    2,
+                    10349965,
+                    33331760,
+                    83865399664,
+                    83865399831,
+                    83865399914
+                  ],
+                  [
+                    83923703174,
+                    3,
+                    8696619,
+                    33331760,
+                    83915520998,
+                    83915521123,
+                    83915521248
+                  ],
+                  [
+                    83957187758,
+                    4,
+                    7373942,
+                    33331760,
+                    83928564706,
+                    83928564956,
+                    83928565081
+                  ],
+                  [
+                    83990786299,
+                    5,
+                    6315800,
+                    33331760,
+                    83963211289,
+                    83963211456,
+                    83963211581
+                  ],
+                  [
+                    84024394091,
+                    6,
+                    5469287,
+                    33331760,
+                    83998850040,
+                    83998850248,
+                    83998850331
+                  ],
+                  [
+                    84058025883,
+                    7,
+                    4792076,
+                    33331760,
+                    84031656415,
+                    84031656623,
+                    84031656748
+                  ],
+                  [
+                    84091536758,
+                    8,
+                    4250308,
+                    33331760,
+                    84064283623,
+                    84064283831,
+                    84064283956
+                  ],
+                  [
+                    84124983841,
+                    9,
+                    3816893,
+                    33331760,
+                    84098148456,
+                    84098148706,
+                    84098148831
+                  ],
+                  [
+                    84158458508,
+                    10,
+                    3470161,
+                    33331760,
+                    84147160540,
+                    84147160873,
+                    84147160998
+                  ],
+                  [
+                    84192066008,
+                    11,
+                    3192775,
+                    33331760,
+                    84172227623,
+                    84172228373,
+                    84172228540
+                  ],
+                  [
+                    84225564300,
+                    12,
+                    2970867,
+                    33331760,
+                    84199733706,
+                    84199734206,
+                    84199734331
+                  ],
+                  [
+                    84259066258,
+                    13,
+                    2793340,
+                    33331760,
+                    84228706748,
+                    84228706998,
+                    84228707123
+                  ],
+                  [
+                    84292567216,
+                    14,
+                    2651319,
+                    33331760,
+                    84269844915,
+                    84269845248,
+                    84269845373
+                  ],
+                  [
+                    84326073466,
+                    15,
+                    2537702,
+                    33331760,
+                    84295664040,
+                    84295664415,
+                    84295664498
+                  ],
+                  [
+                    84359519216,
+                    16,
+                    2446808,
+                    33331760,
+                    84330725623,
+                    84330725831,
+                    84330725956
+                  ],
+                  [
+                    84393101466,
+                    17,
+                    2374093,
+                    33331760,
+                    84375233623,
+                    84375233915,
+                    84375234040
+                  ],
+                  [
+                    84426910133,
+                    18,
+                    2315921,
+                    33331760,
+                    84399589373,
+                    84399589540,
+                    84399589665
+                  ],
+                  [
+                    84460351966,
+                    19,
+                    2269383,
+                    33331760,
+                    84442863706,
+                    84442864040,
+                    84442864123
+                  ],
+                  [
+                    84493837466,
+                    20,
+                    2269383,
+                    33331760,
+                    84470438956,
+                    84470439290,
+                    84470439373
+                  ],
+                  [
+                    84528800133,
+                    21,
+                    2269383,
+                    33331760,
+                    84508889748,
+                    84508890373,
+                    84508890456
+                  ],
+                  [
+                    84562252841,
+                    22,
+                    2269383,
+                    33331760,
+                    84536278540,
+                    84536278748,
+                    84536278873
+                  ],
+                  [
+                    84597456883,
+                    23,
+                    2269383,
+                    33331760,
+                    84571652665,
+                    84571653081,
+                    84571653165
+                  ],
+                  [
+                    84631060091,
+                    24,
+                    2269383,
+                    33331760,
+                    84609105331,
+                    84609105665,
+                    84609105748
+                  ],
+                  [
+                    84664627633,
+                    25,
+                    2269383,
+                    33331760,
+                    84649277706,
+                    84649277915,
+                    84649277998
+                  ],
+                  [
+                    84698080800,
+                    26,
+                    2269383,
+                    33331760,
+                    84673926831,
+                    84673926956,
+                    84673927081
+                  ],
+                  [
+                    84731530800,
+                    27,
+                    2269383,
+                    33331760,
+                    84708887873,
+                    84708888332,
+                    84708888457
+                  ],
+                  [
+                    84764993800,
+                    28,
+                    2269383,
+                    33331760,
+                    84741547082,
+                    84741547373,
+                    84741547498
+                  ]
+                ],
+                "frame_interval_p99_ns": 35204042
+              }
+            ],
+            "elapsed_ms": 2019,
+            "completed_requested_duration": false,
+            "status": "failed",
+            "error": "IllegalStateException: critical_thermal_status:4"
+          }
+        ],
+        "requested_seconds": 90,
+        "recovery_limit": 3,
+        "started_utc": "2026-11-01T09:36:49.502801Z",
+        "dual_rear": "not requested",
+        "backend": "camera2",
+        "status": "failed",
+        "recoveries": 0,
+        "thermal_status": 4,
+        "transport_status": "failed",
+        "completed_utc": "2026-11-01T09:36:51.675697Z"
+      },
+      "shutdown_seconds": 0.6533284170145635,
+      "shutdown_clock": "critical override to completed report"
+    }
+  ],
+  "moderate_pause": {
+    "modeld": {
+      "daemon": "modeld",
+      "pid": 3239,
+      "vehicle_tx_enabled": false,
+      "engagement_allowed": false,
+      "work_samples": 0,
+      "deadline_misses": 0,
+      "phase": "thermal_paused",
+      "simulation": false,
+      "thermal_status": 2,
+      "target_suspended": true,
+      "missing_physical_sensors": [
+        "0",
+        "2"
+      ],
+      "calibrated": false,
+      "valid": false,
+      "blocker": "Bench inference paused at Android MODERATE; requires ten cool seconds before resuming",
+      "target_hz": 20,
+      "computed_frames": 0,
+      "recurrent_resets": 1,
+      "p99_stages_ms": {}
+    },
+    "dmonitoringmodeld": {
+      "daemon": "dmonitoringmodeld",
+      "pid": 3246,
+      "vehicle_tx_enabled": false,
+      "engagement_allowed": false,
+      "work_samples": 0,
+      "deadline_misses": 0,
+      "phase": "thermal_paused",
+      "simulation": false,
+      "thermal_status": 2,
+      "target_suspended": true,
+      "missing_physical_sensors": [
+        "1"
+      ],
+      "calibrated": false,
+      "valid": false,
+      "blocker": "Bench inference paused at Android MODERATE; requires ten cool seconds before resuming",
+      "target_hz": 20,
+      "computed_frames": 0,
+      "recurrent_resets": 1,
+      "p99_stages_ms": {}
+    }
+  },
+  "moderate_resumed": {
+    "modeld": {
+      "daemon": "modeld",
+      "pid": 3239,
+      "vehicle_tx_enabled": false,
+      "engagement_allowed": false,
+      "work_samples": 0,
+      "deadline_misses": 0,
+      "phase": "waiting_for_camera",
+      "simulation": false,
+      "thermal_status": 0,
+      "target_suspended": false,
+      "missing_physical_sensors": [
+        "0",
+        "2"
+      ],
+      "calibrated": false,
+      "valid": false,
+      "blocker": "Distinct narrow and wide rear streams are required",
+      "target_hz": 20,
+      "computed_frames": 0,
+      "recurrent_resets": 1,
+      "p99_stages_ms": {}
+    },
+    "dmonitoringmodeld": {
+      "daemon": "dmonitoringmodeld",
+      "pid": 3246,
+      "vehicle_tx_enabled": false,
+      "engagement_allowed": false,
+      "work_samples": 0,
+      "deadline_misses": 0,
+      "phase": "waiting_for_camera",
+      "simulation": false,
+      "thermal_status": 0,
+      "target_suspended": false,
+      "missing_physical_sensors": [
+        "1"
+      ],
+      "calibrated": false,
+      "valid": false,
+      "blocker": "Driver camera unavailable",
+      "target_hz": 20,
+      "computed_frames": 0,
+      "recurrent_resets": 1,
+      "p99_stages_ms": {}
+    }
+  },
+  "live_validator": {
+    "status": "failed",
+    "error": "RuntimeError: Unsafe or unavailable Android thermal state: 4",
+    "cleanup": {
+      "processes": [],
+      "camera_provider_processes": [
+        "352 android.hardware.camera.provider.ranchu",
+        "353 android.hardware.camera.provider@2.7-service-google",
+        "413 cameraserver"
+      ],
+      "camera_owned": false,
+      "thermal_status": 4,
+      "skin_c": 30.8,
+      "thermal_override": true
+    },
+    "elapsed_s": 0.03411895799217746
+  },
+  "new_activity_stop": {
+    "vehicle_tx_enabled": false,
+    "valid": false,
+    "sessions": [
+      {
+        "camera_ids": [
+          "0",
+          "1"
+        ],
+        "width": 1280,
+        "height": 720,
+        "logical_camera": null,
+        "requested_duration_ms": 89851,
+        "startup_order": "open_all_then_configure",
+        "opened_camera_ids": [
+          "0",
+          "1"
+        ],
+        "image_callbacks_drained": true,
+        "camera_close_callbacks_complete": true,
+        "request_template": "record",
+        "stabilization": "disabled when advertised",
+        "sensor_pairs": [
+          {
+            "camera_ids": [
+              "0",
+              "1"
+            ],
+            "overlap_ns": 1919683543,
+            "distinct_sensor_evidence": true,
+            "nearest_skew_p99_ns": 5578875
+          }
+        ],
+        "overlap_ns": 1919683543,
+        "nearest_skew_p99_ns": 5578875,
+        "skew_sampling": "last 4096 timestamps per stream, shared overlap only",
+        "distinct_sensor_evidence": true,
+        "streams": [
+          {
+            "sensor_id": "0",
+            "width": 1280,
+            "height": 720,
+            "image_rotation_applied_degrees": 0,
+            "output_width": 1280,
+            "output_height": 720,
+            "display_degrees_at_session_start": 90,
+            "mirrored": false,
+            "sensor_orientation": 90,
+            "timestamp_source": 1,
+            "intrinsic_calibration": [],
+            "lens_distortion": [],
+            "visionipc_valid": false,
+            "visionipc_stream": 0,
+            "focal_lengths_mm": [
+              3.3
+            ],
+            "frames": 63,
+            "fps": 29.68838448191706,
+            "first_timestamp_ns": 89627722261,
+            "last_timestamp_ns": 91716081095,
+            "timestamp_errors": 0,
+            "changed_frames": 62,
+            "metadata_failures": 0,
+            "uncaptured_requests": 0,
+            "lost_buffers": 0,
+            "physical_metadata_frames": 63,
+            "measured_focal_length_mm": 3.3,
+            "packing_errors": 0,
+            "packing_p99_ns": 8581333,
+            "delivery_age_available": true,
+            "delivery_age_p50_ns": -30849490,
+            "delivery_age_p95_ns": -22947969,
+            "delivery_age_p99_ns": -20870490,
+            "delivery_over_100ms": 0,
+            "acquisition_age_p50_ns": -31347343,
+            "acquisition_age_p95_ns": -25634385,
+            "acquisition_age_p99_ns": -21038510,
+            "delivery_future_timestamps": 63,
+            "clock_sample_columns": "sensor_raw,elapsed_before,monotonic,elapsed_after",
+            "clock_samples_ns": [
+              [
+                89627722261,
+                89600342584,
+                89600342834,
+                89600342959
+              ],
+              [
+                89662337761,
+                89637035792,
+                89637035959,
+                89637036084
+              ],
+              [
+                89695880886,
+                89672931167,
+                89672931292,
+                89672931417
+              ],
+              [
+                89729426594,
+                89697735626,
+                89697735792,
+                89697735876
+              ],
+              [
+                89762861761,
+                89732712459,
+                89732712626,
+                89732712751
+              ],
+              [
+                89796367469,
+                89765620501,
+                89765620626,
+                89765620792
+              ],
+              [
+                89829874761,
+                89798122001,
+                89798122126,
+                89798122251
+              ],
+              [
+                89863306677,
+                89832965292,
+                89832965501,
+                89832965626
+              ],
+              [
+                89896892511,
+                89865105834,
+                89865105959,
+                89865106042
+              ],
+              [
+                89930484844,
+                89902880667,
+                89902880917,
+                89902881042
+              ],
+              [
+                89964070761,
+                89932290959,
+                89932291084,
+                89932291209
+              ],
+              [
+                89997542261,
+                89965588251,
+                89965588376,
+                89965588501
+              ],
+              [
+                90031190469,
+                89999988334,
+                89999988501,
+                89999988626
+              ],
+              [
+                90064760094,
+                90033204626,
+                90033204792,
+                90033204917
+              ],
+              [
+                90098185969,
+                90068223792,
+                90068223959,
+                90068224084
+              ],
+              [
+                90131678177,
+                90106009709,
+                90106009876,
+                90106009959
+              ],
+              [
+                90168587427,
+                90137253292,
+                90137253459,
+                90137253542
+              ],
+              [
+                90202023219,
+                90170599084,
+                90170599292,
+                90170599417
+              ],
+              [
+                90235529177,
+                90204871376,
+                90204871542,
+                90204871667
+              ],
+              [
+                90269025761,
+                90238174542,
+                90238174751,
+                90238174834
+              ],
+              [
+                90302456844,
+                90271747667,
+                90271747792,
+                90271747917
+              ],
+              [
+                90335949428,
+                90303965334,
+                90303965459,
+                90303965584
+              ],
+              [
+                90369425928,
+                90339258543,
+                90339258668,
+                90339258793
+              ],
+              [
+                90402924261,
+                90374346334,
+                90374346501,
+                90374346626
+              ],
+              [
+                90437444053,
+                90416572293,
+                90416572459,
+                90416572584
+              ],
+              [
+                90470939261,
+                90448227626,
+                90448227834,
+                90448227959
+              ],
+              [
+                90504372636,
+                90472761251,
+                90472761418,
+                90472761543
+              ],
+              [
+                90537863886,
+                90507972793,
+                90507972918,
+                90507973043
+              ],
+              [
+                90571294386,
+                90540481001,
+                90540481168,
+                90540481293
+              ],
+              [
+                90604788094,
+                90574085376,
+                90574085543,
+                90574085668
+              ],
+              [
+                90638293136,
+                90606465418,
+                90606465626,
+                90606465751
+              ],
+              [
+                90671725761,
+                90645370584,
+                90645370751,
+                90645370876
+              ],
+              [
+                90705213011,
+                90676675543,
+                90676675668,
+                90676675793
+              ],
+              [
+                90738679428,
+                90716585543,
+                90716585751,
+                90716585834
+              ],
+              [
+                90773216178,
+                90747784459,
+                90747784626,
+                90747784751
+              ],
+              [
+                90806677178,
+                90779258251,
+                90779258418,
+                90779258543
+              ],
+              [
+                90840182386,
+                90812068459,
+                90812068668,
+                90812068834
+              ],
+              [
+                90873614803,
+                90841715168,
+                90841715334,
+                90841715459
+              ],
+              [
+                90907205886,
+                90876745043,
+                90876745209,
+                90876745334
+              ],
+              [
+                90940680261,
+                90909034626,
+                90909034793,
+                90909034959
+              ],
+              [
+                90974301428,
+                90944563084,
+                90944563251,
+                90944563376
+              ],
+              [
+                91009254803,
+                90978138793,
+                90978138959,
+                90978139084
+              ],
+              [
+                91043162678,
+                91011948001,
+                91011948126,
+                91011948251
+              ],
+              [
+                91079343970,
+                91047186876,
+                91047187043,
+                91047187126
+              ],
+              [
+                91112806095,
+                91082023126,
+                91082023293,
+                91082023418
+              ],
+              [
+                91146295095,
+                91114530960,
+                91114531126,
+                91114531210
+              ],
+              [
+                91179795886,
+                91153062835,
+                91153063001,
+                91153063126
+              ],
+              [
+                91213294720,
+                91181275293,
+                91181275501,
+                91181275626
+              ],
+              [
+                91246747053,
+                91216364460,
+                91216364626,
+                91216364710
+              ],
+              [
+                91280180928,
+                91248755626,
+                91248755751,
+                91248755876
+              ],
+              [
+                91313616386,
+                91282439501,
+                91282439668,
+                91282439793
+              ],
+              [
+                91347111803,
+                91315158668,
+                91315158835,
+                91315158918
+              ],
+              [
+                91380545053,
+                91348834376,
+                91348834543,
+                91348834668
+              ],
+              [
+                91414110928,
+                91382612335,
+                91382612460,
+                91382612585
+              ],
+              [
+                91447723261,
+                91415539918,
+                91415540126,
+                91415540210
+              ],
+              [
+                91481597553,
+                91449591793,
+                91449592001,
+                91449592126
+              ],
+              [
+                91515213553,
+                91483208918,
+                91483209085,
+                91483209210
+              ],
+              [
+                91548694011,
+                91518760001,
+                91518760210,
+                91518760293
+              ],
+              [
+                91582212220,
+                91550352668,
+                91550352835,
+                91550352960
+              ],
+              [
+                91615708220,
+                91583793626,
+                91583793793,
+                91583793918
+              ],
+              [
+                91649152428,
+                91618656335,
+                91618656501,
+                91618656668
+              ],
+              [
+                91682586136,
+                91650745543,
+                91650745710,
+                91650745793
+              ],
+              [
+                91716081095,
+                91684139835,
+                91684140043,
+                91684140127
+              ]
+            ],
+            "capture_sample_columns": "sensor_raw,frame_number,exposure,duration,elapsed_before,monotonic,elapsed_after",
+            "capture_samples_ns": [
+              [
+                89627722261,
+                0,
+                15000000,
+                33331760,
+                89603018542,
+                89603018917,
+                89603019001
+              ],
+              [
+                89662337761,
+                1,
+                12833294,
+                33331760,
+                89640842834,
+                89640843126,
+                89640843251
+              ],
+              [
+                89695880886,
+                2,
+                11099929,
+                33331760,
+                89685148167,
+                89685148417,
+                89685148542
+              ],
+              [
+                89729426594,
+                3,
+                9713237,
+                33331760,
+                89710134417,
+                89710135126,
+                89710135251
+              ],
+              [
+                89762861761,
+                4,
+                8603884,
+                33331760,
+                89748495792,
+                89748496876,
+                89748497042
+              ],
+              [
+                89796367469,
+                5,
+                7716401,
+                33331760,
+                89768749167,
+                89768749959,
+                89768750084
+              ],
+              [
+                89829874761,
+                6,
+                7006415,
+                33331760,
+                89799601626,
+                89799601959,
+                89799602042
+              ],
+              [
+                89863306677,
+                7,
+                6438426,
+                33331760,
+                89841274834,
+                89841275084,
+                89841275209
+              ],
+              [
+                89896892511,
+                8,
+                5984035,
+                33331760,
+                89872331751,
+                89872332376,
+                89872332501
+              ],
+              [
+                89930484844,
+                9,
+                5620522,
+                33331760,
+                89906395209,
+                89906395501,
+                89906395667
+              ],
+              [
+                89964070761,
+                10,
+                5329711,
+                33331760,
+                89940433542,
+                89940434167,
+                89940434292
+              ],
+              [
+                89997542261,
+                11,
+                5097063,
+                33331760,
+                89975305292,
+                89975305501,
+                89975305626
+              ],
+              [
+                90031190469,
+                12,
+                4910944,
+                33331760,
+                90005537167,
+                90005537667,
+                90005537792
+              ],
+              [
+                90064760094,
+                13,
+                4762049,
+                33331760,
+                90035375584,
+                90035375876,
+                90035376001
+              ],
+              [
+                90098185969,
+                14,
+                4642933,
+                33331760,
+                90071341084,
+                90071341376,
+                90071341501
+              ],
+              [
+                90131678177,
+                15,
+                4547640,
+                33331760,
+                90109499459,
+                90109499792,
+                90109499917
+              ],
+              [
+                90168587427,
+                16,
+                4547640,
+                33331760,
+                90139799459,
+                90139799709,
+                90139799834
+              ],
+              [
+                90202023219,
+                17,
+                4547640,
+                33331760,
+                90176181917,
+                90176182292,
+                90176182417
+              ],
+              [
+                90235529177,
+                18,
+                4547640,
+                33331760,
+                90205055126,
+                90205055376,
+                90205055542
+              ],
+              [
+                90269025761,
+                19,
+                4547640,
+                33331760,
+                90238315209,
+                90238315376,
+                90238315501
+              ],
+              [
+                90302456844,
+                20,
+                4547640,
+                33331760,
+                90277932084,
+                90277932334,
+                90277932417
+              ],
+              [
+                90335949428,
+                21,
+                4547640,
+                33331760,
+                90311362668,
+                90311363543,
+                90311363668
+              ],
+              [
+                90369425928,
+                22,
+                4547640,
+                33331760,
+                90344226751,
+                90344227043,
+                90344227168
+              ],
+              [
+                90402924261,
+                23,
+                4547640,
+                33331760,
+                90380753543,
+                90380753751,
+                90380753876
+              ],
+              [
+                90437444053,
+                24,
+                4547640,
+                33331760,
+                90423299418,
+                90423299584,
+                90423299709
+              ],
+              [
+                90470939261,
+                25,
+                4547640,
+                33331760,
+                90452836251,
+                90452836543,
+                90452836668
+              ],
+              [
+                90504372636,
+                26,
+                4547640,
+                33331760,
+                90481862126,
+                90481862543,
+                90481862668
+              ],
+              [
+                90537863886,
+                27,
+                4547640,
+                33331760,
+                90526218293,
+                90526218751,
+                90526218918
+              ],
+              [
+                90571294386,
+                28,
+                4547640,
+                33331760,
+                90543164626,
+                90543164918,
+                90543165043
+              ],
+              [
+                90604788094,
+                29,
+                4547640,
+                33331760,
+                90586063918,
+                90586064126,
+                90586064209
+              ],
+              [
+                90638293136,
+                30,
+                4547640,
+                33331760,
+                90611818293,
+                90611818501,
+                90611818626
+              ],
+              [
+                90671725761,
+                31,
+                4547640,
+                33331760,
+                90646554126,
+                90646554459,
+                90646554584
+              ],
+              [
+                90705213011,
+                32,
+                4547640,
+                33331760,
+                90677146126,
+                90677146293,
+                90677146418
+              ],
+              [
+                90738679428,
+                33,
+                4547640,
+                33331760,
+                90728760043,
+                90728760751,
+                90728760876
+              ],
+              [
+                90773216178,
+                34,
+                4547640,
+                33331760,
+                90764630001,
+                90764630834,
+                90764630959
+              ],
+              [
+                90806677178,
+                35,
+                4547640,
+                33331760,
+                90786370459,
+                90786370959,
+                90786371084
+              ],
+              [
+                90840182386,
+                36,
+                4547640,
+                33331760,
+                90818973501,
+                90818973876,
+                90818973959
+              ],
+              [
+                90873614803,
+                37,
+                4547640,
+                33331760,
+                90847190376,
+                90847190668,
+                90847190793
+              ],
+              [
+                90907205886,
+                38,
+                4547640,
+                33331760,
+                90877324084,
+                90877324376,
+                90877324501
+              ],
+              [
+                90940680261,
+                39,
+                4547640,
+                33331760,
+                90927029459,
+                90927029668,
+                90927029793
+              ],
+              [
+                90974301428,
+                40,
+                4547640,
+                33331760,
+                90970682501,
+                90970683126,
+                90970683251
+              ],
+              [
+                91009254803,
+                41,
+                4547640,
+                33331760,
+                90979304668,
+                90979304959,
+                90979305126
+              ],
+              [
+                91043162678,
+                42,
+                4547640,
+                33331760,
+                91020724668,
+                91020724876,
+                91020725001
+              ],
+              [
+                91079343970,
+                43,
+                4547640,
+                33331760,
+                91056807960,
+                91056808168,
+                91056808293
+              ],
+              [
+                91112806095,
+                44,
+                4547640,
+                33331760,
+                91086865418,
+                91086865626,
+                91086865751
+              ],
+              [
+                91146295095,
+                45,
+                4547640,
+                33331760,
+                91123251376,
+                91123251835,
+                91123252001
+              ],
+              [
+                91179795886,
+                46,
+                4547640,
+                33331760,
+                91157079876,
+                91157080168,
+                91157080293
+              ],
+              [
+                91213294720,
+                47,
+                4547640,
+                33331760,
+                91193890668,
+                91193891043,
+                91193891210
+              ],
+              [
+                91246747053,
+                48,
+                4547640,
+                33331760,
+                91222084918,
+                91222087210,
+                91222087335
+              ],
+              [
+                91280180928,
+                49,
+                4547640,
+                33331760,
+                91249310876,
+                91249311126,
+                91249311251
+              ],
+              [
+                91313616386,
+                50,
+                4547640,
+                33331760,
+                91282920793,
+                91282921043,
+                91282921210
+              ],
+              [
+                91347111803,
+                51,
+                4547640,
+                33331760,
+                91316714668,
+                91316715126,
+                91316715251
+              ],
+              [
+                91380545053,
+                52,
+                4547640,
+                33331760,
+                91352689460,
+                91352690043,
+                91352690210
+              ],
+              [
+                91414110928,
+                53,
+                4547640,
+                33331760,
+                91383044335,
+                91383044543,
+                91383044668
+              ],
+              [
+                91447723261,
+                54,
+                4547640,
+                33331760,
+                91416281501,
+                91416281960,
+                91416282085
+              ],
+              [
+                91481597553,
+                55,
+                4547640,
+                33331760,
+                91450048835,
+                91450049043,
+                91450049168
+              ],
+              [
+                91515213553,
+                56,
+                4547640,
+                33331760,
+                91485151501,
+                91485152460,
+                91485152585
+              ],
+              [
+                91548694011,
+                57,
+                4547640,
+                33331760,
+                91519092918,
+                91519093168,
+                91519093251
+              ],
+              [
+                91582212220,
+                58,
+                4547640,
+                33331760,
+                91550960918,
+                91550961210,
+                91550961335
+              ],
+              [
+                91615708220,
+                59,
+                4547640,
+                33331760,
+                91583939418,
+                91583939626,
+                91583939751
+              ],
+              [
+                91649152428,
+                60,
+                4547640,
+                33331760,
+                91619027001,
+                91619027293,
+                91619027418
+              ],
+              [
+                91682586136,
+                61,
+                4547640,
+                33331760,
+                91651382960,
+                91651383251,
+                91651383376
+              ],
+              [
+                91716081095,
+                62,
+                4547640,
+                33331760,
+                91685132585,
+                91685132835,
+                91685132918
+              ]
+            ],
+            "frame_interval_p99_ns": 36909250
+          },
+          {
+            "sensor_id": "1",
+            "width": 1280,
+            "height": 720,
+            "image_rotation_applied_degrees": 0,
+            "output_width": 1280,
+            "output_height": 720,
+            "display_degrees_at_session_start": 90,
+            "mirrored": false,
+            "sensor_orientation": 270,
+            "timestamp_source": 1,
+            "intrinsic_calibration": [
+              3225.7742,
+              3225.7742,
+              960.5043,
+              540.46704,
+              0
+            ],
+            "lens_distortion": [
+              0.08807813,
+              -0.22617353,
+              0.16460505,
+              0,
+              0
+            ],
+            "visionipc_valid": false,
+            "visionipc_stream": 1,
+            "focal_lengths_mm": [
+              4.38
+            ],
+            "frames": 58,
+            "fps": 29.692393940577738,
+            "first_timestamp_ns": 89767321552,
+            "last_timestamp_ns": 91687005095,
+            "timestamp_errors": 0,
+            "changed_frames": 57,
+            "metadata_failures": 0,
+            "uncaptured_requests": 0,
+            "lost_buffers": 0,
+            "physical_metadata_frames": 58,
+            "measured_focal_length_mm": 4.38,
+            "packing_errors": 0,
+            "packing_p99_ns": 1856958,
+            "delivery_age_available": true,
+            "delivery_age_p50_ns": -30176823,
+            "delivery_age_p95_ns": -21209781,
+            "delivery_age_p99_ns": -18370218,
+            "delivery_over_100ms": 0,
+            "acquisition_age_p50_ns": -30532385,
+            "acquisition_age_p95_ns": -21448135,
+            "acquisition_age_p99_ns": -18746718,
+            "delivery_future_timestamps": 58,
+            "clock_sample_columns": "sensor_raw,elapsed_before,monotonic,elapsed_after",
+            "clock_samples_ns": [
+              [
+                89767321552,
+                89748949917,
+                89748950126,
+                89748950251
+              ],
+              [
+                89801135219,
+                89774574876,
+                89774575001,
+                89774575126
+              ],
+              [
+                89835320094,
+                89809582417,
+                89809582542,
+                89809582667
+              ],
+              [
+                89868885552,
+                89840831709,
+                89840831876,
+                89840832001
+              ],
+              [
+                89902355511,
+                89881144084,
+                89881144251,
+                89881144376
+              ],
+              [
+                89935819886,
+                89910130792,
+                89910130959,
+                89910131084
+              ],
+              [
+                89969418927,
+                89940671167,
+                89940671334,
+                89940671417
+              ],
+              [
+                90002901719,
+                89975157876,
+                89975158001,
+                89975158126
+              ],
+              [
+                90036399052,
+                90005789292,
+                90005789417,
+                90005789542
+              ],
+              [
+                90069844886,
+                90039666542,
+                90039666709,
+                90039666834
+              ],
+              [
+                90103322677,
+                90071547042,
+                90071547209,
+                90071547334
+              ],
+              [
+                90136769177,
+                90106399417,
+                90106399542,
+                90106399667
+              ],
+              [
+                90170195261,
+                90139261959,
+                90139262084,
+                90139262209
+              ],
+              [
+                90203639719,
+                90171741501,
+                90171741667,
+                90171741792
+              ],
+              [
+                90237449969,
+                90205320417,
+                90205320542,
+                90205320667
+              ],
+              [
+                90270887469,
+                90238754876,
+                90238755001,
+                90238755126
+              ],
+              [
+                90304426886,
+                90275501459,
+                90275501626,
+                90275501751
+              ],
+              [
+                90337865511,
+                90311624459,
+                90311624626,
+                90311624751
+              ],
+              [
+                90371311261,
+                90341527376,
+                90341527543,
+                90341527626
+              ],
+              [
+                90404674678,
+                90380615793,
+                90380615959,
+                90380616084
+              ],
+              [
+                90438094636,
+                90416268834,
+                90416268959,
+                90416269084
+              ],
+              [
+                90471814053,
+                90448565376,
+                90448565501,
+                90448565668
+              ],
+              [
+                90505406969,
+                90475667501,
+                90475667626,
+                90475667751
+              ],
+              [
+                90538919719,
+                90510222501,
+                90510222626,
+                90510222751
+              ],
+              [
+                90572443094,
+                90540781584,
+                90540781709,
+                90540781834
+              ],
+              [
+                90605872386,
+                90574451043,
+                90574451168,
+                90574451293
+              ],
+              [
+                90639471678,
+                90611647543,
+                90611648168,
+                90611648251
+              ],
+              [
+                90673151719,
+                90645875418,
+                90645875584,
+                90645875709
+              ],
+              [
+                90706576386,
+                90677002834,
+                90677002959,
+                90677003084
+              ],
+              [
+                90740041303,
+                90719068043,
+                90719068209,
+                90719068293
+              ],
+              [
+                90773992719,
+                90748188543,
+                90748188709,
+                90748188834
+              ],
+              [
+                90808521719,
+                90781295043,
+                90781295459,
+                90781295584
+              ],
+              [
+                90845434844,
+                90813425084,
+                90813425209,
+                90813425334
+              ],
+              [
+                90878882428,
+                90846818251,
+                90846818376,
+                90846818501
+              ],
+              [
+                90912756344,
+                90880675793,
+                90880675918,
+                90880676043
+              ],
+              [
+                90946204469,
+                90913996876,
+                90913997043,
+                90913997126
+              ],
+              [
+                90979703094,
+                90947505626,
+                90947505751,
+                90947505876
+              ],
+              [
+                91013189428,
+                90981636168,
+                90981636335,
+                90981636460
+              ],
+              [
+                91047246511,
+                91018652335,
+                91018652460,
+                91018652585
+              ],
+              [
+                91082687553,
+                91052217585,
+                91052217751,
+                91052217918
+              ],
+              [
+                91116129928,
+                91086148418,
+                91086148543,
+                91086148710
+              ],
+              [
+                91149574220,
+                91119248043,
+                91119248251,
+                91119248376
+              ],
+              [
+                91183019678,
+                91153356376,
+                91153356543,
+                91153356626
+              ],
+              [
+                91217773720,
+                91188419418,
+                91188459585,
+                91188460126
+              ],
+              [
+                91251481553,
+                91222951126,
+                91222951293,
+                91222951376
+              ],
+              [
+                91284924761,
+                91253975501,
+                91253975626,
+                91253975751
+              ],
+              [
+                91318979178,
+                91289698001,
+                91289698168,
+                91289698251
+              ],
+              [
+                91352453970,
+                91320517126,
+                91320517251,
+                91320517376
+              ],
+              [
+                91385901386,
+                91354525376,
+                91354525501,
+                91354525668
+              ],
+              [
+                91419391136,
+                91387727501,
+                91387727710,
+                91387727793
+              ],
+              [
+                91452839261,
+                91420790960,
+                91420791085,
+                91420791210
+              ],
+              [
+                91486281470,
+                91454385793,
+                91454385918,
+                91454386085
+              ],
+              [
+                91519733886,
+                91487756126,
+                91487756251,
+                91487756376
+              ],
+              [
+                91553182803,
+                91521363835,
+                91521363960,
+                91521364085
+              ],
+              [
+                91586629386,
+                91554559460,
+                91554559626,
+                91554559751
+              ],
+              [
+                91620080136,
+                91587828710,
+                91587828918,
+                91587829085
+              ],
+              [
+                91653556678,
+                91621340918,
+                91621341043,
+                91621341168
+              ],
+              [
+                91687005095,
+                91656330668,
+                91656330793,
+                91656330918
+              ]
+            ],
+            "capture_sample_columns": "sensor_raw,frame_number,exposure,duration,elapsed_before,monotonic,elapsed_after",
+            "capture_samples_ns": [
+              [
+                89767321552,
+                0,
+                15000000,
+                33331760,
+                89752613376,
+                89752614417,
+                89752614542
+              ],
+              [
+                89801135219,
+                1,
+                12416647,
+                33331760,
+                89776762626,
+                89776763001,
+                89776763126
+              ],
+              [
+                89835320094,
+                2,
+                10349965,
+                33331760,
+                89819879209,
+                89819880542,
+                89819880667
+              ],
+              [
+                89868885552,
+                3,
+                8696619,
+                33331760,
+                89852547709,
+                89852549042,
+                89852549209
+              ],
+              [
+                89902355511,
+                4,
+                7373942,
+                33331760,
+                89884842626,
+                89884842917,
+                89884843042
+              ],
+              [
+                89935819886,
+                5,
+                6315800,
+                33331760,
+                89913485459,
+                89913485709,
+                89913485792
+              ],
+              [
+                89969418927,
+                6,
+                5469287,
+                33331760,
+                89940814292,
+                89940814501,
+                89940814584
+              ],
+              [
+                90002901719,
+                7,
+                4792076,
+                33331760,
+                89976305626,
+                89976305959,
+                89976306042
+              ],
+              [
+                90036399052,
+                8,
+                4250308,
+                33331760,
+                90009539501,
+                90009539959,
+                90009540084
+              ],
+              [
+                90069844886,
+                9,
+                3816893,
+                33331760,
+                90040797834,
+                90040798084,
+                90040798209
+              ],
+              [
+                90103322677,
+                10,
+                3470161,
+                33331760,
+                90071678626,
+                90071678834,
+                90071678959
+              ],
+              [
+                90136769177,
+                11,
+                3192775,
+                33331760,
+                90109563376,
+                90109563584,
+                90109563667
+              ],
+              [
+                90170195261,
+                12,
+                2970867,
+                33331760,
+                90139865001,
+                90139865209,
+                90139865292
+              ],
+              [
+                90203639719,
+                13,
+                2793340,
+                33331760,
+                90180259751,
+                90180260376,
+                90180260501
+              ],
+              [
+                90237449969,
+                14,
+                2651319,
+                33331760,
+                90208081584,
+                90208081917,
+                90208082042
+              ],
+              [
+                90270887469,
+                15,
+                2537702,
+                33331760,
+                90239115126,
+                90239115417,
+                90239115584
+              ],
+              [
+                90304426886,
+                16,
+                2446808,
+                33331760,
+                90277995751,
+                90277995876,
+                90277995959
+              ],
+              [
+                90337865511,
+                17,
+                2374093,
+                33331760,
+                90321688501,
+                90321688959,
+                90321689126
+              ],
+              [
+                90371311261,
+                18,
+                2315921,
+                33331760,
+                90344294793,
+                90344295001,
+                90344295126
+              ],
+              [
+                90404674678,
+                19,
+                2269383,
+                33331760,
+                90380818834,
+                90380819001,
+                90380819126
+              ],
+              [
+                90438094636,
+                20,
+                2269383,
+                33331760,
+                90423219084,
+                90423220084,
+                90423220209
+              ],
+              [
+                90471814053,
+                21,
+                2269383,
+                33331760,
+                90448726251,
+                90448726459,
+                90448726584
+              ],
+              [
+                90505406969,
+                22,
+                2269383,
+                33331760,
+                90480197626,
+                90480198001,
+                90480198126
+              ],
+              [
+                90538919719,
+                23,
+                2269383,
+                33331760,
+                90515933459,
+                90515933834,
+                90515933959
+              ],
+              [
+                90572443094,
+                24,
+                2269383,
+                33331760,
+                90541158918,
+                90541159334,
+                90541159501
+              ],
+              [
+                90605872386,
+                25,
+                2269383,
+                33331760,
+                90585985418,
+                90585986001,
+                90585986084
+              ],
+              [
+                90639471678,
+                26,
+                2269383,
+                33331760,
+                90611867126,
+                90611867293,
+                90611867376
+              ],
+              [
+                90673151719,
+                27,
+                2269383,
+                33331760,
+                90647333668,
+                90647334043,
+                90647334168
+              ],
+              [
+                90706576386,
+                28,
+                2269383,
+                33331760,
+                90684280459,
+                90684280918,
+                90684281001
+              ],
+              [
+                90740041303,
+                29,
+                2269383,
+                33331760,
+                90719219793,
+                90719220043,
+                90719220168
+              ],
+              [
+                90773992719,
+                30,
+                2269383,
+                33331760,
+                90773144084,
+                90773145168,
+                90773145293
+              ],
+              [
+                90808521719,
+                31,
+                2269383,
+                33331760,
+                90783227959,
+                90783228334,
+                90783228459
+              ],
+              [
+                90845434844,
+                32,
+                2269383,
+                33331760,
+                90819662418,
+                90819662709,
+                90819662793
+              ],
+              [
+                90878882428,
+                33,
+                2269383,
+                33331760,
+                90849478376,
+                90849478709,
+                90849478834
+              ],
+              [
+                90912756344,
+                34,
+                2269383,
+                33331760,
+                90881101418,
+                90881101709,
+                90881101793
+              ],
+              [
+                90946204469,
+                35,
+                2269383,
+                33331760,
+                90926825293,
+                90926825959,
+                90926826084
+              ],
+              [
+                90979703094,
+                36,
+                2269383,
+                33331760,
+                90963132376,
+                90963133001,
+                90963133168
+              ],
+              [
+                91013189428,
+                37,
+                2269383,
+                33331760,
+                90986645335,
+                90986645751,
+                90986645918
+              ],
+              [
+                91047246511,
+                38,
+                2269383,
+                33331760,
+                91020492293,
+                91020492626,
+                91020492751
+              ],
+              [
+                91082687553,
+                39,
+                2269383,
+                33331760,
+                91056496876,
+                91056497126,
+                91056497293
+              ],
+              [
+                91116129928,
+                40,
+                2269383,
+                33331760,
+                91086675293,
+                91086675626,
+                91086675710
+              ],
+              [
+                91149574220,
+                41,
+                2269383,
+                33331760,
+                91147816376,
+                91147816918,
+                91147817043
+              ],
+              [
+                91183019678,
+                42,
+                2269383,
+                33331760,
+                91156758168,
+                91156758501,
+                91156758626
+              ],
+              [
+                91217773720,
+                43,
+                2269383,
+                33331760,
+                91194143710,
+                91194144251,
+                91194144376
+              ],
+              [
+                91251481553,
+                44,
+                2269383,
+                33331760,
+                91225770293,
+                91225770585,
+                91225770710
+              ],
+              [
+                91284924761,
+                45,
+                2269383,
+                33331760,
+                91254501418,
+                91254501668,
+                91254501793
+              ],
+              [
+                91318979178,
+                46,
+                2269383,
+                33331760,
+                91290508543,
+                91290508876,
+                91290509043
+              ],
+              [
+                91352453970,
+                47,
+                2269383,
+                33331760,
+                91321322460,
+                91321322710,
+                91321322835
+              ],
+              [
+                91385901386,
+                48,
+                2269383,
+                33331760,
+                91358548043,
+                91358548376,
+                91358548543
+              ],
+              [
+                91419391136,
+                49,
+                2269383,
+                33331760,
+                91389638876,
+                91389639168,
+                91389639335
+              ],
+              [
+                91452839261,
+                50,
+                2269383,
+                33331760,
+                91421151085,
+                91421151376,
+                91421151460
+              ],
+              [
+                91486281470,
+                51,
+                2269383,
+                33331760,
+                91454505293,
+                91454505460,
+                91454505543
+              ],
+              [
+                91519733886,
+                52,
+                2269383,
+                33331760,
+                91487872335,
+                91487872501,
+                91487872585
+              ],
+              [
+                91553182803,
+                53,
+                2269383,
+                33331760,
+                91521475168,
+                91521475335,
+                91521475460
+              ],
+              [
+                91586629386,
+                54,
+                2269383,
+                33331760,
+                91554676585,
+                91554676793,
+                91554676918
+              ],
+              [
+                91620080136,
+                55,
+                2269383,
+                33331760,
+                91587974293,
+                91587974501,
+                91587974626
+              ],
+              [
+                91653556678,
+                56,
+                2269383,
+                33331760,
+                91621845085,
+                91621845293,
+                91621845418
+              ],
+              [
+                91687005095,
+                57,
+                2269383,
+                33331760,
+                91658411251,
+                91658411543,
+                91658411668
+              ]
+            ],
+            "frame_interval_p99_ns": 36913125
+          }
+        ],
+        "elapsed_ms": 3145,
+        "completed_requested_duration": false,
+        "status": "failed",
+        "error": "IllegalStateException: Live camera session stopped"
+      }
+    ],
+    "requested_seconds": 90,
+    "recovery_limit": 3,
+    "started_utc": "2026-11-01T09:36:55.219581Z",
+    "dual_rear": "not requested",
+    "backend": "camera2",
+    "status": "stopped",
+    "recoveries": 0,
+    "thermal_status": 0,
+    "transport_status": "failed",
+    "completed_utc": "2026-11-01T09:36:58.547590Z"
+  },
+  "override_reset": true
+}

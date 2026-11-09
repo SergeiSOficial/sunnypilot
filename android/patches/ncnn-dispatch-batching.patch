@@ -1,0 +1,89 @@
+--- a/src/fold3_dispatch.h
++++ b/src/fold3_dispatch.h
+@@ -0,0 +1,18 @@
++// Fold 3 diagnostic batch limit; retain bounded timeout-prevention submissions.
++#ifndef NCNN_FOLD3_DISPATCH_H
++#define NCNN_FOLD3_DISPATCH_H
++#include <stdint.h>
++#include <string.h>
++namespace ncnn {
++static inline uint32_t fold3_dispatch_limit(uint32_t vendor, const char* name, uint32_t stock, uint32_t diagnostic = 0)
++{
++    // Session-local diagnostic override on the exact Fold GPU only.
++    if (vendor != 0x5143 || !name || strcmp(name, "Adreno (TM) 660") != 0)
++        return stock;
++    if (diagnostic == 131072u || diagnostic == 262144u || diagnostic == 524288u)
++        return diagnostic;
++    // Preserve the existing default and its stock upper bounds.
++    return stock < 262144u ? 262144u : stock;
++}
++}
++#endif
+--- a/src/benchmark.h
++++ b/src/benchmark.h
+@@ -26,6 +26,9 @@
+     bool enabled = false;
+     bool valid = true;
+     uint32_t timestamp_bits = 0;
++    uint32_t internal_submissions = 0, dispatch_limit = 0, rough_score = 0;
++    uint64_t submitted_groups = 0;
++    double internal_submit_wait_ms = 0.;
+     std::vector<Fold3VulkanTiming> records;
+ };
+ NCNN_EXPORT Fold3VulkanProfile& fold3_vulkan_profile();
+--- a/src/net.cpp
++++ b/src/net.cpp
+@@ -2,6 +2,7 @@
+ // SPDX-License-Identifier: BSD-3-Clause
+ 
+ #include "net.h"
++#include "fold3_dispatch.h"
+ 
+ #include "cpu.h"
+ #include "datareader.h"
+@@ -297,6 +298,14 @@
+     {
+         pending_dispatch_threshold = 256 * 1024; // 256K
+     }
++    pending_dispatch_threshold = fold3_dispatch_limit(vkdev->info.vendor_id(), vkdev->info.device_name(), pending_dispatch_threshold, opt.fold3_diagnostic_dispatch_limit);
++#if NCNN_BENCHMARK
++    if (fold3_vulkan_profile().enabled)
++    {
++        fold3_vulkan_profile().dispatch_limit = pending_dispatch_threshold;
++        fold3_vulkan_profile().rough_score = rough_score;
++    }
++#endif
+     if (cmd.pending_dispatch_total() > pending_dispatch_threshold)
+     {
+         cmd_submit_and_wait = true;
+@@ -305,7 +314,19 @@
+     int ret;
+     if (cmd_submit_and_wait)
+     {
++#if NCNN_BENCHMARK
++        const bool measure_submit = fold3_vulkan_profile().enabled;
++        const double submit_start = measure_submit ? get_current_time() : 0.;
++        if (measure_submit)
++        {
++            fold3_vulkan_profile().internal_submissions++;
++            fold3_vulkan_profile().submitted_groups += cmd.pending_dispatch_total();
++        }
++#endif
+         ret = cmd.submit_and_wait();
++#if NCNN_BENCHMARK
++        if (measure_submit) fold3_vulkan_profile().internal_submit_wait_ms += get_current_time() - submit_start;
++#endif
+ 
+ #if NCNN_BENCHMARK
+         if (fold3_vulkan_profile().enabled)
+--- a/src/option.h
++++ b/src/option.h
+@@ -22,6 +22,9 @@
+ 
+ public:
++    // Explicit diagnostic session setting; zero preserves production defaults.
++    unsigned int fold3_diagnostic_dispatch_limit = 0;
++
+     // light mode
+     // intermediate blob will be recycled when enabled
+     // enabled by default

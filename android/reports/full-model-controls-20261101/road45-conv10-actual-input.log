@@ -1,0 +1,28 @@
+{
+  "candidate": "candidate45",
+  "apk_sha256": "9868e5b9ca7d24feaefd9acfbcdabaf4f5226e85063e03fffec4400aecc1a859",
+  "diagnostic_only": true,
+  "original_node": "model/node_conv2d_10",
+  "operator": "Conv",
+  "tensor": "android_precision_100_result",
+  "input_tensor": "InsertedPrecisionFreeCast_model/gelu_4",
+  "actual_gpu_input_sha256": "b9572eb4ce1cb8c0e8e1f009bd8380ad5acd5893cb5ca3cf0f417b77d6f37227",
+  "diagnostic_graph_sha256": "ce74abae9f8093e2a720701af08f73072528ca860968f83b339d6c61018710c9",
+  "parity_on_actual_input": {
+    "passed": true,
+    "finite": true,
+    "shape": [
+      1,
+      64,
+      32,
+      64
+    ],
+    "dtype": "float32",
+    "expected_nonfinite_elements": 0,
+    "unexpected_nonfinite_elements": 0,
+    "exact": false,
+    "max_abs_error": 0.0001220703125,
+    "mismatched_elements": 0
+  },
+  "note": "An isolated local operation cannot qualify the complete untapped model."
+}

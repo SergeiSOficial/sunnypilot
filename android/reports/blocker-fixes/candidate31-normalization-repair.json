@@ -1,0 +1,62 @@
+{
+  "candidate": "candidate31",
+  "apk_sha256": "fb10875324bd04fe99342516d060eb59689829f8cf8196d7e5b1202bc0832302",
+  "diagnostic_only": true,
+  "vehicle_tx_enabled": false,
+  "scope": "Road seed7 recurrent frame10, retained tensor trace; complete model and performance acceptance are separate",
+  "original_sha256": "65a08adc31d5c456219687d99b7bf5e44d61dae2d49ea67850e76105c7248cce",
+  "rtol": 0.001,
+  "atol": 0.0001,
+  "before": {
+    "candidate": "candidate30",
+    "report": "candidate30-road-recurrent-trace-comparison.json",
+    "exact_tensors": 450,
+    "first_difference": {
+      "index": 442,
+      "operator": "LayerNormalization",
+      "name": "model/p_node_layer_norm",
+      "output": "model/p_layer_norm",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        9,
+        512
+      ],
+      "dtype": "float16",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 3.0517578125e-05,
+      "mismatched_elements": 0
+    },
+    "first_divergence": {
+      "index": 471,
+      "operator": "Add",
+      "name": "model/p_node_add_3",
+      "output": "InsertedPrecisionFreeCast_model/p_add_3",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        9,
+        512
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.00048828125,
+      "mismatched_elements": 3
+    }
+  },
+  "after": {
+    "report": "candidate31-road-recurrent-trace-comparison.json",
+    "exact_tensors": 531,
+    "total_tensors": 531,
+    "first_difference": null,
+    "first_divergence": null,
+    "input_lineage_passed": true,
+    "host_final_original_parity": true
+  }
+}

@@ -1,0 +1,206 @@
+{
+  "status": "failed",
+  "vehicle_tx_enabled": false,
+  "physical_engagement_allowed": false,
+  "synthetic_sources": true,
+  "physical_vehicle_verified": false,
+  "camera_model_parity_verified": false,
+  "derived_inputs_injected": false,
+  "received_services": [
+    "carControl",
+    "carControlSP",
+    "carOutput",
+    "carState",
+    "controlsState",
+    "deviceMotion",
+    "driverAssistance",
+    "driverMonitoringState",
+    "extrinsicsCalibration",
+    "lateralDelay",
+    "lateralTorqueParameters",
+    "longitudinalPlan",
+    "onroadEvents",
+    "radarState",
+    "radarTracks",
+    "selfdriveState",
+    "selfdriveStateSP",
+    "vehicleParameters"
+  ],
+  "packets": 2693,
+  "unsafe_outputs": 0,
+  "profile": {
+    "version": 1,
+    "op": "hello",
+    "simulation": true,
+    "full_chain": true,
+    "vehicle_tx_enabled": false,
+    "car_fingerprint": "HYUNDAI_IONIQ_PHEV_2019",
+    "factory_acc": true,
+    "min_steer_speed_m_s": 14.305279731750488,
+    "physical_fingerprint_verified": false
+  },
+  "cruise_can_valid_samples": 1306,
+  "cruise_can_invalid_samples": 1,
+  "cruise_acc_disabled_samples": 1,
+  "cruise_acc_enabled_samples": 1306,
+  "cancel_can_valid_samples": 489,
+  "cancel_can_invalid_samples": 0,
+  "cancel_acc_disabled_samples": 488,
+  "cancel_acc_enabled_samples": 1,
+  "stale_can_valid_samples": 14,
+  "stale_can_invalid_samples": 516,
+  "stale_acc_disabled_samples": 530,
+  "output_samples": {
+    "driverMonitoringState": 65,
+    "carState": 2326,
+    "carOutput": 2327,
+    "radarTracks": 500,
+    "deviceMotion": 498,
+    "lateralTorqueParameters": 100,
+    "lateralDelay": 100,
+    "extrinsicsCalibration": 100,
+    "radarState": 836,
+    "carControl": 1762,
+    "carControlSP": 1701,
+    "controlsState": 1765,
+    "vehicleParameters": 493,
+    "longitudinalPlan": 891,
+    "driverAssistance": 882,
+    "selfdriveState": 2112,
+    "selfdriveStateSP": 2088,
+    "onroadEvents": 26
+  },
+  "processes": {
+    "pid": 32078,
+    "simulation": true,
+    "full_chain": true,
+    "vehicle_tx_enabled": false,
+    "engagement_allowed": false,
+    "engagement_blocker": "camera calibration, model parity/performance and physical Panda qualification incomplete",
+    "processes": {
+      "Controls": {
+        "daemon": "controlsd",
+        "pid": 32105,
+        "phase": "running",
+        "error": "",
+        "last_progress_ms": 109995478,
+        "ticks": 2480,
+        "restarts": 0
+      },
+      "Monitoring": {
+        "daemon": "dmonitoringd",
+        "pid": 32436,
+        "phase": "failed",
+        "error": "com.chaquo.python.PyException: IndexError: Out of bounds",
+        "last_progress_ms": 109977842,
+        "ticks": 6,
+        "restarts": 3
+      },
+      "Vehicle": {
+        "daemon": "card",
+        "pid": 32107,
+        "phase": "waiting_for_valid_can",
+        "error": "",
+        "last_progress_ms": 109995484,
+        "ticks": 2793,
+        "restarts": 0
+      },
+      "Localization": {
+        "daemon": "locationd",
+        "pid": 32108,
+        "phase": "running",
+        "error": "",
+        "last_progress_ms": 109995481,
+        "ticks": 504,
+        "restarts": 0
+      },
+      "Calibration": {
+        "daemon": "calibrationd",
+        "pid": 32109,
+        "phase": "running",
+        "error": "",
+        "last_progress_ms": 109995481,
+        "ticks": 503,
+        "restarts": 0
+      },
+      "Parameters": {
+        "daemon": "paramsd",
+        "pid": 32110,
+        "phase": "running",
+        "error": "",
+        "last_progress_ms": 109995486,
+        "ticks": 499,
+        "restarts": 0
+      },
+      "Torque": {
+        "daemon": "torqued",
+        "pid": 32111,
+        "phase": "running",
+        "error": "",
+        "last_progress_ms": 109995485,
+        "ticks": 506,
+        "restarts": 0
+      },
+      "Delay": {
+        "daemon": "lagd",
+        "pid": 32159,
+        "phase": "running",
+        "error": "",
+        "last_progress_ms": 109995487,
+        "ticks": 506,
+        "restarts": 0
+      },
+      "Radar": {
+        "daemon": "radard",
+        "pid": 32167,
+        "phase": "running",
+        "error": "",
+        "last_progress_ms": 109995489,
+        "ticks": 911,
+        "restarts": 0
+      },
+      "Planning": {
+        "daemon": "plannerd",
+        "pid": 32181,
+        "phase": "running",
+        "error": "",
+        "last_progress_ms": 109995489,
+        "ticks": 904,
+        "restarts": 0
+      },
+      "Selfdrive": {
+        "daemon": "selfdrived",
+        "pid": 32188,
+        "phase": "running",
+        "error": "",
+        "last_progress_ms": 109995494,
+        "ticks": 2415,
+        "restarts": 0
+      },
+      "Simulator": {
+        "daemon": "sim_bridge",
+        "pid": 32192,
+        "phase": "running",
+        "error": "",
+        "last_progress_ms": 109995491,
+        "ticks": 2665,
+        "restarts": 0
+      }
+    },
+    "updated_elapsed_ms": 109995498
+  },
+  "missing_outputs": [],
+  "factory_acc_cancellation_passed": true,
+  "worker_failures": {
+    "Monitoring": {
+      "daemon": "dmonitoringd",
+      "pid": 32436,
+      "phase": "failed",
+      "error": "com.chaquo.python.PyException: IndexError: Out of bounds",
+      "last_progress_ms": 109977842,
+      "ticks": 6,
+      "restarts": 3
+    }
+  },
+  "elapsed_s": 30.07791658298811
+}

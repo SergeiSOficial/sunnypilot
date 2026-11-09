@@ -1,0 +1,1928 @@
+{
+  "started_utc": 1793537784.0750654,
+  "backend": "qnn-htp",
+  "diagnostic_only": true,
+  "vehicle_tx_enabled": false,
+  "models": {
+    "fp16-conv": {
+      "status": "blocked",
+      "precision": "fp16",
+      "operator": "conv",
+      "cpu_fallback": "unverified",
+      "provider_options": {
+        "htp_arch": "68",
+        "device_id": "0",
+        "profiling_level": "detailed",
+        "profiling_file_path": "/data/user/0/com.samsung.sunnypilot.fold3/files/htp-fp16-conv-qnn.csv"
+      },
+      "performance_status": "blocked",
+      "error": "RuntimeError: Node 'probe_conv_token_1' OpType:Conv with domain:com.ms.internal.nhwc was inserted using the NHWC format as requested by QNNExecutionProvider, but was not selected by that EP. This means the graph is now invalid as there will not be an EP able to run the node. This could be a bug in layout transformer, or in the GetCapability implementation of the EP."
+    },
+    "a16w16-conv": {
+      "status": "blocked",
+      "precision": "a16w16",
+      "operator": "conv",
+      "cpu_fallback": "unverified",
+      "provider_options": {
+        "htp_arch": "68",
+        "device_id": "0",
+        "profiling_level": "detailed",
+        "profiling_file_path": "/data/user/0/com.samsung.sunnypilot.fold3/files/htp-a16w16-conv-qnn.csv"
+      },
+      "performance_status": "blocked",
+      "error": "RuntimeError: Node 'probe_conv_token_1' OpType:Conv with domain:com.ms.internal.nhwc was inserted using the NHWC format as requested by QNNExecutionProvider, but was not selected by that EP. This means the graph is now invalid as there will not be an EP able to run the node. This could be a bug in layout transformer, or in the GetCapability implementation of the EP."
+    },
+    "a16w8-conv": {
+      "status": "failed",
+      "precision": "a16w8",
+      "operator": "conv",
+      "cpu_fallback": "disabled",
+      "provider_options": {
+        "htp_arch": "68",
+        "device_id": "0",
+        "profiling_level": "detailed",
+        "profiling_file_path": "/data/user/0/com.samsung.sunnypilot.fold3/files/htp-a16w8-conv-qnn.csv"
+      },
+      "initialization_ms": 506.203958,
+      "assignment": {
+        "providers": {
+          "QNNExecutionProvider": {
+            "partitions": 1,
+            "nodes": 13
+          }
+        },
+        "device": {
+          "type": 2,
+          "vendor_id": 1297040209,
+          "device_id": 0
+        },
+        "assigned_nodes": [
+          {
+            "provider": "QNNExecutionProvider",
+            "name": "x_QuantizeLinear",
+            "domain": "",
+            "operator": "QuantizeLinear"
+          },
+          {
+            "provider": "QNNExecutionProvider",
+            "name": "w_DequantizeLinear",
+            "domain": "",
+            "operator": "DequantizeLinear"
+          },
+          {
+            "provider": "QNNExecutionProvider",
+            "name": "b_DequantizeLinear",
+            "domain": "",
+            "operator": "DequantizeLinear"
+          },
+          {
+            "provider": "QNNExecutionProvider",
+            "name": "DequantizeLinear",
+            "domain": "",
+            "operator": "DequantizeLinear"
+          },
+          {
+            "provider": "QNNExecutionProvider",
+            "name": "Transpose_token_4",
+            "domain": "",
+            "operator": "Transpose"
+          },
+          {
+            "provider": "QNNExecutionProvider",
+            "name": "QuantizeLinear_token_7",
+            "domain": "",
+            "operator": "QuantizeLinear"
+          },
+          {
+            "provider": "QNNExecutionProvider",
+            "name": "DequantizeLinear_token_8",
+            "domain": "",
+            "operator": "DequantizeLinear"
+          },
+          {
+            "provider": "QNNExecutionProvider",
+            "name": "probe_conv_token_1",
+            "domain": "com.ms.internal.nhwc",
+            "operator": "Conv"
+          },
+          {
+            "provider": "QNNExecutionProvider",
+            "name": "y_QuantizeLinear",
+            "domain": "",
+            "operator": "QuantizeLinear"
+          },
+          {
+            "provider": "QNNExecutionProvider",
+            "name": "y_DequantizeLinear",
+            "domain": "",
+            "operator": "DequantizeLinear"
+          },
+          {
+            "provider": "QNNExecutionProvider",
+            "name": "Transpose_token_6",
+            "domain": "",
+            "operator": "Transpose"
+          },
+          {
+            "provider": "QNNExecutionProvider",
+            "name": "QuantizeLinear_token_9",
+            "domain": "",
+            "operator": "QuantizeLinear"
+          },
+          {
+            "provider": "QNNExecutionProvider",
+            "name": "DequantizeLinear_token_10",
+            "domain": "",
+            "operator": "DequantizeLinear"
+          }
+        ]
+      },
+      "backend_parity": {
+        "passed": false,
+        "finite": true,
+        "shape": [
+          1,
+          4,
+          6,
+          6
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": false,
+        "max_abs_error": 0.000782109797000885,
+        "mismatched_elements": 24
+      },
+      "original_parity": {
+        "passed": false,
+        "finite": true,
+        "shape": [
+          1,
+          4,
+          6,
+          6
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": false,
+        "max_abs_error": 0.0009580031037330627,
+        "mismatched_elements": 102
+      },
+      "performance_status": "diagnostic_only",
+      "samples_ms": [
+        3.8525,
+        3.578541,
+        4.074688,
+        4.531146,
+        4.90625,
+        5.632031,
+        6.40901,
+        6.077396,
+        5.836146,
+        6.138334
+      ],
+      "profile_path": "/data/user/0/com.samsung.sunnypilot.fold3/files/htp-a16w8-conv_2026-11-01_12-56-25_307.json"
+    },
+    "fp16-gemm": {
+      "status": "blocked",
+      "precision": "fp16",
+      "operator": "gemm",
+      "cpu_fallback": "unverified",
+      "provider_options": {
+        "htp_arch": "68",
+        "device_id": "0",
+        "profiling_level": "detailed",
+        "profiling_file_path": "/data/user/0/com.samsung.sunnypilot.fold3/files/htp-fp16-gemm-qnn.csv"
+      },
+      "performance_status": "blocked",
+      "error": "RuntimeError: This session contains graph nodes that are assigned to the default CPU EP, but fallback to CPU EP has been explicitly disabled by the user."
+    },
+    "a16w16-gemm": {
+      "status": "blocked",
+      "precision": "a16w16",
+      "operator": "gemm",
+      "cpu_fallback": "unverified",
+      "provider_options": {
+        "htp_arch": "68",
+        "device_id": "0",
+        "profiling_level": "detailed",
+        "profiling_file_path": "/data/user/0/com.samsung.sunnypilot.fold3/files/htp-a16w16-gemm-qnn.csv"
+      },
+      "performance_status": "blocked",
+      "error": "RuntimeError: This session contains graph nodes that are assigned to the default CPU EP, but fallback to CPU EP has been explicitly disabled by the user."
+    },
+    "a16w8-gemm": {
+      "status": "passed",
+      "precision": "a16w8",
+      "operator": "gemm",
+      "cpu_fallback": "disabled",
+      "provider_options": {
+        "htp_arch": "68",
+        "device_id": "0",
+        "profiling_level": "detailed",
+        "profiling_file_path": "/data/user/0/com.samsung.sunnypilot.fold3/files/htp-a16w8-gemm-qnn.csv"
+      },
+      "initialization_ms": 341.094219,
+      "assignment": {
+        "providers": {
+          "QNNExecutionProvider": {
+            "partitions": 1,
+            "nodes": 7
+          }
+        },
+        "device": {
+          "type": 2,
+          "vendor_id": 1297040209,
+          "device_id": 0
+        },
+        "assigned_nodes": [
+          {
+            "provider": "QNNExecutionProvider",
+            "name": "x_QuantizeLinear",
+            "domain": "",
+            "operator": "QuantizeLinear"
+          },
+          {
+            "provider": "QNNExecutionProvider",
+            "name": "w_DequantizeLinear",
+            "domain": "",
+            "operator": "DequantizeLinear"
+          },
+          {
+            "provider": "QNNExecutionProvider",
+            "name": "b_DequantizeLinear",
+            "domain": "",
+            "operator": "DequantizeLinear"
+          },
+          {
+            "provider": "QNNExecutionProvider",
+            "name": "x_DequantizeLinear",
+            "domain": "",
+            "operator": "DequantizeLinear"
+          },
+          {
+            "provider": "QNNExecutionProvider",
+            "name": "probe_gemm",
+            "domain": "",
+            "operator": "Gemm"
+          },
+          {
+            "provider": "QNNExecutionProvider",
+            "name": "y_QuantizeLinear",
+            "domain": "",
+            "operator": "QuantizeLinear"
+          },
+          {
+            "provider": "QNNExecutionProvider",
+            "name": "y_DequantizeLinear",
+            "domain": "",
+            "operator": "DequantizeLinear"
+          }
+        ]
+      },
+      "backend_parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          2,
+          8
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": false,
+        "max_abs_error": 0.00017283111810684204,
+        "mismatched_elements": 0
+      },
+      "original_parity": {
+        "passed": false,
+        "finite": true,
+        "shape": [
+          2,
+          8
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": false,
+        "max_abs_error": 0.0004168860614299774,
+        "mismatched_elements": 8
+      },
+      "performance_status": "diagnostic_only",
+      "samples_ms": [
+        3.859636,
+        3.835468,
+        3.463958,
+        3.728021,
+        3.999271,
+        4.692865,
+        5.143646,
+        5.565677,
+        5.483333,
+        5.189114
+      ],
+      "profile_path": "/data/user/0/com.samsung.sunnypilot.fold3/files/htp-a16w8-gemm_2026-11-01_12-56-26_472.json"
+    },
+    "fp16-activation": {
+      "status": "blocked",
+      "precision": "fp16",
+      "operator": "activation",
+      "cpu_fallback": "unverified",
+      "provider_options": {
+        "htp_arch": "68",
+        "device_id": "0",
+        "profiling_level": "detailed",
+        "profiling_file_path": "/data/user/0/com.samsung.sunnypilot.fold3/files/htp-fp16-activation-qnn.csv"
+      },
+      "performance_status": "blocked",
+      "error": "RuntimeError: This session contains graph nodes that are assigned to the default CPU EP, but fallback to CPU EP has been explicitly disabled by the user."
+    },
+    "a16w16-activation": {
+      "status": "passed",
+      "precision": "a16w16",
+      "operator": "activation",
+      "cpu_fallback": "disabled",
+      "provider_options": {
+        "htp_arch": "68",
+        "device_id": "0",
+        "profiling_level": "detailed",
+        "profiling_file_path": "/data/user/0/com.samsung.sunnypilot.fold3/files/htp-a16w16-activation-qnn.csv"
+      },
+      "initialization_ms": 327.467864,
+      "assignment": {
+        "providers": {
+          "QNNExecutionProvider": {
+            "partitions": 1,
+            "nodes": 12
+          }
+        },
+        "device": {
+          "type": 2,
+          "vendor_id": 1297040209,
+          "device_id": 0
+        },
+        "assigned_nodes": [
+          {
+            "provider": "QNNExecutionProvider",
+            "name": "x_QuantizeLinear",
+            "domain": "",
+            "operator": "QuantizeLinear"
+          },
+          {
+            "provider": "QNNExecutionProvider",
+            "name": "x_DequantizeLinear",
+            "domain": "",
+            "operator": "DequantizeLinear"
+          },
+          {
+            "provider": "QNNExecutionProvider",
+            "name": "x_DequantizeLinear/duplicated",
+            "domain": "",
+            "operator": "DequantizeLinear"
+          },
+          {
+            "provider": "QNNExecutionProvider",
+            "name": "probe_sigmoid",
+            "domain": "",
+            "operator": "Sigmoid"
+          },
+          {
+            "provider": "QNNExecutionProvider",
+            "name": "s_QuantizeLinear",
+            "domain": "",
+            "operator": "QuantizeLinear"
+          },
+          {
+            "provider": "QNNExecutionProvider",
+            "name": "s_DequantizeLinear",
+            "domain": "",
+            "operator": "DequantizeLinear"
+          },
+          {
+            "provider": "QNNExecutionProvider",
+            "name": "probe_silu",
+            "domain": "",
+            "operator": "Mul"
+          },
+          {
+            "provider": "QNNExecutionProvider",
+            "name": "m_QuantizeLinear",
+            "domain": "",
+            "operator": "QuantizeLinear"
+          },
+          {
+            "provider": "QNNExecutionProvider",
+            "name": "m_DequantizeLinear",
+            "domain": "",
+            "operator": "DequantizeLinear"
+          },
+          {
+            "provider": "QNNExecutionProvider",
+            "name": "probe_tanh",
+            "domain": "",
+            "operator": "Tanh"
+          },
+          {
+            "provider": "QNNExecutionProvider",
+            "name": "y_QuantizeLinear",
+            "domain": "",
+            "operator": "QuantizeLinear"
+          },
+          {
+            "provider": "QNNExecutionProvider",
+            "name": "y_DequantizeLinear",
+            "domain": "",
+            "operator": "DequantizeLinear"
+          }
+        ]
+      },
+      "backend_parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          4,
+          6,
+          6
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": false,
+        "max_abs_error": 6.104260683059692e-05,
+        "mismatched_elements": 0
+      },
+      "original_parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          4,
+          6,
+          6
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": false,
+        "max_abs_error": 6.979331374168396e-05,
+        "mismatched_elements": 0
+      },
+      "performance_status": "diagnostic_only",
+      "samples_ms": [
+        4.069011,
+        4.345782,
+        4.622396,
+        4.296042,
+        4.272604,
+        3.978854,
+        3.732604,
+        3.518542,
+        3.544948,
+        4.043906
+      ],
+      "profile_path": "/data/user/0/com.samsung.sunnypilot.fold3/files/htp-a16w16-activation_2026-11-01_12-56-27_249.json"
+    },
+    "a16w8-activation": {
+      "status": "passed",
+      "precision": "a16w8",
+      "operator": "activation",
+      "cpu_fallback": "disabled",
+      "provider_options": {
+        "htp_arch": "68",
+        "device_id": "0",
+        "profiling_level": "detailed",
+        "profiling_file_path": "/data/user/0/com.samsung.sunnypilot.fold3/files/htp-a16w8-activation-qnn.csv"
+      },
+      "initialization_ms": 386.38151,
+      "assignment": {
+        "providers": {
+          "QNNExecutionProvider": {
+            "partitions": 1,
+            "nodes": 12
+          }
+        },
+        "device": {
+          "type": 2,
+          "vendor_id": 1297040209,
+          "device_id": 0
+        },
+        "assigned_nodes": [
+          {
+            "provider": "QNNExecutionProvider",
+            "name": "x_QuantizeLinear",
+            "domain": "",
+            "operator": "QuantizeLinear"
+          },
+          {
+            "provider": "QNNExecutionProvider",
+            "name": "x_DequantizeLinear",
+            "domain": "",
+            "operator": "DequantizeLinear"
+          },
+          {
+            "provider": "QNNExecutionProvider",
+            "name": "x_DequantizeLinear/duplicated",
+            "domain": "",
+            "operator": "DequantizeLinear"
+          },
+          {
+            "provider": "QNNExecutionProvider",
+            "name": "probe_sigmoid",
+            "domain": "",
+            "operator": "Sigmoid"
+          },
+          {
+            "provider": "QNNExecutionProvider",
+            "name": "s_QuantizeLinear",
+            "domain": "",
+            "operator": "QuantizeLinear"
+          },
+          {
+            "provider": "QNNExecutionProvider",
+            "name": "s_DequantizeLinear",
+            "domain": "",
+            "operator": "DequantizeLinear"
+          },
+          {
+            "provider": "QNNExecutionProvider",
+            "name": "probe_silu",
+            "domain": "",
+            "operator": "Mul"
+          },
+          {
+            "provider": "QNNExecutionProvider",
+            "name": "m_QuantizeLinear",
+            "domain": "",
+            "operator": "QuantizeLinear"
+          },
+          {
+            "provider": "QNNExecutionProvider",
+            "name": "m_DequantizeLinear",
+            "domain": "",
+            "operator": "DequantizeLinear"
+          },
+          {
+            "provider": "QNNExecutionProvider",
+            "name": "probe_tanh",
+            "domain": "",
+            "operator": "Tanh"
+          },
+          {
+            "provider": "QNNExecutionProvider",
+            "name": "y_QuantizeLinear",
+            "domain": "",
+            "operator": "QuantizeLinear"
+          },
+          {
+            "provider": "QNNExecutionProvider",
+            "name": "y_DequantizeLinear",
+            "domain": "",
+            "operator": "DequantizeLinear"
+          }
+        ]
+      },
+      "backend_parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          4,
+          6,
+          6
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": false,
+        "max_abs_error": 6.104260683059692e-05,
+        "mismatched_elements": 0
+      },
+      "original_parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          4,
+          6,
+          6
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": false,
+        "max_abs_error": 6.979331374168396e-05,
+        "mismatched_elements": 0
+      },
+      "performance_status": "diagnostic_only",
+      "samples_ms": [
+        6.5175,
+        4.359635,
+        5.886718,
+        6.220834,
+        6.074115,
+        6.364323,
+        6.265469,
+        5.999844,
+        5.936302,
+        6.079271
+      ],
+      "profile_path": "/data/user/0/com.samsung.sunnypilot.fold3/files/htp-a16w8-activation_2026-11-01_12-56-27_696.json"
+    },
+    "fp16-layout": {
+      "status": "blocked",
+      "precision": "fp16",
+      "operator": "layout",
+      "cpu_fallback": "unverified",
+      "provider_options": {
+        "htp_arch": "68",
+        "device_id": "0",
+        "profiling_level": "detailed",
+        "profiling_file_path": "/data/user/0/com.samsung.sunnypilot.fold3/files/htp-fp16-layout-qnn.csv"
+      },
+      "performance_status": "blocked",
+      "error": "RuntimeError: This session contains graph nodes that are assigned to the default CPU EP, but fallback to CPU EP has been explicitly disabled by the user."
+    },
+    "a16w16-layout": {
+      "status": "passed",
+      "precision": "a16w16",
+      "operator": "layout",
+      "cpu_fallback": "disabled",
+      "provider_options": {
+        "htp_arch": "68",
+        "device_id": "0",
+        "profiling_level": "detailed",
+        "profiling_file_path": "/data/user/0/com.samsung.sunnypilot.fold3/files/htp-a16w16-layout-qnn.csv"
+      },
+      "initialization_ms": 350.096406,
+      "assignment": {
+        "providers": {
+          "QNNExecutionProvider": {
+            "partitions": 1,
+            "nodes": 1
+          }
+        },
+        "device": {
+          "type": 2,
+          "vendor_id": 1297040209,
+          "device_id": 0
+        },
+        "assigned_nodes": [
+          {
+            "provider": "QNNExecutionProvider",
+            "name": "probe_nchw_nhwc",
+            "domain": "",
+            "operator": "Transpose"
+          }
+        ]
+      },
+      "backend_parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          6,
+          6,
+          4
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "original_parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          6,
+          6,
+          4
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "performance_status": "diagnostic_only",
+      "samples_ms": [
+        5.792448,
+        4.380678,
+        4.231615,
+        4.84625,
+        5.078281,
+        5.6475,
+        4.357812,
+        4.108646,
+        4.657708,
+        5.327708
+      ],
+      "profile_path": "/data/user/0/com.samsung.sunnypilot.fold3/files/htp-a16w16-layout_2026-11-01_12-56-28_582.json"
+    },
+    "a16w8-layout": {
+      "status": "passed",
+      "precision": "a16w8",
+      "operator": "layout",
+      "cpu_fallback": "disabled",
+      "provider_options": {
+        "htp_arch": "68",
+        "device_id": "0",
+        "profiling_level": "detailed",
+        "profiling_file_path": "/data/user/0/com.samsung.sunnypilot.fold3/files/htp-a16w8-layout-qnn.csv"
+      },
+      "initialization_ms": 364.959896,
+      "assignment": {
+        "providers": {
+          "QNNExecutionProvider": {
+            "partitions": 1,
+            "nodes": 1
+          }
+        },
+        "device": {
+          "type": 2,
+          "vendor_id": 1297040209,
+          "device_id": 0
+        },
+        "assigned_nodes": [
+          {
+            "provider": "QNNExecutionProvider",
+            "name": "probe_nchw_nhwc",
+            "domain": "",
+            "operator": "Transpose"
+          }
+        ]
+      },
+      "backend_parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          6,
+          6,
+          4
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "original_parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          6,
+          6,
+          4
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "performance_status": "diagnostic_only",
+      "samples_ms": [
+        3.319948,
+        4.706354,
+        5.464375,
+        5.966719,
+        5.016822,
+        5.163021,
+        5.557865,
+        5.986563,
+        6.018385,
+        5.533073
+      ],
+      "profile_path": "/data/user/0/com.samsung.sunnypilot.fold3/files/htp-a16w8-layout_2026-11-01_12-56-29_065.json"
+    }
+  },
+  "manifest": {
+    "diagnostic_only": true,
+    "vehicle_tx_enabled": false,
+    "calibration_seeds": [
+      1000,
+      1001,
+      1002,
+      1003,
+      1004,
+      1005,
+      1006,
+      1007,
+      1008,
+      1009,
+      1010,
+      1011,
+      1012,
+      1013,
+      1014,
+      1015
+    ],
+    "validation_seed": 2029,
+    "rtol": 0.001,
+    "atol": 0.0001,
+    "probes": {
+      "fp16-conv": {
+        "precision": "fp16",
+        "operator": "conv",
+        "input_shape": [
+          1,
+          3,
+          8,
+          8
+        ],
+        "status": "prepared",
+        "sha256": "791b4bb2e2bec5029f5a70f59a3085318bbe7ea0286a586f5d7d735aaffbd95b",
+        "data_sha256": "3d8fc05592b69ab56c03271b49da5b8233eea10d83b1e080d15c1d1ee2aa1519",
+        "original_representation_passed": true,
+        "nodes": [
+          {
+            "name": "probe_conv",
+            "op": "Conv",
+            "domain": ""
+          }
+        ],
+        "tensors": {
+          "x": {
+            "dtype": "FLOAT16",
+            "shape": [
+              1,
+              3,
+              8,
+              8
+            ]
+          },
+          "y": {
+            "dtype": "FLOAT16",
+            "shape": [
+              1,
+              4,
+              6,
+              6
+            ]
+          }
+        }
+      },
+      "a16w16-conv": {
+        "precision": "a16w16",
+        "operator": "conv",
+        "input_shape": [
+          1,
+          3,
+          8,
+          8
+        ],
+        "status": "prepared",
+        "sha256": "988d0020c594b01312cc79df29c9fe179ce0cb5d137c524f63e6c3412d72df7a",
+        "data_sha256": "8bc1fc9db449879685800eab3cb7389a6a41195bf5003589b2e1d5f948c709e0",
+        "original_representation_passed": true,
+        "nodes": [
+          {
+            "name": "b_DequantizeLinear",
+            "op": "DequantizeLinear",
+            "domain": ""
+          },
+          {
+            "name": "w_DequantizeLinear",
+            "op": "DequantizeLinear",
+            "domain": ""
+          },
+          {
+            "name": "x_QuantizeLinear",
+            "op": "QuantizeLinear",
+            "domain": ""
+          },
+          {
+            "name": "x_DequantizeLinear",
+            "op": "DequantizeLinear",
+            "domain": ""
+          },
+          {
+            "name": "probe_conv",
+            "op": "Conv",
+            "domain": ""
+          },
+          {
+            "name": "y_QuantizeLinear",
+            "op": "QuantizeLinear",
+            "domain": ""
+          },
+          {
+            "name": "y_DequantizeLinear",
+            "op": "DequantizeLinear",
+            "domain": ""
+          }
+        ],
+        "tensors": {
+          "x": {
+            "dtype": "FLOAT",
+            "shape": [
+              1,
+              3,
+              8,
+              8
+            ]
+          },
+          "b": {
+            "dtype": "FLOAT",
+            "shape": [
+              4
+            ]
+          },
+          "w_DequantizeLinear_Output": {
+            "dtype": "FLOAT",
+            "shape": [
+              4,
+              3,
+              3,
+              3
+            ]
+          },
+          "x_QuantizeLinear_Output": {
+            "dtype": "UINT16",
+            "shape": [
+              1,
+              3,
+              8,
+              8
+            ]
+          },
+          "x_DequantizeLinear_Output": {
+            "dtype": "FLOAT",
+            "shape": [
+              1,
+              3,
+              8,
+              8
+            ]
+          },
+          "y_QuantizeLinear_Input": {
+            "dtype": "FLOAT",
+            "shape": [
+              1,
+              4,
+              6,
+              6
+            ]
+          },
+          "y_QuantizeLinear_Output": {
+            "dtype": "UINT16",
+            "shape": [
+              1,
+              4,
+              6,
+              6
+            ]
+          },
+          "y": {
+            "dtype": "FLOAT",
+            "shape": [
+              1,
+              4,
+              6,
+              6
+            ]
+          }
+        }
+      },
+      "a16w8-conv": {
+        "precision": "a16w8",
+        "operator": "conv",
+        "input_shape": [
+          1,
+          3,
+          8,
+          8
+        ],
+        "status": "prepared",
+        "sha256": "d28f81d330e88e5ebe13915d3c3d9bc0d627747dfde278dfabf59562337fe51e",
+        "data_sha256": "23b428a48aff264943f8bfb235d2270b6619861b2e3e58c4c7a8f07d9b2c70bc",
+        "original_representation_passed": false,
+        "nodes": [
+          {
+            "name": "b_DequantizeLinear",
+            "op": "DequantizeLinear",
+            "domain": ""
+          },
+          {
+            "name": "w_DequantizeLinear",
+            "op": "DequantizeLinear",
+            "domain": ""
+          },
+          {
+            "name": "x_QuantizeLinear",
+            "op": "QuantizeLinear",
+            "domain": ""
+          },
+          {
+            "name": "x_DequantizeLinear",
+            "op": "DequantizeLinear",
+            "domain": ""
+          },
+          {
+            "name": "probe_conv",
+            "op": "Conv",
+            "domain": ""
+          },
+          {
+            "name": "y_QuantizeLinear",
+            "op": "QuantizeLinear",
+            "domain": ""
+          },
+          {
+            "name": "y_DequantizeLinear",
+            "op": "DequantizeLinear",
+            "domain": ""
+          }
+        ],
+        "tensors": {
+          "x": {
+            "dtype": "FLOAT",
+            "shape": [
+              1,
+              3,
+              8,
+              8
+            ]
+          },
+          "b": {
+            "dtype": "FLOAT",
+            "shape": [
+              4
+            ]
+          },
+          "w_DequantizeLinear_Output": {
+            "dtype": "FLOAT",
+            "shape": [
+              4,
+              3,
+              3,
+              3
+            ]
+          },
+          "x_QuantizeLinear_Output": {
+            "dtype": "UINT16",
+            "shape": [
+              1,
+              3,
+              8,
+              8
+            ]
+          },
+          "x_DequantizeLinear_Output": {
+            "dtype": "FLOAT",
+            "shape": [
+              1,
+              3,
+              8,
+              8
+            ]
+          },
+          "y_QuantizeLinear_Input": {
+            "dtype": "FLOAT",
+            "shape": [
+              1,
+              4,
+              6,
+              6
+            ]
+          },
+          "y_QuantizeLinear_Output": {
+            "dtype": "UINT16",
+            "shape": [
+              1,
+              4,
+              6,
+              6
+            ]
+          },
+          "y": {
+            "dtype": "FLOAT",
+            "shape": [
+              1,
+              4,
+              6,
+              6
+            ]
+          }
+        }
+      },
+      "fp16-gemm": {
+        "precision": "fp16",
+        "operator": "gemm",
+        "input_shape": [
+          2,
+          16
+        ],
+        "status": "prepared",
+        "sha256": "ae1b6067658dc2a4a49a0c238762729c6956f94ad1d3b1b1a296a2cd000ab7d9",
+        "data_sha256": "355c55de3de12f6afbbb540779dbd92dd5b2f31384715361b96cf7ae59c7f423",
+        "original_representation_passed": true,
+        "nodes": [
+          {
+            "name": "probe_gemm",
+            "op": "Gemm",
+            "domain": ""
+          }
+        ],
+        "tensors": {
+          "x": {
+            "dtype": "FLOAT16",
+            "shape": [
+              2,
+              16
+            ]
+          },
+          "y": {
+            "dtype": "FLOAT16",
+            "shape": [
+              2,
+              8
+            ]
+          }
+        }
+      },
+      "a16w16-gemm": {
+        "precision": "a16w16",
+        "operator": "gemm",
+        "input_shape": [
+          2,
+          16
+        ],
+        "status": "prepared",
+        "sha256": "3238a1a2d4a2aae5e6804a7646cb7796ddba6e27fbaa6e7db4d5ef0357323333",
+        "data_sha256": "d76809a9c6df1152f36b585ca1f3e193abd0f6f4be1f9f8d3061e55d7e4a2f14",
+        "original_representation_passed": true,
+        "nodes": [
+          {
+            "name": "b_DequantizeLinear",
+            "op": "DequantizeLinear",
+            "domain": ""
+          },
+          {
+            "name": "w_DequantizeLinear",
+            "op": "DequantizeLinear",
+            "domain": ""
+          },
+          {
+            "name": "x_QuantizeLinear",
+            "op": "QuantizeLinear",
+            "domain": ""
+          },
+          {
+            "name": "x_DequantizeLinear",
+            "op": "DequantizeLinear",
+            "domain": ""
+          },
+          {
+            "name": "probe_gemm",
+            "op": "Gemm",
+            "domain": ""
+          },
+          {
+            "name": "y_QuantizeLinear",
+            "op": "QuantizeLinear",
+            "domain": ""
+          },
+          {
+            "name": "y_DequantizeLinear",
+            "op": "DequantizeLinear",
+            "domain": ""
+          }
+        ],
+        "tensors": {
+          "x": {
+            "dtype": "FLOAT",
+            "shape": [
+              2,
+              16
+            ]
+          },
+          "b": {
+            "dtype": "FLOAT",
+            "shape": [
+              8
+            ]
+          },
+          "w_DequantizeLinear_Output": {
+            "dtype": "FLOAT",
+            "shape": [
+              8,
+              16
+            ]
+          },
+          "x_QuantizeLinear_Output": {
+            "dtype": "UINT16",
+            "shape": [
+              2,
+              16
+            ]
+          },
+          "x_DequantizeLinear_Output": {
+            "dtype": "FLOAT",
+            "shape": [
+              2,
+              16
+            ]
+          },
+          "y_QuantizeLinear_Input": {
+            "dtype": "FLOAT",
+            "shape": [
+              2,
+              8
+            ]
+          },
+          "y_QuantizeLinear_Output": {
+            "dtype": "UINT16",
+            "shape": [
+              2,
+              8
+            ]
+          },
+          "y": {
+            "dtype": "FLOAT",
+            "shape": [
+              2,
+              8
+            ]
+          }
+        }
+      },
+      "a16w8-gemm": {
+        "precision": "a16w8",
+        "operator": "gemm",
+        "input_shape": [
+          2,
+          16
+        ],
+        "status": "prepared",
+        "sha256": "f12c53019d07a846bd108c61377f71b721fab342ac1d114022905f62fd6a0dc2",
+        "data_sha256": "095b1b135bd186b5abaddaeaf2d7a1e3acdba51c431ef2ee6c03cbd63eb38a1c",
+        "original_representation_passed": false,
+        "nodes": [
+          {
+            "name": "b_DequantizeLinear",
+            "op": "DequantizeLinear",
+            "domain": ""
+          },
+          {
+            "name": "w_DequantizeLinear",
+            "op": "DequantizeLinear",
+            "domain": ""
+          },
+          {
+            "name": "x_QuantizeLinear",
+            "op": "QuantizeLinear",
+            "domain": ""
+          },
+          {
+            "name": "x_DequantizeLinear",
+            "op": "DequantizeLinear",
+            "domain": ""
+          },
+          {
+            "name": "probe_gemm",
+            "op": "Gemm",
+            "domain": ""
+          },
+          {
+            "name": "y_QuantizeLinear",
+            "op": "QuantizeLinear",
+            "domain": ""
+          },
+          {
+            "name": "y_DequantizeLinear",
+            "op": "DequantizeLinear",
+            "domain": ""
+          }
+        ],
+        "tensors": {
+          "x": {
+            "dtype": "FLOAT",
+            "shape": [
+              2,
+              16
+            ]
+          },
+          "b": {
+            "dtype": "FLOAT",
+            "shape": [
+              8
+            ]
+          },
+          "w_DequantizeLinear_Output": {
+            "dtype": "FLOAT",
+            "shape": [
+              8,
+              16
+            ]
+          },
+          "x_QuantizeLinear_Output": {
+            "dtype": "UINT16",
+            "shape": [
+              2,
+              16
+            ]
+          },
+          "x_DequantizeLinear_Output": {
+            "dtype": "FLOAT",
+            "shape": [
+              2,
+              16
+            ]
+          },
+          "y_QuantizeLinear_Input": {
+            "dtype": "FLOAT",
+            "shape": [
+              2,
+              8
+            ]
+          },
+          "y_QuantizeLinear_Output": {
+            "dtype": "UINT16",
+            "shape": [
+              2,
+              8
+            ]
+          },
+          "y": {
+            "dtype": "FLOAT",
+            "shape": [
+              2,
+              8
+            ]
+          }
+        }
+      },
+      "fp16-activation": {
+        "precision": "fp16",
+        "operator": "activation",
+        "input_shape": [
+          1,
+          4,
+          6,
+          6
+        ],
+        "status": "prepared",
+        "sha256": "3f85224168b128b7ea15cf146bc40dd2a1fa4aa31e1407df1f711072878a8292",
+        "data_sha256": "45b34c052ed66887654be27125202b31ec60f8b254a71b2f356ea5ff8167f668",
+        "original_representation_passed": true,
+        "nodes": [
+          {
+            "name": "probe_sigmoid",
+            "op": "Sigmoid",
+            "domain": ""
+          },
+          {
+            "name": "probe_silu",
+            "op": "Mul",
+            "domain": ""
+          },
+          {
+            "name": "probe_tanh",
+            "op": "Tanh",
+            "domain": ""
+          }
+        ],
+        "tensors": {
+          "x": {
+            "dtype": "FLOAT16",
+            "shape": [
+              1,
+              4,
+              6,
+              6
+            ]
+          },
+          "s": {
+            "dtype": "FLOAT16",
+            "shape": [
+              1,
+              4,
+              6,
+              6
+            ]
+          },
+          "m": {
+            "dtype": "FLOAT16",
+            "shape": [
+              1,
+              4,
+              6,
+              6
+            ]
+          },
+          "y": {
+            "dtype": "FLOAT16",
+            "shape": [
+              1,
+              4,
+              6,
+              6
+            ]
+          }
+        }
+      },
+      "a16w16-activation": {
+        "precision": "a16w16",
+        "operator": "activation",
+        "input_shape": [
+          1,
+          4,
+          6,
+          6
+        ],
+        "status": "prepared",
+        "sha256": "6a741aaf4f98641b4397f39387f86c56158d6fd3da51177c0928bd55cc9f4f9e",
+        "data_sha256": "ff335ee6d3255357dbac545a271f694326e7afa07d449b830e24ddb0ab8fa210",
+        "original_representation_passed": true,
+        "nodes": [
+          {
+            "name": "x_QuantizeLinear",
+            "op": "QuantizeLinear",
+            "domain": ""
+          },
+          {
+            "name": "x_DequantizeLinear",
+            "op": "DequantizeLinear",
+            "domain": ""
+          },
+          {
+            "name": "probe_sigmoid",
+            "op": "Sigmoid",
+            "domain": ""
+          },
+          {
+            "name": "s_QuantizeLinear",
+            "op": "QuantizeLinear",
+            "domain": ""
+          },
+          {
+            "name": "s_DequantizeLinear",
+            "op": "DequantizeLinear",
+            "domain": ""
+          },
+          {
+            "name": "probe_silu",
+            "op": "Mul",
+            "domain": ""
+          },
+          {
+            "name": "m_QuantizeLinear",
+            "op": "QuantizeLinear",
+            "domain": ""
+          },
+          {
+            "name": "m_DequantizeLinear",
+            "op": "DequantizeLinear",
+            "domain": ""
+          },
+          {
+            "name": "probe_tanh",
+            "op": "Tanh",
+            "domain": ""
+          },
+          {
+            "name": "y_QuantizeLinear",
+            "op": "QuantizeLinear",
+            "domain": ""
+          },
+          {
+            "name": "y_DequantizeLinear",
+            "op": "DequantizeLinear",
+            "domain": ""
+          }
+        ],
+        "tensors": {
+          "x": {
+            "dtype": "FLOAT",
+            "shape": [
+              1,
+              4,
+              6,
+              6
+            ]
+          },
+          "s": {
+            "dtype": "FLOAT",
+            "shape": [
+              1,
+              4,
+              6,
+              6
+            ]
+          },
+          "m": {
+            "dtype": "FLOAT",
+            "shape": [
+              1,
+              4,
+              6,
+              6
+            ]
+          },
+          "x_QuantizeLinear_Output": {
+            "dtype": "UINT16",
+            "shape": [
+              1,
+              4,
+              6,
+              6
+            ]
+          },
+          "x_DequantizeLinear_Output": {
+            "dtype": "FLOAT",
+            "shape": [
+              1,
+              4,
+              6,
+              6
+            ]
+          },
+          "s_QuantizeLinear_Output": {
+            "dtype": "UINT16",
+            "shape": [
+              1,
+              4,
+              6,
+              6
+            ]
+          },
+          "s_DequantizeLinear_Output": {
+            "dtype": "FLOAT",
+            "shape": [
+              1,
+              4,
+              6,
+              6
+            ]
+          },
+          "m_QuantizeLinear_Output": {
+            "dtype": "UINT16",
+            "shape": [
+              1,
+              4,
+              6,
+              6
+            ]
+          },
+          "m_DequantizeLinear_Output": {
+            "dtype": "FLOAT",
+            "shape": [
+              1,
+              4,
+              6,
+              6
+            ]
+          },
+          "y_QuantizeLinear_Input": {
+            "dtype": "FLOAT",
+            "shape": [
+              1,
+              4,
+              6,
+              6
+            ]
+          },
+          "y_QuantizeLinear_Output": {
+            "dtype": "UINT16",
+            "shape": [
+              1,
+              4,
+              6,
+              6
+            ]
+          },
+          "y": {
+            "dtype": "FLOAT",
+            "shape": [
+              1,
+              4,
+              6,
+              6
+            ]
+          }
+        }
+      },
+      "a16w8-activation": {
+        "precision": "a16w8",
+        "operator": "activation",
+        "input_shape": [
+          1,
+          4,
+          6,
+          6
+        ],
+        "status": "prepared",
+        "sha256": "6a741aaf4f98641b4397f39387f86c56158d6fd3da51177c0928bd55cc9f4f9e",
+        "data_sha256": "ff335ee6d3255357dbac545a271f694326e7afa07d449b830e24ddb0ab8fa210",
+        "original_representation_passed": true,
+        "nodes": [
+          {
+            "name": "x_QuantizeLinear",
+            "op": "QuantizeLinear",
+            "domain": ""
+          },
+          {
+            "name": "x_DequantizeLinear",
+            "op": "DequantizeLinear",
+            "domain": ""
+          },
+          {
+            "name": "probe_sigmoid",
+            "op": "Sigmoid",
+            "domain": ""
+          },
+          {
+            "name": "s_QuantizeLinear",
+            "op": "QuantizeLinear",
+            "domain": ""
+          },
+          {
+            "name": "s_DequantizeLinear",
+            "op": "DequantizeLinear",
+            "domain": ""
+          },
+          {
+            "name": "probe_silu",
+            "op": "Mul",
+            "domain": ""
+          },
+          {
+            "name": "m_QuantizeLinear",
+            "op": "QuantizeLinear",
+            "domain": ""
+          },
+          {
+            "name": "m_DequantizeLinear",
+            "op": "DequantizeLinear",
+            "domain": ""
+          },
+          {
+            "name": "probe_tanh",
+            "op": "Tanh",
+            "domain": ""
+          },
+          {
+            "name": "y_QuantizeLinear",
+            "op": "QuantizeLinear",
+            "domain": ""
+          },
+          {
+            "name": "y_DequantizeLinear",
+            "op": "DequantizeLinear",
+            "domain": ""
+          }
+        ],
+        "tensors": {
+          "x": {
+            "dtype": "FLOAT",
+            "shape": [
+              1,
+              4,
+              6,
+              6
+            ]
+          },
+          "s": {
+            "dtype": "FLOAT",
+            "shape": [
+              1,
+              4,
+              6,
+              6
+            ]
+          },
+          "m": {
+            "dtype": "FLOAT",
+            "shape": [
+              1,
+              4,
+              6,
+              6
+            ]
+          },
+          "x_QuantizeLinear_Output": {
+            "dtype": "UINT16",
+            "shape": [
+              1,
+              4,
+              6,
+              6
+            ]
+          },
+          "x_DequantizeLinear_Output": {
+            "dtype": "FLOAT",
+            "shape": [
+              1,
+              4,
+              6,
+              6
+            ]
+          },
+          "s_QuantizeLinear_Output": {
+            "dtype": "UINT16",
+            "shape": [
+              1,
+              4,
+              6,
+              6
+            ]
+          },
+          "s_DequantizeLinear_Output": {
+            "dtype": "FLOAT",
+            "shape": [
+              1,
+              4,
+              6,
+              6
+            ]
+          },
+          "m_QuantizeLinear_Output": {
+            "dtype": "UINT16",
+            "shape": [
+              1,
+              4,
+              6,
+              6
+            ]
+          },
+          "m_DequantizeLinear_Output": {
+            "dtype": "FLOAT",
+            "shape": [
+              1,
+              4,
+              6,
+              6
+            ]
+          },
+          "y_QuantizeLinear_Input": {
+            "dtype": "FLOAT",
+            "shape": [
+              1,
+              4,
+              6,
+              6
+            ]
+          },
+          "y_QuantizeLinear_Output": {
+            "dtype": "UINT16",
+            "shape": [
+              1,
+              4,
+              6,
+              6
+            ]
+          },
+          "y": {
+            "dtype": "FLOAT",
+            "shape": [
+              1,
+              4,
+              6,
+              6
+            ]
+          }
+        }
+      },
+      "fp16-layout": {
+        "precision": "fp16",
+        "operator": "layout",
+        "input_shape": [
+          1,
+          4,
+          6,
+          6
+        ],
+        "status": "prepared",
+        "sha256": "4270c4344093cc43fd4580f4016d4114b71521a47e50b2c184c7f30b89867669",
+        "data_sha256": "f5f09654b1da8686bcdab107276c2a6923d915b2efcd3653aa3511be7f70ea87",
+        "original_representation_passed": true,
+        "nodes": [
+          {
+            "name": "probe_nchw_nhwc",
+            "op": "Transpose",
+            "domain": ""
+          }
+        ],
+        "tensors": {
+          "x": {
+            "dtype": "FLOAT16",
+            "shape": [
+              1,
+              4,
+              6,
+              6
+            ]
+          },
+          "y": {
+            "dtype": "FLOAT16",
+            "shape": [
+              1,
+              6,
+              6,
+              4
+            ]
+          }
+        }
+      },
+      "a16w16-layout": {
+        "precision": "a16w16",
+        "operator": "layout",
+        "input_shape": [
+          1,
+          4,
+          6,
+          6
+        ],
+        "status": "prepared",
+        "sha256": "1c66c006a87ecdb990dd0d46880f5ef766f21aec811b30982403daf082953412",
+        "data_sha256": "ea9e0ed4cb1d1fe748f4d94c2f71dc0df522a40deac8f4797ed5f006bda58a4a",
+        "original_representation_passed": true,
+        "nodes": [
+          {
+            "name": "probe_nchw_nhwc",
+            "op": "Transpose",
+            "domain": ""
+          }
+        ],
+        "tensors": {
+          "x": {
+            "dtype": "FLOAT",
+            "shape": [
+              1,
+              4,
+              6,
+              6
+            ]
+          },
+          "y": {
+            "dtype": "FLOAT",
+            "shape": [
+              1,
+              6,
+              6,
+              4
+            ]
+          }
+        }
+      },
+      "a16w8-layout": {
+        "precision": "a16w8",
+        "operator": "layout",
+        "input_shape": [
+          1,
+          4,
+          6,
+          6
+        ],
+        "status": "prepared",
+        "sha256": "1c66c006a87ecdb990dd0d46880f5ef766f21aec811b30982403daf082953412",
+        "data_sha256": "ea9e0ed4cb1d1fe748f4d94c2f71dc0df522a40deac8f4797ed5f006bda58a4a",
+        "original_representation_passed": true,
+        "nodes": [
+          {
+            "name": "probe_nchw_nhwc",
+            "op": "Transpose",
+            "domain": ""
+          }
+        ],
+        "tensors": {
+          "x": {
+            "dtype": "FLOAT",
+            "shape": [
+              1,
+              4,
+              6,
+              6
+            ]
+          },
+          "y": {
+            "dtype": "FLOAT",
+            "shape": [
+              1,
+              6,
+              6,
+              4
+            ]
+          }
+        }
+      }
+    }
+  },
+  "provider_options": {
+    "htp_arch": "68",
+    "device_id": "0",
+    "profiling_level": "detailed"
+  },
+  "completed_utc": 1793537789.5673077,
+  "validation_status": "failed"
+}

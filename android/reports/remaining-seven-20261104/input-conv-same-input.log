@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "/Users/sergios/sunnypilot/android/scripts/compare_ncnn_same_input.py", line 85, in <module>
+    result = analyze(args.report)
+             ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sergios/sunnypilot/android/scripts/compare_ncnn_same_input.py", line 24, in analyze
+    manifest = json.loads(report.read_text())
+                          ^^^^^^^^^^^^^^^^^^
+  File "/Users/sergios/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/pathlib.py", line 1027, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sergios/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/pathlib.py", line 1013, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'android/reports/remaining-seven-20261104/input-conv-trace.json'

@@ -1,0 +1,48 @@
+{
+  "candidate": "candidate45v",
+  "apk_sha256": "5d108d0c33d6860a162d7fb654997a453735d6a2ef9d5ec40a7895fb8aa15c95",
+  "rtol": 0.001,
+  "atol": 0.0001,
+  "status": "failed",
+  "required": 795,
+  "run": 171,
+  "passed": 169,
+  "failed": 2,
+  "blocked": 624,
+  "failures": [
+    {
+      "model": "driving_supercombo",
+      "case": "7",
+      "output": "outputs",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        2576
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.03125,
+      "mismatched_elements": 47
+    },
+    {
+      "model": "driving_supercombo",
+      "case": "123",
+      "output": "outputs",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        2576
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.015625,
+      "mismatched_elements": 35
+    }
+  ]
+}

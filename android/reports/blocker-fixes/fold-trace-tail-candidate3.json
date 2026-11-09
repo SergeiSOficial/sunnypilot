@@ -1,0 +1,3891 @@
+{
+  "scope": "diagnostic: observing intermediate tensors can change fusion/rounding",
+  "vehicle_tx_enabled": false,
+  "models": {
+    "driving_supercombo": {
+      "instrumented_matches_original": {
+        "outputs": false,
+        "next_state_img_q": true,
+        "next_state_desire_q": true,
+        "next_state_feat_q": false
+      },
+      "engines": {
+        "ort": {
+          "nodes": [
+            {
+              "index": 128,
+              "operator": "Relu",
+              "name": "model/node_relu",
+              "output": "model/relu",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                64,
+                1,
+                1
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 64
+            },
+            {
+              "index": 129,
+              "operator": "Conv",
+              "name": "model/node_conv2d_59",
+              "output": "model/conv2d_59",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                1024,
+                1,
+                1
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 1024
+            },
+            {
+              "index": 130,
+              "operator": "Sigmoid",
+              "name": "model/node_sigmoid",
+              "output": "model/sigmoid",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                1024,
+                1,
+                1
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 1024
+            },
+            {
+              "index": 131,
+              "operator": "Mul",
+              "name": "model/node_mul_12",
+              "output": "model/mul_12",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                1024,
+                4,
+                8
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 32768
+            },
+            {
+              "index": 132,
+              "operator": "Gelu",
+              "name": "model/node_gelu_18",
+              "output": "model/gelu_18",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                1024,
+                4,
+                8
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 32768
+            },
+            {
+              "index": 133,
+              "operator": "ReduceMean",
+              "name": "model/node_mean_1",
+              "output": "model/mean_1",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                1024,
+                1,
+                1
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 1024
+            },
+            {
+              "index": 134,
+              "operator": "Reshape",
+              "name": "model/node_view",
+              "output": "model/view",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                1024
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 1024
+            },
+            {
+              "index": 135,
+              "operator": "Gemm",
+              "name": "model/node_linear",
+              "output": "model/linear",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                2048
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 2048
+            },
+            {
+              "index": 136,
+              "operator": "Gemm",
+              "name": "model/node_linear_1",
+              "output": "model/linear_1",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 512
+            },
+            {
+              "index": 137,
+              "operator": "Relu",
+              "name": "model/node_relu_1",
+              "output": "model/relu_1",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 512
+            },
+            {
+              "index": 138,
+              "operator": "Gemm",
+              "name": "model/node_linear_2",
+              "output": "model/linear_2",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                1024
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 1024
+            },
+            {
+              "index": 139,
+              "operator": "Relu",
+              "name": "model/node_relu_2",
+              "output": "model/relu_2",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                1024
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 1024
+            },
+            {
+              "index": 140,
+              "operator": "Gemm",
+              "name": "model/node_linear_3",
+              "output": "model/linear_3",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 512
+            },
+            {
+              "index": 141,
+              "operator": "Add",
+              "name": "model/node_add_12",
+              "output": "model/add_12",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 512
+            },
+            {
+              "index": 142,
+              "operator": "Relu",
+              "name": "model/node_relu_3",
+              "output": "model/relu_3",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 512
+            },
+            {
+              "index": 143,
+              "operator": "Gemm",
+              "name": "model/node_linear_4",
+              "output": "model/linear_4",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                1024
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 1024
+            },
+            {
+              "index": 144,
+              "operator": "Relu",
+              "name": "model/node_relu_4",
+              "output": "model/relu_4",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                1024
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 1024
+            },
+            {
+              "index": 145,
+              "operator": "Gemm",
+              "name": "model/node_linear_5",
+              "output": "model/linear_5",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 512
+            },
+            {
+              "index": 146,
+              "operator": "Add",
+              "name": "model/node_add_13",
+              "output": "model/add_13",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 512
+            },
+            {
+              "index": 147,
+              "operator": "Relu",
+              "name": "model/node_relu_5",
+              "output": "model/relu_5",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 512
+            },
+            {
+              "index": 148,
+              "operator": "Gemm",
+              "name": "model/node_linear_6",
+              "output": "model/linear_6",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 512
+            },
+            {
+              "index": 149,
+              "operator": "ReduceL2",
+              "name": "model/node_linalg_vector_norm",
+              "output": "model/linalg_vector_norm",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                1
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 1
+            },
+            {
+              "index": 150,
+              "operator": "Clip",
+              "name": "model/node_clamp_min",
+              "output": "model/clamp_min",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                1
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 1
+            },
+            {
+              "index": 151,
+              "operator": "Expand",
+              "name": "model/node_expand",
+              "output": "model/expand",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 512
+            },
+            {
+              "index": 152,
+              "operator": "Div",
+              "name": "model/node_div_1",
+              "output": "model/div_1",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 512
+            },
+            {
+              "index": 153,
+              "operator": "Gemm",
+              "name": "model/node_linear_7",
+              "output": "model/linear_7",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                1024
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 1024
+            },
+            {
+              "index": 154,
+              "operator": "Relu",
+              "name": "model/node_relu_6",
+              "output": "model/relu_6",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                1024
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 1024
+            },
+            {
+              "index": 155,
+              "operator": "Gemm",
+              "name": "model/node_linear_8",
+              "output": "model/linear_8",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 512
+            },
+            {
+              "index": 156,
+              "operator": "Add",
+              "name": "model/node_add_14",
+              "output": "model/add_14",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 512
+            },
+            {
+              "index": 157,
+              "operator": "Relu",
+              "name": "model/node_relu_7",
+              "output": "model/relu_7",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 512
+            },
+            {
+              "index": 158,
+              "operator": "Gemm",
+              "name": "model/node_linear_9",
+              "output": "model/linear_9",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                1024
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 1024
+            },
+            {
+              "index": 159,
+              "operator": "Relu",
+              "name": "model/node_relu_8",
+              "output": "model/relu_8",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                1024
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 1024
+            },
+            {
+              "index": 160,
+              "operator": "Gemm",
+              "name": "model/node_linear_10",
+              "output": "model/linear_10",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 512
+            },
+            {
+              "index": 161,
+              "operator": "Add",
+              "name": "model/node_add_15",
+              "output": "model/add_15",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 512
+            },
+            {
+              "index": 162,
+              "operator": "Relu",
+              "name": "model/node_relu_9",
+              "output": "model/relu_9",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 512
+            },
+            {
+              "index": 163,
+              "operator": "Gemm",
+              "name": "model/node_linear_12",
+              "output": "model/linear_12",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                64
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 64
+            },
+            {
+              "index": 164,
+              "operator": "Relu",
+              "name": "model/node_relu_11",
+              "output": "model/relu_11",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                64
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 64
+            },
+            {
+              "index": 165,
+              "operator": "Gemm",
+              "name": "model/node_linear_13",
+              "output": "model/linear_13",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                16
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 16
+            },
+            {
+              "index": 166,
+              "operator": "Relu",
+              "name": "model/node_relu_12",
+              "output": "model/relu_12",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                16
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 16
+            },
+            {
+              "index": 167,
+              "operator": "Gemm",
+              "name": "model/node_linear_14",
+              "output": "model/linear_14",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                16
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 16
+            },
+            {
+              "index": 168,
+              "operator": "Relu",
+              "name": "model/node_relu_13",
+              "output": "model/relu_13",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                16
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 16
+            },
+            {
+              "index": 169,
+              "operator": "Gemm",
+              "name": "model/node_linear_15",
+              "output": "model/linear_15",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                32
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 32
+            },
+            {
+              "index": 170,
+              "operator": "Relu",
+              "name": "model/node_relu_14",
+              "output": "model/relu_14",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                32
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 32
+            },
+            {
+              "index": 171,
+              "operator": "Gemm",
+              "name": "model/node_linear_16",
+              "output": "model/linear_16",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                64
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 64
+            },
+            {
+              "index": 172,
+              "operator": "Relu",
+              "name": "model/node_relu_15",
+              "output": "model/relu_15",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                64
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 64
+            },
+            {
+              "index": 173,
+              "operator": "Gemm",
+              "name": "model/node_linear_19",
+              "output": "model/linear_19",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                64
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 64
+            },
+            {
+              "index": 174,
+              "operator": "Relu",
+              "name": "model/node_relu_18",
+              "output": "model/relu_18",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                64
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 64
+            },
+            {
+              "index": 175,
+              "operator": "Gemm",
+              "name": "model/node_linear_20",
+              "output": "model/linear_20",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                64
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 64
+            },
+            {
+              "index": 176,
+              "operator": "Add",
+              "name": "model/node_add_17",
+              "output": "model/add_17",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                64
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 64
+            },
+            {
+              "index": 177,
+              "operator": "Relu",
+              "name": "model/node_relu_19",
+              "output": "model/relu_19",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                64
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 64
+            },
+            {
+              "index": 178,
+              "operator": "Gemm",
+              "name": "model/node_linear_21",
+              "output": "model/linear_21",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                16
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 16
+            },
+            {
+              "index": 179,
+              "operator": "Relu",
+              "name": "model/node_relu_20",
+              "output": "model/relu_20",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                16
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 16
+            },
+            {
+              "index": 180,
+              "operator": "Gemm",
+              "name": "model/node_linear_22",
+              "output": "model/linear_22",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                16
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 16
+            },
+            {
+              "index": 181,
+              "operator": "Add",
+              "name": "model/node_add_18",
+              "output": "model/add_18",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                16
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 16
+            },
+            {
+              "index": 182,
+              "operator": "Relu",
+              "name": "model/node_relu_21",
+              "output": "model/relu_21",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                16
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 16
+            },
+            {
+              "index": 183,
+              "operator": "Gemm",
+              "name": "model/node_linear_23",
+              "output": "model/linear_23",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                16
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 16
+            },
+            {
+              "index": 184,
+              "operator": "Relu",
+              "name": "model/node_relu_22",
+              "output": "model/relu_22",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                16
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 16
+            },
+            {
+              "index": 185,
+              "operator": "Gemm",
+              "name": "model/node_linear_24",
+              "output": "model/linear_24",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                16
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 16
+            },
+            {
+              "index": 186,
+              "operator": "Add",
+              "name": "model/node_add_19",
+              "output": "model/add_19",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                16
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 16
+            },
+            {
+              "index": 187,
+              "operator": "Relu",
+              "name": "model/node_relu_23",
+              "output": "model/relu_23",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                16
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 16
+            },
+            {
+              "index": 188,
+              "operator": "Gemm",
+              "name": "model/node_linear_25",
+              "output": "model/linear_25",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                32
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 32
+            },
+            {
+              "index": 189,
+              "operator": "Relu",
+              "name": "model/node_relu_24",
+              "output": "model/relu_24",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                32
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 32
+            },
+            {
+              "index": 190,
+              "operator": "Gemm",
+              "name": "model/node_linear_26",
+              "output": "model/linear_26",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                32
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 32
+            },
+            {
+              "index": 191,
+              "operator": "Add",
+              "name": "model/node_add_20",
+              "output": "model/add_20",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                32
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 32
+            },
+            {
+              "index": 192,
+              "operator": "Relu",
+              "name": "model/node_relu_25",
+              "output": "model/relu_25",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                32
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 32
+            },
+            {
+              "index": 193,
+              "operator": "Gemm",
+              "name": "model/node_linear_27",
+              "output": "model/linear_27",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                64
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 64
+            },
+            {
+              "index": 194,
+              "operator": "Relu",
+              "name": "model/node_relu_26",
+              "output": "model/relu_26",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                64
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 64
+            },
+            {
+              "index": 195,
+              "operator": "Gemm",
+              "name": "model/node_linear_28",
+              "output": "model/linear_28",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                64
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 64
+            },
+            {
+              "index": 196,
+              "operator": "Add",
+              "name": "model/node_add_21",
+              "output": "model/add_21",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                64
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 64
+            },
+            {
+              "index": 197,
+              "operator": "Relu",
+              "name": "model/node_relu_27",
+              "output": "model/relu_27",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                64
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 64
+            },
+            {
+              "index": 198,
+              "operator": "Gemm",
+              "name": "model/node_linear_30",
+              "output": "model/linear_30",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                144
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 144
+            },
+            {
+              "index": 199,
+              "operator": "Gemm",
+              "name": "model/node_linear_31",
+              "output": "model/linear_31",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                3
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 3
+            },
+            {
+              "index": 200,
+              "operator": "Gemm",
+              "name": "model/node_linear_32",
+              "output": "model/linear_32",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                8
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 8
+            },
+            {
+              "index": 201,
+              "operator": "Gemm",
+              "name": "model/node_linear_33",
+              "output": "model/linear_33",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                264
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 264
+            },
+            {
+              "index": 202,
+              "operator": "Gemm",
+              "name": "model/node_linear_34",
+              "output": "model/linear_34",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                528
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 528
+            },
+            {
+              "index": 203,
+              "operator": "Mul",
+              "name": "model/node_mul_14",
+              "output": "model/mul_14",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                144
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 144
+            },
+            {
+              "index": 204,
+              "operator": "Gemm",
+              "name": "model/node_linear_35",
+              "output": "model/linear_35",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 512
+            },
+            {
+              "index": 205,
+              "operator": "Relu",
+              "name": "model/node_relu_28",
+              "output": "model/relu_28",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 512
+            },
+            {
+              "index": 206,
+              "operator": "Gemm",
+              "name": "model/node_linear_36",
+              "output": "model/linear_36",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                1024
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 1024
+            },
+            {
+              "index": 207,
+              "operator": "Relu",
+              "name": "model/node_relu_29",
+              "output": "model/relu_29",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                1024
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 1024
+            },
+            {
+              "index": 208,
+              "operator": "Gemm",
+              "name": "model/node_linear_37",
+              "output": "model/linear_37",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 512
+            },
+            {
+              "index": 209,
+              "operator": "Add",
+              "name": "model/node_add_22",
+              "output": "model/add_22",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 512
+            },
+            {
+              "index": 210,
+              "operator": "Relu",
+              "name": "model/node_relu_30",
+              "output": "model/relu_30",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 512
+            },
+            {
+              "index": 211,
+              "operator": "Gemm",
+              "name": "model/node_linear_38",
+              "output": "model/linear_38",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                1024
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 1024
+            },
+            {
+              "index": 212,
+              "operator": "Relu",
+              "name": "model/node_relu_31",
+              "output": "model/relu_31",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                1024
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 1024
+            },
+            {
+              "index": 213,
+              "operator": "Gemm",
+              "name": "model/node_linear_39",
+              "output": "model/linear_39",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 512
+            },
+            {
+              "index": 214,
+              "operator": "Add",
+              "name": "model/node_add_23",
+              "output": "model/add_23",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 512
+            },
+            {
+              "index": 215,
+              "operator": "Relu",
+              "name": "model/node_relu_32",
+              "output": "model/relu_32",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 512
+            },
+            {
+              "index": 216,
+              "operator": "Gemm",
+              "name": "model/node_linear_40",
+              "output": "model/linear_40",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                1024
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 1024
+            },
+            {
+              "index": 217,
+              "operator": "Relu",
+              "name": "model/node_relu_33",
+              "output": "model/relu_33",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                1024
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 1024
+            },
+            {
+              "index": 218,
+              "operator": "Gemm",
+              "name": "model/node_linear_41",
+              "output": "model/linear_41",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 512
+            },
+            {
+              "index": 219,
+              "operator": "Add",
+              "name": "model/node_add_24",
+              "output": "model/add_24",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 512
+            },
+            {
+              "index": 220,
+              "operator": "Relu",
+              "name": "model/node_relu_34",
+              "output": "model/relu_34",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 512
+            },
+            {
+              "index": 221,
+              "operator": "Gemm",
+              "name": "model/node_linear_42",
+              "output": "model/linear_42",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                1024
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 1024
+            },
+            {
+              "index": 222,
+              "operator": "Relu",
+              "name": "model/node_relu_35",
+              "output": "model/relu_35",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                1024
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 1024
+            },
+            {
+              "index": 223,
+              "operator": "Gemm",
+              "name": "model/node_linear_43",
+              "output": "model/linear_43",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 512
+            },
+            {
+              "index": 224,
+              "operator": "Add",
+              "name": "model/node_add_25",
+              "output": "model/add_25",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 512
+            },
+            {
+              "index": 225,
+              "operator": "Relu",
+              "name": "model/node_relu_36",
+              "output": "model/relu_36",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 512
+            },
+            {
+              "index": 226,
+              "operator": "Gemm",
+              "name": "model/node_linear_44",
+              "output": "model/linear_44",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                64
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 64
+            },
+            {
+              "index": 227,
+              "operator": "Relu",
+              "name": "model/node_relu_37",
+              "output": "model/relu_37",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                64
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 64
+            },
+            {
+              "index": 228,
+              "operator": "Gemm",
+              "name": "model/node_linear_45",
+              "output": "model/linear_45",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                32
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 32
+            },
+            {
+              "index": 229,
+              "operator": "Relu",
+              "name": "model/node_relu_38",
+              "output": "model/relu_38",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                32
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 32
+            },
+            {
+              "index": 230,
+              "operator": "Gemm",
+              "name": "model/node_linear_46",
+              "output": "model/linear_46",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                32
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 32
+            },
+            {
+              "index": 231,
+              "operator": "Relu",
+              "name": "model/node_relu_39",
+              "output": "model/relu_39",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                32
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 32
+            },
+            {
+              "index": 232,
+              "operator": "Gemm",
+              "name": "model/node_linear_47",
+              "output": "model/linear_47",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                32
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 32
+            },
+            {
+              "index": 233,
+              "operator": "Relu",
+              "name": "model/node_relu_40",
+              "output": "model/relu_40",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                32
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 32
+            },
+            {
+              "index": 234,
+              "operator": "Gemm",
+              "name": "model/node_linear_48",
+              "output": "model/linear_48",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                32
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 32
+            },
+            {
+              "index": 235,
+              "operator": "Relu",
+              "name": "model/node_relu_41",
+              "output": "model/relu_41",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                32
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 32
+            },
+            {
+              "index": 236,
+              "operator": "Gemm",
+              "name": "model/node_linear_50",
+              "output": "model/linear_50",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                64
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 64
+            },
+            {
+              "index": 237,
+              "operator": "Relu",
+              "name": "model/node_relu_43",
+              "output": "model/relu_43",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                64
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 64
+            },
+            {
+              "index": 238,
+              "operator": "Gemm",
+              "name": "model/node_linear_51",
+              "output": "model/linear_51",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                64
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 64
+            },
+            {
+              "index": 239,
+              "operator": "Add",
+              "name": "model/node_add_26",
+              "output": "model/add_26",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                64
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 64
+            },
+            {
+              "index": 240,
+              "operator": "Relu",
+              "name": "model/node_relu_44",
+              "output": "model/relu_44",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                64
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 64
+            },
+            {
+              "index": 241,
+              "operator": "Gemm",
+              "name": "model/node_linear_52",
+              "output": "model/linear_52",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                32
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 32
+            },
+            {
+              "index": 242,
+              "operator": "Relu",
+              "name": "model/node_relu_45",
+              "output": "model/relu_45",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                32
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 32
+            },
+            {
+              "index": 243,
+              "operator": "Gemm",
+              "name": "model/node_linear_53",
+              "output": "model/linear_53",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                32
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 32
+            },
+            {
+              "index": 244,
+              "operator": "Add",
+              "name": "model/node_add_27",
+              "output": "model/add_27",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                32
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 32
+            },
+            {
+              "index": 245,
+              "operator": "Relu",
+              "name": "model/node_relu_46",
+              "output": "model/relu_46",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                32
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 32
+            },
+            {
+              "index": 246,
+              "operator": "Gemm",
+              "name": "model/node_linear_54",
+              "output": "model/linear_54",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                32
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 32
+            },
+            {
+              "index": 247,
+              "operator": "Relu",
+              "name": "model/node_relu_47",
+              "output": "model/relu_47",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                32
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 32
+            },
+            {
+              "index": 248,
+              "operator": "Gemm",
+              "name": "model/node_linear_55",
+              "output": "model/linear_55",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                32
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 32
+            },
+            {
+              "index": 249,
+              "operator": "Add",
+              "name": "model/node_add_28",
+              "output": "model/add_28",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                32
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 32
+            },
+            {
+              "index": 250,
+              "operator": "Relu",
+              "name": "model/node_relu_48",
+              "output": "model/relu_48",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                32
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 32
+            },
+            {
+              "index": 251,
+              "operator": "Gemm",
+              "name": "model/node_linear_56",
+              "output": "model/linear_56",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                32
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 32
+            },
+            {
+              "index": 252,
+              "operator": "Relu",
+              "name": "model/node_relu_49",
+              "output": "model/relu_49",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                32
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 32
+            },
+            {
+              "index": 253,
+              "operator": "Gemm",
+              "name": "model/node_linear_57",
+              "output": "model/linear_57",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                32
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 32
+            },
+            {
+              "index": 254,
+              "operator": "Add",
+              "name": "model/node_add_29",
+              "output": "model/add_29",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                32
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 32
+            },
+            {
+              "index": 255,
+              "operator": "Relu",
+              "name": "model/node_relu_50",
+              "output": "model/relu_50",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                32
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 32
+            },
+            {
+              "index": 256,
+              "operator": "Gemm",
+              "name": "model/node_linear_58",
+              "output": "model/linear_58",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                32
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 32
+            },
+            {
+              "index": 257,
+              "operator": "Relu",
+              "name": "model/node_relu_51",
+              "output": "model/relu_51",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                32
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 32
+            },
+            {
+              "index": 258,
+              "operator": "Gemm",
+              "name": "model/node_linear_59",
+              "output": "model/linear_59",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                32
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 32
+            },
+            {
+              "index": 259,
+              "operator": "Add",
+              "name": "model/node_add_30",
+              "output": "model/add_30",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                32
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 32
+            },
+            {
+              "index": 260,
+              "operator": "Relu",
+              "name": "model/node_relu_52",
+              "output": "model/relu_52",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                32
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 32
+            },
+            {
+              "index": 261,
+              "operator": "Gemm",
+              "name": "model/node_linear_62",
+              "output": "model/linear_62",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                55
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 55
+            },
+            {
+              "index": 262,
+              "operator": "Gemm",
+              "name": "model/node_linear_63",
+              "output": "model/linear_63",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                32
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 32
+            },
+            {
+              "index": 263,
+              "operator": "Gemm",
+              "name": "model/node_linear_64",
+              "output": "model/linear_64",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                12
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 12
+            },
+            {
+              "index": 264,
+              "operator": "Gemm",
+              "name": "model/node_linear_65",
+              "output": "model/linear_65",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                12
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 12
+            },
+            {
+              "index": 265,
+              "operator": "Gemm",
+              "name": "model/node_linear_66",
+              "output": "model/linear_66",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                6
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 6
+            },
+            {
+              "index": 266,
+              "operator": "Gemm",
+              "name": "model/node_linear_68",
+              "output": "model/linear_68",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 512
+            },
+            {
+              "index": 267,
+              "operator": "Relu",
+              "name": "model/node_relu_55",
+              "output": "model/relu_55",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 512
+            },
+            {
+              "index": 268,
+              "operator": "Gemm",
+              "name": "model/node_linear_69",
+              "output": "model/linear_69",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                1024
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 1024
+            },
+            {
+              "index": 269,
+              "operator": "Relu",
+              "name": "model/node_relu_56",
+              "output": "model/relu_56",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                1024
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 1024
+            },
+            {
+              "index": 270,
+              "operator": "Gemm",
+              "name": "model/node_linear_70",
+              "output": "model/linear_70",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 512
+            },
+            {
+              "index": 271,
+              "operator": "Add",
+              "name": "model/node_add_32",
+              "output": "model/add_32",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 512
+            },
+            {
+              "index": 272,
+              "operator": "Relu",
+              "name": "model/node_relu_57",
+              "output": "model/relu_57",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 512
+            },
+            {
+              "index": 273,
+              "operator": "Gemm",
+              "name": "model/node_linear_71",
+              "output": "model/linear_71",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                1024
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 1024
+            },
+            {
+              "index": 274,
+              "operator": "Relu",
+              "name": "model/node_relu_58",
+              "output": "model/relu_58",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                1024
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 1024
+            },
+            {
+              "index": 275,
+              "operator": "Gemm",
+              "name": "model/node_linear_72",
+              "output": "model/linear_72",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 512
+            },
+            {
+              "index": 276,
+              "operator": "Add",
+              "name": "model/node_add_33",
+              "output": "model/add_33",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 512
+            },
+            {
+              "index": 277,
+              "operator": "Relu",
+              "name": "model/node_relu_59",
+              "output": "model/relu_59",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 512
+            },
+            {
+              "index": 278,
+              "operator": "Gemm",
+              "name": "model/node_linear_73",
+              "output": "model/linear_73",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 512
+            },
+            {
+              "index": 279,
+              "operator": "ReduceL2",
+              "name": "model/node_linalg_vector_norm_1",
+              "output": "model/linalg_vector_norm_1",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                1
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 1
+            },
+            {
+              "index": 280,
+              "operator": "Clip",
+              "name": "model/node_clamp_min_1",
+              "output": "model/clamp_min_1",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                1
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 1
+            },
+            {
+              "index": 281,
+              "operator": "Expand",
+              "name": "model/node_expand_1",
+              "output": "model/expand_1",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 512
+            },
+            {
+              "index": 282,
+              "operator": "Div",
+              "name": "model/node_div_2",
+              "output": "model/div_2",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 512
+            },
+            {
+              "index": 283,
+              "operator": "Concat",
+              "name": "model/node_Concat_171",
+              "output": "model/vision_outputs",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                1576
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 1576
+            },
+            {
+              "index": 284,
+              "operator": "Slice",
+              "name": "",
+              "output": "model/hidden",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 512
+            },
+            {
+              "index": 285,
+              "operator": "Reshape",
+              "name": "",
+              "output": "model/hidden_t",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 512
+            },
+            {
+              "index": 286,
+              "operator": "Concat",
+              "name": "",
+              "output": "model/fb_full",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                25,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 512
+            },
+            {
+              "index": 287,
+              "operator": "Identity",
+              "name": "",
+              "output": "model/dp_out",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                25,
+                8
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 288,
+              "operator": "Identity",
+              "name": "",
+              "output": "model/tc_out",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                2
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 289,
+              "operator": "Identity",
+              "name": "",
+              "output": "model/vout_pass",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                1576
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 1576
+            },
+            {
+              "index": 290,
+              "operator": "Transpose",
+              "name": "model/p_node_Transpose_0",
+              "output": "model/p_val_0",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                25,
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 512
+            },
+            {
+              "index": 291,
+              "operator": "GatherND",
+              "name": "model/p_node_GatherND_7",
+              "output": "model/p_val_7",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                9,
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 512
+            },
+            {
+              "index": 292,
+              "operator": "Transpose",
+              "name": "model/p_node_index",
+              "output": "model/p_index",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                9,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 512
+            },
+            {
+              "index": 293,
+              "operator": "Reshape",
+              "name": "model/p_node_view",
+              "output": "model/p_view",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                200
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 294,
+              "operator": "MatMul",
+              "name": "model/p_node_MatMul_13",
+              "output": "model/p_val_13",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                9,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 512
+            },
+            {
+              "index": 295,
+              "operator": "Add",
+              "name": "model/p_node_linear",
+              "output": "model/p_linear",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                9,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 512
+            },
+            {
+              "index": 296,
+              "operator": "Sigmoid",
+              "name": "model/p_node_Sigmoid_14",
+              "output": "model/p_val_14",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                9,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 512
+            },
+            {
+              "index": 297,
+              "operator": "Mul",
+              "name": "model/p_node_silu",
+              "output": "model/p_silu",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                9,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 512
+            },
+            {
+              "index": 298,
+              "operator": "MatMul",
+              "name": "model/p_node_MatMul_16",
+              "output": "model/p_val_16",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                9,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 2528
+            },
+            {
+              "index": 299,
+              "operator": "Add",
+              "name": "model/p_node_linear_1",
+              "output": "model/p_linear_1",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                9,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 2504
+            },
+            {
+              "index": 300,
+              "operator": "Gemm",
+              "name": "model/p_node_linear_2",
+              "output": "model/p_linear_2",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 301,
+              "operator": "Sigmoid",
+              "name": "model/p_node_Sigmoid_17",
+              "output": "model/p_val_17",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 302,
+              "operator": "Mul",
+              "name": "model/p_node_silu_1",
+              "output": "model/p_silu_1",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": 7.62939453125e-06,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 303,
+              "operator": "Gemm",
+              "name": "model/p_node_linear_3",
+              "output": "model/p_linear_3",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.001953125,
+              "mismatched_elements": 27
+            },
+            {
+              "index": 304,
+              "operator": "Unsqueeze",
+              "name": "model/p_node_unsqueeze",
+              "output": "model/p_unsqueeze",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.001953125,
+              "mismatched_elements": 27
+            },
+            {
+              "index": 305,
+              "operator": "Gemm",
+              "name": "model/p_node_linear_4",
+              "output": "model/p_linear_4",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 306,
+              "operator": "Sigmoid",
+              "name": "model/p_node_Sigmoid_19",
+              "output": "model/p_val_19",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 307,
+              "operator": "Mul",
+              "name": "model/p_node_silu_2",
+              "output": "model/p_silu_2",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.00048828125,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 308,
+              "operator": "Gemm",
+              "name": "model/p_node_linear_5",
+              "output": "model/p_linear_5",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.09375,
+              "mismatched_elements": 306
+            },
+            {
+              "index": 309,
+              "operator": "Unsqueeze",
+              "name": "model/p_node_unsqueeze_1",
+              "output": "model/p_unsqueeze_1",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.09375,
+              "mismatched_elements": 306
+            },
+            {
+              "index": 310,
+              "operator": "Add",
+              "name": "model/p_node_add",
+              "output": "model/p_add",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                9,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 1368
+            },
+            {
+              "index": 311,
+              "operator": "Add",
+              "name": "model/p_node_add_1",
+              "output": "model/p_add_1",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                9,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 1402
+            },
+            {
+              "index": 312,
+              "operator": "Add",
+              "name": "model/p_node_add_2",
+              "output": "model/p_add_2",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                9,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 2509
+            },
+            {
+              "index": 313,
+              "operator": "LayerNormalization",
+              "name": "model/p_node_layer_norm",
+              "output": "model/p_layer_norm",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                9,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 1821
+            },
+            {
+              "index": 314,
+              "operator": "MatMul",
+              "name": "model/p_node_MatMul_27",
+              "output": "model/p_val_29",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                9,
+                1536
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 10044
+            },
+            {
+              "index": 315,
+              "operator": "Add",
+              "name": "model/p_node_linear_6",
+              "output": "model/p_linear_6",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                9,
+                1536
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 10035
+            },
+            {
+              "index": 316,
+              "operator": "Reshape",
+              "name": "model/p_node_view_1",
+              "output": "model/p_view_1",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                9,
+                3,
+                8,
+                64
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 10035
+            },
+            {
+              "index": 317,
+              "operator": "Transpose",
+              "name": "model/p_node_permute",
+              "output": "model/p_permute",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                3,
+                1,
+                8,
+                9,
+                64
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 10035
+            },
+            {
+              "index": 318,
+              "operator": "Slice",
+              "name": "model/p_node_Slice_38",
+              "output": "model/p_val_40",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                1,
+                8,
+                9,
+                64
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 3383
+            },
+            {
+              "index": 319,
+              "operator": "Squeeze",
+              "name": "model/p_node_unbind__0",
+              "output": "model/p_getitem",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                8,
+                9,
+                64
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 3383
+            },
+            {
+              "index": 320,
+              "operator": "Slice",
+              "name": "model/p_node_Slice_42",
+              "output": "model/p_val_44",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                1,
+                8,
+                9,
+                64
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 3450
+            },
+            {
+              "index": 321,
+              "operator": "Squeeze",
+              "name": "model/p_node_unbind__1",
+              "output": "model/p_getitem_1",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                8,
+                9,
+                64
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 3450
+            },
+            {
+              "index": 322,
+              "operator": "Slice",
+              "name": "model/p_node_Slice_46",
+              "output": "model/p_val_48",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                1,
+                8,
+                9,
+                64
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 3202
+            },
+            {
+              "index": 323,
+              "operator": "Squeeze",
+              "name": "model/p_node_unbind__2",
+              "output": "model/p_getitem_2",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                8,
+                9,
+                64
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 3202
+            },
+            {
+              "index": 324,
+              "operator": "Transpose",
+              "name": "model/p_node_transpose",
+              "output": "model/p_transpose",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                8,
+                64,
+                9
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 3450
+            },
+            {
+              "index": 325,
+              "operator": "MatMul",
+              "name": "model/p_node_matmul",
+              "output": "model/p_matmul",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                8,
+                9,
+                9
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 571
+            },
+            {
+              "index": 326,
+              "operator": "Mul",
+              "name": "model/p_node_mul",
+              "output": "model/p_mul",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                8,
+                9,
+                9
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 502
+            },
+            {
+              "index": 327,
+              "operator": "Where",
+              "name": "model/p_node_masked_fill",
+              "output": "model/p_masked_fill",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                8,
+                9,
+                9
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 277
+            },
+            {
+              "index": 328,
+              "operator": "Softmax",
+              "name": "model/p_node_softmax",
+              "output": "model/p_softmax",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                8,
+                9,
+                9
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 81
+            },
+            {
+              "index": 329,
+              "operator": "MatMul",
+              "name": "model/p_node_matmul_1",
+              "output": "model/p_matmul_1",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                8,
+                9,
+                64
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 4608
+            },
+            {
+              "index": 330,
+              "operator": "Transpose",
+              "name": "model/p_node_transpose_1",
+              "output": "model/p_transpose_1",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                9,
+                8,
+                64
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 4608
+            },
+            {
+              "index": 331,
+              "operator": "Reshape",
+              "name": "model/p_node_view_2",
+              "output": "model/p_view_2",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                9,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 4608
+            },
+            {
+              "index": 332,
+              "operator": "MatMul",
+              "name": "model/p_node_MatMul_56",
+              "output": "model/p_val_58",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                9,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 4608
+            },
+            {
+              "index": 333,
+              "operator": "Add",
+              "name": "model/p_node_linear_7",
+              "output": "model/p_linear_7",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                9,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 4608
+            },
+            {
+              "index": 334,
+              "operator": "Add",
+              "name": "model/p_node_add_3",
+              "output": "model/p_add_3",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                9,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 4608
+            },
+            {
+              "index": 335,
+              "operator": "LayerNormalization",
+              "name": "model/p_node_layer_norm_1",
+              "output": "model/p_layer_norm_1",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                9,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 4608
+            },
+            {
+              "index": 336,
+              "operator": "MatMul",
+              "name": "model/p_node_MatMul_58",
+              "output": "model/p_val_62",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                9,
+                2048
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 18432
+            },
+            {
+              "index": 337,
+              "operator": "Add",
+              "name": "model/p_node_linear_8",
+              "output": "model/p_linear_8",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                9,
+                2048
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 18432
+            },
+            {
+              "index": 338,
+              "operator": "Gelu",
+              "name": "model/p_node_gelu",
+              "output": "model/p_gelu",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                9,
+                2048
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 18432
+            },
+            {
+              "index": 339,
+              "operator": "MatMul",
+              "name": "model/p_node_MatMul_60",
+              "output": "model/p_val_64",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                9,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 4608
+            },
+            {
+              "index": 340,
+              "operator": "Add",
+              "name": "model/p_node_linear_9",
+              "output": "model/p_linear_9",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                9,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 4608
+            },
+            {
+              "index": 341,
+              "operator": "Add",
+              "name": "model/p_node_add_4",
+              "output": "model/p_add_4",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                9,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 4608
+            },
+            {
+              "index": 342,
+              "operator": "Gather",
+              "name": "model/p_node_select",
+              "output": "model/p_select",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 512
+            },
+            {
+              "index": 343,
+              "operator": "Gemm",
+              "name": "model/p_node_linear_10",
+              "output": "model/p_linear_10",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                1024
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 1024
+            },
+            {
+              "index": 344,
+              "operator": "Relu",
+              "name": "model/p_node_relu",
+              "output": "model/p_relu",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                1024
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 1024
+            },
+            {
+              "index": 345,
+              "operator": "Gemm",
+              "name": "model/p_node_linear_11",
+              "output": "model/p_linear_11",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 512
+            },
+            {
+              "index": 346,
+              "operator": "Add",
+              "name": "model/p_node_add_5",
+              "output": "model/p_add_5",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 512
+            },
+            {
+              "index": 347,
+              "operator": "Relu",
+              "name": "model/p_node_relu_1",
+              "output": "model/p_relu_1",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 512
+            },
+            {
+              "index": 348,
+              "operator": "Gemm",
+              "name": "model/p_node_linear_12",
+              "output": "model/p_linear_12",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                1024
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 1024
+            },
+            {
+              "index": 349,
+              "operator": "Relu",
+              "name": "model/p_node_relu_2",
+              "output": "model/p_relu_2",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                1024
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 1024
+            },
+            {
+              "index": 350,
+              "operator": "Gemm",
+              "name": "model/p_node_linear_13",
+              "output": "model/p_linear_13",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 512
+            },
+            {
+              "index": 351,
+              "operator": "Add",
+              "name": "model/p_node_add_6",
+              "output": "model/p_add_6",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 512
+            },
+            {
+              "index": 352,
+              "operator": "Relu",
+              "name": "model/p_node_relu_3",
+              "output": "model/p_relu_3",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 512
+            },
+            {
+              "index": 353,
+              "operator": "Gemm",
+              "name": "model/p_node_linear_14",
+              "output": "model/p_linear_14",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                256
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 256
+            },
+            {
+              "index": 354,
+              "operator": "Relu",
+              "name": "model/p_node_relu_4",
+              "output": "model/p_relu_4",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                256
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 256
+            },
+            {
+              "index": 355,
+              "operator": "Gemm",
+              "name": "model/p_node_linear_15",
+              "output": "model/p_linear_15",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                32
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 32
+            },
+            {
+              "index": 356,
+              "operator": "Relu",
+              "name": "model/p_node_relu_5",
+              "output": "model/p_relu_5",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                32
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 32
+            },
+            {
+              "index": 357,
+              "operator": "Gemm",
+              "name": "model/p_node_linear_16",
+              "output": "model/p_linear_16",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                256
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 256
+            },
+            {
+              "index": 358,
+              "operator": "Relu",
+              "name": "model/p_node_relu_6",
+              "output": "model/p_relu_6",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                256
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 256
+            },
+            {
+              "index": 359,
+              "operator": "Gemm",
+              "name": "model/p_node_linear_17",
+              "output": "model/p_linear_17",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                256
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 256
+            },
+            {
+              "index": 360,
+              "operator": "Add",
+              "name": "model/p_node_add_7",
+              "output": "model/p_add_7",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                256
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 256
+            },
+            {
+              "index": 361,
+              "operator": "Relu",
+              "name": "model/p_node_relu_7",
+              "output": "model/p_relu_7",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                256
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 256
+            },
+            {
+              "index": 362,
+              "operator": "Gemm",
+              "name": "model/p_node_linear_18",
+              "output": "model/p_linear_18",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                32
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 32
+            },
+            {
+              "index": 363,
+              "operator": "Relu",
+              "name": "model/p_node_relu_8",
+              "output": "model/p_relu_8",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                32
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 32
+            },
+            {
+              "index": 364,
+              "operator": "Gemm",
+              "name": "model/p_node_linear_19",
+              "output": "model/p_linear_19",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                32
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 32
+            },
+            {
+              "index": 365,
+              "operator": "Add",
+              "name": "model/p_node_add_8",
+              "output": "model/p_add_8",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                32
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 32
+            },
+            {
+              "index": 366,
+              "operator": "Relu",
+              "name": "model/p_node_relu_9",
+              "output": "model/p_relu_9",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                32
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 32
+            },
+            {
+              "index": 367,
+              "operator": "Gemm",
+              "name": "model/p_node_linear_20",
+              "output": "model/p_linear_20",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                990
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 990
+            },
+            {
+              "index": 368,
+              "operator": "Gemm",
+              "name": "model/p_node_linear_21",
+              "output": "model/p_linear_21",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                8
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 8
+            },
+            {
+              "index": 369,
+              "operator": "Mul",
+              "name": "model/p_node_mul_1",
+              "output": "model/p_mul_1",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                990
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 990
+            },
+            {
+              "index": 370,
+              "operator": "Concat",
+              "name": "model/p_node_cat",
+              "output": "model/p_outputs",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                1000
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 998
+            },
+            {
+              "index": 371,
+              "operator": "Concat",
+              "name": "",
+              "output": "_symbolic",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                2576
+              ],
+              "dtype": "float16",
+              "max_abs_error": null,
+              "mismatched_elements": 2574
+            },
+            {
+              "index": 373,
+              "operator": "Slice",
+              "name": "node_slice_6",
+              "output": "slice_6",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float32",
+              "max_abs_error": null,
+              "mismatched_elements": 512
+            },
+            {
+              "index": 374,
+              "operator": "Unsqueeze",
+              "name": "node_unsqueeze_1",
+              "output": "unsqueeze_1",
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                1,
+                512
+              ],
+              "dtype": "float32",
+              "max_abs_error": null,
+              "mismatched_elements": 512
+            },
+            {
+              "index": 375,
+              "operator": "Slice",
+              "name": "node_slice_7",
+              "output": "slice_7",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                95,
+                1,
+                512
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            }
+          ],
+          "final": {
+            "outputs": {
+              "passed": false,
+              "finite": false,
+              "shape": [
+                1,
+                2576
+              ],
+              "dtype": "float32",
+              "max_abs_error": null,
+              "mismatched_elements": 2574
+            },
+            "next_state_img_q": {
+              "passed": true,
+              "finite": true,
+              "shape": [
+                2,
+                5,
+                6,
+                128,
+                256
+              ],
+              "dtype": "uint8",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            "next_state_desire_q": {
+              "passed": true,
+              "finite": true,
+              "shape": [
+                100,
+                1,
+                8
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            "next_state_feat_q": {
+              "passed": false,
+              "finite": false,
+              "shape": [
+                96,
+                1,
+                512
+              ],
+              "dtype": "float32",
+              "max_abs_error": null,
+              "mismatched_elements": 512
+            }
+          },
+          "first_divergence": {
+            "index": 128,
+            "operator": "Relu",
+            "name": "model/node_relu",
+            "output": "model/relu",
+            "passed": false,
+            "finite": false,
+            "shape": [
+              1,
+              64,
+              1,
+              1
+            ],
+            "dtype": "float16",
+            "max_abs_error": null,
+            "mismatched_elements": 64
+          },
+          "first_nonfinite": {
+            "index": 128,
+            "operator": "Relu",
+            "name": "model/node_relu",
+            "output": "model/relu",
+            "passed": false,
+            "finite": false,
+            "shape": [
+              1,
+              64,
+              1,
+              1
+            ],
+            "dtype": "float16",
+            "max_abs_error": null,
+            "mismatched_elements": 64
+          }
+        }
+      }
+    }
+  },
+  "completed": true
+}

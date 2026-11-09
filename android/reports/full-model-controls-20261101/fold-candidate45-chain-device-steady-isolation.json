@@ -1,0 +1,72 @@
+{
+  "serial": "RFCR81Y1TBJ",
+  "command": [
+    "/Users/sergios/sunnypilot/.venv/bin/python",
+    "-m",
+    "openpilot.tools.sim.android_chain_validation",
+    "--seconds",
+    "30",
+    "--device-replay",
+    "--steady-inputs",
+    "--serial",
+    "RFCR81Y1TBJ",
+    "--adb",
+    "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+    "--report",
+    "/Users/sergios/sunnypilot/android/reports/full-model-controls-20261101/fold-candidate45-chain-device-steady.json",
+    "--package",
+    "com.samsung.sunnypilot.fold3"
+  ],
+  "vehicle_tx_enabled": false,
+  "status": "passed",
+  "validation_status": "passed",
+  "isolation_status": "passed",
+  "forwards_before": [],
+  "before_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 27.3,
+    "thermal_override": false
+  },
+  "apk_sha256": "9868e5b9ca7d24feaefd9acfbcdabaf4f5226e85063e03fffec4400aecc1a859",
+  "baseline": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 27.2,
+    "thermal_override": false,
+    "idle_seconds": 33.12535200000275,
+    "normal_thermal_seconds": 32.698036750021856
+  },
+  "apk_sha256_at_start": "9868e5b9ca7d24feaefd9acfbcdabaf4f5226e85063e03fffec4400aecc1a859",
+  "runtime": {
+    "manager_pid": 26203,
+    "ui_pid": 26386,
+    "simulation": true
+  },
+  "returncode": 0,
+  "after_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 28.9,
+    "thermal_override": false
+  },
+  "forwards_removed": [],
+  "apk_sha256_after": "9868e5b9ca7d24feaefd9acfbcdabaf4f5226e85063e03fffec4400aecc1a859",
+  "artifact_stable": true,
+  "wrapper_status": "passed"
+}

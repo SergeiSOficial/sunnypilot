@@ -1,0 +1,18 @@
+{
+  "scope": "host development before final APK build",
+  "failures_retained": [
+    {
+      "change": "implicit UPCAST convolution accumulator",
+      "failure": "Metal compiler rejected scalar register assignment from float4; four grouped cases failed",
+      "fix": "explicit independent scalar registers and shared scalar input; all six convolution cases pass",
+      "raw_log": "candidate33-initial-tiling-failure.txt"
+    },
+    {
+      "change": "UPCAST polynomial activation",
+      "failure": "Metal vector ternary bool/float element sizes differ",
+      "fix": "retain verified scalar activation implementation"
+    }
+  ],
+  "final_host_gate": "candidate33-host-model-parity.json",
+  "vehicle_tx_enabled": false
+}

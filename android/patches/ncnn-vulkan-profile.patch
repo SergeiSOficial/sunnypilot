@@ -1,0 +1,163 @@
+--- a/src/benchmark.h
++++ b/src/benchmark.h
+@@ -4,11 +4,32 @@
+ #ifndef NCNN_BENCHMARK_H
+ #define NCNN_BENCHMARK_H
+ 
++#include <string>
++#include <vector>
++#include <stdint.h>
++
+ #include "layer.h"
+ #include "mat.h"
+ #include "platform.h"
+ 
+ namespace ncnn {
++
++// Thread-local, bounded profiling. Queries are read only at existing submission fences.
++struct Fold3VulkanTiming
++{
++    std::string name, type;
++    uint64_t start, end;
++    double milliseconds;
++};
++struct Fold3VulkanProfile
++{
++    bool enabled = false;
++    bool valid = true;
++    uint32_t timestamp_bits = 0;
++    std::vector<Fold3VulkanTiming> records;
++};
++NCNN_EXPORT Fold3VulkanProfile& fold3_vulkan_profile();
++NCNN_EXPORT void fold3_record_vulkan_profile(const Layer* layer, uint64_t start, uint64_t end, float period);
+ 
+ // get now timestamp in ms
+ NCNN_EXPORT double get_current_time();
+--- a/src/benchmark.cpp
++++ b/src/benchmark.cpp
+@@ -41,6 +41,26 @@
+ 
+ namespace ncnn {
+ 
++Fold3VulkanProfile& fold3_vulkan_profile()
++{
++    static thread_local Fold3VulkanProfile profile;
++    return profile;
++}
++void fold3_record_vulkan_profile(const Layer* layer, uint64_t start, uint64_t end, float period)
++{
++    Fold3VulkanProfile& p = fold3_vulkan_profile();
++    if (!p.enabled || !start || !end) return;
++    if (!p.timestamp_bits || p.timestamp_bits > 64 || p.records.size() >= 16384 || !(period > 0.f))
++    {
++        p.valid = false;
++        return;
++    }
++    const uint64_t mask = p.timestamp_bits == 64 ? ~uint64_t(0) : (uint64_t(1) << p.timestamp_bits) - 1;
++    const uint64_t ticks = (end - start) & mask;
++    p.records.push_back({layer->name, layer->type, start, end, ticks * double(period) / 1000000.0});
++}
++
++
+ double get_current_time()
+ {
+ #if USE_CXX11_CLOCK
+--- a/src/net.cpp
++++ b/src/net.cpp
+@@ -308,17 +308,19 @@
+         ret = cmd.submit_and_wait();
+ 
+ #if NCNN_BENCHMARK
+-        std::vector<uint64_t> results(layer_index * 2);
+-        cmd.get_query_pool_results(0, layer_index * 2, results);
+-        for (int i = 0; i < layer_index; i++)
+-        {
+-            uint64_t start = results[i * 2];
+-            uint64_t end = results[i * 2 + 1];
+-            if (start == 0 || end == 0)
+-                continue;
+-
+-            double duration_us = (end - start) * vkdev->info.timestamp_period() / 1000;
+-            NCNN_LOGE("%-24s %-30s %8.2lfus    |", layers[i]->type.c_str(), layers[i]->name.c_str(), duration_us);
++        if (fold3_vulkan_profile().enabled)
++        {
++            std::vector<uint64_t> results(layer_index * 2);
++            if (cmd.get_query_pool_results(0, layer_index * 2, results) != 0) fold3_vulkan_profile().valid = false;
++            for (int i = 0; i < layer_index; i++)
++            {
++                uint64_t start = results[i * 2];
++                uint64_t end = results[i * 2 + 1];
++                if (start == 0 || end == 0)
++                    continue;
++    
++                fold3_record_vulkan_profile(layers[i], start, end, vkdev->info.timestamp_period());
++            }
+         }
+ #endif // NCNN_BENCHMARK
+ 
+@@ -330,7 +332,10 @@
+     if (layer->support_vulkan)
+     {
+ #if NCNN_BENCHMARK
+-        cmd.record_write_timestamp(layer_index * 2);
++        if (fold3_vulkan_profile().enabled)
++        {
++            cmd.record_write_timestamp(layer_index * 2);
++        }
+ #endif
+         if (layer->featmask)
+         {
+@@ -341,7 +346,10 @@
+             ret = do_forward_layer(layer, blob_mats_gpu, cmd, opt);
+         }
+ #if NCNN_BENCHMARK
+-        cmd.record_write_timestamp(layer_index * 2 + 1);
++        if (fold3_vulkan_profile().enabled)
++        {
++            cmd.record_write_timestamp(layer_index * 2 + 1);
++        }
+ #endif
+     }
+     else
+@@ -3292,7 +3300,10 @@
+ 
+             ncnn::VkCompute cmd(d->net->vulkan_device());
+ #if NCNN_BENCHMARK
+-            cmd.create_query_pool(d->net->layers().size() * 2);
++            if (fold3_vulkan_profile().enabled)
++            {
++                if (cmd.create_query_pool(d->net->layers().size() * 2) != 0) fold3_vulkan_profile().valid = false;
++            }
+ #endif // NCNN_BENCHMARK
+ 
+             VkMat feat_gpu;
+@@ -3305,17 +3316,19 @@
+                 ret = cmd.submit_and_wait();
+ 
+ #if NCNN_BENCHMARK
+-                std::vector<uint64_t> results(d->net->layers().size() * 2);
+-                cmd.get_query_pool_results(0, d->net->layers().size() * 2, results);
+-                for (size_t i = 0; i < d->net->layers().size(); i++)
++                if (fold3_vulkan_profile().enabled)
+                 {
+-                    uint64_t start = results[i * 2];
+-                    uint64_t end = results[i * 2 + 1];
+-                    if (start == 0 || end == 0)
+-                        continue;
+-
+-                    double duration_us = (end - start) * d->net->vulkan_device()->info.timestamp_period() / 1000;
+-                    NCNN_LOGE("%-24s %-30s %8.2lfus    |", d->net->layers()[i]->type.c_str(), d->net->layers()[i]->name.c_str(), duration_us);
++                    std::vector<uint64_t> results(d->net->layers().size() * 2);
++                    if (cmd.get_query_pool_results(0, d->net->layers().size() * 2, results) != 0) fold3_vulkan_profile().valid = false;
++                    for (size_t i = 0; i < d->net->layers().size(); i++)
++                    {
++                        uint64_t start = results[i * 2];
++                        uint64_t end = results[i * 2 + 1];
++                        if (start == 0 || end == 0)
++                            continue;
++    
++                        fold3_record_vulkan_profile(d->net->layers()[i], start, end, d->net->vulkan_device()->info.timestamp_period());
++                    }
+                 }
+ #endif // NCNN_BENCHMARK
+             }

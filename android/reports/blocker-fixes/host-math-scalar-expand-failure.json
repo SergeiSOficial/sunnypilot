@@ -1,0 +1,21 @@
+{
+  "scope": "host GPU numerical regression only; not Android qualification",
+  "device": "METAL",
+  "host": "macOS-27.2-arm64-arm-64bit",
+  "rtol": 0.001,
+  "atol": 0.0001,
+  "vehicle_tx_enabled": false,
+  "references_sha256": "610f877bd0f98353a6e7228698ee869d02a5b2976430234b96d097e96e773381",
+  "source_sha256": {
+    "fold3_opencl": "b33cd65a1eee944711e34fef07776948d5d9da0944a791ab35403949dd5d4a19",
+    "fold3_host_math": "56f7797945ec1eaaf4a3a31ff332bce192a1c8a868454e10a1fa5cf1ed68f6e1"
+  },
+  "models": {
+    "dmonitoring_model": {
+      "graph_sha256": "30f0326378aea3a8c2a59da73cb4e50c38272bb4fc487c810ebbe6f0daabc7b7",
+      "seeds": {}
+    }
+  },
+  "status": "failed",
+  "error": "RuntimeError: UOp verification failed at 7 on Ops.EXPAND dtypes.f32 2 [(Ops.CAST, dtypes.f32, dtypes.f32), (Ops.STACK, dtypes.weakint, None)] None"
+}

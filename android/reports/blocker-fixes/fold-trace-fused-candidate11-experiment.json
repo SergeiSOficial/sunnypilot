@@ -1,0 +1,60 @@
+{
+  "serial": "RFCR81Y1TBJ",
+  "command": [
+    ".venv/bin/python",
+    "android/scripts/collect_model_trace.py",
+    "--serial",
+    "RFCR81Y1TBJ",
+    "--adb",
+    "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+    "--profile",
+    "trace-fused",
+    "--report",
+    "android/reports/blocker-fixes/fold-trace-fused-candidate11.json"
+  ],
+  "vehicle_tx_enabled": false,
+  "status": "failed",
+  "forwards_before": [],
+  "before_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 24.6,
+    "thermal_override": false
+  },
+  "apk_sha256": "566e4c253c05aae9a6d8fdce82c68b67f3558612ad97560a5d12b2ca2ce83a9a",
+  "baseline": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 25.2,
+    "thermal_override": false,
+    "idle_seconds": 32.23661054199329,
+    "normal_thermal_seconds": 31.99095499998657
+  },
+  "apk_sha256_at_start": "3117fcd52bf426a48d85ca303b08fcaa9a7d135f5f9656b1b1693963995a2ec3",
+  "error": "RuntimeError: Installed APK changed during cooldown; experiment was not started",
+  "after_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 25.2,
+    "thermal_override": false
+  },
+  "forwards_removed": [],
+  "apk_sha256_after": "3117fcd52bf426a48d85ca303b08fcaa9a7d135f5f9656b1b1693963995a2ec3",
+  "artifact_stable": false,
+  "artifact_error": "Installed APK changed or could not be verified throughout the experiment"
+}

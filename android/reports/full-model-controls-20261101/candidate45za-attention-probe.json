@@ -1,0 +1,42 @@
+
+{ "bizCode": "fold3", "extraInfo": 
+{ "version": "3.6.2" }
+, "oplists": 
+[ 
+{ "main_type": "Input", "main": 
+{ "dims": 
+[ 1, 3, 5 ]
+, "dtype": "DT_FLOAT", "dformat": "NCHW" }
+, "name": "a", "outputIndexes": 
+[ 0 ]
+, "type": "Input", "defaultDimentionFormat": "NHWC" }
+, 
+{ "main_type": "Input", "main": 
+{ "dims": 
+[ 2, 5, 7 ]
+, "dtype": "DT_FLOAT", "dformat": "NCHW" }
+, "name": "b", "outputIndexes": 
+[ 1 ]
+, "type": "Input", "defaultDimentionFormat": "NHWC" }
+, 
+{ "inputIndexes": 
+[ 0, 1 ]
+, "main_type": "MatMul", "main": 
+{ "T": "DT_FLOAT", "transposeA": false, "transposeB": false }
+, "name": "fold3_half_matmul2_0_0", "outputIndexes": 
+[ 2 ]
+, "type": "MatMul", "defaultDimentionFormat": "NHWC" }
+, 
+{ "inputIndexes": 
+[ 2 ]
+, "main_type": "CastParam", "main": 
+{ "srcT": "DT_VARIANT", "dstT": "DT_HALF" }
+, "name": "y", "outputIndexes": 
+[ 3 ]
+, "type": "Cast", "defaultDimentionFormat": "NHWC" }
+ ]
+, "outputName": 
+[ "y" ]
+, "preferForwardType": "CPU", "sourceType": "ONNX", "tensorName": 
+[ "a", "b", "fold3_half_matmul2_0_0", "y" ]
+, "tensorNumber": 0, "usage": "INFERENCE", "mnn_uuid": "52c2545f-7942-4cea-932d-4cd6017c52bf" }

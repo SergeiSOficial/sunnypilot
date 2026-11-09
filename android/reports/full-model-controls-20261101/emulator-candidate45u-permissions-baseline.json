@@ -1,0 +1,56 @@
+{
+  "scope": "dedicated emulator validation baseline",
+  "package": "com.samsung.sunnypilot.fold3",
+  "before": [
+    "android.permission.FOREGROUND_SERVICE_CAMERA: granted=true",
+    "android.permission.FOREGROUND_SERVICE: granted=true",
+    "android.permission.FOREGROUND_SERVICE_SPECIAL_USE: granted=true",
+    "android.permission.HIGH_SAMPLING_RATE_SENSORS: granted=true",
+    "android.permission.POST_NOTIFICATIONS: granted=false, flags=[ USER_SENSITIVE_WHEN_GRANTED|USER_SENSITIVE_WHEN_DENIED]",
+    "android.permission.ACCESS_FINE_LOCATION: granted=false, flags=[ USER_SENSITIVE_WHEN_GRANTED|USER_SENSITIVE_WHEN_DENIED]",
+    "android.permission.ACCESS_COARSE_LOCATION: granted=false, flags=[ USER_SENSITIVE_WHEN_GRANTED|USER_SENSITIVE_WHEN_DENIED]",
+    "android.permission.CAMERA: granted=false, flags=[ USER_SENSITIVE_WHEN_GRANTED|USER_SENSITIVE_WHEN_DENIED]"
+  ],
+  "commands": [
+    [
+      "shell",
+      "pm",
+      "grant",
+      "com.samsung.sunnypilot.fold3",
+      "android.permission.CAMERA"
+    ],
+    [
+      "shell",
+      "pm",
+      "grant",
+      "com.samsung.sunnypilot.fold3",
+      "android.permission.POST_NOTIFICATIONS"
+    ],
+    [
+      "shell",
+      "pm",
+      "grant",
+      "com.samsung.sunnypilot.fold3",
+      "android.permission.ACCESS_COARSE_LOCATION"
+    ],
+    [
+      "shell",
+      "pm",
+      "grant",
+      "com.samsung.sunnypilot.fold3",
+      "android.permission.ACCESS_FINE_LOCATION"
+    ]
+  ],
+  "apk_sha256": "e34f7d2979bd37b1457b8f83052bdf9436c4b10c491097988078822c87b29319",
+  "reason": "First-install permission dialogs paused ActivityScenario; original failed instrumentation retained.",
+  "after": [
+    "android.permission.FOREGROUND_SERVICE_CAMERA: granted=true",
+    "android.permission.FOREGROUND_SERVICE: granted=true",
+    "android.permission.FOREGROUND_SERVICE_SPECIAL_USE: granted=true",
+    "android.permission.HIGH_SAMPLING_RATE_SENSORS: granted=true",
+    "android.permission.POST_NOTIFICATIONS: granted=true, flags=[ USER_SENSITIVE_WHEN_GRANTED|USER_SENSITIVE_WHEN_DENIED]",
+    "android.permission.ACCESS_FINE_LOCATION: granted=true, flags=[ USER_SENSITIVE_WHEN_GRANTED|USER_SENSITIVE_WHEN_DENIED]",
+    "android.permission.ACCESS_COARSE_LOCATION: granted=true, flags=[ USER_SENSITIVE_WHEN_GRANTED|USER_SENSITIVE_WHEN_DENIED]",
+    "android.permission.CAMERA: granted=true, flags=[ USER_SENSITIVE_WHEN_GRANTED|USER_SENSITIVE_WHEN_DENIED]"
+  ]
+}

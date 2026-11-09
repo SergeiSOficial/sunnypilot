@@ -1,0 +1,99 @@
+{
+  "diagnostic_only": true,
+  "backend": "host Metal",
+  "seed": 42,
+  "models": {
+    "dmonitoring_model": {
+      "node": "node_Conv_827",
+      "index": 103,
+      "checks": [
+        {
+          "variant": "dot_bias_res",
+          "exact": false,
+          "unequal": 4318,
+          "tolerance_failures": 0,
+          "max_abs_error": 9.5367431640625e-07,
+          "seconds": 0.601468125008978
+        },
+        {
+          "variant": "dot_res_bias",
+          "exact": true,
+          "unequal": 0,
+          "tolerance_failures": 0,
+          "max_abs_error": 0.0,
+          "seconds": 0.07340866600861773
+        },
+        {
+          "variant": "dot_combined",
+          "exact": false,
+          "unequal": 5553,
+          "tolerance_failures": 0,
+          "max_abs_error": 9.5367431640625e-07,
+          "seconds": 0.1383753329864703
+        },
+        {
+          "variant": "res_dot_bias",
+          "exact": false,
+          "unequal": 27769,
+          "tolerance_failures": 0,
+          "max_abs_error": 1.239776611328125e-05,
+          "seconds": 0.2888412089960184
+        },
+        {
+          "variant": "bias_dot_res",
+          "exact": false,
+          "unequal": 26936,
+          "tolerance_failures": 0,
+          "max_abs_error": 5.245208740234375e-06,
+          "seconds": 0.03394974998082034
+        }
+      ]
+    },
+    "driving_supercombo": {
+      "node": "model/node_conv2d_6",
+      "index": 87,
+      "checks": [
+        {
+          "variant": "dot_bias_res",
+          "exact": false,
+          "unequal": 4868,
+          "tolerance_failures": 0,
+          "max_abs_error": 7.62939453125e-06,
+          "seconds": 0.23747745901346207
+        },
+        {
+          "variant": "dot_res_bias",
+          "exact": true,
+          "unequal": 0,
+          "tolerance_failures": 0,
+          "max_abs_error": 0.0,
+          "seconds": 0.03668824999476783
+        },
+        {
+          "variant": "dot_combined",
+          "exact": false,
+          "unequal": 4353,
+          "tolerance_failures": 0,
+          "max_abs_error": 7.62939453125e-06,
+          "seconds": 0.08096208301139995
+        },
+        {
+          "variant": "res_dot_bias",
+          "exact": false,
+          "unequal": 83899,
+          "tolerance_failures": 0,
+          "max_abs_error": 3.0517578125e-05,
+          "seconds": 0.20495958399260417
+        },
+        {
+          "variant": "bias_dot_res",
+          "exact": false,
+          "unequal": 51227,
+          "tolerance_failures": 0,
+          "max_abs_error": 1.71661376953125e-05,
+          "seconds": 0.031630791985662654
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "candidate": "candidate29",
+  "app_sha256": "04cf8905009abe6d502048b90fd94a6065d49c7b6967c9230603bffbe40e6b39",
+  "vehicle_tx_enabled": false,
+  "engagement_allowed": false,
+  "rtol": 0.001,
+  "atol": 0.0001,
+  "models": {
+    "driving_supercombo": {
+      "report": "fold-models-road-candidate29.json",
+      "single_frame_seeds_passed": true,
+      "sequences": {
+        "seed42": {
+          "passed": false,
+          "frames": 32,
+          "failed_frames": [
+            25,
+            27
+          ]
+        },
+        "seed7": {
+          "passed": false,
+          "frames": 32,
+          "failed_frames": [
+            10
+          ]
+        },
+        "seed123": {
+          "passed": false,
+          "frames": 32,
+          "failed_frames": [
+            23,
+            24
+          ]
+        },
+        "camera-replay": {
+          "passed": true,
+          "frames": 60,
+          "failed_frames": []
+        }
+      },
+      "status": "failed",
+      "performance_status": "failed",
+      "samples": 100,
+      "work_p50_ms": 942.715182,
+      "work_p99_ms": 1121.54721104,
+      "deadline_misses_50ms": 100
+    },
+    "dmonitoring_model": {
+      "report": "fold-models-driver-candidate29.json",
+      "single_frame_seeds_passed": true,
+      "sequences": {
+        "seed42": {
+          "passed": true,
+          "frames": 32,
+          "failed_frames": []
+        },
+        "seed7": {
+          "passed": true,
+          "frames": 32,
+          "failed_frames": []
+        },
+        "seed123": {
+          "passed": true,
+          "frames": 32,
+          "failed_frames": []
+        },
+        "camera-replay": {
+          "passed": true,
+          "frames": 60,
+          "failed_frames": []
+        }
+      },
+      "status": "passed",
+      "performance_status": "failed",
+      "samples": 100,
+      "work_p50_ms": 548.1945835,
+      "work_p99_ms": 605.0626159999999,
+      "deadline_misses_50ms": 100
+    }
+  }
+}

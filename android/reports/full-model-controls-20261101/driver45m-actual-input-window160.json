@@ -1,0 +1,534 @@
+{
+  "diagnostic_only": true,
+  "candidate": "candidate45m",
+  "apk_sha256": "66e55837069c90af87a6fce9f0acf4334c7407cf29bed50d716938f7abcd6538",
+  "model": "dmonitoring_model",
+  "rtol": 0.001,
+  "atol": 0.0001,
+  "checks": [
+    {
+      "node": "",
+      "operator": "Mul",
+      "tensor": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_13_XCubedC0",
+      "diagnostic_graph_sha256": "9e86cdb80f33737f601fefb68792900bf93c69f8dd793063138a2270ea4f0f6d",
+      "input_sha256": {
+        "InsertedPrecisionFreeCast__inlfunc_Gelu_token_13_XCubed": "f021929e84203b3b0ee9a0dcd0830d10988a8e9f417feee0b7c8dcea2635656f"
+      },
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          192,
+          15,
+          23
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "unequal_elements": 0
+    },
+    {
+      "node": "",
+      "operator": "Tanh",
+      "tensor": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_13_ErfApprox",
+      "diagnostic_graph_sha256": "c16c942adf808822322037709e7a1a29b1fdc6cbf57ed16293670eac335bfbb8",
+      "input_sha256": {
+        "InsertedPrecisionFreeCast__inlfunc_Gelu_token_13_TanhInput": "924c2caea7d230ae4fcc9be94282db90ff7232a58627b186ab1c9ba7161d6061"
+      },
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          192,
+          15,
+          23
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "unequal_elements": 0
+    },
+    {
+      "node": "node_Conv_845",
+      "operator": "Conv",
+      "tensor": "fold3_host_conv_bl_android_precision_166_result",
+      "diagnostic_graph_sha256": "e262b2dc9906d7082a4ba33fdb68b2b2d5c64f711b1e38b685cbf516c1012103",
+      "input_sha256": {
+        "InsertedPrecisionFreeCast_gelu_14": "6b4808d59f74b2cb16224aa899c5bb9cbf4d7542bd1d19c0f97797ec4f4444d0"
+      },
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          96,
+          15,
+          23
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "unequal_elements": 0
+    },
+    {
+      "node": "node_Conv_847",
+      "operator": "Conv",
+      "tensor": "fold3_host_conv_bl_InsertedPrecisionFreeCast_getitem_63",
+      "diagnostic_graph_sha256": "14991fee0bdb92caf0f96f4c23becced6f2e3b72c60c3693e7c700aa40a569c9",
+      "input_sha256": {
+        "InsertedPrecisionFreeCast_add_4": "4e7dabc91c46a111d554c32d2ee1b28acbd84935219b0740b289356973a2416b"
+      },
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          96,
+          15,
+          23
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "unequal_elements": 0
+    },
+    {
+      "node": "node_Conv_849",
+      "operator": "Conv",
+      "tensor": "fold3_host_conv_bl_InsertedPrecisionFreeCast_getitem_66",
+      "diagnostic_graph_sha256": "ff313acbcb51056434e2c45f7d7a0a60b69a41a04f9ae93f37f15cee1cd603a8",
+      "input_sha256": {
+        "fold3_host_conv_bl_InsertedPrecisionFreeCast_getitem_63": "641783eca3e8ef125cb91c209e1a1ee3f4bb96dc91acdef599a58b40d56df87a"
+      },
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          384,
+          15,
+          23
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "unequal_elements": 0
+    },
+    {
+      "node": "",
+      "operator": "Mul",
+      "tensor": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_14_MultX",
+      "diagnostic_graph_sha256": "dd8e05590d677bcdf84e84b50596a414dca9b0460f89394750a7ec8f61275e67",
+      "input_sha256": {
+        "fold3_host_conv_bl_InsertedPrecisionFreeCast_getitem_66": "9d3ced8a530ca57d68829d751c63901515f2b263d0b34c853ccce7776b8222b2"
+      },
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          384,
+          15,
+          23
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "unequal_elements": 0
+    },
+    {
+      "node": "fold3_host_power_square_180",
+      "operator": "Mul",
+      "tensor": "fold3_host_power_square_180",
+      "diagnostic_graph_sha256": "99b7bf5baf436b6d9b9a134266012adbe6ba6ed697f640159d52ab849ee4f677",
+      "input_sha256": {
+        "fold3_host_conv_bl_InsertedPrecisionFreeCast_getitem_66": "9d3ced8a530ca57d68829d751c63901515f2b263d0b34c853ccce7776b8222b2"
+      },
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          384,
+          15,
+          23
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "unequal_elements": 0
+    },
+    {
+      "node": "",
+      "operator": "Mul",
+      "tensor": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_14_XCubed",
+      "diagnostic_graph_sha256": "1145e292351ae989f63f09603a3b1aacfd29de640f5e1ecb71fa171096b2c883",
+      "input_sha256": {
+        "fold3_host_power_square_180": "3a4fb5399f667fc7e48c3281395d69393f17498b1c80d2582378cc1c2788aa50",
+        "fold3_host_conv_bl_InsertedPrecisionFreeCast_getitem_66": "9d3ced8a530ca57d68829d751c63901515f2b263d0b34c853ccce7776b8222b2"
+      },
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          384,
+          15,
+          23
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "unequal_elements": 0
+    },
+    {
+      "node": "",
+      "operator": "Mul",
+      "tensor": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_14_XCubedC0",
+      "diagnostic_graph_sha256": "db4aec4427976d91b3a4f5e9c52fc43ea45529573ddd0a088731060cba43e0f4",
+      "input_sha256": {
+        "InsertedPrecisionFreeCast__inlfunc_Gelu_token_14_XCubed": "36dbe4f0f1144e21613e96e504da0e6ff439cf20e72ad161da637498016c6dfd"
+      },
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          384,
+          15,
+          23
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "unequal_elements": 0
+    },
+    {
+      "node": "",
+      "operator": "Tanh",
+      "tensor": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_14_ErfApprox",
+      "diagnostic_graph_sha256": "0ebde581b391e833b427c6e9a751d515a62dd2f2231289d285c6bb08c4a762da",
+      "input_sha256": {
+        "InsertedPrecisionFreeCast__inlfunc_Gelu_token_14_TanhInput": "9dbf7392a4d9da0e3247f856955ce06f3dd3ea72e32da328a285523c40f70608"
+      },
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          384,
+          15,
+          23
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "unequal_elements": 0
+    },
+    {
+      "node": "",
+      "operator": "Mul",
+      "tensor": "InsertedPrecisionFreeCast_gelu_15",
+      "diagnostic_graph_sha256": "39a6be6d59592a13f3317a5cf83bebd892692a760c3deaa5ac2fe8e20a669ba4",
+      "input_sha256": {
+        "InsertedPrecisionFreeCast__inlfunc_Gelu_token_14_MultX": "81db27f57bcca0ba674cd6ea5a2539404bf9d94c6e1c46d2084e5436f699a8dd",
+        "InsertedPrecisionFreeCast__inlfunc_Gelu_token_14_PhiApprox": "b28127d03858ec06788cda6c1192b4e6cb2525b341b7b5a1028a37739c93529d"
+      },
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          384,
+          15,
+          23
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "unequal_elements": 0
+    },
+    {
+      "node": "node_Conv_851",
+      "operator": "Conv",
+      "tensor": "fold3_host_conv_bl_android_precision_178_result",
+      "diagnostic_graph_sha256": "b08ac5900314325bb1e2b2b8d87fc52b7f94c95f573989d355067fe258b7a823",
+      "input_sha256": {
+        "InsertedPrecisionFreeCast_gelu_15": "0a4c49b567cb487fc0a45d3d0e200e0911618f558efd9160cd0693e9d244b9cf"
+      },
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          96,
+          15,
+          23
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "unequal_elements": 0
+    },
+    {
+      "node": "",
+      "operator": "Add",
+      "tensor": "InsertedPrecisionFreeCast_add_5",
+      "diagnostic_graph_sha256": "5647d77242e98d54e2e39daef526380958a09d1fe7fdf1727b5ccacd06267b52",
+      "input_sha256": {
+        "fold3_host_conv_bl_android_precision_178_result": "08961c052606b769b37529712cfb8895165093c1b5aa0f41874b2d9f9d725f38",
+        "InsertedPrecisionFreeCast_add_4": "4e7dabc91c46a111d554c32d2ee1b28acbd84935219b0740b289356973a2416b"
+      },
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          96,
+          15,
+          23
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "unequal_elements": 0
+    },
+    {
+      "node": "node_Conv_853",
+      "operator": "Conv",
+      "tensor": "fold3_host_conv_bl_InsertedPrecisionFreeCast_getitem_72",
+      "diagnostic_graph_sha256": "5d02003825442d8f1a24fb39e5addcb1459e0ba7c96d32a316f59ce432028347",
+      "input_sha256": {
+        "InsertedPrecisionFreeCast_add_5": "a12c95c2f124fe99f77c8590eb5108b5b59baca8ce5f0caaec84fbf495359422"
+      },
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          96,
+          15,
+          23
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "unequal_elements": 0
+    },
+    {
+      "node": "node_Conv_855",
+      "operator": "Conv",
+      "tensor": "fold3_host_conv_bl_InsertedPrecisionFreeCast_getitem_75",
+      "diagnostic_graph_sha256": "60adb471e2adad49b80636c4ad3c6119482f989d740675e8be1a4e3f6ee734a6",
+      "input_sha256": {
+        "fold3_host_conv_bl_InsertedPrecisionFreeCast_getitem_72": "b8e337b7d70fb5cced6e13a9857411af017d52fa76aa6007b338b6f14f34a3f2"
+      },
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          576,
+          15,
+          23
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "unequal_elements": 0
+    },
+    {
+      "node": "",
+      "operator": "Mul",
+      "tensor": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_15_MultX",
+      "diagnostic_graph_sha256": "f2a8585c5dadba1db3d87150795cc32427f313f5328e667c29f6638dc72be63a",
+      "input_sha256": {
+        "fold3_host_conv_bl_InsertedPrecisionFreeCast_getitem_75": "7983c5344c63c4e988c056a897567d84a71039b5e1b40bd50412d227489463e7"
+      },
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          576,
+          15,
+          23
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "unequal_elements": 0
+    },
+    {
+      "node": "fold3_host_power_square_193",
+      "operator": "Mul",
+      "tensor": "fold3_host_power_square_193",
+      "diagnostic_graph_sha256": "a52d3c00bb21b7fc6f702382f86384d0c4c5c6a68a4e7c6ff6029e47e7659c79",
+      "input_sha256": {
+        "fold3_host_conv_bl_InsertedPrecisionFreeCast_getitem_75": "7983c5344c63c4e988c056a897567d84a71039b5e1b40bd50412d227489463e7"
+      },
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          576,
+          15,
+          23
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "unequal_elements": 0
+    },
+    {
+      "node": "",
+      "operator": "Mul",
+      "tensor": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_15_XCubed",
+      "diagnostic_graph_sha256": "291be1e17d8c648253a041cc54613f9bdccc785fc59ec4ca031e5436f42b54e2",
+      "input_sha256": {
+        "fold3_host_power_square_193": "f56c7669ae55ce39767edd13920663cb275660ee83419ee8ceacb672912917d0",
+        "fold3_host_conv_bl_InsertedPrecisionFreeCast_getitem_75": "7983c5344c63c4e988c056a897567d84a71039b5e1b40bd50412d227489463e7"
+      },
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          576,
+          15,
+          23
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "unequal_elements": 0
+    },
+    {
+      "node": "",
+      "operator": "Mul",
+      "tensor": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_15_XCubedC0",
+      "diagnostic_graph_sha256": "8f1446aa2259b6deaf35abda78bfd1ebdbd38bf6c7fb90dbbc0930b27af01f94",
+      "input_sha256": {
+        "InsertedPrecisionFreeCast__inlfunc_Gelu_token_15_XCubed": "8afcc10527b2114e5684397198e46475a714a5179a89e08923934ea286c90dcd"
+      },
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          576,
+          15,
+          23
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "unequal_elements": 0
+    },
+    {
+      "node": "",
+      "operator": "Tanh",
+      "tensor": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_15_ErfApprox",
+      "diagnostic_graph_sha256": "14947e093a2f9ff06eed4e8ba2777a6918400316a3825d0dfe17f5204a121148",
+      "input_sha256": {
+        "InsertedPrecisionFreeCast__inlfunc_Gelu_token_15_TanhInput": "e0c8bf95e8149f5153b0711016d750285b8612291a786d277339ed22fdcda348"
+      },
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          576,
+          15,
+          23
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "unequal_elements": 0
+    }
+  ]
+}

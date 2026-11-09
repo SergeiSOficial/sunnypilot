@@ -53,7 +53,10 @@ public final class ProbeService extends Service {
             save();
             if (BuildConfig.DEBUG && options.getBooleanExtra("samsung_multiview", false)) {
                 int seconds = Math.max(3, Math.min(1800, options.getIntExtra("duration_seconds", 10)));
-                attempts.put(probe.samsungMultiview(options.getBooleanExtra("front_camera", true), seconds * 1000L));
+                attempts.put(probe.samsungMultiview(options.getBooleanExtra("front_camera", true), seconds * 1000L, false,
+                    options.hasExtra("camera_profile") ? options.getStringExtra("camera_profile") : "record",
+                    options.getBooleanExtra("continuous_readback", false),
+                    options.getBooleanExtra("record_camera_evidence", false)));
                 report.put("completed_utc", java.time.Instant.now().toString()); save();
                 return;
             }
@@ -61,7 +64,9 @@ public final class ProbeService extends Service {
                 String[] ids = options.getStringExtra("camera_ids").split(",");
                 int seconds = Math.max(3, Math.min(1800, options.getIntExtra("duration_seconds", 10)));
                 attempts.put(probe.attempt(ids, options.getStringExtra("logical_camera"),
-                    options.getIntExtra("width", 1280), options.getIntExtra("height", 720), seconds * 1000L));
+                    options.getIntExtra("width", 1280), options.getIntExtra("height", 720), seconds * 1000L,
+                    options.getStringExtra("camera_profile") == null ? "record" : options.getStringExtra("camera_profile"),
+                    options.getBooleanExtra("private_gpu", false), options.getBooleanExtra("record_camera_evidence", false)));
                 report.put("completed_utc", java.time.Instant.now().toString()); save();
                 return;
             }

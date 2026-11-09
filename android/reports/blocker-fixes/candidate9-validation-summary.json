@@ -1,0 +1,91 @@
+{
+  "candidate": "candidate9",
+  "apk_sha256": "8af4bdf3cd4bd4496788bef640e1ebe923ae7967945c1de971438e7e5fd1d0a4",
+  "vehicle_tx_enabled": false,
+  "status": "failed",
+  "reason": "Emulator repeat Planning worker died SIGUSR2 and restarted; first full-chain pass does not erase repeat failure",
+  "experiments": [
+    {
+      "name": "emulator-host-fullchain-candidate9",
+      "status": "passed",
+      "isolation_status": "passed",
+      "artifact_stable": true,
+      "apk_sha256": "8af4bdf3cd4bd4496788bef640e1ebe923ae7967945c1de971438e7e5fd1d0a4",
+      "report": "android/reports/blocker-fixes/emulator-host-fullchain-candidate9.json",
+      "isolation": "android/reports/blocker-fixes/emulator-host-fullchain-candidate9-isolation.json"
+    },
+    {
+      "name": "emulator-host-fullchain-repeat-candidate9",
+      "status": "failed",
+      "isolation_status": "failed",
+      "artifact_stable": true,
+      "apk_sha256": "8af4bdf3cd4bd4496788bef640e1ebe923ae7967945c1de971438e7e5fd1d0a4",
+      "report": "android/reports/blocker-fixes/emulator-host-fullchain-repeat-candidate9.json",
+      "isolation": "android/reports/blocker-fixes/emulator-host-fullchain-repeat-candidate9-isolation.json"
+    },
+    {
+      "name": "emulator-signal-trace-candidate9",
+      "status": "not_run",
+      "isolation_status": "passed",
+      "artifact_stable": true,
+      "apk_sha256": "8af4bdf3cd4bd4496788bef640e1ebe923ae7967945c1de971438e7e5fd1d0a4",
+      "report": "android.build.trace_msgq_signal",
+      "isolation": "android/reports/blocker-fixes/emulator-signal-trace-candidate9-isolation.json"
+    },
+    {
+      "name": "fold-adb-faults-fixed-candidate9",
+      "status": "passed",
+      "isolation_status": "passed",
+      "artifact_stable": true,
+      "apk_sha256": "8af4bdf3cd4bd4496788bef640e1ebe923ae7967945c1de971438e7e5fd1d0a4",
+      "report": "android/reports/blocker-fixes/fold-adb-faults-fixed-candidate9.json",
+      "isolation": "android/reports/blocker-fixes/fold-adb-faults-fixed-candidate9-isolation.json"
+    },
+    {
+      "name": "fold-fullchain-candidate9",
+      "status": "passed",
+      "isolation_status": "passed",
+      "artifact_stable": true,
+      "apk_sha256": "8af4bdf3cd4bd4496788bef640e1ebe923ae7967945c1de971438e7e5fd1d0a4",
+      "report": "android/reports/blocker-fixes/fold-fullchain-candidate9.json",
+      "isolation": "android/reports/blocker-fixes/fold-fullchain-candidate9-isolation.json"
+    },
+    {
+      "name": "fold-instrumentation-candidate9",
+      "status": "passed",
+      "isolation_status": "passed",
+      "artifact_stable": true,
+      "apk_sha256": "8af4bdf3cd4bd4496788bef640e1ebe923ae7967945c1de971438e7e5fd1d0a4",
+      "report": "android/reports/blocker-fixes/fold-instrumentation-candidate9.json",
+      "isolation": "android/reports/blocker-fixes/fold-instrumentation-candidate9-isolation.json"
+    },
+    {
+      "name": "fold-lifecycle-candidate9",
+      "status": "passed",
+      "isolation_status": "passed",
+      "artifact_stable": true,
+      "apk_sha256": "8af4bdf3cd4bd4496788bef640e1ebe923ae7967945c1de971438e7e5fd1d0a4",
+      "report": "android/reports/blocker-fixes/fold-lifecycle-candidate9.json",
+      "isolation": "android/reports/blocker-fixes/fold-lifecycle-candidate9-isolation.json"
+    },
+    {
+      "name": "fold-metadrive-cancel-fixed-candidate9",
+      "status": "passed",
+      "isolation_status": "passed",
+      "artifact_stable": true,
+      "apk_sha256": "8af4bdf3cd4bd4496788bef640e1ebe923ae7967945c1de971438e7e5fd1d0a4",
+      "report": "android/reports/blocker-fixes/fold-metadrive-cancel-fixed-candidate9.json",
+      "isolation": "android/reports/blocker-fixes/fold-metadrive-cancel-fixed-candidate9-isolation.json"
+    },
+    {
+      "name": "fold-metadrive-stale-fixed-candidate9",
+      "status": "passed",
+      "isolation_status": "passed",
+      "artifact_stable": true,
+      "apk_sha256": "8af4bdf3cd4bd4496788bef640e1ebe923ae7967945c1de971438e7e5fd1d0a4",
+      "report": "android/reports/blocker-fixes/fold-metadrive-stale-fixed-candidate9.json",
+      "isolation": "android/reports/blocker-fixes/fold-metadrive-stale-fixed-candidate9-isolation.json"
+    }
+  ],
+  "diagnosis_correction": "The initial kill(0) fallback explanation was a hypothesis. Actual ARM64 APK disassembly uses SYS_tkill 130 with the zero guard; the repeat still dies SIGUSR2. Candidate10 retains process and thread IDs and uses SYS_tgkill. The traced diagnostic did not capture the exact crashing sender."
+}

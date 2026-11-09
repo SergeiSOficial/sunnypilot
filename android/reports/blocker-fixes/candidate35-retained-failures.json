@@ -1,0 +1,53 @@
+{
+  "candidate": "candidate35",
+  "apk_sha256": "38645e91f806076517de1497cdb6b5c0cbf4873cfecf5efabb980297a014ad51",
+  "vehicle_tx_enabled": false,
+  "engagement_allowed": false,
+  "scope": "Additive history index; original reports, exit codes, failed assertions and APK identities are retained.",
+  "history": [
+    {
+      "candidate": "candidate32",
+      "apk_sha256": "a62b55187b2a60a15c9b7d34cb5e6e462cc00c353971d8d126940960861a2810",
+      "report": "candidate32-validation-summary.json",
+      "validation_counts": {
+        "passed": 13,
+        "failed": 4,
+        "blocked": 1
+      },
+      "note": "Validator results differ from the historical wrapper count (13 passed, 5 failed). Isolation is a separate gate; no validation failure is changed to a pass."
+    },
+    {
+      "candidate": "candidate33",
+      "apk_sha256": "cdaac6c4223ee64ba2f600e4cac3a0d7775bcde2f7a7d4ab5b69ec3e05092305",
+      "reports": [
+        "candidate33-model-experiment.json",
+        "candidate33-validation-issues.json",
+        "candidate33-development-failures.json",
+        "fold-candidate33-vision.json"
+      ],
+      "note": "Four-channel ordered-FMA tiling passed accuracy but regressed performance and was reverted. Lifecycle invocation incorrectly requested physical-phone display resize; candidate35 omits that flag on the phone. Camera diagnostics did not enable continuous readback."
+    },
+    {
+      "candidate": "candidate34",
+      "apk_sha256": "a11680a0ac1cbb77ab85866a3b4d540a9c486a66693d1e0443b1cef8126cc934",
+      "reports": [
+        "candidate34-superseded.json",
+        "candidate34-host-results.json",
+        "candidate34-development-failures.json"
+      ],
+      "installed_on_phone": false,
+      "installed_on_emulator": false,
+      "note": "Built and host-tested, then superseded by the explicit sensor timestamp-base change before installation. No candidate35 device result is attributed to candidate34."
+    },
+    {
+      "candidate": "candidate35",
+      "apk_sha256": "38645e91f806076517de1497cdb6b5c0cbf4873cfecf5efabb980297a014ad51",
+      "reports": [
+        "emulator-candidate35-thermal.json",
+        "emulator-candidate35-thermal-retry.json",
+        "candidate35-host-tooling-update.json"
+      ],
+      "note": "Initial thermal harness failed a stale error-message assertion and cleanup after launching an already-hot workload. Corrected host-only preflight, force-stop retry and assertion passed on the identical APK. Original failure and isolation result retained."
+    }
+  ]
+}

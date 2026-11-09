@@ -1,0 +1,86 @@
+{
+  "status": "passed",
+  "rejected_cases": [
+    "can_service",
+    "output_service",
+    "sequence_gap",
+    "negative_age",
+    "service_payload_mismatch",
+    "malformed_cereal",
+    "invalid_base64",
+    "oversized_packet",
+    "malformed_json",
+    "non_simulation_handshake"
+  ],
+  "vehicle_tx_enabled": false
+}
+{
+  "serial": "emulator-5560",
+  "command": [
+    "/Users/sergios/sunnypilot/.venv/bin/python",
+    "android/scripts/validate_adb_faults.py",
+    "--serial",
+    "emulator-5560",
+    "--adb",
+    "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+    "--report",
+    "/Users/sergios/sunnypilot/android/reports/full-model-timing-repair-20261103/emulator-candidate45zl-adb-faults.json",
+    "--package",
+    "com.samsung.sunnypilot.fold3"
+  ],
+  "vehicle_tx_enabled": false,
+  "status": "passed",
+  "validation_status": "passed",
+  "isolation_status": "passed",
+  "forwards_before": [],
+  "before_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "377 android.hardware.camera.provider.ranchu",
+      "378 android.hardware.camera.provider@2.7-service-google",
+      "469 cameraserver"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.8,
+    "thermal_override": false
+  },
+  "apk_sha256": "0e035bbab912cc5607bde2a1a934a433d452cde8e46d6a69a6e09ae2ff79aa2a",
+  "baseline": {
+    "processes": [],
+    "camera_provider_processes": [
+      "377 android.hardware.camera.provider.ranchu",
+      "378 android.hardware.camera.provider@2.7-service-google",
+      "469 cameraserver"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.8,
+    "thermal_override": false,
+    "idle_seconds": 30.89668762497604,
+    "normal_thermal_seconds": 30.787682333029807
+  },
+  "apk_sha256_at_start": "0e035bbab912cc5607bde2a1a934a433d452cde8e46d6a69a6e09ae2ff79aa2a",
+  "runtime": {
+    "manager_pid": 6479,
+    "ui_pid": 6549,
+    "simulation": true
+  },
+  "returncode": 0,
+  "after_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "377 android.hardware.camera.provider.ranchu",
+      "378 android.hardware.camera.provider@2.7-service-google",
+      "469 cameraserver"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.8,
+    "thermal_override": false
+  },
+  "forwards_removed": [],
+  "apk_sha256_after": "0e035bbab912cc5607bde2a1a934a433d452cde8e46d6a69a6e09ae2ff79aa2a",
+  "artifact_stable": true,
+  "wrapper_status": "passed"
+}

@@ -10,6 +10,27 @@ import time
 from experiment import Device, PACKAGE, CAMERA_COMPAT_PACKAGE
 
 
+def raw_cameras_started(current, previous, started_elapsed_ns):
+  """Only new raw-camera generations establish capture for thermal injection.
+
+  This does not qualify timestamps or VisionIPC delivery. The emulator's broken
+  camera clock must remain rejected even while camera teardown is exercised.
+  """
+  # Persisted metadata can belong to an earlier boot, whose elapsed timestamp
+  # exceeds this boot's clock. Bound new sessions by the current launch instead
+  # of ordering timestamps from different boots.
+  return type(started_elapsed_ns) is int and started_elapsed_ns >= 0 and len(current) == len(previous) == 2 and all(
+    item.get("sensor_id") == str(sensor)
+    and type(old.get("session_started_elapsed_ns", -1)) is int
+    and type(item.get("session_started_elapsed_ns")) is int
+    and item["session_started_elapsed_ns"] >= started_elapsed_ns
+    and item["session_started_elapsed_ns"] != old.get("session_started_elapsed_ns", -1)
+    and type(item.get("raw_acquired_frames")) is int
+    and item.get("raw_acquired_frames", 0) > 0
+    and item.get("visionipc_valid") is False
+    for sensor, (item, old) in enumerate(zip(current, previous, strict=True)))
+
+
 def validate(serial, adb, output, package=PACKAGE):
   if not serial.startswith("emulator-"):
     raise ValueError("Thermal overrides are restricted to the dedicated emulator")
@@ -23,14 +44,15 @@ def validate(serial, adb, output, package=PACKAGE):
     except (subprocess.CalledProcessError, json.JSONDecodeError):
       return {}
 
-  def wait_camera(previous_ui):
+  def camera_metadata():
+    return [read("camera-" + sensor) for sensor in ("0", "1")]
+
+  def wait_camera(previous, started_elapsed_ns):
     deadline = time.monotonic() + 45
     while time.monotonic() < deadline:
-      ui = read("ui-report")
-      previews = ui.get("camera_preview", [])
-      if (ui.get("pid") != previous_ui and len(previews) == 2
-          and all(stream.get("frame_id", 0) > 0 for stream in previews)):
-        return
+      acquired = camera_metadata()
+      if raw_cameras_started(acquired, previous, started_elapsed_ns):
+        return acquired
       time.sleep(.25)
     raise TimeoutError("No current camera frames before fault injection")
 
@@ -88,11 +110,16 @@ def validate(serial, adb, output, package=PACKAGE):
       if not during_capture:
         command("shell", "cmd", "thermalservice", "override-status", "4")
       previous = read("vision-report").get("started_utc")
-      previous_ui = read("ui-report").get("pid")
+      previous_camera = camera_metadata()
+      # /proc/uptime and elapsedRealtimeNanos share CLOCK_BOOTTIME. Round
+      # down its centisecond sample before launching the new camera session.
+      capture_started_ns = int(float(command("shell", "cat", "/proc/uptime").split()[0]) * 1e9)
+      report.setdefault("capture_baselines", []).append({"during_capture": during_capture,
+          "started_elapsed_ns": capture_started_ns, "previous_camera_metadata": previous_camera})
       command("shell", "am", "start", "-n", activity, "--ez", "run_vision", "true",
               "--ei", "vision_seconds", "90" if during_capture else "30")
       if during_capture:
-        wait_camera(previous_ui)
+        report.setdefault("raw_capture_before_injection", []).append(wait_camera(previous_camera, capture_started_ns))
         command("shell", "cmd", "thermalservice", "override-status", "4")
       start = time.monotonic()
       deadline = start + 30
@@ -125,7 +152,7 @@ def validate(serial, adb, output, package=PACKAGE):
         case["shutdown_seconds"] = session["elapsed_ms"] / 1000
         case["shutdown_clock"] = "camera worker startup to rejection"
       assert 0 <= case["shutdown_seconds"] < 10, "Thermal abort exceeded the shutdown budget"
-    validation_path = Path(output).with_name("emulator-thermal-live-validator.json")
+    validation_path = Path(output).with_name(Path(output).stem + "-live-validator.json")
     validation = subprocess.run([sys.executable, str(Path(__file__).with_name("validate_vision.py")),
                                  "--serial", serial, "--adb", adb, "--package", package,
                                  "--seconds", "15", "--report", str(validation_path)],
@@ -133,14 +160,18 @@ def validate(serial, adb, output, package=PACKAGE):
     result = json.loads(validation_path.read_text())
     report["live_validator"] = {key: result.get(key) for key in ("status", "error", "cleanup", "elapsed_s")}
     assert validation.returncode == 1 and result["status"] == "failed", "Live validator accepted critical heat"
-    assert "critical" in result.get("error", "").lower() and result.get("cleanup"), result
+    assert "Unsafe or unavailable Android thermal state: 4" in result.get("error", ""), result
+    assert result.get("cleanup") and not result["cleanup"]["processes"] and not result["cleanup"]["camera_owned"], result
     assert result["elapsed_s"] < 15, "Live validator did not abort promptly"
     command("shell", "cmd", "thermalservice", "reset")
     previous = read("vision-report").get("started_utc")
-    previous_ui = read("ui-report").get("pid")
+    previous_camera = camera_metadata()
+    capture_started_ns = int(float(command("shell", "cat", "/proc/uptime").split()[0]) * 1e9)
+    report["activity_stop_capture_baseline"] = {"started_elapsed_ns": capture_started_ns,
+        "previous_camera_metadata": previous_camera}
     command("shell", "am", "start", "-n", activity, "--ez", "run_vision", "true",
             "--ei", "vision_seconds", "90")
-    wait_camera(previous_ui)
+    report["raw_capture_before_activity_stop"] = wait_camera(previous_camera, capture_started_ns)
     # Force onCreate rather than onNewIntent: the driving UI may be on top.
     command("shell", "am", "start", "-f", "0x18000000", "-n", activity,
             "--ez", "stop_vision", "true")
@@ -159,6 +190,10 @@ def validate(serial, adb, output, package=PACKAGE):
     report["status"] = "passed"
   except Exception as exc:
     report.update(status="failed", error=f"{type(exc).__name__}: {exc}")
+    # Preserve the actual generations and camera error before cleanup removes
+    # the running processes. A raw-frame timeout alone cannot identify its cause.
+    report["camera_metadata_on_failure"] = camera_metadata()
+    report["vision_report_on_failure"] = read("vision-report")
   finally:
     try:
       device.stop()

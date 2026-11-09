@@ -1,0 +1,438 @@
+{
+  "diagnostic_only": true,
+  "qualifies_model": false,
+  "apk_sha256": "17a87c7909af196941a6659a68c905ba41d5590dc361b8a309e2c4af53e95822",
+  "sha256": {
+    "run_conv_probe.py": "b4b0abea3b5be182bcaa6104e8a9c2b6650a08f5449ead3fb81a05ef14f2fe20",
+    "conv_mad_probe.cpp": "d2a3c526964cdb2fd5afb6bb4e2dabab3a32c49eb965cbfe67735a906bcbf5e7",
+    "conv_mad_probe": "e559f1402ffbded0c6593e8ad9635e539f0279f52c0c7e2db98021012ebef2c2",
+    "fold3_host_conv_buf.cl": "103d8505fb9729a7a176cf1b25cbd19683f2358bd2bfc63342a63bb47303453e"
+  },
+  "status": "passed",
+  "returncode": 0,
+  "stderr": "",
+  "probe": {
+    "diagnostic_only": true,
+    "synthetic_operands": true,
+    "bias_order": "last",
+    "cpu_fallback": false,
+    "vehicle_tx_enabled": false,
+    "device": "QUALCOMM Adreno(TM)",
+    "driver": "OpenCL 2.0 QUALCOMM build: commit #9ad1b67875 changeid #Ib48d2dada6 Date: 05/11/25 Sun Local Branch:  Remote Branch: refs/tags/AU_LINUX_ANDROID_LA.UM.9.14.11.00.00.571.148 Compiler E031.38.01.08",
+    "single_fp_config": 22,
+    "native_fma_flag": false,
+    "compute_units": 3,
+    "local_work_size": [
+      32,
+      1
+    ],
+    "variant_names": [
+      "pinned_fma",
+      "scalar_mad",
+      "vector4_mad"
+    ],
+    "cases": [
+      {
+        "shape": 0,
+        "seed": 42,
+        "elements": 524288,
+        "bit_mismatches": 482242,
+        "tolerance_failures": 0,
+        "nonfinite": 0,
+        "max_abs_error": 7.45058e-09,
+        "variants": [
+          {
+            "batch_wall_ms": 1261.09,
+            "gpu_ms": [
+              251.928,
+              251.707,
+              251.831,
+              251.922,
+              251.54
+            ]
+          },
+          {
+            "batch_wall_ms": 259.862,
+            "gpu_ms": [
+              52.3028,
+              52.374,
+              51.5761,
+              50.922,
+              51.031
+            ]
+          },
+          {
+            "batch_wall_ms": 28.3292,
+            "gpu_ms": [
+              5.34093,
+              5.34118,
+              5.3481,
+              5.33811,
+              5.35808
+            ]
+          }
+        ]
+      },
+      {
+        "shape": 0,
+        "seed": 7,
+        "elements": 524288,
+        "bit_mismatches": 474044,
+        "tolerance_failures": 0,
+        "nonfinite": 0,
+        "max_abs_error": 7.45058e-09,
+        "variants": [
+          {
+            "batch_wall_ms": 1262.89,
+            "gpu_ms": [
+              252.611,
+              251.368,
+              251.979,
+              251.628,
+              252.003
+            ]
+          },
+          {
+            "batch_wall_ms": 251.522,
+            "gpu_ms": [
+              50.081,
+              50.2259,
+              49.419,
+              49.5342,
+              50.3721
+            ]
+          },
+          {
+            "batch_wall_ms": 28.6953,
+            "gpu_ms": [
+              5.30202,
+              5.29792,
+              5.30688,
+              5.31302,
+              5.30816
+            ]
+          }
+        ]
+      },
+      {
+        "shape": 0,
+        "seed": 123,
+        "elements": 524288,
+        "bit_mismatches": 449762,
+        "tolerance_failures": 0,
+        "nonfinite": 0,
+        "max_abs_error": 7.45058e-09,
+        "variants": [
+          {
+            "batch_wall_ms": 1261.43,
+            "gpu_ms": [
+              251.754,
+              251.397,
+              251.752,
+              251.442,
+              251.618
+            ]
+          },
+          {
+            "batch_wall_ms": 249.391,
+            "gpu_ms": [
+              50.2771,
+              50.1489,
+              48.7521,
+              49.2078,
+              49.2081
+            ]
+          },
+          {
+            "batch_wall_ms": 27.4105,
+            "gpu_ms": [
+              5.26592,
+              5.27206,
+              5.26387,
+              5.27795,
+              5.26515
+            ]
+          }
+        ]
+      },
+      {
+        "shape": 1,
+        "seed": 42,
+        "elements": 691200,
+        "bit_mismatches": 436072,
+        "tolerance_failures": 0,
+        "nonfinite": 0,
+        "max_abs_error": 7.45058e-09,
+        "variants": [
+          {
+            "batch_wall_ms": 1102.69,
+            "gpu_ms": [
+              221.352,
+              219.335,
+              219.022,
+              220.595,
+              219.145
+            ]
+          },
+          {
+            "batch_wall_ms": 235.123,
+            "gpu_ms": [
+              46.8411,
+              46.5838,
+              45.6712,
+              48.1539,
+              46.763
+            ]
+          },
+          {
+            "batch_wall_ms": 27.3554,
+            "gpu_ms": [
+              5.07597,
+              5.06189,
+              5.05702,
+              5.05805,
+              5.05498
+            ]
+          }
+        ]
+      },
+      {
+        "shape": 1,
+        "seed": 7,
+        "elements": 691200,
+        "bit_mismatches": 471036,
+        "tolerance_failures": 0,
+        "nonfinite": 0,
+        "max_abs_error": 4.65661e-09,
+        "variants": [
+          {
+            "batch_wall_ms": 1103.68,
+            "gpu_ms": [
+              221.886,
+              219.16,
+              219.38,
+              220.093,
+              219.666
+            ]
+          },
+          {
+            "batch_wall_ms": 239.31,
+            "gpu_ms": [
+              47.2988,
+              46.3532,
+              48.1958,
+              49.122,
+              46.998
+            ]
+          },
+          {
+            "batch_wall_ms": 26.9638,
+            "gpu_ms": [
+              5.10797,
+              5.10106,
+              5.088,
+              5.08083,
+              5.0601
+            ]
+          }
+        ]
+      },
+      {
+        "shape": 1,
+        "seed": 123,
+        "elements": 691200,
+        "bit_mismatches": 457146,
+        "tolerance_failures": 0,
+        "nonfinite": 0,
+        "max_abs_error": 7.45058e-09,
+        "variants": [
+          {
+            "batch_wall_ms": 1105.59,
+            "gpu_ms": [
+              222.243,
+              219.39,
+              219.302,
+              219.286,
+              222.471
+            ]
+          },
+          {
+            "batch_wall_ms": 236.798,
+            "gpu_ms": [
+              48.257,
+              47.3452,
+              46.9578,
+              46.5531,
+              46.5769
+            ]
+          },
+          {
+            "batch_wall_ms": 27.6729,
+            "gpu_ms": [
+              5.11693,
+              5.10413,
+              5.1072,
+              5.07494,
+              5.10899
+            ]
+          }
+        ]
+      },
+      {
+        "shape": 2,
+        "seed": 42,
+        "elements": 16384,
+        "bit_mismatches": 24804,
+        "tolerance_failures": 0,
+        "nonfinite": 0,
+        "max_abs_error": 1.86265e-08,
+        "variants": [
+          {
+            "batch_wall_ms": 299.249,
+            "gpu_ms": [
+              59.3759,
+              59.168,
+              59.3772,
+              59.2909,
+              59.2179
+            ]
+          },
+          {
+            "batch_wall_ms": 66.2549,
+            "gpu_ms": [
+              13.026,
+              12.951,
+              12.9792,
+              12.9948,
+              12.9321
+            ]
+          },
+          {
+            "batch_wall_ms": 11.0507,
+            "gpu_ms": [
+              1.68397,
+              1.53702,
+              1.56186,
+              1.54906,
+              2.79808
+            ]
+          }
+        ]
+      },
+      {
+        "shape": 2,
+        "seed": 7,
+        "elements": 16384,
+        "bit_mismatches": 24502,
+        "tolerance_failures": 0,
+        "nonfinite": 0,
+        "max_abs_error": 2.98023e-08,
+        "variants": [
+          {
+            "batch_wall_ms": 297.788,
+            "gpu_ms": [
+              59.3999,
+              59.1419,
+              59.1071,
+              59.2379,
+              59.2051
+            ]
+          },
+          {
+            "batch_wall_ms": 66.3755,
+            "gpu_ms": [
+              12.9352,
+              13.1238,
+              12.969,
+              12.9981,
+              12.9239
+            ]
+          },
+          {
+            "batch_wall_ms": 8.36198,
+            "gpu_ms": [
+              1.54496,
+              1.53318,
+              1.47584,
+              1.53395,
+              1.48915
+            ]
+          }
+        ]
+      },
+      {
+        "shape": 2,
+        "seed": 123,
+        "elements": 16384,
+        "bit_mismatches": 24728,
+        "tolerance_failures": 0,
+        "nonfinite": 0,
+        "max_abs_error": 1.86265e-08,
+        "variants": [
+          {
+            "batch_wall_ms": 298.643,
+            "gpu_ms": [
+              59.5302,
+              59.3042,
+              59.3539,
+              59.284,
+              59.4422
+            ]
+          },
+          {
+            "batch_wall_ms": 65.6841,
+            "gpu_ms": [
+              12.9039,
+              12.874,
+              12.8148,
+              13.0481,
+              12.928
+            ]
+          },
+          {
+            "batch_wall_ms": 8.94849,
+            "gpu_ms": [
+              1.61024,
+              1.6041,
+              1.61408,
+              1.57978,
+              1.60896
+            ]
+          }
+        ]
+      }
+    ],
+    "build_ms": [
+      56.0839,
+      113.169,
+      113.338,
+      78.7865,
+      126.99,
+      77.9804,
+      55.308,
+      121.783,
+      108.108,
+      55.2357,
+      118.632,
+      125.57,
+      63.0246,
+      125.371,
+      122.545,
+      69.7939,
+      119.622,
+      123.439,
+      65.343,
+      65.8303,
+      116.925,
+      76.061,
+      131.108,
+      127.859,
+      66.1244,
+      121.614,
+      117.211
+    ],
+    "all_exact": false,
+    "all_tolerance_passed": true
+  },
+  "completed_utc": 1793585090.0870059
+}

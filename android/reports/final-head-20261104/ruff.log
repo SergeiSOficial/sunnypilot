@@ -1,0 +1,30 @@
+F401 [*] `hashlib` imported but unused
+ --> android/tests/test_ncnn_frozen.py:2:8
+  |
+1 | """Frozen tracing must prove original outputs before diagnosing GPU tensors."""
+2 | import hashlib
+  |        ^^^^^^^
+3 | import importlib.util
+4 | import json
+  |
+help: Remove unused import: `hashlib`
+  |
+1 | """Frozen tracing must prove original outputs before diagnosing GPU tensors."""
+  - import hashlib
+2 | import importlib.util
+  |
+
+E731 Do not assign a `lambda` expression, use a `def`
+  --> android/tests/test_ncnn_frozen.py:24:5
+   |
+22 |     for name in ('host-fusion', 'accelerators/ncnn'):
+23 |       (base / name).mkdir(parents=True)
+24 |     info = lambda name: onnx.helper.make_tensor_value_info(name, onnx.TensorProto.FLOAT, [1, 2])
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+25 |     model = onnx.helper.make_model(onnx.helper.make_graph([
+26 |       onnx.helper.make_node('Relu', ['x'], ['y']), onnx.helper.make_node('Identity', ['y'], ['z'])],
+   |
+help: Rewrite `info` as a `def`
+
+Found 2 errors.
+[*] 1 fixable with the `--fix` option (1 hidden fix can be enabled with the `--unsafe-fixes` option).

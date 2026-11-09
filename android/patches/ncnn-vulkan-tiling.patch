@@ -1,0 +1,144 @@
+--- a/src/layer/vulkan/shader/convolution_packed_1x1s1d1.comp
++++ b/src/layer/vulkan/shader/convolution_packed_1x1s1d1.comp
+@@ -102,25 +102,37 @@
+     if (activation_type == 0 || activation_type == 1 || activation_type == 4)
+     {
+         if (gx >= psc(size) || gy >= psc(outc)) return;
++        // Each pixel keeps its sequential FMA order; reuse each weight vector
++        // across four independent spatial accumulators before advancing ci.
+         precise vec4 results[4];
++        results[0] = vec4(0.f);
++        results[1] = vec4(0.f);
++        results[2] = vec4(0.f);
++        results[3] = vec4(0.f);
++        for (int ci = 0; ci < psc(num_input); ++ci)
++        {
++            int wi = gy * psc(c) * 4 + (ci / 4) * 4;
++            vec4 weights = vec4(buffer_ld4(weight_data, wi)[ci % 4],
++                                buffer_ld4(weight_data, wi + 1)[ci % 4],
++                                buffer_ld4(weight_data, wi + 2)[ci % 4],
++                                buffer_ld4(weight_data, wi + 3)[ci % 4]);
++            vec4 values;
++            if (elempack == 4)
++            {
++                values = vec4(buffer_ld4(bottom_blob_data, (ci / 4) * psc(cstep) + gx * 4)[ci % 4],
++                              buffer_ld4(bottom_blob_data, (ci / 4) * psc(cstep) + gx * 4 + 1)[ci % 4],
++                              buffer_ld4(bottom_blob_data, (ci / 4) * psc(cstep) + gx * 4 + 2)[ci % 4],
++                              buffer_ld4(bottom_blob_data, (ci / 4) * psc(cstep) + gx * 4 + 3)[ci % 4]);
++            }
++            else values = buffer_ld4(bottom_blob_data, ci * psc(cstep) + gx);
++            results[0] = fold3_projection_fma(vec4(values.x), weights, results[0]);
++            results[1] = fold3_projection_fma(vec4(values.y), weights, results[1]);
++            results[2] = fold3_projection_fma(vec4(values.z), weights, results[2]);
++            results[3] = fold3_projection_fma(vec4(values.w), weights, results[3]);
++        }
+         for (int spatial = 0; spatial < 4; ++spatial)
+         {
+-            precise vec4 sum = vec4(0.f);
+-            for (int ci = 0; ci < psc(num_input); ++ci)
+-            {
+-                float value;
+-                if (elempack == 4)
+-                    value = buffer_ld4(bottom_blob_data, (ci / 4) * psc(cstep) + gx * 4 + spatial)[ci % 4];
+-                else
+-                    value = buffer_ld4(bottom_blob_data, ci * psc(cstep) + gx)[spatial];
+-                int wi = gy * psc(c) * 4 + (ci / 4) * 4;
+-                vec4 weights = vec4(buffer_ld4(weight_data, wi)[ci % 4],
+-                                    buffer_ld4(weight_data, wi + 1)[ci % 4],
+-                                    buffer_ld4(weight_data, wi + 2)[ci % 4],
+-                                    buffer_ld4(weight_data, wi + 3)[ci % 4]);
+-                sum = fold3_projection_fma(vec4(value), weights, sum);
+-            }
+-            results[spatial] = bias_term == 1 ? sum + buffer_ld4(bias_data, gy) : sum;
++            if (bias_term == 1) results[spatial] = results[spatial] + buffer_ld4(bias_data, gy);
+             results[spatial] = activation_afpvec4(results[spatial], activation_type, activation_param_0, activation_param_1);
+         }
+         if (out_elempack == 4)
+--- a/src/layer/vulkan/shader/convolution_packed.comp
++++ b/src/layer/vulkan/shader/convolution_packed.comp
+@@ -117,38 +117,63 @@
+         (((psc(c) * elempack == 16 || psc(c) * elempack == 32) && psc(num_output) == 32) ||
+          (psc(c) * elempack == 24 && psc(num_output) == 64)) && bias_term == 1 && activation_type == 0)
+     {
++        // Tile four spatial outputs per weight load. Bias and each output's
++        // ky/kx/channel FMA sequence remain identical to the scalar reference.
++        int xx1 = min(gx + 1, psc(outw) - 1);
++        int yy1 = min(gy + 1, psc(outh) - 1);
+         for (int pack = gz; pack < min(gz + 2, psc(outc)); ++pack)
++        {
++            precise vec4 values[4];
++            values[0] = buffer_ld4(bias_data, pack);
++            values[1] = values[0];
++            values[2] = values[0];
++            values[3] = values[0];
++            for (int ky = 0; ky < 3; ++ky)
++                for (int kx = 0; kx < 3; ++kx)
++                    for (int ci = 0; ci < psc(c) * elempack; ++ci)
++                    {
++                        int wi = pack * psc(c) * 9 + (ci / elempack) * 9 + ky * 3 + kx;
++                        vec4 weights;
++                        if (elempack == 4)
++                        {
++                            wi *= 4;
++                            weights = vec4(buffer_ld4(weight_data, wi)[ci % 4],
++                                buffer_ld4(weight_data, wi + 1)[ci % 4],
++                                buffer_ld4(weight_data, wi + 2)[ci % 4],
++                                buffer_ld4(weight_data, wi + 3)[ci % 4]);
++                        }
++                        else weights = buffer_ld4(weight_data, wi);
++                        ivec4 positions = ivec4((gy * 2 + ky) * psc(w) + gx * 2 + kx,
++                                               (gy * 2 + ky) * psc(w) + xx1 * 2 + kx,
++                                               (yy1 * 2 + ky) * psc(w) + gx * 2 + kx,
++                                               (yy1 * 2 + ky) * psc(w) + xx1 * 2 + kx);
++                        vec4 inputs;
++                        if (elempack == 4)
++                            inputs = vec4(buffer_ld4(bottom_blob_data_4, (ci / 4) * psc(cstep) + positions.x)[ci % 4],
++                                          buffer_ld4(bottom_blob_data_4, (ci / 4) * psc(cstep) + positions.y)[ci % 4],
++                                          buffer_ld4(bottom_blob_data_4, (ci / 4) * psc(cstep) + positions.z)[ci % 4],
++                                          buffer_ld4(bottom_blob_data_4, (ci / 4) * psc(cstep) + positions.w)[ci % 4]);
++                        else
++                            inputs = vec4(buffer_ld1(bottom_blob_data_1, ci * psc(cstep) + positions.x),
++                                          buffer_ld1(bottom_blob_data_1, ci * psc(cstep) + positions.y),
++                                          buffer_ld1(bottom_blob_data_1, ci * psc(cstep) + positions.z),
++                                          buffer_ld1(bottom_blob_data_1, ci * psc(cstep) + positions.w));
++                        values[0] = fold3_spatial_fma(vec4(inputs.x), weights, values[0]);
++                        values[1] = fold3_spatial_fma(vec4(inputs.y), weights, values[1]);
++                        values[2] = fold3_spatial_fma(vec4(inputs.z), weights, values[2]);
++                        values[3] = fold3_spatial_fma(vec4(inputs.w), weights, values[3]);
++                    }
+             for (int yy = gy; yy < min(gy + 2, psc(outh)); ++yy)
+                 for (int xx = gx; xx < min(gx + 2, psc(outw)); ++xx)
+                 {
+-                    precise vec4 value = buffer_ld4(bias_data, pack);
+-                    for (int ky = 0; ky < 3; ++ky)
+-                        for (int kx = 0; kx < 3; ++kx)
+-                            for (int ci = 0; ci < psc(c) * elempack; ++ci)
+-                            {
+-                                int position = (yy * 2 + ky) * psc(w) + xx * 2 + kx;
+-                                float input_value = elempack == 4
+-                                    ? buffer_ld4(bottom_blob_data_4, (ci / 4) * psc(cstep) + position)[ci % 4]
+-                                    : buffer_ld1(bottom_blob_data_1, ci * psc(cstep) + position);
+-                                int wi = pack * psc(c) * 9 + (ci / elempack) * 9 + ky * 3 + kx;
+-                                vec4 weights;
+-                                if (elempack == 4)
+-                                {
+-                                    wi *= 4;
+-                                    weights = vec4(buffer_ld4(weight_data, wi)[ci % 4],
+-                                        buffer_ld4(weight_data, wi + 1)[ci % 4],
+-                                        buffer_ld4(weight_data, wi + 2)[ci % 4],
+-                                        buffer_ld4(weight_data, wi + 3)[ci % 4]);
+-                                }
+-                                else weights = buffer_ld4(weight_data, wi);
+-                                value = fold3_spatial_fma(vec4(input_value), weights, value);
+-                            }
++                    vec4 value = values[(yy - gy) * 2 + xx - gx];
+                     int out_position = pack * psc(outcstep) + yy * psc(outw) + xx;
+                     if (out_elempack == 4) buffer_st4(top_blob_data_4, out_position, value);
+                     else
+                         for (int lane = 0; lane < 4; ++lane)
+                             buffer_st1(top_blob_data_1, out_position + lane * (psc(outcstep) / 4), value[lane]);
+                 }
++        }
+         return;
+     }
+ #endif

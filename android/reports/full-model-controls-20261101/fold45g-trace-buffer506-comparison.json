@@ -1,0 +1,78 @@
+2026-11-01 17:31:49.315 python[97798:43884638] 2026-11-01 17:31:49.315619 [W:onnxruntime:, graph.cc:5777 CleanUnusedInitializersAndNodeArgs] Removing initializer 'model/p_val_6'. It is not used by any node and should be removed from the model.
+2026-11-01 17:31:49.511 python[97798:43884638] 2026-11-01 17:31:49.510987 [W:onnxruntime:, graph.cc:5777 CleanUnusedInitializersAndNodeArgs] Removing initializer 'model/p_val_6'. It is not used by any node and should be removed from the model.
+{
+  "dmonitoring_model": {
+    "captured_tensors": 9,
+    "first_tolerance_failure": {
+      "operator": "outputs_raster_0",
+      "operator_type": "Raster",
+      "tensor": "outputs",
+      "backend": "OpenCL",
+      "layout": "NCHW",
+      "dtype": "float32",
+      "shape": [
+        1,
+        553
+      ],
+      "file": "0008.bin",
+      "original": {
+        "tensor": "outputs",
+        "node": "node_cat_2",
+        "operator": "Concat",
+        "domain": ""
+      },
+      "parity": {
+        "passed": false,
+        "finite": true,
+        "shape": [
+          1,
+          553
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": false,
+        "max_abs_error": 0.001953125,
+        "mismatched_elements": 8
+      },
+      "original_dtype": "float16"
+    }
+  },
+  "driving_supercombo": {
+    "captured_tensors": 32,
+    "first_tolerance_failure": {
+      "operator": "gemm_output_reshape_arg_raster_0",
+      "operator_type": "Raster",
+      "tensor": "fold3_half_source_477_0",
+      "backend": "OpenCL",
+      "layout": "NCHW",
+      "dtype": "float32",
+      "shape": [
+        9,
+        512
+      ],
+      "file": "0003.bin",
+      "original": {
+        "tensor": "fold3_half_source_477_0",
+        "node": "model/p_node_MatMul_13/MatMulAddFusion",
+        "operator": "Gemm",
+        "domain": ""
+      },
+      "parity": {
+        "passed": false,
+        "finite": true,
+        "shape": [
+          9,
+          512
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": false,
+        "max_abs_error": 0.00032401084899902344,
+        "mismatched_elements": 3
+      },
+      "original_dtype": "float16"
+    }
+  }
+}

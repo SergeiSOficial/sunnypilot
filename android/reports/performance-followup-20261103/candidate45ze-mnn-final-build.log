@@ -1,0 +1,364 @@
+patching file 'tools/converter/source/onnx/CastOnnx.cpp'
+patching file 'source/shape/ShapeCast.cpp'
+patching file 'source/backend/opencl/execution/buffer/CastBufExecution.cpp'
+patching file 'source/backend/opencl/execution/cl/cast_buf.cl'
+patching file 'source/backend/opencl/execution/image/CastExecution.cpp'
+patching file 'source/backend/opencl/execution/cl/cast.cl'
+patching file 'source/backend/opencl/execution/buffer/ConvBufExecution.hpp'
+patching file 'source/backend/opencl/execution/buffer/ConvBufExecution.cpp'
+patching file 'source/backend/opencl/execution/cl/fold3_half_gemv_buf.cl'
+patching file 'source/backend/opencl/execution/buffer/UnaryBufExecution.cpp'
+patching file 'source/backend/opencl/execution/cl/unary_buf.cl'
+patching file 'source/backend/opencl/execution/buffer/DepthwiseConvBufExecution.cpp'
+patching file 'source/backend/opencl/execution/cl/fold3_host_conv_buf.cl'
+patching file 'tools/converter/source/optimizer/merge/TransformSmallGroupConvolutionToDepthwise.cpp'
+patching file 'source/backend/opencl/execution/buffer/BinaryBufExecution.cpp'
+patching file 'source/backend/opencl/execution/cl/binary_buf.cl'
+patching file 'source/geometry/GeometryComputerUtils.hpp'
+patching file 'source/geometry/GeometryComputerUtils.cpp'
+patching file 'source/geometry/GeometryReduce.cpp'
+patching file 'source/backend/opencl/execution/buffer/ReductionBufExecution.hpp'
+patching file 'source/backend/opencl/execution/buffer/ReductionBufExecution.cpp'
+patching file 'source/backend/opencl/execution/cl/reduction_buf.cl'
+patching file 'tools/converter/source/optimizer/merge/FuseTemplateOp.cpp'
+patching file 'source/backend/opencl/execution/buffer/LoopBufExecution.cpp'
+patching file 'source/backend/opencl/execution/cl/loop.cl'
+patching file 'source/backend/opencl/execution/buffer/LayerNormBufExecution.hpp'
+patching file 'source/backend/opencl/execution/buffer/LayerNormBufExecution.cpp'
+patching file 'source/backend/opencl/execution/cl/layernorm_buf.cl'
+patching file 'source/backend/opencl/execution/buffer/LoopBufExecution.hpp'
+CMake Deprecation Warning at CMakeLists.txt:1 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+
+CMake Deprecation Warning at 3rd_party/protobuf/cmake/CMakeLists.txt:2 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+
+-- 
+-- 3.19.0.0
+-- Use Threadpool, forbid openmp
+-- >>>>>>>>>>>>>
+-- MNN BUILD INFO:
+-- 	System: Darwin
+-- 	Processor: arm64
+-- 	Version: 3.6.2
+-- 	Metal: OFF
+-- 	OpenCL: OFF
+-- 	OpenGL: OFF
+-- 	Vulkan: OFF
+-- 	ARM82: ON
+-- 	KleidiAI: OFF
+-- 	oneDNN: OFF
+-- 	TensorRT: OFF
+-- 	CoreML: OFF
+-- 	NNAPI: OFF
+-- 	QNN: OFF
+-- 	CUDA: OFF
+-- 	MUSA: OFF
+-- 	OpenMP: OFF
+-- 	BF16: OFF
+-- 	ThreadPool: ON
+-- 	Hidden: TRUE
+-- 	Build Path: /Users/sergios/sunnypilot/android/build/native/accelerators/mnn-patched/host
+-- 	CUDA PROFILE: OFF
+-- WIN_USE_ASM: 
+-- Enabling AArch64 Assemblies
+-- Configuring done (0.1s)
+-- Generating done (0.3s)
+-- Build files have been written to: /Users/sergios/sunnypilot/android/build/native/accelerators/mnn-patched/host
+[1/44] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryBinary.cpp.o
+[2/44] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryBatchMatMul.cpp.o
+[3/44] Building CXX object CMakeFiles/MNNCore.dir/source/core/Schedule.cpp.o
+[4/44] Building CXX object CMakeFiles/MNNCore.dir/source/core/Pipeline.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/mnn-patched/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d/source/core/Pipeline.cpp:135:13: warning: 'sprintf' is deprecated: This function is provided for compatibility reasons only.  Due to security concerns inherent in the design of sprintf(3), it is highly recommended that you use snprintf(3) instead. [-Wdeprecated-declarations]
+  135 |             sprintf(buffer, "%d", index);
+      |             ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.5.sdk/usr/include/_stdio.h:278:1: note: 'sprintf' has been explicitly marked deprecated here
+  278 | __deprecated_msg("This function is provided for compatibility reasons only.  Due to security concerns inherent in the design of sprintf(3), it is highly recommended that you use snprintf(3) instead.")
+      | ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.5.sdk/usr/include/sys/cdefs.h:227:48: note: expanded from macro '__deprecated_msg'
+  227 |         #define __deprecated_msg(_msg) __attribute__((__deprecated__(_msg)))
+      |                                                       ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/mnn-patched/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d/source/core/Pipeline.cpp:139:13: warning: 'sprintf' is deprecated: This function is provided for compatibility reasons only.  Due to security concerns inherent in the design of sprintf(3), it is highly recommended that you use snprintf(3) instead. [-Wdeprecated-declarations]
+  139 |             sprintf(buffer, "_raster_%d", totalIndex);
+      |             ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.5.sdk/usr/include/_stdio.h:278:1: note: 'sprintf' has been explicitly marked deprecated here
+  278 | __deprecated_msg("This function is provided for compatibility reasons only.  Due to security concerns inherent in the design of sprintf(3), it is highly recommended that you use snprintf(3) instead.")
+      | ^
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.5.sdk/usr/include/sys/cdefs.h:227:48: note: expanded from macro '__deprecated_msg'
+  227 |         #define __deprecated_msg(_msg) __attribute__((__deprecated__(_msg)))
+      |                                                       ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/mnn-patched/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d/source/core/Pipeline.cpp:960:51: warning: format specifies type 'int' but the argument has type 'size_t' (aka 'unsigned long') [-Wformat]
+  960 |     MNN_PRINT("Fix: %d - Total: %d, rate = %f\n", fixNumber, totalNumber, (float)fixNumber / (float)totalNumber);
+      |                     ~~                            ^~~~~~~~~
+      |                     %zu
+/Users/sergios/sunnypilot/android/build/native/accelerators/mnn-patched/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d/include/MNN/MNNDefine.h:38:49: note: expanded from macro 'MNN_PRINT'
+   38 | #define MNN_PRINT(format, ...) printf(format, ##__VA_ARGS__)
+      |                                       ~~~~~~    ^~~~~~~~~~~
+/Users/sergios/sunnypilot/android/build/native/accelerators/mnn-patched/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d/source/core/Pipeline.cpp:960:62: warning: format specifies type 'int' but the argument has type 'size_t' (aka 'unsigned long') [-Wformat]
+  960 |     MNN_PRINT("Fix: %d - Total: %d, rate = %f\n", fixNumber, totalNumber, (float)fixNumber / (float)totalNumber);
+      |                                 ~~                           ^~~~~~~~~~~
+      |                                 %zu
+/Users/sergios/sunnypilot/android/build/native/accelerators/mnn-patched/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d/include/MNN/MNNDefine.h:38:49: note: expanded from macro 'MNN_PRINT'
+   38 | #define MNN_PRINT(format, ...) printf(format, ##__VA_ARGS__)
+      |                                       ~~~~~~    ^~~~~~~~~~~
+4 warnings generated.
+[5/44] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryConv2D.cpp.o
+[6/44] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryComputerUtils.cpp.o
+[7/44] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryConv2DBackPropFilter.cpp.o
+[8/44] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryConv3D.cpp.o
+[9/44] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryConvert.cpp.o
+[10/44] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryConvUtils.cpp.o
+[11/44] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryCosineSimilarity.cpp.o
+[12/44] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryDilation2D.cpp.o
+[13/44] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryFusedProj.cpp.o
+[14/44] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryELU.cpp.o
+[15/44] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryCumSum.cpp.o
+[16/44] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryGatedRMSNorm.cpp.o
+[17/44] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryInnerProduct.cpp.o
+[18/44] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryImageOp.cpp.o
+[19/44] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryGather.cpp.o
+[20/44] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryLRN.cpp.o
+[21/44] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryLayernorm.cpp.o
+[22/44] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryPooling3D.cpp.o
+[23/44] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryReduce.cpp.o
+[24/44] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryLSTM.cpp.o
+[25/44] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryPoolGrad.cpp.o
+[26/44] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryScatter.cpp.o
+[27/44] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryShape.cpp.o
+[28/44] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometrySpatialProduct.cpp.o
+[29/44] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryTensorArray.cpp.o
+[30/44] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryThreshold.cpp.o
+[31/44] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryUnary.cpp.o
+[32/44] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryTopK.cpp.o
+[33/44] Building CXX object CMakeFiles/MNNTransform.dir/source/shape/ShapeCast.cpp.o
+[34/44] Linking CXX shared library libMNN.dylib
+[35/44] Building CXX object tools/converter/CMakeFiles/MNNConverterONNX.dir/source/onnx/CastOnnx.cpp.o
+[36/44] Building CXX object express/CMakeFiles/MNN_Express.dir/Executor.cpp.o
+[37/44] Building CXX object tools/converter/CMakeFiles/MNNConverterOpt.dir/source/optimizer/merge/FuseTemplateOp.cpp.o
+[38/44] Building CXX object tools/converter/CMakeFiles/MNNConverterOpt.dir/source/optimizer/merge/TransformSmallGroupConvolutionToDepthwise.cpp.o
+[39/44] Building CXX object express/CMakeFiles/MNN_Express.dir/Expr.cpp.o
+In file included from /Users/sergios/sunnypilot/android/build/native/accelerators/mnn-patched/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d/express/Expr.cpp:24:
+/Users/sergios/sunnypilot/android/build/native/accelerators/mnn-patched/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d/3rd_party/half/half.hpp:223:19: warning: identifier '_h' preceded by whitespace in a literal operator declaration is deprecated [-Wdeprecated-literal-operator]
+  223 |                 half operator"" _h(long double);
+      |                      ~~~~~~~~~~~^~
+      |                      operator""_h
+/Users/sergios/sunnypilot/android/build/native/accelerators/mnn-patched/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d/3rd_party/half/half.hpp:1034:35: warning: identifier '_h' preceded by whitespace in a literal operator declaration is deprecated [-Wdeprecated-literal-operator]
+ 1034 |                 friend half literal::operator"" _h(long double);
+      |                                      ~~~~~~~~~~~^~
+      |                                      operator""_h
+/Users/sergios/sunnypilot/android/build/native/accelerators/mnn-patched/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d/3rd_party/half/half.hpp:1145:26: warning: identifier '_h' preceded by whitespace in a literal operator declaration is deprecated [-Wdeprecated-literal-operator]
+ 1145 |                 inline half operator"" _h(long double value) { return half(detail::binary, detail::float2half<half::round_style>(value)); }
+      |                             ~~~~~~~~~~~^~
+      |                             operator""_h
+3 warnings generated.
+[40/44] Building CXX object express/CMakeFiles/MNN_Express.dir/module/PipelineModule.cpp.o
+[41/44] Linking CXX shared library express/libMNN_Express.dylib
+[42/44] Building CXX object tools/converter/CMakeFiles/MNNConvertDeps.dir/source/common/convertToStaticModel.cpp.o
+[43/44] Linking CXX shared library tools/converter/libMNNConvertDeps.dylib
+[44/44] Linking CXX executable MNNConvert
+CMake Deprecation Warning at CMakeLists.txt:1 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+
+-- Use Threadpool, forbid openmp
+-- >>>>>>>>>>>>>
+-- MNN BUILD INFO:
+-- 	System: Android
+-- 	Processor: aarch64
+-- 	Version: 3.6.2
+-- 	Metal: OFF
+-- 	OpenCL: ON
+-- 	OpenGL: OFF
+-- 	Vulkan: OFF
+-- 	ARM82: ON
+-- 	KleidiAI: OFF
+-- 	oneDNN: OFF
+-- 	TensorRT: OFF
+-- 	CoreML: OFF
+-- 	NNAPI: OFF
+-- 	QNN: OFF
+-- 	CUDA: OFF
+-- 	MUSA: OFF
+-- 	OpenMP: OFF
+-- 	BF16: OFF
+-- 	ThreadPool: ON
+-- 	Hidden: TRUE
+-- 	Build Path: /Users/sergios/sunnypilot/android/build/native/accelerators/mnn-patched/android
+-- 	CUDA PROFILE: OFF
+-- WIN_USE_ASM: 
+-- Enabling AArch64 Assemblies
+-- Configuring done (0.2s)
+-- Generating done (0.2s)
+-- Build files have been written to: /Users/sergios/sunnypilot/android/build/native/accelerators/mnn-patched/android
+[1/140] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryBinary.cpp.o
+[2/140] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryBatchMatMul.cpp.o
+[3/140] Building CXX object CMakeFiles/MNNCore.dir/source/core/Schedule.cpp.o
+[4/140] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryConv2D.cpp.o
+[5/140] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryComputerUtils.cpp.o
+[6/140] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryConv2DBackPropFilter.cpp.o
+[7/140] Building CXX object CMakeFiles/MNNCore.dir/source/core/Pipeline.cpp.o
+/Users/sergios/sunnypilot/android/build/native/accelerators/mnn-patched/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d/source/core/Pipeline.cpp:960:51: warning: format specifies type 'int' but the argument has type 'size_t' (aka 'unsigned long') [-Wformat]
+  960 |     MNN_PRINT("Fix: %d - Total: %d, rate = %f\n", fixNumber, totalNumber, (float)fixNumber / (float)totalNumber);
+      |                     ~~                            ^~~~~~~~~
+      |                     %zu
+/Users/sergios/sunnypilot/android/build/native/accelerators/mnn-patched/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d/include/MNN/MNNDefine.h:30:90: note: expanded from macro 'MNN_PRINT'
+   30 | #define MNN_PRINT(format, ...) __android_log_print(ANDROID_LOG_INFO, "MNNJNI", format, ##__VA_ARGS__)
+      |                                                                                ~~~~~~    ^~~~~~~~~~~
+/Users/sergios/sunnypilot/android/build/native/accelerators/mnn-patched/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d/source/core/Pipeline.cpp:960:62: warning: format specifies type 'int' but the argument has type 'size_t' (aka 'unsigned long') [-Wformat]
+  960 |     MNN_PRINT("Fix: %d - Total: %d, rate = %f\n", fixNumber, totalNumber, (float)fixNumber / (float)totalNumber);
+      |                                 ~~                           ^~~~~~~~~~~
+      |                                 %zu
+/Users/sergios/sunnypilot/android/build/native/accelerators/mnn-patched/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d/include/MNN/MNNDefine.h:30:90: note: expanded from macro 'MNN_PRINT'
+   30 | #define MNN_PRINT(format, ...) __android_log_print(ANDROID_LOG_INFO, "MNNJNI", format, ##__VA_ARGS__)
+      |                                                                                ~~~~~~    ^~~~~~~~~~~
+2 warnings generated.
+[8/140] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryConvert.cpp.o
+[9/140] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryCosineSimilarity.cpp.o
+[10/140] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryConvUtils.cpp.o
+[11/140] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryConv3D.cpp.o
+[12/140] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryFusedProj.cpp.o
+[13/140] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryDilation2D.cpp.o
+[14/140] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryELU.cpp.o
+[15/140] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryCumSum.cpp.o
+[16/140] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryGatedRMSNorm.cpp.o
+[17/140] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryInnerProduct.cpp.o
+[18/140] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryImageOp.cpp.o
+[19/140] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryGather.cpp.o
+[20/140] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryLRN.cpp.o
+[21/140] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryLayernorm.cpp.o
+[22/140] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryPooling3D.cpp.o
+[23/140] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryReduce.cpp.o
+[24/140] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryScatter.cpp.o
+[25/140] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryLSTM.cpp.o
+[26/140] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryPoolGrad.cpp.o
+[27/140] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryShape.cpp.o
+[28/140] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometrySpatialProduct.cpp.o
+[29/140] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryThreshold.cpp.o
+[30/140] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryTensorArray.cpp.o
+[31/140] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryTopK.cpp.o
+[32/140] Building CXX object CMakeFiles/MNNTransform.dir/source/geometry/GeometryUnary.cpp.o
+[33/140] Building CXX object CMakeFiles/MNNTransform.dir/source/shape/ShapeCast.cpp.o
+[34/140] Linking CXX shared library libs/arm64-v8a/libMNN.so
+[35/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/core/OpenCLRunningUtils.cpp.o
+[36/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/buffer/BinaryBufExecution.cpp.o
+[37/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/buffer/CastBufExecution.cpp.o
+[38/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/buffer/ConvBufWinograd.cpp.o
+[39/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/buffer/DeconvBufExecution.cpp.o
+[40/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/buffer/ConvBufExecution.cpp.o
+[41/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/core/runtime/OpenCLRuntime.cpp.o
+[42/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/buffer/FuseBufExecution.cpp.o
+[43/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/buffer/DepthwiseConvBufExecution.cpp.o
+[44/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/buffer/LayerNormBufExecution.cpp.o
+[45/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/buffer/LoopBufExecution.cpp.o
+[46/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/buffer/ReductionBufExecution.cpp.o
+[47/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/buffer/SharedGatherBufExecution.cpp.o
+[48/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/argmax_buf_mnn_cl.cpp.o
+[49/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/buffer/UnaryBufExecution.cpp.o
+[50/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/attention_flash_decode_partial_buf_mnn_cl.cpp.o
+[51/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/attention_flash_decode_reduce_buf_mnn_cl.cpp.o
+[52/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/attention_flash_prefill_buf_mnn_cl.cpp.o
+[53/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/attention_kv_rearrange_buf_mnn_cl.cpp.o
+[54/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/attention_long_layout_buf_mnn_cl.cpp.o
+[55/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/binary_buf_mnn_cl.cpp.o
+[56/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/binary_mnn_cl.cpp.o
+[57/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/binary_subgroup_buf_mnn_cl.cpp.o
+[58/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/buffer_convert_buf_mnn_cl.cpp.o
+[59/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/buffer_convert_filter_buf_mnn_cl.cpp.o
+[60/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/buffer_convert_quant_mnn_cl.cpp.o
+[61/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/buffer_convert_subgroup_buf_mnn_cl.cpp.o
+[62/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/buffer_to_image_mnn_cl.cpp.o
+[63/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/cast_buf_mnn_cl.cpp.o
+[64/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/cast_mnn_cl.cpp.o
+[65/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/conv_2d_buf_mnn_cl.cpp.o
+[66/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/conv_2d_c16_subgroup_buf_mnn_cl.cpp.o
+[67/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/conv_2d_c1_subgroup_buf_mnn_cl.cpp.o
+[68/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/conv_2d_int_buf_mnn_cl.cpp.o
+[69/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/conv_2d_int_mnn_cl.cpp.o
+[70/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/conv_2d_mnn_cl.cpp.o
+[71/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/copy_buffer_to_image2d_mnn_cl.cpp.o
+[72/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/deconv_2d_mnn_cl.cpp.o
+[73/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/depthwise_conv2d_buf_mnn_cl.cpp.o
+[74/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/depthwise_conv2d_mnn_cl.cpp.o
+[75/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/depthwise_conv2d_subgroup_buf_mnn_cl.cpp.o
+[76/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/depthwise_deconv2d_mnn_cl.cpp.o
+[77/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/fold3_half_gemv_buf_mnn_cl.cpp.o
+[78/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/fold3_host_conv_buf_mnn_cl.cpp.o
+[79/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/fused_proj_gemv_buf_mnn_cl.cpp.o
+[80/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/gated_rms_norm_buf_mnn_cl.cpp.o
+[81/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/gemm_buf_mnn_cl.cpp.o
+[82/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/gemm_conv1x1_int4_b4_buf_mnn_cl.cpp.o
+[83/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/gemm_conv1x1_int4_b8_buf_mnn_cl.cpp.o
+[84/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/gemm_conv1x1_int8_b4_buf_mnn_cl.cpp.o
+[85/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/gemm_conv1x1_inverse_quant_buf_mnn_cl.cpp.o
+[86/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/gemm_conv1x1_layout_buf_mnn_cl.cpp.o
+[87/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/gemm_int_mnn_cl.cpp.o
+[88/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/gemm_mnn_cl.cpp.o
+[89/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/gemv_conv1x1_buf_mnn_cl.cpp.o
+[90/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/glmem_convert_mnn_cl.cpp.o
+[91/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/indexed_linear_buf_mnn_cl.cpp.o
+[92/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/grid_sample_buf_mnn_cl.cpp.o
+[93/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/grid_sample_mnn_cl.cpp.o
+[94/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/groupnorm_buf_mnn_cl.cpp.o
+[95/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/input_transe_buf_mnn_cl.cpp.o
+[96/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/interp_buf_mnn_cl.cpp.o
+[97/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/interp_mnn_cl.cpp.o
+[98/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/layernorm_buf_mnn_cl.cpp.o
+[99/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/layernorm_mnn_cl.cpp.o
+[100/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/linear_attention_buf_mnn_cl.cpp.o
+[101/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/loop_mnn_cl.cpp.o
+[102/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/matmul_buf_mnn_cl.cpp.o
+[103/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/matmul_local_buf_mnn_cl.cpp.o
+[104/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/matmul_mnn_cl.cpp.o
+[105/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/matmul_params_buf_mnn_cl.cpp.o
+[106/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/nearest_mnn_cl.cpp.o
+[107/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/pooling_buf_mnn_cl.cpp.o
+[108/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/pooling_mnn_cl.cpp.o
+[109/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/pooling_subgroup_buf_mnn_cl.cpp.o
+[110/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/range_buf_mnn_cl.cpp.o
+[111/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/range_mnn_cl.cpp.o
+[112/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/raster_buf_mnn_cl.cpp.o
+[113/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/raster_mnn_cl.cpp.o
+[114/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/reduction_buf_mnn_cl.cpp.o
+[115/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/reduction_mnn_cl.cpp.o
+[116/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/roi_pooling_mnn_cl.cpp.o
+[117/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/rope_buf_mnn_cl.cpp.o
+[118/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/scale_buf_mnn_cl.cpp.o
+[119/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/scale_mnn_cl.cpp.o
+[120/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/select_buf_mnn_cl.cpp.o
+[121/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/select_mnn_cl.cpp.o
+[122/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/self_attention_buf_mnn_cl.cpp.o
+[123/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/shared_gather_buf_mnn_cl.cpp.o
+[124/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/softmax_buf_mnn_cl.cpp.o
+[125/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/softmax_mnn_cl.cpp.o
+[126/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/splitgelu_buf_mnn_cl.cpp.o
+[127/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/strassen_binary_buf_mnn_cl.cpp.o
+[128/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/topkv2_buf_mnn_cl.cpp.o
+[129/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/topkv2_mnn_cl.cpp.o
+[130/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/unary_buf_mnn_cl.cpp.o
+[131/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/unary_mnn_cl.cpp.o
+[132/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/unary_subgroup_buf_mnn_cl.cpp.o
+[133/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/winogradTransformDest2_3_1_mnn_cl.cpp.o
+[134/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/winogradTransformDest2_5_1_mnn_cl.cpp.o
+[135/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/winogradTransformSource2_3_1_mnn_cl.cpp.o
+[136/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/winogradTransformSource2_5_1_mnn_cl.cpp.o
+[137/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/winogradTransform_buf_mnn_cl.cpp.o
+[138/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/winogradTransform_subgroup_buf_mnn_cl.cpp.o
+[139/140] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/image/CastExecution.cpp.o
+[140/140] Linking CXX shared library libs/arm64-v8a/libMNN_CL.so

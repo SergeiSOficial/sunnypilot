@@ -1,0 +1,62 @@
+[
+  {
+    "name": "driver",
+    "status": "passed",
+    "command": [
+      "/Users/sergios/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/bin/python3.12",
+      "android/scripts/experiment.py",
+      "--serial",
+      "RFCR81Y1TBJ",
+      "--adb",
+      "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+      "--package",
+      "com.samsung.sunnypilot.fold3",
+      "--report",
+      "/Users/sergios/sunnypilot/android/reports/performance-followup-20261103/candidate45ze-driver-profile-isolation.json",
+      "--",
+      "/Users/sergios/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/bin/python3.12",
+      "android/scripts/profile_mnn.py",
+      "--serial",
+      "RFCR81Y1TBJ",
+      "--adb",
+      "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+      "--model",
+      "dmonitoring_model",
+      "--report",
+      "/Users/sergios/sunnypilot/android/reports/performance-followup-20261103/candidate45ze-driver-profile.json"
+    ],
+    "returncode": 0,
+    "log": "candidate45ze-profile-driver-command.log",
+    "isolation_status": "passed"
+  },
+  {
+    "name": "road",
+    "status": "passed",
+    "command": [
+      "/Users/sergios/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/bin/python3.12",
+      "android/scripts/experiment.py",
+      "--serial",
+      "RFCR81Y1TBJ",
+      "--adb",
+      "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+      "--package",
+      "com.samsung.sunnypilot.fold3",
+      "--report",
+      "/Users/sergios/sunnypilot/android/reports/performance-followup-20261103/candidate45ze-road-profile-isolation.json",
+      "--",
+      "/Users/sergios/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/bin/python3.12",
+      "android/scripts/profile_mnn.py",
+      "--serial",
+      "RFCR81Y1TBJ",
+      "--adb",
+      "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+      "--model",
+      "driving_supercombo",
+      "--report",
+      "/Users/sergios/sunnypilot/android/reports/performance-followup-20261103/candidate45ze-road-profile.json"
+    ],
+    "returncode": 0,
+    "log": "candidate45ze-profile-road-command.log",
+    "isolation_status": "passed"
+  }
+]

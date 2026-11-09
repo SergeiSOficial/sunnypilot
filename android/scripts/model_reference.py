@@ -47,12 +47,16 @@ def promote_fp32(source, destination):
 def main():
   parser = argparse.ArgumentParser()
   parser.add_argument("--fp32", action="store_true", help="Also generate and validate increased-precision models")
+  parser.add_argument("--operators-only", action="store_true", help="Generate exact grouped FP16 convolution checks without changing model goldens")
   args = parser.parse_args()
   root = pathlib.Path(__file__).resolve().parents[2]
   output = root / "android/app/build/model-reference"
   if args.fp32:
     output /= "fp32"
   output.mkdir(parents=True, exist_ok=True)
+  if args.operators_only:
+    group_checks(output)
+    return
   manifest = {"onnxruntime": ort.__version__, "numpy": np.__version__, "seed": 42,
               "precision": "fp32 promotion" if args.fp32 else "original", "models": {}}
   for name in ("dmonitoring_model", "driving_supercombo"):
@@ -147,7 +151,37 @@ def main():
                             [helper.make_tensor_value_info("y", TensorProto.FLOAT, [1, 4])])
   model = helper.make_model(graph, opset_imports=[helper.make_opsetid("", 13)], ir_version=8)
   onnx.save(model, output / "runtime-check.onnx")
+  group_checks(output)
   print(output)
+
+
+def group_checks(output):
+  """Integer-valued FP16 cases have exact sums, independent of accumulation order."""
+  import onnx
+  from onnx import helper, numpy_helper, TensorProto
+  rng = np.random.default_rng(42)
+  for channels, groups, kernel in ((4, 2, 1), (4, 2, 3), (64, 64, 7)):
+    width, height, outputs = 11, 9, groups * 2
+    x = rng.integers(-2, 3, (1, channels, height, width)).astype(np.float16)
+    w = rng.integers(-3, 4, (outputs, channels // groups, kernel, kernel)).astype(np.float16)
+    bias = np.arange(outputs, dtype=np.float16) - outputs // 2
+    windows = np.lib.stride_tricks.sliding_window_view(
+      np.pad(x, ((0, 0), (0, 0), (kernel // 2, kernel // 2), (kernel // 2, kernel // 2))),
+      (kernel, kernel), axis=(-2, -1))
+    grouped = windows.reshape(1, groups, channels // groups, height, width, kernel, kernel)
+    expected = np.einsum("ngchwkl,gockl->ngohw", grouped.astype(np.float64),
+                         w.reshape(groups, 2, channels // groups, kernel, kernel).astype(np.float64))
+    expected = (expected.reshape(1, outputs, height, width) + bias[None, :, None, None]).astype(np.float16)
+    graph = helper.make_graph([helper.make_node("Conv", ["x", "w", "bias"], ["y"], group=groups,
+      pads=[kernel // 2] * 4)], "fp16_group_check",
+      [helper.make_tensor_value_info("x", TensorProto.FLOAT16, list(x.shape))],
+      [helper.make_tensor_value_info("y", TensorProto.FLOAT16, list(expected.shape))],
+      [numpy_helper.from_array(w, "w"), numpy_helper.from_array(bias, "bias")])
+    path = output / f"fp16-groups-{channels}-{kernel}.onnx"
+    onnx.save(helper.make_model(graph, opset_imports=[helper.make_opsetid("", 13)], ir_version=8), path)
+    actual = ort.InferenceSession(str(path), providers=["CPUExecutionProvider"]).run(None, {"x": x})[0]
+    np.testing.assert_array_equal(actual, expected)
+    np.savez_compressed(path.with_suffix(".npz"), x=x, y=expected)
 
 
 if __name__ == "__main__":

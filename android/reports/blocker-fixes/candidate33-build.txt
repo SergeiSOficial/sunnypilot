@@ -1,0 +1,212 @@
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/8.9/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+> Task :app:cleanPackageDebug
+> Task :app:preBuild UP-TO-DATE
+> Task :app:preDebugBuild UP-TO-DATE
+> Task :app:mergeDebugNativeDebugMetadata NO-SOURCE
+> Task :app:generateDebugBuildConfig UP-TO-DATE
+> Task :app:findDebugPythonCommand
+> Task :app:extractDebugPythonBuildPackages
+
+> Task :app:installDebugPythonRequirements
+Chaquopy: Installing for arm64-v8a
+Looking in indexes: https://pypi.org/simple, https://chaquo.com/pypi-13.1
+Collecting cffi==1.17.1
+  Using cached cffi-1.17.1-1-cp312-cp312-android_24_arm64_v8a.whl (188 kB)
+Collecting requests==2.32.5
+  Using cached requests-2.32.5-py3-none-any.whl.metadata (4.9 kB)
+Collecting pyyaml==6.0.3
+  Using cached pyyaml-6.0.3-0-cp312-cp312-android_24_arm64_v8a.whl (146 kB)
+Collecting tqdm==4.70.1
+  Using cached tqdm-4.70.1-py3-none-any.whl.metadata (57 kB)
+Collecting pycryptodome==3.21.0
+  Using cached pycryptodome-3.21.0-0-cp312-cp312-android_24_arm64_v8a.whl (1.6 MB)
+Collecting PyJWT==2.10.1
+  Using cached PyJWT-2.10.1-py3-none-any.whl.metadata (4.0 kB)
+Collecting pycparser (from cffi==1.17.1)
+  Using cached pycparser-3.12-py3-none-any.whl.metadata (9.7 kB)
+Collecting chaquopy-libffi>=3.3 (from cffi==1.17.1)
+  Using cached chaquopy_libffi-3.3-3-py3-none-android_24_arm64_v8a.whl (33 kB)
+Collecting charset_normalizer<4,>=2 (from requests==2.32.5)
+  Using cached charset_normalizer-3.5.2-py3-none-any.whl.metadata (46 kB)
+Collecting idna<4,>=2.5 (from requests==2.32.5)
+  Using cached idna-3.20-py3-none-any.whl.metadata (7.2 kB)
+Collecting urllib3<3,>=1.21.1 (from requests==2.32.5)
+  Using cached urllib3-2.8.0-py3-none-any.whl.metadata (7.4 kB)
+Collecting certifi>=2017.4.17 (from requests==2.32.5)
+  Using cached certifi-2026.10.23-py3-none-any.whl.metadata (2.5 kB)
+Collecting chaquopy-libyaml>=0.2.5 (from pyyaml==6.0.3)
+  Using cached chaquopy_libyaml-0.2.5-0-py3-none-android_24_arm64_v8a.whl (58 kB)
+Using cached requests-2.32.5-py3-none-any.whl (64 kB)
+Using cached tqdm-4.70.1-py3-none-any.whl (80 kB)
+Using cached PyJWT-2.10.1-py3-none-any.whl (22 kB)
+Using cached charset_normalizer-3.5.2-py3-none-any.whl (68 kB)
+Using cached idna-3.20-py3-none-any.whl (69 kB)
+Using cached urllib3-2.8.0-py3-none-any.whl (135 kB)
+Using cached certifi-2026.10.23-py3-none-any.whl (135 kB)
+Using cached pycparser-3.12-py3-none-any.whl (62 kB)
+Installing collected packages: chaquopy-libyaml, chaquopy-libffi, urllib3, tqdm, pyyaml, PyJWT, pycryptodome, pycparser, idna, charset_normalizer, certifi, requests, cffi
+
+Successfully installed PyJWT-2.10.1 certifi-2026.10.23 cffi-1.17.1 chaquopy-libffi-3.3 chaquopy-libyaml-0.2.5 charset_normalizer-3.5.2 idna-3.20 pycparser-3.12 pycryptodome-3.21.0 pyyaml-6.0.3 requests-2.32.5 tqdm-4.70.1 urllib3-2.8.0
+
+> Task :app:buildMetadata
+kj/filesystem-disk-unix.c++:1734: warning: PWD environment variable doesn't match current directory; pwd = /Users/sergios/sunnypilot/android
+android/CAMERAS.md: needs update
+android/PERFORMANCE.md: needs update
+android/README.md: needs update
+android/VALIDATION.md: needs update
+android/app/build.gradle: needs update
+android/app/src/androidTest/java/ai/sunnypilot/fold3/CameraPreviewSampleTest.java: needs update
+android/app/src/androidTest/java/ai/sunnypilot/fold3/PerceptionTest.java: needs update
+android/app/src/androidTest/java/ai/sunnypilot/fold3/RuntimeTest.java: needs update
+android/app/src/main/AndroidManifest.xml: needs update
+android/app/src/main/cpp/CMakeLists.txt: needs update
+android/app/src/main/cpp/bridge.cpp: needs update
+android/app/src/main/cpp/ort_python.cpp: needs update
+android/app/src/main/java/ai/sunnypilot/fold3/CameraPreviewSample.java: needs update
+android/app/src/main/java/ai/sunnypilot/fold3/CameraProbe.java: needs update
+android/app/src/main/java/ai/sunnypilot/fold3/DrivingActivity.java: needs update
+android/app/src/main/java/ai/sunnypilot/fold3/FrameStats.java: needs update
+android/app/src/main/java/ai/sunnypilot/fold3/MainActivity.java: needs update
+android/app/src/main/java/ai/sunnypilot/fold3/ManagerService.java: needs update
+android/app/src/main/java/ai/sunnypilot/fold3/ModelService.java: needs update
+android/app/src/main/java/ai/sunnypilot/fold3/NativeBridge.java: needs update
+android/app/src/main/java/ai/sunnypilot/fold3/ProbeService.java: needs update
+android/app/src/main/java/ai/sunnypilot/fold3/WorkerService.java: needs update
+android/app/src/main/python/fold3_checks.py: needs update
+android/app/src/main/python/fold3_daemons.py: needs update
+android/app/src/main/python/fold3_models.py: needs update
+android/app/src/main/python/fold3_ort.py: needs update
+android/app/src/main/python/fold3_runtime.py: needs update
+android/app/src/main/python/fold3_sim.py: needs update
+android/app/src/main/python/fold3_vision.py: needs update
+android/app/src/test/java/ai/sunnypilot/fold3/FrameStatsTest.java: needs update
+android/patches/msgq-android.patch: needs update
+android/patches/tinygrad-android.patch: needs update
+android/requirements-host.txt: needs update
+android/scripts/build_ort.py: needs update
+android/scripts/experiment.py: needs update
+android/scripts/model_reference.py: needs update
+android/scripts/prepare_native.py: needs update
+android/scripts/validate_adb_faults.py: needs update
+android/scripts/validate_cameras.py: needs update
+android/scripts/validate_instrumentation.py: needs update
+android/scripts/validate_lifecycle.py: needs update
+android/scripts/validate_models.py: needs update
+android/scripts/validate_vision.py: needs update
+android/tests/test_experiment.py: needs update
+android/tests/test_model_reference.py: needs update
+android/tests/test_validate_models.py: needs update
+android/tests/test_vision_panda.py: needs update
+openpilot/common/params.py: needs update
+openpilot/common/version.py: needs update
+openpilot/selfdrive/car/card.py: needs update
+openpilot/selfdrive/controls/controlsd.py: needs update
+openpilot/selfdrive/controls/lib/longitudinal_mpc_lib/long_mpc.py: needs update
+openpilot/selfdrive/locationd/calibrationd.py: needs update
+openpilot/tools/sim/android_bridge.py: needs update
+openpilot/tools/sim/android_validation.py: needs update
+openpilot/tools/sim/lib/android_protocol.py: needs update
+fatal: no upstream configured for branch 'codex/fold3-android-port'
+
+> Task :app:configureCMakeDebug[arm64-v8a]
+[CXX5304] This version only understands SDK XML versions up to 3 but an SDK XML file of version 4 was encountered. This can happen if you use versions of Android Studio and the command-line tools that were released at different times.
+[CXX5304] This version only understands SDK XML versions up to 3 but an SDK XML file of version 4 was encountered. This can happen if you use versions of Android Studio and the command-line tools that were released at different times.
+
+> Task :app:buildCMakeDebug[arm64-v8a]
+> Task :app:externalNativeBuildDebug
+> Task :app:stagePython
+> Task :app:mergeDebugPythonSources
+> Task :app:generateDebugPythonProxies
+> Task :app:javaPreCompileDebug UP-TO-DATE
+> Task :app:checkDebugAarMetadata UP-TO-DATE
+> Task :app:generateDebugResValues UP-TO-DATE
+> Task :app:mapDebugSourceSetPaths UP-TO-DATE
+> Task :app:generateDebugResources UP-TO-DATE
+> Task :app:mergeDebugResources UP-TO-DATE
+> Task :app:packageDebugResources UP-TO-DATE
+> Task :app:parseDebugLocalResources UP-TO-DATE
+> Task :app:createDebugCompatibleScreenManifests UP-TO-DATE
+> Task :app:extractDeepLinksDebug UP-TO-DATE
+> Task :app:processDebugMainManifest UP-TO-DATE
+> Task :app:processDebugManifest UP-TO-DATE
+> Task :app:processDebugManifestForPackage UP-TO-DATE
+> Task :app:processDebugResources UP-TO-DATE
+
+> Task :app:compileDebugJavaWithJavac
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :app:mergeDebugShaders UP-TO-DATE
+> Task :app:compileDebugShaders NO-SOURCE
+> Task :app:generateDebugAssets UP-TO-DATE
+> Task :app:generateDebugPythonMiscAssets UP-TO-DATE
+> Task :app:generateDebugPythonRequirementsAssets
+> Task :app:generateDebugPythonSourceAssets
+> Task :app:generateDebugPythonBuildAssets
+> Task :app:stageNotices UP-TO-DATE
+> Task :app:mergeDebugAssets
+> Task :app:desugarDebugFileDependencies UP-TO-DATE
+> Task :app:dexBuilderDebug
+> Task :app:mergeDebugGlobalSynthetics UP-TO-DATE
+> Task :app:processDebugJavaRes NO-SOURCE
+> Task :app:mergeDebugJavaResource UP-TO-DATE
+> Task :app:checkDebugDuplicateClasses UP-TO-DATE
+> Task :app:mergeDebugStartupProfile UP-TO-DATE
+> Task :app:mergeExtDexDebug UP-TO-DATE
+> Task :app:mergeLibDexDebug UP-TO-DATE
+> Task :app:generateDebugPythonJniLibs UP-TO-DATE
+> Task :app:mergeDebugJniLibFolders UP-TO-DATE
+> Task :app:mergeDebugNativeLibs UP-TO-DATE
+> Task :app:stripDebugDebugSymbols UP-TO-DATE
+> Task :app:validateSigningDebug UP-TO-DATE
+> Task :app:writeDebugAppMetadata UP-TO-DATE
+> Task :app:writeDebugSigningConfigVersions UP-TO-DATE
+> Task :app:preDebugAndroidTestBuild SKIPPED
+> Task :app:bundleDebugClassesToCompileJar
+> Task :app:mergeProjectDexDebug
+> Task :app:compressDebugAssets
+> Task :app:processDebugAndroidTestManifest UP-TO-DATE
+> Task :app:generateDebugAndroidTestBuildConfig UP-TO-DATE
+> Task :app:javaPreCompileDebugAndroidTest UP-TO-DATE
+> Task :app:checkDebugAndroidTestAarMetadata UP-TO-DATE
+> Task :app:generateDebugAndroidTestResValues UP-TO-DATE
+> Task :app:mapDebugAndroidTestSourceSetPaths UP-TO-DATE
+> Task :app:generateDebugAndroidTestResources UP-TO-DATE
+> Task :app:mergeDebugAndroidTestResources UP-TO-DATE
+> Task :app:processDebugAndroidTestResources UP-TO-DATE
+> Task :app:compileDebugAndroidTestJavaWithJavac
+> Task :app:mergeDebugAndroidTestShaders UP-TO-DATE
+> Task :app:compileDebugAndroidTestShaders NO-SOURCE
+> Task :app:generateDebugAndroidTestAssets UP-TO-DATE
+> Task :app:mergeDebugAndroidTestAssets UP-TO-DATE
+> Task :app:compressDebugAndroidTestAssets UP-TO-DATE
+> Task :app:desugarDebugAndroidTestFileDependencies UP-TO-DATE
+> Task :app:dexBuilderDebugAndroidTest
+> Task :app:mergeDebugAndroidTestGlobalSynthetics UP-TO-DATE
+> Task :app:processDebugAndroidTestJavaRes NO-SOURCE
+> Task :app:mergeDebugAndroidTestJavaResource UP-TO-DATE
+> Task :app:checkDebugAndroidTestDuplicateClasses UP-TO-DATE
+> Task :app:mergeExtDexDebugAndroidTest UP-TO-DATE
+> Task :app:mergeLibDexDebugAndroidTest UP-TO-DATE
+> Task :app:mergeDebugAndroidTestJniLibFolders UP-TO-DATE
+> Task :app:mergeDebugAndroidTestNativeLibs NO-SOURCE
+> Task :app:stripDebugAndroidTestDebugSymbols NO-SOURCE
+> Task :app:validateSigningDebugAndroidTest UP-TO-DATE
+> Task :app:writeDebugAndroidTestSigningConfigVersions UP-TO-DATE
+> Task :app:preDebugUnitTestBuild UP-TO-DATE
+> Task :app:javaPreCompileDebugUnitTest UP-TO-DATE
+> Task :app:bundleDebugClassesToRuntimeJar
+> Task :app:mergeProjectDexDebugAndroidTest
+> Task :app:compileDebugUnitTestJavaWithJavac
+> Task :app:processDebugUnitTestJavaRes NO-SOURCE
+> Task :app:testDebugUnitTest
+> Task :app:packageDebugAndroidTest
+> Task :app:createDebugAndroidTestApkListingFileRedirect UP-TO-DATE
+> Task :app:assembleDebugAndroidTest
+> Task :app:packageDebug
+> Task :app:createDebugApkListingFileRedirect UP-TO-DATE
+> Task :app:assembleDebug
+
+BUILD SUCCESSFUL in 2m 28s
+84 actionable tasks: 28 executed, 56 up-to-date

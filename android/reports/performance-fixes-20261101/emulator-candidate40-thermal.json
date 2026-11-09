@@ -1,0 +1,3176 @@
+{
+  "serial": "emulator-5560",
+  "package": "com.samsung.sunnypilot.fold3",
+  "vehicle_tx_enabled": false,
+  "status": "passed",
+  "cases": [
+    {
+      "during_capture": false,
+      "abort_wait_seconds": 1.7375656250223983,
+      "result": {
+        "vehicle_tx_enabled": false,
+        "valid": false,
+        "sessions": [
+          {
+            "camera_ids": [
+              "0",
+              "1"
+            ],
+            "width": 1280,
+            "height": 720,
+            "logical_camera": null,
+            "requested_duration_ms": 29957,
+            "startup_order": "open_all_then_configure",
+            "opened_camera_ids": [],
+            "image_callbacks_drained": true,
+            "camera_close_callbacks_complete": true,
+            "request_template": "record",
+            "stabilization": "disabled when advertised",
+            "sensor_pairs": [],
+            "streams": [],
+            "elapsed_ms": 4,
+            "completed_requested_duration": false,
+            "status": "failed",
+            "error": "IllegalStateException: critical_thermal_status:4"
+          }
+        ],
+        "requested_seconds": 30,
+        "recovery_limit": 3,
+        "started_utc": "2026-11-01T11:45:57.043842Z",
+        "dual_rear": "not requested",
+        "backend": "camera2",
+        "status": "failed",
+        "recoveries": 0,
+        "thermal_status": 4,
+        "transport_status": "failed",
+        "completed_utc": "2026-11-01T11:45:57.107326Z"
+      },
+      "shutdown_seconds": 0.004,
+      "shutdown_clock": "camera worker startup to rejection"
+    },
+    {
+      "during_capture": true,
+      "abort_wait_seconds": 0.849940041982336,
+      "result": {
+        "vehicle_tx_enabled": false,
+        "valid": false,
+        "sessions": [
+          {
+            "camera_ids": [
+              "0",
+              "1"
+            ],
+            "width": 1280,
+            "height": 720,
+            "logical_camera": null,
+            "requested_duration_ms": 89973,
+            "startup_order": "open_all_then_configure",
+            "opened_camera_ids": [
+              "0",
+              "1"
+            ],
+            "image_callbacks_drained": true,
+            "camera_close_callbacks_complete": true,
+            "request_template": "record",
+            "stabilization": "disabled when advertised",
+            "sensor_pairs": [
+              {
+                "camera_ids": [
+                  "0",
+                  "1"
+                ],
+                "overlap_ns": 937315543,
+                "distinct_sensor_evidence": true,
+                "nearest_skew_p99_ns": 7805291
+              }
+            ],
+            "overlap_ns": 937315543,
+            "nearest_skew_p99_ns": 7805291,
+            "skew_sampling": "last 4096 timestamps per stream, shared overlap only",
+            "distinct_sensor_evidence": true,
+            "streams": [
+              {
+                "sensor_id": "0",
+                "width": 1280,
+                "height": 720,
+                "image_rotation_applied_degrees": 0,
+                "output_width": 1280,
+                "output_height": 720,
+                "display_degrees_at_session_start": 90,
+                "mirrored": false,
+                "sensor_orientation": 90,
+                "timestamp_source": 1,
+                "intrinsic_calibration": [],
+                "lens_distortion": [],
+                "visionipc_valid": false,
+                "visionipc_stream": 0,
+                "focal_lengths_mm": [
+                  3.3
+                ],
+                "frames": 31,
+                "fps": 29.856398159097882,
+                "first_timestamp_ns": 549362351646,
+                "last_timestamp_ns": 550367161397,
+                "timestamp_errors": 0,
+                "changed_frames": 30,
+                "metadata_failures": 0,
+                "uncaptured_requests": 0,
+                "lost_buffers": 0,
+                "physical_metadata_frames": 31,
+                "measured_focal_length_mm": 3.3,
+                "packing_errors": 0,
+                "packing_p99_ns": 2163250,
+                "delivery_age_available": true,
+                "delivery_age_p50_ns": -31745135,
+                "delivery_age_p95_ns": -24946323,
+                "delivery_age_p99_ns": -24831051,
+                "delivery_over_100ms": 0,
+                "acquisition_age_p50_ns": -32133677,
+                "acquisition_age_p95_ns": -25144593,
+                "acquisition_age_p99_ns": -25090051,
+                "capture_result_age_p99_ns": 0,
+                "capture_result_timestamp_errors": 31,
+                "delivery_future_timestamps": 31,
+                "clock_sample_columns": "sensor_raw,elapsed_before,monotonic,elapsed_after",
+                "clock_samples_ns": [
+                  [
+                    549362351646,
+                    549330605261,
+                    549330605344,
+                    549330605428
+                  ],
+                  [
+                    549395940438,
+                    549364359553,
+                    549364359636,
+                    549364359719
+                  ],
+                  [
+                    549429591771,
+                    549403600386,
+                    549403600428,
+                    549403600511
+                  ],
+                  [
+                    549463205229,
+                    549437039761,
+                    549437040011,
+                    549437040094
+                  ],
+                  [
+                    549496736104,
+                    549471788469,
+                    549471788761,
+                    549471788844
+                  ],
+                  [
+                    549530187896,
+                    549499322011,
+                    549499322095,
+                    549499322178
+                  ],
+                  [
+                    549563652313,
+                    549531409470,
+                    549531409553,
+                    549531409636
+                  ],
+                  [
+                    549597206688,
+                    549565754803,
+                    549565754886,
+                    549565754970
+                  ],
+                  [
+                    549631038188,
+                    549600349970,
+                    549600350178,
+                    549600350261
+                  ],
+                  [
+                    549664515563,
+                    549635520845,
+                    549635521053,
+                    549635521178
+                  ],
+                  [
+                    549698004646,
+                    549671195761,
+                    549671195845,
+                    549671195928
+                  ],
+                  [
+                    549731523188,
+                    549699211970,
+                    549699212095,
+                    549699212178
+                  ],
+                  [
+                    549764976980,
+                    549735260720,
+                    549735260970,
+                    549735261095
+                  ],
+                  [
+                    549798514188,
+                    549767543345,
+                    549767543428,
+                    549767543511
+                  ],
+                  [
+                    549832018813,
+                    549807184970,
+                    549807185261,
+                    549807185386
+                  ],
+                  [
+                    549865402646,
+                    549833313011,
+                    549833313095,
+                    549833313178
+                  ],
+                  [
+                    549898849938,
+                    549867587345,
+                    549867587470,
+                    549867587553
+                  ],
+                  [
+                    549932306105,
+                    549900102386,
+                    549900102678,
+                    549900102761
+                  ],
+                  [
+                    549965750813,
+                    549933319553,
+                    549933319636,
+                    549933319720
+                  ],
+                  [
+                    549999165605,
+                    549966743845,
+                    549966743970,
+                    549966744053
+                  ],
+                  [
+                    550032619563,
+                    550000255595,
+                    550000255678,
+                    550000255761
+                  ],
+                  [
+                    550066128480,
+                    550033693136,
+                    550033693261,
+                    550033693345
+                  ],
+                  [
+                    550099574355,
+                    550066998886,
+                    550066998970,
+                    550066999053
+                  ],
+                  [
+                    550132991563,
+                    550100451636,
+                    550100451720,
+                    550100451803
+                  ],
+                  [
+                    550166498771,
+                    550133925386,
+                    550133925511,
+                    550133925595
+                  ],
+                  [
+                    550199912730,
+                    550168744428,
+                    550168744511,
+                    550168744553
+                  ],
+                  [
+                    550233408563,
+                    550201056137,
+                    550201056220,
+                    550201056303
+                  ],
+                  [
+                    550266823605,
+                    550235166928,
+                    550235167220,
+                    550235167262
+                  ],
+                  [
+                    550300307147,
+                    550267693970,
+                    550267694053,
+                    550267694137
+                  ],
+                  [
+                    550333750897,
+                    550301618845,
+                    550301619095,
+                    550301619137
+                  ],
+                  [
+                    550367161397,
+                    550334669512,
+                    550334669595,
+                    550334669678
+                  ]
+                ],
+                "capture_sample_columns": "sensor_raw,frame_number,exposure,duration,elapsed_before,monotonic,elapsed_after",
+                "capture_samples_ns": [
+                  [
+                    549362351646,
+                    0,
+                    15000000,
+                    33331760,
+                    549334855344,
+                    549334856094,
+                    549334856136
+                  ],
+                  [
+                    549395940438,
+                    1,
+                    12833294,
+                    33331760,
+                    549368262344,
+                    549368262886,
+                    549368262928
+                  ],
+                  [
+                    549429591771,
+                    2,
+                    11099929,
+                    33331760,
+                    549408702511,
+                    549408703594,
+                    549408703678
+                  ],
+                  [
+                    549463205229,
+                    3,
+                    9713237,
+                    33331760,
+                    549445754178,
+                    549445754386,
+                    549445754469
+                  ],
+                  [
+                    549496736104,
+                    4,
+                    8603884,
+                    33331760,
+                    549476621303,
+                    549476621386,
+                    549476621469
+                  ],
+                  [
+                    549530187896,
+                    5,
+                    7716401,
+                    33331760,
+                    549500252178,
+                    549500252428,
+                    549500252553
+                  ],
+                  [
+                    549563652313,
+                    6,
+                    7006415,
+                    33331760,
+                    549532852303,
+                    549532852553,
+                    549532852595
+                  ],
+                  [
+                    549597206688,
+                    7,
+                    6438426,
+                    33331760,
+                    549573836220,
+                    549573838053,
+                    549573838220
+                  ],
+                  [
+                    549631038188,
+                    8,
+                    5984035,
+                    33331760,
+                    549601165845,
+                    549601166136,
+                    549601166220
+                  ],
+                  [
+                    549664515563,
+                    9,
+                    5620522,
+                    33331760,
+                    549641839636,
+                    549641840011,
+                    549641840095
+                  ],
+                  [
+                    549698004646,
+                    10,
+                    5329711,
+                    33331760,
+                    549671343428,
+                    549671343553,
+                    549671343636
+                  ],
+                  [
+                    549731523188,
+                    11,
+                    5097063,
+                    33331760,
+                    549699701470,
+                    549699701636,
+                    549699701720
+                  ],
+                  [
+                    549764976980,
+                    12,
+                    4910944,
+                    33331760,
+                    549738268470,
+                    549738270261,
+                    549738270428
+                  ],
+                  [
+                    549798514188,
+                    13,
+                    4762049,
+                    33331760,
+                    549771830511,
+                    549771831428,
+                    549771831511
+                  ],
+                  [
+                    549832018813,
+                    14,
+                    4642933,
+                    33331760,
+                    549815158178,
+                    549815158386,
+                    549815158428
+                  ],
+                  [
+                    549865402646,
+                    15,
+                    4547640,
+                    33331760,
+                    549833432886,
+                    549833433011,
+                    549833433053
+                  ],
+                  [
+                    549898849938,
+                    16,
+                    4547640,
+                    33331760,
+                    549873807428,
+                    549873809095,
+                    549873809261
+                  ],
+                  [
+                    549932306105,
+                    17,
+                    4547640,
+                    33331760,
+                    549900250553,
+                    549900250761,
+                    549900250886
+                  ],
+                  [
+                    549965750813,
+                    18,
+                    4547640,
+                    33331760,
+                    549933648761,
+                    549933648886,
+                    549933648970
+                  ],
+                  [
+                    549999165605,
+                    19,
+                    4547640,
+                    33331760,
+                    549967125803,
+                    549967125970,
+                    549967126053
+                  ],
+                  [
+                    550032619563,
+                    20,
+                    4547640,
+                    33331760,
+                    550000573386,
+                    550000573553,
+                    550000573678
+                  ],
+                  [
+                    550066128480,
+                    21,
+                    4547640,
+                    33331760,
+                    550034057220,
+                    550034057386,
+                    550034057428
+                  ],
+                  [
+                    550099574355,
+                    22,
+                    4547640,
+                    33331760,
+                    550067296511,
+                    550067296636,
+                    550067296720
+                  ],
+                  [
+                    550132991563,
+                    23,
+                    4547640,
+                    33331760,
+                    550102419220,
+                    550102419386,
+                    550102419470
+                  ],
+                  [
+                    550166498771,
+                    24,
+                    4547640,
+                    33331760,
+                    550135563470,
+                    550135563678,
+                    550135563720
+                  ],
+                  [
+                    550199912730,
+                    25,
+                    4547640,
+                    33331760,
+                    550168869720,
+                    550168869886,
+                    550168869928
+                  ],
+                  [
+                    550233408563,
+                    26,
+                    4547640,
+                    33331760,
+                    550204147887,
+                    550204148095,
+                    550204148220
+                  ],
+                  [
+                    550266823605,
+                    27,
+                    4547640,
+                    33331760,
+                    550235302970,
+                    550235303053,
+                    550235303178
+                  ],
+                  [
+                    550300307147,
+                    28,
+                    4547640,
+                    33331760,
+                    550268057512,
+                    550268057720,
+                    550268057803
+                  ],
+                  [
+                    550333750897,
+                    29,
+                    4547640,
+                    33331760,
+                    550301718220,
+                    550301718387,
+                    550301718470
+                  ],
+                  [
+                    550367161397,
+                    30,
+                    4547640,
+                    33331760,
+                    550334886137,
+                    550334886303,
+                    550334886428
+                  ]
+                ],
+                "frame_interval_p99_ns": 33831500
+              },
+              {
+                "sensor_id": "1",
+                "width": 1280,
+                "height": 720,
+                "image_rotation_applied_degrees": 0,
+                "output_width": 1280,
+                "output_height": 720,
+                "display_degrees_at_session_start": 90,
+                "mirrored": false,
+                "sensor_orientation": 270,
+                "timestamp_source": 1,
+                "intrinsic_calibration": [
+                  3225.7742,
+                  3225.7742,
+                  960.5043,
+                  540.46704,
+                  0
+                ],
+                "lens_distortion": [
+                  0.08807813,
+                  -0.22617353,
+                  0.16460505,
+                  0,
+                  0
+                ],
+                "visionipc_valid": false,
+                "visionipc_stream": 1,
+                "focal_lengths_mm": [
+                  4.38
+                ],
+                "frames": 29,
+                "fps": 29.635584155456012,
+                "first_timestamp_ns": 549429845854,
+                "last_timestamp_ns": 550374655980,
+                "timestamp_errors": 0,
+                "changed_frames": 28,
+                "metadata_failures": 0,
+                "uncaptured_requests": 0,
+                "lost_buffers": 0,
+                "physical_metadata_frames": 29,
+                "measured_focal_length_mm": 4.38,
+                "packing_errors": 0,
+                "packing_p99_ns": 500541,
+                "delivery_age_available": true,
+                "delivery_age_p50_ns": -32082114,
+                "delivery_age_p95_ns": -27203739,
+                "delivery_age_p99_ns": -26002531,
+                "delivery_over_100ms": 0,
+                "acquisition_age_p50_ns": -32189218,
+                "acquisition_age_p95_ns": -27786218,
+                "acquisition_age_p99_ns": -26291635,
+                "capture_result_age_p99_ns": 0,
+                "capture_result_timestamp_errors": 29,
+                "delivery_future_timestamps": 29,
+                "clock_sample_columns": "sensor_raw,elapsed_before,monotonic,elapsed_after",
+                "clock_samples_ns": [
+                  [
+                    549429845854,
+                    549402640511,
+                    549402640636,
+                    549402640719
+                  ],
+                  [
+                    549463954813,
+                    549434792761,
+                    549434793011,
+                    549434793094
+                  ],
+                  [
+                    549501370146,
+                    549472099636,
+                    549472099719,
+                    549472099844
+                  ],
+                  [
+                    549534876980,
+                    549502534136,
+                    549502534386,
+                    549502534470
+                  ],
+                  [
+                    549569245355,
+                    549536815303,
+                    549536815553,
+                    549536815636
+                  ],
+                  [
+                    549602801021,
+                    549571990595,
+                    549571990803,
+                    549571990928
+                  ],
+                  [
+                    549636376813,
+                    549605006553,
+                    549605006678,
+                    549605006720
+                  ],
+                  [
+                    549669893063,
+                    549641641678,
+                    549641641761,
+                    549641641845
+                  ],
+                  [
+                    549703339271,
+                    549672619636,
+                    549672619720,
+                    549672619803
+                  ],
+                  [
+                    549738754188,
+                    549707226345,
+                    549707226470,
+                    549707226511
+                  ],
+                  [
+                    549772597438,
+                    549742102178,
+                    549742102261,
+                    549742102345
+                  ],
+                  [
+                    549806028355,
+                    549774418303,
+                    549774418386,
+                    549774418428
+                  ],
+                  [
+                    549839688813,
+                    549807604886,
+                    549807604970,
+                    549807605136
+                  ],
+                  [
+                    549873136938,
+                    549842001220,
+                    549842001595,
+                    549842001720
+                  ],
+                  [
+                    549906564313,
+                    549880537303,
+                    549880537470,
+                    549880537511
+                  ],
+                  [
+                    549939981313,
+                    549907898095,
+                    549907898220,
+                    549907898303
+                  ],
+                  [
+                    549973511938,
+                    549941143886,
+                    549941144011,
+                    549941144053
+                  ],
+                  [
+                    550006970896,
+                    549974579761,
+                    549974579886,
+                    549974579970
+                  ],
+                  [
+                    550040380521,
+                    550007906136,
+                    550007906261,
+                    550007906303
+                  ],
+                  [
+                    550073788688,
+                    550041107261,
+                    550041107345,
+                    550041107428
+                  ],
+                  [
+                    550107232105,
+                    550074789470,
+                    550074789553,
+                    550074789636
+                  ],
+                  [
+                    550140643646,
+                    550108272678,
+                    550108272803,
+                    550108272845
+                  ],
+                  [
+                    550174053938,
+                    550141904678,
+                    550141904761,
+                    550141904845
+                  ],
+                  [
+                    550207467563,
+                    550175185511,
+                    550175185595,
+                    550175185678
+                  ],
+                  [
+                    550240880230,
+                    550211640428,
+                    550211640512,
+                    550211640595
+                  ],
+                  [
+                    550274294772,
+                    550241851512,
+                    550241851595,
+                    550241851637
+                  ],
+                  [
+                    550307820105,
+                    550275238970,
+                    550275239012,
+                    550275239095
+                  ],
+                  [
+                    550341243147,
+                    550310336637,
+                    550310336720,
+                    550310336803
+                  ],
+                  [
+                    550374655980,
+                    550342143053,
+                    550342143178,
+                    550342143262
+                  ]
+                ],
+                "capture_sample_columns": "sensor_raw,frame_number,exposure,duration,elapsed_before,monotonic,elapsed_after",
+                "capture_samples_ns": [
+                  [
+                    549429845854,
+                    0,
+                    15000000,
+                    33331760,
+                    549406092844,
+                    549406093261,
+                    549406093344
+                  ],
+                  [
+                    549463954813,
+                    1,
+                    12416647,
+                    33331760,
+                    549444777303,
+                    549444778178,
+                    549444778261
+                  ],
+                  [
+                    549501370146,
+                    2,
+                    10349965,
+                    33331760,
+                    549476486219,
+                    549476487011,
+                    549476487053
+                  ],
+                  [
+                    549534876980,
+                    3,
+                    8696619,
+                    33331760,
+                    549503191095,
+                    549503191220,
+                    549503191303
+                  ],
+                  [
+                    549569245355,
+                    4,
+                    7373942,
+                    33331760,
+                    549537782011,
+                    549537782178,
+                    549537782220
+                  ],
+                  [
+                    549602801021,
+                    5,
+                    6315800,
+                    33331760,
+                    549574322470,
+                    549574323261,
+                    549574323428
+                  ],
+                  [
+                    549636376813,
+                    6,
+                    5469287,
+                    33331760,
+                    549605351803,
+                    549605352011,
+                    549605352095
+                  ],
+                  [
+                    549669893063,
+                    7,
+                    4792076,
+                    33331760,
+                    549643419303,
+                    549643420261,
+                    549643420386
+                  ],
+                  [
+                    549703339271,
+                    8,
+                    4250308,
+                    33331760,
+                    549675674428,
+                    549675676053,
+                    549675676178
+                  ],
+                  [
+                    549738754188,
+                    9,
+                    3816893,
+                    33331760,
+                    549709197636,
+                    549709198553,
+                    549709198720
+                  ],
+                  [
+                    549772597438,
+                    10,
+                    3470161,
+                    33331760,
+                    549747240428,
+                    549747241595,
+                    549747241678
+                  ],
+                  [
+                    549806028355,
+                    11,
+                    3192775,
+                    33331760,
+                    549775085011,
+                    549775086095,
+                    549775086220
+                  ],
+                  [
+                    549839688813,
+                    12,
+                    2970867,
+                    33331760,
+                    549815017261,
+                    549815018136,
+                    549815018220
+                  ],
+                  [
+                    549873136938,
+                    13,
+                    2793340,
+                    33331760,
+                    549846948720,
+                    549846949636,
+                    549846949678
+                  ],
+                  [
+                    549906564313,
+                    14,
+                    2651319,
+                    33331760,
+                    549880696595,
+                    549880696761,
+                    549880696845
+                  ],
+                  [
+                    549939981313,
+                    15,
+                    2537702,
+                    33331760,
+                    549907996636,
+                    549907996720,
+                    549907996803
+                  ],
+                  [
+                    549973511938,
+                    16,
+                    2446808,
+                    33331760,
+                    549941432136,
+                    549941432303,
+                    549941432345
+                  ],
+                  [
+                    550006970896,
+                    17,
+                    2374093,
+                    33331760,
+                    549974880928,
+                    549974881095,
+                    549974881178
+                  ],
+                  [
+                    550040380521,
+                    18,
+                    2315921,
+                    33331760,
+                    550008968928,
+                    550008969095,
+                    550008969178
+                  ],
+                  [
+                    550073788688,
+                    19,
+                    2269383,
+                    33331760,
+                    550041455970,
+                    550041456095,
+                    550041456178
+                  ],
+                  [
+                    550107232105,
+                    20,
+                    2269383,
+                    33331760,
+                    550076102345,
+                    550076102511,
+                    550076102595
+                  ],
+                  [
+                    550140643646,
+                    21,
+                    2269383,
+                    33331760,
+                    550109040303,
+                    550109040470,
+                    550109040511
+                  ],
+                  [
+                    550174053938,
+                    22,
+                    2269383,
+                    33331760,
+                    550142274428,
+                    550142274636,
+                    550142274720
+                  ],
+                  [
+                    550207467563,
+                    23,
+                    2269383,
+                    33331760,
+                    550176110845,
+                    550176111011,
+                    550176111053
+                  ],
+                  [
+                    550240880230,
+                    24,
+                    2269383,
+                    33331760,
+                    550211756137,
+                    550211756345,
+                    550211756428
+                  ],
+                  [
+                    550274294772,
+                    25,
+                    2269383,
+                    33331760,
+                    550242141512,
+                    550242141637,
+                    550242141762
+                  ],
+                  [
+                    550307820105,
+                    26,
+                    2269383,
+                    33331760,
+                    550275361428,
+                    550275361553,
+                    550275361637
+                  ],
+                  [
+                    550341243147,
+                    27,
+                    2269383,
+                    33331760,
+                    550320192345,
+                    550320192970,
+                    550320193012
+                  ],
+                  [
+                    550374655980,
+                    28,
+                    2269383,
+                    33331760,
+                    550342437553,
+                    550342437762,
+                    550342437845
+                  ]
+                ],
+                "frame_interval_p99_ns": 37415333
+              }
+            ],
+            "elapsed_ms": 1803,
+            "completed_requested_duration": false,
+            "status": "failed",
+            "error": "IllegalStateException: critical_thermal_status:4"
+          }
+        ],
+        "requested_seconds": 90,
+        "recovery_limit": 3,
+        "started_utc": "2026-11-01T11:46:00.481995Z",
+        "dual_rear": "not requested",
+        "backend": "camera2",
+        "status": "failed",
+        "recoveries": 0,
+        "thermal_status": 4,
+        "transport_status": "failed",
+        "completed_utc": "2026-11-01T11:46:02.347764Z"
+      },
+      "shutdown_seconds": 0.849940041982336,
+      "shutdown_clock": "critical override to completed report"
+    }
+  ],
+  "moderate_pause": {
+    "modeld": {
+      "daemon": "modeld",
+      "pid": 7404,
+      "vehicle_tx_enabled": false,
+      "engagement_allowed": false,
+      "work_samples": 0,
+      "deadline_misses": 0,
+      "phase": "thermal_paused",
+      "simulation": false,
+      "thermal_status": 2,
+      "target_suspended": true,
+      "missing_physical_sensors": [
+        "0",
+        "2"
+      ],
+      "calibrated": false,
+      "valid": false,
+      "blocker": "Bench inference paused at Android MODERATE; requires ten cool seconds before resuming",
+      "target_hz": 20,
+      "computed_frames": 0,
+      "recurrent_resets": 1,
+      "p99_stages_ms": {}
+    },
+    "dmonitoringmodeld": {
+      "daemon": "dmonitoringmodeld",
+      "pid": 7405,
+      "vehicle_tx_enabled": false,
+      "engagement_allowed": false,
+      "work_samples": 0,
+      "deadline_misses": 0,
+      "phase": "thermal_paused",
+      "simulation": false,
+      "thermal_status": 2,
+      "target_suspended": true,
+      "missing_physical_sensors": [
+        "1"
+      ],
+      "calibrated": false,
+      "valid": false,
+      "blocker": "Bench inference paused at Android MODERATE; requires ten cool seconds before resuming",
+      "target_hz": 20,
+      "computed_frames": 0,
+      "recurrent_resets": 1,
+      "p99_stages_ms": {}
+    }
+  },
+  "moderate_resumed": {
+    "modeld": {
+      "daemon": "modeld",
+      "pid": 7404,
+      "vehicle_tx_enabled": false,
+      "engagement_allowed": false,
+      "work_samples": 0,
+      "deadline_misses": 0,
+      "phase": "waiting_for_camera",
+      "simulation": false,
+      "thermal_status": 0,
+      "target_suspended": false,
+      "missing_physical_sensors": [
+        "0",
+        "2"
+      ],
+      "calibrated": false,
+      "valid": false,
+      "blocker": "Distinct narrow and wide rear streams are required",
+      "target_hz": 20,
+      "computed_frames": 0,
+      "recurrent_resets": 1,
+      "p99_stages_ms": {}
+    },
+    "dmonitoringmodeld": {
+      "daemon": "dmonitoringmodeld",
+      "pid": 7405,
+      "vehicle_tx_enabled": false,
+      "engagement_allowed": false,
+      "work_samples": 0,
+      "deadline_misses": 0,
+      "phase": "waiting_for_camera",
+      "simulation": false,
+      "thermal_status": 0,
+      "target_suspended": false,
+      "missing_physical_sensors": [
+        "1"
+      ],
+      "calibrated": false,
+      "valid": false,
+      "blocker": "Driver camera unavailable",
+      "target_hz": 20,
+      "computed_frames": 0,
+      "recurrent_resets": 1,
+      "p99_stages_ms": {}
+    }
+  },
+  "live_validator": {
+    "status": "failed",
+    "error": "RuntimeError: Unsafe or unavailable Android thermal state: 4",
+    "cleanup": {
+      "processes": [],
+      "camera_provider_processes": [
+        "350 android.hardware.camera.provider.ranchu",
+        "353 android.hardware.camera.provider@2.7-service-google",
+        "425 cameraserver"
+      ],
+      "camera_owned": false,
+      "thermal_status": 4,
+      "skin_c": 30.8,
+      "thermal_override": true
+    },
+    "elapsed_s": 0.017971041990676895
+  },
+  "new_activity_stop": {
+    "vehicle_tx_enabled": false,
+    "valid": false,
+    "sessions": [
+      {
+        "camera_ids": [
+          "0",
+          "1"
+        ],
+        "width": 1280,
+        "height": 720,
+        "logical_camera": null,
+        "requested_duration_ms": 89953,
+        "startup_order": "open_all_then_configure",
+        "opened_camera_ids": [
+          "0",
+          "1"
+        ],
+        "image_callbacks_drained": true,
+        "camera_close_callbacks_complete": true,
+        "request_template": "record",
+        "stabilization": "disabled when advertised",
+        "sensor_pairs": [
+          {
+            "camera_ids": [
+              "0",
+              "1"
+            ],
+            "overlap_ns": 1935578209,
+            "distinct_sensor_evidence": true,
+            "nearest_skew_p99_ns": 9035583
+          }
+        ],
+        "overlap_ns": 1935578209,
+        "nearest_skew_p99_ns": 9035583,
+        "skew_sampling": "last 4096 timestamps per stream, shared overlap only",
+        "distinct_sensor_evidence": true,
+        "streams": [
+          {
+            "sensor_id": "0",
+            "width": 1280,
+            "height": 720,
+            "image_rotation_applied_degrees": 0,
+            "output_width": 1280,
+            "output_height": 720,
+            "display_degrees_at_session_start": 90,
+            "mirrored": false,
+            "sensor_orientation": 90,
+            "timestamp_source": 1,
+            "intrinsic_calibration": [],
+            "lens_distortion": [],
+            "visionipc_valid": false,
+            "visionipc_stream": 0,
+            "focal_lengths_mm": [
+              3.3
+            ],
+            "frames": 59,
+            "fps": 29.826835922592046,
+            "first_timestamp_ns": 553532885148,
+            "last_timestamp_ns": 555477442732,
+            "timestamp_errors": 0,
+            "changed_frames": 58,
+            "metadata_failures": 0,
+            "uncaptured_requests": 0,
+            "lost_buffers": 0,
+            "physical_metadata_frames": 59,
+            "measured_focal_length_mm": 3.3,
+            "packing_errors": 0,
+            "packing_p99_ns": 418416,
+            "delivery_age_available": true,
+            "delivery_age_p50_ns": -32444176,
+            "delivery_age_p95_ns": -27455345,
+            "delivery_age_p99_ns": -22881948,
+            "delivery_over_100ms": 0,
+            "acquisition_age_p50_ns": -32542927,
+            "acquisition_age_p95_ns": -27706635,
+            "acquisition_age_p99_ns": -22983760,
+            "capture_result_age_p99_ns": 0,
+            "capture_result_timestamp_errors": 59,
+            "delivery_future_timestamps": 59,
+            "clock_sample_columns": "sensor_raw,elapsed_before,monotonic,elapsed_after",
+            "clock_samples_ns": [
+              [
+                553532885148,
+                553500829721,
+                553500829846,
+                553500829888
+              ],
+              [
+                553566957023,
+                553536109346,
+                553536109430,
+                553536109513
+              ],
+              [
+                553600430606,
+                553576187846,
+                553576187971,
+                553576188055
+              ],
+              [
+                553633896523,
+                553602136888,
+                553602137013,
+                553602137096
+              ],
+              [
+                553667391815,
+                553636270388,
+                553636270471,
+                553636270555
+              ],
+              [
+                553700845315,
+                553677962180,
+                553677962263,
+                553677962305
+              ],
+              [
+                553734345065,
+                553701991805,
+                553701991847,
+                553701991930
+              ],
+              [
+                553767810398,
+                553735264347,
+                553735264430,
+                553735264513
+              ],
+              [
+                553801307607,
+                553768792930,
+                553768793013,
+                553768793138
+              ],
+              [
+                553834792148,
+                553804329347,
+                553804329472,
+                553804329555
+              ],
+              [
+                553868203940,
+                553835646430,
+                553835646513,
+                553835646555
+              ],
+              [
+                553901683898,
+                553869058263,
+                553869058347,
+                553869058430
+              ],
+              [
+                553935169732,
+                553902994930,
+                553902995013,
+                553902995055
+              ],
+              [
+                553968602982,
+                553936482180,
+                553936482263,
+                553936482347
+              ],
+              [
+                554002098482,
+                553969486680,
+                553969486763,
+                553969486847
+              ],
+              [
+                554035541482,
+                554002999763,
+                554002999847,
+                554002999930
+              ],
+              [
+                554069240773,
+                554037085097,
+                554037085222,
+                554037085305
+              ],
+              [
+                554102648982,
+                554070045847,
+                554070045930,
+                554070046013
+              ],
+              [
+                554136119273,
+                554104201472,
+                554104201597,
+                554104201638
+              ],
+              [
+                554169682232,
+                554137492847,
+                554137492930,
+                554137493013
+              ],
+              [
+                554203146232,
+                554172454597,
+                554172454680,
+                554172454722
+              ],
+              [
+                554236586273,
+                554204140972,
+                554204141055,
+                554204141138
+              ],
+              [
+                554269991357,
+                554237303013,
+                554237303097,
+                554237303138
+              ],
+              [
+                554303481732,
+                554271194055,
+                554271194138,
+                554271194222
+              ],
+              [
+                554336981732,
+                554304493930,
+                554304494055,
+                554304494138
+              ],
+              [
+                554370411107,
+                554337751847,
+                554337751930,
+                554337752013
+              ],
+              [
+                554403819357,
+                554371326138,
+                554371326222,
+                554371326305
+              ],
+              [
+                554437292815,
+                554405166097,
+                554405166139,
+                554405166222
+              ],
+              [
+                554470782524,
+                554438173680,
+                554438173764,
+                554438173847
+              ],
+              [
+                554504270232,
+                554471710055,
+                554471710139,
+                554471710222
+              ],
+              [
+                554537649024,
+                554505194805,
+                554505194889,
+                554505194972
+              ],
+              [
+                554571066649,
+                554540363597,
+                554540363680,
+                554540363764
+              ],
+              [
+                554604483440,
+                554573112722,
+                554573112805,
+                554573112889
+              ],
+              [
+                554637901857,
+                554607526347,
+                554607526430,
+                554607526514
+              ],
+              [
+                554671325774,
+                554641018014,
+                554641018097,
+                554641018180
+              ],
+              [
+                554704802899,
+                554672955930,
+                554672956014,
+                554672956097
+              ],
+              [
+                554738475357,
+                554708234180,
+                554708234264,
+                554708234347
+              ],
+              [
+                554771963524,
+                554744506680,
+                554744506764,
+                554744506847
+              ],
+              [
+                554805452940,
+                554773788097,
+                554773788180,
+                554773788264
+              ],
+              [
+                554838861524,
+                554806659347,
+                554806659430,
+                554806659514
+              ],
+              [
+                554872278607,
+                554839996680,
+                554839996889,
+                554839996930
+              ],
+              [
+                554905683815,
+                554876405264,
+                554876405514,
+                554876405597
+              ],
+              [
+                554939174274,
+                554906712472,
+                554906712555,
+                554906712597
+              ],
+              [
+                554972736815,
+                554940377305,
+                554940377347,
+                554940377430
+              ],
+              [
+                555006166232,
+                554973631139,
+                554973631222,
+                554973631305
+              ],
+              [
+                555039660440,
+                555006993889,
+                555006993972,
+                555006994014
+              ],
+              [
+                555073083065,
+                555040552514,
+                555040552597,
+                555040552680
+              ],
+              [
+                555106566940,
+                555074009389,
+                555074009472,
+                555074009514
+              ],
+              [
+                555139983316,
+                555107288097,
+                555107288139,
+                555107288222
+              ],
+              [
+                555173391149,
+                555140787431,
+                555140787514,
+                555140787597
+              ],
+              [
+                555206804857,
+                555174182097,
+                555174182181,
+                555174182264
+              ],
+              [
+                555243513274,
+                555210928597,
+                555210928681,
+                555210928764
+              ],
+              [
+                555276931607,
+                555244634764,
+                555244634847,
+                555244634931
+              ],
+              [
+                555310363274,
+                555277889347,
+                555277889431,
+                555277889514
+              ],
+              [
+                555343778274,
+                555311264056,
+                555311264139,
+                555311264222
+              ],
+              [
+                555377193482,
+                555344602222,
+                555344602306,
+                555344602389
+              ],
+              [
+                555410609441,
+                555378078472,
+                555378078597,
+                555378078639
+              ],
+              [
+                555444029357,
+                555411471472,
+                555411471556,
+                555411471597
+              ],
+              [
+                555477442732,
+                555444964764,
+                555444964806,
+                555444964889
+              ]
+            ],
+            "capture_sample_columns": "sensor_raw,frame_number,exposure,duration,elapsed_before,monotonic,elapsed_after",
+            "capture_samples_ns": [
+              [
+                553532885148,
+                0,
+                15000000,
+                33331760,
+                553505936596,
+                553505937138,
+                553505937180
+              ],
+              [
+                553566957023,
+                1,
+                12833294,
+                33331760,
+                553540681013,
+                553540681180,
+                553540681221
+              ],
+              [
+                553600430606,
+                2,
+                11099929,
+                33331760,
+                553586339430,
+                553586339930,
+                553586340013
+              ],
+              [
+                553633896523,
+                3,
+                9713237,
+                33331760,
+                553602543930,
+                553602544096,
+                553602544138
+              ],
+              [
+                553667391815,
+                4,
+                8603884,
+                33331760,
+                553636536096,
+                553636536263,
+                553636536346
+              ],
+              [
+                553700845315,
+                5,
+                7716401,
+                33331760,
+                553678328846,
+                553678328971,
+                553678329055
+              ],
+              [
+                553734345065,
+                6,
+                7006415,
+                33331760,
+                553702303305,
+                553702303430,
+                553702303513
+              ],
+              [
+                553767810398,
+                7,
+                6438426,
+                33331760,
+                553735465097,
+                553735465263,
+                553735465347
+              ],
+              [
+                553801307607,
+                8,
+                5984035,
+                33331760,
+                553768888347,
+                553768888472,
+                553768888555
+              ],
+              [
+                553834792148,
+                9,
+                5620522,
+                33331760,
+                553804589513,
+                553804589638,
+                553804589722
+              ],
+              [
+                553868203940,
+                10,
+                5329711,
+                33331760,
+                553842764430,
+                553842764888,
+                553842765013
+              ],
+              [
+                553901683898,
+                11,
+                5097063,
+                33331760,
+                553872538097,
+                553872538263,
+                553872538347
+              ],
+              [
+                553935169732,
+                12,
+                4910944,
+                33331760,
+                553903198597,
+                553903198722,
+                553903198805
+              ],
+              [
+                553968602982,
+                13,
+                4762049,
+                33331760,
+                553938115930,
+                553938116097,
+                553938116180
+              ],
+              [
+                554002098482,
+                14,
+                4642933,
+                33331760,
+                553969743930,
+                553969744097,
+                553969744138
+              ],
+              [
+                554035541482,
+                15,
+                4547640,
+                33331760,
+                554003240180,
+                554003240305,
+                554003240388
+              ],
+              [
+                554069240773,
+                16,
+                4547640,
+                33331760,
+                554047210805,
+                554047211638,
+                554047211763
+              ],
+              [
+                554102648982,
+                17,
+                4547640,
+                33331760,
+                554070243347,
+                554070243513,
+                554070243597
+              ],
+              [
+                554136119273,
+                18,
+                4547640,
+                33331760,
+                554105755763,
+                554105755972,
+                554105756013
+              ],
+              [
+                554169682232,
+                19,
+                4547640,
+                33331760,
+                554140086597,
+                554140086888,
+                554140086972
+              ],
+              [
+                554203146232,
+                20,
+                4547640,
+                33331760,
+                554173647097,
+                554173647305,
+                554173647388
+              ],
+              [
+                554236586273,
+                21,
+                4547640,
+                33331760,
+                554204295638,
+                554204295847,
+                554204295930
+              ],
+              [
+                554269991357,
+                22,
+                4547640,
+                33331760,
+                554237463763,
+                554237463888,
+                554237463972
+              ],
+              [
+                554303481732,
+                23,
+                4547640,
+                33331760,
+                554272233388,
+                554272233555,
+                554272233722
+              ],
+              [
+                554336981732,
+                24,
+                4547640,
+                33331760,
+                554304721513,
+                554304721638,
+                554304721722
+              ],
+              [
+                554370411107,
+                25,
+                4547640,
+                33331760,
+                554337968597,
+                554337968763,
+                554337968847
+              ],
+              [
+                554403819357,
+                26,
+                4547640,
+                33331760,
+                554372108722,
+                554372108888,
+                554372108972
+              ],
+              [
+                554437292815,
+                27,
+                4547640,
+                33331760,
+                554405249764,
+                554405249889,
+                554405249972
+              ],
+              [
+                554470782524,
+                28,
+                4547640,
+                33331760,
+                554441698347,
+                554441698597,
+                554441698680
+              ],
+              [
+                554504270232,
+                29,
+                4547640,
+                33331760,
+                554471961680,
+                554471961847,
+                554471961930
+              ],
+              [
+                554537649024,
+                30,
+                4547640,
+                33331760,
+                554505608889,
+                554505608972,
+                554505609055
+              ],
+              [
+                554571066649,
+                31,
+                4547640,
+                33331760,
+                554540838805,
+                554540838972,
+                554540839055
+              ],
+              [
+                554604483440,
+                32,
+                4547640,
+                33331760,
+                554573452264,
+                554573452389,
+                554573452472
+              ],
+              [
+                554637901857,
+                33,
+                4547640,
+                33331760,
+                554607756014,
+                554607756180,
+                554607756264
+              ],
+              [
+                554671325774,
+                34,
+                4547640,
+                33331760,
+                554641978430,
+                554641978680,
+                554641978764
+              ],
+              [
+                554704802899,
+                35,
+                4547640,
+                33331760,
+                554675219389,
+                554675219639,
+                554675219722
+              ],
+              [
+                554738475357,
+                36,
+                4547640,
+                33331760,
+                554709134347,
+                554709134555,
+                554709134639
+              ],
+              [
+                554771963524,
+                37,
+                4547640,
+                33331760,
+                554745151597,
+                554745151764,
+                554745151847
+              ],
+              [
+                554805452940,
+                38,
+                4547640,
+                33331760,
+                554773876889,
+                554773877014,
+                554773877055
+              ],
+              [
+                554838861524,
+                39,
+                4547640,
+                33331760,
+                554806976055,
+                554806976222,
+                554806976264
+              ],
+              [
+                554872278607,
+                40,
+                4547640,
+                33331760,
+                554840403972,
+                554840404180,
+                554840404264
+              ],
+              [
+                554905683815,
+                41,
+                4547640,
+                33331760,
+                554877482597,
+                554877482805,
+                554877482847
+              ],
+              [
+                554939174274,
+                42,
+                4547640,
+                33331760,
+                554906791805,
+                554906792097,
+                554906792180
+              ],
+              [
+                554972736815,
+                43,
+                4547640,
+                33331760,
+                554940435597,
+                554940435680,
+                554940435764
+              ],
+              [
+                555006166232,
+                44,
+                4547640,
+                33331760,
+                554973868930,
+                554973869055,
+                554973869097
+              ],
+              [
+                555039660440,
+                45,
+                4547640,
+                33331760,
+                555007207014,
+                555007207180,
+                555007207222
+              ],
+              [
+                555073083065,
+                46,
+                4547640,
+                33331760,
+                555040784680,
+                555040784847,
+                555040784930
+              ],
+              [
+                555106566940,
+                47,
+                4547640,
+                33331760,
+                555074190389,
+                555074190514,
+                555074190597
+              ],
+              [
+                555139983316,
+                48,
+                4547640,
+                33331760,
+                555107359597,
+                555107359681,
+                555107359722
+              ],
+              [
+                555173391149,
+                49,
+                4547640,
+                33331760,
+                555141043431,
+                555141043597,
+                555141043639
+              ],
+              [
+                555206804857,
+                50,
+                4547640,
+                33331760,
+                555174449806,
+                555174449972,
+                555174450014
+              ],
+              [
+                555243513274,
+                51,
+                4547640,
+                33331760,
+                555211322556,
+                555211322722,
+                555211322806
+              ],
+              [
+                555276931607,
+                52,
+                4547640,
+                33331760,
+                555245172056,
+                555245172181,
+                555245172347
+              ],
+              [
+                555310363274,
+                53,
+                4547640,
+                33331760,
+                555278155306,
+                555278155431,
+                555278155514
+              ],
+              [
+                555343778274,
+                54,
+                4547640,
+                33331760,
+                555311562639,
+                555311562806,
+                555311562889
+              ],
+              [
+                555377193482,
+                55,
+                4547640,
+                33331760,
+                555344820847,
+                555344821014,
+                555344821056
+              ],
+              [
+                555410609441,
+                56,
+                4547640,
+                33331760,
+                555378146389,
+                555378146514,
+                555378146556
+              ],
+              [
+                555444029357,
+                57,
+                4547640,
+                33331760,
+                555411865514,
+                555411865681,
+                555411865806
+              ],
+              [
+                555477442732,
+                58,
+                4547640,
+                33331760,
+                555445146389,
+                555445146556,
+                555445146639
+              ]
+            ],
+            "frame_interval_p99_ns": 36708417
+          },
+          {
+            "sensor_id": "1",
+            "width": 1280,
+            "height": 720,
+            "image_rotation_applied_degrees": 0,
+            "output_width": 1280,
+            "output_height": 720,
+            "display_degrees_at_session_start": 90,
+            "mirrored": false,
+            "sensor_orientation": 270,
+            "timestamp_source": 1,
+            "intrinsic_calibration": [
+              3225.7742,
+              3225.7742,
+              960.5043,
+              540.46704,
+              0
+            ],
+            "lens_distortion": [
+              0.08807813,
+              -0.22617353,
+              0.16460505,
+              0,
+              0
+            ],
+            "visionipc_valid": false,
+            "visionipc_stream": 1,
+            "focal_lengths_mm": [
+              4.38
+            ],
+            "frames": 59,
+            "fps": 29.874926415995898,
+            "first_timestamp_ns": 553527035981,
+            "last_timestamp_ns": 555468463357,
+            "timestamp_errors": 0,
+            "changed_frames": 58,
+            "metadata_failures": 0,
+            "uncaptured_requests": 0,
+            "lost_buffers": 0,
+            "physical_metadata_frames": 59,
+            "measured_focal_length_mm": 4.38,
+            "packing_errors": 0,
+            "packing_p99_ns": 320084,
+            "delivery_age_available": true,
+            "delivery_age_p50_ns": -32394657,
+            "delivery_age_p95_ns": -28115906,
+            "delivery_age_p99_ns": -20043948,
+            "delivery_over_100ms": 0,
+            "acquisition_age_p50_ns": -32588260,
+            "acquisition_age_p95_ns": -28246052,
+            "acquisition_age_p99_ns": -20135718,
+            "capture_result_age_p99_ns": 0,
+            "capture_result_timestamp_errors": 59,
+            "delivery_future_timestamps": 59,
+            "clock_sample_columns": "sensor_raw,elapsed_before,monotonic,elapsed_after",
+            "clock_samples_ns": [
+              [
+                553527035981,
+                553496713180,
+                553496713305,
+                553496713388
+              ],
+              [
+                553560452398,
+                553540407596,
+                553540407721,
+                553540407805
+              ],
+              [
+                553594225606,
+                553562334846,
+                553562334930,
+                553562335013
+              ],
+              [
+                553627639606,
+                553595832305,
+                553595832430,
+                553595832471
+              ],
+              [
+                553661155731,
+                553629224971,
+                553629225096,
+                553629225138
+              ],
+              [
+                553694658148,
+                553666541013,
+                553666541096,
+                553666541138
+              ],
+              [
+                553728165940,
+                553697066430,
+                553697066513,
+                553697066555
+              ],
+              [
+                553761607273,
+                553732520472,
+                553732520555,
+                553732520597
+              ],
+              [
+                553795061607,
+                553764827305,
+                553764827430,
+                553764827472
+              ],
+              [
+                553828515898,
+                553797486430,
+                553797486513,
+                553797486555
+              ],
+              [
+                553861928357,
+                553830100263,
+                553830100347,
+                553830100430
+              ],
+              [
+                553896094023,
+                553863893597,
+                553863893680,
+                553863893763
+              ],
+              [
+                553929819898,
+                553897236097,
+                553897236180,
+                553897236263
+              ],
+              [
+                553963234565,
+                553930704638,
+                553930704763,
+                553930704805
+              ],
+              [
+                553996677273,
+                553964407430,
+                553964407763,
+                553964407847
+              ],
+              [
+                554030311648,
+                553997808430,
+                553997808513,
+                553997808555
+              ],
+              [
+                554063741648,
+                554031870763,
+                554031871138,
+                554031871222
+              ],
+              [
+                554097170565,
+                554065899388,
+                554065899472,
+                554065899555
+              ],
+              [
+                554130621315,
+                554097947305,
+                554097947388,
+                554097947472
+              ],
+              [
+                554164041857,
+                554131590013,
+                554131590138,
+                554131590180
+              ],
+              [
+                554197488107,
+                554164832805,
+                554164832888,
+                554164832930
+              ],
+              [
+                554230899898,
+                554198426263,
+                554198426347,
+                554198426430
+              ],
+              [
+                554264353648,
+                554236402388,
+                554236402472,
+                554236402555
+              ],
+              [
+                554297763023,
+                554265288347,
+                554265288430,
+                554265288513
+              ],
+              [
+                554331223982,
+                554299862305,
+                554299862388,
+                554299862472
+              ],
+              [
+                554364647398,
+                554334685680,
+                554334685763,
+                554334685847
+              ],
+              [
+                554398068898,
+                554365874847,
+                554365874888,
+                554365874972
+              ],
+              [
+                554431487440,
+                554398977222,
+                554398977347,
+                554398977430
+              ],
+              [
+                554464912107,
+                554432417930,
+                554432418055,
+                554432418097
+              ],
+              [
+                554498328357,
+                554465878889,
+                554465878972,
+                554465879055
+              ],
+              [
+                554531753940,
+                554499275264,
+                554499275389,
+                554499275430
+              ],
+              [
+                554565180690,
+                554532826305,
+                554532826389,
+                554532826472
+              ],
+              [
+                554598596857,
+                554566241639,
+                554566241764,
+                554566241805
+              ],
+              [
+                554632342774,
+                554599959930,
+                554599960055,
+                554599960097
+              ],
+              [
+                554665783399,
+                554633540930,
+                554633541014,
+                554633541097
+              ],
+              [
+                554699249649,
+                554668307764,
+                554668307847,
+                554668307930
+              ],
+              [
+                554732668857,
+                554700307805,
+                554700307930,
+                554700307972
+              ],
+              [
+                554766536440,
+                554733960805,
+                554733960889,
+                554733960972
+              ],
+              [
+                554799955940,
+                554768146180,
+                554768146305,
+                554768146347
+              ],
+              [
+                554833401607,
+                554800892014,
+                554800892139,
+                554800892222
+              ],
+              [
+                554866825649,
+                554834364722,
+                554834364847,
+                554834364889
+              ],
+              [
+                554900247774,
+                554871537055,
+                554871537305,
+                554871537389
+              ],
+              [
+                554933688815,
+                554901294305,
+                554901294555,
+                554901294639
+              ],
+              [
+                554967106774,
+                554934408347,
+                554934408430,
+                554934408472
+              ],
+              [
+                555000530357,
+                554967874514,
+                554967874597,
+                554967874639
+              ],
+              [
+                555033953649,
+                555001295847,
+                555001295889,
+                555001295972
+              ],
+              [
+                555067378690,
+                555034983055,
+                555034983139,
+                555034983180
+              ],
+              [
+                555100799440,
+                555068275139,
+                555068275180,
+                555068275264
+              ],
+              [
+                555134219357,
+                555101654556,
+                555101654639,
+                555101654722
+              ],
+              [
+                555167642357,
+                555135312306,
+                555135312389,
+                555135312472
+              ],
+              [
+                555201071232,
+                555168526847,
+                555168526931,
+                555168527014
+              ],
+              [
+                555234491607,
+                555202042681,
+                555202042722,
+                555202042806
+              ],
+              [
+                555267907274,
+                555235292931,
+                555235293014,
+                555235293097
+              ],
+              [
+                555301327691,
+                555268808514,
+                555268808556,
+                555268808639
+              ],
+              [
+                555334748982,
+                555302111556,
+                555302111639,
+                555302111722
+              ],
+              [
+                555368188107,
+                555335577806,
+                555335577889,
+                555335577931
+              ],
+              [
+                555401625857,
+                555369039264,
+                555369039306,
+                555369039389
+              ],
+              [
+                555435046107,
+                555402406139,
+                555402406222,
+                555402406306
+              ],
+              [
+                555468463357,
+                555435865847,
+                555435865931,
+                555435866014
+              ]
+            ],
+            "capture_sample_columns": "sensor_raw,frame_number,exposure,duration,elapsed_before,monotonic,elapsed_after",
+            "capture_samples_ns": [
+              [
+                553527035981,
+                0,
+                15000000,
+                33331760,
+                553499741555,
+                553499741763,
+                553499741846
+              ],
+              [
+                553560452398,
+                1,
+                12416647,
+                33331760,
+                553560104388,
+                553560105013,
+                553560105096
+              ],
+              [
+                553594225606,
+                2,
+                10349965,
+                33331760,
+                553568145596,
+                553568145805,
+                553568145888
+              ],
+              [
+                553627639606,
+                3,
+                8696619,
+                33331760,
+                553597798513,
+                553597798888,
+                553597798930
+              ],
+              [
+                553661155731,
+                4,
+                7373942,
+                33331760,
+                553629971346,
+                553629971513,
+                553629971555
+              ],
+              [
+                553694658148,
+                5,
+                6315800,
+                33331760,
+                553677806388,
+                553677807096,
+                553677807180
+              ],
+              [
+                553728165940,
+                6,
+                5469287,
+                33331760,
+                553697301722,
+                553697301847,
+                553697301888
+              ],
+              [
+                553761607273,
+                7,
+                4792076,
+                33331760,
+                553734682013,
+                553734682222,
+                553734682305
+              ],
+              [
+                553795061607,
+                8,
+                4250308,
+                33331760,
+                553768613388,
+                553768613763,
+                553768613847
+              ],
+              [
+                553828515898,
+                9,
+                3816893,
+                33331760,
+                553799872180,
+                553799872347,
+                553799872388
+              ],
+              [
+                553861928357,
+                10,
+                3470161,
+                33331760,
+                553831635930,
+                553831636138,
+                553831636180
+              ],
+              [
+                553896094023,
+                11,
+                3192775,
+                33331760,
+                553864964222,
+                553864964388,
+                553864964430
+              ],
+              [
+                553929819898,
+                12,
+                2970867,
+                33331760,
+                553897521430,
+                553897521638,
+                553897521722
+              ],
+              [
+                553963234565,
+                13,
+                2793340,
+                33331760,
+                553931160930,
+                553931161138,
+                553931161180
+              ],
+              [
+                553996677273,
+                14,
+                2651319,
+                33331760,
+                553964771263,
+                553964771388,
+                553964771430
+              ],
+              [
+                554030311648,
+                15,
+                2537702,
+                33331760,
+                554000135722,
+                554000136013,
+                554000136055
+              ],
+              [
+                554063741648,
+                16,
+                2446808,
+                33331760,
+                554033177013,
+                554033177263,
+                554033177347
+              ],
+              [
+                554097170565,
+                17,
+                2374093,
+                33331760,
+                554066130263,
+                554066130388,
+                554066130472
+              ],
+              [
+                554130621315,
+                18,
+                2315921,
+                33331760,
+                554100297930,
+                554100298180,
+                554100298222
+              ],
+              [
+                554164041857,
+                19,
+                2269383,
+                33331760,
+                554132085222,
+                554132085388,
+                554132085472
+              ],
+              [
+                554197488107,
+                20,
+                2269383,
+                33331760,
+                554165047472,
+                554165047638,
+                554165047680
+              ],
+              [
+                554230899898,
+                21,
+                2269383,
+                33331760,
+                554199029513,
+                554199029722,
+                554199029805
+              ],
+              [
+                554264353648,
+                22,
+                2269383,
+                33331760,
+                554236572847,
+                554236573055,
+                554236573097
+              ],
+              [
+                554297763023,
+                23,
+                2269383,
+                33331760,
+                554266402930,
+                554266403097,
+                554266403138
+              ],
+              [
+                554331223982,
+                24,
+                2269383,
+                33331760,
+                554301678680,
+                554301678972,
+                554301679055
+              ],
+              [
+                554364647398,
+                25,
+                2269383,
+                33331760,
+                554335104763,
+                554335104930,
+                554335105013
+              ],
+              [
+                554398068898,
+                26,
+                2269383,
+                33331760,
+                554365987430,
+                554365987555,
+                554365987597
+              ],
+              [
+                554431487440,
+                27,
+                2269383,
+                33331760,
+                554399436514,
+                554399436722,
+                554399436764
+              ],
+              [
+                554464912107,
+                28,
+                2269383,
+                33331760,
+                554432627722,
+                554432627889,
+                554432627930
+              ],
+              [
+                554498328357,
+                29,
+                2269383,
+                33331760,
+                554466360972,
+                554466361139,
+                554466361180
+              ],
+              [
+                554531753940,
+                30,
+                2269383,
+                33331760,
+                554503200764,
+                554503201097,
+                554503201180
+              ],
+              [
+                554565180690,
+                31,
+                2269383,
+                33331760,
+                554533630847,
+                554533631139,
+                554533631180
+              ],
+              [
+                554598596857,
+                32,
+                2269383,
+                33331760,
+                554567766555,
+                554567766805,
+                554567766847
+              ],
+              [
+                554632342774,
+                33,
+                2269383,
+                33331760,
+                554600269930,
+                554600270097,
+                554600270180
+              ],
+              [
+                554665783399,
+                34,
+                2269383,
+                33331760,
+                554634055930,
+                554634056139,
+                554634056180
+              ],
+              [
+                554699249649,
+                35,
+                2269383,
+                33331760,
+                554668522014,
+                554668522180,
+                554668522222
+              ],
+              [
+                554732668857,
+                36,
+                2269383,
+                33331760,
+                554710191889,
+                554710192139,
+                554710192222
+              ],
+              [
+                554766536440,
+                37,
+                2269383,
+                33331760,
+                554736239930,
+                554736240097,
+                554736240180
+              ],
+              [
+                554799955940,
+                38,
+                2269383,
+                33331760,
+                554769107639,
+                554769107889,
+                554769107930
+              ],
+              [
+                554833401607,
+                39,
+                2269383,
+                33331760,
+                554801297639,
+                554801297764,
+                554801297805
+              ],
+              [
+                554866825649,
+                40,
+                2269383,
+                33331760,
+                554835361139,
+                554835361305,
+                554835361389
+              ],
+              [
+                554900247774,
+                41,
+                2269383,
+                33331760,
+                554872297055,
+                554872297305,
+                554872297389
+              ],
+              [
+                554933688815,
+                42,
+                2269383,
+                33331760,
+                554901726430,
+                554901726597,
+                554901726680
+              ],
+              [
+                554967106774,
+                43,
+                2269383,
+                33331760,
+                554935175389,
+                554935175680,
+                554935175764
+              ],
+              [
+                555000530357,
+                44,
+                2269383,
+                33331760,
+                554968095139,
+                554968095347,
+                554968095430
+              ],
+              [
+                555033953649,
+                45,
+                2269383,
+                33331760,
+                555001663222,
+                555001663430,
+                555001663472
+              ],
+              [
+                555067378690,
+                46,
+                2269383,
+                33331760,
+                555035102889,
+                555035103014,
+                555035103055
+              ],
+              [
+                555100799440,
+                47,
+                2269383,
+                33331760,
+                555070705097,
+                555070705597,
+                555070705680
+              ],
+              [
+                555134219357,
+                48,
+                2269383,
+                33331760,
+                555101811597,
+                555101811681,
+                555101811764
+              ],
+              [
+                555167642357,
+                49,
+                2269383,
+                33331760,
+                555136133056,
+                555136133222,
+                555136133306
+              ],
+              [
+                555201071232,
+                50,
+                2269383,
+                33331760,
+                555168837972,
+                555168838097,
+                555168838181
+              ],
+              [
+                555234491607,
+                51,
+                2269383,
+                33331760,
+                555202361597,
+                555202361722,
+                555202361764
+              ],
+              [
+                555267907274,
+                52,
+                2269383,
+                33331760,
+                555235715431,
+                555235715681,
+                555235715764
+              ],
+              [
+                555301327691,
+                53,
+                2269383,
+                33331760,
+                555269042222,
+                555269042347,
+                555269042431
+              ],
+              [
+                555334748982,
+                54,
+                2269383,
+                33331760,
+                555302422847,
+                555302423014,
+                555302423097
+              ],
+              [
+                555368188107,
+                55,
+                2269383,
+                33331760,
+                555335928306,
+                555335928431,
+                555335928514
+              ],
+              [
+                555401625857,
+                56,
+                2269383,
+                33331760,
+                555369243056,
+                555369243222,
+                555369243264
+              ],
+              [
+                555435046107,
+                57,
+                2269383,
+                33331760,
+                555402709389,
+                555402709514,
+                555402709597
+              ],
+              [
+                555468463357,
+                58,
+                2269383,
+                33331760,
+                555436287431,
+                555436287639,
+                555436287681
+              ]
+            ],
+            "frame_interval_p99_ns": 34165666
+          }
+        ],
+        "elapsed_ms": 2640,
+        "completed_requested_duration": false,
+        "status": "failed",
+        "error": "IllegalStateException: Live camera session stopped"
+      }
+    ],
+    "requested_seconds": 90,
+    "recovery_limit": 3,
+    "started_utc": "2026-11-01T11:46:04.651008Z",
+    "dual_rear": "not requested",
+    "backend": "camera2",
+    "status": "stopped",
+    "recoveries": 0,
+    "thermal_status": 0,
+    "transport_status": "failed",
+    "completed_utc": "2026-11-01T11:46:07.351024Z"
+  },
+  "override_reset": true
+}

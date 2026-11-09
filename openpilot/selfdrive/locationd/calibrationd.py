@@ -275,7 +275,9 @@ def main() -> NoReturn:
     timeout = 0 if sm.frame == -1 else 100
     sm.update(timeout)
 
-    if sm.updated['cameraOdometry']:
+    # Disconnect/fault events can contain an empty invalid odometry struct.
+    # They must withdraw validity without feeding empty vectors to calibration.
+    if sm.updated['cameraOdometry'] and sm.valid['cameraOdometry']:
       calibrator.handle_v_ego(sm['carState'].vEgo)
       new_rpy = calibrator.handle_cam_odom(sm['cameraOdometry'].trans,
                                            sm['cameraOdometry'].rot,

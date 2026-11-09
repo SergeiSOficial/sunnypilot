@@ -1,0 +1,123 @@
+{
+  "candidate": "candidate40",
+  "apk_sha256": "bd42b65a3538b8ad73834e90826eb10a98d8afeacbe9d5aae5877d43a25e30ec",
+  "vehicle_tx_enabled": false,
+  "engagement_allowed": false,
+  "rtol": 0.001,
+  "atol": 0.0001,
+  "models": {
+    "driving_supercombo": {
+      "numerical_status": "passed",
+      "comparisons": 636,
+      "expected_comparisons": 636,
+      "failed_comparisons": 0,
+      "nonexact_outputs": 0,
+      "max_abs_error": 0.0,
+      "unexpected_nonfinite_elements": 0,
+      "sequences": {
+        "seed42": {
+          "passed": true,
+          "frames": 32
+        },
+        "seed7": {
+          "passed": true,
+          "frames": 32
+        },
+        "seed123": {
+          "passed": true,
+          "frames": 32
+        },
+        "camera-replay": {
+          "passed": true,
+          "frames": 60
+        }
+      },
+      "identity": {
+        "name": "driving_supercombo",
+        "backend": "CL",
+        "cpu_fallback": false,
+        "fingerprint": "samsung/q2qxser/q2q:15/AP3A.240905.015.A2/F926BXXSJJZH3:user/release-keys",
+        "sha256": {
+          "model": "5078784511c7bfb22f1546a15532ed6b6ed71ee6c3e83237951ff5b95ca9ce80",
+          "original_references": "610f877bd0f98353a6e7228698ee869d02a5b2976430234b96d097e96e773381",
+          "sequences": "6acb2ec99babfe57b5ec33b601e262ee9f5b4e54a2fd185f2b59e939256ca3d6",
+          "driver": "f64d432f19fd3f2732cd95050b47328e0c84837b7b60376d55fd7a73a6e9dc8c",
+          "apk": "bd42b65a3538b8ad73834e90826eb10a98d8afeacbe9d5aae5877d43a25e30ec",
+          "runner": "033327af15d3950a8d7d6e07b96328061d282a4fc293ea9fd3b3470bba637f94",
+          "host_math": "3622452f60993a67e54cc1d44c04468d424f6d7b9262feb4ed9d9e51ce282b91",
+          "tinygrad": "f71bb58b1d5a9be372ae4395af0452eec720f7ee3b1d396439913feb7029c934",
+          "uops": "f39fefa91b7df95d09f7ed451b3df395a12966db2b3e9608ef4275f34dea2b30",
+          "renderer": "95ef8249bba9dc2baf817b80a00818de72f0b57a639eabbbc6b64bcf9d1ad5e0",
+          "compiler": "22e831fc16d0a75ee922dd9ccbdf3741c519e2ca0cfbff17ca97341baf5baa42"
+        }
+      },
+      "timing": {
+        "compile_ms": 25890.250927,
+        "performance_status": "blocked",
+        "error": "Unsafe or unavailable Android thermal state: 2"
+      },
+      "arithmetic": "reference ordered fma",
+      "source_report": "fold-candidate40-opencl-reference-road.json"
+    },
+    "dmonitoring_model": {
+      "numerical_status": "passed",
+      "comparisons": 159,
+      "expected_comparisons": 159,
+      "failed_comparisons": 0,
+      "nonexact_outputs": 0,
+      "max_abs_error": 0.0,
+      "unexpected_nonfinite_elements": 0,
+      "sequences": {
+        "seed42": {
+          "passed": true,
+          "frames": 32
+        },
+        "seed7": {
+          "passed": true,
+          "frames": 32
+        },
+        "seed123": {
+          "passed": true,
+          "frames": 32
+        },
+        "camera-replay": {
+          "passed": true,
+          "frames": 60
+        }
+      },
+      "identity": {
+        "name": "dmonitoring_model",
+        "backend": "CL",
+        "cpu_fallback": false,
+        "fingerprint": "samsung/q2qxser/q2q:15/AP3A.240905.015.A2/F926BXXSJJZH3:user/release-keys",
+        "sha256": {
+          "model": "30f0326378aea3a8c2a59da73cb4e50c38272bb4fc487c810ebbe6f0daabc7b7",
+          "original_references": "610f877bd0f98353a6e7228698ee869d02a5b2976430234b96d097e96e773381",
+          "sequences": "6acb2ec99babfe57b5ec33b601e262ee9f5b4e54a2fd185f2b59e939256ca3d6",
+          "driver": "f64d432f19fd3f2732cd95050b47328e0c84837b7b60376d55fd7a73a6e9dc8c",
+          "apk": "bd42b65a3538b8ad73834e90826eb10a98d8afeacbe9d5aae5877d43a25e30ec",
+          "runner": "033327af15d3950a8d7d6e07b96328061d282a4fc293ea9fd3b3470bba637f94",
+          "host_math": "3622452f60993a67e54cc1d44c04468d424f6d7b9262feb4ed9d9e51ce282b91",
+          "tinygrad": "f71bb58b1d5a9be372ae4395af0452eec720f7ee3b1d396439913feb7029c934",
+          "uops": "f39fefa91b7df95d09f7ed451b3df395a12966db2b3e9608ef4275f34dea2b30",
+          "renderer": "95ef8249bba9dc2baf817b80a00818de72f0b57a639eabbbc6b64bcf9d1ad5e0",
+          "compiler": "22e831fc16d0a75ee922dd9ccbdf3741c519e2ca0cfbff17ca97341baf5baa42"
+        }
+      },
+      "timing": {
+        "performance_status": "failed",
+        "samples": 100,
+        "compile_ms": 18104.978899,
+        "work_p50_ms": 319.904219,
+        "work_p99_ms": 381.54413361,
+        "work_max_ms": 383.917917,
+        "deadline_misses_50ms": 100
+      },
+      "arithmetic": "reference ordered fma",
+      "source_report": "fold-candidate40-opencl-reference-driver.json"
+    }
+  },
+  "live_backend_qualified": false,
+  "comparisons": 795,
+  "status": "passed"
+}

@@ -1,0 +1,346 @@
+{
+  "diagnostic_only": true,
+  "backend": "NumPy explicit float32/half rounding",
+  "seed": 42,
+  "nodes": {
+    "285": {
+      "name": "fused model/node_linear_2",
+      "samples": 256,
+      "policies": {
+        "float16_1lanes_biasfirstTrue": {
+          "exact": 238,
+          "max_abs_error": 0.002671152353286743,
+          "mismatched": 12
+        },
+        "float16_1lanes_biasfirstFalse": {
+          "exact": 238,
+          "max_abs_error": 0.00590592622756958,
+          "mismatched": 16
+        },
+        "float16_2lanes_biasfirstTrue": {
+          "exact": 238,
+          "max_abs_error": 0.00199967622756958,
+          "mismatched": 15
+        },
+        "float16_2lanes_biasfirstFalse": {
+          "exact": 238,
+          "max_abs_error": 0.00346451997756958,
+          "mismatched": 13
+        },
+        "float16_4lanes_biasfirstTrue": {
+          "exact": 238,
+          "max_abs_error": 0.0017167925834655762,
+          "mismatched": 13
+        },
+        "float16_4lanes_biasfirstFalse": {
+          "exact": 238,
+          "max_abs_error": 0.0016304254531860352,
+          "mismatched": 10
+        },
+        "float16_8lanes_biasfirstTrue": {
+          "exact": 238,
+          "max_abs_error": 0.0010992884635925293,
+          "mismatched": 11
+        },
+        "float16_8lanes_biasfirstFalse": {
+          "exact": 238,
+          "max_abs_error": 0.0007180273532867432,
+          "mismatched": 11
+        },
+        "float16_16lanes_biasfirstTrue": {
+          "exact": 238,
+          "max_abs_error": 0.0014935731887817383,
+          "mismatched": 11
+        },
+        "float16_16lanes_biasfirstFalse": {
+          "exact": 238,
+          "max_abs_error": 0.0008333921432495117,
+          "mismatched": 13
+        },
+        "float32_1lanes_biasfirstTrue": {
+          "exact": 238,
+          "max_abs_error": 4.76837158203125e-07,
+          "mismatched": 0
+        },
+        "float32_1lanes_biasfirstFalse": {
+          "exact": 256,
+          "max_abs_error": 0.0,
+          "mismatched": 0
+        },
+        "float32_2lanes_biasfirstTrue": {
+          "exact": 238,
+          "max_abs_error": 5.960464477539062e-07,
+          "mismatched": 0
+        },
+        "float32_2lanes_biasfirstFalse": {
+          "exact": 238,
+          "max_abs_error": 4.76837158203125e-07,
+          "mismatched": 0
+        },
+        "float32_4lanes_biasfirstTrue": {
+          "exact": 238,
+          "max_abs_error": 4.172325134277344e-07,
+          "mismatched": 0
+        },
+        "float32_4lanes_biasfirstFalse": {
+          "exact": 240,
+          "max_abs_error": 3.5762786865234375e-07,
+          "mismatched": 0
+        },
+        "float32_8lanes_biasfirstTrue": {
+          "exact": 238,
+          "max_abs_error": 4.76837158203125e-07,
+          "mismatched": 0
+        },
+        "float32_8lanes_biasfirstFalse": {
+          "exact": 239,
+          "max_abs_error": 4.172325134277344e-07,
+          "mismatched": 0
+        },
+        "float32_16lanes_biasfirstTrue": {
+          "exact": 238,
+          "max_abs_error": 5.364418029785156e-07,
+          "mismatched": 0
+        },
+        "float32_16lanes_biasfirstFalse": {
+          "exact": 239,
+          "max_abs_error": 4.76837158203125e-07,
+          "mismatched": 0
+        }
+      },
+      "best": [
+        "float32_1lanes_biasfirstFalse",
+        "float32_4lanes_biasfirstFalse",
+        "float32_8lanes_biasfirstFalse",
+        "float32_16lanes_biasfirstFalse",
+        "float32_4lanes_biasfirstTrue"
+      ]
+    },
+    "429": {
+      "name": "model/p_node_MatMul_13/MatMulAddFusion",
+      "samples": 256,
+      "policies": {
+        "float16_1lanes_biasfirstTrue": {
+          "exact": 226,
+          "max_abs_error": 0.002197265625,
+          "mismatched": 22
+        },
+        "float16_1lanes_biasfirstFalse": {
+          "exact": 225,
+          "max_abs_error": 0.001953125,
+          "mismatched": 20
+        },
+        "float16_2lanes_biasfirstTrue": {
+          "exact": 226,
+          "max_abs_error": 0.001220703125,
+          "mismatched": 14
+        },
+        "float16_2lanes_biasfirstFalse": {
+          "exact": 227,
+          "max_abs_error": 0.0013427734375,
+          "mismatched": 13
+        },
+        "float16_4lanes_biasfirstTrue": {
+          "exact": 229,
+          "max_abs_error": 0.000732421875,
+          "mismatched": 13
+        },
+        "float16_4lanes_biasfirstFalse": {
+          "exact": 228,
+          "max_abs_error": 0.000732421875,
+          "mismatched": 7
+        },
+        "float16_8lanes_biasfirstTrue": {
+          "exact": 231,
+          "max_abs_error": 0.00048828125,
+          "mismatched": 7
+        },
+        "float16_8lanes_biasfirstFalse": {
+          "exact": 231,
+          "max_abs_error": 0.00048828125,
+          "mismatched": 8
+        },
+        "float16_16lanes_biasfirstTrue": {
+          "exact": 236,
+          "max_abs_error": 0.000244140625,
+          "mismatched": 2
+        },
+        "float16_16lanes_biasfirstFalse": {
+          "exact": 237,
+          "max_abs_error": 0.00048828125,
+          "mismatched": 4
+        },
+        "float32_1lanes_biasfirstTrue": {
+          "exact": 256,
+          "max_abs_error": 0.0,
+          "mismatched": 0
+        },
+        "float32_1lanes_biasfirstFalse": {
+          "exact": 256,
+          "max_abs_error": 0.0,
+          "mismatched": 0
+        },
+        "float32_2lanes_biasfirstTrue": {
+          "exact": 256,
+          "max_abs_error": 0.0,
+          "mismatched": 0
+        },
+        "float32_2lanes_biasfirstFalse": {
+          "exact": 256,
+          "max_abs_error": 0.0,
+          "mismatched": 0
+        },
+        "float32_4lanes_biasfirstTrue": {
+          "exact": 256,
+          "max_abs_error": 0.0,
+          "mismatched": 0
+        },
+        "float32_4lanes_biasfirstFalse": {
+          "exact": 256,
+          "max_abs_error": 0.0,
+          "mismatched": 0
+        },
+        "float32_8lanes_biasfirstTrue": {
+          "exact": 256,
+          "max_abs_error": 0.0,
+          "mismatched": 0
+        },
+        "float32_8lanes_biasfirstFalse": {
+          "exact": 256,
+          "max_abs_error": 0.0,
+          "mismatched": 0
+        },
+        "float32_16lanes_biasfirstTrue": {
+          "exact": 256,
+          "max_abs_error": 0.0,
+          "mismatched": 0
+        },
+        "float32_16lanes_biasfirstFalse": {
+          "exact": 256,
+          "max_abs_error": 0.0,
+          "mismatched": 0
+        }
+      },
+      "best": [
+        "float32_1lanes_biasfirstTrue",
+        "float32_1lanes_biasfirstFalse",
+        "float32_2lanes_biasfirstTrue",
+        "float32_2lanes_biasfirstFalse",
+        "float32_4lanes_biasfirstTrue"
+      ]
+    },
+    "435": {
+      "name": "model/p_node_MatMul_16/MatMulAddFusion",
+      "samples": 256,
+      "policies": {
+        "float16_1lanes_biasfirstTrue": {
+          "exact": 16,
+          "max_abs_error": 0.0078125,
+          "mismatched": 134
+        },
+        "float16_1lanes_biasfirstFalse": {
+          "exact": 23,
+          "max_abs_error": 0.0390625,
+          "mismatched": 125
+        },
+        "float16_2lanes_biasfirstTrue": {
+          "exact": 15,
+          "max_abs_error": 0.0234375,
+          "mismatched": 109
+        },
+        "float16_2lanes_biasfirstFalse": {
+          "exact": 25,
+          "max_abs_error": 0.0078125,
+          "mismatched": 105
+        },
+        "float16_4lanes_biasfirstTrue": {
+          "exact": 50,
+          "max_abs_error": 0.015625,
+          "mismatched": 72
+        },
+        "float16_4lanes_biasfirstFalse": {
+          "exact": 50,
+          "max_abs_error": 0.001953125,
+          "mismatched": 44
+        },
+        "float16_8lanes_biasfirstTrue": {
+          "exact": 73,
+          "max_abs_error": 0.001220703125,
+          "mismatched": 40
+        },
+        "float16_8lanes_biasfirstFalse": {
+          "exact": 71,
+          "max_abs_error": 0.0078125,
+          "mismatched": 37
+        },
+        "float16_16lanes_biasfirstTrue": {
+          "exact": 79,
+          "max_abs_error": 0.0009765625,
+          "mismatched": 17
+        },
+        "float16_16lanes_biasfirstFalse": {
+          "exact": 84,
+          "max_abs_error": 0.0078125,
+          "mismatched": 12
+        },
+        "float32_1lanes_biasfirstTrue": {
+          "exact": 256,
+          "max_abs_error": 0.0,
+          "mismatched": 0
+        },
+        "float32_1lanes_biasfirstFalse": {
+          "exact": 256,
+          "max_abs_error": 0.0,
+          "mismatched": 0
+        },
+        "float32_2lanes_biasfirstTrue": {
+          "exact": 256,
+          "max_abs_error": 0.0,
+          "mismatched": 0
+        },
+        "float32_2lanes_biasfirstFalse": {
+          "exact": 255,
+          "max_abs_error": 2.384185791015625e-07,
+          "mismatched": 0
+        },
+        "float32_4lanes_biasfirstTrue": {
+          "exact": 255,
+          "max_abs_error": 2.384185791015625e-07,
+          "mismatched": 0
+        },
+        "float32_4lanes_biasfirstFalse": {
+          "exact": 255,
+          "max_abs_error": 2.384185791015625e-07,
+          "mismatched": 0
+        },
+        "float32_8lanes_biasfirstTrue": {
+          "exact": 255,
+          "max_abs_error": 2.384185791015625e-07,
+          "mismatched": 0
+        },
+        "float32_8lanes_biasfirstFalse": {
+          "exact": 255,
+          "max_abs_error": 2.384185791015625e-07,
+          "mismatched": 0
+        },
+        "float32_16lanes_biasfirstTrue": {
+          "exact": 255,
+          "max_abs_error": 2.384185791015625e-07,
+          "mismatched": 0
+        },
+        "float32_16lanes_biasfirstFalse": {
+          "exact": 255,
+          "max_abs_error": 2.384185791015625e-07,
+          "mismatched": 0
+        }
+      },
+      "best": [
+        "float32_1lanes_biasfirstTrue",
+        "float32_1lanes_biasfirstFalse",
+        "float32_2lanes_biasfirstTrue",
+        "float32_2lanes_biasfirstFalse",
+        "float32_4lanes_biasfirstTrue"
+      ]
+    }
+  }
+}

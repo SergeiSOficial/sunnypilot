@@ -17,7 +17,7 @@ import time
 from openpilot.tools.sim.lib.android_protocol import INBOUND, OUTBOUND, receive, send
 
 
-def connect(port, timeout=30):
+def connect(port, timeout=30, full_chain=False):
   """ADB forwarding can open before the Android worker is listening."""
   deadline = time.monotonic() + timeout
   while True:
@@ -25,10 +25,12 @@ def connect(port, timeout=30):
     try:
       connection = socket.create_connection(("127.0.0.1", port), timeout=5)
       connection.settimeout(5)
-      send(connection, {"op": "hello", "simulation": True})
+      send(connection, {"op": "hello", "simulation": True, "full_chain": full_chain})
       hello = receive(connection)
       if hello.get("simulation") is not True or hello.get("vehicle_tx_enabled") is not False or hello.get("factory_acc") is not True:
         raise ValueError("Android did not confirm isolated, stock-ACC simulation")
+      if bool(hello.get("full_chain", False)) != full_chain:
+        raise ValueError("Android process-chain mode differs from requested test")
       return connection, hello
     except (OSError, EOFError):
       if connection is not None:

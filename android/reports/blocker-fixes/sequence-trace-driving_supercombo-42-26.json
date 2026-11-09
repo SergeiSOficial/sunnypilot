@@ -1,0 +1,1754 @@
+{
+  "scope": "diagnostic sequence operator trace; not device qualification",
+  "model": "driving_supercombo",
+  "seed": 42,
+  "frame": 26,
+  "seconds": 20.00148695902317,
+  "source_sha256": {
+    "fold3_opencl": "8a1acf64995b13888203a4c3731cf160617aad716be22296a5a7fb5e6b9a7a56",
+    "fold3_host_math": "ead1a988e3354d8dd7e776a163a41a0a80e212f4969ea02171a9091615db71b4"
+  },
+  "first_difference": {
+    "index": 296,
+    "operator": "ReduceL2",
+    "name": "model/node_linalg_vector_norm",
+    "output": "InsertedPrecisionFreeCast_model/linalg_vector_norm",
+    "passed": true,
+    "finite": true,
+    "shape": [
+      1,
+      1
+    ],
+    "dtype": "float32",
+    "expected_nonfinite_elements": 0,
+    "unexpected_nonfinite_elements": 0,
+    "exact": false,
+    "max_abs_error": 6.103515625e-05,
+    "mismatched_elements": 0
+  },
+  "first_divergence": {
+    "index": 471,
+    "operator": "Add",
+    "name": "model/p_node_add_3",
+    "output": "InsertedPrecisionFreeCast_model/p_add_3",
+    "passed": false,
+    "finite": true,
+    "shape": [
+      1,
+      9,
+      512
+    ],
+    "dtype": "float32",
+    "expected_nonfinite_elements": 0,
+    "unexpected_nonfinite_elements": 0,
+    "exact": false,
+    "max_abs_error": 0.000244140625,
+    "mismatched_elements": 1
+  },
+  "different_operators": [
+    {
+      "index": 296,
+      "operator": "ReduceL2",
+      "name": "model/node_linalg_vector_norm",
+      "output": "InsertedPrecisionFreeCast_model/linalg_vector_norm",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        1
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 6.103515625e-05,
+      "mismatched_elements": 0
+    },
+    {
+      "index": 330,
+      "operator": "ReduceL2",
+      "name": "model/node_linalg_vector_norm_1",
+      "output": "InsertedPrecisionFreeCast_model/linalg_vector_norm_1",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        1
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 6.103515625e-05,
+      "mismatched_elements": 0
+    },
+    {
+      "index": 464,
+      "operator": "MatMul",
+      "name": "model/p_node_matmul_1",
+      "output": "model/p_matmul_1",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        8,
+        9,
+        64
+      ],
+      "dtype": "float16",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 1.52587890625e-05,
+      "mismatched_elements": 0
+    },
+    {
+      "index": 465,
+      "operator": "Transpose",
+      "name": "model/p_node_transpose_1",
+      "output": "model/p_transpose_1",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        9,
+        8,
+        64
+      ],
+      "dtype": "float16",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 1.52587890625e-05,
+      "mismatched_elements": 0
+    },
+    {
+      "index": 466,
+      "operator": "Reshape",
+      "name": "model/p_node_view_2",
+      "output": "model/p_view_2",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        9,
+        512
+      ],
+      "dtype": "float16",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 1.52587890625e-05,
+      "mismatched_elements": 0
+    },
+    {
+      "index": 467,
+      "operator": "Reshape",
+      "name": "gemm_input_reshape_token_14",
+      "output": "gemm_input_reshape_arg_token_13",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        9,
+        512
+      ],
+      "dtype": "float16",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 1.52587890625e-05,
+      "mismatched_elements": 0
+    },
+    {
+      "index": 468,
+      "operator": "Gemm",
+      "name": "model/p_node_MatMul_56/MatMulAddFusion",
+      "output": "gemm_output_reshape_arg_token_16",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        9,
+        512
+      ],
+      "dtype": "float16",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.000244140625,
+      "mismatched_elements": 0
+    },
+    {
+      "index": 469,
+      "operator": "Reshape",
+      "name": "gemm_output_reshape_token_17",
+      "output": "model/p_linear_7",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        9,
+        512
+      ],
+      "dtype": "float16",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.000244140625,
+      "mismatched_elements": 0
+    },
+    {
+      "index": 470,
+      "operator": "Cast",
+      "name": "InsertedPrecisionFreeCast_model/p_linear_7",
+      "output": "InsertedPrecisionFreeCast_model/p_linear_7",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        9,
+        512
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.000244140625,
+      "mismatched_elements": 0
+    },
+    {
+      "index": 471,
+      "operator": "Add",
+      "name": "model/p_node_add_3",
+      "output": "InsertedPrecisionFreeCast_model/p_add_3",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        9,
+        512
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.000244140625,
+      "mismatched_elements": 1
+    },
+    {
+      "index": 472,
+      "operator": "Cast",
+      "name": "InsertedPrecisionFreeCast_model/p_add_3",
+      "output": "model/p_add_3",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        9,
+        512
+      ],
+      "dtype": "float16",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.0001220703125,
+      "mismatched_elements": 1
+    },
+    {
+      "index": 473,
+      "operator": "LayerNormalization",
+      "name": "model/p_node_layer_norm_1",
+      "output": "model/p_layer_norm_1",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        9,
+        512
+      ],
+      "dtype": "float16",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 1.52587890625e-05,
+      "mismatched_elements": 0
+    },
+    {
+      "index": 474,
+      "operator": "Reshape",
+      "name": "gemm_input_reshape_token_20",
+      "output": "gemm_input_reshape_arg_token_19",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        9,
+        512
+      ],
+      "dtype": "float16",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 1.52587890625e-05,
+      "mismatched_elements": 0
+    },
+    {
+      "index": 475,
+      "operator": "Gemm",
+      "name": "model/p_node_MatMul_58/MatMulAddFusion",
+      "output": "gemm_output_reshape_arg_token_22",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        9,
+        2048
+      ],
+      "dtype": "float16",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.000244140625,
+      "mismatched_elements": 0
+    },
+    {
+      "index": 476,
+      "operator": "Reshape",
+      "name": "gemm_output_reshape_token_23",
+      "output": "model/p_linear_8",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        9,
+        2048
+      ],
+      "dtype": "float16",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.000244140625,
+      "mismatched_elements": 0
+    },
+    {
+      "index": 477,
+      "operator": "Cast",
+      "name": "InsertedPrecisionFreeCast_model/p_linear_8",
+      "output": "InsertedPrecisionFreeCast_model/p_linear_8",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        9,
+        2048
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.000244140625,
+      "mismatched_elements": 0
+    },
+    {
+      "index": 478,
+      "operator": "Mul",
+      "name": "",
+      "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_58_MultX",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        9,
+        2048
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.0001220703125,
+      "mismatched_elements": 0
+    },
+    {
+      "index": 479,
+      "operator": "Pow",
+      "name": "",
+      "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_58_XCubed",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        9,
+        2048
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 5.89955598115921e-05,
+      "mismatched_elements": 0
+    },
+    {
+      "index": 480,
+      "operator": "Mul",
+      "name": "",
+      "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_58_XCubedC0",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        9,
+        2048
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 2.637971192598343e-06,
+      "mismatched_elements": 0
+    },
+    {
+      "index": 481,
+      "operator": "Sum",
+      "name": "",
+      "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_58_XC0XCubed",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        9,
+        2048
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.0002467930316925049,
+      "mismatched_elements": 0
+    },
+    {
+      "index": 483,
+      "operator": "Mul",
+      "name": "",
+      "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_58_TanhInput",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        9,
+        2048
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.00019691884517669678,
+      "mismatched_elements": 0
+    },
+    {
+      "index": 484,
+      "operator": "Tanh",
+      "name": "",
+      "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_58_ErfApprox",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        9,
+        2048
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.00018709897994995117,
+      "mismatched_elements": 0
+    },
+    {
+      "index": 485,
+      "operator": "Sum",
+      "name": "",
+      "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_58_PhiApprox",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        9,
+        2048
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.00018715858459472656,
+      "mismatched_elements": 0
+    },
+    {
+      "index": 486,
+      "operator": "Mul",
+      "name": "",
+      "output": "InsertedPrecisionFreeCast_model/p_gelu",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        9,
+        2048
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 7.399171590805054e-05,
+      "mismatched_elements": 0
+    },
+    {
+      "index": 487,
+      "operator": "Cast",
+      "name": "InsertedPrecisionFreeCast_model/p_gelu",
+      "output": "model/p_gelu",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        9,
+        2048
+      ],
+      "dtype": "float16",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 6.103515625e-05,
+      "mismatched_elements": 0
+    },
+    {
+      "index": 488,
+      "operator": "Reshape",
+      "name": "gemm_input_reshape_token_26",
+      "output": "gemm_input_reshape_arg_token_25",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        9,
+        2048
+      ],
+      "dtype": "float16",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 6.103515625e-05,
+      "mismatched_elements": 0
+    },
+    {
+      "index": 489,
+      "operator": "Gemm",
+      "name": "model/p_node_MatMul_60/MatMulAddFusion",
+      "output": "gemm_output_reshape_arg_token_28",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        9,
+        512
+      ],
+      "dtype": "float16",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.00048828125,
+      "mismatched_elements": 0
+    },
+    {
+      "index": 490,
+      "operator": "Reshape",
+      "name": "gemm_output_reshape_token_29",
+      "output": "model/p_linear_9",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        9,
+        512
+      ],
+      "dtype": "float16",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.00048828125,
+      "mismatched_elements": 0
+    },
+    {
+      "index": 491,
+      "operator": "Cast",
+      "name": "InsertedPrecisionFreeCast_model/p_linear_9",
+      "output": "InsertedPrecisionFreeCast_model/p_linear_9",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        9,
+        512
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.00048828125,
+      "mismatched_elements": 0
+    },
+    {
+      "index": 492,
+      "operator": "Add",
+      "name": "model/p_node_add_4",
+      "output": "InsertedPrecisionFreeCast_model/p_add_4",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        9,
+        512
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.00048828125,
+      "mismatched_elements": 0
+    },
+    {
+      "index": 493,
+      "operator": "Cast",
+      "name": "InsertedPrecisionFreeCast_model/p_add_4",
+      "output": "model/p_add_4",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        9,
+        512
+      ],
+      "dtype": "float16",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.00048828125,
+      "mismatched_elements": 0
+    },
+    {
+      "index": 494,
+      "operator": "Gather",
+      "name": "model/p_node_select",
+      "output": "model/p_select",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        512
+      ],
+      "dtype": "float16",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.00048828125,
+      "mismatched_elements": 0
+    },
+    {
+      "index": 495,
+      "operator": "Cast",
+      "name": "InsertedPrecisionFreeCast_model/p_select",
+      "output": "InsertedPrecisionFreeCast_model/p_select",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        512
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.00048828125,
+      "mismatched_elements": 0
+    },
+    {
+      "index": 496,
+      "operator": "Gemm",
+      "name": "model/p_node_linear_10",
+      "output": "model/p_linear_10",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        1024
+      ],
+      "dtype": "float16",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.001953125,
+      "mismatched_elements": 6
+    },
+    {
+      "index": 497,
+      "operator": "Cast",
+      "name": "InsertedPrecisionFreeCast_model/p_linear_10",
+      "output": "InsertedPrecisionFreeCast_model/p_linear_10",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        1024
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.001953125,
+      "mismatched_elements": 6
+    },
+    {
+      "index": 498,
+      "operator": "Relu",
+      "name": "model/p_node_relu",
+      "output": "InsertedPrecisionFreeCast_model/p_relu",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        1024
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.001953125,
+      "mismatched_elements": 1
+    },
+    {
+      "index": 499,
+      "operator": "Gemm",
+      "name": "model/p_node_linear_11",
+      "output": "InsertedPrecisionFreeCast_model/p_linear_11",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        512
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.000873565673828125,
+      "mismatched_elements": 83
+    },
+    {
+      "index": 500,
+      "operator": "Add",
+      "name": "model/p_node_add_5",
+      "output": "InsertedPrecisionFreeCast_model/p_add_5",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        512
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.0008997917175292969,
+      "mismatched_elements": 36
+    },
+    {
+      "index": 501,
+      "operator": "Relu",
+      "name": "model/p_node_relu_1",
+      "output": "InsertedPrecisionFreeCast_model/p_relu_1",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        512
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.0008997917175292969,
+      "mismatched_elements": 19
+    },
+    {
+      "index": 502,
+      "operator": "FusedGemm",
+      "name": "fused model/p_node_linear_12",
+      "output": "InsertedPrecisionFreeCast_model/p_relu_2",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        1024
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.0005202293395996094,
+      "mismatched_elements": 31
+    },
+    {
+      "index": 503,
+      "operator": "Gemm",
+      "name": "model/p_node_linear_13",
+      "output": "InsertedPrecisionFreeCast_model/p_linear_13",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        512
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.00036656856536865234,
+      "mismatched_elements": 20
+    },
+    {
+      "index": 504,
+      "operator": "Add",
+      "name": "model/p_node_add_6",
+      "output": "InsertedPrecisionFreeCast_model/p_add_6",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        512
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.0009529590606689453,
+      "mismatched_elements": 26
+    },
+    {
+      "index": 505,
+      "operator": "Relu",
+      "name": "model/p_node_relu_3",
+      "output": "InsertedPrecisionFreeCast_model/p_relu_3",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        512
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.0009529590606689453,
+      "mismatched_elements": 22
+    },
+    {
+      "index": 506,
+      "operator": "FusedGemm",
+      "name": "fused model/p_node_linear_14",
+      "output": "InsertedPrecisionFreeCast_model/p_relu_4",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        256
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.0017590522766113281,
+      "mismatched_elements": 12
+    },
+    {
+      "index": 507,
+      "operator": "FusedGemm",
+      "name": "fused model/p_node_linear_16",
+      "output": "InsertedPrecisionFreeCast_model/p_relu_6",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        256
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.0018759369850158691,
+      "mismatched_elements": 13
+    },
+    {
+      "index": 508,
+      "operator": "Gemm",
+      "name": "model/p_node_linear_17",
+      "output": "InsertedPrecisionFreeCast_model/p_linear_17",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        256
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.0030552148818969727,
+      "mismatched_elements": 31
+    },
+    {
+      "index": 509,
+      "operator": "Add",
+      "name": "model/p_node_add_7",
+      "output": "InsertedPrecisionFreeCast_model/p_add_7",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        256
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.0030465126037597656,
+      "mismatched_elements": 36
+    },
+    {
+      "index": 510,
+      "operator": "Relu",
+      "name": "model/p_node_relu_7",
+      "output": "InsertedPrecisionFreeCast_model/p_relu_7",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        256
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.0030465126037597656,
+      "mismatched_elements": 22
+    },
+    {
+      "index": 511,
+      "operator": "Gemm",
+      "name": "model/p_node_linear_20",
+      "output": "InsertedPrecisionFreeCast_model/p_linear_20",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        990
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.013175606727600098,
+      "mismatched_elements": 176
+    },
+    {
+      "index": 512,
+      "operator": "Mul",
+      "name": "model/p_node_mul_1",
+      "output": "InsertedPrecisionFreeCast_model/p_mul_1",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        990
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.02135467529296875,
+      "mismatched_elements": 72
+    },
+    {
+      "index": 513,
+      "operator": "Cast",
+      "name": "InsertedPrecisionFreeCast_model/p_mul_1",
+      "output": "model/p_mul_1",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        990
+      ],
+      "dtype": "float16",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.03125,
+      "mismatched_elements": 74
+    },
+    {
+      "index": 514,
+      "operator": "FusedGemm",
+      "name": "fused model/p_node_linear_15",
+      "output": "InsertedPrecisionFreeCast_model/p_relu_5",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        32
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.0014326274394989014,
+      "mismatched_elements": 2
+    },
+    {
+      "index": 515,
+      "operator": "FusedGemm",
+      "name": "fused model/p_node_linear_18",
+      "output": "InsertedPrecisionFreeCast_model/p_relu_8",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        32
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.000578761100769043,
+      "mismatched_elements": 0
+    },
+    {
+      "index": 516,
+      "operator": "Gemm",
+      "name": "model/p_node_linear_19",
+      "output": "InsertedPrecisionFreeCast_model/p_linear_19",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        32
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.0006178319454193115,
+      "mismatched_elements": 1
+    },
+    {
+      "index": 517,
+      "operator": "Add",
+      "name": "model/p_node_add_8",
+      "output": "InsertedPrecisionFreeCast_model/p_add_8",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        32
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.0016335248947143555,
+      "mismatched_elements": 1
+    },
+    {
+      "index": 518,
+      "operator": "Relu",
+      "name": "model/p_node_relu_9",
+      "output": "InsertedPrecisionFreeCast_model/p_relu_9",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        32
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.0016335248947143555,
+      "mismatched_elements": 1
+    },
+    {
+      "index": 519,
+      "operator": "Cast",
+      "name": "InsertedPrecisionFreeCast_model/p_relu_9",
+      "output": "model/p_relu_9",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        32
+      ],
+      "dtype": "float16",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.001953125,
+      "mismatched_elements": 1
+    },
+    {
+      "index": 520,
+      "operator": "Gemm",
+      "name": "model/p_node_linear_21",
+      "output": "model/p_linear_21",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        8
+      ],
+      "dtype": "float16",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.015625,
+      "mismatched_elements": 0
+    },
+    {
+      "index": 521,
+      "operator": "Concat",
+      "name": "model/p_node_cat",
+      "output": "model/p_outputs",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        1000
+      ],
+      "dtype": "float16",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.03125,
+      "mismatched_elements": 74
+    },
+    {
+      "index": 522,
+      "operator": "Concat",
+      "name": "",
+      "output": "_symbolic",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        2576
+      ],
+      "dtype": "float16",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.03125,
+      "mismatched_elements": 74
+    }
+  ],
+  "failed_operators": [
+    {
+      "index": 471,
+      "operator": "Add",
+      "name": "model/p_node_add_3",
+      "output": "InsertedPrecisionFreeCast_model/p_add_3",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        9,
+        512
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.000244140625,
+      "mismatched_elements": 1
+    },
+    {
+      "index": 472,
+      "operator": "Cast",
+      "name": "InsertedPrecisionFreeCast_model/p_add_3",
+      "output": "model/p_add_3",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        9,
+        512
+      ],
+      "dtype": "float16",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.0001220703125,
+      "mismatched_elements": 1
+    },
+    {
+      "index": 496,
+      "operator": "Gemm",
+      "name": "model/p_node_linear_10",
+      "output": "model/p_linear_10",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        1024
+      ],
+      "dtype": "float16",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.001953125,
+      "mismatched_elements": 6
+    },
+    {
+      "index": 497,
+      "operator": "Cast",
+      "name": "InsertedPrecisionFreeCast_model/p_linear_10",
+      "output": "InsertedPrecisionFreeCast_model/p_linear_10",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        1024
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.001953125,
+      "mismatched_elements": 6
+    },
+    {
+      "index": 498,
+      "operator": "Relu",
+      "name": "model/p_node_relu",
+      "output": "InsertedPrecisionFreeCast_model/p_relu",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        1024
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.001953125,
+      "mismatched_elements": 1
+    },
+    {
+      "index": 499,
+      "operator": "Gemm",
+      "name": "model/p_node_linear_11",
+      "output": "InsertedPrecisionFreeCast_model/p_linear_11",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        512
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.000873565673828125,
+      "mismatched_elements": 83
+    },
+    {
+      "index": 500,
+      "operator": "Add",
+      "name": "model/p_node_add_5",
+      "output": "InsertedPrecisionFreeCast_model/p_add_5",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        512
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.0008997917175292969,
+      "mismatched_elements": 36
+    },
+    {
+      "index": 501,
+      "operator": "Relu",
+      "name": "model/p_node_relu_1",
+      "output": "InsertedPrecisionFreeCast_model/p_relu_1",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        512
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.0008997917175292969,
+      "mismatched_elements": 19
+    },
+    {
+      "index": 502,
+      "operator": "FusedGemm",
+      "name": "fused model/p_node_linear_12",
+      "output": "InsertedPrecisionFreeCast_model/p_relu_2",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        1024
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.0005202293395996094,
+      "mismatched_elements": 31
+    },
+    {
+      "index": 503,
+      "operator": "Gemm",
+      "name": "model/p_node_linear_13",
+      "output": "InsertedPrecisionFreeCast_model/p_linear_13",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        512
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.00036656856536865234,
+      "mismatched_elements": 20
+    },
+    {
+      "index": 504,
+      "operator": "Add",
+      "name": "model/p_node_add_6",
+      "output": "InsertedPrecisionFreeCast_model/p_add_6",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        512
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.0009529590606689453,
+      "mismatched_elements": 26
+    },
+    {
+      "index": 505,
+      "operator": "Relu",
+      "name": "model/p_node_relu_3",
+      "output": "InsertedPrecisionFreeCast_model/p_relu_3",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        512
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.0009529590606689453,
+      "mismatched_elements": 22
+    },
+    {
+      "index": 506,
+      "operator": "FusedGemm",
+      "name": "fused model/p_node_linear_14",
+      "output": "InsertedPrecisionFreeCast_model/p_relu_4",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        256
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.0017590522766113281,
+      "mismatched_elements": 12
+    },
+    {
+      "index": 507,
+      "operator": "FusedGemm",
+      "name": "fused model/p_node_linear_16",
+      "output": "InsertedPrecisionFreeCast_model/p_relu_6",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        256
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.0018759369850158691,
+      "mismatched_elements": 13
+    },
+    {
+      "index": 508,
+      "operator": "Gemm",
+      "name": "model/p_node_linear_17",
+      "output": "InsertedPrecisionFreeCast_model/p_linear_17",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        256
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.0030552148818969727,
+      "mismatched_elements": 31
+    },
+    {
+      "index": 509,
+      "operator": "Add",
+      "name": "model/p_node_add_7",
+      "output": "InsertedPrecisionFreeCast_model/p_add_7",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        256
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.0030465126037597656,
+      "mismatched_elements": 36
+    },
+    {
+      "index": 510,
+      "operator": "Relu",
+      "name": "model/p_node_relu_7",
+      "output": "InsertedPrecisionFreeCast_model/p_relu_7",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        256
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.0030465126037597656,
+      "mismatched_elements": 22
+    },
+    {
+      "index": 511,
+      "operator": "Gemm",
+      "name": "model/p_node_linear_20",
+      "output": "InsertedPrecisionFreeCast_model/p_linear_20",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        990
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.013175606727600098,
+      "mismatched_elements": 176
+    },
+    {
+      "index": 512,
+      "operator": "Mul",
+      "name": "model/p_node_mul_1",
+      "output": "InsertedPrecisionFreeCast_model/p_mul_1",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        990
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.02135467529296875,
+      "mismatched_elements": 72
+    },
+    {
+      "index": 513,
+      "operator": "Cast",
+      "name": "InsertedPrecisionFreeCast_model/p_mul_1",
+      "output": "model/p_mul_1",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        990
+      ],
+      "dtype": "float16",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.03125,
+      "mismatched_elements": 74
+    },
+    {
+      "index": 514,
+      "operator": "FusedGemm",
+      "name": "fused model/p_node_linear_15",
+      "output": "InsertedPrecisionFreeCast_model/p_relu_5",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        32
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.0014326274394989014,
+      "mismatched_elements": 2
+    },
+    {
+      "index": 516,
+      "operator": "Gemm",
+      "name": "model/p_node_linear_19",
+      "output": "InsertedPrecisionFreeCast_model/p_linear_19",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        32
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.0006178319454193115,
+      "mismatched_elements": 1
+    },
+    {
+      "index": 517,
+      "operator": "Add",
+      "name": "model/p_node_add_8",
+      "output": "InsertedPrecisionFreeCast_model/p_add_8",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        32
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.0016335248947143555,
+      "mismatched_elements": 1
+    },
+    {
+      "index": 518,
+      "operator": "Relu",
+      "name": "model/p_node_relu_9",
+      "output": "InsertedPrecisionFreeCast_model/p_relu_9",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        32
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.0016335248947143555,
+      "mismatched_elements": 1
+    },
+    {
+      "index": 519,
+      "operator": "Cast",
+      "name": "InsertedPrecisionFreeCast_model/p_relu_9",
+      "output": "model/p_relu_9",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        32
+      ],
+      "dtype": "float16",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.001953125,
+      "mismatched_elements": 1
+    },
+    {
+      "index": 521,
+      "operator": "Concat",
+      "name": "model/p_node_cat",
+      "output": "model/p_outputs",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        1000
+      ],
+      "dtype": "float16",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.03125,
+      "mismatched_elements": 74
+    },
+    {
+      "index": 522,
+      "operator": "Concat",
+      "name": "",
+      "output": "_symbolic",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        2576
+      ],
+      "dtype": "float16",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.03125,
+      "mismatched_elements": 74
+    }
+  ],
+  "outputs": {
+    "outputs": {
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        2576
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.03125,
+      "mismatched_elements": 74
+    },
+    "next_state_img_q": {
+      "passed": true,
+      "finite": true,
+      "shape": [
+        2,
+        5,
+        6,
+        128,
+        256
+      ],
+      "dtype": "uint8",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": true,
+      "max_abs_error": 0.0,
+      "mismatched_elements": 0
+    },
+    "next_state_desire_q": {
+      "passed": true,
+      "finite": true,
+      "shape": [
+        100,
+        1,
+        8
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": true,
+      "max_abs_error": 0.0,
+      "mismatched_elements": 0
+    },
+    "next_state_feat_q": {
+      "passed": true,
+      "finite": true,
+      "shape": [
+        96,
+        1,
+        512
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": true,
+      "max_abs_error": 0.0,
+      "mismatched_elements": 0
+    }
+  },
+  "fixture": {
+    "outputs": {
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        2576
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": true,
+      "max_abs_error": 0.0,
+      "mismatched_elements": 0
+    },
+    "next_state_desire_q": {
+      "passed": true,
+      "finite": true,
+      "shape": [
+        100,
+        1,
+        8
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": true,
+      "max_abs_error": 0.0,
+      "mismatched_elements": 0
+    },
+    "next_state_feat_q": {
+      "passed": true,
+      "finite": true,
+      "shape": [
+        96,
+        1,
+        512
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": true,
+      "max_abs_error": 0.0,
+      "mismatched_elements": 0
+    }
+  }
+}

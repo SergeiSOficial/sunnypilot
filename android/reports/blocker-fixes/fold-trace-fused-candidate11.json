@@ -1,0 +1,32 @@
+{
+  "scope": "diagnostic: frozen host fusion",
+  "vehicle_tx_enabled": false,
+  "models": {
+    "dmonitoring_model": {
+      "instrumented_matches_original": {
+        "outputs": true
+      },
+      "engines": {
+        "ort": {
+          "error": "Could not find an implementation for NhwcFusedConv(1) node with name 'node_Conv_805_token_561'",
+          "traceback": "Traceback (most recent call last):\n  File \"/data/data/com.samsung.sunnypilot.fold3/files/chaquopy/AssetFinder/app/fold3_model_trace.py\", line 42, in trace\n  File \"/data/data/com.samsung.sunnypilot.fold3/files/chaquopy/AssetFinder/app/fold3_ort.py\", line 9, in __init__\nRuntimeError: Could not find an implementation for NhwcFusedConv(1) node with name 'node_Conv_805_token_561'\n"
+        }
+      }
+    },
+    "driving_supercombo": {
+      "instrumented_matches_original": {
+        "outputs": true,
+        "next_state_img_q": true,
+        "next_state_desire_q": true,
+        "next_state_feat_q": true
+      },
+      "engines": {
+        "ort": {
+          "error": "Could not find an implementation for NhwcFusedConv(1) node with name 'model/node_conv2d_token_575'",
+          "traceback": "Traceback (most recent call last):\n  File \"/data/data/com.samsung.sunnypilot.fold3/files/chaquopy/AssetFinder/app/fold3_model_trace.py\", line 42, in trace\n  File \"/data/data/com.samsung.sunnypilot.fold3/files/chaquopy/AssetFinder/app/fold3_ort.py\", line 9, in __init__\nRuntimeError: Could not find an implementation for NhwcFusedConv(1) node with name 'model/node_conv2d_token_575'\n"
+        }
+      }
+    }
+  },
+  "completed": true
+}

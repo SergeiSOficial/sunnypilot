@@ -1,0 +1,53 @@
+..................................................................................FF..........................................
+======================================================================
+FAIL: test_android_wakeup_retains_reader_process_and_thread (test_msgq_wakeup.MsgqWakeupTest.test_android_wakeup_retains_reader_process_and_thread)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sergios/sunnypilot/android/tests/test_msgq_wakeup.py", line 69, in test_android_wakeup_retains_reader_process_and_thread
+    self.compile_check('''
+  File "/Users/sergios/sunnypilot/android/tests/test_msgq_wakeup.py", line 34, in compile_check
+    self.assertEqual(compiled.returncode, 0, compiled.stderr)
+AssertionError: 1 != 0 : ld: multiple errors: tapi error: malformed file
+/Library/Developer/CommandLineTools/SDKs/MacOSX27.2.sdk/usr/lib/libSystem.B.tbd:4:20: error: unknown architecture
+                   arm64e.x1-macos, arm64e.x1-maccatalyst ]
+                   ^~~~~~~~~~~~~~~
+ in '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib/libSystem.tbd'; tapi error: malformed file
+/Library/Developer/CommandLineTools/SDKs/MacOSX27.2.sdk/usr/lib/libc++.1.tbd:4:54: error: unknown architecture
+                   arm64e-macos, arm64e-maccatalyst, arm64e.x1-macos, arm64e.x1-maccatalyst ]
+                                                     ^~~~~~~~~~~~~~~
+ in '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib/libc++.tbd'
+clang++: error: linker command failed with exit code 1 (use -v to see invocation)
+
+
+======================================================================
+FAIL: test_empty_registration_slot_cannot_signal_a_process_group (test_msgq_wakeup.MsgqWakeupTest.test_empty_registration_slot_cannot_signal_a_process_group)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sergios/sunnypilot/android/tests/test_msgq_wakeup.py", line 39, in test_empty_registration_slot_cannot_signal_a_process_group
+    self.compile_check('''
+  File "/Users/sergios/sunnypilot/android/tests/test_msgq_wakeup.py", line 34, in compile_check
+    self.assertEqual(compiled.returncode, 0, compiled.stderr)
+AssertionError: 1 != 0 : In file included from /var/folders/8z/wn5gq57n6dqffngwg62nm8lc0000gn/T/tmpdh1nthza/check.cc:41:
+/var/folders/8z/wn5gq57n6dqffngwg62nm8lc0000gn/T/tmpdh1nthza/msgq/msgq.cc:44:45: warning: 'syscall' is deprecated: first deprecated in macOS 10.12 - syscall(2) is unsupported; please switch to a supported interface. For SYS_kdebug_trace use kdebug_signpost(). [-Wdeprecated-declarations]
+   44 |     uint64_t uid = distribution(rd) << 32 | syscall(SYS_gettid);
+      |                                             ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/unistd.h:754:6: note: 'syscall' has been explicitly marked deprecated here
+  754 | int      syscall(int, ...);
+      |          ^
+1 warning generated.
+ld: multiple errors: tapi error: malformed file
+/Library/Developer/CommandLineTools/SDKs/MacOSX27.2.sdk/usr/lib/libSystem.B.tbd:4:20: error: unknown architecture
+                   arm64e.x1-macos, arm64e.x1-maccatalyst ]
+                   ^~~~~~~~~~~~~~~
+ in '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib/libSystem.tbd'; tapi error: malformed file
+/Library/Developer/CommandLineTools/SDKs/MacOSX27.2.sdk/usr/lib/libc++.1.tbd:4:54: error: unknown architecture
+                   arm64e-macos, arm64e-maccatalyst, arm64e.x1-macos, arm64e.x1-maccatalyst ]
+                                                     ^~~~~~~~~~~~~~~
+ in '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib/libc++.tbd'
+clang++: error: linker command failed with exit code 1 (use -v to see invocation)
+
+
+----------------------------------------------------------------------
+Ran 126 tests in 10.828s
+
+FAILED (failures=2)

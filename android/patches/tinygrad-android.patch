@@ -16,3 +16,40 @@
  import os, sys, mmap, io, ctypes, contextlib, pathlib, functools, collections, struct, itertools
  from dataclasses import replace
  from typing import cast
+--- a/tinygrad/renderer/cstyle.py
++++ b/tinygrad/renderer/cstyle.py
+@@ -341,5 +341,17 @@
+   extra_matcher = create_non_native_float_pats((dtypes.bfloat16,)) + pm_manual_bf16_cast
+ 
++  def render_cast(self, u:UOp, val:str) -> str:
++    # Preserve the pinned arm64 RTE boundaries explicitly, including
++    # vectorized conversions and float32 accumulation into half outputs.
++    if u.dtype == dtypes.half and u.addrspace in (AddrSpace.ALU, None):
++      half_type = self.render_type(u)
++      normal = f"convert_{half_type}_rte({val})"
++      if u.src[0].dtype != dtypes.float32: return normal
++      # Evaluate the source once: embedding it several times makes nested
++      # half reductions grow exponentially before OpenCL compilation.
++      return f"fold3_half_rte{u.max_numel()}({val})"
++    return super().render_cast(u, val)
++
+   string_rewrite = pm_bf16_ushort_const + PatternMatcher([
+     (UPat(Ops.BITCAST, name="x"), lambda ctx,x: f"as_{ctx.render_dtype(x.dtype)}(({ctx.render_dtype(x.src[0].dtype)})({ctx[x.src[0]]}))"
+      if x.addrspace not in (AddrSpace.GLOBAL, AddrSpace.LOCAL) else None),
+@@ -353,3 +365,15 @@
+   def render_kernel(self, function_name, kernel, bufs, uops, prefix=None) -> str:
+-    if any(uop.dtype == dtypes.half for uop in uops): prefix = (["#pragma OPENCL EXTENSION cl_khr_fp16 : enable"] + (prefix or []))
++    if any(uop.dtype == dtypes.half for uop in uops):
++      helpers = []
++      widths = sorted({u.max_numel() for u in uops if u.op is Ops.CAST and u.dtype == dtypes.half
++                       and u.addrspace in (AddrSpace.ALU, None) and u.src[0].dtype == dtypes.float32})
++      for width in widths:
++        suffix = str(width) if width > 1 else ""
++        # Preserve subnormal result bits which native Adreno half conversion
++        # flushes. Scaling by 2^24 and the integer RTE conversion are exact.
++        helpers.append(f"static inline half{suffix} fold3_half_rte{width}(float{suffix} x) {{ "
++                       f"return fabs(x) < 0.00006103515625f ? as_half{suffix}((ushort{suffix})("
++                       f"convert_ushort{suffix}((as_uint{suffix}(x) >> 16) & 0x8000u) | "
++                       f"convert_ushort{suffix}_rte(fabs(x) * 16777216.0f))) : convert_half{suffix}_rte(x); }}")
++      prefix = ["#pragma OPENCL EXTENSION cl_khr_fp16 : enable", *helpers, *(prefix or [])]
+     return super().render_kernel(function_name, kernel, bufs, uops, prefix)

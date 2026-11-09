@@ -4,26 +4,41 @@ Camera projection/mount calibration, numerical parity and timing are unqualified
 No result from this module is allowed to become a valid driving input.
 """
 from collections import deque
+from itertools import product
 import hashlib
 import json
 from pathlib import Path
 import time
 
 
+MODEL_DEADLINE_NS = 50_000_000
+
+
 class FrameGate:
   """Bounded, one-to-one timestamp pairing; duplicate/stale frames never pair."""
   def __init__(self, sensors, max_age_ns=100_000_000, max_skew_ns=20_000_000):
-    if len(set(sensors)) != len(sensors):
+    if not sensors or len(set(sensors)) != len(sensors):
       raise ValueError("Distinct physical sensor IDs required")
     self.sensors = tuple(sensors)
     self.queues = {sensor: deque(maxlen=2) for sensor in sensors}
     self.last = dict.fromkeys(sensors, 0)
+    self.staging = {}
     self.age, self.skew = max_age_ns, max_skew_ns
     self.rejected = 0
+    self.expired = 0
+    self.received = 0
+    self.skipped = 0
+    self.last_frame_id = {}
 
-  def add(self, sensor, stamp, payload, now):
+  def _fresh(self, sensor, stamp, now):
     if sensor not in self.queues or stamp <= self.last[sensor] or not 0 <= now - stamp <= self.age:
       self.rejected += 1
+      self.expired += int(sensor in self.queues and stamp > self.last[sensor] and now - stamp > self.age)
+      return False
+    return True
+
+  def add(self, sensor, stamp, payload, now):
+    if not self._fresh(sensor, stamp, now):
       return False
     self.last[sensor] = stamp
     queue = self.queues[sensor]
@@ -32,15 +47,52 @@ class FrameGate:
     queue.append((stamp, payload))
     return True
 
+  def add_frame(self, sensor, stamp, frame_id, data, geometry, now):
+    """Own the shared-ring pixels without allocating a frame-sized object each time."""
+    self.received += 1
+    if sensor in self.queues:
+      previous = self.last_frame_id.get(sensor, frame_id)
+      self.skipped += max(0, frame_id - previous - 1)
+      self.last_frame_id[sensor] = max(previous, frame_id)
+    if not self._fresh(sensor, stamp, now):
+      return False
+    source = memoryview(data).cast("B")
+    buffers = self.staging.get(sensor)
+    if buffers is None or len(buffers[0]) != len(source):
+      self.rejected += len(self.queues[sensor])
+      self.queues[sensor].clear()
+      # The queue holds at most two frames. The third slot is free until the
+      # current pair has finished processing on this same inference thread.
+      buffers = self.staging[sensor] = deque(bytearray(len(source)) for _ in range(3))
+    buffers[0][:] = source
+    accepted = self.add(sensor, stamp, (frame_id, buffers[0], *geometry), now)
+    if accepted:
+      buffers.rotate(-1)
+    return accepted
+
   def pair(self, now):
     for queue in self.queues.values():
       while queue and now - queue[0][0] > self.age:
         queue.popleft()
         self.rejected += 1
+        self.expired += 1
+    queues = [self.queues[sensor] for sensor in self.sensors]
+    candidates = []
+    for indices in product(*(range(len(queue)) for queue in queues)):
+      stamps = [queue[index][0] for queue, index in zip(queues, indices, strict=True)]
+      if max(stamps) - min(stamps) <= self.skew:
+        candidates.append(((min(stamps), max(stamps)), indices))
+    if candidates:
+      _, indices = max(candidates)
+      pair = {}
+      for sensor, queue, index in zip(self.sensors, queues, indices, strict=True):
+        for _ in range(index):
+          queue.popleft()
+          self.rejected += 1
+        pair[sensor] = queue.popleft()
+      return pair
     while all(self.queues.values()):
       times = {sensor: self.queues[sensor][0][0] for sensor in self.sensors}
-      if max(times.values()) - min(times.values()) <= self.skew:
-        return {sensor: self.queues[sensor].popleft() for sensor in self.sensors}
       self.queues[min(times, key=times.get)].popleft()
       self.rejected += 1
     return None
@@ -184,6 +236,8 @@ class ThermalGate:
     self.paused, self.cool_since = False, None
 
   def update(self, status, now):
+    if status >= 4:
+      raise RuntimeError(f"Critical Android thermal status: {status}")
     if status >= 2:
       self.paused, self.cool_since = True, None
     elif self.paused:
@@ -211,12 +265,24 @@ def camera_available(client):
 
 def inference_delay_ns(last_started, now):
   # Bound model work to the upstream 20 Hz cadence without catching up after a stall.
-  return max(0, last_started + 50_000_000 - now)
+  return max(0, last_started + MODEL_DEADLINE_NS - now)
+
+
+def publish_with_deadline(pm, messages, deadline_ns, clock=time.monotonic_ns):
+  # Serialize first so parsing and encoding consume the same capture budget.
+  payloads = tuple((name, msg.to_bytes()) for name, msg in messages)
+  for service, payload in payloads:
+    if clock() > deadline_ns:
+      return False
+    pm.send(service, payload)
+  # A send already in flight cannot be withdrawn. Its completion still counts
+  # as a miss, and all Android diagnostic messages are explicitly invalid.
+  return clock() <= deadline_ns
 
 
 def run(report, driver=False):
   import numpy as np
-  from fold3_ort import OrtModel
+  from fold3_opencl import live_model
   from msgq.visionipc import VisionIpcClient
   from openpilot.cereal.visionipc import VisionStreamType
   from openpilot.cereal import log, messaging
@@ -227,12 +293,15 @@ def run(report, driver=False):
   sensors = ("1",) if driver else ("0", "2")
   types = (VisionStreamType.VISION_STREAM_CABIN,) if driver else (VisionStreamType.VISION_STREAM_NARROW_ROAD, VisionStreamType.VISION_STREAM_WIDE_ROAD)
   clients = {sensor: VisionIpcClient("camerad", stream, True) for sensor, stream in zip(sensors, types, strict=True)}
-  gate = FrameGate(sensors)
+  gate = FrameGate(sensors, max_age_ns=MODEL_DEADLINE_NS)
   model, warps, inputs = None, {}, {}
   count, published, late, resets, nonfinite = 0, 0, 0, 0, 0
   numerical_fault = False
   last_inference, last_retry, last_started = 0, 0, 0
-  stages = {name: deque(maxlen=4096) for name in ("input_age", "prepare", "inference", "output_age")}
+  warmup_discarded, thermal_discarded = 0, 0
+  stages = {name: deque(maxlen=4096) for name in ("receive_copy", "input_age", "prepare", "inference", "output_age",
+                                                "publication", "capture_to_publication")}
+  report.data.update(capture_budget_ns=MODEL_DEADLINE_NS, timing_schema="sensor-capture-v1", work_deadline_misses=0)
   pm = messaging.PubMaster(["driverStateV2"] if driver else ["modelV2", "cameraOdometry"])
   if driver:
     from openpilot.selfdrive.modeld.dmonitoringmodeld import slice_outputs, parse_model_output, get_driverstate_packet
@@ -244,7 +313,9 @@ def run(report, driver=False):
     status = int(hardware.thermalStatus())
     if thermal.update(status, time.monotonic_ns()):
       if not was_paused:
-        gate = FrameGate(sensors)
+        for queue in gate.queues.values():
+          thermal_discarded += len(queue)
+          queue.clear()
         for key, value in inputs.items():
           if key.startswith("state_"):
             value.fill(0)
@@ -282,21 +353,28 @@ def run(report, driver=False):
       time.sleep(.02)
       continue
     report.data["missing_physical_sensors"] = []
+    receiving = time.monotonic_ns()
     for sensor, client in clients.items():
       frame = client.recv(timeout_ms=0)
       if frame is None:
         continue
       # Copy out of the bounded shared ring before another producer frame can
       # overwrite it during model execution; no Camera2 buffer is retained.
-      payload = (client.frame_id, bytes(frame.data), frame.width, frame.height, frame.stride, frame.uv_offset)
-      gate.add(sensor, client.timestamp_sof, payload, time.monotonic_ns())
+      geometry = (frame.width, frame.height, frame.stride, frame.uv_offset)
+      gate.add_frame(sensor, client.timestamp_sof, client.frame_id, frame.data, geometry, time.monotonic_ns())
+    stages["receive_copy"].append(time.monotonic_ns() - receiving)
     pair = gate.pair(time.monotonic_ns())
+    report.data.update(received_inputs=gate.received, skipped_input_frames=gate.skipped, expired_inputs=gate.expired,
+                       rejected_frames=gate.rejected, thermal_discarded_inputs=thermal_discarded,
+                       deadline_misses=gate.expired + late)
     if pair is None:
       report.update("waiting_for_synchronized_frames", rejected_frames=gate.rejected, computed_frames=count,
                     published_frames=published, late_outputs=late, valid=False, calibrated=False)
       time.sleep(.005)
       continue
     if model is None:
+      warmup_discarded += len(pair)
+      report.data["warmup_discarded_inputs"] = warmup_discarded
       report.update("initializing_diagnostic_model")
       try:
         sources = json.loads((report.path.parent / "vision-sources.json").read_text())
@@ -311,7 +389,7 @@ def run(report, driver=False):
         except (OSError, KeyError, ValueError) as exc:
           calibration_blocker = str(exc)
       path, metadata = model_asset("dmonitoring_model" if driver else "driving_supercombo")
-      model = OrtModel(path, "cpu", threads=2)
+      model, backend = live_model(report.path.parent, "dmonitoring_model" if driver else "driving_supercombo", path)
       inputs = {key: np.zeros(shape, dtype=metadata["input_dtypes"][key]) for key, shape in metadata["inputs"].items()}
       slices = {key: slice(*value) for key, value in metadata["output_slices"].items()}
       if not driver:
@@ -327,6 +405,7 @@ def run(report, driver=False):
     started = time.monotonic_ns()
     last_started = started
     oldest = min(stamp for stamp, _ in pair.values())
+    deadline = oldest + MODEL_DEADLINE_NS
     stages["input_age"].append(started - oldest)
     for i, sensor in enumerate(sensors):
       stamp, (frame_id, data, width, height, stride, uv_offset) = pair[sensor]
@@ -345,49 +424,65 @@ def run(report, driver=False):
     # calibration. Zero calib/action/desire below belong only to this invalid
     # diagnostic output, never the qualified driving model runtime.
     prepared_at = time.monotonic_ns()
+    stages["prepare"].append(prepared_at - started)
+    if prepared_at > deadline:
+      late += 1
+      report.update("waiting_for_fresh_frames", late_outputs=late, deadline_misses=gate.expired + late,
+                    valid=False, calibrated=False)
+      continue
     outputs = model(inputs)
     inferred_at = time.monotonic_ns()
     finite = carry_model_state(inputs, outputs)
     elapsed = time.monotonic_ns() - started
     report.samples.append(elapsed)
     report.data["work_samples"] += 1
-    report.data["deadline_misses"] += int(elapsed >= 50_000_000)
+    report.data["work_deadline_misses"] += int(elapsed > MODEL_DEADLINE_NS)
     count += 1
     last_inference = newest
-    output_age = time.monotonic_ns() - oldest
-    stages["prepare"].append(prepared_at - started)
     stages["inference"].append(inferred_at - prepared_at)
-    stages["output_age"].append(output_age)
-    stale = output_age > gate.age
+    ready_at = time.monotonic_ns()
+    stages["output_age"].append(ready_at - oldest)
+    on_time = ready_at <= deadline
     if not finite:
       nonfinite += 1
       resets += 1
       numerical_fault = True
-    elif stale:
-      late += 1
-    elif driver:
+    elif on_time and driver:
       parsed = parse_model_output(slice_outputs(outputs["outputs"].astype(np.float32).reshape(-1), slices))
       parsed["raw_pred"] = b""
       message = get_driverstate_packet(parsed, frame_id, newest, elapsed / 1e9, 0.)
       message.valid = False
-      pm.send("driverStateV2", message)
-      published += 1
-    else:
+      on_time = publish_with_deadline(pm, (("driverStateV2", message),), deadline)
+    elif on_time:
       raw = outputs["outputs"].astype(np.float32)
       parsed = parser.parse_outputs({key: raw[:, value] for key, value in slices.items()})
       message, pose = messaging.new_message("modelV2", valid=False), messaging.new_message("cameraOdometry", valid=False)
       fill_model_msg(message, parsed, log.ModelDataV2.Action(), publish_state, pair["0"][1][0], pair["2"][1][0],
-                     pair["0"][1][0], 0., newest, elapsed / 1e9, False)
-      fill_pose_msg(pose, parsed, pair["0"][1][0], 0, newest, False)
-      pm.send("modelV2", message)
-      pm.send("cameraOdometry", pose)
-      published += 1
+                     pair["0"][1][0], 0., oldest, elapsed / 1e9, False)
+      fill_pose_msg(pose, parsed, pair["0"][1][0], 0, oldest, False)
+      on_time = publish_with_deadline(pm, (("modelV2", message), ("cameraOdometry", pose)), deadline)
+    if finite and ready_at <= deadline:
+      completed = time.monotonic_ns()
+      stages["publication"].append(completed - ready_at)
+      stages["capture_to_publication"].append(completed - oldest)
+      on_time &= completed <= deadline
+    if not on_time:
+      late += 1
+      report.data["deadline_misses"] = gate.expired + late
+      if finite:
+        for key, value in inputs.items():
+          if key.startswith("state_"):
+            value.fill(0)
+        resets += 1
+    published += int(finite and on_time)
     if time.monotonic() - report.last_write >= 1:
-      report.data["stage_p99_ms"] = {key: float(np.percentile(values, 99)) / 1e6 for key, values in stages.items()}
+      percentiles = {key: np.percentile(values, (50, 95, 99)) / 1e6 for key, values in stages.items() if values}
+      for index, quantile in enumerate((50, 95, 99)):
+        report.data[f"stage_p{quantile}_ms"] = {key: float(values[index]) for key, values in percentiles.items()}
     report.update("running", valid=False, calibrated=False, computed_frames=count, published_frames=published,
                   rejected_frames=gate.rejected, late_outputs=late, nonfinite_outputs=nonfinite, recurrent_resets=resets, work_ms=elapsed / 1e6,
                   projection="measured narrow/large model geometry" if calibration else "uncalibrated preview affine; not suitable for driving",
-                  backend="ORT CPU, 2 threads",
+                  backend=backend,
                   measured_projection_loaded=bool(calibration), calibration_blocker=calibration_blocker,
                   input_frame_ids={sensor: value[1][0] for sensor, value in pair.items()},
                   input_timestamps_ns={sensor: value[0] for sensor, value in pair.items()}, input_skew_ns=newest - oldest,

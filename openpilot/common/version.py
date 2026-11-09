@@ -192,11 +192,14 @@ def build_metadata_from_dict(build_metadata: dict) -> BuildMetadata:
               git_origin=git_origin,
               git_commit_date=git_commit_date,
               build_style=build_style,
-              is_dirty=False))
+              is_dirty=bool(openpilot_metadata.get("is_dirty", False))))
 
 
 def get_build_metadata(path: str = BASEDIR) -> BuildMetadata:
   build_metadata_path = pathlib.Path(path) / BUILD_METADATA_FILENAME
+  if path == BASEDIR and os.environ.get("ANDROID_DATA_ROOT") and not build_metadata_path.exists():
+    # Chaquopy extracts package data inside openpilot, while BASEDIR is its parent.
+    build_metadata_path = pathlib.Path(__file__).resolve().parents[1] / BUILD_METADATA_FILENAME
 
   if build_metadata_path.exists():
     build_metadata = json.loads(build_metadata_path.read_text())

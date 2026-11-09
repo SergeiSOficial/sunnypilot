@@ -1,0 +1,66 @@
+{
+  "serial": "emulator-5554",
+  "command": [
+    "/Users/sergios/sunnypilot/.venv/bin/python",
+    "android/scripts/validate_cameras.py",
+    "--serial",
+    "emulator-5554",
+    "--adb",
+    "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+    "--package",
+    "com.samsung.sunnypilot.fold3",
+    "--ids",
+    "0",
+    "--seconds",
+    "10",
+    "--output",
+    "/Users/sergios/sunnypilot/android/reports/blocker-fixes/emulator-camera-timing-candidate22.json"
+  ],
+  "vehicle_tx_enabled": false,
+  "status": "failed",
+  "forwards_before": [],
+  "before_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "358 android.hardware.camera.provider.ranchu",
+      "359 android.hardware.camera.provider@2.7-service-google",
+      "425 cameraserver"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.8,
+    "thermal_override": false
+  },
+  "apk_sha256": "9d12ba49c6f12b7439298e0e97b809d58dc052fbe25ce02fe5dda50ecddad752",
+  "baseline": {
+    "processes": [],
+    "camera_provider_processes": [
+      "358 android.hardware.camera.provider.ranchu",
+      "359 android.hardware.camera.provider@2.7-service-google",
+      "425 cameraserver"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.8,
+    "thermal_override": false,
+    "idle_seconds": 30.79004104199703,
+    "normal_thermal_seconds": 30.680626874993322
+  },
+  "apk_sha256_at_start": "9d12ba49c6f12b7439298e0e97b809d58dc052fbe25ce02fe5dda50ecddad752",
+  "returncode": 1,
+  "after_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "358 android.hardware.camera.provider.ranchu",
+      "359 android.hardware.camera.provider@2.7-service-google",
+      "425 cameraserver"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.8,
+    "thermal_override": false
+  },
+  "forwards_removed": [],
+  "apk_sha256_after": "9d12ba49c6f12b7439298e0e97b809d58dc052fbe25ce02fe5dda50ecddad752",
+  "artifact_stable": true
+}

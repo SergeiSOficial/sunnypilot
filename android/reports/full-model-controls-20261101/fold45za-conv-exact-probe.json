@@ -1,0 +1,1374 @@
+{
+  "diagnostic_only": true,
+  "qualifies_model": false,
+  "apk_sha256": "17a87c7909af196941a6659a68c905ba41d5590dc361b8a309e2c4af53e95822",
+  "sha256": {
+    "run_conv_probe.py": "3fdd508ddfb4cd2910979bdebca42aef876340492bcfd0773501964c95358bec",
+    "conv_exact_probe.cpp": "ea4c72695991f1377b5c28ddbce508cf4e9bb17d7d18517be33d953bfd9a96cb",
+    "conv_exact_probe": "aa923c376ebc1e53f810e303693a9b81dc3c3cf8d38656db7f4bd977406c03b0",
+    "fold3_host_conv_buf.cl": "cc0039aa8542bf0799f35a11963252fca7e2a98a9503ee19c06875477246d2cb"
+  },
+  "status": "passed",
+  "returncode": 0,
+  "stderr": "",
+  "probe": {
+    "diagnostic_only": true,
+    "synthetic_operands": true,
+    "rtol": 0.001,
+    "atol": 0.0001,
+    "cpu_fallback": false,
+    "vehicle_tx_enabled": false,
+    "device": "QUALCOMM Adreno(TM)",
+    "driver": "OpenCL 2.0 QUALCOMM build: commit #9ad1b67875 changeid #Ib48d2dada6 Date: 05/11/25 Sun Local Branch:  Remote Branch: refs/tags/AU_LINUX_ANDROID_LA.UM.9.14.11.00.00.571.148 Compiler E031.38.01.08",
+    "single_fp_config": 22,
+    "native_fma_flag": false,
+    "compute_units": 3,
+    "local_work_size": [
+      32,
+      1
+    ],
+    "variant_names": [
+      "pinned_fma",
+      "production_vector_fma"
+    ],
+    "cases": [
+      {
+        "shape": 0,
+        "seed": 42,
+        "bias_first": 0,
+        "batch": 1,
+        "dilation": 1,
+        "relu": false,
+        "elements": 524288,
+        "bit_mismatches": 0,
+        "tolerance_failures": 0,
+        "nonfinite": 0,
+        "max_abs_error": 0,
+        "variants": [
+          {
+            "batch_wall_ms": 1261.92,
+            "gpu_ms": [
+              251.857,
+              251.588,
+              252.513,
+              252.277,
+              252.27
+            ]
+          },
+          {
+            "batch_wall_ms": 1159.28,
+            "gpu_ms": [
+              231.819,
+              231.063,
+              231.199,
+              231.705,
+              231.574
+            ]
+          }
+        ]
+      },
+      {
+        "shape": 0,
+        "seed": 42,
+        "bias_first": 1,
+        "batch": 1,
+        "dilation": 1,
+        "relu": false,
+        "elements": 524288,
+        "bit_mismatches": 0,
+        "tolerance_failures": 0,
+        "nonfinite": 0,
+        "max_abs_error": 0,
+        "variants": [
+          {
+            "batch_wall_ms": 1330.37,
+            "gpu_ms": [
+              264.72,
+              264.066,
+              268.581,
+              264.312,
+              267.02
+            ]
+          },
+          {
+            "batch_wall_ms": 1223.75,
+            "gpu_ms": [
+              249.578,
+              242.357,
+              242.377,
+              244.482,
+              242.933
+            ]
+          }
+        ]
+      },
+      {
+        "shape": 0,
+        "seed": 7,
+        "bias_first": 0,
+        "batch": 1,
+        "dilation": 1,
+        "relu": true,
+        "elements": 524288,
+        "bit_mismatches": 0,
+        "tolerance_failures": 0,
+        "nonfinite": 0,
+        "max_abs_error": 0,
+        "variants": [
+          {
+            "batch_wall_ms": 1264.36,
+            "gpu_ms": [
+              253.165,
+              252.214,
+              252.204,
+              252.703,
+              252.196
+            ]
+          },
+          {
+            "batch_wall_ms": 1162.04,
+            "gpu_ms": [
+              231.546,
+              231.686,
+              233.38,
+              231.561,
+              231.724
+            ]
+          }
+        ]
+      },
+      {
+        "shape": 0,
+        "seed": 7,
+        "bias_first": 1,
+        "batch": 1,
+        "dilation": 1,
+        "relu": true,
+        "elements": 524288,
+        "bit_mismatches": 0,
+        "tolerance_failures": 0,
+        "nonfinite": 0,
+        "max_abs_error": 0,
+        "variants": [
+          {
+            "batch_wall_ms": 1335.07,
+            "gpu_ms": [
+              266.639,
+              265.246,
+              267.503,
+              268.516,
+              265.136
+            ]
+          },
+          {
+            "batch_wall_ms": 1222.28,
+            "gpu_ms": [
+              247.447,
+              243.377,
+              243.181,
+              242.875,
+              243.344
+            ]
+          }
+        ]
+      },
+      {
+        "shape": 0,
+        "seed": 123,
+        "bias_first": 0,
+        "batch": 1,
+        "dilation": 1,
+        "relu": false,
+        "elements": 524288,
+        "bit_mismatches": 0,
+        "tolerance_failures": 0,
+        "nonfinite": 0,
+        "max_abs_error": 0,
+        "variants": [
+          {
+            "batch_wall_ms": 1261.74,
+            "gpu_ms": [
+              251.793,
+              251.658,
+              251.975,
+              252.578,
+              251.954
+            ]
+          },
+          {
+            "batch_wall_ms": 1161.12,
+            "gpu_ms": [
+              233.429,
+              231.674,
+              231.36,
+              231.162,
+              231.324
+            ]
+          }
+        ]
+      },
+      {
+        "shape": 0,
+        "seed": 123,
+        "bias_first": 1,
+        "batch": 1,
+        "dilation": 1,
+        "relu": false,
+        "elements": 524288,
+        "bit_mismatches": 0,
+        "tolerance_failures": 0,
+        "nonfinite": 0,
+        "max_abs_error": 0,
+        "variants": [
+          {
+            "batch_wall_ms": 1328.13,
+            "gpu_ms": [
+              265.497,
+              263.924,
+              263.733,
+              268.58,
+              264.208
+            ]
+          },
+          {
+            "batch_wall_ms": 1218.46,
+            "gpu_ms": [
+              245.251,
+              244.072,
+              242.559,
+              242.497,
+              242.005
+            ]
+          }
+        ]
+      },
+      {
+        "shape": 1,
+        "seed": 42,
+        "bias_first": 0,
+        "batch": 1,
+        "dilation": 1,
+        "relu": false,
+        "elements": 691200,
+        "bit_mismatches": 0,
+        "tolerance_failures": 0,
+        "nonfinite": 0,
+        "max_abs_error": 0,
+        "variants": [
+          {
+            "batch_wall_ms": 1113.81,
+            "gpu_ms": [
+              224.736,
+              220.699,
+              220.571,
+              223.894,
+              222.017
+            ]
+          },
+          {
+            "batch_wall_ms": 1014.52,
+            "gpu_ms": [
+              202.756,
+              202.064,
+              203.379,
+              202.413,
+              202.03
+            ]
+          }
+        ]
+      },
+      {
+        "shape": 1,
+        "seed": 42,
+        "bias_first": 1,
+        "batch": 1,
+        "dilation": 1,
+        "relu": false,
+        "elements": 691200,
+        "bit_mismatches": 0,
+        "tolerance_failures": 0,
+        "nonfinite": 0,
+        "max_abs_error": 0,
+        "variants": [
+          {
+            "batch_wall_ms": 1174.06,
+            "gpu_ms": [
+              241.871,
+              234.044,
+              232.249,
+              231.452,
+              231.986
+            ]
+          },
+          {
+            "batch_wall_ms": 1071.04,
+            "gpu_ms": [
+              213.468,
+              212.755,
+              212.695,
+              214.409,
+              215.405
+            ]
+          }
+        ]
+      },
+      {
+        "shape": 1,
+        "seed": 7,
+        "bias_first": 0,
+        "batch": 1,
+        "dilation": 1,
+        "relu": true,
+        "elements": 691200,
+        "bit_mismatches": 0,
+        "tolerance_failures": 0,
+        "nonfinite": 0,
+        "max_abs_error": 0,
+        "variants": [
+          {
+            "batch_wall_ms": 1111.45,
+            "gpu_ms": [
+              225.433,
+              219.743,
+              223.425,
+              220.827,
+              220.287
+            ]
+          },
+          {
+            "batch_wall_ms": 1017.21,
+            "gpu_ms": [
+              205.836,
+              202.551,
+              202.293,
+              202.689,
+              202.186
+            ]
+          }
+        ]
+      },
+      {
+        "shape": 1,
+        "seed": 7,
+        "bias_first": 1,
+        "batch": 1,
+        "dilation": 1,
+        "relu": true,
+        "elements": 691200,
+        "bit_mismatches": 0,
+        "tolerance_failures": 0,
+        "nonfinite": 0,
+        "max_abs_error": 0,
+        "variants": [
+          {
+            "batch_wall_ms": 1171.79,
+            "gpu_ms": [
+              234.377,
+              232.556,
+              232.643,
+              233.897,
+              236.123
+            ]
+          },
+          {
+            "batch_wall_ms": 1080.28,
+            "gpu_ms": [
+              216.451,
+              216.032,
+              219.743,
+              213.107,
+              212.878
+            ]
+          }
+        ]
+      },
+      {
+        "shape": 1,
+        "seed": 123,
+        "bias_first": 0,
+        "batch": 1,
+        "dilation": 1,
+        "relu": false,
+        "elements": 691200,
+        "bit_mismatches": 0,
+        "tolerance_failures": 0,
+        "nonfinite": 0,
+        "max_abs_error": 0,
+        "variants": [
+          {
+            "batch_wall_ms": 1113.64,
+            "gpu_ms": [
+              226.625,
+              222.205,
+              222.188,
+              220.082,
+              220.818
+            ]
+          },
+          {
+            "batch_wall_ms": 1016.38,
+            "gpu_ms": [
+              202.719,
+              201.643,
+              201.893,
+              202.43,
+              206.114
+            ]
+          }
+        ]
+      },
+      {
+        "shape": 1,
+        "seed": 123,
+        "bias_first": 1,
+        "batch": 1,
+        "dilation": 1,
+        "relu": false,
+        "elements": 691200,
+        "bit_mismatches": 0,
+        "tolerance_failures": 0,
+        "nonfinite": 0,
+        "max_abs_error": 0,
+        "variants": [
+          {
+            "batch_wall_ms": 1167.1,
+            "gpu_ms": [
+              231.951,
+              230.702,
+              238.935,
+              231.402,
+              231.533
+            ]
+          },
+          {
+            "batch_wall_ms": 1072.71,
+            "gpu_ms": [
+              217.519,
+              215.218,
+              213.18,
+              212.018,
+              212.117
+            ]
+          }
+        ]
+      },
+      {
+        "shape": 2,
+        "seed": 42,
+        "bias_first": 0,
+        "batch": 1,
+        "dilation": 1,
+        "relu": false,
+        "elements": 16384,
+        "bit_mismatches": 0,
+        "tolerance_failures": 0,
+        "nonfinite": 0,
+        "max_abs_error": 0,
+        "variants": [
+          {
+            "batch_wall_ms": 299.013,
+            "gpu_ms": [
+              59.358,
+              59.371,
+              59.3311,
+              59.413,
+              59.351
+            ]
+          },
+          {
+            "batch_wall_ms": 280.182,
+            "gpu_ms": [
+              55.647,
+              55.67,
+              55.604,
+              55.6989,
+              55.6621
+            ]
+          }
+        ]
+      },
+      {
+        "shape": 2,
+        "seed": 42,
+        "bias_first": 1,
+        "batch": 1,
+        "dilation": 1,
+        "relu": false,
+        "elements": 16384,
+        "bit_mismatches": 0,
+        "tolerance_failures": 0,
+        "nonfinite": 0,
+        "max_abs_error": 0,
+        "variants": [
+          {
+            "batch_wall_ms": 325.452,
+            "gpu_ms": [
+              66.0838,
+              62.9801,
+              64.1098,
+              65.2982,
+              64.9838
+            ]
+          },
+          {
+            "batch_wall_ms": 291.589,
+            "gpu_ms": [
+              57.6379,
+              57.6389,
+              58.9591,
+              58.123,
+              57.931
+            ]
+          }
+        ]
+      },
+      {
+        "shape": 2,
+        "seed": 7,
+        "bias_first": 0,
+        "batch": 1,
+        "dilation": 1,
+        "relu": true,
+        "elements": 16384,
+        "bit_mismatches": 0,
+        "tolerance_failures": 0,
+        "nonfinite": 0,
+        "max_abs_error": 0,
+        "variants": [
+          {
+            "batch_wall_ms": 304.518,
+            "gpu_ms": [
+              59.3948,
+              64.7532,
+              59.422,
+              59.3789,
+              59.3961
+            ]
+          },
+          {
+            "batch_wall_ms": 280.084,
+            "gpu_ms": [
+              55.8861,
+              55.6349,
+              55.6739,
+              55.6662,
+              55.6849
+            ]
+          }
+        ]
+      },
+      {
+        "shape": 2,
+        "seed": 7,
+        "bias_first": 1,
+        "batch": 1,
+        "dilation": 1,
+        "relu": true,
+        "elements": 16384,
+        "bit_mismatches": 0,
+        "tolerance_failures": 0,
+        "nonfinite": 0,
+        "max_abs_error": 0,
+        "variants": [
+          {
+            "batch_wall_ms": 321.737,
+            "gpu_ms": [
+              62.485,
+              62.5349,
+              66.303,
+              64.4009,
+              64.3722
+            ]
+          },
+          {
+            "batch_wall_ms": 296.54,
+            "gpu_ms": [
+              59.4808,
+              58.942,
+              58.636,
+              59.2061,
+              59.0651
+            ]
+          }
+        ]
+      },
+      {
+        "shape": 2,
+        "seed": 123,
+        "bias_first": 0,
+        "batch": 1,
+        "dilation": 1,
+        "relu": false,
+        "elements": 16384,
+        "bit_mismatches": 0,
+        "tolerance_failures": 0,
+        "nonfinite": 0,
+        "max_abs_error": 0,
+        "variants": [
+          {
+            "batch_wall_ms": 298.692,
+            "gpu_ms": [
+              59.232,
+              59.189,
+              59.265,
+              59.6349,
+              59.3661
+            ]
+          },
+          {
+            "batch_wall_ms": 279.431,
+            "gpu_ms": [
+              55.6211,
+              55.6308,
+              55.5692,
+              55.583,
+              55.649
+            ]
+          }
+        ]
+      },
+      {
+        "shape": 2,
+        "seed": 123,
+        "bias_first": 1,
+        "batch": 1,
+        "dilation": 1,
+        "relu": false,
+        "elements": 16384,
+        "bit_mismatches": 0,
+        "tolerance_failures": 0,
+        "nonfinite": 0,
+        "max_abs_error": 0,
+        "variants": [
+          {
+            "batch_wall_ms": 316.316,
+            "gpu_ms": [
+              62.9901,
+              62.9629,
+              62.5029,
+              62.561,
+              63.926
+            ]
+          },
+          {
+            "batch_wall_ms": 290.767,
+            "gpu_ms": [
+              57.8501,
+              57.5859,
+              57.835,
+              57.695,
+              57.835
+            ]
+          }
+        ]
+      },
+      {
+        "shape": 3,
+        "seed": 42,
+        "bias_first": 0,
+        "batch": 2,
+        "dilation": 1,
+        "relu": false,
+        "elements": 480,
+        "bit_mismatches": 0,
+        "tolerance_failures": 0,
+        "nonfinite": 0,
+        "max_abs_error": 0,
+        "variants": [
+          {
+            "batch_wall_ms": 1.33536,
+            "gpu_ms": [
+              0.116992,
+              0.114944,
+              0.114944,
+              0.114944,
+              0.114944
+            ]
+          },
+          {
+            "batch_wall_ms": 1.75776,
+            "gpu_ms": [
+              0.117248,
+              0.1152,
+              0.114944,
+              0.11392,
+              0.11392
+            ]
+          }
+        ]
+      },
+      {
+        "shape": 3,
+        "seed": 42,
+        "bias_first": 1,
+        "batch": 2,
+        "dilation": 1,
+        "relu": false,
+        "elements": 480,
+        "bit_mismatches": 0,
+        "tolerance_failures": 0,
+        "nonfinite": 0,
+        "max_abs_error": 0,
+        "variants": [
+          {
+            "batch_wall_ms": 2.61974,
+            "gpu_ms": [
+              0.116992,
+              0.114944,
+              0.114944,
+              0.11392,
+              0.114944
+            ]
+          },
+          {
+            "batch_wall_ms": 1.35182,
+            "gpu_ms": [
+              0.116992,
+              0.114944,
+              0.1152,
+              0.114176,
+              0.11392
+            ]
+          }
+        ]
+      },
+      {
+        "shape": 3,
+        "seed": 7,
+        "bias_first": 0,
+        "batch": 2,
+        "dilation": 1,
+        "relu": true,
+        "elements": 480,
+        "bit_mismatches": 0,
+        "tolerance_failures": 0,
+        "nonfinite": 0,
+        "max_abs_error": 0,
+        "variants": [
+          {
+            "batch_wall_ms": 1.43266,
+            "gpu_ms": [
+              0.116992,
+              0.1152,
+              0.1152,
+              0.11392,
+              0.114944
+            ]
+          },
+          {
+            "batch_wall_ms": 1.29167,
+            "gpu_ms": [
+              0.116224,
+              0.1152,
+              0.11392,
+              0.11392,
+              0.11392
+            ]
+          }
+        ]
+      },
+      {
+        "shape": 3,
+        "seed": 7,
+        "bias_first": 1,
+        "batch": 2,
+        "dilation": 1,
+        "relu": true,
+        "elements": 480,
+        "bit_mismatches": 0,
+        "tolerance_failures": 0,
+        "nonfinite": 0,
+        "max_abs_error": 0,
+        "variants": [
+          {
+            "batch_wall_ms": 1.62906,
+            "gpu_ms": [
+              0.115968,
+              0.114944,
+              0.1152,
+              0.1152,
+              0.114944
+            ]
+          },
+          {
+            "batch_wall_ms": 1.3562,
+            "gpu_ms": [
+              0.115968,
+              0.11392,
+              0.114176,
+              0.11392,
+              0.11392
+            ]
+          }
+        ]
+      },
+      {
+        "shape": 3,
+        "seed": 123,
+        "bias_first": 0,
+        "batch": 2,
+        "dilation": 1,
+        "relu": false,
+        "elements": 480,
+        "bit_mismatches": 0,
+        "tolerance_failures": 0,
+        "nonfinite": 0,
+        "max_abs_error": 0,
+        "variants": [
+          {
+            "batch_wall_ms": 0.849688,
+            "gpu_ms": [
+              0.115968,
+              0.114944,
+              0.114944,
+              0.11392,
+              0.114176
+            ]
+          },
+          {
+            "batch_wall_ms": 1.58208,
+            "gpu_ms": [
+              0.115968,
+              0.114944,
+              0.114176,
+              0.11392,
+              0.11392
+            ]
+          }
+        ]
+      },
+      {
+        "shape": 3,
+        "seed": 123,
+        "bias_first": 1,
+        "batch": 2,
+        "dilation": 1,
+        "relu": false,
+        "elements": 480,
+        "bit_mismatches": 0,
+        "tolerance_failures": 0,
+        "nonfinite": 0,
+        "max_abs_error": 0,
+        "variants": [
+          {
+            "batch_wall_ms": 1.3474,
+            "gpu_ms": [
+              0.116992,
+              0.115968,
+              0.115968,
+              0.1152,
+              0.114944
+            ]
+          },
+          {
+            "batch_wall_ms": 1.34104,
+            "gpu_ms": [
+              0.116992,
+              0.114944,
+              0.11392,
+              0.11392,
+              0.114176
+            ]
+          }
+        ]
+      },
+      {
+        "shape": 4,
+        "seed": 42,
+        "bias_first": 0,
+        "batch": 2,
+        "dilation": 2,
+        "relu": false,
+        "elements": 3432,
+        "bit_mismatches": 0,
+        "tolerance_failures": 0,
+        "nonfinite": 0,
+        "max_abs_error": 0,
+        "variants": [
+          {
+            "batch_wall_ms": 4.44526,
+            "gpu_ms": [
+              0.705792,
+              0.692992,
+              0.694016,
+              0.688128,
+              0.69376
+            ]
+          },
+          {
+            "batch_wall_ms": 4.51568,
+            "gpu_ms": [
+              0.647168,
+              0.660992,
+              0.658944,
+              0.64896,
+              0.646912
+            ]
+          }
+        ]
+      },
+      {
+        "shape": 4,
+        "seed": 42,
+        "bias_first": 1,
+        "batch": 2,
+        "dilation": 2,
+        "relu": false,
+        "elements": 3432,
+        "bit_mismatches": 0,
+        "tolerance_failures": 0,
+        "nonfinite": 0,
+        "max_abs_error": 0,
+        "variants": [
+          {
+            "batch_wall_ms": 5.3649,
+            "gpu_ms": [
+              0.811008,
+              0.820992,
+              0.834048,
+              0.855808,
+              0.835072
+            ]
+          },
+          {
+            "batch_wall_ms": 4.32234,
+            "gpu_ms": [
+              0.768,
+              0.787968,
+              0.775936,
+              0.780032,
+              0.78208
+            ]
+          }
+        ]
+      },
+      {
+        "shape": 4,
+        "seed": 7,
+        "bias_first": 0,
+        "batch": 2,
+        "dilation": 2,
+        "relu": true,
+        "elements": 3432,
+        "bit_mismatches": 0,
+        "tolerance_failures": 0,
+        "nonfinite": 0,
+        "max_abs_error": 0,
+        "variants": [
+          {
+            "batch_wall_ms": 4.89651,
+            "gpu_ms": [
+              0.715008,
+              0.701952,
+              0.70016,
+              0.691968,
+              0.697856
+            ]
+          },
+          {
+            "batch_wall_ms": 4.23011,
+            "gpu_ms": [
+              0.647936,
+              0.656128,
+              0.651008,
+              0.649984,
+              0.645888
+            ]
+          }
+        ]
+      },
+      {
+        "shape": 4,
+        "seed": 7,
+        "bias_first": 1,
+        "batch": 2,
+        "dilation": 2,
+        "relu": true,
+        "elements": 3432,
+        "bit_mismatches": 0,
+        "tolerance_failures": 0,
+        "nonfinite": 0,
+        "max_abs_error": 0,
+        "variants": [
+          {
+            "batch_wall_ms": 5.33115,
+            "gpu_ms": [
+              0.81408,
+              0.822784,
+              0.834048,
+              0.829952,
+              0.839936
+            ]
+          },
+          {
+            "batch_wall_ms": 4.84453,
+            "gpu_ms": [
+              0.76288,
+              0.766208,
+              0.786944,
+              0.769792,
+              0.781056
+            ]
+          }
+        ]
+      },
+      {
+        "shape": 4,
+        "seed": 123,
+        "bias_first": 0,
+        "batch": 2,
+        "dilation": 2,
+        "relu": false,
+        "elements": 3432,
+        "bit_mismatches": 0,
+        "tolerance_failures": 0,
+        "nonfinite": 0,
+        "max_abs_error": 0,
+        "variants": [
+          {
+            "batch_wall_ms": 4.45844,
+            "gpu_ms": [
+              0.699136,
+              0.691968,
+              0.694784,
+              0.690176,
+              0.692992
+            ]
+          },
+          {
+            "batch_wall_ms": 4.34609,
+            "gpu_ms": [
+              0.657152,
+              0.644864,
+              0.638976,
+              0.651008,
+              0.643072
+            ]
+          }
+        ]
+      },
+      {
+        "shape": 4,
+        "seed": 123,
+        "bias_first": 1,
+        "batch": 2,
+        "dilation": 2,
+        "relu": false,
+        "elements": 3432,
+        "bit_mismatches": 0,
+        "tolerance_failures": 0,
+        "nonfinite": 0,
+        "max_abs_error": 0,
+        "variants": [
+          {
+            "batch_wall_ms": 5.23411,
+            "gpu_ms": [
+              0.804096,
+              0.81792,
+              0.832,
+              0.813824,
+              0.830208
+            ]
+          },
+          {
+            "batch_wall_ms": 5.94474,
+            "gpu_ms": [
+              0.759808,
+              0.775168,
+              0.77696,
+              0.764928,
+              0.77696
+            ]
+          }
+        ]
+      },
+      {
+        "shape": 5,
+        "seed": 42,
+        "bias_first": 0,
+        "batch": 2,
+        "dilation": 1,
+        "relu": false,
+        "elements": 448,
+        "bit_mismatches": 0,
+        "tolerance_failures": 0,
+        "nonfinite": 0,
+        "max_abs_error": 0,
+        "variants": [
+          {
+            "batch_wall_ms": 0.968021,
+            "gpu_ms": [
+              0.016896,
+              0.01408,
+              0.013056,
+              0.0128,
+              0.013056
+            ]
+          },
+          {
+            "batch_wall_ms": 1.59151,
+            "gpu_ms": [
+              0.016128,
+              0.01408,
+              0.013056,
+              0.013056,
+              0.013056
+            ]
+          }
+        ]
+      },
+      {
+        "shape": 5,
+        "seed": 42,
+        "bias_first": 1,
+        "batch": 2,
+        "dilation": 1,
+        "relu": false,
+        "elements": 448,
+        "bit_mismatches": 0,
+        "tolerance_failures": 0,
+        "nonfinite": 0,
+        "max_abs_error": 0,
+        "variants": [
+          {
+            "batch_wall_ms": 0.705938,
+            "gpu_ms": [
+              0.014848,
+              0.01408,
+              0.013056,
+              0.0128,
+              0.013056
+            ]
+          },
+          {
+            "batch_wall_ms": 1.72052,
+            "gpu_ms": [
+              0.014848,
+              0.01408,
+              0.013824,
+              0.013056,
+              0.013056
+            ]
+          }
+        ]
+      },
+      {
+        "shape": 5,
+        "seed": 7,
+        "bias_first": 0,
+        "batch": 2,
+        "dilation": 1,
+        "relu": true,
+        "elements": 448,
+        "bit_mismatches": 0,
+        "tolerance_failures": 0,
+        "nonfinite": 0,
+        "max_abs_error": 0,
+        "variants": [
+          {
+            "batch_wall_ms": 0.756354,
+            "gpu_ms": [
+              0.015104,
+              0.01408,
+              0.0128,
+              0.013056,
+              0.013056
+            ]
+          },
+          {
+            "batch_wall_ms": 1.68963,
+            "gpu_ms": [
+              0.016128,
+              0.01408,
+              0.0128,
+              0.013056,
+              0.013056
+            ]
+          }
+        ]
+      },
+      {
+        "shape": 5,
+        "seed": 7,
+        "bias_first": 1,
+        "batch": 2,
+        "dilation": 1,
+        "relu": true,
+        "elements": 448,
+        "bit_mismatches": 0,
+        "tolerance_failures": 0,
+        "nonfinite": 0,
+        "max_abs_error": 0,
+        "variants": [
+          {
+            "batch_wall_ms": 0.618541,
+            "gpu_ms": [
+              0.016128,
+              0.013824,
+              0.01408,
+              0.013056,
+              0.0128
+            ]
+          },
+          {
+            "batch_wall_ms": 0.882083,
+            "gpu_ms": [
+              0.017152,
+              0.013824,
+              0.013056,
+              0.013056,
+              0.0128
+            ]
+          }
+        ]
+      },
+      {
+        "shape": 5,
+        "seed": 123,
+        "bias_first": 0,
+        "batch": 2,
+        "dilation": 1,
+        "relu": false,
+        "elements": 448,
+        "bit_mismatches": 0,
+        "tolerance_failures": 0,
+        "nonfinite": 0,
+        "max_abs_error": 0,
+        "variants": [
+          {
+            "batch_wall_ms": 0.703489,
+            "gpu_ms": [
+              0.015104,
+              0.01408,
+              0.013056,
+              0.013056,
+              0.013056
+            ]
+          },
+          {
+            "batch_wall_ms": 0.739427,
+            "gpu_ms": [
+              0.015104,
+              0.01408,
+              0.013056,
+              0.013056,
+              0.0128
+            ]
+          }
+        ]
+      },
+      {
+        "shape": 5,
+        "seed": 123,
+        "bias_first": 1,
+        "batch": 2,
+        "dilation": 1,
+        "relu": false,
+        "elements": 448,
+        "bit_mismatches": 0,
+        "tolerance_failures": 0,
+        "nonfinite": 0,
+        "max_abs_error": 0,
+        "variants": [
+          {
+            "batch_wall_ms": 1.6976,
+            "gpu_ms": [
+              0.014848,
+              0.01408,
+              0.0128,
+              0.013056,
+              0.013056
+            ]
+          },
+          {
+            "batch_wall_ms": 0.817656,
+            "gpu_ms": [
+              0.016128,
+              0.01408,
+              0.013056,
+              0.0128,
+              0.013056
+            ]
+          }
+        ]
+      }
+    ],
+    "build_ms": [
+      56.8987,
+      132.726,
+      73.8712,
+      110.492,
+      60.0904,
+      138.141,
+      112.502,
+      134.642,
+      63.3299,
+      140.909,
+      60.8646,
+      98.4309,
+      63.6908,
+      96.6024,
+      62.3641,
+      95.3736,
+      62.8405,
+      145.755,
+      87.9192,
+      141.283,
+      92.7139,
+      142.495,
+      76.5453,
+      136.155,
+      99.7253,
+      147.047,
+      112.381,
+      150.778,
+      98.9101,
+      144.031,
+      109.83,
+      140.318,
+      116.266,
+      136.856,
+      110.682,
+      142.333,
+      130.148,
+      67.5564,
+      46.758,
+      51.757,
+      47.0453,
+      53.7711,
+      46.6987,
+      51.6669,
+      48.1271,
+      53.5928,
+      47.2704,
+      51.7979,
+      47.3015,
+      52.2091,
+      46.8749,
+      54.2501,
+      47.2842,
+      55.0644,
+      47.083,
+      52.5054,
+      47.3833,
+      53.607,
+      46.8319,
+      53.1732,
+      49.9518,
+      51.7749,
+      48.3439,
+      52.5704,
+      48.8524,
+      52.2547,
+      47.3905,
+      53.0493,
+      47.2156,
+      52.2965,
+      47.0266,
+      51.6408
+    ],
+    "all_exact": true,
+    "all_tolerance_passed": true
+  },
+  "completed_utc": 1793604039.795012
+}

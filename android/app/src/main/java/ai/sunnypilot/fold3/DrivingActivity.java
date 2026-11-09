@@ -18,7 +18,12 @@ public final class DrivingActivity extends NativeActivity {
         prepareNative();
         super.onCreate(saved);
         getWindow().addFlags(android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        getOnBackInvokedDispatcher().registerOnBackInvokedCallback(android.window.OnBackInvokedDispatcher.PRIORITY_DEFAULT, this::finish);
+        getOnBackInvokedDispatcher().registerOnBackInvokedCallback(android.window.OnBackInvokedDispatcher.PRIORITY_DEFAULT, () -> {
+            finish();
+            // NativeActivity destruction can wait on Raylib's paused thread.
+            // Dispose its process before another Activity reuses global EGL state.
+            android.os.Process.killProcess(android.os.Process.myPid());
+        });
         getWindow().getDecorView().addOnLayoutChangeListener((view, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom) -> {
             AndroidHardware.surfaceWidth = right - left;
             AndroidHardware.surfaceHeight = bottom - top;
@@ -47,9 +52,9 @@ public final class DrivingActivity extends NativeActivity {
         }
     }
     @Override public void onDestroy() {
-        super.onDestroy();
         // Raylib and Python retain process-global GPU objects. A completed UI
         // Activity gets a fresh renderer next time; driving services survive.
         android.os.Process.killProcess(android.os.Process.myPid());
+        super.onDestroy();
     }
 }

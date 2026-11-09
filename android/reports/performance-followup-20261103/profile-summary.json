@@ -1,0 +1,108 @@
+{
+  "diagnostic_only": true,
+  "qualifies_model": false,
+  "vehicle_tx_enabled": false,
+  "models": {
+    "driver": {
+      "source_report": "driver-profile-stdout.json",
+      "source_sha256": "fd6d6e122493b452948bcb1c9aed8e5d3928c386d026294c82962d07257a1983",
+      "apk_sha256": "e7ae5461257aae2abef31e1631c4c79e7a32bc1513523f5d38db021ab9a2334e",
+      "kernel_count": [
+        579,
+        579,
+        579
+      ],
+      "kernel_sum_ms": [
+        1150.069,
+        1153.071,
+        1156.7169999999999
+      ],
+      "top_costs": [
+        {
+          "name": "ConvBuf2D-ori-b1ci16hi240wi360co32ho120wo180kh3kw3-total:99.532800*10^6",
+          "median_aggregate_ms": 211.288
+        },
+        {
+          "name": "UnaryOp0",
+          "median_aggregate_ms": 199.73699999999994
+        },
+        {
+          "name": "ConvBuf2D-ori-b1ci32hi120wi180co32ho60wo90kh3kw3-total:49.766400*10^6",
+          "median_aggregate_ms": 106.903
+        },
+        {
+          "name": "ConvBuf2D-ori-b1ci32hi60wi90co96ho30wo45kh3kw3-total:37.324800*10^6",
+          "median_aggregate_ms": 80.136
+        },
+        {
+          "name": "ConvBuf2D-ori-b1ci192hi15wi23co96ho15wo23kh1kw1-total:6.359040*10^6",
+          "median_aggregate_ms": 65.839
+        },
+        {
+          "name": "ConvBuf2D-ori-b1ci96hi15wi23co192ho15wo23kh1kw1-total:6.359040*10^6",
+          "median_aggregate_ms": 54.055
+        },
+        {
+          "name": "ConvBuf2D-ori-b1ci512hi8wi12co128ho8wo12kh1kw1-total:6.291456*10^6",
+          "median_aggregate_ms": 53.891999999999996
+        },
+        {
+          "name": "ConvBuf2D-ori-b1ci128hi8wi12co512ho8wo12kh1kw1-total:6.291456*10^6",
+          "median_aggregate_ms": 52.888000000000005
+        }
+      ]
+    },
+    "road": {
+      "source_report": "road-profile-stdout.json",
+      "source_sha256": "c3fbf0a59167c432b39fdf1b704c982d4be683eae5e34bcb281932be2d770c85",
+      "apk_sha256": "e7ae5461257aae2abef31e1631c4c79e7a32bc1513523f5d38db021ab9a2334e",
+      "kernel_count": [
+        736,
+        736,
+        736
+      ],
+      "kernel_sum_ms": [
+        2167.546,
+        2172.862,
+        2178.185
+      ],
+      "top_costs": [
+        {
+          "name": "ConvBuf2D-ori-b1ci768hi8wi16co256ho8wo16kh1kw1-total:25.165824*10^6",
+          "median_aggregate_ms": 320.744
+        },
+        {
+          "name": "ConvBuf2D-ori-b1ci256hi8wi16co768ho8wo16kh1kw1-total:25.165824*10^6",
+          "median_aggregate_ms": 314.45
+        },
+        {
+          "name": "ConvBuf2D-ori-b1ci24hi128wi256co64ho64wo128kh3kw3-total:113.246208*10^6",
+          "median_aggregate_ms": 244.726
+        },
+        {
+          "name": "UnaryOp0",
+          "median_aggregate_ms": 211.99799999999988
+        },
+        {
+          "name": "ConvBuf2D-ori-b1ci64hi32wi64co192ho32wo64kh1kw1-total:25.165824*10^6",
+          "median_aggregate_ms": 109.874
+        },
+        {
+          "name": "ConvBuf2D-ori-b1ci1536hi4wi8co512ho4wo8kh1kw1-total:25.165824*10^6",
+          "median_aggregate_ms": 109.03800000000001
+        },
+        {
+          "name": "ConvBuf2D-ori-b1ci512hi4wi8co1536ho4wo8kh1kw1-total:25.165824*10^6",
+          "median_aggregate_ms": 107.206
+        },
+        {
+          "name": "ConvolutionDepthwise0",
+          "median_aggregate_ms": 106.61400000000002
+        }
+      ]
+    }
+  },
+  "rejected_earlier_evidence": {
+    "road-profile.json": "Unequal event coverage: 736,736,702; old parser status cannot establish a complete profile. Retained unchanged."
+  }
+}

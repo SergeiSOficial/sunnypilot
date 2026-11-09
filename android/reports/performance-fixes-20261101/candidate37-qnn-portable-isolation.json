@@ -1,0 +1,64 @@
+{
+  "serial": "RFCR81Y1TBJ",
+  "command": [
+    ".venv/bin/python",
+    "android/scripts/collect_model_trace.py",
+    "--serial",
+    "RFCR81Y1TBJ",
+    "--profile",
+    "trace-qnn",
+    "--trace-directory",
+    "android/build/qnn-trace-portable-host",
+    "--artifact-directory",
+    "android/reports/performance-fixes-20261101/candidate37-qnn-portable-artifacts",
+    "--report",
+    "android/reports/performance-fixes-20261101/candidate37-qnn-portable.json"
+  ],
+  "vehicle_tx_enabled": false,
+  "status": "passed",
+  "validation_status": "passed",
+  "isolation_status": "passed",
+  "forwards_before": [],
+  "before_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 25.1,
+    "thermal_override": false
+  },
+  "apk_sha256": "e3b7f892e99f73f83fe77b51c0066e514717f515834b6eb9638a16fac13d091f",
+  "baseline": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 25.1,
+    "thermal_override": false,
+    "idle_seconds": 32.46518458399805,
+    "normal_thermal_seconds": 32.10056625001016
+  },
+  "apk_sha256_at_start": "e3b7f892e99f73f83fe77b51c0066e514717f515834b6eb9638a16fac13d091f",
+  "returncode": 0,
+  "after_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 27.3,
+    "thermal_override": false
+  },
+  "forwards_removed": [],
+  "apk_sha256_after": "e3b7f892e99f73f83fe77b51c0066e514717f515834b6eb9638a16fac13d091f",
+  "artifact_stable": true,
+  "wrapper_status": "passed"
+}

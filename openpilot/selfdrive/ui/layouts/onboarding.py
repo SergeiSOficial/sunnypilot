@@ -222,9 +222,6 @@ class OnboardingWindow(Widget):
     ui_state.params.put("CompletedTrainingVersion", training_version, block=True)
 
   def _render(self, _):
-    if self._training_guide is None:
-      self._training_guide = TrainingGuide(completed_callback=self._on_completed_training)
-
     if self._state == OnboardingState.TERMS:
       self._terms.render(self._rect)
     elif self._state == OnboardingState.SUNNYLINK_CONSENT:
@@ -236,6 +233,8 @@ class OnboardingWindow(Widget):
           gui_app.pop_widget()
     elif self._state == OnboardingState.ONBOARDING:
       if not self._training_done:
+        if self._training_guide is None:
+          self._training_guide = TrainingGuide(completed_callback=self._on_completed_training)
         self._training_guide.render(self._rect)
       else:
         gui_app.pop_widget()

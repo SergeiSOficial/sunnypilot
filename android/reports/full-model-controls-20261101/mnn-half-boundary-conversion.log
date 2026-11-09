@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "/Users/sergios/sunnypilot/android/scripts/prepare_accel_models.py", line 234, in <module>
+    prepare(args.destination, args.engine or ["mnn", "ncnn"], args.model or ["dmonitoring_model", "driving_supercombo"], args.mnn_patched)
+  File "/Users/sergios/sunnypilot/android/scripts/prepare_accel_models.py", line 196, in prepare
+    identity = json.loads((patched / "build.json").read_text())
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sergios/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/pathlib.py", line 1027, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sergios/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/pathlib.py", line 1013, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/Users/sergios/sunnypilot/android/build/native/accelerators/mnn-patched/build.json'

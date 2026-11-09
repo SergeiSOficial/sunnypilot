@@ -1,0 +1,49 @@
+{
+  "candidate": "candidate32",
+  "apk_sha256": "a62b55187b2a60a15c9b7d34cb5e6e462cc00c353971d8d126940960861a2810",
+  "vehicle_tx_enabled": false,
+  "engagement_allowed": false,
+  "focused_tests": {
+    "status": "passed",
+    "tests_run": 92,
+    "elapsed_seconds": 16.099,
+    "log": "android/build/candidate32-host-tests.log",
+    "log_sha256": "01cafb9ee44dc9f3e08d48025a666ea3a247f4ed401c6a3b80c8e441f8b44216"
+  },
+  "hyundai_panda_protocol": {
+    "status": "passed",
+    "tests_run": 3938,
+    "elapsed_seconds": 7.659,
+    "log": "android/build/candidate32-hyundai-panda-protocol.log",
+    "log_sha256": "6e59c77a8483222946d7edcc75aa7d3044abcdf894c1ce70c9d00c7661d6c471",
+    "skipped": 356,
+    "scope": "Host only; physical Panda and vehicle remain unavailable"
+  },
+  "original_model_reference_gate": {
+    "status": "passed",
+    "report": "candidate32-host-reference-models.json",
+    "seeds": [
+      42,
+      7,
+      123
+    ],
+    "recurrent_frames_per_seed": 32,
+    "camera_replay_frames_per_model": 60,
+    "rtol": 0.001,
+    "atol": 0.0001
+  },
+  "ruff": {
+    "status": "passed",
+    "paths": [
+      "android/app/src/main/python/fold3_host_math.py",
+      "android/app/src/main/python/fold3_model_trace.py",
+      "android/scripts/compare_camera_trace.py",
+      "android/tests/test_host_math.py"
+    ]
+  },
+  "initial_toolchain_failure": "candidate32-host-toolchain-failure.json",
+  "host_compiler": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++",
+  "host_sdkroot": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk",
+  "build": "android/build/candidate32-build.log",
+  "source_hashes": "/Users/sergios/sunnypilot/android/build/candidates/candidate32/source-hashes.json"
+}

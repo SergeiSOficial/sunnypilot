@@ -1,0 +1,100 @@
+[38;20m[INFO] Environment: MetaDriveEnv[0m
+[38;20m[INFO] MetaDrive version: 0.4.2.3[0m
+[38;20m[INFO] Sensors: [lidar: Lidar(), side_detector: SideDetector(), lane_line_detector: LaneLineDetector(), rgb_road: RGBCameraRoad(1928, 1208)][0m
+[38;20m[INFO] Render Mode: offscreen[0m
+[38;20m[INFO] Horizon (Max steps per agent): None[0m
+[38;20m[INFO] Assets version: 0.4.2.3[0m
+[38;20m[INFO] Known Pipes: CocoaGraphicsPipe[0m
+[38;20m[INFO] Assets version: 0.4.2.3[0m
+[38;20m[INFO] Known Pipes: CocoaGraphicsPipe[0m
+[38;20m[INFO] Start Scenario Index: 0, Num Scenarios : 1[0m
+[33;20m[WARNING] env.vehicle will be deprecated soon. Use env.agent instead (base_env.py:733)[0m
+[38;20m[INFO] Episode ended! Scenario Index: 0 Reason: out_of_road.[0m
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/Users/sergios/sunnypilot/openpilot/tools/sim/android_validation.py", line 205, in <module>
+    main()
+  File "/Users/sergios/sunnypilot/openpilot/tools/sim/android_validation.py", line 201, in main
+    print(json.dumps(validate(args.serial, args.adb, args.duration, args.fault, args.metadrive, args.report, args.port), indent=2))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sergios/sunnypilot/openpilot/tools/sim/android_validation.py", line 166, in validate
+    raise RuntimeError("MetaDrive world stopped unexpectedly")
+RuntimeError: MetaDrive world stopped unexpectedly
+----------------------------------------------------------
+---- Spawning Metadrive world, this might take awhile ----
+----------------------------------------------------------
+{
+  "serial": "emulator-5560",
+  "command": [
+    "/Users/sergios/sunnypilot/.venv/bin/python",
+    "-m",
+    "openpilot.tools.sim.android_validation",
+    "--serial",
+    "emulator-5560",
+    "--adb",
+    "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+    "--duration",
+    "30",
+    "--fault",
+    "cancel",
+    "--metadrive",
+    "--report",
+    "/Users/sergios/sunnypilot/android/reports/full-model-controls-20261101/emulator-candidate45zc-metadrive-cancel.json"
+  ],
+  "vehicle_tx_enabled": false,
+  "status": "failed",
+  "validation_status": "failed",
+  "isolation_status": "passed",
+  "forwards_before": [],
+  "before_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "345 android.hardware.camera.provider.ranchu",
+      "346 android.hardware.camera.provider@2.7-service-google",
+      "436 cameraserver"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.8,
+    "thermal_override": false
+  },
+  "apk_sha256": "3e3c44ec71339060d81cb8278498df64edf840dd9705dfe4b3b4e04d8ff83361",
+  "baseline": {
+    "processes": [],
+    "camera_provider_processes": [
+      "345 android.hardware.camera.provider.ranchu",
+      "346 android.hardware.camera.provider@2.7-service-google",
+      "436 cameraserver"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.8,
+    "thermal_override": false,
+    "idle_seconds": 30.880830415990204,
+    "normal_thermal_seconds": 30.763711582985707
+  },
+  "apk_sha256_at_start": "3e3c44ec71339060d81cb8278498df64edf840dd9705dfe4b3b4e04d8ff83361",
+  "runtime": {
+    "manager_pid": 6139,
+    "ui_pid": 6219,
+    "simulation": true
+  },
+  "returncode": 1,
+  "after_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "345 android.hardware.camera.provider.ranchu",
+      "346 android.hardware.camera.provider@2.7-service-google",
+      "436 cameraserver"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.8,
+    "thermal_override": false
+  },
+  "forwards_removed": [],
+  "apk_sha256_after": "3e3c44ec71339060d81cb8278498df64edf840dd9705dfe4b3b4e04d8ff83361",
+  "artifact_stable": true,
+  "wrapper_status": "failed"
+}

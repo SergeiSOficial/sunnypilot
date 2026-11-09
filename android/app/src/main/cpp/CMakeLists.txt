@@ -129,6 +129,103 @@ target_include_directories(ort_python PRIVATE ${ORT_ROOT}/headers)
 target_link_libraries(ort_python PRIVATE onnxruntime)
 python_extension(ort_python "." "fold3_ort_native")
 
+# Pinned diagnostic engines: their presence never qualifies live perception.
+set(ACCEL_ROOT "${NATIVE_ROOT}/accelerators")
+set(MNN_SOURCE "${ACCEL_ROOT}/mnn-source/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d")
+set(MNN_LIBRARY "${ACCEL_ROOT}/mnn-android/mnn_3.6.2_android_armv7_armv8_cpu_opencl_vulkan/arm64-v8a/libMNN.so")
+option(FOLD3_MNN_PATCHED "Use the pinned MNN source build with explicit FP16 boundaries" OFF)
+set(MNN_CL_LIBRARY "${ACCEL_ROOT}/mnn-android/mnn_3.6.2_android_armv7_armv8_cpu_opencl_vulkan/arm64-v8a/libMNN_CL.so")
+if(FOLD3_MNN_PATCHED)
+  if(NOT EXISTS "${ACCEL_ROOT}/mnn-patched/build.json")
+    message(FATAL_ERROR "Run android/scripts/build_mnn.py before enabling FOLD3_MNN_PATCHED")
+  endif()
+  set(MNN_SOURCE "${ACCEL_ROOT}/mnn-patched/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d")
+  set(MNN_LIBRARY "${ACCEL_ROOT}/mnn-patched/android/libs/arm64-v8a/libMNN.so")
+  set(MNN_CL_LIBRARY "${ACCEL_ROOT}/mnn-patched/android/libs/arm64-v8a/libMNN_CL.so")
+endif()
+set(ncnn_DIR "${ACCEL_ROOT}/ncnn-android/ncnn-20261020-android-vulkan/arm64-v8a/lib/cmake/ncnn")
+option(FOLD3_NCNN_PATCHED "Use diagnostic Vulkan with explicit half-rounding casts" OFF)
+if(FOLD3_NCNN_PATCHED)
+  if(NOT EXISTS "${ACCEL_ROOT}/ncnn-patched/build.json")
+    message(FATAL_ERROR "Run android/scripts/build_ncnn.py before enabling FOLD3_NCNN_PATCHED")
+  endif()
+  set(ncnn_DIR "${ACCEL_ROOT}/ncnn-patched/install/lib/cmake/ncnn")
+endif()
+if(EXISTS "${MNN_LIBRARY}" AND EXISTS "${ncnn_DIR}/ncnnConfig.cmake")
+  if(FOLD3_NCNN_PATCHED)
+    add_library(ncnn SHARED IMPORTED)
+    set_target_properties(ncnn PROPERTIES
+      IMPORTED_LOCATION "${ACCEL_ROOT}/ncnn-patched/install/lib/libncnn.so"
+      INTERFACE_INCLUDE_DIRECTORIES "${ACCEL_ROOT}/ncnn-patched/install/include/ncnn")
+  else()
+  # The release glslang archive uses a newer libc++ ABI than NDK r28. Rebuild
+  # ncnn's exact glslang submodule with this app's NDK rather than adding an ABI shim.
+  set(ENABLE_GLSLANG_BINARIES OFF CACHE BOOL "" FORCE)
+  set(ENABLE_SPVREMAPPER OFF CACHE BOOL "" FORCE)
+  set(ENABLE_OPT OFF CACHE BOOL "" FORCE)
+  set(GLSLANG_TESTS OFF CACHE BOOL "" FORCE)
+  set(GLSLANG_ENABLE_INSTALL OFF CACHE BOOL "" FORCE)
+  add_subdirectory("${ACCEL_ROOT}/glslang-source/glslang-780b6a209132dc74e99458f62ebe5fa7e57c41cf" fold3-glslang EXCLUDE_FROM_ALL)
+  foreach(glslang_target IN ITEMS glslang SPIRV glslang-default-resource-limits)
+    target_compile_options(${glslang_target} PRIVATE -Wno-error)
+  endforeach()
+  find_package(OpenMP REQUIRED)
+  find_package(Threads REQUIRED)
+  # Import ncnn without re-importing the incompatible release glslang archive.
+  include("${ncnn_DIR}/ncnn.cmake")
+  endif()
+  add_library(MNN SHARED IMPORTED)
+  set_target_properties(MNN PROPERTIES IMPORTED_LOCATION "${MNN_LIBRARY}")
+  # The release builds OpenCL separately. Its static initializers register the
+  # backend, so retain the dependency even though we call no exported symbols.
+  add_library(MNN_CL SHARED IMPORTED)
+  set_target_properties(MNN_CL PROPERTIES IMPORTED_LOCATION "${MNN_CL_LIBRARY}")
+  add_library(accel_python MODULE accel_python.cpp)
+  if(FOLD3_NCNN_PATCHED)
+    target_compile_definitions(accel_python PRIVATE FOLD3_NCNN_EXPLICIT_CASTS=1)
+  endif()
+  # ncnn's imported target disables exceptions for consumers. This bridge uses
+  # exceptions only to return failures to Python, outside engine callbacks.
+  set_source_files_properties(accel_python.cpp PROPERTIES COMPILE_OPTIONS "-fexceptions")
+  target_include_directories(accel_python PRIVATE "${MNN_SOURCE}/include" "${MNN_SOURCE}/source"
+    "${MNN_SOURCE}/schema/current" "${MNN_SOURCE}/3rd_party/flatbuffers/include")
+  target_link_libraries(accel_python PRIVATE MNN "-Wl,--no-as-needed" MNN_CL "-Wl,--as-needed" ncnn dl)
+  python_extension(accel_python "." "fold3_accel_native")
+endif()
+
+# Kalman bindings use the same NumPy 2 C API as the packaged ARM64 NumPy.
+set(DRIVING_ROOT "${NATIVE_ROOT}/driving")
+set(REDNOSE_ROOT "${DRIVING_ROOT}/rednose-src")
+set(NUMPY_INCLUDE "${NATIVE_ROOT}/numpy-install/usr/lib/python3.12/site-packages/numpy/_core/include")
+if(NOT EXISTS "${DRIVING_ROOT}/build.json")
+  message(FATAL_ERROR "Run android/scripts/prepare_driving.py before Gradle")
+endif()
+add_library(ekf_sym_pyx MODULE ${DRIVING_ROOT}/ekf_sym_pyx.cpp
+  ${REDNOSE_ROOT}/rednose/helpers/ekf_sym.cc ${REDNOSE_ROOT}/rednose/helpers/ekf_load.cc)
+target_include_directories(ekf_sym_pyx PRIVATE ${REDNOSE_ROOT} ${REDNOSE_ROOT}/rednose ${DRIVING_ROOT}/include ${NUMPY_INCLUDE})
+target_link_libraries(ekf_sym_pyx PRIVATE dl)
+python_extension(ekf_sym_pyx "rednose/helpers" "ekf_sym_pyx")
+foreach(model IN ITEMS pose car)
+  add_library(kalman_${model} SHARED ${DRIVING_ROOT}/kalman/${model}.cpp)
+  target_include_directories(kalman_${model} PRIVATE ${REDNOSE_ROOT} ${DRIVING_ROOT}/include)
+  target_compile_options(kalman_${model} PRIVATE -Wno-error -UNDEBUG)
+  set_target_properties(kalman_${model} PROPERTIES OUTPUT_NAME "${model}"
+    LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_LIST_DIR}/../../../build/native-python/openpilot/selfdrive/locationd/models/generated")
+endforeach()
+
+set(ACADOS_ROOT "${NATIVE_ROOT}/acados-install")
+set(MPC_ROOT "${DRIVING_ROOT}/mpc")
+file(GLOB MPC_GENERATED CONFIGURE_DEPENDS "${MPC_ROOT}/c_generated_code/long_model/long_expl_ode_fun.c"
+  "${MPC_ROOT}/c_generated_code/long_model/long_expl_vde_forw.c"
+  "${MPC_ROOT}/c_generated_code/long_cost/*.c" "${MPC_ROOT}/c_generated_code/long_constraints/*.c")
+add_library(acados_ocp_solver_pyx MODULE ${MPC_ROOT}/acados_ocp_solver_pyx.c
+  ${MPC_ROOT}/c_generated_code/acados_solver_long.c ${MPC_GENERATED})
+target_include_directories(acados_ocp_solver_pyx PRIVATE ${NUMPY_INCLUDE} ${MPC_ROOT}/c_generated_code
+  ${ACADOS_ROOT}/include ${ACADOS_ROOT}/include/blasfeo/include ${ACADOS_ROOT}/include/hpipm/include)
+target_link_libraries(acados_ocp_solver_pyx PRIVATE ${ACADOS_ROOT}/lib/libacados.a
+  ${ACADOS_ROOT}/lib/libhpipm.a ${ACADOS_ROOT}/lib/libblasfeo.a m)
+python_extension(acados_ocp_solver_pyx "openpilot/selfdrive/controls/lib/longitudinal_mpc_lib/c_generated_code" "acados_ocp_solver_pyx")
+
 # Keep exactly one Raylib instance shared by NativeActivity and the Python API.
 set(PLATFORM "Android" CACHE STRING "" FORCE)
 set(OPENGL_VERSION "ES 3.0" CACHE STRING "" FORCE)

@@ -1,0 +1,102 @@
+{
+  "diagnostic_only": true,
+  "candidate": "candidate45j",
+  "model": "driving_supercombo",
+  "apk_sha256": "cfac795591e24a81cc0dbc35a6a6bfdc2a05e86815dbe80613eef1caf8d0b219",
+  "checks": [
+    {
+      "tensor": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_56_XCubed",
+      "input": "fold3_host_conv_bl_InsertedPrecisionFreeCast_model/conv2d_55",
+      "shape": [
+        1,
+        1536,
+        4,
+        8
+      ],
+      "exponent": 3.0,
+      "diagnostic_graph_sha256": "16e5598b502de840f661bc4c0eeb729a99c71910cf9672b71ae22134b1795a3b",
+      "gpu_input_sha256": "cad218f7117a881a1690d4643a1ceaaa33ceae021fc1f3b6d847c4c5cac28a8c",
+      "gpu_on_actual_input": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          1536,
+          4,
+          8
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": false,
+        "max_abs_error": 0.0625,
+        "mismatched_elements": 0
+      },
+      "gpu_unequal_elements": 18423,
+      "separate_mul_host_parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          1536,
+          4,
+          8
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "separate_mul_unequal_elements": 0
+    },
+    {
+      "tensor": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_57_XCubed",
+      "input": "InsertedPrecisionFreeCast_model/mul_12",
+      "shape": [
+        1,
+        1024,
+        4,
+        8
+      ],
+      "exponent": 3.0,
+      "diagnostic_graph_sha256": "21219c19bd18e48ae384adb72bec3365f4a5958cf68fe039fea8c0427d053328",
+      "gpu_input_sha256": "63f37b18a2a02d4a629d92e5ac3f9100ac4066d61f8256d2d01fbd2a67d2db3d",
+      "gpu_on_actual_input": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          1024,
+          4,
+          8
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": false,
+        "max_abs_error": 7.62939453125e-06,
+        "mismatched_elements": 0
+      },
+      "gpu_unequal_elements": 11747,
+      "separate_mul_host_parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          1024,
+          4,
+          8
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "separate_mul_unequal_elements": 0
+    }
+  ]
+}

@@ -18,6 +18,7 @@ public abstract class WorkerService extends Service {
         @Override protected boolean onTransact(int code, Parcel data, Parcel reply, int flags) {
             if (code == START) {
                 boolean simulation = data.readInt() != 0;
+                boolean fullChain = data.dataAvail() > 0 && data.readInt() != 0;
                 synchronized (WorkerService.this) {
                     if (worker == null) {
                         progress("starting");
@@ -26,7 +27,8 @@ public abstract class WorkerService extends Service {
                                 AndroidHardware.initialize(WorkerService.this);
                                 PythonRuntime.start(WorkerService.this);
                                 Python.getInstance().getModule("fold3_daemons").callAttr("run", daemon(),
-                                    getFilesDir().getAbsolutePath(), WorkerService.this, simulation && BuildConfig.DEBUG);
+                                    getFilesDir().getAbsolutePath(), WorkerService.this, simulation && BuildConfig.DEBUG,
+                                    simulation && fullChain && BuildConfig.DEBUG);
                                 phase = "exited";
                             } catch (Throwable e) { error = e.toString(); phase = "failed"; }
                         }, daemon());
@@ -54,4 +56,13 @@ public abstract class WorkerService extends Service {
     public static final class Simulator extends WorkerService { protected String daemon() { return "sim_bridge"; } }
     public static final class RoadModel extends WorkerService { protected String daemon() { return "modeld"; } }
     public static final class DriverModel extends WorkerService { protected String daemon() { return "dmonitoringmodeld"; } }
+    public static final class Vehicle extends WorkerService { protected String daemon() { return "card"; } }
+    public static final class Localization extends WorkerService { protected String daemon() { return "locationd"; } }
+    public static final class Calibration extends WorkerService { protected String daemon() { return "calibrationd"; } }
+    public static final class Parameters extends WorkerService { protected String daemon() { return "paramsd"; } }
+    public static final class Torque extends WorkerService { protected String daemon() { return "torqued"; } }
+    public static final class Delay extends WorkerService { protected String daemon() { return "lagd"; } }
+    public static final class Radar extends WorkerService { protected String daemon() { return "radard"; } }
+    public static final class Planning extends WorkerService { protected String daemon() { return "plannerd"; } }
+    public static final class Selfdrive extends WorkerService { protected String daemon() { return "selfdrived"; } }
 }

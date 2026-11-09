@@ -1,0 +1,130 @@
+{
+  "profile": "trace-kernels",
+  "backend": "CL",
+  "diagnostic_only": true,
+  "started_utc": 1793495114.9157193,
+  "vehicle_tx_enabled": false,
+  "models": {
+    "dmonitoring_model": {
+      "status": "passed",
+      "performance_status": "blocked",
+      "identity": {
+        "name": "dmonitoring_model",
+        "fingerprint": "samsung/q2qxser/q2q:15/AP3A.240905.015.A2/F926BXXSJJZH3:user/release-keys",
+        "sha256": {
+          "model": "30f0326378aea3a8c2a59da73cb4e50c38272bb4fc487c810ebbe6f0daabc7b7",
+          "original_references": "610f877bd0f98353a6e7228698ee869d02a5b2976430234b96d097e96e773381",
+          "sequences": "6acb2ec99babfe57b5ec33b601e262ee9f5b4e54a2fd185f2b59e939256ca3d6",
+          "driver": "f64d432f19fd3f2732cd95050b47328e0c84837b7b60376d55fd7a73a6e9dc8c",
+          "runner": "691b33d509a2caeea62c16f271a53d7bbecf0bd9b13482600e440887ccfd4e39",
+          "host_math": "da749b6acc03721c728c412283b698560a9133d9adc2a52e646ba0f292c91fde",
+          "tinygrad": "5328c614cf4ddb91d645331727d726a07a465505f20f114780e0b1ae2367322f",
+          "uops": "799bf629c8b96b04e0df464970576c55af712a23d7e015adae74a5fecb316ba4",
+          "renderer": "7b187257358cdc652d2031cd42904ab0843b8d4e892405838d03a0c72db78cf3",
+          "compiler": "dbab0929ee9c70a0fc54b52b7371d410226729479121e9e2c2709d46494c69d4"
+        }
+      },
+      "parity": {
+        "outputs": {
+          "passed": true,
+          "finite": true,
+          "shape": [
+            1,
+            553
+          ],
+          "dtype": "float16",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": true,
+          "max_abs_error": 0.0,
+          "mismatched_elements": 0
+        }
+      }
+    },
+    "driving_supercombo": {
+      "status": "passed",
+      "performance_status": "blocked",
+      "identity": {
+        "name": "driving_supercombo",
+        "fingerprint": "samsung/q2qxser/q2q:15/AP3A.240905.015.A2/F926BXXSJJZH3:user/release-keys",
+        "sha256": {
+          "model": "5078784511c7bfb22f1546a15532ed6b6ed71ee6c3e83237951ff5b95ca9ce80",
+          "original_references": "610f877bd0f98353a6e7228698ee869d02a5b2976430234b96d097e96e773381",
+          "sequences": "6acb2ec99babfe57b5ec33b601e262ee9f5b4e54a2fd185f2b59e939256ca3d6",
+          "driver": "f64d432f19fd3f2732cd95050b47328e0c84837b7b60376d55fd7a73a6e9dc8c",
+          "runner": "691b33d509a2caeea62c16f271a53d7bbecf0bd9b13482600e440887ccfd4e39",
+          "host_math": "da749b6acc03721c728c412283b698560a9133d9adc2a52e646ba0f292c91fde",
+          "tinygrad": "5328c614cf4ddb91d645331727d726a07a465505f20f114780e0b1ae2367322f",
+          "uops": "799bf629c8b96b04e0df464970576c55af712a23d7e015adae74a5fecb316ba4",
+          "renderer": "7b187257358cdc652d2031cd42904ab0843b8d4e892405838d03a0c72db78cf3",
+          "compiler": "dbab0929ee9c70a0fc54b52b7371d410226729479121e9e2c2709d46494c69d4"
+        }
+      },
+      "parity": {
+        "outputs": {
+          "passed": true,
+          "finite": true,
+          "shape": [
+            1,
+            2576
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 6.079673767089844e-05,
+          "mismatched_elements": 0
+        },
+        "next_state_img_q": {
+          "passed": true,
+          "finite": true,
+          "shape": [
+            2,
+            5,
+            6,
+            128,
+            256
+          ],
+          "dtype": "uint8",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": true,
+          "max_abs_error": 0.0,
+          "mismatched_elements": 0
+        },
+        "next_state_desire_q": {
+          "passed": true,
+          "finite": true,
+          "shape": [
+            100,
+            1,
+            8
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": true,
+          "max_abs_error": 0.0,
+          "mismatched_elements": 0
+        },
+        "next_state_feat_q": {
+          "passed": true,
+          "finite": true,
+          "shape": [
+            96,
+            1,
+            512
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 4.5299530029296875e-06,
+          "mismatched_elements": 0
+        }
+      }
+    }
+  },
+  "completed_utc": 1793495201.2636485,
+  "validation_status": "blocked"
+}

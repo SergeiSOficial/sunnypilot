@@ -1,0 +1,9 @@
+{
+  "purpose": "Compare bounded FP32 dot-product fma, mad and separate multiply/add against CPU std::fma before considering a production arithmetic change",
+  "diagnostic_only": true,
+  "vehicle_tx_enabled": false,
+  "source": "android/reports/blocker-fixes/opencl-arithmetic-probe.cpp",
+  "source_sha256": "143749d7b37830efbf18cfaa3670efddd6188c8cefe079eaa1e1b0122700a7c5",
+  "elf_sha256": "bc7f03cb16b1232a7c643ae89896ca748bd37b1beeeecffe52a8c51b12cc63f5",
+  "build_command": "/Users/sergios/Library/Android/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/darwin-x86_64/bin/aarch64-linux-android28-clang++ -O2 -Wall -Wextra -Werror -ffp-contract=off -static-libstdc++ android/reports/blocker-fixes/opencl-arithmetic-probe.cpp -ldl -o android/build/opencl-arithmetic-probe"
+}

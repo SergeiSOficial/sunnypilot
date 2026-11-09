@@ -1,0 +1,60 @@
+{
+  "status": "passed",
+  "diagnostic_only": true,
+  "vehicle_tx_enabled": false,
+  "artifact": "opencl-precise-sqrt-probe-artifact.json",
+  "elf_sha256": "cc0707437e53c95b11cd0e41be332aa9cc078b47238ef6470f4d98164bc41572",
+  "returncode": 0,
+  "stderr": "",
+  "single_fp_config": 22,
+  "outputs": 65536,
+  "terms": 128,
+  "variants": [
+    {
+      "name": "fma",
+      "event_mean_ms": 7.130197333,
+      "different_elements": 0,
+      "outside_original_tolerance": 0,
+      "nonfinite": 0,
+      "max_abs_error": 0,
+      "matches_cpu_reference_exactly": true
+    },
+    {
+      "name": "mad",
+      "event_mean_ms": 0.950357333,
+      "different_elements": 50920,
+      "outside_original_tolerance": 0,
+      "nonfinite": 0,
+      "max_abs_error": 2.98023223877e-07,
+      "matches_cpu_reference_exactly": false
+    },
+    {
+      "name": "separate",
+      "event_mean_ms": 0.947541333,
+      "different_elements": 50920,
+      "outside_original_tolerance": 0,
+      "nonfinite": 0,
+      "max_abs_error": 2.98023223877e-07,
+      "matches_cpu_reference_exactly": false
+    },
+    {
+      "name": "sqrt",
+      "event_mean_ms": 0.029952,
+      "different_elements": 3522,
+      "outside_original_tolerance": 0,
+      "nonfinite": 0,
+      "max_abs_error": 1099511627780.0,
+      "matches_cpu_reference_exactly": false
+    },
+    {
+      "name": "integer-corrected-sqrt",
+      "event_mean_ms": 0.098986667,
+      "different_elements": 0,
+      "outside_original_tolerance": 0,
+      "nonfinite": 0,
+      "max_abs_error": 0,
+      "matches_cpu_reference_exactly": true
+    }
+  ],
+  "qualification_scope": "Bounded arithmetic diagnostic only; model accuracy and sustained inference remain separate gates"
+}

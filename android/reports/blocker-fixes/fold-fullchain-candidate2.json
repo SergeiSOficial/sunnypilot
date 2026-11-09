@@ -1,0 +1,225 @@
+{
+  "status": "failed",
+  "vehicle_tx_enabled": false,
+  "physical_engagement_allowed": false,
+  "synthetic_sources": true,
+  "physical_vehicle_verified": false,
+  "camera_model_parity_verified": false,
+  "derived_inputs_injected": false,
+  "received_services": [
+    "carControl",
+    "carControlSP",
+    "carOutput",
+    "carState",
+    "controlsState",
+    "deviceMotion",
+    "driverMonitoringState",
+    "extrinsicsCalibration",
+    "lateralTorqueParameters",
+    "radarState",
+    "radarTracks",
+    "vehicleParameters"
+  ],
+  "packets": 2695,
+  "unsafe_outputs": 0,
+  "profile": {
+    "version": 1,
+    "op": "hello",
+    "simulation": true,
+    "full_chain": true,
+    "vehicle_tx_enabled": false,
+    "car_fingerprint": "HYUNDAI_IONIQ_PHEV_2019",
+    "factory_acc": true,
+    "min_steer_speed_m_s": 14.305279731750488,
+    "physical_fingerprint_verified": false
+  },
+  "cruise_can_valid_samples": 1366,
+  "cruise_can_invalid_samples": 0,
+  "cruise_acc_disabled_samples": 0,
+  "cruise_acc_enabled_samples": 1366,
+  "cancel_can_valid_samples": 509,
+  "cancel_can_invalid_samples": 0,
+  "cancel_acc_disabled_samples": 508,
+  "cancel_acc_enabled_samples": 1,
+  "stale_can_valid_samples": 11,
+  "stale_can_invalid_samples": 492,
+  "stale_acc_disabled_samples": 503,
+  "output_samples": {
+    "driverMonitoringState": 895,
+    "carState": 2378,
+    "carOutput": 2375,
+    "radarTracks": 501,
+    "carControl": 1265,
+    "carControlSP": 1265,
+    "controlsState": 1265,
+    "deviceMotion": 494,
+    "vehicleParameters": 494,
+    "lateralTorqueParameters": 99,
+    "radarState": 801,
+    "extrinsicsCalibration": 99
+  },
+  "processes": {
+    "pid": 27921,
+    "simulation": true,
+    "full_chain": true,
+    "vehicle_tx_enabled": false,
+    "engagement_allowed": false,
+    "engagement_blocker": "camera calibration, model parity/performance and physical Panda qualification incomplete",
+    "processes": {
+      "Controls": {
+        "daemon": "controlsd",
+        "pid": 27947,
+        "phase": "waiting_for_selfdrive_state",
+        "error": "",
+        "last_progress_ms": 108746044,
+        "ticks": 1282,
+        "restarts": 0
+      },
+      "Monitoring": {
+        "daemon": "dmonitoringd",
+        "pid": 27948,
+        "phase": "running",
+        "error": "",
+        "last_progress_ms": 108746048,
+        "ticks": 977,
+        "restarts": 0
+      },
+      "Vehicle": {
+        "daemon": "card",
+        "pid": 27949,
+        "phase": "waiting_for_valid_can",
+        "error": "",
+        "last_progress_ms": 108746050,
+        "ticks": 2836,
+        "restarts": 0
+      },
+      "Localization": {
+        "daemon": "locationd",
+        "pid": 27950,
+        "phase": "running",
+        "error": "",
+        "last_progress_ms": 108746039,
+        "ticks": 512,
+        "restarts": 0
+      },
+      "Calibration": {
+        "daemon": "calibrationd",
+        "pid": 27951,
+        "phase": "failed",
+        "error": "com.chaquo.python.PyException: IndexError: Out of bounds",
+        "last_progress_ms": 108746047,
+        "ticks": 514,
+        "restarts": 0
+      },
+      "Parameters": {
+        "daemon": "paramsd",
+        "pid": 27952,
+        "phase": "running",
+        "error": "",
+        "last_progress_ms": 108746046,
+        "ticks": 512,
+        "restarts": 0
+      },
+      "Torque": {
+        "daemon": "torqued",
+        "pid": 27956,
+        "phase": "running",
+        "error": "",
+        "last_progress_ms": 108746045,
+        "ticks": 510,
+        "restarts": 0
+      },
+      "Delay": {
+        "daemon": "lagd",
+        "pid": 28355,
+        "phase": "failed",
+        "error": "com.chaquo.python.PyException: ImportError: dlopen failed: cannot locate symbol \"PyExc_ImportError\" referenced by \"/data/data/com.samsung.sunnypilot.fold3/files/chaquopy/AssetFinder/app/numpy/fft/_pocketfft_umath.so\"...",
+        "last_progress_ms": 108727153,
+        "ticks": 5,
+        "restarts": 3
+      },
+      "Radar": {
+        "daemon": "radard",
+        "pid": 28005,
+        "phase": "running",
+        "error": "",
+        "last_progress_ms": 108746037,
+        "ticks": 943,
+        "restarts": 0
+      },
+      "Planning": {
+        "daemon": "plannerd",
+        "pid": 28371,
+        "phase": "failed",
+        "error": "com.chaquo.python.PyException: RuntimeError: Failed to ensure params path, errno=13, path=/dev/shm/params, param_prefix=/d",
+        "last_progress_ms": 108728155,
+        "ticks": 4,
+        "restarts": 3
+      },
+      "Selfdrive": {
+        "daemon": "selfdrived",
+        "pid": 28372,
+        "phase": "failed",
+        "error": "com.chaquo.python.PyException: Exception: invalid build metadata",
+        "last_progress_ms": 108727944,
+        "ticks": 4,
+        "restarts": 3
+      },
+      "Simulator": {
+        "daemon": "sim_bridge",
+        "pid": 28045,
+        "phase": "waiting_for_adb",
+        "error": "",
+        "last_progress_ms": 108746037,
+        "ticks": 2702,
+        "restarts": 0
+      }
+    },
+    "updated_elapsed_ms": 108746072
+  },
+  "missing_outputs": [
+    "lateralDelay",
+    "longitudinalPlan",
+    "selfdriveState"
+  ],
+  "factory_acc_cancellation_passed": true,
+  "worker_failures": {
+    "Calibration": {
+      "daemon": "calibrationd",
+      "pid": 27951,
+      "phase": "failed",
+      "error": "com.chaquo.python.PyException: IndexError: Out of bounds",
+      "last_progress_ms": 108746047,
+      "ticks": 514,
+      "restarts": 0
+    },
+    "Delay": {
+      "daemon": "lagd",
+      "pid": 28355,
+      "phase": "failed",
+      "error": "com.chaquo.python.PyException: ImportError: dlopen failed: cannot locate symbol \"PyExc_ImportError\" referenced by \"/data/data/com.samsung.sunnypilot.fold3/files/chaquopy/AssetFinder/app/numpy/fft/_pocketfft_umath.so\"...",
+      "last_progress_ms": 108727153,
+      "ticks": 5,
+      "restarts": 3
+    },
+    "Planning": {
+      "daemon": "plannerd",
+      "pid": 28371,
+      "phase": "failed",
+      "error": "com.chaquo.python.PyException: RuntimeError: Failed to ensure params path, errno=13, path=/dev/shm/params, param_prefix=/d",
+      "last_progress_ms": 108728155,
+      "ticks": 4,
+      "restarts": 3
+    },
+    "Selfdrive": {
+      "daemon": "selfdrived",
+      "pid": 28372,
+      "phase": "failed",
+      "error": "com.chaquo.python.PyException: Exception: invalid build metadata",
+      "last_progress_ms": 108727944,
+      "ticks": 4,
+      "restarts": 3
+    }
+  },
+  "elapsed_s": 30.083250416995725
+}

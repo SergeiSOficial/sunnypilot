@@ -1,0 +1,164 @@
+TID251 `time.time` is banned: Use time.monotonic. time.time can skip due to its reference clock, you probably want a monotonic clock
+   --> android/app/src/main/python/fold3_accel.py:210:28
+    |
+208 |   manifest = json.loads((root / "accelerators/manifest.json").read_text())
+209 |   engine = "mnn" if backend == "mnn-opencl" else "ncnn"
+210 |   report = {"started_utc": time.time(), "backend": backend, "memory_mode": memory_mode,
+    |                            ^^^^^^^^^
+211 |             "stage": stage, "diagnostic_tracing": bool(trace_limit), "vehicle_tx_enabled": False, "models": {}}
+212 |   if accuracy_part is not None:
+    |
+
+TID251 `time.time` is banned: Use time.monotonic. time.time can skip due to its reference clock, you probably want a monotonic clock
+   --> android/app/src/main/python/fold3_accel.py:319:73
+    |
+317 |         if accuracy_part is not None:
+318 |           entry.update(status="passed", accuracy_status="partial", accuracy_part=accuracy_part,
+319 |                        started_utc=report["started_utc"], completed_utc=time.time())
+    |                                                                         ^^^^^^^^^
+320 |           if not accuracy_part_passed(entry, entry["identity"], accuracy_part):
+321 |             entry.update(status="failed", accuracy_status="failed", error="Original-reference accuracy part failed")
+    |
+
+TID251 `time.time` is banned: Use time.monotonic. time.time can skip due to its reference clock, you probably want a monotonic clock
+   --> android/app/src/main/python/fold3_accel.py:394:29
+    |
+392 |         del model
+393 |         save()
+394 |   report["completed_utc"] = time.time()
+    |                             ^^^^^^^^^
+395 |   save()
+396 |   return report
+    |
+
+TID251 `time.time` is banned: Use time.monotonic. time.time can skip due to its reference clock, you probably want a monotonic clock
+   --> android/app/src/main/python/fold3_accel.py:432:28
+    |
+430 |   root = Path(__file__).parent / "fold3_reference/gpu-probes"
+431 |   manifest = json.loads((root / "manifest.json").read_text())
+432 |   report = {"started_utc": time.time(), "diagnostic_only": True, "vehicle_tx_enabled": False, "models": {}}
+    |                            ^^^^^^^^^
+433 |   destination = Path(data_dir) / "model-report.json"
+434 |   for backend, engine in (("mnn-opencl", "mnn"), ("ncnn-vulkan", "ncnn")):
+    |
+
+TID251 `time.time` is banned: Use time.monotonic. time.time can skip due to its reference clock, you probably want a monotonic clock
+   --> android/app/src/main/python/fold3_accel.py:469:29
+    |
+467 |         del model
+468 |       destination.write_text(json.dumps(report, indent=2) + "\n")
+469 |   report["completed_utc"] = time.time()
+    |                             ^^^^^^^^^
+470 |   destination.write_text(json.dumps(report, indent=2) + "\n")
+471 |   return report
+    |
+
+TID251 `time.time` is banned: Use time.monotonic. time.time can skip due to its reference clock, you probably want a monotonic clock
+   --> android/app/src/main/python/fold3_accel.py:481:28
+    |
+479 |   root = Path(__file__).parent / "fold3_reference/htp-probes"
+480 |   manifest = json.loads((root / "manifest.json").read_text())
+481 |   report = {"started_utc": time.time(), "backend": "qnn-htp", "diagnostic_only": True,
+    |                            ^^^^^^^^^
+482 |             "vehicle_tx_enabled": False, "models": {}, "manifest": manifest,
+483 |             "provider_options": {"htp_arch": "68", "device_id": "0", "profiling_level": "detailed"}}
+    |
+
+TID251 `time.time` is banned: Use time.monotonic. time.time can skip due to its reference clock, you probably want a monotonic clock
+   --> android/app/src/main/python/fold3_accel.py:536:29
+    |
+534 |       del model
+535 |     save()
+536 |   report["completed_utc"] = time.time()
+    |                             ^^^^^^^^^
+537 |   report["validation_status"] = "diagnostic_only"
+538 |   save()
+    |
+
+E702 Multiple statements on one line (semicolon)
+  --> android/reports/linear-timing-repair-20261103/check_linear_arithmetic.py:58:31
+   |
+56 |  [copy.deepcopy(info[node.input[0]])], [copy.deepcopy(info[node.output[0]])], constants),
+57 |  opset_imports=list(graph.opset_import), ir_version=graph.ir_version)
+58 | options = ort.SessionOptions(); options.intra_op_num_threads = 2
+   |                               ^
+59 | capture = ROOT / 'android/reports/gpu-runtime-recovery-20261103/ncnn-driver-seed42-reduction/trace-440.bin'
+60 | xhalf = np.fromfile(capture, np.float32).astype(np.float16).reshape(1,1280)
+   |
+
+ISC002 Implicitly concatenated string literals over multiple lines
+  --> android/reports/linear-timing-repair-20261103/check_linear_shader.py:16:43
+   |
+14 |   for half_storage, half_arithmetic in ((0, 0), (1, 0), (1, 1)):
+15 |     name = f'linear-storage{half_storage}-arithmetic{half_arithmetic}'
+16 |     text = original.replace('#version 450', '#version 450\n'
+   |  ___________________________________________^
+17 | |     '#extension GL_EXT_shader_16bit_storage : require\n'
+   | |________________________________________________________^
+18 |       '#extension GL_EXT_shader_explicit_arithmetic_types_float16 : require\n'
+19 |       f'#define NCNN_fp16_storage {half_storage}\n#define NCNN_fp16_arithmetic {half_arithmetic}\n'
+   |
+
+ISC002 Implicitly concatenated string literals over multiple lines
+  --> android/reports/linear-timing-repair-20261103/check_linear_shader.py:17:5
+   |
+15 |     name = f'linear-storage{half_storage}-arithmetic{half_arithmetic}'
+16 |     text = original.replace('#version 450', '#version 450\n'
+17 | /     '#extension GL_EXT_shader_16bit_storage : require\n'
+18 | |     '#extension GL_EXT_shader_explicit_arithmetic_types_float16 : require\n'
+   | |____________________________________________________________________________^
+19 |       f'#define NCNN_fp16_storage {half_storage}\n#define NCNN_fp16_arithmetic {half_arithmetic}\n'
+20 |       + (SOURCE / 'ncnn_glsl_ext.comp').read_text()
+   |
+
+ISC002 Implicitly concatenated string literals over multiple lines
+  --> android/reports/linear-timing-repair-20261103/check_linear_shader.py:18:5
+   |
+16 |     text = original.replace('#version 450', '#version 450\n'
+17 |       '#extension GL_EXT_shader_16bit_storage : require\n'
+18 | /     '#extension GL_EXT_shader_explicit_arithmetic_types_float16 : require\n'
+19 | |     f'#define NCNN_fp16_storage {half_storage}\n#define NCNN_fp16_arithmetic {half_arithmetic}\n'
+   | |_________________________________________________________________________________________________^
+20 |       + (SOURCE / 'ncnn_glsl_ext.comp').read_text()
+21 |       + '\nlayout(local_size_x=64, local_size_y=1, local_size_z=1) in;\n')
+   |
+
+B905 `zip()` without an explicit `strict=` parameter
+   --> android/scripts/prepare_accel_models.py:433:26
+    |
+431 |             # the pinned host, including an unpaired odd-K tail. Scope the tag
+432 |             # to static, valid MatMul batches handled by MNN's Loop lowering.
+433 |             batches = list(zip((1,) * max(0, len(b) - len(a)) + tuple(a[:-2]),
+    |  __________________________^
+434 | |                              (1,) * max(0, len(a) - len(b)) + tuple(b[:-2])))
+    | |____________________________________________________________________________^
+435 |             matmul2 = (node.op_type == "MatMul" and len(node.input) == 2 and min(len(a), len(b)) >= 2
+436 |                        and max(len(a), len(b)) > 2 and min((*a, *b)) > 0 and a[-1] == b[-2]
+    |
+help: Add explicit value for parameter `strict=`
+
+B905 `zip()` without an explicit `strict=` parameter
+   --> android/scripts/prepare_accel_models.py:518:20
+    |
+516 |     types = {"tensor(float)": np.float32, "tensor(float16)": np.float16, "tensor(uint8)": np.uint8}
+517 |     adapted = {item.name: inputs[item.name].astype(types[item.type], copy=False) for item in session.get_inputs()}
+518 |     outputs = dict(zip((item.name for item in session.get_outputs()), session.run(None, adapted)))
+    |                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+519 |     for key, contract in (external_outputs or {}).items():
+520 |       value, target = outputs[key], types[contract["type"]]
+    |
+help: Add explicit value for parameter `strict=`
+
+E501 Line too long (192 > 160)
+   --> android/scripts/prepare_accel_models.py:584:161
+    |
+582 | …
+583 | …
+584 | …','ONNX','--modelFile',sys.argv[2],'--MNNModel',sys.argv[3],'--bizCode','fold3'])"
+    |                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+585 | …
+586 | …
+    |
+
+Found 14 errors.
+No fixes available (2 hidden fixes can be enabled with the `--unsafe-fixes` option).

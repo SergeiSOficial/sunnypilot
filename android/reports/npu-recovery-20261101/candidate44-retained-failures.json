@@ -1,0 +1,267 @@
+{
+  "baseline_apks": {
+    "candidate35": "38645e91f806076517de1497cdb6b5c0cbf4873cfecf5efabb980297a014ad51",
+    "candidate40": "bd42b65a3538b8ad73834e90826eb10a98d8afeacbe9d5aae5877d43a25e30ec"
+  },
+  "experiments": [
+    {
+      "candidate": "candidate41",
+      "apk_sha256": "98264759812d34300d49c043d016bb57dec4fa11b3e20fc1f656f730a7de41e7",
+      "retained": true,
+      "reports": [
+        {
+          "report": "candidate41-htp-probes.json",
+          "models": {
+            "fp16-conv": {
+              "status": "blocked",
+              "error": "RuntimeError: Node 'probe_conv_token_1' OpType:Conv with domain:com.ms.internal.nhwc was inserted using the NHWC format as requested by QNNExecutionProvider, but was not selected by that EP. This means the graph is now invalid as there will not be an EP able to run the node. This could be a bug in layout transformer, or in the GetCapability implementation of the EP.",
+              "performance_status": "blocked"
+            },
+            "a16w16-conv": {
+              "status": "blocked",
+              "error": "RuntimeError: Node 'probe_conv_token_1' OpType:Conv with domain:com.ms.internal.nhwc was inserted using the NHWC format as requested by QNNExecutionProvider, but was not selected by that EP. This means the graph is now invalid as there will not be an EP able to run the node. This could be a bug in layout transformer, or in the GetCapability implementation of the EP.",
+              "performance_status": "blocked"
+            },
+            "a16w8-conv": {
+              "status": "blocked",
+              "error": "RuntimeError: Need to specify a CSV file via provider option profiling_file_path if ETW not enabled.",
+              "performance_status": "blocked"
+            },
+            "fp16-gemm": {
+              "status": "blocked",
+              "error": "RuntimeError: This session contains graph nodes that are assigned to the default CPU EP, but fallback to CPU EP has been explicitly disabled by the user.",
+              "performance_status": "blocked"
+            },
+            "a16w16-gemm": {
+              "status": "blocked",
+              "error": "RuntimeError: This session contains graph nodes that are assigned to the default CPU EP, but fallback to CPU EP has been explicitly disabled by the user.",
+              "performance_status": "blocked"
+            },
+            "a16w8-gemm": {
+              "status": "blocked",
+              "error": "RuntimeError: Need to specify a CSV file via provider option profiling_file_path if ETW not enabled.",
+              "performance_status": "blocked"
+            },
+            "fp16-activation": {
+              "status": "blocked",
+              "error": "RuntimeError: This session contains graph nodes that are assigned to the default CPU EP, but fallback to CPU EP has been explicitly disabled by the user.",
+              "performance_status": "blocked"
+            },
+            "a16w16-activation": {
+              "status": "blocked",
+              "error": "RuntimeError: Need to specify a CSV file via provider option profiling_file_path if ETW not enabled.",
+              "performance_status": "blocked"
+            },
+            "a16w8-activation": {
+              "status": "blocked",
+              "error": "RuntimeError: Need to specify a CSV file via provider option profiling_file_path if ETW not enabled.",
+              "performance_status": "blocked"
+            },
+            "fp16-layout": {
+              "status": "blocked",
+              "error": "RuntimeError: This session contains graph nodes that are assigned to the default CPU EP, but fallback to CPU EP has been explicitly disabled by the user.",
+              "performance_status": "blocked"
+            },
+            "a16w16-layout": {
+              "status": "blocked",
+              "error": "RuntimeError: Need to specify a CSV file via provider option profiling_file_path if ETW not enabled.",
+              "performance_status": "blocked"
+            },
+            "a16w8-layout": {
+              "status": "blocked",
+              "error": "RuntimeError: Need to specify a CSV file via provider option profiling_file_path if ETW not enabled.",
+              "performance_status": "blocked"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "candidate": "candidate42",
+      "apk_sha256": "bc6398930f7bae41244920b7119ce6be1eda2dc7685392d017ebe86104646af5",
+      "retained": true,
+      "reports": [
+        {
+          "report": "candidate42-gpu-probes.json",
+          "models": {
+            "mnn-opencl-conv": {
+              "status": "blocked",
+              "error": "RuntimeError: MNN OpenCL unavailable; CPU fallback rejected",
+              "performance_status": "diagnostic_only"
+            },
+            "mnn-opencl-gemm": {
+              "status": "blocked",
+              "error": "RuntimeError: MNN OpenCL unavailable; CPU fallback rejected",
+              "performance_status": "diagnostic_only"
+            },
+            "mnn-opencl-activation": {
+              "status": "blocked",
+              "error": "RuntimeError: MNN OpenCL unavailable; CPU fallback rejected",
+              "performance_status": "diagnostic_only"
+            },
+            "mnn-opencl-layout": {
+              "status": "blocked",
+              "error": "RuntimeError: MNN OpenCL unavailable; CPU fallback rejected",
+              "performance_status": "diagnostic_only"
+            },
+            "ncnn-vulkan-conv": {
+              "status": "passed",
+              "performance_status": "diagnostic_only"
+            },
+            "ncnn-vulkan-gemm": {
+              "status": "blocked",
+              "error": "RuntimeError: ncnn input allocation/packing mismatch",
+              "performance_status": "diagnostic_only"
+            },
+            "ncnn-vulkan-activation": {
+              "status": "passed",
+              "performance_status": "diagnostic_only"
+            },
+            "ncnn-vulkan-layout": {
+              "status": "passed",
+              "performance_status": "diagnostic_only"
+            }
+          }
+        },
+        {
+          "report": "candidate42-htp-probes.json",
+          "models": {
+            "fp16-conv": {
+              "status": "blocked",
+              "error": "RuntimeError: Node 'probe_conv_token_1' OpType:Conv with domain:com.ms.internal.nhwc was inserted using the NHWC format as requested by QNNExecutionProvider, but was not selected by that EP. This means the graph is now invalid as there will not be an EP able to run the node. This could be a bug in layout transformer, or in the GetCapability implementation of the EP.",
+              "performance_status": "blocked"
+            },
+            "a16w16-conv": {
+              "status": "blocked",
+              "error": "RuntimeError: Node 'probe_conv_token_1' OpType:Conv with domain:com.ms.internal.nhwc was inserted using the NHWC format as requested by QNNExecutionProvider, but was not selected by that EP. This means the graph is now invalid as there will not be an EP able to run the node. This could be a bug in layout transformer, or in the GetCapability implementation of the EP.",
+              "performance_status": "blocked"
+            },
+            "a16w8-conv": {
+              "status": "failed",
+              "performance_status": "diagnostic_only"
+            },
+            "fp16-gemm": {
+              "status": "blocked",
+              "error": "RuntimeError: This session contains graph nodes that are assigned to the default CPU EP, but fallback to CPU EP has been explicitly disabled by the user.",
+              "performance_status": "blocked"
+            },
+            "a16w16-gemm": {
+              "status": "blocked",
+              "error": "RuntimeError: This session contains graph nodes that are assigned to the default CPU EP, but fallback to CPU EP has been explicitly disabled by the user.",
+              "performance_status": "blocked"
+            },
+            "a16w8-gemm": {
+              "status": "passed",
+              "performance_status": "diagnostic_only"
+            },
+            "fp16-activation": {
+              "status": "blocked",
+              "error": "RuntimeError: This session contains graph nodes that are assigned to the default CPU EP, but fallback to CPU EP has been explicitly disabled by the user.",
+              "performance_status": "blocked"
+            },
+            "a16w16-activation": {
+              "status": "passed",
+              "performance_status": "diagnostic_only"
+            },
+            "a16w8-activation": {
+              "status": "passed",
+              "performance_status": "diagnostic_only"
+            },
+            "fp16-layout": {
+              "status": "blocked",
+              "error": "RuntimeError: This session contains graph nodes that are assigned to the default CPU EP, but fallback to CPU EP has been explicitly disabled by the user.",
+              "performance_status": "blocked"
+            },
+            "a16w16-layout": {
+              "status": "passed",
+              "performance_status": "diagnostic_only"
+            },
+            "a16w8-layout": {
+              "status": "passed",
+              "performance_status": "diagnostic_only"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "candidate": "candidate43",
+      "apk_sha256": "5f83ee86387d1ce7a5f50ffa47a02992703af844a6aa1b5ad869b8ba23685785",
+      "retained": true,
+      "reports": [
+        {
+          "report": "candidate43-gpu-probes.json",
+          "models": {
+            "mnn-opencl-conv": {
+              "status": "passed",
+              "performance_status": "diagnostic_only"
+            },
+            "mnn-opencl-gemm": {
+              "status": "passed",
+              "performance_status": "diagnostic_only"
+            },
+            "mnn-opencl-activation": {
+              "status": "passed",
+              "performance_status": "diagnostic_only"
+            },
+            "mnn-opencl-layout": {
+              "status": "passed",
+              "performance_status": "diagnostic_only"
+            },
+            "ncnn-vulkan-conv": {
+              "status": "passed",
+              "performance_status": "diagnostic_only"
+            },
+            "ncnn-vulkan-gemm": {
+              "status": "blocked",
+              "error": "ValueError: cannot reshape array of size 32 into shape (2,8)",
+              "performance_status": "diagnostic_only"
+            },
+            "ncnn-vulkan-activation": {
+              "status": "passed",
+              "performance_status": "diagnostic_only"
+            },
+            "ncnn-vulkan-layout": {
+              "status": "passed",
+              "performance_status": "diagnostic_only"
+            }
+          }
+        },
+        {
+          "report": "candidate43-mnn.json",
+          "models": {
+            "dmonitoring_model": {
+              "status": "blocked",
+              "error": "RuntimeError: MNN CPU operation rejected: InsertedPrecisionFreeCast__to_copy_1:Cast;",
+              "performance_status": "blocked"
+            },
+            "driving_supercombo": {
+              "status": "blocked",
+              "error": "KeyError: 'action_t'",
+              "performance_status": "blocked"
+            }
+          }
+        },
+        {
+          "report": "candidate43-ncnn.json",
+          "models": {
+            "dmonitoring_model": {
+              "status": "failed",
+              "error": "Original-reference tolerance failed; recurrent/performance stages not advanced",
+              "performance_status": "not_run"
+            },
+            "driving_supercombo": {
+              "status": "blocked",
+              "error": "RuntimeError: ncnn graph load failed",
+              "performance_status": "blocked"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "notes": [
+    "candidate42 a16w8 Gemm backend-only verdict did not check original accuracy; candidate44 requires both.",
+    "Earlier conversion, loader, stride and batch-axis failures remain attached to their own APKs."
+  ]
+}

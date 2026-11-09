@@ -1,0 +1,28 @@
+{
+  "candidate": "candidate45h",
+  "apk_sha256": "9868e5b9ca7d24feaefd9acfbcdabaf4f5226e85063e03fffec4400aecc1a859",
+  "diagnostic_only": true,
+  "results": [
+    {
+      "input_tensor": "_token_582",
+      "output_tensor": "_token_584",
+      "actual_gpu_input_sha256": "c6183be581fa9a00f3c90638abcdfdb4bc5c7baf50b881b310fb6c67e9fa40fc",
+      "diagnostic_graph_sha256": "9656ec3af1a5194245f99913443fb0eeda71f2d42d42a439cc4e0458344d5628",
+      "elements": 691200,
+      "max_abs_error": 0.0,
+      "different_fp32_elements": 0,
+      "different_after_fp16_rounding": 0
+    },
+    {
+      "input_tensor": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_0_TanhInput",
+      "output_tensor": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_0_ErfApprox",
+      "actual_gpu_input_sha256": "0bd63885d3e00066140975996f0acfb4b1501d3a55b2590734b591dc45dc3477",
+      "diagnostic_graph_sha256": "67ea0b6b2d1d2783869951ca3a98857d2f2272433c8332169b81f52ce1f20211",
+      "elements": 172800,
+      "max_abs_error": 0.0,
+      "different_fp32_elements": 0,
+      "different_after_fp16_rounding": 0
+    }
+  ],
+  "note": "Local operator equivalence on actual GPU inputs; complete untapped model still fails original-reference tolerances."
+}

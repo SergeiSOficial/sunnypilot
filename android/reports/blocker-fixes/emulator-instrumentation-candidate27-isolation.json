@@ -1,0 +1,66 @@
+{
+  "serial": "emulator-5554",
+  "command": [
+    "/Users/sergios/sunnypilot/.venv/bin/python",
+    "android/scripts/validate_instrumentation.py",
+    "--serial",
+    "emulator-5554",
+    "--adb",
+    "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+    "--package",
+    "com.samsung.sunnypilot.fold3",
+    "--expected-tests",
+    "20",
+    "--output",
+    "/Users/sergios/sunnypilot/android/reports/blocker-fixes/emulator-instrumentation-candidate27.txt",
+    "--report",
+    "/Users/sergios/sunnypilot/android/reports/blocker-fixes/emulator-instrumentation-candidate27.json"
+  ],
+  "vehicle_tx_enabled": false,
+  "status": "passed",
+  "forwards_before": [],
+  "before_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "358 android.hardware.camera.provider.ranchu",
+      "359 android.hardware.camera.provider@2.7-service-google",
+      "425 cameraserver"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.8,
+    "thermal_override": false
+  },
+  "apk_sha256": "0cad68bd370fb4907196cf4c5e9a75cba9cc5f254f9fcb7c3419857bafc32590",
+  "baseline": {
+    "processes": [],
+    "camera_provider_processes": [
+      "358 android.hardware.camera.provider.ranchu",
+      "359 android.hardware.camera.provider@2.7-service-google",
+      "425 cameraserver"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.8,
+    "thermal_override": false,
+    "idle_seconds": 30.814122459007194,
+    "normal_thermal_seconds": 30.719046042009722
+  },
+  "apk_sha256_at_start": "0cad68bd370fb4907196cf4c5e9a75cba9cc5f254f9fcb7c3419857bafc32590",
+  "returncode": 0,
+  "after_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "358 android.hardware.camera.provider.ranchu",
+      "359 android.hardware.camera.provider@2.7-service-google",
+      "425 cameraserver"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.8,
+    "thermal_override": false
+  },
+  "forwards_removed": [],
+  "apk_sha256_after": "0cad68bd370fb4907196cf4c5e9a75cba9cc5f254f9fcb7c3419857bafc32590",
+  "artifact_stable": true
+}

@@ -1,0 +1,360 @@
+{
+  "diagnostic_only": true,
+  "qualified": false,
+  "vehicle_tx_enabled": false,
+  "trace_sha256": "6aa61933540cb929aa73d2658bc05c60cde39f315537385d718021b88de5bdfb",
+  "checks": [
+    {
+      "operator": "convdw_173",
+      "original_node": "node_Conv_877",
+      "original_op_type": "Conv",
+      "dtype": "float32",
+      "input_shape": [
+        1,
+        384,
+        8,
+        12
+      ],
+      "fused_relu": false,
+      "section_sha256": "a350049159dbe60eaa934b4e365ee57da07edfd37987219112109320dbdb6b4d",
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          384,
+          8,
+          12
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": false,
+        "max_abs_error": 3.814697265625e-06,
+        "mismatched_elements": 0
+      },
+      "exact_elements": 10315,
+      "elements": 36864
+    },
+    {
+      "operator": "tanh_62",
+      "original_node": "",
+      "original_op_type": "Tanh",
+      "dtype": "float32",
+      "input_shape": [
+        1,
+        384,
+        8,
+        12
+      ],
+      "fused_relu": false,
+      "section_sha256": "faa3cf820f40b47a352508ea9f1442c08a4cd636b378aa07f8d65bedb6faedf5",
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          384,
+          8,
+          12
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": false,
+        "max_abs_error": 4.172325134277344e-07,
+        "mismatched_elements": 0
+      },
+      "exact_elements": 25099,
+      "elements": 36864
+    },
+    {
+      "operator": "conv_93",
+      "original_node": "node_Conv_879",
+      "original_op_type": "Conv",
+      "dtype": "float32",
+      "input_shape": [
+        1,
+        384,
+        8,
+        12
+      ],
+      "fused_relu": false,
+      "section_sha256": "3034c9d0bbb6422f2c4cb282a99ef80d69531cd3650031896347360d7a80bb7c",
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          128,
+          8,
+          12
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "exact_elements": 12288,
+      "elements": 12288
+    },
+    {
+      "operator": "conv_94",
+      "original_node": "node_Conv_881",
+      "original_op_type": "Conv",
+      "dtype": "float32",
+      "input_shape": [
+        1,
+        128,
+        8,
+        12
+      ],
+      "fused_relu": false,
+      "section_sha256": "60006e1a004a6652581bc35ea306c3188cd094fd4469be10c12ef74ccb850ce6",
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          512,
+          8,
+          12
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "exact_elements": 49152,
+      "elements": 49152
+    },
+    {
+      "operator": "tanh_63",
+      "original_node": "",
+      "original_op_type": "Tanh",
+      "dtype": "float32",
+      "input_shape": [
+        1,
+        512,
+        8,
+        12
+      ],
+      "fused_relu": false,
+      "section_sha256": "d65bfed95b258b41ddf530aa15484f7344fb45630cb829fcf70b3cb3f3f6ba8f",
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          512,
+          8,
+          12
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": false,
+        "max_abs_error": 2.980232238769531e-07,
+        "mismatched_elements": 0
+      },
+      "exact_elements": 35913,
+      "elements": 49152
+    },
+    {
+      "operator": "convdw_174",
+      "original_node": "node_Conv_883",
+      "original_op_type": "Conv",
+      "dtype": "float32",
+      "input_shape": [
+        1,
+        512,
+        8,
+        12
+      ],
+      "fused_relu": false,
+      "section_sha256": "662c8d98b474943ed17f668d519c038f8e1018817f59b0f934975b8bd15f0aa9",
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          512,
+          8,
+          12
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": false,
+        "max_abs_error": 5.7220458984375e-06,
+        "mismatched_elements": 0
+      },
+      "exact_elements": 19557,
+      "elements": 49152
+    },
+    {
+      "operator": "tanh_64",
+      "original_node": "",
+      "original_op_type": "Tanh",
+      "dtype": "float32",
+      "input_shape": [
+        1,
+        512,
+        8,
+        12
+      ],
+      "fused_relu": false,
+      "section_sha256": "42ec7b2ae0aa7a7a9e65e7d41a89a02e787a6f81265272ac0b5c2e819760c0f8",
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          512,
+          8,
+          12
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": false,
+        "max_abs_error": 3.5762786865234375e-07,
+        "mismatched_elements": 0
+      },
+      "exact_elements": 34256,
+      "elements": 49152
+    },
+    {
+      "operator": "conv_95",
+      "original_node": "node_Conv_885",
+      "original_op_type": "Conv",
+      "dtype": "float32",
+      "input_shape": [
+        1,
+        512,
+        8,
+        12
+      ],
+      "fused_relu": false,
+      "section_sha256": "fdc9cba93bfe54b5080aac790086cc331b17011804a86b7483a3826c4878f2cb",
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          128,
+          8,
+          12
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "exact_elements": 12288,
+      "elements": 12288
+    },
+    {
+      "operator": "conv_96",
+      "original_node": "node_Conv_887",
+      "original_op_type": "Conv",
+      "dtype": "float32",
+      "input_shape": [
+        1,
+        128,
+        8,
+        12
+      ],
+      "fused_relu": false,
+      "section_sha256": "b46f10c5c4f3dbedd613b288fd185d1be8d4c3a3ea4a75c384403d9a4aa0006f",
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          512,
+          8,
+          12
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "exact_elements": 49152,
+      "elements": 49152
+    },
+    {
+      "operator": "tanh_65",
+      "original_node": "",
+      "original_op_type": "Tanh",
+      "dtype": "float32",
+      "input_shape": [
+        1,
+        512,
+        8,
+        12
+      ],
+      "fused_relu": false,
+      "section_sha256": "a6f26225be691a2524dd9282be68fd7f8f6accf45f9fa6525546f624ed9607ce",
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          512,
+          8,
+          12
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": false,
+        "max_abs_error": 3.5762786865234375e-07,
+        "mismatched_elements": 0
+      },
+      "exact_elements": 35622,
+      "elements": 49152
+    },
+    {
+      "operator": "convdw_175",
+      "original_node": "node_Conv_889",
+      "original_op_type": "Conv",
+      "dtype": "float32",
+      "input_shape": [
+        1,
+        512,
+        8,
+        12
+      ],
+      "fused_relu": false,
+      "section_sha256": "66f2fa27772b5719246e3463c4337cfe8580286cc59dfeaae1711c8e2859a8b2",
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          512,
+          8,
+          12
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": false,
+        "max_abs_error": 3.814697265625e-06,
+        "mismatched_elements": 0
+      },
+      "exact_elements": 20190,
+      "elements": 49152
+    }
+  ]
+}

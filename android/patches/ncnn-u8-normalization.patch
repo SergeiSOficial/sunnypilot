@@ -1,0 +1,78 @@
+--- a/src/layer/vulkan/shader/binaryop.comp
++++ b/src/layer/vulkan/shader/binaryop.comp
+@@ -94,6 +94,27 @@
+     return isinf(cubed) || isnan(cubed) ? cubed : result;
+ }
+ 
++#if !NCNN_fp16_storage && !NCNN_fp16_packed && !NCNN_fp16_arithmetic && !NCNN_bf16_storage && !NCNN_bf16_packed
++// Exact FP32 division for integer camera samples; retain strict division elsewhere.
++float fold3_u8_divide_255(float value)
++{
++    if (value >= 0.0 && value <= 255.0)
++    {
++        uint pixel = uint(value);
++        if (float(pixel) == value)
++        {
++            if (pixel == 0u) return value; // Preserve negative zero.
++            uint exponent = uint(findMSB(pixel));
++            uint numerator = pixel << (31u - exponent);
++            uint significand = (numerator + 127u) / 255u;
++            // Odd denominator has no rounding ties; addition handles carry at 255.
++            return uintBitsToFloat(((exponent + 118u) << 23u) + significand);
++        }
++    }
++    return fold3_activation_divide(value, 255.0);
++}
++#endif
++
+ void main()
+ {
+     int gx = int(gl_GlobalInvocationID.x);
+@@ -131,7 +152,7 @@
+     if (op_type == 1) res = v1 - v2;
+     if (op_type == 2) res = v1 * v2;
+ #if !NCNN_fp16_storage && !NCNN_fp16_packed && !NCNN_fp16_arithmetic && !NCNN_bf16_storage && !NCNN_bf16_packed
+-    if (op_type == 3) res = fold3_activation_divide(v1, v2);
++    if (op_type == 3) res = with_scalar == 1 && const_b == 255.0 ? fold3_u8_divide_255(v1) : fold3_activation_divide(v1, v2);
+ #else
+     if (op_type == 3) res = v1 / v2;
+ #endif
+--- a/src/layer/vulkan/shader/binaryop_pack4.comp
++++ b/src/layer/vulkan/shader/binaryop_pack4.comp
+@@ -94,6 +94,27 @@
+     return isinf(cubed) || isnan(cubed) ? cubed : result;
+ }
+ 
++#if !NCNN_fp16_storage && !NCNN_fp16_packed && !NCNN_fp16_arithmetic && !NCNN_bf16_storage && !NCNN_bf16_packed
++// Exact FP32 division for integer camera samples; retain strict division elsewhere.
++float fold3_u8_divide_255(float value)
++{
++    if (value >= 0.0 && value <= 255.0)
++    {
++        uint pixel = uint(value);
++        if (float(pixel) == value)
++        {
++            if (pixel == 0u) return value; // Preserve negative zero.
++            uint exponent = uint(findMSB(pixel));
++            uint numerator = pixel << (31u - exponent);
++            uint significand = (numerator + 127u) / 255u;
++            // Odd denominator has no rounding ties; addition handles carry at 255.
++            return uintBitsToFloat(((exponent + 118u) << 23u) + significand);
++        }
++    }
++    return fold3_activation_divide(value, 255.0);
++}
++#endif
++
+ void main()
+ {
+     int gx = int(gl_GlobalInvocationID.x);
+@@ -126,7 +147,7 @@
+     if (op_type == 1) res = v1 - v2;
+     if (op_type == 2) res = v1 * v2;
+ #if !NCNN_fp16_storage && !NCNN_fp16_packed && !NCNN_fp16_arithmetic && !NCNN_bf16_storage && !NCNN_bf16_packed
+-    if (op_type == 3) res = vec4(fold3_activation_divide(v1.x, v2.x), fold3_activation_divide(v1.y, v2.y), fold3_activation_divide(v1.z, v2.z), fold3_activation_divide(v1.w, v2.w));
++    if (op_type == 3) res = with_scalar == 1 && const_b == 255.0 ? vec4(fold3_u8_divide_255(v1.x), fold3_u8_divide_255(v1.y), fold3_u8_divide_255(v1.z), fold3_u8_divide_255(v1.w)) : vec4(fold3_activation_divide(v1.x, v2.x), fold3_activation_divide(v1.y, v2.y), fold3_activation_divide(v1.z, v2.z), fold3_activation_divide(v1.w, v2.w));
+ #else
+     if (op_type == 3) res = v1 / v2;
+ #endif

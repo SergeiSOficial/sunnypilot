@@ -1,0 +1,83 @@
+{
+  "status": "passed",
+  "rejected_cases": [
+    "can_service",
+    "output_service",
+    "sequence_gap",
+    "negative_age",
+    "service_payload_mismatch",
+    "malformed_cereal",
+    "invalid_base64",
+    "oversized_packet",
+    "malformed_json",
+    "non_simulation_handshake"
+  ],
+  "vehicle_tx_enabled": false
+}
+{
+  "serial": "RFCR81Y1TBJ",
+  "command": [
+    "/Users/sergios/sunnypilot/.venv/bin/python",
+    "android/scripts/validate_adb_faults.py",
+    "--serial",
+    "RFCR81Y1TBJ",
+    "--adb",
+    "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+    "--report",
+    "/Users/sergios/sunnypilot/android/reports/full-model-controls-20261101/fold-candidate45t-adb-faults.json",
+    "--package",
+    "com.samsung.sunnypilot.fold3"
+  ],
+  "vehicle_tx_enabled": false,
+  "status": "passed",
+  "validation_status": "passed",
+  "isolation_status": "passed",
+  "forwards_before": [],
+  "before_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 31.1,
+    "thermal_override": false
+  },
+  "apk_sha256": "266fbc1dd1ac476c9e806d851c2193709732507a8e9a3124679554114e14fd2d",
+  "baseline": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 29.7,
+    "thermal_override": false,
+    "idle_seconds": 33.1848448330129,
+    "normal_thermal_seconds": 32.80880220801919
+  },
+  "apk_sha256_at_start": "266fbc1dd1ac476c9e806d851c2193709732507a8e9a3124679554114e14fd2d",
+  "runtime": {
+    "manager_pid": 28562,
+    "ui_pid": 28635,
+    "simulation": true
+  },
+  "returncode": 0,
+  "after_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 31.0,
+    "thermal_override": false
+  },
+  "forwards_removed": [],
+  "apk_sha256_after": "266fbc1dd1ac476c9e806d851c2193709732507a8e9a3124679554114e14fd2d",
+  "artifact_stable": true,
+  "wrapper_status": "passed"
+}

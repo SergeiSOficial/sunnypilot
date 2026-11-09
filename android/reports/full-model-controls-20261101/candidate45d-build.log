@@ -1,0 +1,803 @@
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/8.9/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+> Task :app:preBuild UP-TO-DATE
+> Task :app:preDebugBuild UP-TO-DATE
+> Task :app:generateDebugBuildConfig UP-TO-DATE
+> Task :app:findDebugPythonCommand
+> Task :app:extractDebugPythonBuildPackages UP-TO-DATE
+> Task :app:installDebugPythonRequirements UP-TO-DATE
+
+> Task :app:buildMetadata
+kj/filesystem-disk-unix.c++:1734: warning: PWD environment variable doesn't match current directory; pwd = /Users/sergios/sunnypilot/android
+android/CAMERAS.md: needs update
+android/PERFORMANCE.md: needs update
+android/README.md: needs update
+android/VALIDATION.md: needs update
+android/app/build.gradle: needs update
+android/app/src/androidTest/java/ai/sunnypilot/fold3/CameraPreviewSampleTest.java: needs update
+android/app/src/androidTest/java/ai/sunnypilot/fold3/PerceptionTest.java: needs update
+android/app/src/androidTest/java/ai/sunnypilot/fold3/RuntimeTest.java: needs update
+android/app/src/main/AndroidManifest.xml: needs update
+android/app/src/main/cpp/CMakeLists.txt: needs update
+android/app/src/main/cpp/bridge.cpp: needs update
+android/app/src/main/cpp/ort_python.cpp: needs update
+android/app/src/main/java/ai/sunnypilot/fold3/AndroidHardware.java: needs update
+android/app/src/main/java/ai/sunnypilot/fold3/CameraPreviewSample.java: needs update
+android/app/src/main/java/ai/sunnypilot/fold3/CameraProbe.java: needs update
+android/app/src/main/java/ai/sunnypilot/fold3/DrivingActivity.java: needs update
+android/app/src/main/java/ai/sunnypilot/fold3/FrameStats.java: needs update
+android/app/src/main/java/ai/sunnypilot/fold3/MainActivity.java: needs update
+android/app/src/main/java/ai/sunnypilot/fold3/ManagerService.java: needs update
+android/app/src/main/java/ai/sunnypilot/fold3/ModelService.java: needs update
+android/app/src/main/java/ai/sunnypilot/fold3/NativeBridge.java: needs update
+android/app/src/main/java/ai/sunnypilot/fold3/ProbeService.java: needs update
+android/app/src/main/java/ai/sunnypilot/fold3/WorkerService.java: needs update
+android/app/src/main/python/fold3_checks.py: needs update
+android/app/src/main/python/fold3_daemons.py: needs update
+android/app/src/main/python/fold3_models.py: needs update
+android/app/src/main/python/fold3_ort.py: needs update
+android/app/src/main/python/fold3_runtime.py: needs update
+android/app/src/main/python/fold3_sim.py: needs update
+android/app/src/main/python/fold3_vision.py: needs update
+android/app/src/test/java/ai/sunnypilot/fold3/FrameStatsTest.java: needs update
+android/patches/msgq-android.patch: needs update
+android/patches/tinygrad-android.patch: needs update
+android/requirements-host.txt: needs update
+android/scripts/build_ort.py: needs update
+android/scripts/experiment.py: needs update
+android/scripts/model_reference.py: needs update
+android/scripts/prepare_native.py: needs update
+android/scripts/validate_adb_faults.py: needs update
+android/scripts/validate_cameras.py: needs update
+android/scripts/validate_instrumentation.py: needs update
+android/scripts/validate_lifecycle.py: needs update
+android/scripts/validate_models.py: needs update
+android/scripts/validate_thermal.py: needs update
+android/scripts/validate_vision.py: needs update
+android/tests/test_experiment.py: needs update
+android/tests/test_model_reference.py: needs update
+android/tests/test_validate_models.py: needs update
+android/tests/test_vision_panda.py: needs update
+openpilot/common/params.py: needs update
+openpilot/common/version.py: needs update
+openpilot/selfdrive/car/card.py: needs update
+openpilot/selfdrive/controls/controlsd.py: needs update
+openpilot/selfdrive/controls/lib/longitudinal_mpc_lib/long_mpc.py: needs update
+openpilot/selfdrive/locationd/calibrationd.py: needs update
+openpilot/tools/sim/android_bridge.py: needs update
+openpilot/tools/sim/android_validation.py: needs update
+openpilot/tools/sim/lib/android_protocol.py: needs update
+fatal: no upstream configured for branch 'codex/fold3-android-port'
+
+> Task :app:configureCMakeDebug[arm64-v8a]
+[CXX5304] This version only understands SDK XML versions up to 3 but an SDK XML file of version 4 was encountered. This can happen if you use versions of Android Studio and the command-line tools that were released at different times.
+[CXX5304] This version only understands SDK XML versions up to 3 but an SDK XML file of version 4 was encountered. This can happen if you use versions of Android Studio and the command-line tools that were released at different times.
+C/C++: CMake Deprecation Warning at /Users/sergios/sunnypilot/android/build/native/capnproto-c++-1.0.1/CMakeLists.txt:1 (cmake_minimum_required):
+C/C++:   Compatibility with CMake < 3.10 will be removed from a future version of
+C/C++:   CMake.
+C/C++:   Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+C/C++:   to tell CMake that the project requires at least <min> but has been updated
+C/C++:   to work with policies introduced by <max> or earlier.
+C/C++: CMake Deprecation Warning at /Users/sergios/sunnypilot/android/build/native/libzmq-4.3.5/CMakeLists.txt:7 (cmake_minimum_required):
+C/C++:   Compatibility with CMake < 3.10 will be removed from a future version of
+C/C++:   CMake.
+C/C++:   Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+C/C++:   to tell CMake that the project requires at least <min> but has been updated
+C/C++:   to work with policies introduced by <max> or earlier.
+C/C++: CMake Deprecation Warning at /Users/sergios/sunnypilot/android/build/native/accelerators/glslang-source/glslang-780b6a209132dc74e99458f62ebe5fa7e57c41cf/CMakeLists.txt:111 (message):
+C/C++:   ENABLE_HLSL is deprecated.  The HLSL front-end will be removed in a future
+C/C++:   major release of glslang.  See
+C/C++:   https://github.com/KhronosGroup/glslang/issues/4210 for details.
+C/C++: CMake Warning at /Users/sergios/sunnypilot/android/build/native/raylib-android/cmake/LibraryConfigurations.cmake:215 (message):
+C/C++:   You are overriding the suggested GRAPHICS=GRAPHICS_API_OPENGL_ES2 with
+C/C++:   GRAPHICS_API_OPENGL_ES3! This may fail.
+C/C++: Call Stack (most recent call first):
+C/C++:   /Users/sergios/sunnypilot/android/build/native/raylib-android/src/CMakeLists.txt:49 (include)
+
+> Task :app:buildCMakeDebug[arm64-v8a]
+C/C++: ninja: Entering directory `/Users/sergios/sunnypilot/android/app/.cxx/Debug/1q476u4b/arm64-v8a'
+C/C++: /Users/sergios/sunnypilot/android/build/native/msgq/msgq/impl_msgq.cc:38:109: warning: unused parameter 'check_endpoint' [-Wunused-parameter]
+C/C++:    38 | int MSGQSubSocket::connect(Context *context, std::string endpoint, std::string address, bool conflate, bool check_endpoint, size_t segment_size){
+C/C++:       |                                                                                                             ^
+C/C++: /Users/sergios/sunnypilot/android/build/native/msgq/msgq/impl_msgq.cc:107:69: warning: unused parameter 'check_endpoint' [-Wunused-parameter]
+C/C++:   107 | int PubSocket::connect(Context *context, std::string endpoint, bool check_endpoint, size_t segment_size){
+C/C++:       |                                                                     ^
+C/C++: 2 warnings generated.
+C/C++: /Users/sergios/sunnypilot/android/build/native/msgq/msgq/event.cc:248:14: warning: variable length arrays in C++ are a Clang extension [-Wvla-cxx-extension]
+C/C++:   248 |   pollfd fds[events.size()];
+C/C++:       |              ^~~~~~~~~~~~~
+C/C++: /Users/sergios/sunnypilot/android/build/native/msgq/msgq/event.cc:248:14: note: function parameter 'events' with unknown value cannot be used in a constant expression
+C/C++: /Users/sergios/sunnypilot/android/build/native/msgq/msgq/event.cc:247:51: note: declared here
+C/C++:   247 | int Event::wait_for_one(const std::vector<Event>& events, int timeout_sec) {
+C/C++:       |                                                   ^
+C/C++: 1 warning generated.
+C/C++: /Users/sergios/sunnypilot/android/build/native/msgq/msgq/visionipc/visionipc.cc:28:3: warning: missing field 'sun_path' initializer [-Wmissing-designated-field-initializers]
+C/C++:    28 |   };
+C/C++:       |   ^
+C/C++: /Users/sergios/sunnypilot/android/build/native/msgq/msgq/visionipc/visionipc.cc:48:3: warning: missing field 'sun_path' initializer [-Wmissing-designated-field-initializers]
+C/C++:    48 |   };
+C/C++:       |   ^
+C/C++: /Users/sergios/sunnypilot/android/build/native/msgq/msgq/visionipc/visionipc.cc:62:20: warning: variable length arrays in C++ are a Clang extension [-Wvla-cxx-extension]
+C/C++:    62 |   char control_buf[CMSG_SPACE(sizeof(int) * num_fds)];
+C/C++:       |                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C/C++: /Users/sergios/Library/Android/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/include/sys/socket.h:108:25: note: expanded from macro 'CMSG_SPACE'
+C/C++:   108 | #define CMSG_SPACE(len) (CMSG_ALIGN(sizeof(struct cmsghdr)) + CMSG_ALIGN(len))
+C/C++:       |                         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C/C++: /Users/sergios/sunnypilot/android/build/native/msgq/msgq/visionipc/visionipc.cc:62:45: note: function parameter 'num_fds' with unknown value cannot be used in a constant expression
+C/C++:    62 |   char control_buf[CMSG_SPACE(sizeof(int) * num_fds)];
+C/C++:       |                                             ^
+C/C++: /Users/sergios/sunnypilot/android/build/native/msgq/msgq/visionipc/visionipc.cc:60:88: note: declared here
+C/C++:    60 | int ipc_sendrecv_with_fds(bool send, int fd, void *buf, size_t buf_size, int* fds, int num_fds,
+C/C++:       |                                                                                        ^
+C/C++: /Users/sergios/sunnypilot/android/build/native/msgq/msgq/visionipc/visionipc.cc:72:3: warning: missing field 'msg_name' initializer [-Wmissing-designated-field-initializers]
+C/C++:    72 |   };
+C/C++:       |   ^
+C/C++: 4 warnings generated.
+C/C++: /Users/sergios/sunnypilot/android/build/native/msgq/msgq/visionipc/visionbuf.cc:67:25: warning: unused parameter 'dir' [-Wunused-parameter]
+C/C++:    67 | int VisionBuf::sync(int dir) {
+C/C++:       |                         ^
+C/C++: 1 warning generated.
+C/C++: /Users/sergios/sunnypilot/android/build/native/msgq/msgq/impl_fake.cc:8:46: warning: unused parameter 'timeout' [-Wunused-parameter]
+C/C++:     8 | std::vector<SubSocket*> FakePoller::poll(int timeout) {
+C/C++:       |                                              ^
+C/C++: 1 warning generated.
+C/C++: /Users/sergios/sunnypilot/android/build/native/msgq/msgq/visionipc/visionipc_client.cc:42:24: warning: comparison of integers of different signs: 'size_t' (aka 'unsigned long') and 'int' [-Wsign-compare]
+C/C++:    42 |   for (size_t i = 0; i < num_buffers; i++) {
+C/C++:       |                      ~ ^ ~~~~~~~~~~~
+C/C++: /Users/sergios/sunnypilot/android/build/native/msgq/msgq/visionipc/visionipc_client.cc:73:24: warning: comparison of integers of different signs: 'size_t' (aka 'unsigned long') and 'int' [-Wsign-compare]
+C/C++:    73 |   for (size_t i = 0; i < num_buffers; i++) {
+C/C++:       |                      ~ ^ ~~~~~~~~~~~
+C/C++: /Users/sergios/sunnypilot/android/build/native/msgq/msgq/visionipc/visionipc_client.cc:102:19: warning: comparison of integers of different signs: 'size_t' (aka 'unsigned long') and 'int' [-Wsign-compare]
+C/C++:   102 |   if (packet->idx >= num_buffers) {
+C/C++:       |       ~~~~~~~~~~~ ^  ~~~~~~~~~~~
+C/C++: /Users/sergios/sunnypilot/android/build/native/msgq/msgq/visionipc/visionipc_client.cc:153:24: warning: comparison of integers of different signs: 'size_t' (aka 'unsigned long') and 'int' [-Wsign-compare]
+C/C++:   153 |   for (size_t i = 0; i < num_buffers; i++) {
+C/C++:       |                      ~ ^ ~~~~~~~~~~~
+C/C++: 4 warnings generated.
+C/C++: /Users/sergios/sunnypilot/android/build/native/msgq/msgq/visionipc/visionipc_server.cc:90:33: warning: missing field 'events' initializer [-Wmissing-field-initializers]
+C/C++:    90 |     struct pollfd polls[1] = {{0}};
+C/C++:       |                                 ^
+C/C++: /Users/sergios/sunnypilot/android/build/native/msgq/msgq/visionipc/visionipc_server.cc:125:16: warning: comparison of integers of different signs: 'int' and 'unsigned long' [-Wsign-compare]
+C/C++:   125 |       assert(r == available_stream_types.size() * sizeof(VisionStreamType));
+C/C++:       |              ~ ^  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C/C++: /Users/sergios/Library/Android/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/include/assert.h:55:23: note: expanded from macro 'assert'
+C/C++:    55 | #  define assert(e) ((e) ? __assert_no_op : __assert2(__FILE__, __LINE__, __PRETTY_FUNCTION__, #e))
+C/C++:       |                       ^
+C/C++: /Users/sergios/sunnypilot/android/build/native/msgq/msgq/visionipc/visionipc_server.cc:169:16: warning: comparison of integers of different signs: 'int' and 'size_type' (aka 'unsigned long') [-Wsign-compare]
+C/C++:   169 |     assert(idx < b.size() && idx >= 0);
+C/C++:       |            ~~~ ^ ~~~~~~~~
+C/C++: /Users/sergios/Library/Android/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/include/assert.h:55:23: note: expanded from macro 'assert'
+C/C++:    55 | #  define assert(e) ((e) ? __assert_no_op : __assert2(__FILE__, __LINE__, __PRETTY_FUNCTION__, #e))
+C/C++:       |                       ^
+C/C++: /Users/sergios/sunnypilot/android/build/native/msgq/msgq/visionipc/visionipc_server.cc:185:30: warning: missing field 'idx' initializer [-Wmissing-field-initializers]
+C/C++:   185 |   VisionIpcPacket packet = {0};
+C/C++:       |                              ^
+C/C++: 4 warnings generated.
+C/C++: /Users/sergios/sunnypilot/android/build/native/libzmq-4.3.5/src/proxy.cpp:502:27: warning: missing field 'bytes' initializer [-Wmissing-field-initializers]
+C/C++:   502 |     stats_proxy stats = {0};
+C/C++:       |                           ^
+C/C++: /Users/sergios/sunnypilot/android/build/native/libzmq-4.3.5/src/proxy.cpp:502:26: warning: suggest braces around initialization of subobject [-Wmissing-braces]
+C/C++:   502 |     stats_proxy stats = {0};
+C/C++:       |                          ^
+C/C++:       |                          {}
+C/C++: /Users/sergios/sunnypilot/android/build/native/libzmq-4.3.5/src/proxy.cpp:502:27: warning: missing field 'recv' initializer [-Wmissing-field-initializers]
+C/C++:   502 |     stats_proxy stats = {0};
+C/C++:       |                           ^
+C/C++: /Users/sergios/sunnypilot/android/build/native/libzmq-4.3.5/src/proxy.cpp:502:26: warning: suggest braces around initialization of subobject [-Wmissing-braces]
+C/C++:   502 |     stats_proxy stats = {0};
+C/C++:       |                          ^
+C/C++:       |                          {}
+C/C++: /Users/sergios/sunnypilot/android/build/native/libzmq-4.3.5/src/proxy.cpp:502:27: warning: missing field 'backend' initializer [-Wmissing-field-initializers]
+C/C++:   502 |     stats_proxy stats = {0};
+C/C++:       |                           ^
+C/C++: 5 warnings generated.
+C/C++: /Users/sergios/sunnypilot/android/build/native/accelerators/glslang-source/glslang-780b6a209132dc74e99458f62ebe5fa7e57c41cf/glslang/MachineIndependent/iomapper.cpp:267:26: warning: definition of implicit copy constructor for 'TNotifyInOutAdaptor' is deprecated because it has a user-declared copy assignment operator [-Wdeprecated-copy]
+C/C++:   267 |     TNotifyInOutAdaptor& operator=(TNotifyInOutAdaptor&) = delete;
+C/C++:       |                          ^
+C/C++: /Users/sergios/sunnypilot/android/build/native/accelerators/glslang-source/glslang-780b6a209132dc74e99458f62ebe5fa7e57c41cf/glslang/MachineIndependent/iomapper.cpp:1574:53: note: in implicit copy constructor for 'glslang::TNotifyInOutAdaptor' first required here
+C/C++:  1574 |     std::for_each(inVector.begin(), inVector.end(), inOutNotify);
+C/C++:       |                                                     ^
+C/C++: /Users/sergios/sunnypilot/android/build/native/accelerators/glslang-source/glslang-780b6a209132dc74e99458f62ebe5fa7e57c41cf/glslang/MachineIndependent/iomapper.cpp:248:28: warning: definition of implicit copy constructor for 'TNotifyUniformAdaptor' is deprecated because it has a user-declared copy assignment operator [-Wdeprecated-copy]
+C/C++:   248 |     TNotifyUniformAdaptor& operator=(TNotifyUniformAdaptor&) = delete;
+C/C++:       |                            ^
+C/C++: /Users/sergios/sunnypilot/android/build/native/accelerators/glslang-source/glslang-780b6a209132dc74e99458f62ebe5fa7e57c41cf/glslang/MachineIndependent/iomapper.cpp:1576:63: note: in implicit copy constructor for 'glslang::TNotifyUniformAdaptor' first required here
+C/C++:  1576 |     std::for_each(uniformVector.begin(), uniformVector.end(), uniformNotify);
+C/C++:       |                                                               ^
+C/C++: /Users/sergios/sunnypilot/android/build/native/accelerators/glslang-source/glslang-780b6a209132dc74e99458f62ebe5fa7e57c41cf/glslang/MachineIndependent/iomapper.cpp:344:30: warning: definition of implicit copy constructor for 'TResolverUniformAdaptor' is deprecated because it has a user-declared copy assignment operator [-Wdeprecated-copy]
+C/C++:   344 |     TResolverUniformAdaptor& operator=(TResolverUniformAdaptor&) = delete;
+C/C++:       |                              ^
+C/C++: /Users/sergios/sunnypilot/android/build/native/accelerators/glslang-source/glslang-780b6a209132dc74e99458f62ebe5fa7e57c41cf/glslang/MachineIndependent/iomapper.cpp:1591:63: note: in implicit copy constructor for 'glslang::TResolverUniformAdaptor' first required here
+C/C++:  1591 |     std::for_each(uniformVector.begin(), uniformVector.end(), uniformResolve);
+C/C++:       |                                                               ^
+C/C++: /Users/sergios/sunnypilot/android/build/native/accelerators/glslang-source/glslang-780b6a209132dc74e99458f62ebe5fa7e57c41cf/glslang/MachineIndependent/iomapper.cpp:836:21: warning: definition of implicit copy constructor for 'TSlotCollector' is deprecated because it has a user-declared copy assignment operator [-Wdeprecated-copy]
+C/C++:   836 |     TSlotCollector& operator=(TSlotCollector&) = delete;
+C/C++:       |                     ^
+C/C++: /Users/sergios/sunnypilot/android/build/native/accelerators/glslang-source/glslang-780b6a209132dc74e99458f62ebe5fa7e57c41cf/glslang/MachineIndependent/iomapper.cpp:1707:71: note: in implicit copy constructor for 'glslang::TSlotCollector' first required here
+C/C++:  1707 |     std::for_each(inVarMaps[stage]->begin(), inVarMaps[stage]->end(), slotCollector);
+C/C++:       |                                                                       ^
+C/C++: 4 warnings generated.
+C/C++: /Users/sergios/sunnypilot/android/build/native/accelerators/glslang-source/glslang-780b6a209132dc74e99458f62ebe5fa7e57c41cf/glslang/MachineIndependent/Initialize.cpp:152:65: warning: missing field 'minExtendedVersion' initializer [-Wmissing-field-initializers]
+C/C++:   152 |                                                   { EBadProfile } };
+C/C++:       |                                                                 ^
+C/C++: /Users/sergios/sunnypilot/android/build/native/accelerators/glslang-source/glslang-780b6a209132dc74e99458f62ebe5fa7e57c41cf/glslang/MachineIndependent/Initialize.cpp:157:65: warning: missing field 'minExtendedVersion' initializer [-Wmissing-field-initializers]
+C/C++:   157 |                                                   { EBadProfile } };
+C/C++:       |                                                                 ^
+C/C++: /Users/sergios/sunnypilot/android/build/native/accelerators/glslang-source/glslang-780b6a209132dc74e99458f62ebe5fa7e57c41cf/glslang/MachineIndependent/Initialize.cpp:162:65: warning: missing field 'minExtendedVersion' initializer [-Wmissing-field-initializers]
+C/C++:   162 |                                                   { EBadProfile } };
+C/C++:       |                                                                 ^
+C/C++: /Users/sergios/sunnypilot/android/build/native/accelerators/glslang-source/glslang-780b6a209132dc74e99458f62ebe5fa7e57c41cf/glslang/MachineIndependent/Initialize.cpp:268:15: warning: missing field 'name' initializer [-Wmissing-field-initializers]
+C/C++:   268 |     { EOpNull }
+C/C++:       |               ^
+C/C++: /Users/sergios/sunnypilot/android/build/native/accelerators/glslang-source/glslang-780b6a209132dc74e99458f62ebe5fa7e57c41cf/glslang/MachineIndependent/Initialize.cpp:275:15: warning: missing field 'name' initializer [-Wmissing-field-initializers]
+C/C++:   275 |     { EOpNull }
+C/C++:       |               ^
+C/C++: /Users/sergios/sunnypilot/android/build/native/accelerators/glslang-source/glslang-780b6a209132dc74e99458f62ebe5fa7e57c41cf/glslang/MachineIndependent/Initialize.cpp:329:15: warning: missing field 'name' initializer [-Wmissing-field-initializers]
+C/C++:   329 |     { EOpNull }
+C/C++:       |               ^
+C/C++: 6 warnings generated.
+C/C++: In file included from /Users/sergios/sunnypilot/android/build/native/pycapnp-2.1.0/capnp/helpers/capabilityHelper.cpp:1:
+C/C++: /Users/sergios/sunnypilot/android/app/src/main/cpp/../../../../build/native/pycapnp-2.1.0/capnp/helpers/capabilityHelper.h:99:94: warning: unused parameter 'context' [-Wunused-parameter]
+C/C++:    99 | inline void allowCancellation(capnp::CallContext<capnp::DynamicStruct, capnp::DynamicStruct> context) {
+C/C++:       |                                                                                              ^
+C/C++: /Users/sergios/sunnypilot/android/build/native/pycapnp-2.1.0/capnp/helpers/capabilityHelper.cpp:144:54: warning: unused parameter 'buffer' [-Wunused-parameter]
+C/C++:   144 | kj::Promise<void> PyAsyncIoStream::write(const void* buffer, size_t size) {
+C/C++:       |                                                      ^
+C/C++: /Users/sergios/sunnypilot/android/build/native/pycapnp-2.1.0/capnp/helpers/capabilityHelper.cpp:144:69: warning: unused parameter 'size' [-Wunused-parameter]
+C/C++:   144 | kj::Promise<void> PyAsyncIoStream::write(const void* buffer, size_t size) {
+C/C++:       |                                                                     ^
+C/C++: 3 warnings generated.
+C/C++: /Users/sergios/sunnypilot/android/build/native/msgq/msgq/visionipc/visionipc_pyx.cpp:20903:35: warning: comparison of integers of different signs: 'size_t' (aka 'unsigned long') and 'Py_ssize_t' (aka 'long') [-Wsign-compare]
+C/C++:  20903 |     __pyx_t_2 = (__pyx_v_buf->len == __pyx_t_1);
+C/C++:        |                  ~~~~~~~~~~~~~~~~ ^  ~~~~~~~~~
+C/C++: 1 warning generated.
+C/C++: In file included from /Users/sergios/sunnypilot/android/build/native/accelerators/glslang-source/glslang-780b6a209132dc74e99458f62ebe5fa7e57c41cf/SPIRV/SpvBuilder.cpp:49:
+C/C++: /Users/sergios/sunnypilot/android/build/native/accelerators/glslang-source/glslang-780b6a209132dc74e99458f62ebe5fa7e57c41cf/SPIRV/SpvBuilder.h:999:21: warning: definition of implicit copy constructor for 'LoopBlocks' is deprecated because it has a user-declared copy assignment operator [-Wdeprecated-copy]
+C/C++:   999 |         LoopBlocks& operator=(const LoopBlocks&) = delete;
+C/C++:       |                     ^
+C/C++: /Users/sergios/Library/Android/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/include/c++/v1/__memory/allocator.h:173:24: note: in implicit copy constructor for 'spv::Builder::LoopBlocks' first required here
+C/C++:   173 |     ::new ((void*)__p) _Up(std::forward<_Args>(__args)...);
+C/C++:       |                        ^
+C/C++: /Users/sergios/Library/Android/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/include/c++/v1/__memory/allocator_traits.h:320:9: note: in instantiation of function template specialization 'std::allocator<spv::Builder::LoopBlocks>::construct<spv::Builder::LoopBlocks, const spv::Builder::LoopBlocks &>' requested here
+C/C++:   320 |     __a.construct(__p, std::forward<_Args>(__args)...);
+C/C++:       |         ^
+C/C++: /Users/sergios/Library/Android/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/include/c++/v1/deque:1552:19: note: in instantiation of function template specialization 'std::allocator_traits<std::allocator<spv::Builder::LoopBlocks>>::construct<spv::Builder::LoopBlocks, const spv::Builder::LoopBlocks &, 0>' requested here
+C/C++:  1552 |   __alloc_traits::construct(__a, std::addressof(*end()), __v);
+C/C++:       |                   ^
+C/C++: /Users/sergios/Library/Android/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/include/c++/v1/stack:241:62: note: in instantiation of member function 'std::deque<spv::Builder::LoopBlocks>::push_back' requested here
+C/C++:   241 |   _LIBCPP_HIDE_FROM_ABI void push(const value_type& __v) { c.push_back(__v); }
+C/C++:       |                                                              ^
+C/C++: /Users/sergios/sunnypilot/android/build/native/accelerators/glslang-source/glslang-780b6a209132dc74e99458f62ebe5fa7e57c41cf/SPIRV/SpvBuilder.cpp:4675:11: note: in instantiation of member function 'std::stack<spv::Builder::LoopBlocks>::push' requested here
+C/C++:  4675 |     loops.push(blocks);
+C/C++:       |           ^
+C/C++: 1 warning generated.
+C/C++: /Users/sergios/sunnypilot/openpilot/common/util.cc:306:66: warning: missing field 'tm_sec' initializer [-Wmissing-designated-field-initializers]
+C/C++:   306 |   tm min_tm = {.tm_mday = 26, .tm_mon = 7, .tm_year = 2024 - 1900};
+C/C++:       |                                                                  ^
+C/C++: 1 warning generated.
+C/C++: /Users/sergios/sunnypilot/android/build/native/json11/json11.cpp:201:54: warning: unqualified call to 'std::move' [-Wunqualified-std-cast-call]
+C/C++:   201 |     explicit JsonString(string &&value)      : Value(move(value)) {}
+C/C++:       |                                                      ^
+C/C++:       |                                                      std::
+C/C++: /Users/sergios/sunnypilot/android/build/native/json11/json11.cpp:209:58: warning: unqualified call to 'std::move' [-Wunqualified-std-cast-call]
+C/C++:   209 |     explicit JsonArray(Json::array &&value)      : Value(move(value)) {}
+C/C++:       |                                                          ^
+C/C++:       |                                                          std::
+C/C++: /Users/sergios/sunnypilot/android/build/native/json11/json11.cpp:217:60: warning: unqualified call to 'std::move' [-Wunqualified-std-cast-call]
+C/C++:   217 |     explicit JsonObject(Json::object &&value)      : Value(move(value)) {}
+C/C++:       |                                                            ^
+C/C++:       |                                                            std::
+C/C++: /Users/sergios/sunnypilot/android/build/native/json11/json11.cpp:259:72: warning: unqualified call to 'std::move' [-Wunqualified-std-cast-call]
+C/C++:   259 | Json::Json(string &&value)             : m_ptr(make_shared<JsonString>(move(value))) {}
+C/C++:       |                                                                        ^
+C/C++:       |                                                                        std::
+C/C++: /Users/sergios/sunnypilot/android/build/native/json11/json11.cpp:262:71: warning: unqualified call to 'std::move' [-Wunqualified-std-cast-call]
+C/C++:   262 | Json::Json(Json::array &&values)       : m_ptr(make_shared<JsonArray>(move(values))) {}
+C/C++:       |                                                                       ^
+C/C++:       |                                                                       std::
+C/C++: /Users/sergios/sunnypilot/android/build/native/json11/json11.cpp:264:72: warning: unqualified call to 'std::move' [-Wunqualified-std-cast-call]
+C/C++:   264 | Json::Json(Json::object &&values)      : m_ptr(make_shared<JsonObject>(move(values))) {}
+C/C++:       |                                                                        ^
+C/C++:       |                                                                        std::
+C/C++: /Users/sergios/sunnypilot/android/build/native/json11/json11.cpp:358:21: warning: unqualified call to 'std::move' [-Wunqualified-std-cast-call]
+C/C++:   358 |         return fail(move(msg), Json());
+C/C++:       |                     ^
+C/C++:       |                     std::
+C/C++: /Users/sergios/sunnypilot/android/build/native/json11/json11.cpp:154:46: warning: unqualified call to 'std::move' [-Wunqualified-std-cast-call]
+C/C++:   154 |     explicit Value(T &&value)      : m_value(move(value)) {}
+C/C++:       |                                              ^
+C/C++:       |                                              std::
+C/C++: /Users/sergios/sunnypilot/android/build/native/json11/json11.cpp:201:48: note: in instantiation of member function 'json11::Value<json11::Json::STRING, std::string>::Value' requested here
+C/C++:   201 |     explicit JsonString(string &&value)      : Value(move(value)) {}
+C/C++:       |                                                ^
+C/C++: /Users/sergios/sunnypilot/android/build/native/json11/json11.cpp:154:46: warning: unqualified call to 'std::move' [-Wunqualified-std-cast-call]
+C/C++:   154 |     explicit Value(T &&value)      : m_value(move(value)) {}
+C/C++:       |                                              ^
+C/C++:       |                                              std::
+C/C++: /Users/sergios/sunnypilot/android/build/native/json11/json11.cpp:209:52: note: in instantiation of member function 'json11::Value<json11::Json::ARRAY, std::vector<json11::Json>>::Value' requested here
+C/C++:   209 |     explicit JsonArray(Json::array &&value)      : Value(move(value)) {}
+C/C++:       |                                                    ^
+C/C++: /Users/sergios/sunnypilot/android/build/native/json11/json11.cpp:154:46: warning: unqualified call to 'std::move' [-Wunqualified-std-cast-call]
+C/C++:   154 |     explicit Value(T &&value)      : m_value(move(value)) {}
+C/C++:       |                                              ^
+C/C++:       |                                              std::
+C/C++: /Users/sergios/sunnypilot/android/build/native/json11/json11.cpp:217:54: note: in instantiation of member function 'json11::Value<json11::Json::OBJECT, std::map<std::string, json11::Json>>::Value' requested here
+C/C++:   217 |     explicit JsonObject(Json::object &&value)      : Value(move(value)) {}
+C/C++:       |                                                      ^
+C/C++: /Users/sergios/sunnypilot/android/build/native/json11/json11.cpp:154:46: warning: unqualified call to 'std::move' [-Wunqualified-std-cast-call]
+C/C++:   154 |     explicit Value(T &&value)      : m_value(move(value)) {}
+C/C++:       |                                              ^
+C/C++:       |                                              std::
+C/C++: /Users/sergios/sunnypilot/android/build/native/json11/json11.cpp:222:18: note: in instantiation of member function 'json11::Value<json11::Json::NUL, json11::NullStruct>::Value' requested here
+C/C++:   222 |     JsonNull() : Value({}) {}
+C/C++:       |                  ^
+C/C++: 11 warnings generated.
+C/C++: /Users/sergios/sunnypilot/android/build/native/pyzmq-27.2.0/_zmq.cpp:5340:37: warning: comparison of integers of different signs: 'Py_ssize_t' (aka 'long') and 'size_t' (aka 'unsigned long') [-Wsign-compare]
+C/C++:  5340 |     __pyx_t_6 = (__pyx_v_data_len_c < __pyx_v_c_copy_threshold);
+C/C++:       |                  ~~~~~~~~~~~~~~~~~~ ^ ~~~~~~~~~~~~~~~~~~~~~~~~
+C/C++: /Users/sergios/sunnypilot/android/build/native/pyzmq-27.2.0/_zmq.cpp:7509:12: warning: variable '__pyx_v_routing_id' set but not used [-Wunused-but-set-variable]
+C/C++:  7509 |   uint32_t __pyx_v_routing_id;
+C/C++:       |            ^
+C/C++: /Users/sergios/sunnypilot/android/build/native/pyzmq-27.2.0/_zmq.cpp:12485:44: warning: variable '__pyx_v_optval_fd_c' is uninitialized when used here [-Wuninitialized]
+C/C++:  12485 |     __pyx_t_7 = __Pyx_PyLong_From_ZMQ_FD_T(__pyx_v_optval_fd_c); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 915, __pyx_L1_error)
+C/C++:        |                                            ^~~~~~~~~~~~~~~~~~~
+C/C++: /Users/sergios/sunnypilot/android/build/native/pyzmq-27.2.0/_zmq.cpp:12041:31: note: initialize the variable '__pyx_v_optval_fd_c' to silence this warning
+C/C++:  12041 |   ZMQ_FD_T __pyx_v_optval_fd_c;
+C/C++:        |                               ^
+C/C++:        |                                = 0
+C/C++: /Users/sergios/sunnypilot/android/build/native/pyzmq-27.2.0/_zmq.cpp:14864:123: warning: unused parameter '__pyx_v_self' [-Wunused-parameter]
+C/C++:  14864 | static PyObject *__pyx_pf_3zmq_7backend_6cython_4_zmq_6Socket_18join(struct __pyx_obj_3zmq_7backend_6cython_4_zmq_Socket *__pyx_v_self, PyObject *__pyx_v_group) {
+C/C++:        |                                                                                                                           ^
+C/C++: /Users/sergios/sunnypilot/android/build/native/pyzmq-27.2.0/_zmq.cpp:15142:124: warning: unused parameter '__pyx_v_self' [-Wunused-parameter]
+C/C++:  15142 | static PyObject *__pyx_pf_3zmq_7backend_6cython_4_zmq_6Socket_20leave(struct __pyx_obj_3zmq_7backend_6cython_4_zmq_Socket *__pyx_v_self, PyObject *__pyx_v_group) {
+C/C++:        |                                                                                                                            ^
+C/C++: 5 warnings generated.
+C/C++: In file included from /Users/sergios/sunnypilot/openpilot/common/swaglog.cc:16:
+C/C++: In file included from /Users/sergios/sunnypilot/android/app/src/main/cpp/../../../../../openpilot/common/hardware/hw.h:5:
+C/C++: /Users/sergios/sunnypilot/android/app/src/main/cpp/../../../../../openpilot/common/hardware/base.h:18:64: warning: unused parameter 'route_log' [-Wunused-parameter]
+C/C++:    18 |   static std::map<std::string, std::string> get_init_logs(bool route_log = false) {
+C/C++:       |                                                                ^
+C/C++: /Users/sergios/sunnypilot/android/app/src/main/cpp/../../../../../openpilot/common/hardware/base.h:22:32: warning: unused parameter 'percentage' [-Wunused-parameter]
+C/C++:    22 |   static void set_ir_power(int percentage) {}
+C/C++:       |                                ^
+C/C++: /Users/sergios/sunnypilot/openpilot/common/swaglog.cc:71:52: warning: unused parameter 'lineno' [-Wunused-parameter]
+C/C++:    71 |   void log(int levelnum, const char* filename, int lineno, const char* func, const char* msg, const std::string& log_s) {
+C/C++:       |                                                    ^
+C/C++: /Users/sergios/sunnypilot/openpilot/common/swaglog.cc:71:72: warning: unused parameter 'func' [-Wunused-parameter]
+C/C++:    71 |   void log(int levelnum, const char* filename, int lineno, const char* func, const char* msg, const std::string& log_s) {
+C/C++:       |                                                                        ^
+C/C++: 4 warnings generated.
+C/C++: In file included from /Users/sergios/sunnypilot/android/build/native/accelerators/glslang-source/glslang-780b6a209132dc74e99458f62ebe5fa7e57c41cf/SPIRV/GlslangToSpv.cpp:45:
+C/C++: /Users/sergios/sunnypilot/android/build/native/accelerators/glslang-source/glslang-780b6a209132dc74e99458f62ebe5fa7e57c41cf/SPIRV/SpvBuilder.h:999:21: warning: definition of implicit copy constructor for 'LoopBlocks' is deprecated because it has a user-declared copy assignment operator [-Wdeprecated-copy]
+C/C++:   999 |         LoopBlocks& operator=(const LoopBlocks&) = delete;
+C/C++:       |                     ^
+C/C++: /Users/sergios/sunnypilot/android/build/native/accelerators/glslang-source/glslang-780b6a209132dc74e99458f62ebe5fa7e57c41cf/SPIRV/GlslangToSpv.cpp:5401:19: note: in implicit copy constructor for 'spv::Builder::LoopBlocks' first required here
+C/C++:  5401 |     auto blocks = builder.makeNewLoop();
+C/C++:       |                   ^
+C/C++: 1 warning generated.
+C/C++: In file included from /Users/sergios/sunnypilot/openpilot/common/params.cc:15:
+C/C++: In file included from /Users/sergios/sunnypilot/android/app/src/main/cpp/../../../../../openpilot/common/hardware/hw.h:5:
+C/C++: /Users/sergios/sunnypilot/android/app/src/main/cpp/../../../../../openpilot/common/hardware/base.h:18:64: warning: unused parameter 'route_log' [-Wunused-parameter]
+C/C++:    18 |   static std::map<std::string, std::string> get_init_logs(bool route_log = false) {
+C/C++:       |                                                                ^
+C/C++: /Users/sergios/sunnypilot/android/app/src/main/cpp/../../../../../openpilot/common/hardware/base.h:22:32: warning: unused parameter 'percentage' [-Wunused-parameter]
+C/C++:    22 |   static void set_ir_power(int percentage) {}
+C/C++:       |                                ^
+C/C++: /Users/sergios/sunnypilot/openpilot/common/params.cc:20:29: warning: unused parameter 'signal' [-Wunused-parameter]
+C/C++:    20 | void params_sig_handler(int signal) {
+C/C++:       |                             ^
+C/C++: /Users/sergios/sunnypilot/openpilot/common/params.cc:26:58: warning: 'open' has superfluous mode bits; missing O_CREAT or O_TMPFILE? [-Wuser-defined-warnings]
+C/C++:    26 |   int fd = HANDLE_EINTR(open(path.c_str(), O_RDONLY, 0755));
+C/C++:       |                                                          ^
+C/C++: /Users/sergios/Library/Android/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/include/bits/fortify/fcntl.h:72:9: note: from 'diagnose_if' attribute on 'open':
+C/C++:    72 |         __clang_warning_if(!__open_modes_useful(flags) && modes,
+C/C++:       |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C/C++:    73 |                            "'open' " __open_useless_modes_warning) {
+C/C++:       |                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C/C++: /Users/sergios/Library/Android/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/include/sys/cdefs.h:151:54: note: expanded from macro '__clang_warning_if'
+C/C++:   151 | #define __clang_warning_if(cond, msg) __attribute__((__diagnose_if__(cond, msg, "warning")))
+C/C++:       |                                                      ^               ~~~~
+C/C++: /Users/sergios/sunnypilot/openpilot/common/params.cc:26:58: warning: 'open' has superfluous mode bits; missing O_CREAT or O_TMPFILE? [-Wuser-defined-warnings]
+C/C++:    26 |   int fd = HANDLE_EINTR(open(path.c_str(), O_RDONLY, 0755));
+C/C++:       |                                                          ^
+C/C++: /Users/sergios/Library/Android/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/include/bits/fortify/fcntl.h:72:9: note: from 'diagnose_if' attribute on 'open':
+C/C++:    72 |         __clang_warning_if(!__open_modes_useful(flags) && modes,
+C/C++:       |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C/C++:    73 |                            "'open' " __open_useless_modes_warning) {
+C/C++:       |                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C/C++: /Users/sergios/Library/Android/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/include/sys/cdefs.h:151:54: note: expanded from macro '__clang_warning_if'
+C/C++:   151 | #define __clang_warning_if(cond, msg) __attribute__((__diagnose_if__(cond, msg, "warning")))
+C/C++:       |                                                      ^               ~~~~
+C/C++: 5 warnings generated.
+C/C++: /Users/sergios/sunnypilot/android/build/native/driving/rednose-src/rednose/helpers/ekf_sym.cc:174:21: warning: comparison of integers of different signs: 'int' and 'size_type' (aka 'unsigned long') [-Wsign-compare]
+C/C++:   174 |   for (int i = 0; i < obs.z.size(); i++) {
+C/C++:       |                   ~ ^ ~~~~~~~~~~~~
+C/C++: 1 warning generated.
+C/C++: In file included from /Users/sergios/sunnypilot/android/app/src/main/cpp/accel_python.cpp:5:
+C/C++: /Users/sergios/sunnypilot/android/app/src/main/cpp/../../../../build/native/accelerators/mnn-patched/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d/source/core/Backend.hpp:218:47: warning: unused parameter 'index' [-Wunused-parameter]
+C/C++:   218 |     virtual bool onSelectDynamicAllocator(int index, int maxIndex) {
+C/C++:       |                                               ^
+C/C++: /Users/sergios/sunnypilot/android/app/src/main/cpp/../../../../build/native/accelerators/mnn-patched/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d/source/core/Backend.hpp:218:58: warning: unused parameter 'maxIndex' [-Wunused-parameter]
+C/C++:   218 |     virtual bool onSelectDynamicAllocator(int index, int maxIndex) {
+C/C++:       |                                                          ^
+C/C++: /Users/sergios/sunnypilot/android/app/src/main/cpp/../../../../build/native/accelerators/mnn-patched/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d/source/core/Backend.hpp:226:48: warning: unused parameter 'tensor' [-Wunused-parameter]
+C/C++:   226 |     virtual bool onGetTensorInfo(const Tensor* tensor, void* dstInfo) {
+C/C++:       |                                                ^
+C/C++: /Users/sergios/sunnypilot/android/app/src/main/cpp/../../../../build/native/accelerators/mnn-patched/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d/source/core/Backend.hpp:226:62: warning: unused parameter 'dstInfo' [-Wunused-parameter]
+C/C++:   226 |     virtual bool onGetTensorInfo(const Tensor* tensor, void* dstInfo) {
+C/C++:       |                                                              ^
+C/C++: /Users/sergios/sunnypilot/android/app/src/main/cpp/../../../../build/native/accelerators/mnn-patched/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d/source/core/Backend.hpp:256:47: warning: unused parameter 'mtype' [-Wunused-parameter]
+C/C++:   256 |     virtual void* onMapTensor(Tensor::MapType mtype, Tensor::DimensionType dtype, const Tensor* srcTensor) {
+C/C++:       |                                               ^
+C/C++: /Users/sergios/sunnypilot/android/app/src/main/cpp/../../../../build/native/accelerators/mnn-patched/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d/source/core/Backend.hpp:256:76: warning: unused parameter 'dtype' [-Wunused-parameter]
+C/C++:   256 |     virtual void* onMapTensor(Tensor::MapType mtype, Tensor::DimensionType dtype, const Tensor* srcTensor) {
+C/C++:       |                                                                            ^
+C/C++: /Users/sergios/sunnypilot/android/app/src/main/cpp/../../../../build/native/accelerators/mnn-patched/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d/source/core/Backend.hpp:256:97: warning: unused parameter 'srcTensor' [-Wunused-parameter]
+C/C++:   256 |     virtual void* onMapTensor(Tensor::MapType mtype, Tensor::DimensionType dtype, const Tensor* srcTensor) {
+C/C++:       |                                                                                                 ^
+C/C++: /Users/sergios/sunnypilot/android/app/src/main/cpp/../../../../build/native/accelerators/mnn-patched/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d/source/core/Backend.hpp:260:48: warning: unused parameter 'mtype' [-Wunused-parameter]
+C/C++:   260 |     virtual bool onUnmapTensor(Tensor::MapType mtype, Tensor::DimensionType dtype, const Tensor* dstTensor, void* mapPtr) {
+C/C++:       |                                                ^
+C/C++: /Users/sergios/sunnypilot/android/app/src/main/cpp/../../../../build/native/accelerators/mnn-patched/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d/source/core/Backend.hpp:260:77: warning: unused parameter 'dtype' [-Wunused-parameter]
+C/C++:   260 |     virtual bool onUnmapTensor(Tensor::MapType mtype, Tensor::DimensionType dtype, const Tensor* dstTensor, void* mapPtr) {
+C/C++:       |                                                                             ^
+C/C++: /Users/sergios/sunnypilot/android/app/src/main/cpp/../../../../build/native/accelerators/mnn-patched/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d/source/core/Backend.hpp:260:98: warning: unused parameter 'dstTensor' [-Wunused-parameter]
+C/C++:   260 |     virtual bool onUnmapTensor(Tensor::MapType mtype, Tensor::DimensionType dtype, const Tensor* dstTensor, void* mapPtr) {
+C/C++:       |                                                                                                  ^
+C/C++: /Users/sergios/sunnypilot/android/app/src/main/cpp/../../../../build/native/accelerators/mnn-patched/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d/source/core/Backend.hpp:260:115: warning: unused parameter 'mapPtr' [-Wunused-parameter]
+C/C++:   260 |     virtual bool onUnmapTensor(Tensor::MapType mtype, Tensor::DimensionType dtype, const Tensor* dstTensor, void* mapPtr) {
+C/C++:       |                                                                                                                   ^
+C/C++: /Users/sergios/sunnypilot/android/app/src/main/cpp/../../../../build/native/accelerators/mnn-patched/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d/source/core/Backend.hpp:264:40: warning: unused parameter 'mtype' [-Wunused-parameter]
+C/C++:   264 |     virtual int onSync(Tensor::MapType mtype, bool toCpu, const Tensor* dstTensor) {
+C/C++:       |                                        ^
+C/C++: /Users/sergios/sunnypilot/android/app/src/main/cpp/../../../../build/native/accelerators/mnn-patched/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d/source/core/Backend.hpp:264:52: warning: unused parameter 'toCpu' [-Wunused-parameter]
+C/C++:   264 |     virtual int onSync(Tensor::MapType mtype, bool toCpu, const Tensor* dstTensor) {
+C/C++:       |                                                    ^
+C/C++: /Users/sergios/sunnypilot/android/app/src/main/cpp/../../../../build/native/accelerators/mnn-patched/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d/source/core/Backend.hpp:264:73: warning: unused parameter 'dstTensor' [-Wunused-parameter]
+C/C++:   264 |     virtual int onSync(Tensor::MapType mtype, bool toCpu, const Tensor* dstTensor) {
+C/C++:       |                                                                         ^
+C/C++: /Users/sergios/sunnypilot/android/app/src/main/cpp/../../../../build/native/accelerators/mnn-patched/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d/source/core/Backend.hpp:322:30: warning: unused parameter 'numberThread' [-Wunused-parameter]
+C/C++:   322 |     virtual void onReset(int numberThread, const BackendConfig* config, bool full) {
+C/C++:       |                              ^
+C/C++: /Users/sergios/sunnypilot/android/app/src/main/cpp/../../../../build/native/accelerators/mnn-patched/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d/source/core/Backend.hpp:322:65: warning: unused parameter 'config' [-Wunused-parameter]
+C/C++:   322 |     virtual void onReset(int numberThread, const BackendConfig* config, bool full) {
+C/C++:       |                                                                 ^
+C/C++: /Users/sergios/sunnypilot/android/app/src/main/cpp/../../../../build/native/accelerators/mnn-patched/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d/source/core/Backend.hpp:322:78: warning: unused parameter 'full' [-Wunused-parameter]
+C/C++:   322 |     virtual void onReset(int numberThread, const BackendConfig* config, bool full) {
+C/C++:       |                                                                              ^
+C/C++: /Users/sergios/sunnypilot/android/app/src/main/cpp/../../../../build/native/accelerators/mnn-patched/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d/source/core/Backend.hpp:339:45: warning: unused parameter 'path' [-Wunused-parameter]
+C/C++:   339 |     virtual bool onSetCachePath(const char* path, int mode) {
+C/C++:       |                                             ^
+C/C++: /Users/sergios/sunnypilot/android/app/src/main/cpp/../../../../build/native/accelerators/mnn-patched/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d/source/core/Backend.hpp:339:55: warning: unused parameter 'mode' [-Wunused-parameter]
+C/C++:   339 |     virtual bool onSetCachePath(const char* path, int mode) {
+C/C++:       |                                                       ^
+C/C++: /Users/sergios/sunnypilot/android/app/src/main/cpp/../../../../build/native/accelerators/mnn-patched/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d/source/core/Backend.hpp:344:41: warning: unused parameter 'buffer' [-Wunused-parameter]
+C/C++:   344 |     virtual bool onSetCache(const void* buffer, size_t size) {
+C/C++:       |                                         ^
+C/C++: /Users/sergios/sunnypilot/android/app/src/main/cpp/../../../../build/native/accelerators/mnn-patched/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d/source/core/Backend.hpp:344:56: warning: unused parameter 'size' [-Wunused-parameter]
+C/C++:   344 |     virtual bool onSetCache(const void* buffer, size_t size) {
+C/C++:       |                                                        ^
+C/C++: /Users/sergios/sunnypilot/android/app/src/main/cpp/../../../../build/native/accelerators/mnn-patched/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d/source/core/Backend.hpp:352:50: warning: unused parameter 'statusEnum' [-Wunused-parameter]
+C/C++:   352 |     virtual int onGetRuntimeStatus(RuntimeStatus statusEnum) const {
+C/C++:       |                                                  ^
+C/C++: /Users/sergios/sunnypilot/android/app/src/main/cpp/../../../../build/native/accelerators/mnn-patched/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d/source/core/Backend.hpp:356:45: warning: unused parameter 'info' [-Wunused-parameter]
+C/C++:   356 |     virtual bool onCheckInfo(Backend::Info& info) const {
+C/C++:       |                                             ^
+C/C++: /Users/sergios/sunnypilot/android/app/src/main/cpp/../../../../build/native/accelerators/mnn-patched/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d/source/core/Backend.hpp:372:56: warning: unused parameter 'inputs' [-Wunused-parameter]
+C/C++:   372 |     virtual bool onMeasure(const std::vector<Tensor*>& inputs, const std::vector<Tensor*>& outputs,
+C/C++:       |                                                        ^
+C/C++: /Users/sergios/sunnypilot/android/app/src/main/cpp/../../../../build/native/accelerators/mnn-patched/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d/source/core/Backend.hpp:372:92: warning: unused parameter 'outputs' [-Wunused-parameter]
+C/C++:   372 |     virtual bool onMeasure(const std::vector<Tensor*>& inputs, const std::vector<Tensor*>& outputs,
+C/C++:       |                                                                                            ^
+C/C++: /Users/sergios/sunnypilot/android/app/src/main/cpp/../../../../build/native/accelerators/mnn-patched/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d/source/core/Backend.hpp:373:61: warning: unused parameter 'op' [-Wunused-parameter]
+C/C++:   373 |                                              const MNN::Op* op, OpInfo& dstInfo) const {
+C/C++:       |                                                             ^
+C/C++: /Users/sergios/sunnypilot/android/app/src/main/cpp/../../../../build/native/accelerators/mnn-patched/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d/source/core/Backend.hpp:373:73: warning: unused parameter 'dstInfo' [-Wunused-parameter]
+C/C++:   373 |                                              const MNN::Op* op, OpInfo& dstInfo) const {
+C/C++:       |                                                                         ^
+C/C++: /Users/sergios/sunnypilot/android/app/src/main/cpp/../../../../build/native/accelerators/mnn-patched/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d/source/core/Backend.hpp:378:60: warning: unused parameter 'inputs' [-Wunused-parameter]
+C/C++:   378 |     virtual void onMaskOpReady(const std::vector<Tensor*>& inputs, const std::vector<Tensor*>& outputs,
+C/C++:       |                                                            ^
+C/C++: /Users/sergios/sunnypilot/android/app/src/main/cpp/../../../../build/native/accelerators/mnn-patched/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d/source/core/Backend.hpp:378:96: warning: unused parameter 'outputs' [-Wunused-parameter]
+C/C++:   378 |     virtual void onMaskOpReady(const std::vector<Tensor*>& inputs, const std::vector<Tensor*>& outputs,
+C/C++:       |                                                                                                ^
+C/C++: /Users/sergios/sunnypilot/android/app/src/main/cpp/../../../../build/native/accelerators/mnn-patched/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d/source/core/Backend.hpp:379:47: warning: unused parameter 'op' [-Wunused-parameter]
+C/C++:   379 |                                const MNN::Op* op) {
+C/C++:       |                                               ^
+C/C++: /Users/sergios/sunnypilot/android/app/src/main/cpp/../../../../build/native/accelerators/mnn-patched/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d/source/core/Backend.hpp:427:53: warning: unused parameter 'deviceKey' [-Wunused-parameter]
+C/C++:   427 |     virtual bool onGetDeviceInfo(const std::string& deviceKey, std::string& deviceValue) const {
+C/C++:       |                                                     ^
+C/C++: /Users/sergios/sunnypilot/android/app/src/main/cpp/../../../../build/native/accelerators/mnn-patched/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d/source/core/Backend.hpp:427:77: warning: unused parameter 'deviceValue' [-Wunused-parameter]
+C/C++:   427 |     virtual bool onGetDeviceInfo(const std::string& deviceKey, std::string& deviceValue) const {
+C/C++:       |                                                                             ^
+C/C++: /Users/sergios/sunnypilot/android/app/src/main/cpp/../../../../build/native/accelerators/mnn-patched/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d/source/core/Backend.hpp:431:43: warning: unused parameter 'op' [-Wunused-parameter]
+C/C++:   431 |     virtual bool onSetQuantInfo(const Op* op, const std::vector<Tensor*>& inputs, const std::vector<Tensor*>& outputs) const {
+C/C++:       |                                           ^
+C/C++: /Users/sergios/sunnypilot/android/app/src/main/cpp/../../../../build/native/accelerators/mnn-patched/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d/source/core/Backend.hpp:431:75: warning: unused parameter 'inputs' [-Wunused-parameter]
+C/C++:   431 |     virtual bool onSetQuantInfo(const Op* op, const std::vector<Tensor*>& inputs, const std::vector<Tensor*>& outputs) const {
+C/C++:       |                                                                           ^
+C/C++: /Users/sergios/sunnypilot/android/app/src/main/cpp/../../../../build/native/accelerators/mnn-patched/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d/source/core/Backend.hpp:431:111: warning: unused parameter 'outputs' [-Wunused-parameter]
+C/C++:   431 |     virtual bool onSetQuantInfo(const Op* op, const std::vector<Tensor*>& inputs, const std::vector<Tensor*>& outputs) const {
+C/C++:       |                                                                                                               ^
+C/C++: /Users/sergios/sunnypilot/android/app/src/main/cpp/accel_python.cpp:349:88: warning: missing field 'm_slots' initializer [-Wmissing-field-initializers]
+C/C++:   349 | PyModuleDef module = {PyModuleDef_HEAD_INIT, "fold3_accel_native", nullptr, -1, methods};
+C/C++:       |                                                                                        ^
+C/C++: 36 warnings generated.
+C/C++: /Users/sergios/sunnypilot/android/build/native/driving/kalman/pose.cpp:60:24: warning: unused parameter 'state' [-Wunused-parameter]
+C/C++:    60 | void H_mod_fun(double *state, double *out_838380002720724121) {
+C/C++:       |                        ^
+C/C++: /Users/sergios/sunnypilot/android/build/native/driving/kalman/pose.cpp:732:33: warning: unused parameter 'unused' [-Wunused-parameter]
+C/C++:   732 | void h_4(double *state, double *unused, double *out_7646293966113408960) {
+C/C++:       |                                 ^
+C/C++: /Users/sergios/sunnypilot/android/build/native/driving/kalman/pose.cpp:737:18: warning: unused parameter 'state' [-Wunused-parameter]
+C/C++:   737 | void H_4(double *state, double *unused, double *out_2658078728627020982) {
+C/C++:       |                  ^
+C/C++: /Users/sergios/sunnypilot/android/build/native/driving/kalman/pose.cpp:737:33: warning: unused parameter 'unused' [-Wunused-parameter]
+C/C++:   737 | void H_4(double *state, double *unused, double *out_2658078728627020982) {
+C/C++:       |                                 ^
+C/C++: /Users/sergios/sunnypilot/android/build/native/driving/kalman/pose.cpp:793:34: warning: unused parameter 'unused' [-Wunused-parameter]
+C/C++:   793 | void h_10(double *state, double *unused, double *out_3469718811315612463) {
+C/C++:       |                                  ^
+C/C++: /Users/sergios/sunnypilot/android/build/native/driving/kalman/pose.cpp:798:34: warning: unused parameter 'unused' [-Wunused-parameter]
+C/C++:   798 | void H_10(double *state, double *unused, double *out_21394897929817242) {
+C/C++:       |                                  ^
+C/C++: /Users/sergios/sunnypilot/android/build/native/driving/kalman/pose.cpp:854:34: warning: unused parameter 'unused' [-Wunused-parameter]
+C/C++:   854 | void h_13(double *state, double *unused, double *out_8493351214973055771) {
+C/C++:       |                                  ^
+C/C++: /Users/sergios/sunnypilot/android/build/native/driving/kalman/pose.cpp:859:19: warning: unused parameter 'state' [-Wunused-parameter]
+C/C++:   859 | void H_13(double *state, double *unused, double *out_554195096705311819) {
+C/C++:       |                   ^
+C/C++: /Users/sergios/sunnypilot/android/build/native/driving/kalman/pose.cpp:859:34: warning: unused parameter 'unused' [-Wunused-parameter]
+C/C++:   859 | void H_13(double *state, double *unused, double *out_554195096705311819) {
+C/C++:       |                                  ^
+C/C++: /Users/sergios/sunnypilot/android/build/native/driving/kalman/pose.cpp:915:34: warning: unused parameter 'unused' [-Wunused-parameter]
+C/C++:   915 | void h_14(double *state, double *unused, double *out_6387381444416807867) {
+C/C++:       |                                  ^
+C/C++: /Users/sergios/sunnypilot/android/build/native/driving/kalman/pose.cpp:920:19: warning: unused parameter 'state' [-Wunused-parameter]
+C/C++:   920 | void H_14(double *state, double *unused, double *out_5740867160922393278) {
+C/C++:       |                   ^
+C/C++: /Users/sergios/sunnypilot/android/build/native/driving/kalman/pose.cpp:920:34: warning: unused parameter 'unused' [-Wunused-parameter]
+C/C++:   920 | void H_14(double *state, double *unused, double *out_5740867160922393278) {
+C/C++:       |                                  ^
+C/C++: 12 warnings generated.
+C/C++: In file included from /Users/sergios/sunnypilot/android/build/native/pycapnp-2.1.0/capnp/lib/capnp.cpp:1171:
+C/C++: /Users/sergios/sunnypilot/android/app/src/main/cpp/../../../../build/native/pycapnp-2.1.0/capnp/helpers/capabilityHelper.h:99:94: warning: unused parameter 'context' [-Wunused-parameter]
+C/C++:    99 | inline void allowCancellation(capnp::CallContext<capnp::DynamicStruct, capnp::DynamicStruct> context) {
+C/C++:       |                                                                                              ^
+C/C++: /Users/sergios/sunnypilot/android/build/native/pycapnp-2.1.0/capnp/lib/capnp.cpp:75476:248: warning: moving a temporary object prevents copy elision [-Wpessimizing-move]
+C/C++:  75476 |   __pyx_t_3 = ((struct __pyx_vtabstruct_5capnp_3lib_5capnp__DynamicStructReader *)((struct __pyx_obj_5capnp_3lib_5capnp__DynamicStructReader *)__pyx_t_1)->__pyx_vtab)->_init(((struct __pyx_obj_5capnp_3lib_5capnp__DynamicStructReader *)__pyx_t_1), __PYX_STD_MOVE_IF_SUPPORTED((( ::capnp::DynamicStruct::Reader)__pyx_t_5)), ((PyObject *)__pyx_v_self), NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2743, __pyx_L1_error)
+C/C++:        |                                                                                                                                                                                                                                                        ^
+C/C++: /Users/sergios/sunnypilot/android/build/native/pycapnp-2.1.0/capnp/lib/capnp.cpp:5200:42: note: expanded from macro '__PYX_STD_MOVE_IF_SUPPORTED'
+C/C++:  5200 |   #define __PYX_STD_MOVE_IF_SUPPORTED(x) std::move(x)
+C/C++:       |                                          ^
+C/C++: /Users/sergios/sunnypilot/android/build/native/pycapnp-2.1.0/capnp/lib/capnp.cpp:77150:248: warning: moving a temporary object prevents copy elision [-Wpessimizing-move]
+C/C++:  77150 |   __pyx_t_3 = ((struct __pyx_vtabstruct_5capnp_3lib_5capnp__DynamicStructReader *)((struct __pyx_obj_5capnp_3lib_5capnp__DynamicStructReader *)__pyx_t_1)->__pyx_vtab)->_init(((struct __pyx_obj_5capnp_3lib_5capnp__DynamicStructReader *)__pyx_t_1), __PYX_STD_MOVE_IF_SUPPORTED((( ::capnp::DynamicStruct::Reader)__pyx_t_6)), ((PyObject *)__pyx_v_self), NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2822, __pyx_L1_error)
+C/C++:        |                                                                                                                                                                                                                                                        ^
+C/C++: /Users/sergios/sunnypilot/android/build/native/pycapnp-2.1.0/capnp/lib/capnp.cpp:5200:42: note: expanded from macro '__PYX_STD_MOVE_IF_SUPPORTED'
+C/C++:  5200 |   #define __PYX_STD_MOVE_IF_SUPPORTED(x) std::move(x)
+C/C++:       |                                          ^
+C/C++: /Users/sergios/sunnypilot/android/build/native/pycapnp-2.1.0/capnp/lib/capnp.cpp:80176:248: warning: moving a temporary object prevents copy elision [-Wpessimizing-move]
+C/C++:  80176 |   __pyx_t_3 = ((struct __pyx_vtabstruct_5capnp_3lib_5capnp__DynamicStructReader *)((struct __pyx_obj_5capnp_3lib_5capnp__DynamicStructReader *)__pyx_t_1)->__pyx_vtab)->_init(((struct __pyx_obj_5capnp_3lib_5capnp__DynamicStructReader *)__pyx_t_1), __PYX_STD_MOVE_IF_SUPPORTED((( ::capnp::DynamicStruct::Reader)__pyx_t_5)), ((PyObject *)__pyx_v_self), NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2963, __pyx_L1_error)
+C/C++:        |                                                                                                                                                                                                                                                        ^
+C/C++: /Users/sergios/sunnypilot/android/build/native/pycapnp-2.1.0/capnp/lib/capnp.cpp:5200:42: note: expanded from macro '__PYX_STD_MOVE_IF_SUPPORTED'
+C/C++:  5200 |   #define __PYX_STD_MOVE_IF_SUPPORTED(x) std::move(x)
+C/C++:       |                                          ^
+C/C++: /Users/sergios/sunnypilot/android/build/native/pycapnp-2.1.0/capnp/lib/capnp.cpp:89114:161: warning: 'parseDiskFile' is deprecated: Use parseFromDirectory() instead. [-Wdeprecated-declarations]
+C/C++:  89114 |   __pyx_t_1 = ((struct __pyx_vtabstruct_5capnp_3lib_5capnp__ParsedSchema *)__pyx_v_ret->__pyx_base.__pyx_vtab)->_init_child(__pyx_v_ret, __pyx_v_self->thisptr->parseDiskFile(__pyx_t_11, __pyx_t_14, __PYX_STD_MOVE_IF_SUPPORTED(__pyx_t_15))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 3487, __pyx_L1_error)
+C/C++:        |                                                                                                                                                                 ^
+C/C++: /Users/sergios/sunnypilot/android/app/src/main/cpp/../../../../build/native/capnproto-c++-1.0.1/src/capnp/schema-parser.h:103:7: note: 'parseDiskFile' has been explicitly marked deprecated here
+C/C++:   103 |       CAPNP_DEPRECATED("Use parseFromDirectory() instead.");
+C/C++:       |       ^
+C/C++: /Users/sergios/sunnypilot/android/app/src/main/cpp/../../../../build/native/capnproto-c++-1.0.1/src/capnp/common.h:63:26: note: expanded from macro 'CAPNP_DEPRECATED'
+C/C++:    63 | #define CAPNP_DEPRECATED KJ_DEPRECATED
+C/C++:       |                          ^
+C/C++: /Users/sergios/sunnypilot/android/app/src/main/cpp/../../../../build/native/capnproto-c++-1.0.1/src/kj/common.h:294:20: note: expanded from macro 'KJ_DEPRECATED'
+C/C++:   294 |     __attribute__((deprecated(reason)))
+C/C++:       |                    ^
+C/C++: /Users/sergios/sunnypilot/android/build/native/pycapnp-2.1.0/capnp/lib/capnp.cpp:92081:251: warning: moving a temporary object prevents copy elision [-Wpessimizing-move]
+C/C++:  92081 |   __pyx_t_4 = ((struct __pyx_vtabstruct_5capnp_3lib_5capnp__DynamicStructBuilder *)((struct __pyx_obj_5capnp_3lib_5capnp__DynamicStructBuilder *)__pyx_t_1)->__pyx_vtab)->_init(((struct __pyx_obj_5capnp_3lib_5capnp__DynamicStructBuilder *)__pyx_t_1), __PYX_STD_MOVE_IF_SUPPORTED((( ::capnp::DynamicStruct::Builder)__pyx_t_8)), ((PyObject *)__pyx_v_self), &__pyx_t_9); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 3663, __pyx_L1_error)
+C/C++:        |                                                                                                                                                                                                                                                           ^
+C/C++: /Users/sergios/sunnypilot/android/build/native/pycapnp-2.1.0/capnp/lib/capnp.cpp:5200:42: note: expanded from macro '__PYX_STD_MOVE_IF_SUPPORTED'
+C/C++:  5200 |   #define __PYX_STD_MOVE_IF_SUPPORTED(x) std::move(x)
+C/C++:       |                                          ^
+C/C++: /Users/sergios/sunnypilot/android/build/native/pycapnp-2.1.0/capnp/lib/capnp.cpp:94179:248: warning: moving a temporary object prevents copy elision [-Wpessimizing-move]
+C/C++:  94179 |   __pyx_t_4 = ((struct __pyx_vtabstruct_5capnp_3lib_5capnp__DynamicStructReader *)((struct __pyx_obj_5capnp_3lib_5capnp__DynamicStructReader *)__pyx_t_1)->__pyx_vtab)->_init(((struct __pyx_obj_5capnp_3lib_5capnp__DynamicStructReader *)__pyx_t_1), __PYX_STD_MOVE_IF_SUPPORTED((( ::capnp::DynamicStruct::Reader)__pyx_t_8)), ((PyObject *)__pyx_v_self), NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 3784, __pyx_L1_error)
+C/C++:        |                                                                                                                                                                                                                                                        ^
+C/C++: /Users/sergios/sunnypilot/android/build/native/pycapnp-2.1.0/capnp/lib/capnp.cpp:5200:42: note: expanded from macro '__PYX_STD_MOVE_IF_SUPPORTED'
+C/C++:  5200 |   #define __PYX_STD_MOVE_IF_SUPPORTED(x) std::move(x)
+C/C++:       |                                          ^
+C/C++: In file included from /Users/sergios/sunnypilot/android/build/native/pycapnp-2.1.0/capnp/lib/capnp.cpp:1168:
+C/C++: In file included from /Users/sergios/sunnypilot/android/app/src/main/cpp/../../../../build/native/pycapnp-2.1.0/capnp/helpers/checkCompiler.h:6:
+C/C++: In file included from /Users/sergios/sunnypilot/android/app/src/main/cpp/../../../../build/native/capnproto-c++-1.0.1/src/capnp/dynamic.h:35:
+C/C++: In file included from /Users/sergios/sunnypilot/android/app/src/main/cpp/../../../../build/native/capnproto-c++-1.0.1/src/capnp/schema.h:39:
+C/C++: In file included from /Users/sergios/sunnypilot/android/app/src/main/cpp/../../../../build/native/capnproto-c++-1.0.1/src/capnp/schema.capnp.h:6:
+C/C++: In file included from /Users/sergios/sunnypilot/android/app/src/main/cpp/../../../../build/native/capnproto-c++-1.0.1/src/capnp/generated-header-support.h:26:
+C/C++: In file included from /Users/sergios/sunnypilot/android/app/src/main/cpp/../../../../build/native/capnproto-c++-1.0.1/src/capnp/raw-schema.h:24:
+C/C++: In file included from /Users/sergios/sunnypilot/android/app/src/main/cpp/../../../../build/native/capnproto-c++-1.0.1/src/capnp/common.h:29:
+C/C++: In file included from /Users/sergios/sunnypilot/android/app/src/main/cpp/../../../../build/native/capnproto-c++-1.0.1/src/kj/string.h:25:
+C/C++: In file included from /Users/sergios/sunnypilot/android/app/src/main/cpp/../../../../build/native/capnproto-c++-1.0.1/src/kj/array.h:24:
+C/C++: /Users/sergios/sunnypilot/android/app/src/main/cpp/../../../../build/native/capnproto-c++-1.0.1/src/kj/memory.h:557:60: warning: delete called on non-final 'PyAsyncIoStream' that has virtual functions but non-virtual destructor [-Wdelete-non-abstract-non-virtual-dtor]
+C/C++:   557 |   virtual void disposeImpl(void* pointer) const override { delete reinterpret_cast<T*>(pointer); }
+C/C++:       |                                                            ^
+C/C++: /Users/sergios/sunnypilot/android/app/src/main/cpp/../../../../build/native/capnproto-c++-1.0.1/src/kj/memory.h:571:51: note: in instantiation of member function 'kj::_::HeapDisposer<PyAsyncIoStream>::disposeImpl' requested here
+C/C++:   571 | const HeapDisposer<T> HeapDisposer<T>::instance = HeapDisposer<T>();
+C/C++:       |                                                   ^
+C/C++: /Users/sergios/sunnypilot/android/app/src/main/cpp/../../../../build/native/capnproto-c++-1.0.1/src/kj/memory.h:596:72: note: in instantiation of static data member 'kj::_::HeapDisposer<PyAsyncIoStream>::instance' requested here
+C/C++:   596 |   return Own<T>(new T(kj::fwd<Params>(params)...), _::HeapDisposer<T>::instance);
+C/C++:       |                                                                        ^
+C/C++: /Users/sergios/sunnypilot/android/build/native/pycapnp-2.1.0/capnp/lib/capnp.cpp:67518:72: note: in instantiation of function template specialization 'kj::heap<PyAsyncIoStream, kj::Own<PyRefCounter>>' requested here
+C/C++:  67518 |     __pyx_v_self->thisptr = (( ::kj::Own< ::kj::AsyncIoStream> ) ::kj::heap<PyAsyncIoStream>( ::kj::heap<PyRefCounter>(((PyObject *)__pyx_v_protocol))));
+C/C++:        |                                                                        ^
+C/C++: /Users/sergios/sunnypilot/android/build/native/pycapnp-2.1.0/capnp/lib/capnp.cpp:149627:1: warning: unused function '__Pyx_PyAsyncGen_Fini' [-Wunused-function]
+C/C++:  149627 | __Pyx_PyAsyncGen_Fini(void)
+C/C++:         | ^~~~~~~~~~~~~~~~~~~~~
+C/C++: 9 warnings generated.
+C/C++: /Users/sergios/sunnypilot/android/build/native/driving/kalman/car.cpp:66:24: warning: unused parameter 'state' [-Wunused-parameter]
+C/C++:    66 | void H_mod_fun(double *state, double *out_456542387295610543) {
+C/C++:       |                        ^
+C/C++: /Users/sergios/sunnypilot/android/build/native/driving/kalman/car.cpp:243:34: warning: unused parameter 'unused' [-Wunused-parameter]
+C/C++:   243 | void h_25(double *state, double *unused, double *out_8786054801107150917) {
+C/C++:       |                                  ^
+C/C++: /Users/sergios/sunnypilot/android/build/native/driving/kalman/car.cpp:246:19: warning: unused parameter 'state' [-Wunused-parameter]
+C/C++:   246 | void H_25(double *state, double *unused, double *out_5360234212480275383) {
+C/C++:       |                   ^
+C/C++: /Users/sergios/sunnypilot/android/build/native/driving/kalman/car.cpp:246:34: warning: unused parameter 'unused' [-Wunused-parameter]
+C/C++:   246 | void H_25(double *state, double *unused, double *out_5360234212480275383) {
+C/C++:       |                                  ^
+C/C++: /Users/sergios/sunnypilot/android/build/native/driving/kalman/car.cpp:257:34: warning: unused parameter 'unused' [-Wunused-parameter]
+C/C++:   257 | void h_24(double *state, double *unused, double *out_6913027852648134032) {
+C/C++:       |                                  ^
+C/C++: /Users/sergios/sunnypilot/android/build/native/driving/kalman/car.cpp:261:19: warning: unused parameter 'state' [-Wunused-parameter]
+C/C++:   261 | void H_24(double *state, double *unused, double *out_491419347452568531) {
+C/C++:       |                   ^
+C/C++: /Users/sergios/sunnypilot/android/build/native/driving/kalman/car.cpp:261:34: warning: unused parameter 'unused' [-Wunused-parameter]
+C/C++:   261 | void H_24(double *state, double *unused, double *out_491419347452568531) {
+C/C++:       |                                  ^
+C/C++: /Users/sergios/sunnypilot/android/build/native/driving/kalman/car.cpp:281:34: warning: unused parameter 'unused' [-Wunused-parameter]
+C/C++:   281 | void h_30(double *state, double *unused, double *out_8628868132756021772) {
+C/C++:       |                                  ^
+C/C++: /Users/sergios/sunnypilot/android/build/native/driving/kalman/car.cpp:284:19: warning: unused parameter 'state' [-Wunused-parameter]
+C/C++:   284 | void H_30(double *state, double *unused, double *out_832537882352667185) {
+C/C++:       |                   ^
+C/C++: /Users/sergios/sunnypilot/android/build/native/driving/kalman/car.cpp:284:34: warning: unused parameter 'unused' [-Wunused-parameter]
+C/C++:   284 | void H_30(double *state, double *unused, double *out_832537882352667185) {
+C/C++:       |                                  ^
+C/C++: /Users/sergios/sunnypilot/android/build/native/driving/kalman/car.cpp:295:34: warning: unused parameter 'unused' [-Wunused-parameter]
+C/C++:   295 | void h_26(double *state, double *unused, double *out_3627194865095176127) {
+C/C++:       |                                  ^
+C/C++: /Users/sergios/sunnypilot/android/build/native/driving/kalman/car.cpp:298:19: warning: unused parameter 'state' [-Wunused-parameter]
+C/C++:   298 | void H_26(double *state, double *unused, double *out_1618730893606219159) {
+C/C++:       |                   ^
+C/C++: /Users/sergios/sunnypilot/android/build/native/driving/kalman/car.cpp:298:34: warning: unused parameter 'unused' [-Wunused-parameter]
+C/C++:   298 | void H_26(double *state, double *unused, double *out_1618730893606219159) {
+C/C++:       |                                  ^
+C/C++: /Users/sergios/sunnypilot/android/build/native/driving/kalman/car.cpp:309:34: warning: unused parameter 'unused' [-Wunused-parameter]
+C/C++:   309 | void h_27(double *state, double *unused, double *out_1350911366678450104) {
+C/C++:       |                                  ^
+C/C++: /Users/sergios/sunnypilot/android/build/native/driving/kalman/car.cpp:312:19: warning: unused parameter 'state' [-Wunused-parameter]
+C/C++:   312 | void H_27(double *state, double *unused, double *out_1342225429447757726) {
+C/C++:       |                   ^
+C/C++: /Users/sergios/sunnypilot/android/build/native/driving/kalman/car.cpp:312:34: warning: unused parameter 'unused' [-Wunused-parameter]
+C/C++:   312 | void H_27(double *state, double *unused, double *out_1342225429447757726) {
+C/C++:       |                                  ^
+C/C++: /Users/sergios/sunnypilot/android/build/native/driving/kalman/car.cpp:323:34: warning: unused parameter 'unused' [-Wunused-parameter]
+C/C++:   323 | void h_29(double *state, double *unused, double *out_1021566476687532704) {
+C/C++:       |                                  ^
+C/C++: /Users/sergios/sunnypilot/android/build/native/driving/kalman/car.cpp:326:19: warning: unused parameter 'state' [-Wunused-parameter]
+C/C++:   326 | void H_29(double *state, double *unused, double *out_1342769226667059369) {
+C/C++:       |                   ^
+C/C++: /Users/sergios/sunnypilot/android/build/native/driving/kalman/car.cpp:326:34: warning: unused parameter 'unused' [-Wunused-parameter]
+C/C++:   326 | void H_29(double *state, double *unused, double *out_1342769226667059369) {
+C/C++:       |                                  ^
+C/C++: /Users/sergios/sunnypilot/android/build/native/driving/kalman/car.cpp:337:34: warning: unused parameter 'unused' [-Wunused-parameter]
+C/C++:   337 | void h_28(double *state, double *unused, double *out_407401513776787669) {
+C/C++:       |                                  ^
+C/C++: /Users/sergios/sunnypilot/android/build/native/driving/kalman/car.cpp:340:19: warning: unused parameter 'state' [-Wunused-parameter]
+C/C++:   340 | void H_28(double *state, double *unused, double *out_3306399498232385620) {
+C/C++:       |                   ^
+C/C++: /Users/sergios/sunnypilot/android/build/native/driving/kalman/car.cpp:340:34: warning: unused parameter 'unused' [-Wunused-parameter]
+C/C++:   340 | void H_28(double *state, double *unused, double *out_3306399498232385620) {
+C/C++:       |                                  ^
+C/C++: /Users/sergios/sunnypilot/android/build/native/driving/kalman/car.cpp:351:34: warning: unused parameter 'unused' [-Wunused-parameter]
+C/C++:   351 | void h_31(double *state, double *unused, double *out_2200130508353512374) {
+C/C++:       |                                  ^
+C/C++: /Users/sergios/sunnypilot/android/build/native/driving/kalman/car.cpp:354:19: warning: unused parameter 'state' [-Wunused-parameter]
+C/C++:   354 | void H_31(double *state, double *unused, double *out_992522791372867683) {
+C/C++:       |                   ^
+C/C++: /Users/sergios/sunnypilot/android/build/native/driving/kalman/car.cpp:354:34: warning: unused parameter 'unused' [-Wunused-parameter]
+C/C++:   354 | void H_31(double *state, double *unused, double *out_992522791372867683) {
+C/C++:       |                                  ^
+C/C++: 25 warnings generated.
+
+> Task :app:externalNativeBuildDebug
+> Task :app:stagePython
+> Task :app:mergeDebugPythonSources
+> Task :app:generateDebugPythonProxies
+> Task :app:javaPreCompileDebug UP-TO-DATE
+> Task :app:checkDebugAarMetadata UP-TO-DATE
+> Task :app:generateDebugResValues UP-TO-DATE
+> Task :app:mapDebugSourceSetPaths UP-TO-DATE
+> Task :app:generateDebugResources UP-TO-DATE
+> Task :app:mergeDebugResources UP-TO-DATE
+> Task :app:packageDebugResources UP-TO-DATE
+> Task :app:parseDebugLocalResources UP-TO-DATE
+> Task :app:createDebugCompatibleScreenManifests UP-TO-DATE
+> Task :app:extractDeepLinksDebug UP-TO-DATE
+> Task :app:processDebugMainManifest UP-TO-DATE
+> Task :app:processDebugManifest UP-TO-DATE
+> Task :app:processDebugManifestForPackage UP-TO-DATE
+> Task :app:processDebugResources UP-TO-DATE
+> Task :app:compileDebugJavaWithJavac UP-TO-DATE
+> Task :app:bundleDebugClassesToRuntimeJar UP-TO-DATE
+> Task :app:bundleDebugClassesToCompileJar UP-TO-DATE
+> Task :app:preDebugUnitTestBuild UP-TO-DATE
+> Task :app:javaPreCompileDebugUnitTest UP-TO-DATE
+> Task :app:compileDebugUnitTestJavaWithJavac UP-TO-DATE
+> Task :app:processDebugJavaRes NO-SOURCE
+> Task :app:processDebugUnitTestJavaRes NO-SOURCE
+> Task :app:testDebugUnitTest UP-TO-DATE
+> Task :app:mergeDebugNativeDebugMetadata NO-SOURCE
+> Task :app:mergeDebugShaders UP-TO-DATE
+> Task :app:compileDebugShaders NO-SOURCE
+> Task :app:generateDebugAssets UP-TO-DATE
+> Task :app:generateDebugPythonMiscAssets UP-TO-DATE
+> Task :app:generateDebugPythonRequirementsAssets UP-TO-DATE
+> Task :app:generateDebugPythonSourceAssets
+> Task :app:generateDebugPythonBuildAssets
+> Task :app:stageNotices UP-TO-DATE
+> Task :app:mergeDebugAssets
+> Task :app:desugarDebugFileDependencies UP-TO-DATE
+> Task :app:dexBuilderDebug UP-TO-DATE
+> Task :app:mergeDebugGlobalSynthetics UP-TO-DATE
+> Task :app:mergeDebugJavaResource UP-TO-DATE
+> Task :app:checkDebugDuplicateClasses UP-TO-DATE
+> Task :app:mergeDebugStartupProfile UP-TO-DATE
+> Task :app:mergeExtDexDebug UP-TO-DATE
+> Task :app:mergeLibDexDebug UP-TO-DATE
+> Task :app:mergeProjectDexDebug UP-TO-DATE
+> Task :app:generateDebugPythonJniLibs UP-TO-DATE
+> Task :app:mergeDebugJniLibFolders UP-TO-DATE
+> Task :app:validateSigningDebug UP-TO-DATE
+> Task :app:writeDebugAppMetadata UP-TO-DATE
+> Task :app:writeDebugSigningConfigVersions UP-TO-DATE
+> Task :app:preDebugAndroidTestBuild SKIPPED
+> Task :app:processDebugAndroidTestManifest UP-TO-DATE
+> Task :app:generateDebugAndroidTestBuildConfig UP-TO-DATE
+> Task :app:javaPreCompileDebugAndroidTest UP-TO-DATE
+> Task :app:checkDebugAndroidTestAarMetadata UP-TO-DATE
+> Task :app:generateDebugAndroidTestResValues UP-TO-DATE
+> Task :app:mapDebugAndroidTestSourceSetPaths UP-TO-DATE
+> Task :app:generateDebugAndroidTestResources UP-TO-DATE
+> Task :app:mergeDebugAndroidTestResources UP-TO-DATE
+> Task :app:processDebugAndroidTestResources UP-TO-DATE
+> Task :app:compileDebugAndroidTestJavaWithJavac UP-TO-DATE
+> Task :app:mergeDebugAndroidTestShaders UP-TO-DATE
+> Task :app:compileDebugAndroidTestShaders NO-SOURCE
+> Task :app:generateDebugAndroidTestAssets UP-TO-DATE
+> Task :app:mergeDebugAndroidTestAssets UP-TO-DATE
+> Task :app:compressDebugAndroidTestAssets UP-TO-DATE
+> Task :app:desugarDebugAndroidTestFileDependencies UP-TO-DATE
+> Task :app:dexBuilderDebugAndroidTest UP-TO-DATE
+> Task :app:mergeDebugAndroidTestGlobalSynthetics UP-TO-DATE
+> Task :app:processDebugAndroidTestJavaRes NO-SOURCE
+> Task :app:mergeDebugAndroidTestJavaResource UP-TO-DATE
+> Task :app:checkDebugAndroidTestDuplicateClasses UP-TO-DATE
+> Task :app:mergeExtDexDebugAndroidTest UP-TO-DATE
+> Task :app:mergeLibDexDebugAndroidTest UP-TO-DATE
+> Task :app:mergeProjectDexDebugAndroidTest UP-TO-DATE
+> Task :app:mergeDebugAndroidTestJniLibFolders UP-TO-DATE
+> Task :app:validateSigningDebugAndroidTest UP-TO-DATE
+> Task :app:writeDebugAndroidTestSigningConfigVersions UP-TO-DATE
+> Task :app:mergeDebugNativeLibs
+> Task :app:stripDebugDebugSymbols
+> Task :app:compressDebugAssets
+> Task :app:mergeDebugAndroidTestNativeLibs NO-SOURCE
+> Task :app:stripDebugAndroidTestDebugSymbols NO-SOURCE
+> Task :app:packageDebugAndroidTest UP-TO-DATE
+> Task :app:createDebugAndroidTestApkListingFileRedirect UP-TO-DATE
+> Task :app:assembleDebugAndroidTest UP-TO-DATE
+> Task :app:packageDebug
+> Task :app:createDebugApkListingFileRedirect UP-TO-DATE
+> Task :app:assembleDebug
+
+BUILD SUCCESSFUL in 6m 53s
+83 actionable tasks: 15 executed, 68 up-to-date

@@ -90,9 +90,12 @@ def validate(serial, adb, resize, report_path, package=PACKAGE):
       size = command("shell", "wm", "size")
       restore = size.split("Override size: ")[-1].strip() if "Override size:" in size else "reset"
       restored_size = [int(value) for value in (restore if restore != "reset" else size.split("Physical size: ")[-1].strip()).split("x")]
-      report["display_sizes"] = {"requested": [1280, 720], "restore": restored_size}
-      command("shell", "wm", "size", "1280x720")
-      report["resized"] = wait_for_frames(report["resumed"], resized=True, expected_size=[1280, 720])
+      # Swapping a portrait override's dimensions need not change a landscape
+      # surface. Exercise a different pixel extent even on the 720p emulator.
+      requested = [960, 540] if sorted(restored_size, reverse=True) == [1280, 720] else [1280, 720]
+      report["display_sizes"] = {"requested": requested, "restore": restored_size}
+      command("shell", "wm", "size", "x".join(map(str, requested)))
+      report["resized"] = wait_for_frames(report["resumed"], resized=True, expected_size=requested)
       command("shell", "wm", "size", restore)
       restore = None
       report["restored"] = wait_for_frames(report["resized"], resized=True, expected_size=restored_size)
@@ -105,6 +108,10 @@ def validate(serial, adb, resize, report_path, package=PACKAGE):
     report["status"] = "passed"
   except Exception as exc:
     report.update(status="failed", error=f"{type(exc).__name__}: {exc}")
+    try:
+      report["failure_snapshot"] = snapshot()
+    except (subprocess.SubprocessError, json.JSONDecodeError) as read_error:
+      report["failure_snapshot"] = {"error": str(read_error)}
   finally:
     if restore is not None:
       command("shell", "wm", "size", restore)

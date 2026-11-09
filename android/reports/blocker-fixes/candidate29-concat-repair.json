@@ -1,0 +1,95 @@
+{
+  "scope": "Diagnostic replay frame 0; retained tensor reads may change scheduling; full sequences and timing are separate gates",
+  "vehicle_tx_enabled": false,
+  "engagement_allowed": false,
+  "fix": "Bitcast floating concat inputs to integers before data movement; preserve original floating bits",
+  "reference_tolerances": {
+    "rtol": 0.001,
+    "atol": 0.0001
+  },
+  "before": {
+    "candidate": "candidate28",
+    "apk_sha256": "021948e1e7693d89fd27bd3aaf574de227be19beb28d54115920d5547f2dc59b",
+    "trace": "candidate28-road-camera-trace-comparison.json",
+    "tensors": 531,
+    "exact_tensors": 527,
+    "first_difference": {
+      "index": 419,
+      "operator": "Concat",
+      "name": "model/node_Concat_171",
+      "output": "model/vision_outputs",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        1576
+      ],
+      "dtype": "float16",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 3.0517578125e-05,
+      "mismatched_elements": 0
+    }
+  },
+  "after": {
+    "candidate": "candidate29",
+    "apk_sha256": "04cf8905009abe6d502048b90fd94a6065d49c7b6967c9230603bffbe40e6b39",
+    "trace": "candidate29-road-camera-trace-comparison.json",
+    "tensors": 531,
+    "exact_tensors": 531,
+    "first_difference": null,
+    "first_divergence": null,
+    "archive_sha256": "47383039c4dad61ad92a9e151a71b5f8c5459acd776adb29115f55c4c0ff5ce0",
+    "final_outputs": {
+      "next_state_feat_q": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          96,
+          1,
+          512
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "outputs": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          2576
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "next_state_desire_q": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          100,
+          1,
+          8
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "next_state_img_q": {
+        "passed": true,
+        "exact_hash": "986635d5e41f3ceb4cd13118fedd76fa1889bd0f7a725f826612b80edd26bdc0"
+      }
+    }
+  }
+}

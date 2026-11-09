@@ -1,0 +1,35 @@
+{
+  "diagnostic_only": true,
+  "native_physical_shape": [
+    1024,
+    1,
+    1
+  ],
+  "logical_shape": [
+    1,
+    1024,
+    1,
+    1
+  ],
+  "shape_provenance": "MNN GeometryReduce lowers to [outside, dim, inside] then restores original leading singleton",
+  "source_graph_sha256": "52534d305499bd9036311eabf1541b0517e3464245e64512e98e9ac9ed1cc575",
+  "operator": "ReduceMean",
+  "node": "model/node_mean",
+  "parity": {
+    "passed": true,
+    "finite": true,
+    "shape": [
+      1,
+      1024,
+      1,
+      1
+    ],
+    "dtype": "float32",
+    "expected_nonfinite_elements": 0,
+    "unexpected_nonfinite_elements": 0,
+    "exact": true,
+    "max_abs_error": 0.0,
+    "mismatched_elements": 0
+  },
+  "unequal_elements": 0
+}

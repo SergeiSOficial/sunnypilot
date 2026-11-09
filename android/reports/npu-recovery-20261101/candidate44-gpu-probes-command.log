@@ -1,0 +1,614 @@
+{
+  "mnn-opencl-conv": {
+    "status": "passed",
+    "performance_status": "diagnostic_only",
+    "model_sha256": "03037d64115db12d8fbd9caae68d25cf18c5bcc08e576b7505da4aa0a337a7e6",
+    "initialization_ms": 548.628749,
+    "parity": {
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        4,
+        6,
+        6
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 2.2351741790771484e-08,
+      "mismatched_elements": 0
+    },
+    "assignment": {
+      "backend": "mnn-opencl",
+      "inputs": {
+        "x": {
+          "shape": [
+            1,
+            3,
+            8,
+            8
+          ],
+          "dtype": "float32"
+        }
+      },
+      "outputs": {
+        "y": {
+          "shape": [
+            1,
+            4,
+            6,
+            6
+          ],
+          "dtype": "float32"
+        }
+      },
+      "assignments": [
+        "y_raster_0:Raster:OpenCL",
+        "y:Convolution:OpenCL",
+        "y__before_tr_raster_0:Raster:OpenCL"
+      ],
+      "no_cpu_fallback_verified": true,
+      "upload_ms": 63.34651,
+      "compute_ms": 0.067709,
+      "readback_ms": 1.237187
+    },
+    "samples_ms": [
+      1.392448,
+      1.458021,
+      1.439114,
+      1.694479,
+      1.640937,
+      0.761823,
+      1.522291,
+      0.720521,
+      1.34599,
+      1.224115,
+      1.223698,
+      1.222864,
+      1.222188,
+      1.222448,
+      1.389427,
+      1.495417,
+      1.431354,
+      1.400468,
+      1.467917,
+      1.522084
+    ],
+    "work_p50_ms": 1.396458,
+    "work_p99_ms": 1.68430602
+  },
+  "mnn-opencl-gemm": {
+    "status": "passed",
+    "performance_status": "diagnostic_only",
+    "model_sha256": "e312012ba764ad7ac898a6f7a342da3b45a0e58486c9fd2774594fa2e48216c5",
+    "initialization_ms": 327.206875,
+    "parity": {
+      "passed": true,
+      "finite": true,
+      "shape": [
+        2,
+        8
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 1.4901161193847656e-08,
+      "mismatched_elements": 0
+    },
+    "assignment": {
+      "backend": "mnn-opencl",
+      "inputs": {
+        "x": {
+          "shape": [
+            2,
+            16
+          ],
+          "dtype": "float32"
+        }
+      },
+      "outputs": {
+        "y": {
+          "shape": [
+            2,
+            8
+          ],
+          "dtype": "float32"
+        }
+      },
+      "assignments": [
+        "y__matmul_converted_raster_0:Raster:OpenCL",
+        "y__matmul_converted:Convolution:OpenCL",
+        "y_raster_0:Raster:OpenCL"
+      ],
+      "no_cpu_fallback_verified": true,
+      "upload_ms": 61.819584,
+      "compute_ms": 0.069114,
+      "readback_ms": 1.071146
+    },
+    "samples_ms": [
+      1.229427,
+      1.227031,
+      1.216042,
+      1.451719,
+      1.511094,
+      1.519271,
+      1.531354,
+      1.522188,
+      1.529948,
+      1.528646,
+      1.503802,
+      1.541355,
+      1.524479,
+      1.528385,
+      1.525781,
+      1.507552,
+      1.532344,
+      1.602448,
+      1.530729,
+      1.637552
+    ],
+    "work_p50_ms": 1.5251299999999999,
+    "work_p99_ms": 1.6308822399999998
+  },
+  "mnn-opencl-activation": {
+    "status": "passed",
+    "performance_status": "diagnostic_only",
+    "model_sha256": "767fd436aee1567ff55ee7dac0b9baec2ffec513622e34b169f572f37ae41786",
+    "initialization_ms": 74.387864,
+    "parity": {
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        4,
+        6,
+        6
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 2.9802322387695312e-08,
+      "mismatched_elements": 0
+    },
+    "assignment": {
+      "backend": "mnn-opencl",
+      "inputs": {
+        "x": {
+          "shape": [
+            1,
+            4,
+            6,
+            6
+          ],
+          "dtype": "float32"
+        }
+      },
+      "outputs": {
+        "y": {
+          "shape": [
+            1,
+            4,
+            6,
+            6
+          ],
+          "dtype": "float32"
+        }
+      },
+      "assignments": [
+        "m:UnaryOp:OpenCL",
+        "y:UnaryOp:OpenCL"
+      ],
+      "no_cpu_fallback_verified": true,
+      "upload_ms": 60.534323,
+      "compute_ms": 0.024479,
+      "readback_ms": 4.551615
+    },
+    "samples_ms": [
+      1.332448,
+      1.365209,
+      0.492604,
+      0.484531,
+      1.354896,
+      1.386719,
+      1.403073,
+      1.344011,
+      0.5075,
+      1.400677,
+      0.537083,
+      0.529531,
+      0.522083,
+      1.404479,
+      1.429479,
+      1.373645,
+      1.400781,
+      1.370573,
+      0.515313,
+      0.508802
+    ],
+    "work_p50_ms": 1.3494535,
+    "work_p99_ms": 1.424729
+  },
+  "mnn-opencl-layout": {
+    "status": "passed",
+    "performance_status": "diagnostic_only",
+    "model_sha256": "7307ddae7ae406b6dfd2674ddcc88ca9d87582ff02a64bf661541eb6a2056744",
+    "initialization_ms": 118.742448,
+    "parity": {
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        6,
+        6,
+        4
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": true,
+      "max_abs_error": 0.0,
+      "mismatched_elements": 0
+    },
+    "assignment": {
+      "backend": "mnn-opencl",
+      "inputs": {
+        "x": {
+          "shape": [
+            1,
+            4,
+            6,
+            6
+          ],
+          "dtype": "float32"
+        }
+      },
+      "outputs": {
+        "y": {
+          "shape": [
+            1,
+            6,
+            6,
+            4
+          ],
+          "dtype": "float32"
+        }
+      },
+      "assignments": [
+        "y_raster_0:Raster:OpenCL"
+      ],
+      "no_cpu_fallback_verified": true,
+      "upload_ms": 60.523802,
+      "compute_ms": 0.041875,
+      "readback_ms": 1.211563
+    },
+    "samples_ms": [
+      1.484271,
+      1.388229,
+      1.385417,
+      0.623646,
+      1.397239,
+      1.383907,
+      1.402396,
+      0.634427,
+      1.409896,
+      1.418854,
+      1.416979,
+      1.463125,
+      1.410417,
+      1.400261,
+      1.403594,
+      1.406667,
+      1.519947,
+      0.568646,
+      1.416927,
+      1.476771
+    ],
+    "work_p50_ms": 1.4051304999999998,
+    "work_p99_ms": 1.5131685599999998
+  },
+  "ncnn-vulkan-conv": {
+    "status": "passed",
+    "performance_status": "diagnostic_only",
+    "model_sha256": "bd1b425ecffa6e536aea9d8b5daf795f5982dd3f313919b37caf69820e322cc8",
+    "initialization_ms": 427.421249,
+    "parity": {
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        4,
+        6,
+        6
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 2.9802322387695312e-08,
+      "mismatched_elements": 0
+    },
+    "assignment": {
+      "backend": "ncnn-vulkan",
+      "inputs": {},
+      "outputs": {},
+      "assignments": [
+        "in0:Input:Vulkan",
+        "conv_0:Convolution:Vulkan"
+      ],
+      "no_cpu_fallback_verified": true,
+      "upload_ms": 0.005365,
+      "compute_ms": 23.253958,
+      "readback_ms": 0.0
+    },
+    "samples_ms": [
+      0.639479,
+      0.591406,
+      0.601562,
+      0.574532,
+      0.571615,
+      0.569479,
+      0.568386,
+      0.603959,
+      0.627188,
+      0.62875,
+      0.625417,
+      0.623855,
+      0.631666,
+      0.649115,
+      0.608438,
+      0.631198,
+      0.644427,
+      0.634427,
+      0.648646,
+      0.640625
+    ],
+    "work_p50_ms": 0.6263025,
+    "work_p99_ms": 0.64902589
+  },
+  "ncnn-vulkan-gemm": {
+    "status": "passed",
+    "performance_status": "diagnostic_only",
+    "model_sha256": "d8920d5b63e2b7228ba43b06090e88e770259c242a415b265270ea0dd7950ba4",
+    "initialization_ms": 39.724635,
+    "parity": {
+      "passed": true,
+      "finite": true,
+      "shape": [
+        2,
+        8
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 1.4901161193847656e-08,
+      "mismatched_elements": 0
+    },
+    "assignment": {
+      "backend": "ncnn-vulkan",
+      "inputs": {},
+      "outputs": {},
+      "assignments": [
+        "in0:Input:Vulkan",
+        "gemm_0:Gemm:Vulkan"
+      ],
+      "no_cpu_fallback_verified": true,
+      "upload_ms": 0.004896,
+      "compute_ms": 0.644115,
+      "readback_ms": 0.0
+    },
+    "samples_ms": [
+      0.630833,
+      0.607708,
+      0.600468,
+      0.596666,
+      0.579479,
+      0.551041,
+      0.549427,
+      0.5475,
+      0.562188,
+      0.548646,
+      0.580625,
+      0.547188,
+      0.5475,
+      0.550052,
+      0.546718,
+      0.544635,
+      0.553281,
+      0.541406,
+      0.530677,
+      0.535364
+    ],
+    "work_p50_ms": 0.5497395,
+    "work_p99_ms": 0.62643925
+  },
+  "ncnn-vulkan-activation": {
+    "status": "passed",
+    "performance_status": "diagnostic_only",
+    "model_sha256": "53030e2b72f9d8e2b71bb1063629f8f1d3be064c2f0c7c5160edaec3b76714fd",
+    "initialization_ms": 10.806458,
+    "parity": {
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        4,
+        6,
+        6
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 6.705522537231445e-08,
+      "mismatched_elements": 0
+    },
+    "assignment": {
+      "backend": "ncnn-vulkan",
+      "inputs": {},
+      "outputs": {},
+      "assignments": [
+        "in0:Input:Vulkan",
+        "silu_0:Swish:Vulkan",
+        "tanh_1:TanH:Vulkan"
+      ],
+      "no_cpu_fallback_verified": true,
+      "upload_ms": 0.005208,
+      "compute_ms": 0.527709,
+      "readback_ms": 0.0
+    },
+    "samples_ms": [
+      0.57026,
+      0.545729,
+      0.544219,
+      0.541354,
+      0.538646,
+      0.637969,
+      0.544271,
+      0.543281,
+      0.538177,
+      0.532708,
+      0.541406,
+      0.658541,
+      0.579167,
+      0.582187,
+      0.580052,
+      0.602135,
+      0.577292,
+      0.607552,
+      0.569323,
+      0.573854
+    ],
+    "work_p50_ms": 0.5697915,
+    "work_p99_ms": 0.65463232
+  },
+  "ncnn-vulkan-layout": {
+    "status": "passed",
+    "performance_status": "diagnostic_only",
+    "model_sha256": "80b692827e237a64e882c903cf42478474e8683741eb8882b1ae2b3d8b4346e0",
+    "initialization_ms": 82.720729,
+    "parity": {
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        6,
+        6,
+        4
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": true,
+      "max_abs_error": 0.0,
+      "mismatched_elements": 0
+    },
+    "assignment": {
+      "backend": "ncnn-vulkan",
+      "inputs": {},
+      "outputs": {},
+      "assignments": [
+        "in0:Input:Vulkan",
+        "permute_0:Permute:Vulkan"
+      ],
+      "no_cpu_fallback_verified": true,
+      "upload_ms": 0.005416,
+      "compute_ms": 0.594428,
+      "readback_ms": 0.0
+    },
+    "samples_ms": [
+      0.670833,
+      0.616354,
+      0.616823,
+      0.614844,
+      0.617031,
+      0.671823,
+      0.613959,
+      0.612083,
+      0.610781,
+      0.614635,
+      0.660521,
+      0.640833,
+      0.814428,
+      0.606042,
+      0.578177,
+      0.664166,
+      0.583385,
+      0.601407,
+      0.582239,
+      0.584011
+    ],
+    "work_p50_ms": 0.6147395,
+    "work_p99_ms": 0.7873330499999999
+  }
+}
+{
+  "serial": "RFCR81Y1TBJ",
+  "command": [
+    "/Users/sergios/sunnypilot/.venv/bin/python",
+    "android/scripts/validate_models.py",
+    "--serial",
+    "RFCR81Y1TBJ",
+    "--adb",
+    "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+    "--package",
+    "com.samsung.sunnypilot.fold3",
+    "--profile",
+    "accel-probes",
+    "--report",
+    "/Users/sergios/sunnypilot/android/reports/npu-recovery-20261101/candidate44-gpu-probes.json",
+    "--timeout",
+    "900"
+  ],
+  "vehicle_tx_enabled": false,
+  "status": "passed",
+  "validation_status": "passed",
+  "isolation_status": "passed",
+  "forwards_before": [],
+  "before_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 29.4,
+    "thermal_override": false
+  },
+  "apk_sha256": "f18262c93c2132b1e61a1746af6b2c55dcae8820e3d8a9db0dd84bc5472c6360",
+  "baseline": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 27.9,
+    "thermal_override": false,
+    "idle_seconds": 32.547459041001275,
+    "normal_thermal_seconds": 32.22636537498329
+  },
+  "apk_sha256_at_start": "f18262c93c2132b1e61a1746af6b2c55dcae8820e3d8a9db0dd84bc5472c6360",
+  "returncode": 0,
+  "after_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 27.8,
+    "thermal_override": false
+  },
+  "forwards_removed": [],
+  "apk_sha256_after": "f18262c93c2132b1e61a1746af6b2c55dcae8820e3d8a9db0dd84bc5472c6360",
+  "artifact_stable": true,
+  "wrapper_status": "passed"
+}

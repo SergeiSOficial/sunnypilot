@@ -1,0 +1,146 @@
+{
+  "scope": "Matched tiny GPU probes compare only with the same tiny workload; full-model baseline timings remain separate. Separate cooled runs are not a controlled A/B.",
+  "rtol": 0.001,
+  "atol": 0.0001,
+  "vehicle_tx_enabled": false,
+  "full_models": [
+    {
+      "candidate": "candidate35",
+      "apk_sha256": "38645e91f806076517de1497cdb6b5c0cbf4873cfecf5efabb980297a014ad51",
+      "backend": "strict OpenCL",
+      "original_reference_comparisons": 795,
+      "accuracy_status": "passed",
+      "samples_per_model": 100,
+      "driver_p99_ms": 560.16,
+      "road_p99_ms": 881.57,
+      "performance_status": "failed"
+    },
+    {
+      "candidate": "candidate40",
+      "apk_sha256": "bd42b65a3538b8ad73834e90826eb10a98d8afeacbe9d5aae5877d43a25e30ec",
+      "backend": "strict OpenCL",
+      "original_reference_comparisons": 795,
+      "accuracy_status": "passed",
+      "samples_driver": 100,
+      "driver_p99_ms": 381.544,
+      "road_p99_ms": null,
+      "road_timing_status": "blocked at MODERATE after parity",
+      "performance_status": "failed"
+    }
+  ],
+  "candidate44": {
+    "apk_sha256": "f18262c93c2132b1e61a1746af6b2c55dcae8820e3d8a9db0dd84bc5472c6360",
+    "new_qualified_models": [],
+    "backend_reports": {
+      "htp": "candidate44-htp-probes.json",
+      "mnn": "candidate44-mnn.json",
+      "ncnn": "candidate44-ncnn.json"
+    },
+    "full_model_timing_status": "blocked by accuracy/operator prerequisites"
+  },
+  "tiny_gpu_probes": {
+    "mnn-opencl-conv": {
+      "status": "passed",
+      "initialization_ms": 548.628749,
+      "work_p50_ms": 1.396458,
+      "work_p99_ms": 1.68430602,
+      "samples": 20,
+      "no_cpu_fallback_verified": true
+    },
+    "mnn-opencl-gemm": {
+      "status": "passed",
+      "initialization_ms": 327.206875,
+      "work_p50_ms": 1.5251299999999999,
+      "work_p99_ms": 1.6308822399999998,
+      "samples": 20,
+      "no_cpu_fallback_verified": true
+    },
+    "mnn-opencl-activation": {
+      "status": "passed",
+      "initialization_ms": 74.387864,
+      "work_p50_ms": 1.3494535,
+      "work_p99_ms": 1.424729,
+      "samples": 20,
+      "no_cpu_fallback_verified": true
+    },
+    "mnn-opencl-layout": {
+      "status": "passed",
+      "initialization_ms": 118.742448,
+      "work_p50_ms": 1.4051304999999998,
+      "work_p99_ms": 1.5131685599999998,
+      "samples": 20,
+      "no_cpu_fallback_verified": true
+    },
+    "ncnn-vulkan-conv": {
+      "status": "passed",
+      "initialization_ms": 427.421249,
+      "work_p50_ms": 0.6263025,
+      "work_p99_ms": 0.64902589,
+      "samples": 20,
+      "no_cpu_fallback_verified": true
+    },
+    "ncnn-vulkan-gemm": {
+      "status": "passed",
+      "initialization_ms": 39.724635,
+      "work_p50_ms": 0.5497395,
+      "work_p99_ms": 0.62643925,
+      "samples": 20,
+      "no_cpu_fallback_verified": true
+    },
+    "ncnn-vulkan-activation": {
+      "status": "passed",
+      "initialization_ms": 10.806458,
+      "work_p50_ms": 0.5697915,
+      "work_p99_ms": 0.65463232,
+      "samples": 20,
+      "no_cpu_fallback_verified": true
+    },
+    "ncnn-vulkan-layout": {
+      "status": "passed",
+      "initialization_ms": 82.720729,
+      "work_p50_ms": 0.6147395,
+      "work_p99_ms": 0.7873330499999999,
+      "samples": 20,
+      "no_cpu_fallback_verified": true
+    }
+  },
+  "device_source_fixtures": [
+    {
+      "candidate": "candidate40",
+      "apk_sha256": "bd42b65a3538b8ad73834e90826eb10a98d8afeacbe9d5aae5877d43a25e30ec",
+      "report": "android/reports/performance-fixes-20261101/fold-candidate40-chain-device-steady.json",
+      "fixture_sha256": "b5ea99327f0ffc121e5556d29b32d4ce8e6e855d14518f46a3f060ea38721f99",
+      "input_pacing": "android_absolute_deadline_100_hz",
+      "synthetic_sources": true,
+      "camera_model_parity_verified": false,
+      "source_mean_hz": 99.99416947669258,
+      "control_mean_hz": 99.8312225729036,
+      "control_work_p99_ms": 8.826146,
+      "complete_cycle_p99_ms": 18.288646,
+      "complete_cycle_deadline_misses": 1368,
+      "ui_mean_fps": 29.601761967409747,
+      "unsafe_outputs": 0,
+      "functional_status": "passed",
+      "complete_cycle_timing_status": "failed"
+    },
+    {
+      "candidate": "candidate44",
+      "apk_sha256": "f18262c93c2132b1e61a1746af6b2c55dcae8820e3d8a9db0dd84bc5472c6360",
+      "report": "android/reports/npu-recovery-20261101/fold-candidate44-chain-device-steady.json",
+      "fixture_sha256": "b5ea99327f0ffc121e5556d29b32d4ce8e6e855d14518f46a3f060ea38721f99",
+      "input_pacing": "android_absolute_deadline_100_hz",
+      "synthetic_sources": true,
+      "camera_model_parity_verified": false,
+      "source_mean_hz": 99.99968927430768,
+      "control_mean_hz": 99.909663972664,
+      "control_work_p99_ms": 7.304167,
+      "complete_cycle_p99_ms": 16.612917,
+      "complete_cycle_deadline_misses": 1350,
+      "ui_mean_fps": 29.675004522902988,
+      "unsafe_outputs": 0,
+      "functional_status": "passed",
+      "complete_cycle_timing_status": "failed"
+    }
+  ],
+  "device_source_fixtures_note": "These separate cooled fixture runs inject unqualified perception, use the same recorded fixture hash/pacing, and test process correctness. Variance is not attributed to an inference optimization."
+}

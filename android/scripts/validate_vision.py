@@ -37,14 +37,16 @@ def validate(serial, adb, seconds, output, package=PACKAGE, samsung=False):
   previous_vision_start = read("vision-report").get("started_utc")
   launch_elapsed_ms = int(float(command("shell", "cat", "/proc/uptime").split()[0]) * 1000)
   device.stop()
-  command("shell", "am", "start", "-n", package + "/ai.sunnypilot.fold3.MainActivity", "--ez", "run_vision", "true",
-          "--ei", "vision_seconds", str(seconds), "--ez", "samsung_multiview", str(samsung).lower())
   start = time.monotonic()
   try:
+    device.assert_thermal_safe()
+    command("shell", "am", "start", "-n", package + "/ai.sunnypilot.fold3.MainActivity", "--ez", "run_vision", "true",
+            "--ei", "vision_seconds", str(seconds), "--ez", "samsung_multiview", str(samsung).lower())
     with samples.open("w") as log:
       # Native/Python imports and renderer startup are slower on the emulator.
       # Stop immediately on completion, but do not truncate a fresh session.
       while time.monotonic() - start < seconds + 60:
+        device.assert_thermal_safe()
         sample = {"elapsed_s": time.monotonic() - start}
         for name in ("ui-report", "manager", "dmonitoringmodeld", "modeld", "sensord", "vision-report"):
           sample[name] = read(name)
@@ -92,7 +94,8 @@ def validate(serial, adb, seconds, output, package=PACKAGE, samsung=False):
     workers = report["last_sample"]["manager"]["processes"]
     assert report["last_sample"]["manager"]["updated_elapsed_ms"] >= launch_elapsed_ms, "Stale manager report"
     assert report["last_sample"]["manager"]["pid"] != previous_manager_pid, "Previous manager process report"
-    assert set(workers) == {"Controls", "Monitoring", "Sensors", "RoadModel", "DriverModel"}
+    assert set(workers) == {"Controls", "Monitoring", "Sensors", "RoadModel", "DriverModel", "Vehicle",
+                            "Localization", "Calibration", "Parameters", "Torque", "Delay", "Radar", "Planning", "Selfdrive"}
     assert all(not worker.get("error") and not worker.get("restarts") for worker in workers.values()), "Worker failure/restart"
     road = report["last_sample"]["modeld"]
     if samsung:

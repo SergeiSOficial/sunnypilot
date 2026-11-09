@@ -1,0 +1,68 @@
+/Users/sergios/sunnypilot/android/build/f3mnnprofile: 1 file pushed, 0 skipped. 423.1 MB/s (57792 bytes in 0.000s)
+/Users/sergios/sunnypilot/android/app/build/model-reference/accelerators/mnn/dmonitoring_model.mnn: 1 file pushed, 0 skipped. 67.3 MB/s (14626436 bytes in 0.207s)
+/Users/sergios/sunnypilot/android/build/native/accelerators/mnn-patched/android-profile/libs/arm64-v8a/libMNN.so: 1 file pushed, 0 skipped. 139.1 MB/s (53206808 bytes in 0.365s)
+/Users/sergios/sunnypilot/android/build/native/accelerators/mnn-patched/android-profile/libs/arm64-v8a/libMNN_CL.so: 1 file pushed, 0 skipped. 298.0 MB/s (79280360 bytes in 0.254s)
+/Users/sergios/Library/Android/sdk/ndk/28.2.13676358/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/aarch64-linux-android/libc++_shared.so: 1 file pushed, 0 skipped. 193.8 MB/s (9236352 bytes in 0.045s)
+{"status": "passed", "diagnostic_only": true, "qualifies_model": false}
+{
+  "serial": "RFCR81Y1TBJ",
+  "command": [
+    ".venv/bin/python",
+    "android/scripts/profile_mnn.py",
+    "--serial",
+    "RFCR81Y1TBJ",
+    "--adb",
+    "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+    "--model",
+    "dmonitoring_model",
+    "--report",
+    "android/reports/performance-followup-20261103/driver-profile-stdout.json"
+  ],
+  "vehicle_tx_enabled": false,
+  "status": "passed",
+  "validation_status": "passed",
+  "isolation_status": "passed",
+  "forwards_before": [],
+  "before_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 23.9,
+    "thermal_override": false
+  },
+  "apk_sha256": "e7ae5461257aae2abef31e1631c4c79e7a32bc1513523f5d38db021ab9a2334e",
+  "baseline": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 24.0,
+    "thermal_override": false,
+    "idle_seconds": 33.19839720800519,
+    "normal_thermal_seconds": 32.84037295804592
+  },
+  "apk_sha256_at_start": "e7ae5461257aae2abef31e1631c4c79e7a32bc1513523f5d38db021ab9a2334e",
+  "returncode": 0,
+  "after_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 25.4,
+    "thermal_override": false
+  },
+  "forwards_removed": [],
+  "apk_sha256_after": "e7ae5461257aae2abef31e1631c4c79e7a32bc1513523f5d38db021ab9a2334e",
+  "artifact_stable": true,
+  "wrapper_status": "passed"
+}

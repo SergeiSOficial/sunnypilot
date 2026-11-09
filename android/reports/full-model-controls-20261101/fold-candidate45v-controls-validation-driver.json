@@ -1,0 +1,39 @@
+[
+  {
+    "name": "chain-device-steady",
+    "command": [
+      "/Users/sergios/sunnypilot/.venv/bin/python",
+      "android/scripts/experiment.py",
+      "--serial",
+      "RFCR81Y1TBJ",
+      "--adb",
+      "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+      "--package",
+      "com.samsung.sunnypilot.fold3",
+      "--report",
+      "/Users/sergios/sunnypilot/android/reports/full-model-controls-20261101/fold-candidate45v-chain-device-steady-isolation.json",
+      "--runtime",
+      "full-chain",
+      "--",
+      "/Users/sergios/sunnypilot/.venv/bin/python",
+      "-m",
+      "openpilot.tools.sim.android_chain_validation",
+      "--seconds",
+      "30",
+      "--device-replay",
+      "--steady-inputs",
+      "--serial",
+      "RFCR81Y1TBJ",
+      "--adb",
+      "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+      "--report",
+      "/Users/sergios/sunnypilot/android/reports/full-model-controls-20261101/fold-candidate45v-chain-device-steady.json",
+      "--package",
+      "com.samsung.sunnypilot.fold3"
+    ],
+    "status": "passed",
+    "returncode": 0,
+    "log": "fold-candidate45v-controls-chain-device-steady-command.log",
+    "isolation_status": "passed"
+  }
+]

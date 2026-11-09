@@ -1,0 +1,82 @@
+patching file 'src/layer/vulkan/innerproduct_vulkan.cpp'
+patching file 'src/layer/vulkan/innerproduct_vulkan.h'
+patching file 'src/layer/vulkan/shader/binaryop.comp'
+patching file 'src/layer/vulkan/shader/binaryop_pack4.comp'
+patching file 'src/layer/vulkan/shader/cast_fp32_to_fp16.comp'
+patching file 'src/layer/vulkan/shader/cast_fp32_to_fp16_pack4.comp'
+patching file 'src/layer/vulkan/shader/convolution_packed_1x1s1d1.comp'
+patching file 'src/layer/vulkan/shader/innerproduct.comp'
+patching file 'src/layer/vulkan/shader/reduction.comp'
+patching file 'src/layer/vulkan/shader/tanh.comp'
+patching file 'src/layer/vulkan/shader/convolutiondepthwise.comp'
+patching file 'src/layer/vulkan/shader/convolutiondepthwise_pack4.comp'
+patching file 'src/layer/vulkan/shader/convolution_packed.comp'
+patching file 'src/layer/vulkan/shader/convolution_packed_gemm.comp'
+-- CMAKE_TOOLCHAIN_FILE = /Users/sergios/Library/Android/sdk/ndk/28.2.13676358/build/cmake/android.toolchain.cmake
+-- CMAKE_INSTALL_PREFIX = /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/android/install
+-- NCNN_VERSION_STRING = 1.0.20261104
+-- Target arch: arm 64bit
+-- Configuring done (0.8s)
+-- Generating done (0.3s)
+-- Build files have been written to: /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/android
+[1/16] Preprocessing shader source binaryop_pack4.comp
+[2/16] Preprocessing shader source cast_fp32_to_fp16.comp
+[3/16] Preprocessing shader source cast_fp32_to_fp16_pack4.comp
+[4/16] Preprocessing shader source binaryop.comp
+[5/16] Preprocessing shader source convolutiondepthwise.comp
+[6/16] Preprocessing shader source convolution_packed_1x1s1d1.comp
+[7/16] Preprocessing shader source convolution_packed_gemm.comp
+[8/16] Preprocessing shader source convolution_packed.comp
+[9/16] Preprocessing shader source convolutiondepthwise_pack4.comp
+[10/16] Preprocessing shader source tanh.comp
+[11/16] Preprocessing shader source innerproduct.comp
+[12/16] Preprocessing shader source reduction.comp
+[13/16] Building CXX object src/CMakeFiles/ncnn.dir/layer.cpp.o
+In file included from /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer.cpp:10:
+In file included from /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/android/src/layer_declaration.h:313:
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/vulkan/noop_vulkan.h:17:17: warning: 'ncnn::Noop_vulkan::forward_inplace' hides overloaded virtual function [-Woverloaded-virtual]
+   17 |     virtual int forward_inplace(std::vector<VkMat>& bottom_top_blobs, VkCompute& cmd, const Option& opt) const;
+      |                 ^
+/Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/ncnn-7e36d25cb153092ba87a60530455c7376fedf452/src/layer/noop.h:16:17: note: hidden overloaded virtual function 'ncnn::Noop::forward_inplace' declared here: different number of parameters (2 vs 3)
+   16 |     virtual int forward_inplace(std::vector<Mat>& bottom_top_blobs, const Option& opt) const;
+      |                 ^
+1 warning generated.
+[14/16] Building CXX object src/CMakeFiles/ncnn.dir/layer/vulkan/innerproduct_vulkan.cpp.o
+[15/16] Building CXX object src/CMakeFiles/ncnn.dir/gpu.cpp.o
+[16/16] Linking CXX shared library src/libncnn.so
+-- Install configuration: "Release"
+-- Installing: /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/install/lib/libncnn.so
+-- Up-to-date: /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/install/include/ncnn/allocator.h
+-- Up-to-date: /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/install/include/ncnn/benchmark.h
+-- Up-to-date: /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/install/include/ncnn/blob.h
+-- Up-to-date: /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/install/include/ncnn/c_api.h
+-- Up-to-date: /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/install/include/ncnn/command.h
+-- Up-to-date: /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/install/include/ncnn/cpu.h
+-- Up-to-date: /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/install/include/ncnn/datareader.h
+-- Up-to-date: /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/install/include/ncnn/expression.h
+-- Up-to-date: /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/install/include/ncnn/gpu.h
+-- Up-to-date: /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/install/include/ncnn/layer.h
+-- Up-to-date: /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/install/include/ncnn/layer_shader_type.h
+-- Up-to-date: /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/install/include/ncnn/layer_type.h
+-- Up-to-date: /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/install/include/ncnn/mat.h
+-- Up-to-date: /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/install/include/ncnn/modelbin.h
+-- Up-to-date: /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/install/include/ncnn/net.h
+-- Up-to-date: /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/install/include/ncnn/option.h
+-- Up-to-date: /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/install/include/ncnn/paramdict.h
+-- Up-to-date: /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/install/include/ncnn/pipeline.h
+-- Up-to-date: /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/install/include/ncnn/pipelinecache.h
+-- Up-to-date: /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/install/include/ncnn/simpleocv.h
+-- Up-to-date: /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/install/include/ncnn/simpleomp.h
+-- Up-to-date: /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/install/include/ncnn/simplestl.h
+-- Up-to-date: /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/install/include/ncnn/simplemath.h
+-- Up-to-date: /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/install/include/ncnn/simplevk.h
+-- Up-to-date: /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/install/include/ncnn/vulkan_header_fix.h
+-- Up-to-date: /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/install/include/ncnn/ncnn_export.h
+-- Up-to-date: /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/install/include/ncnn/layer_shader_type_enum.h
+-- Up-to-date: /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/install/include/ncnn/layer_type_enum.h
+-- Up-to-date: /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/install/include/ncnn/platform.h
+-- Up-to-date: /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/install/lib/cmake/ncnn/ncnn.cmake
+-- Up-to-date: /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/install/lib/cmake/ncnn/ncnn-release.cmake
+-- Up-to-date: /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/install/lib/cmake/ncnn/ncnnConfig.cmake
+-- Up-to-date: /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/install/lib/cmake/ncnn/ncnnConfigVersion.cmake
+-- Up-to-date: /Users/sergios/sunnypilot/android/build/native/accelerators/ncnn-patched/install/lib/pkgconfig/ncnn.pc

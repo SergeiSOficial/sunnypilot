@@ -118,7 +118,8 @@ public final class MainActivity extends Activity {
         stopRuntime.setOnClickListener(v -> stopService(new Intent(this, ManagerService.class)));
         layout.addView(stopRuntime, 2);
         if (saved == null && getIntent().getBooleanExtra("run_runtime", false))
-            startForegroundService(new Intent(this, ManagerService.class).putExtra("simulation", getIntent().getBooleanExtra("simulation", false)));
+            startForegroundService(new Intent(this, ManagerService.class).putExtra("simulation", getIntent().getBooleanExtra("simulation", false))
+                .putExtra("full_chain", getIntent().getBooleanExtra("full_chain", false)));
         if (saved == null && getIntent().getBooleanExtra("raylib", false)) launchDrivingUi();
         if (saved == null && getIntent().getBooleanExtra("run_vision", false)) startVision(getIntent());
         if (getIntent().getBooleanExtra("stop_vision", false)) stopService(new Intent(this, VisionService.class));
@@ -152,7 +153,8 @@ public final class MainActivity extends Activity {
                 PythonRuntime.start(this);
                 runOnUiThread(() -> { preparingUi = false; if (!isFinishing()) startActivity(new Intent(this, DrivingActivity.class)
                     .addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
-                    .putExtra("simulation", getIntent().getBooleanExtra("simulation", false))); });
+                    .putExtra("simulation", getIntent().getBooleanExtra("simulation", false))
+                .putExtra("full_chain", getIntent().getBooleanExtra("full_chain", false))); });
             } catch (Exception e) { runOnUiThread(() -> { preparingUi = false; status.setText("UI startup failed: " + e); }); }
         }, "prepare-ui").start();
     }
@@ -160,7 +162,8 @@ public final class MainActivity extends Activity {
         super.onNewIntent(intent);
         setIntent(intent);
         if (intent.getBooleanExtra("run_runtime", false))
-            startForegroundService(new Intent(this, ManagerService.class).putExtra("simulation", intent.getBooleanExtra("simulation", false)));
+            startForegroundService(new Intent(this, ManagerService.class).putExtra("simulation", intent.getBooleanExtra("simulation", false))
+                .putExtra("full_chain", intent.getBooleanExtra("full_chain", false)));
         if (intent.getBooleanExtra("raylib", false)) launchDrivingUi();
         if (intent.getBooleanExtra("run_vision", false)) startVision(intent);
         if (intent.getBooleanExtra("stop_vision", false)) stopService(new Intent(this, VisionService.class));

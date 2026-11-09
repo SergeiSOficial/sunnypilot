@@ -1,0 +1,293 @@
+{
+  "candidate": "candidate18",
+  "apk_sha256": "286b3134f50c809f08a4308c792ef28ee982e323e06887d5b956b538320a2de9",
+  "vehicle_tx_enabled": false,
+  "status": "failed",
+  "collection_status": "passed",
+  "half_conversion": {
+    "passed": true,
+    "values": 63512,
+    "mismatched_elements": 0,
+    "subnormal_values": 2056,
+    "first_mismatches": []
+  },
+  "micro_gemm": {
+    "cases": 18,
+    "passed": 0,
+    "exact": 0
+  },
+  "models": {
+    "dmonitoring_model": {
+      "ort": {
+        "first_difference": {
+          "index": 8,
+          "operator": "NhwcFusedConv",
+          "name": "node_Conv_805_token_561",
+          "output": "node_Conv_805",
+          "passed": true,
+          "finite": true,
+          "shape": [
+            1,
+            120,
+            180,
+            32
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 2.86102294921875e-05,
+          "mismatched_elements": 0
+        },
+        "first_divergence": null,
+        "first_nonfinite": null,
+        "final": {
+          "outputs": {
+            "passed": false,
+            "finite": true,
+            "shape": [
+              1,
+              553
+            ],
+            "dtype": "float16",
+            "expected_nonfinite_elements": 0,
+            "unexpected_nonfinite_elements": 0,
+            "exact": false,
+            "max_abs_error": 0.00390625,
+            "mismatched_elements": 2
+          }
+        }
+      },
+      "CL": {
+        "first_difference": {
+          "index": 1,
+          "operator": "Div",
+          "name": "node_div",
+          "output": "InsertedPrecisionFreeCast_div",
+          "passed": true,
+          "finite": true,
+          "shape": [
+            1,
+            1382400
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 5.960464477539063e-08,
+          "mismatched_elements": 0
+        },
+        "first_divergence": null,
+        "first_nonfinite": null,
+        "final": {
+          "outputs": {
+            "passed": false,
+            "finite": true,
+            "shape": [
+              1,
+              553
+            ],
+            "dtype": "float16",
+            "expected_nonfinite_elements": 0,
+            "unexpected_nonfinite_elements": 0,
+            "exact": false,
+            "max_abs_error": 0.1796875,
+            "mismatched_elements": 548
+          }
+        }
+      }
+    },
+    "driving_supercombo": {
+      "ort": {
+        "first_difference": {
+          "index": 44,
+          "operator": "NhwcFusedConv",
+          "name": "model/node_conv2d_token_575",
+          "output": "model/node_conv2d",
+          "passed": true,
+          "finite": true,
+          "shape": [
+            1,
+            64,
+            128,
+            64
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 8.392333984375e-05,
+          "mismatched_elements": 0
+        },
+        "first_divergence": null,
+        "first_nonfinite": null,
+        "final": {
+          "outputs": {
+            "passed": false,
+            "finite": true,
+            "shape": [
+              1,
+              2576
+            ],
+            "dtype": "float32",
+            "expected_nonfinite_elements": 0,
+            "unexpected_nonfinite_elements": 0,
+            "exact": false,
+            "max_abs_error": 0.1640625,
+            "mismatched_elements": 664
+          },
+          "next_state_img_q": {
+            "passed": true,
+            "finite": true,
+            "shape": [
+              2,
+              5,
+              6,
+              128,
+              256
+            ],
+            "dtype": "uint8",
+            "expected_nonfinite_elements": 0,
+            "unexpected_nonfinite_elements": 0,
+            "exact": true,
+            "max_abs_error": 0.0,
+            "mismatched_elements": 0
+          },
+          "next_state_desire_q": {
+            "passed": true,
+            "finite": true,
+            "shape": [
+              100,
+              1,
+              8
+            ],
+            "dtype": "float32",
+            "expected_nonfinite_elements": 0,
+            "unexpected_nonfinite_elements": 0,
+            "exact": true,
+            "max_abs_error": 0.0,
+            "mismatched_elements": 0
+          },
+          "next_state_feat_q": {
+            "passed": true,
+            "finite": true,
+            "shape": [
+              96,
+              1,
+              512
+            ],
+            "dtype": "float32",
+            "expected_nonfinite_elements": 0,
+            "unexpected_nonfinite_elements": 0,
+            "exact": false,
+            "max_abs_error": 0.0001220703125,
+            "mismatched_elements": 0
+          }
+        }
+      },
+      "CL": {
+        "first_difference": {
+          "index": 4,
+          "operator": "QuickGelu",
+          "name": "model/p_node_silu_2/QuickGeluFusion/",
+          "output": "InsertedPrecisionFreeCast_model/p_silu_2",
+          "passed": true,
+          "finite": true,
+          "shape": [
+            1,
+            512
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 5.960464477539063e-08,
+          "mismatched_elements": 0
+        },
+        "first_divergence": {
+          "index": 6,
+          "operator": "Gemm",
+          "name": "model/p_node_linear_5",
+          "output": "model/p_linear_5",
+          "passed": false,
+          "finite": true,
+          "shape": [
+            1,
+            512
+          ],
+          "dtype": "float16",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 0.625,
+          "mismatched_elements": 503
+        },
+        "first_nonfinite": null,
+        "final": {
+          "outputs": {
+            "passed": false,
+            "finite": true,
+            "shape": [
+              1,
+              2576
+            ],
+            "dtype": "float32",
+            "expected_nonfinite_elements": 0,
+            "unexpected_nonfinite_elements": 0,
+            "exact": false,
+            "max_abs_error": 5.046875,
+            "mismatched_elements": 2470
+          },
+          "next_state_img_q": {
+            "passed": true,
+            "finite": true,
+            "shape": [
+              2,
+              5,
+              6,
+              128,
+              256
+            ],
+            "dtype": "uint8",
+            "expected_nonfinite_elements": 0,
+            "unexpected_nonfinite_elements": 0,
+            "exact": true,
+            "max_abs_error": 0.0,
+            "mismatched_elements": 0
+          },
+          "next_state_desire_q": {
+            "passed": true,
+            "finite": true,
+            "shape": [
+              100,
+              1,
+              8
+            ],
+            "dtype": "float32",
+            "expected_nonfinite_elements": 0,
+            "unexpected_nonfinite_elements": 0,
+            "exact": true,
+            "max_abs_error": 0.0,
+            "mismatched_elements": 0
+          },
+          "next_state_feat_q": {
+            "passed": false,
+            "finite": true,
+            "shape": [
+              96,
+              1,
+              512
+            ],
+            "dtype": "float32",
+            "expected_nonfinite_elements": 0,
+            "unexpected_nonfinite_elements": 0,
+            "exact": false,
+            "max_abs_error": 0.011962890625,
+            "mismatched_elements": 491
+          }
+        }
+      }
+    }
+  },
+  "root_cause": "The ALU-only cast guard excludes CUSTOM operation results with addrspace=None. Cached generated kernels still contain ordinary half casts for the accumulator, while ALU reductions use the software helper. Candidate19 extends the guard and helper declarations to None; host regression covers this case."
+}

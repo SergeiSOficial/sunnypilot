@@ -1,0 +1,98 @@
+
+ai.sunnypilot.fold3.AcceleratorTest:.
+ai.sunnypilot.fold3.CameraPreviewSampleTest:..
+Error in slowPublisherOwnsItsBufferAndDropsQueuedFrames(ai.sunnypilot.fold3.CameraPreviewSampleTest):
+java.lang.AssertionError: Acquisition stalled behind sink
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at ai.sunnypilot.fold3.CameraPreviewSampleTest.slowPublisherOwnsItsBufferAndDropsQueuedFrames(CameraPreviewSampleTest.java:84)
+.
+ai.sunnypilot.fold3.ControlsMetricsIntegrationTest:.....
+ai.sunnypilot.fold3.GpuNv12Test:.
+ai.sunnypilot.fold3.LifecycleTest:.
+ai.sunnypilot.fold3.NativeBridgeTest:.......
+ai.sunnypilot.fold3.PerceptionTest:.......
+ai.sunnypilot.fold3.RuntimeTest:.
+ai.sunnypilot.fold3.SupervisorTest:.
+
+Time: 118.519
+There was 1 failure:
+1) slowPublisherOwnsItsBufferAndDropsQueuedFrames(ai.sunnypilot.fold3.CameraPreviewSampleTest)
+java.lang.AssertionError: Acquisition stalled behind sink
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at ai.sunnypilot.fold3.CameraPreviewSampleTest.slowPublisherOwnsItsBufferAndDropsQueuedFrames(CameraPreviewSampleTest.java:84)
+
+FAILURES!!!
+Tests run: 28,  Failures: 1
+
+
+{
+  "serial": "emulator-5560",
+  "command": [
+    "/Users/sergios/sunnypilot/.venv/bin/python",
+    "android/scripts/validate_instrumentation.py",
+    "--expected-tests",
+    "28",
+    "--output",
+    "/Users/sergios/sunnypilot/android/reports/remaining-seven-20261104/emulator-candidate45zq-instrumentation.txt",
+    "--serial",
+    "emulator-5560",
+    "--adb",
+    "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+    "--report",
+    "/Users/sergios/sunnypilot/android/reports/remaining-seven-20261104/emulator-candidate45zq-instrumentation.json",
+    "--package",
+    "com.samsung.sunnypilot.fold3"
+  ],
+  "vehicle_tx_enabled": false,
+  "status": "failed",
+  "validation_status": "failed",
+  "isolation_status": "passed",
+  "forwards_before": [],
+  "before_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "382 android.hardware.camera.provider.ranchu",
+      "383 android.hardware.camera.provider@2.7-service-google",
+      "469 cameraserver"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.8,
+    "thermal_override": false
+  },
+  "apk_sha256": "db2fc305eaaedb99b87a746fdad7816ab0d07206f1d2f641b8f5cc0c3a4085b1",
+  "baseline": {
+    "processes": [],
+    "camera_provider_processes": [
+      "382 android.hardware.camera.provider.ranchu",
+      "383 android.hardware.camera.provider@2.7-service-google",
+      "469 cameraserver"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.8,
+    "thermal_override": false,
+    "idle_seconds": 32.25474345800467,
+    "normal_thermal_seconds": 31.676314415992238
+  },
+  "apk_sha256_at_start": "db2fc305eaaedb99b87a746fdad7816ab0d07206f1d2f641b8f5cc0c3a4085b1",
+  "returncode": 1,
+  "after_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "382 android.hardware.camera.provider.ranchu",
+      "383 android.hardware.camera.provider@2.7-service-google",
+      "469 cameraserver"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.8,
+    "thermal_override": false
+  },
+  "forwards_removed": [],
+  "apk_sha256_after": "db2fc305eaaedb99b87a746fdad7816ab0d07206f1d2f641b8f5cc0c3a4085b1",
+  "artifact_stable": true,
+  "wrapper_status": "failed"
+}

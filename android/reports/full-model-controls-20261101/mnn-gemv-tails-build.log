@@ -1,0 +1,207 @@
+patching file 'tools/converter/source/onnx/CastOnnx.cpp'
+patching file 'source/shape/ShapeCast.cpp'
+patching file 'source/backend/opencl/execution/buffer/CastBufExecution.cpp'
+patching file 'source/backend/opencl/execution/cl/cast_buf.cl'
+patching file 'source/backend/opencl/execution/image/CastExecution.cpp'
+patching file 'source/backend/opencl/execution/cl/cast.cl'
+patching file 'source/backend/opencl/execution/buffer/CastBufExecution.cpp'
+patching file 'source/backend/opencl/execution/buffer/ConvBufExecution.hpp'
+patching file 'source/backend/opencl/execution/buffer/ConvBufExecution.cpp'
+patching file 'source/backend/opencl/execution/cl/fold3_half_gemv_buf.cl'
+CMake Deprecation Warning at CMakeLists.txt:1 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+
+CMake Deprecation Warning at 3rd_party/protobuf/cmake/CMakeLists.txt:2 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+
+-- 
+-- 3.19.0.0
+-- Use Threadpool, forbid openmp
+-- >>>>>>>>>>>>>
+-- MNN BUILD INFO:
+-- 	System: Darwin
+-- 	Processor: arm64
+-- 	Version: 3.6.2
+-- 	Metal: OFF
+-- 	OpenCL: OFF
+-- 	OpenGL: OFF
+-- 	Vulkan: OFF
+-- 	ARM82: ON
+-- 	KleidiAI: OFF
+-- 	oneDNN: OFF
+-- 	TensorRT: OFF
+-- 	CoreML: OFF
+-- 	NNAPI: OFF
+-- 	QNN: OFF
+-- 	CUDA: OFF
+-- 	MUSA: OFF
+-- 	OpenMP: OFF
+-- 	BF16: OFF
+-- 	ThreadPool: ON
+-- 	Hidden: TRUE
+-- 	Build Path: /Users/sergios/sunnypilot/android/build/native/accelerators/mnn-patched/host
+-- 	CUDA PROFILE: OFF
+-- WIN_USE_ASM: 
+-- Enabling AArch64 Assemblies
+-- Configuring done (0.1s)
+-- Generating done (0.2s)
+-- Build files have been written to: /Users/sergios/sunnypilot/android/build/native/accelerators/mnn-patched/host
+[1/6] Building CXX object CMakeFiles/MNNTransform.dir/source/shape/ShapeCast.cpp.o
+[2/6] Linking CXX shared library libMNN.dylib
+[3/6] Linking CXX shared library express/libMNN_Express.dylib
+[4/6] Building CXX object tools/converter/CMakeFiles/MNNConverterONNX.dir/source/onnx/CastOnnx.cpp.o
+[5/6] Linking CXX shared library tools/converter/libMNNConvertDeps.dylib
+[6/6] Linking CXX executable MNNConvert
+CMake Deprecation Warning at CMakeLists.txt:1 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+
+-- Use Threadpool, forbid openmp
+-- >>>>>>>>>>>>>
+-- MNN BUILD INFO:
+-- 	System: Android
+-- 	Processor: aarch64
+-- 	Version: 3.6.2
+-- 	Metal: OFF
+-- 	OpenCL: ON
+-- 	OpenGL: OFF
+-- 	Vulkan: OFF
+-- 	ARM82: ON
+-- 	KleidiAI: OFF
+-- 	oneDNN: OFF
+-- 	TensorRT: OFF
+-- 	CoreML: OFF
+-- 	NNAPI: OFF
+-- 	QNN: OFF
+-- 	CUDA: OFF
+-- 	MUSA: OFF
+-- 	OpenMP: OFF
+-- 	BF16: OFF
+-- 	ThreadPool: ON
+-- 	Hidden: TRUE
+-- 	Build Path: /Users/sergios/sunnypilot/android/build/native/accelerators/mnn-patched/android
+-- 	CUDA PROFILE: OFF
+-- WIN_USE_ASM: 
+-- Enabling AArch64 Assemblies
+-- Configuring done (0.3s)
+-- Generating done (0.3s)
+-- Build files have been written to: /Users/sergios/sunnypilot/android/build/native/accelerators/mnn-patched/android
+[1/102] Building CXX object CMakeFiles/MNNTransform.dir/source/shape/ShapeCast.cpp.o
+[2/102] Linking CXX shared library libs/arm64-v8a/libMNN.so
+[3/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/buffer/CastBufExecution.cpp.o
+[4/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/core/OpenCLRunningUtils.cpp.o
+[5/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/buffer/ConvBufExecution.cpp.o
+[6/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/buffer/ConvBufWinograd.cpp.o
+[7/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/buffer/DeconvBufExecution.cpp.o
+[8/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/core/runtime/OpenCLRuntime.cpp.o
+[9/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/buffer/FuseBufExecution.cpp.o
+[10/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/buffer/SharedGatherBufExecution.cpp.o
+[11/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/argmax_buf_mnn_cl.cpp.o
+[12/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/buffer/DepthwiseConvBufExecution.cpp.o
+[13/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/attention_flash_decode_partial_buf_mnn_cl.cpp.o
+[14/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/attention_flash_decode_reduce_buf_mnn_cl.cpp.o
+[15/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/attention_flash_prefill_buf_mnn_cl.cpp.o
+[16/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/attention_kv_rearrange_buf_mnn_cl.cpp.o
+[17/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/attention_long_layout_buf_mnn_cl.cpp.o
+[18/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/binary_buf_mnn_cl.cpp.o
+[19/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/binary_mnn_cl.cpp.o
+[20/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/binary_subgroup_buf_mnn_cl.cpp.o
+[21/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/buffer_convert_buf_mnn_cl.cpp.o
+[22/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/buffer_convert_filter_buf_mnn_cl.cpp.o
+[23/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/buffer_convert_quant_mnn_cl.cpp.o
+[24/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/buffer_convert_subgroup_buf_mnn_cl.cpp.o
+[25/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/buffer_to_image_mnn_cl.cpp.o
+[26/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/cast_buf_mnn_cl.cpp.o
+[27/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/cast_mnn_cl.cpp.o
+[28/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/conv_2d_buf_mnn_cl.cpp.o
+[29/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/conv_2d_c16_subgroup_buf_mnn_cl.cpp.o
+[30/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/conv_2d_c1_subgroup_buf_mnn_cl.cpp.o
+[31/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/conv_2d_int_buf_mnn_cl.cpp.o
+[32/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/conv_2d_int_mnn_cl.cpp.o
+[33/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/conv_2d_mnn_cl.cpp.o
+[34/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/copy_buffer_to_image2d_mnn_cl.cpp.o
+[35/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/deconv_2d_mnn_cl.cpp.o
+[36/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/depthwise_conv2d_buf_mnn_cl.cpp.o
+[37/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/depthwise_conv2d_mnn_cl.cpp.o
+[38/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/depthwise_conv2d_subgroup_buf_mnn_cl.cpp.o
+[39/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/depthwise_deconv2d_mnn_cl.cpp.o
+[40/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/fold3_half_gemv_buf_mnn_cl.cpp.o
+[41/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/fused_proj_gemv_buf_mnn_cl.cpp.o
+[42/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/gated_rms_norm_buf_mnn_cl.cpp.o
+[43/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/gemm_buf_mnn_cl.cpp.o
+[44/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/gemm_conv1x1_int4_b4_buf_mnn_cl.cpp.o
+[45/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/gemm_conv1x1_int4_b8_buf_mnn_cl.cpp.o
+[46/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/gemm_conv1x1_int8_b4_buf_mnn_cl.cpp.o
+[47/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/gemm_conv1x1_inverse_quant_buf_mnn_cl.cpp.o
+[48/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/gemm_conv1x1_layout_buf_mnn_cl.cpp.o
+[49/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/gemm_int_mnn_cl.cpp.o
+[50/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/gemm_mnn_cl.cpp.o
+[51/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/gemv_conv1x1_buf_mnn_cl.cpp.o
+[52/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/glmem_convert_mnn_cl.cpp.o
+[53/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/indexed_linear_buf_mnn_cl.cpp.o
+[54/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/grid_sample_buf_mnn_cl.cpp.o
+[55/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/grid_sample_mnn_cl.cpp.o
+[56/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/groupnorm_buf_mnn_cl.cpp.o
+[57/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/input_transe_buf_mnn_cl.cpp.o
+[58/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/interp_buf_mnn_cl.cpp.o
+[59/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/interp_mnn_cl.cpp.o
+[60/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/layernorm_buf_mnn_cl.cpp.o
+[61/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/layernorm_mnn_cl.cpp.o
+[62/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/linear_attention_buf_mnn_cl.cpp.o
+[63/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/loop_mnn_cl.cpp.o
+[64/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/matmul_buf_mnn_cl.cpp.o
+[65/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/matmul_local_buf_mnn_cl.cpp.o
+[66/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/matmul_mnn_cl.cpp.o
+[67/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/matmul_params_buf_mnn_cl.cpp.o
+[68/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/nearest_mnn_cl.cpp.o
+[69/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/pooling_buf_mnn_cl.cpp.o
+[70/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/pooling_mnn_cl.cpp.o
+[71/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/pooling_subgroup_buf_mnn_cl.cpp.o
+[72/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/range_buf_mnn_cl.cpp.o
+[73/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/range_mnn_cl.cpp.o
+[74/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/raster_buf_mnn_cl.cpp.o
+[75/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/raster_mnn_cl.cpp.o
+[76/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/reduction_buf_mnn_cl.cpp.o
+[77/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/reduction_mnn_cl.cpp.o
+[78/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/roi_pooling_mnn_cl.cpp.o
+[79/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/rope_buf_mnn_cl.cpp.o
+[80/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/scale_buf_mnn_cl.cpp.o
+[81/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/scale_mnn_cl.cpp.o
+[82/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/select_buf_mnn_cl.cpp.o
+[83/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/select_mnn_cl.cpp.o
+[84/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/self_attention_buf_mnn_cl.cpp.o
+[85/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/shared_gather_buf_mnn_cl.cpp.o
+[86/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/softmax_buf_mnn_cl.cpp.o
+[87/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/softmax_mnn_cl.cpp.o
+[88/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/splitgelu_buf_mnn_cl.cpp.o
+[89/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/strassen_binary_buf_mnn_cl.cpp.o
+[90/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/topkv2_buf_mnn_cl.cpp.o
+[91/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/topkv2_mnn_cl.cpp.o
+[92/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/unary_buf_mnn_cl.cpp.o
+[93/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/unary_mnn_cl.cpp.o
+[94/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/unary_subgroup_buf_mnn_cl.cpp.o
+[95/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/winogradTransformDest2_3_1_mnn_cl.cpp.o
+[96/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/winogradTransformDest2_5_1_mnn_cl.cpp.o
+[97/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/winogradTransformSource2_3_1_mnn_cl.cpp.o
+[98/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/winogradTransformSource2_5_1_mnn_cl.cpp.o
+[99/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/winogradTransform_buf_mnn_cl.cpp.o
+[100/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/cl/winogradTransform_subgroup_buf_mnn_cl.cpp.o
+[101/102] Building CXX object source/backend/opencl/CMakeFiles/MNN_CL.dir/execution/image/CastExecution.cpp.o
+[102/102] Linking CXX shared library libs/arm64-v8a/libMNN_CL.so

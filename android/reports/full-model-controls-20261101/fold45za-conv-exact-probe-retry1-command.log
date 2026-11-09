@@ -1,0 +1,63 @@
+Traceback (most recent call last):
+  File "/Users/sergios/sunnypilot/android/reports/full-model-controls-20261101/run_conv_probe.py", line 87, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/Users/sergios/sunnypilot/android/reports/full-model-controls-20261101/run_conv_probe.py", line 28, in main
+    assert device.artifact() == apk
+           ^^^^^^^^^^^^^^^^^
+  File "/Users/sergios/sunnypilot/android/scripts/experiment.py", line 63, in artifact
+    return self.command("shell", "sha256sum", path).split()[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sergios/sunnypilot/android/scripts/experiment.py", line 49, in command
+    return subprocess.check_output([self.adb, "-s", self.serial, *args], text=True, timeout=30)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sergios/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/subprocess.py", line 466, in check_output
+    return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sergios/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['/Users/sergios/Library/Android/sdk/platform-tools/adb', '-s', 'RFCR81Y1TBJ', 'shell', 'sha256sum', '/data/app/~~7KS9nTl10C3IoSKpsdt6Bw==/com.samsung.sunnypilot.fold3-naK90rXGDWR5Lv8uJs4dAg==/base.apk']' returned non-zero exit status 255.
+adb: device 'RFCR81Y1TBJ' not found
+{
+  "serial": "RFCR81Y1TBJ",
+  "command": [
+    ".venv/bin/python",
+    "android/reports/full-model-controls-20261101/run_conv_probe.py",
+    "candidate45za",
+    "exact"
+  ],
+  "vehicle_tx_enabled": false,
+  "status": "failed",
+  "validation_status": "failed",
+  "isolation_status": "failed",
+  "forwards_before": [],
+  "before_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 25.9,
+    "thermal_override": false
+  },
+  "apk_sha256": "17a87c7909af196941a6659a68c905ba41d5590dc361b8a309e2c4af53e95822",
+  "baseline": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 24.9,
+    "thermal_override": false,
+    "idle_seconds": 33.49443529199925,
+    "normal_thermal_seconds": 33.03335749998223
+  },
+  "apk_sha256_at_start": "17a87c7909af196941a6659a68c905ba41d5590dc361b8a309e2c4af53e95822",
+  "returncode": 1,
+  "cleanup_error": "CalledProcessError: Command '['/Users/sergios/Library/Android/sdk/platform-tools/adb', '-s', 'RFCR81Y1TBJ', 'shell', 'am', 'force-stop', 'ai.sunnypilot.fold3']' returned non-zero exit status 1.",
+  "wrapper_status": "failed"
+}

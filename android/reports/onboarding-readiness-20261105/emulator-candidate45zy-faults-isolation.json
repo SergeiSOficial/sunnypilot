@@ -1,0 +1,76 @@
+{
+  "serial": "emulator-5560",
+  "command": [
+    "/Users/sergios/sunnypilot/.venv/bin/python",
+    "-m",
+    "openpilot.tools.sim.android_chain_validation",
+    "--seconds",
+    "30",
+    "--device-replay",
+    "--serial",
+    "emulator-5560",
+    "--adb",
+    "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+    "--report",
+    "/Users/sergios/sunnypilot/android/reports/onboarding-readiness-20261105/emulator-candidate45zy-faults.json",
+    "--package",
+    "com.samsung.sunnypilot.fold3"
+  ],
+  "vehicle_tx_enabled": false,
+  "status": "passed",
+  "validation_status": "passed",
+  "isolation_status": "passed",
+  "forwards_before": [],
+  "before_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "379 android.hardware.camera.provider.ranchu",
+      "380 android.hardware.camera.provider@2.7-service-google",
+      "462 cameraserver"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.8,
+    "thermal_override": false
+  },
+  "apk_sha256": "0e70a87decb28b63f49d7948f433c559de91336828851701145275b32d8f0811",
+  "baseline": {
+    "processes": [],
+    "camera_provider_processes": [
+      "379 android.hardware.camera.provider.ranchu",
+      "380 android.hardware.camera.provider@2.7-service-google",
+      "462 cameraserver"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.8,
+    "thermal_override": false,
+    "idle_seconds": 32.12309824995464,
+    "normal_thermal_seconds": 32.01464179198956
+  },
+  "apk_sha256_at_start": "0e70a87decb28b63f49d7948f433c559de91336828851701145275b32d8f0811",
+  "runtime": {
+    "manager_pid": 4876,
+    "ui_pid": 5079,
+    "simulation": true,
+    "startup_elapsed_s": 38.3437386250007,
+    "startup_budget_s": 180
+  },
+  "returncode": 0,
+  "after_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "379 android.hardware.camera.provider.ranchu",
+      "380 android.hardware.camera.provider@2.7-service-google",
+      "462 cameraserver"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.8,
+    "thermal_override": false
+  },
+  "forwards_removed": [],
+  "apk_sha256_after": "0e70a87decb28b63f49d7948f433c559de91336828851701145275b32d8f0811",
+  "artifact_stable": true,
+  "wrapper_status": "passed"
+}

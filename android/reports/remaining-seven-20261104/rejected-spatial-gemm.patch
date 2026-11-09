@@ -1,0 +1,66 @@
+--- a/src/layer/vulkan/shader/convolution_packed_gemm.comp
++++ b/src/layer/vulkan/shader/convolution_packed_gemm.comp
+@@ -64,6 +64,22 @@
+ shared lfpvec4 tmp_k[8][LOCAL_MEMORY_UNROLL_INCH][4];
+ #endif
+ 
++#if !NCNN_fp16_storage && !NCNN_fp16_packed && !NCNN_fp16_arithmetic && !NCNN_bf16_storage && !NCNN_bf16_packed
++vec4 fold3_spatial_fma(vec4 a, vec4 b, vec4 c)
++{
++    precise vec4 ah = uintBitsToFloat(floatBitsToUint(a) & uvec4(0xfffff000u));
++    precise vec4 bh = uintBitsToFloat(floatBitsToUint(b) & uvec4(0xfffff000u));
++    precise vec4 al = a - ah;
++    precise vec4 bl = b - bh;
++    precise vec4 product = a * b;
++    precise vec4 error = ((ah * bh - product) + ah * bl + al * bh) + al * bl;
++    precise vec4 total = product + c;
++    precise vec4 part = total - product;
++    precise vec4 residual = (product - (total - part)) + (c - part);
++    return total + (residual + error);
++}
++#endif
++
+ void main()
+ {
+     int gx = int(gl_GlobalInvocationID.x) * 4;
+@@ -74,6 +90,40 @@
+ #if !NCNN_shader_local_memory
+     if (gx >= outsize || gy >= psc(outc))
+         return;
++#endif
++
++
++#if !NCNN_fp16_storage && !NCNN_fp16_packed && !NCNN_fp16_arithmetic && !NCNN_bf16_storage && !NCNN_bf16_packed
++    // The original NHWC stem accumulates spatial positions, then scalar channels,
++    // loading bias first. Keep that order on the GEMM path selected by this net.
++    if (kernel_w == 3 && kernel_h == 3 && stride_w == 2 && stride_h == 2 &&
++        dilation_w == 1 && dilation_h == 1 && bias_term == 1 && activation_type == 0 &&
++        (psc(num_input) == 16 || psc(num_input) == 32) && psc(num_output) == 32)
++    {
++        if (gx >= outsize || gy >= psc(outc)) return;
++        for (int point = 0; point < 4; point++)
++        {
++            int position = gx + point;
++            if (position >= outsize) break;
++            precise vec4 value = buffer_ld4(bias_data, gy);
++            for (int ky = 0; ky < 3; ky++)
++                for (int kx = 0; kx < 3; kx++)
++                    for (int ci = 0; ci < psc(num_input); ci++)
++                    {
++                        int spatial = ((position / psc(outw)) * 2 + ky) * psc(w) + (position % psc(outw)) * 2 + kx;
++                        float input_value;
++                        if (elempack == 4) input_value = buffer_ld4(bottom_blob_data_4, (ci / 4) * psc(cstep) + spatial)[ci % 4];
++                        else input_value = buffer_ld1(bottom_blob_data_1, ci * psc(cstep) + spatial);
++                        int wi = (gy * psc(c) * 9 + (ci / 4) * 9 + ky * 3 + kx) * 4;
++                        vec4 weights = vec4(buffer_ld4(weight_data, wi)[ci % 4], buffer_ld4(weight_data, wi + 1)[ci % 4],
++                                            buffer_ld4(weight_data, wi + 2)[ci % 4], buffer_ld4(weight_data, wi + 3)[ci % 4]);
++                        value = fold3_spatial_fma(vec4(input_value), weights, value);
++                    }
++            if (out_elempack == 4) { buffer_st4(top_blob_data_4, gy * psc(outcstep) + position, value); }
++            else { for (int lane = 0; lane < 4; lane++) { buffer_st1(top_blob_data_1, (gy * 4 + lane) * psc(outcstep) + position, value[lane]); } }
++        }
++        return;
++    }
+ #endif
+ 
+     afpvec4 sum0;

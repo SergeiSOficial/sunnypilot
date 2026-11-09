@@ -1,0 +1,2151 @@
+{
+  "serial": "emulator-5560",
+  "package": "com.samsung.sunnypilot.fold3",
+  "vehicle_tx_enabled": false,
+  "status": "passed",
+  "cases": [
+    {
+      "during_capture": false,
+      "abort_wait_seconds": 6.441307375003817,
+      "result": {
+        "vehicle_tx_enabled": false,
+        "valid": false,
+        "sessions": [
+          {
+            "camera_ids": [
+              "0",
+              "1"
+            ],
+            "width": 1280,
+            "height": 720,
+            "logical_camera": null,
+            "requested_duration_ms": 29923,
+            "startup_order": "open_all_then_configure",
+            "opened_camera_ids": [],
+            "image_callbacks_drained": true,
+            "camera_close_callbacks_complete": true,
+            "request_template": "record",
+            "stabilization": "disabled when advertised",
+            "sensor_pairs": [],
+            "streams": [],
+            "elapsed_ms": 1,
+            "completed_requested_duration": false,
+            "status": "failed",
+            "error": "IllegalStateException: critical_thermal_status:4"
+          }
+        ],
+        "requested_seconds": 30,
+        "recovery_limit": 3,
+        "started_utc": "2026-11-02T07:36:34.224953Z",
+        "dual_rear": "not requested",
+        "backend": "camera2",
+        "status": "failed",
+        "recoveries": 0,
+        "thermal_status": 4,
+        "transport_status": "failed",
+        "completed_utc": "2026-11-02T07:36:34.339829Z"
+      },
+      "shutdown_seconds": 0.001,
+      "shutdown_clock": "camera worker startup to rejection"
+    },
+    {
+      "during_capture": true,
+      "abort_wait_seconds": 3.3713268330029678,
+      "result": {
+        "vehicle_tx_enabled": false,
+        "valid": false,
+        "sessions": [
+          {
+            "camera_ids": [
+              "0",
+              "1"
+            ],
+            "width": 1280,
+            "height": 720,
+            "logical_camera": null,
+            "requested_duration_ms": 89732,
+            "startup_order": "open_all_then_configure",
+            "opened_camera_ids": [
+              "0",
+              "1"
+            ],
+            "image_callbacks_drained": true,
+            "camera_close_callbacks_complete": true,
+            "request_template": "record",
+            "stabilization": "disabled when advertised",
+            "sensor_pairs": [
+              {
+                "camera_ids": [
+                  "0",
+                  "1"
+                ],
+                "overlap_ns": 1392446834,
+                "distinct_sensor_evidence": true,
+                "nearest_skew_p99_ns": 73272583
+              }
+            ],
+            "overlap_ns": 1392446834,
+            "nearest_skew_p99_ns": 73272583,
+            "skew_sampling": "last 4096 timestamps per stream, shared overlap only",
+            "distinct_sensor_evidence": true,
+            "streams": [
+              {
+                "sensor_id": "0",
+                "width": 1280,
+                "height": 720,
+                "process_pid": 8062,
+                "session_started_elapsed_ns": 968571556253,
+                "raw_acquired_frames": 1,
+                "image_rotation_applied_degrees": 0,
+                "output_width": 1280,
+                "output_height": 720,
+                "display_degrees_at_session_start": 90,
+                "mirrored": false,
+                "sensor_orientation": 90,
+                "timestamp_source": 1,
+                "intrinsic_calibration": [],
+                "lens_distortion": [],
+                "visionipc_valid": false,
+                "visionipc_stream": 0,
+                "focal_lengths_mm": [
+                  3.3
+                ],
+                "first_raw_sensor_timestamp_ns": 972377912223,
+                "frames": 8,
+                "fps": 2.002496588019012,
+                "first_timestamp_ns": 972377912223,
+                "last_timestamp_ns": 975873548641,
+                "timestamp_errors": 0,
+                "changed_frames": 7,
+                "metadata_failures": 0,
+                "uncaptured_requests": 0,
+                "lost_buffers": 0,
+                "physical_metadata_frames": 27,
+                "measured_focal_length_mm": 3.3,
+                "packing_errors": 0,
+                "packing_p99_ns": 334789667,
+                "delivery_age_available": true,
+                "delivery_age_p50_ns": 50901990,
+                "delivery_age_p95_ns": 916184698,
+                "delivery_age_p99_ns": 916184698,
+                "delivery_over_100ms": 3,
+                "acquisition_age_p50_ns": 36434865,
+                "acquisition_age_p95_ns": 199659866,
+                "acquisition_age_p99_ns": 199659866,
+                "capture_result_age_p99_ns": 2344260700,
+                "capture_result_timestamp_errors": 0,
+                "delivery_future_timestamps": 2,
+                "clock_sample_columns": "sensor_raw,elapsed_before,monotonic,elapsed_after",
+                "clock_samples_ns": [
+                  [
+                    972377912223,
+                    973294090714,
+                    973294092964,
+                    973294093297
+                  ],
+                  [
+                    974281779891,
+                    974382058256,
+                    974382058547,
+                    974382058714
+                  ],
+                  [
+                    974670174308,
+                    974721068798,
+                    974721069089,
+                    974721069298
+                  ],
+                  [
+                    974772372724,
+                    974809982089,
+                    974809982506,
+                    974809982798
+                  ],
+                  [
+                    974874094266,
+                    974857029381,
+                    974857029881,
+                    974857030089
+                  ],
+                  [
+                    975203737433,
+                    975225535964,
+                    975225536214,
+                    975225536339
+                  ],
+                  [
+                    975537138766,
+                    975508616173,
+                    975508616631,
+                    975508616798
+                  ],
+                  [
+                    975873548641,
+                    976073871173,
+                    976073871590,
+                    976073871757
+                  ]
+                ],
+                "capture_sample_columns": "sensor_raw,frame_number,exposure,duration,elapsed_before,monotonic,elapsed_after",
+                "capture_samples_ns": [
+                  [
+                    972377912223,
+                    0,
+                    15000000,
+                    33331760,
+                    974722172923,
+                    974722173631,
+                    974722173839
+                  ],
+                  [
+                    972429851681,
+                    1,
+                    12833294,
+                    33331760,
+                    974723413173,
+                    974723413589,
+                    974723413923
+                  ],
+                  [
+                    972527967598,
+                    2,
+                    11099929,
+                    33331760,
+                    974723520548,
+                    974723520964,
+                    974723521131
+                  ],
+                  [
+                    972642860182,
+                    3,
+                    9713237,
+                    33331760,
+                    974723648506,
+                    974723648798,
+                    974723648964
+                  ],
+                  [
+                    972768924057,
+                    4,
+                    8603884,
+                    33331760,
+                    974811222714,
+                    974811223839,
+                    974811224089
+                  ],
+                  [
+                    972868209265,
+                    5,
+                    7716401,
+                    33331760,
+                    974811457631,
+                    974811458006,
+                    974811458256
+                  ],
+                  [
+                    973240286807,
+                    6,
+                    7006415,
+                    33331760,
+                    974811553339,
+                    974811553714,
+                    974811553923
+                  ],
+                  [
+                    973302230015,
+                    7,
+                    6438426,
+                    33331760,
+                    974811701173,
+                    974811701506,
+                    974811701714
+                  ],
+                  [
+                    973346120557,
+                    8,
+                    5984035,
+                    33331760,
+                    974811820339,
+                    974811820673,
+                    974811820881
+                  ],
+                  [
+                    973429967057,
+                    9,
+                    5620522,
+                    33331760,
+                    974811909798,
+                    974811910089,
+                    974811910298
+                  ],
+                  [
+                    974281779891,
+                    10,
+                    5329711,
+                    33331760,
+                    974935307048,
+                    974935310798,
+                    974935311048
+                  ],
+                  [
+                    974475376141,
+                    11,
+                    5097063,
+                    33331760,
+                    975226086089,
+                    975226087173,
+                    975226087339
+                  ],
+                  [
+                    974535482432,
+                    12,
+                    4910944,
+                    33331760,
+                    975227329339,
+                    975227331423,
+                    975227331589
+                  ],
+                  [
+                    974578205307,
+                    13,
+                    4762049,
+                    33331760,
+                    975227969048,
+                    975227969256,
+                    975227969423
+                  ],
+                  [
+                    974612253891,
+                    14,
+                    4642933,
+                    33331760,
+                    975231068714,
+                    975231069131,
+                    975231069298
+                  ],
+                  [
+                    974670174308,
+                    15,
+                    4547640,
+                    33331760,
+                    975231135173,
+                    975231135381,
+                    975231135548
+                  ],
+                  [
+                    974706342016,
+                    16,
+                    4547640,
+                    33331760,
+                    975232809214,
+                    975232809506,
+                    975232809673
+                  ],
+                  [
+                    974772372724,
+                    17,
+                    4547640,
+                    33331760,
+                    975232872714,
+                    975232872923,
+                    975232873089
+                  ],
+                  [
+                    974830792474,
+                    18,
+                    4547640,
+                    33331760,
+                    975232954506,
+                    975232954756,
+                    975232954881
+                  ],
+                  [
+                    974874094266,
+                    19,
+                    4547640,
+                    33331760,
+                    975233035131,
+                    975233035839,
+                    975233035964
+                  ],
+                  [
+                    974907686516,
+                    20,
+                    4547640,
+                    33331760,
+                    975233195214,
+                    975233196173,
+                    975233196339
+                  ],
+                  [
+                    974941667724,
+                    21,
+                    4547640,
+                    33331760,
+                    975233351339,
+                    975233351631,
+                    975233351798
+                  ],
+                  [
+                    974976174683,
+                    22,
+                    4547640,
+                    33331760,
+                    975233774173,
+                    975233774381,
+                    975233774548
+                  ],
+                  [
+                    975009734641,
+                    23,
+                    4547640,
+                    33331760,
+                    975233871048,
+                    975233871298,
+                    975233871423
+                  ],
+                  [
+                    975043280558,
+                    24,
+                    4547640,
+                    33331760,
+                    975233967256,
+                    975233967464,
+                    975233967631
+                  ],
+                  [
+                    975078912558,
+                    25,
+                    4547640,
+                    33331760,
+                    975234070381,
+                    975234070839,
+                    975234070964
+                  ],
+                  [
+                    975121833974,
+                    26,
+                    4547640,
+                    33331760,
+                    975234160256,
+                    975234186464,
+                    975234197089
+                  ]
+                ],
+                "frame_interval_p99_ns": 1903867668
+              },
+              {
+                "sensor_id": "1",
+                "width": 1280,
+                "height": 720,
+                "process_pid": 8062,
+                "session_started_elapsed_ns": 969566580753,
+                "raw_acquired_frames": 1,
+                "image_rotation_applied_degrees": 0,
+                "output_width": 1280,
+                "output_height": 720,
+                "display_degrees_at_session_start": 90,
+                "mirrored": false,
+                "sensor_orientation": 270,
+                "timestamp_source": 1,
+                "intrinsic_calibration": [
+                  3225.7742,
+                  3225.7742,
+                  960.5043,
+                  540.46704,
+                  0
+                ],
+                "lens_distortion": [
+                  0.08807813,
+                  -0.22617353,
+                  0.16460505,
+                  0,
+                  0
+                ],
+                "visionipc_valid": false,
+                "visionipc_stream": 1,
+                "focal_lengths_mm": [
+                  4.38
+                ],
+                "first_raw_sensor_timestamp_ns": 974481101807,
+                "frames": 11,
+                "fps": 6.310506078860022,
+                "first_timestamp_ns": 974481101807,
+                "last_timestamp_ns": 976065760767,
+                "timestamp_errors": 0,
+                "changed_frames": 10,
+                "metadata_failures": 0,
+                "uncaptured_requests": 0,
+                "lost_buffers": 0,
+                "physical_metadata_frames": 25,
+                "measured_focal_length_mm": 4.38,
+                "packing_errors": 0,
+                "packing_p99_ns": 112968458,
+                "delivery_age_available": true,
+                "delivery_age_p50_ns": 93736073,
+                "delivery_age_p95_ns": 207805594,
+                "delivery_age_p99_ns": 207805594,
+                "delivery_over_100ms": 5,
+                "acquisition_age_p50_ns": -11246802,
+                "acquisition_age_p95_ns": 207033366,
+                "acquisition_age_p99_ns": 207033366,
+                "capture_result_age_p99_ns": 2210995907,
+                "capture_result_timestamp_errors": 0,
+                "delivery_future_timestamps": 4,
+                "clock_sample_columns": "sensor_raw,elapsed_before,monotonic,elapsed_after",
+                "clock_samples_ns": [
+                  [
+                    974481101807,
+                    974624845381,
+                    974624846589,
+                    974624846839
+                  ],
+                  [
+                    974743446891,
+                    974722607756,
+                    974722608006,
+                    974722608173
+                  ],
+                  [
+                    974946889558,
+                    975049766548,
+                    975049770756,
+                    975049770923
+                  ],
+                  [
+                    975014070141,
+                    975165246423,
+                    975165248131,
+                    975165248256
+                  ],
+                  [
+                    975083074641,
+                    975226633589,
+                    975226634173,
+                    975226634298
+                  ],
+                  [
+                    975262099974,
+                    975469900923,
+                    975469901173,
+                    975469901298
+                  ],
+                  [
+                    975496658600,
+                    975488951673,
+                    975488952423,
+                    975488952673
+                  ],
+                  [
+                    975542141766,
+                    975511116173,
+                    975511116381,
+                    975511116506
+                  ],
+                  [
+                    975767005391,
+                    975860735006,
+                    975860739548,
+                    975860739673
+                  ],
+                  [
+                    975875549350,
+                    975861827298,
+                    975861827506,
+                    975861827673
+                  ],
+                  [
+                    976065760767,
+                    976148480673,
+                    976148481132,
+                    976148481298
+                  ]
+                ],
+                "capture_sample_columns": "sensor_raw,frame_number,exposure,duration,elapsed_before,monotonic,elapsed_after",
+                "capture_samples_ns": [
+                  [
+                    972512837307,
+                    0,
+                    15000000,
+                    33331760,
+                    974723833214,
+                    974723833423,
+                    974723833589
+                  ],
+                  [
+                    972584450057,
+                    1,
+                    12416647,
+                    33331760,
+                    974723981714,
+                    974723981964,
+                    974723982131
+                  ],
+                  [
+                    972667790265,
+                    2,
+                    10349965,
+                    33331760,
+                    974762276798,
+                    974762281256,
+                    974762281506
+                  ],
+                  [
+                    972710512265,
+                    3,
+                    8696619,
+                    33331760,
+                    974762460923,
+                    974762461506,
+                    974762461714
+                  ],
+                  [
+                    972761690807,
+                    4,
+                    7373942,
+                    33331760,
+                    974762592131,
+                    974762592506,
+                    974762592714
+                  ],
+                  [
+                    972795968432,
+                    5,
+                    6315800,
+                    33331760,
+                    974762767089,
+                    974762767506,
+                    974762767714
+                  ],
+                  [
+                    972880683307,
+                    6,
+                    5469287,
+                    33331760,
+                    974803359464,
+                    974803363298,
+                    974803363548
+                  ],
+                  [
+                    972914692473,
+                    7,
+                    4792076,
+                    33331760,
+                    974803491298,
+                    974803491714,
+                    974803491923
+                  ],
+                  [
+                    973080438473,
+                    8,
+                    4250308,
+                    33331760,
+                    974803642048,
+                    974803642714,
+                    974803642923
+                  ],
+                  [
+                    974337150349,
+                    9,
+                    3816893,
+                    33331760,
+                    975227640048,
+                    975227640964,
+                    975227641131
+                  ],
+                  [
+                    974372352474,
+                    10,
+                    3470161,
+                    33331760,
+                    975227731173,
+                    975227731464,
+                    975227731631
+                  ],
+                  [
+                    974481101807,
+                    11,
+                    3192775,
+                    33331760,
+                    975227806798,
+                    975227807006,
+                    975227807131
+                  ],
+                  [
+                    974667026849,
+                    12,
+                    2970867,
+                    33331760,
+                    975227879173,
+                    975227879381,
+                    975227879548
+                  ],
+                  [
+                    974707710349,
+                    13,
+                    2793340,
+                    33331760,
+                    975231256173,
+                    975231256381,
+                    975231256506
+                  ],
+                  [
+                    974743446891,
+                    14,
+                    2651319,
+                    33331760,
+                    975231346256,
+                    975231346464,
+                    975231346631
+                  ],
+                  [
+                    974777651474,
+                    15,
+                    2537702,
+                    33331760,
+                    975231487298,
+                    975231487506,
+                    975231487673
+                  ],
+                  [
+                    974830814183,
+                    16,
+                    2446808,
+                    33331760,
+                    975232183298,
+                    975232184881,
+                    975232185006
+                  ],
+                  [
+                    974877587266,
+                    17,
+                    2374093,
+                    33331760,
+                    975232500339,
+                    975232501006,
+                    975232501339
+                  ],
+                  [
+                    974912353599,
+                    18,
+                    2315921,
+                    33331760,
+                    975232678714,
+                    975232679173,
+                    975232679339
+                  ],
+                  [
+                    974946889558,
+                    19,
+                    2269383,
+                    33331760,
+                    975233522214,
+                    975233522464,
+                    975233522589
+                  ],
+                  [
+                    974980512891,
+                    20,
+                    2269383,
+                    33331760,
+                    975233602964,
+                    975233603173,
+                    975233603339
+                  ],
+                  [
+                    975014070141,
+                    21,
+                    2269383,
+                    33331760,
+                    975233712589,
+                    975233712839,
+                    975233713006
+                  ],
+                  [
+                    975083074641,
+                    22,
+                    2269383,
+                    33331760,
+                    975500443215,
+                    975500445881,
+                    975500446090
+                  ],
+                  [
+                    975262099974,
+                    23,
+                    2269383,
+                    33331760,
+                    975500699381,
+                    975500699840,
+                    975500700298
+                  ],
+                  [
+                    975496658600,
+                    24,
+                    2269383,
+                    33331760,
+                    975500817631,
+                    975500817965,
+                    975500818090
+                  ]
+                ],
+                "frame_interval_p99_ns": 262345084
+              }
+            ],
+            "elapsed_ms": 9991,
+            "completed_requested_duration": false,
+            "status": "failed",
+            "error": "IllegalStateException: critical_thermal_status:4"
+          }
+        ],
+        "requested_seconds": 90,
+        "recovery_limit": 3,
+        "started_utc": "2026-11-02T07:36:44.026260Z",
+        "dual_rear": "not requested",
+        "backend": "camera2",
+        "status": "failed",
+        "recoveries": 0,
+        "thermal_status": 4,
+        "transport_status": "failed",
+        "completed_utc": "2026-11-02T07:36:54.659091Z"
+      },
+      "shutdown_seconds": 3.3713268330029678,
+      "shutdown_clock": "critical override to completed report"
+    }
+  ],
+  "moderate_pause": {
+    "modeld": {
+      "daemon": "modeld",
+      "pid": 6889,
+      "vehicle_tx_enabled": false,
+      "engagement_allowed": false,
+      "work_samples": 0,
+      "deadline_misses": 0,
+      "phase": "thermal_paused",
+      "simulation": false,
+      "thermal_status": 2,
+      "target_suspended": true,
+      "missing_physical_sensors": [
+        "0",
+        "2"
+      ],
+      "calibrated": false,
+      "valid": false,
+      "blocker": "Bench inference paused at Android MODERATE; requires ten cool seconds before resuming",
+      "target_hz": 20,
+      "computed_frames": 0,
+      "recurrent_resets": 1,
+      "p99_stages_ms": {}
+    },
+    "dmonitoringmodeld": {
+      "daemon": "dmonitoringmodeld",
+      "pid": 6891,
+      "vehicle_tx_enabled": false,
+      "engagement_allowed": false,
+      "work_samples": 0,
+      "deadline_misses": 0,
+      "phase": "thermal_paused",
+      "simulation": false,
+      "thermal_status": 2,
+      "target_suspended": true,
+      "missing_physical_sensors": [
+        "1"
+      ],
+      "calibrated": false,
+      "valid": false,
+      "blocker": "Bench inference paused at Android MODERATE; requires ten cool seconds before resuming",
+      "target_hz": 20,
+      "computed_frames": 0,
+      "recurrent_resets": 1,
+      "p99_stages_ms": {}
+    }
+  },
+  "moderate_resumed": {
+    "modeld": {
+      "daemon": "modeld",
+      "pid": 6889,
+      "vehicle_tx_enabled": false,
+      "engagement_allowed": false,
+      "work_samples": 0,
+      "deadline_misses": 0,
+      "phase": "waiting_for_camera",
+      "simulation": false,
+      "thermal_status": 0,
+      "target_suspended": false,
+      "missing_physical_sensors": [
+        "0",
+        "2"
+      ],
+      "calibrated": false,
+      "valid": false,
+      "blocker": "Distinct narrow and wide rear streams are required",
+      "target_hz": 20,
+      "computed_frames": 0,
+      "recurrent_resets": 1,
+      "p99_stages_ms": {}
+    },
+    "dmonitoringmodeld": {
+      "daemon": "dmonitoringmodeld",
+      "pid": 6891,
+      "vehicle_tx_enabled": false,
+      "engagement_allowed": false,
+      "work_samples": 0,
+      "deadline_misses": 0,
+      "phase": "waiting_for_camera",
+      "simulation": false,
+      "thermal_status": 0,
+      "target_suspended": false,
+      "missing_physical_sensors": [
+        "1"
+      ],
+      "calibrated": false,
+      "valid": false,
+      "blocker": "Driver camera unavailable",
+      "target_hz": 20,
+      "computed_frames": 0,
+      "recurrent_resets": 1,
+      "p99_stages_ms": {}
+    }
+  },
+  "capture_baselines": [
+    {
+      "during_capture": false,
+      "started_elapsed_ns": 951780000000,
+      "previous_camera_metadata": [
+        {
+          "sensor_id": "0",
+          "width": 1280,
+          "height": 720,
+          "process_pid": 17224,
+          "session_started_elapsed_ns": 2485305746518,
+          "raw_acquired_frames": 1,
+          "image_rotation_applied_degrees": 0,
+          "output_width": 1280,
+          "output_height": 720,
+          "display_degrees_at_session_start": 90,
+          "mirrored": false,
+          "sensor_orientation": 90,
+          "timestamp_source": 1,
+          "intrinsic_calibration": [],
+          "lens_distortion": [],
+          "visionipc_valid": false,
+          "visionipc_stream": 0,
+          "focal_lengths_mm": [
+            3.3
+          ],
+          "first_raw_sensor_timestamp_ns": 2485513136653
+        },
+        {
+          "sensor_id": "1",
+          "width": 1280,
+          "height": 720,
+          "process_pid": 17527,
+          "session_started_elapsed_ns": 2528689145538,
+          "raw_acquired_frames": 1,
+          "image_rotation_applied_degrees": 0,
+          "output_width": 1280,
+          "output_height": 720,
+          "display_degrees_at_session_start": 90,
+          "mirrored": false,
+          "sensor_orientation": 270,
+          "timestamp_source": 1,
+          "intrinsic_calibration": [
+            3225.7742,
+            3225.7742,
+            960.5043,
+            540.46704,
+            0
+          ],
+          "lens_distortion": [
+            0.08807813,
+            -0.22617353,
+            0.16460505,
+            0,
+            0
+          ],
+          "visionipc_valid": false,
+          "visionipc_stream": 1,
+          "focal_lengths_mm": [
+            4.38
+          ],
+          "first_raw_sensor_timestamp_ns": 2528892694715
+        }
+      ]
+    },
+    {
+      "during_capture": true,
+      "started_elapsed_ns": 961380000000,
+      "previous_camera_metadata": [
+        {
+          "sensor_id": "0",
+          "width": 1280,
+          "height": 720,
+          "process_pid": 17224,
+          "session_started_elapsed_ns": 2485305746518,
+          "raw_acquired_frames": 1,
+          "image_rotation_applied_degrees": 0,
+          "output_width": 1280,
+          "output_height": 720,
+          "display_degrees_at_session_start": 90,
+          "mirrored": false,
+          "sensor_orientation": 90,
+          "timestamp_source": 1,
+          "intrinsic_calibration": [],
+          "lens_distortion": [],
+          "visionipc_valid": false,
+          "visionipc_stream": 0,
+          "focal_lengths_mm": [
+            3.3
+          ],
+          "first_raw_sensor_timestamp_ns": 2485513136653
+        },
+        {
+          "sensor_id": "1",
+          "width": 1280,
+          "height": 720,
+          "process_pid": 17527,
+          "session_started_elapsed_ns": 2528689145538,
+          "raw_acquired_frames": 1,
+          "image_rotation_applied_degrees": 0,
+          "output_width": 1280,
+          "output_height": 720,
+          "display_degrees_at_session_start": 90,
+          "mirrored": false,
+          "sensor_orientation": 270,
+          "timestamp_source": 1,
+          "intrinsic_calibration": [
+            3225.7742,
+            3225.7742,
+            960.5043,
+            540.46704,
+            0
+          ],
+          "lens_distortion": [
+            0.08807813,
+            -0.22617353,
+            0.16460505,
+            0,
+            0
+          ],
+          "visionipc_valid": false,
+          "visionipc_stream": 1,
+          "focal_lengths_mm": [
+            4.38
+          ],
+          "first_raw_sensor_timestamp_ns": 2528892694715
+        }
+      ]
+    }
+  ],
+  "raw_capture_before_injection": [
+    [
+      {
+        "sensor_id": "0",
+        "width": 1280,
+        "height": 720,
+        "process_pid": 8062,
+        "session_started_elapsed_ns": 968571556253,
+        "raw_acquired_frames": 1,
+        "image_rotation_applied_degrees": 0,
+        "output_width": 1280,
+        "output_height": 720,
+        "display_degrees_at_session_start": 90,
+        "mirrored": false,
+        "sensor_orientation": 90,
+        "timestamp_source": 1,
+        "intrinsic_calibration": [],
+        "lens_distortion": [],
+        "visionipc_valid": false,
+        "visionipc_stream": 0,
+        "focal_lengths_mm": [
+          3.3
+        ],
+        "first_raw_sensor_timestamp_ns": 972377912223
+      },
+      {
+        "sensor_id": "1",
+        "width": 1280,
+        "height": 720,
+        "process_pid": 8062,
+        "session_started_elapsed_ns": 969566580753,
+        "raw_acquired_frames": 1,
+        "image_rotation_applied_degrees": 0,
+        "output_width": 1280,
+        "output_height": 720,
+        "display_degrees_at_session_start": 90,
+        "mirrored": false,
+        "sensor_orientation": 270,
+        "timestamp_source": 1,
+        "intrinsic_calibration": [
+          3225.7742,
+          3225.7742,
+          960.5043,
+          540.46704,
+          0
+        ],
+        "lens_distortion": [
+          0.08807813,
+          -0.22617353,
+          0.16460505,
+          0,
+          0
+        ],
+        "visionipc_valid": false,
+        "visionipc_stream": 1,
+        "focal_lengths_mm": [
+          4.38
+        ],
+        "first_raw_sensor_timestamp_ns": 974481101807
+      }
+    ]
+  ],
+  "live_validator": {
+    "status": "failed",
+    "error": "RuntimeError: Unsafe or unavailable Android thermal state: 4",
+    "cleanup": {
+      "processes": [],
+      "camera_provider_processes": [
+        "345 android.hardware.camera.provider.ranchu",
+        "346 android.hardware.camera.provider@2.7-service-google",
+        "436 cameraserver"
+      ],
+      "camera_owned": false,
+      "thermal_status": 4,
+      "skin_c": 30.8,
+      "thermal_override": true
+    },
+    "elapsed_s": 0.14109162500244565
+  },
+  "activity_stop_capture_baseline": {
+    "started_elapsed_ns": 984380000000,
+    "previous_camera_metadata": [
+      {
+        "sensor_id": "0",
+        "width": 1280,
+        "height": 720,
+        "process_pid": 8062,
+        "session_started_elapsed_ns": 968571556253,
+        "raw_acquired_frames": 1,
+        "image_rotation_applied_degrees": 0,
+        "output_width": 1280,
+        "output_height": 720,
+        "display_degrees_at_session_start": 90,
+        "mirrored": false,
+        "sensor_orientation": 90,
+        "timestamp_source": 1,
+        "intrinsic_calibration": [],
+        "lens_distortion": [],
+        "visionipc_valid": false,
+        "visionipc_stream": 0,
+        "focal_lengths_mm": [
+          3.3
+        ],
+        "first_raw_sensor_timestamp_ns": 972377912223
+      },
+      {
+        "sensor_id": "1",
+        "width": 1280,
+        "height": 720,
+        "process_pid": 8062,
+        "session_started_elapsed_ns": 969566580753,
+        "raw_acquired_frames": 1,
+        "image_rotation_applied_degrees": 0,
+        "output_width": 1280,
+        "output_height": 720,
+        "display_degrees_at_session_start": 90,
+        "mirrored": false,
+        "sensor_orientation": 270,
+        "timestamp_source": 1,
+        "intrinsic_calibration": [
+          3225.7742,
+          3225.7742,
+          960.5043,
+          540.46704,
+          0
+        ],
+        "lens_distortion": [
+          0.08807813,
+          -0.22617353,
+          0.16460505,
+          0,
+          0
+        ],
+        "visionipc_valid": false,
+        "visionipc_stream": 1,
+        "focal_lengths_mm": [
+          4.38
+        ],
+        "first_raw_sensor_timestamp_ns": 974481101807
+      }
+    ]
+  },
+  "raw_capture_before_activity_stop": [
+    {
+      "sensor_id": "0",
+      "width": 1280,
+      "height": 720,
+      "process_pid": 8637,
+      "session_started_elapsed_ns": 993584918723,
+      "raw_acquired_frames": 1,
+      "image_rotation_applied_degrees": 0,
+      "output_width": 1280,
+      "output_height": 720,
+      "display_degrees_at_session_start": 90,
+      "mirrored": false,
+      "sensor_orientation": 90,
+      "timestamp_source": 1,
+      "intrinsic_calibration": [],
+      "lens_distortion": [],
+      "visionipc_valid": false,
+      "visionipc_stream": 0,
+      "focal_lengths_mm": [
+        3.3
+      ],
+      "first_raw_sensor_timestamp_ns": 996038959193
+    },
+    {
+      "sensor_id": "1",
+      "width": 1280,
+      "height": 720,
+      "process_pid": 8637,
+      "session_started_elapsed_ns": 994025133390,
+      "raw_acquired_frames": 1,
+      "image_rotation_applied_degrees": 0,
+      "output_width": 1280,
+      "output_height": 720,
+      "display_degrees_at_session_start": 90,
+      "mirrored": false,
+      "sensor_orientation": 270,
+      "timestamp_source": 1,
+      "intrinsic_calibration": [
+        3225.7742,
+        3225.7742,
+        960.5043,
+        540.46704,
+        0
+      ],
+      "lens_distortion": [
+        0.08807813,
+        -0.22617353,
+        0.16460505,
+        0,
+        0
+      ],
+      "visionipc_valid": false,
+      "visionipc_stream": 1,
+      "focal_lengths_mm": [
+        4.38
+      ],
+      "first_raw_sensor_timestamp_ns": 996923218026
+    }
+  ],
+  "new_activity_stop": {
+    "vehicle_tx_enabled": false,
+    "valid": false,
+    "sessions": [
+      {
+        "camera_ids": [
+          "0",
+          "1"
+        ],
+        "width": 1280,
+        "height": 720,
+        "logical_camera": null,
+        "requested_duration_ms": 89929,
+        "startup_order": "open_all_then_configure",
+        "opened_camera_ids": [
+          "0",
+          "1"
+        ],
+        "image_callbacks_drained": true,
+        "camera_close_callbacks_complete": true,
+        "request_template": "record",
+        "stabilization": "disabled when advertised",
+        "sensor_pairs": [
+          {
+            "camera_ids": [
+              "0",
+              "1"
+            ],
+            "overlap_ns": 2234194210,
+            "distinct_sensor_evidence": true,
+            "nearest_skew_p99_ns": 319632500
+          }
+        ],
+        "overlap_ns": 2234194210,
+        "nearest_skew_p99_ns": 319632500,
+        "skew_sampling": "last 4096 timestamps per stream, shared overlap only",
+        "distinct_sensor_evidence": true,
+        "streams": [
+          {
+            "sensor_id": "0",
+            "width": 1280,
+            "height": 720,
+            "process_pid": 8637,
+            "session_started_elapsed_ns": 993584918723,
+            "raw_acquired_frames": 1,
+            "image_rotation_applied_degrees": 0,
+            "output_width": 1280,
+            "output_height": 720,
+            "display_degrees_at_session_start": 90,
+            "mirrored": false,
+            "sensor_orientation": 90,
+            "timestamp_source": 1,
+            "intrinsic_calibration": [],
+            "lens_distortion": [],
+            "visionipc_valid": false,
+            "visionipc_stream": 0,
+            "focal_lengths_mm": [
+              3.3
+            ],
+            "first_raw_sensor_timestamp_ns": 996038959193,
+            "frames": 20,
+            "fps": 6.0875846415085215,
+            "first_timestamp_ns": 996038959193,
+            "last_timestamp_ns": 999160065694,
+            "timestamp_errors": 0,
+            "changed_frames": 19,
+            "metadata_failures": 0,
+            "uncaptured_requests": 0,
+            "lost_buffers": 0,
+            "physical_metadata_frames": 40,
+            "measured_focal_length_mm": 3.3,
+            "packing_errors": 0,
+            "packing_p99_ns": 73462833,
+            "delivery_age_available": true,
+            "delivery_age_p50_ns": 40144636,
+            "delivery_age_p95_ns": 352497761,
+            "delivery_age_p99_ns": 352497761,
+            "delivery_over_100ms": 6,
+            "acquisition_age_p50_ns": 24781615,
+            "acquisition_age_p95_ns": 264599740,
+            "acquisition_age_p99_ns": 264599740,
+            "capture_result_age_p99_ns": 802880991,
+            "capture_result_timestamp_errors": 0,
+            "delivery_future_timestamps": 8,
+            "clock_sample_columns": "sensor_raw,elapsed_before,monotonic,elapsed_after",
+            "clock_samples_ns": [
+              [
+                996038959193,
+                996229357850,
+                996229359683,
+                996229359850
+              ],
+              [
+                996200728693,
+                996231313100,
+                996231313350,
+                996231313475
+              ],
+              [
+                996319597651,
+                996359738558,
+                996359738766,
+                996359738933
+              ],
+              [
+                996475681443,
+                996466091308,
+                996466091975,
+                996466092141
+              ],
+              [
+                996669508401,
+                996669471683,
+                996669471933,
+                996669472100
+              ],
+              [
+                996887287360,
+                996886130766,
+                996886131308,
+                996886131475
+              ],
+              [
+                997036846485,
+                997389337517,
+                997389340933,
+                997389341142
+              ],
+              [
+                997227071068,
+                997392784225,
+                997392784517,
+                997392784683
+              ],
+              [
+                997508510360,
+                997477992933,
+                997477993350,
+                997477993558
+              ],
+              [
+                997542119693,
+                997529460183,
+                997529460558,
+                997529460808
+              ],
+              [
+                997601864568,
+                997571675350,
+                997571676517,
+                997571676850
+              ],
+              [
+                997731840944,
+                997718510975,
+                997718512100,
+                997718512392
+              ],
+              [
+                997862528694,
+                997914579600,
+                997914579934,
+                997914580100
+              ],
+              [
+                997952459860,
+                998143746267,
+                998143746559,
+                998143746725
+              ],
+              [
+                998175368402,
+                998238089517,
+                998238089767,
+                998238089934
+              ],
+              [
+                998483238361,
+                998521126934,
+                998521127309,
+                998521127517
+              ],
+              [
+                998518893486,
+                998755081434,
+                998755081684,
+                998755081851
+              ],
+              [
+                998552758486,
+                998817785976,
+                998817786226,
+                998817786392
+              ],
+              [
+                999056676486,
+                999128695559,
+                999128699643,
+                999128699809
+              ],
+              [
+                999160065694,
+                999134233684,
+                999134238309,
+                999134238518
+              ]
+            ],
+            "capture_sample_columns": "sensor_raw,frame_number,exposure,duration,elapsed_before,monotonic,elapsed_after",
+            "capture_samples_ns": [
+              [
+                996038959193,
+                0,
+                15000000,
+                33331760,
+                996371432225,
+                996371435058,
+                996371435266
+              ],
+              [
+                996073190068,
+                1,
+                12833294,
+                33331760,
+                996371609266,
+                996371609683,
+                996371609933
+              ],
+              [
+                996109798568,
+                2,
+                11099929,
+                33331760,
+                996371702016,
+                996371702308,
+                996371702433
+              ],
+              [
+                996143390943,
+                3,
+                9713237,
+                33331760,
+                996384810891,
+                996384814225,
+                996384814391
+              ],
+              [
+                996200728693,
+                4,
+                8603884,
+                33331760,
+                996385087100,
+                996385087475,
+                996385087641
+              ],
+              [
+                996250016318,
+                5,
+                7716401,
+                33331760,
+                996385179225,
+                996385179475,
+                996385179600
+              ],
+              [
+                996286009985,
+                6,
+                7006415,
+                33331760,
+                996385267975,
+                996385268391,
+                996385268516
+              ],
+              [
+                996319597651,
+                7,
+                6438426,
+                33331760,
+                996669770891,
+                996669771225,
+                996669771391
+              ],
+              [
+                996442197401,
+                8,
+                5984035,
+                33331760,
+                996669924725,
+                996669924975,
+                996669925141
+              ],
+              [
+                996475681443,
+                9,
+                5620522,
+                33331760,
+                996670071308,
+                996670071558,
+                996670071725
+              ],
+              [
+                996510595485,
+                10,
+                5329711,
+                33331760,
+                996670210808,
+                996670211016,
+                996670211183
+              ],
+              [
+                996558523110,
+                11,
+                5097063,
+                33331760,
+                996670310766,
+                996670311100,
+                996670311266
+              ],
+              [
+                996635986068,
+                12,
+                4910944,
+                33331760,
+                996670410225,
+                996670410475,
+                996670410641
+              ],
+              [
+                996669508401,
+                13,
+                4762049,
+                33331760,
+                996822087558,
+                996822090516,
+                996822090766
+              ],
+              [
+                996845808110,
+                14,
+                4642933,
+                33331760,
+                997393766975,
+                997393767267,
+                997393767433
+              ],
+              [
+                996887287360,
+                15,
+                4547640,
+                33331760,
+                997393847892,
+                997393848183,
+                997393848350
+              ],
+              [
+                996924465568,
+                16,
+                4547640,
+                33331760,
+                997393970267,
+                997393970517,
+                997393970683
+              ],
+              [
+                996990977027,
+                17,
+                4547640,
+                33331760,
+                997394047433,
+                997394047683,
+                997394047850
+              ],
+              [
+                997036846485,
+                18,
+                4547640,
+                33331760,
+                997396245225,
+                997396248225,
+                997396248475
+              ],
+              [
+                997080794527,
+                19,
+                4547640,
+                33331760,
+                997412849892,
+                997412852558,
+                997412852808
+              ],
+              [
+                997227071068,
+                20,
+                4547640,
+                33331760,
+                997860771184,
+                997860774517,
+                997860774684
+              ],
+              [
+                997508510360,
+                21,
+                4547640,
+                33331760,
+                997861016850,
+                997861017225,
+                997861017392
+              ],
+              [
+                997542119693,
+                22,
+                4547640,
+                33331760,
+                997861115600,
+                997861115850,
+                997861115975
+              ],
+              [
+                997601864568,
+                23,
+                4547640,
+                33331760,
+                997861220350,
+                997861220559,
+                997861220725
+              ],
+              [
+                997656605485,
+                24,
+                4547640,
+                33331760,
+                997861306184,
+                997861306434,
+                997861306559
+              ],
+              [
+                997698003610,
+                25,
+                4547640,
+                33331760,
+                997913603684,
+                997913605642,
+                997913605850
+              ],
+              [
+                997731840944,
+                26,
+                4547640,
+                33331760,
+                998487200226,
+                998487202601,
+                998487202809
+              ],
+              [
+                997777623235,
+                27,
+                4547640,
+                33331760,
+                998487343559,
+                998487343851,
+                998487343976
+              ],
+              [
+                997862528694,
+                28,
+                4547640,
+                33331760,
+                998487494559,
+                998487495434,
+                998487495642
+              ],
+              [
+                997952459860,
+                29,
+                4547640,
+                33331760,
+                998755340851,
+                998755341184,
+                998755341351
+              ],
+              [
+                998008348110,
+                30,
+                4547640,
+                33331760,
+                998755993226,
+                998755996184,
+                998755996351
+              ],
+              [
+                998104050360,
+                31,
+                4547640,
+                33331760,
+                998785179184,
+                998785181351,
+                998785181476
+              ],
+              [
+                998175368402,
+                32,
+                4547640,
+                33331760,
+                998785280809,
+                998785281101,
+                998785281267
+              ],
+              [
+                998243613069,
+                33,
+                4547640,
+                33331760,
+                998786705767,
+                998786705976,
+                998786706142
+              ],
+              [
+                998443841444,
+                34,
+                4547640,
+                33331760,
+                998786759476,
+                998786759642,
+                998786759809
+              ],
+              [
+                998483238361,
+                35,
+                4547640,
+                33331760,
+                998786814309,
+                998786814517,
+                998786814642
+              ],
+              [
+                998518893486,
+                36,
+                4547640,
+                33331760,
+                998786867601,
+                998786867809,
+                998786867934
+              ],
+              [
+                998552758486,
+                37,
+                4547640,
+                33331760,
+                999129227976,
+                999129228893,
+                999129229018
+              ],
+              [
+                998851906277,
+                38,
+                4547640,
+                33331760,
+                999129326268,
+                999129326476,
+                999129326601
+              ],
+              [
+                998885518486,
+                39,
+                4547640,
+                33331760,
+                999134943768,
+                999134944018,
+                999134944143
+              ]
+            ],
+            "frame_interval_p99_ns": 503918000
+          },
+          {
+            "sensor_id": "1",
+            "width": 1280,
+            "height": 720,
+            "process_pid": 8637,
+            "session_started_elapsed_ns": 994025133390,
+            "raw_acquired_frames": 1,
+            "image_rotation_applied_degrees": 0,
+            "output_width": 1280,
+            "output_height": 720,
+            "display_degrees_at_session_start": 90,
+            "mirrored": false,
+            "sensor_orientation": 270,
+            "timestamp_source": 1,
+            "intrinsic_calibration": [
+              3225.7742,
+              3225.7742,
+              960.5043,
+              540.46704,
+              0
+            ],
+            "lens_distortion": [
+              0.08807813,
+              -0.22617353,
+              0.16460505,
+              0,
+              0
+            ],
+            "visionipc_valid": false,
+            "visionipc_stream": 1,
+            "focal_lengths_mm": [
+              4.38
+            ],
+            "first_raw_sensor_timestamp_ns": 996923218026,
+            "frames": 9,
+            "fps": 3.5807093063767272,
+            "first_timestamp_ns": 996923218026,
+            "last_timestamp_ns": 999157412236,
+            "timestamp_errors": 0,
+            "changed_frames": 8,
+            "metadata_failures": 0,
+            "uncaptured_requests": 0,
+            "lost_buffers": 0,
+            "physical_metadata_frames": 22,
+            "measured_focal_length_mm": 4.38,
+            "packing_errors": 0,
+            "packing_p99_ns": 10377459,
+            "delivery_age_available": true,
+            "delivery_age_p50_ns": 92700407,
+            "delivery_age_p95_ns": 202146218,
+            "delivery_age_p99_ns": 202146218,
+            "delivery_over_100ms": 4,
+            "acquisition_age_p50_ns": 31897781,
+            "acquisition_age_p95_ns": 201740657,
+            "acquisition_age_p99_ns": 201740657,
+            "capture_result_age_p99_ns": 675536990,
+            "capture_result_timestamp_errors": 0,
+            "delivery_future_timestamps": 2,
+            "clock_sample_columns": "sensor_raw,elapsed_before,monotonic,elapsed_after",
+            "clock_samples_ns": [
+              [
+                996923218026,
+                997015913267,
+                997015915058,
+                997015915350
+              ],
+              [
+                997188877860,
+                997391020642,
+                997391021017,
+                997391021183
+              ],
+              [
+                997859936152,
+                997862231267,
+                997862231475,
+                997862231642
+              ],
+              [
+                998130778694,
+                998236979642,
+                998236979934,
+                998236980059
+              ],
+              [
+                998518842611,
+                998626041017,
+                998626041309,
+                998626041517
+              ],
+              [
+                998552382944,
+                998753993184,
+                998753993392,
+                998753993601
+              ],
+              [
+                998812961361,
+                998785724809,
+                998785725017,
+                998785725184
+              ],
+              [
+                998885557736,
+                998912586434,
+                998912586809,
+                998912586976
+              ],
+              [
+                999157412236,
+                999146027268,
+                999146027684,
+                999146027851
+              ]
+            ],
+            "capture_sample_columns": "sensor_raw,frame_number,exposure,duration,elapsed_before,monotonic,elapsed_after",
+            "capture_samples_ns": [
+              [
+                996923218026,
+                0,
+                15000000,
+                33331760,
+                997393333267,
+                997393333683,
+                997393333850
+              ],
+              [
+                996981944818,
+                1,
+                12416647,
+                33331760,
+                997393507142,
+                997393507433,
+                997393507600
+              ],
+              [
+                997037178110,
+                2,
+                10349965,
+                33331760,
+                997393589058,
+                997393589308,
+                997393589475
+              ],
+              [
+                997083991527,
+                3,
+                8696619,
+                33331760,
+                997396658183,
+                997396659058,
+                997396659267
+              ],
+              [
+                997118254902,
+                4,
+                7373942,
+                33331760,
+                997404864267,
+                997404867142,
+                997404867433
+              ],
+              [
+                997153285152,
+                5,
+                6315800,
+                33331760,
+                997405020808,
+                997405021183,
+                997405021392
+              ],
+              [
+                997188877860,
+                6,
+                5469287,
+                33331760,
+                997405157517,
+                997405157850,
+                997405158058
+              ],
+              [
+                997655166235,
+                7,
+                4792076,
+                33331760,
+                998070032434,
+                998070033809,
+                998070033975
+              ],
+              [
+                997859936152,
+                8,
+                4250308,
+                33331760,
+                998487589226,
+                998487589434,
+                998487589642
+              ],
+              [
+                997951119694,
+                9,
+                3816893,
+                33331760,
+                998626656684,
+                998626657517,
+                998626657809
+              ],
+              [
+                998089655985,
+                10,
+                3470161,
+                33331760,
+                998755532809,
+                998755533059,
+                998755533226
+              ],
+              [
+                998130778694,
+                11,
+                3192775,
+                33331760,
+                998755607767,
+                998755607976,
+                998755608142
+              ],
+              [
+                998196234735,
+                12,
+                2970867,
+                33331760,
+                998786271392,
+                998786271642,
+                998786271809
+              ],
+              [
+                998300803860,
+                13,
+                2793340,
+                33331760,
+                998786356559,
+                998786356809,
+                998786356934
+              ],
+              [
+                998338816152,
+                14,
+                2651319,
+                33331760,
+                998786430767,
+                998786431017,
+                998786431184
+              ],
+              [
+                998386293569,
+                15,
+                2537702,
+                33331760,
+                998786485101,
+                998786485309,
+                998786485476
+              ],
+              [
+                998419770236,
+                16,
+                2446808,
+                33331760,
+                998786560226,
+                998786560434,
+                998786560559
+              ],
+              [
+                998483197527,
+                17,
+                2374093,
+                33331760,
+                998786651476,
+                998786651684,
+                998786651851
+              ],
+              [
+                998518842611,
+                18,
+                2315921,
+                33331760,
+                998786937267,
+                998786937434,
+                998786937601
+              ],
+              [
+                998552382944,
+                19,
+                2269383,
+                33331760,
+                998817124267,
+                998817127642,
+                998817127851
+              ],
+              [
+                998812961361,
+                20,
+                2269383,
+                33331760,
+                998817231642,
+                998817231892,
+                998817232059
+              ],
+              [
+                998846460069,
+                21,
+                2269383,
+                33331760,
+                999134844351,
+                999134844768,
+                999134844934
+              ]
+            ],
+            "frame_interval_p99_ns": 671058292
+          }
+        ],
+        "elapsed_ms": 7330,
+        "completed_requested_duration": false,
+        "status": "failed",
+        "error": "IllegalStateException: Live camera session stopped"
+      }
+    ],
+    "requested_seconds": 90,
+    "recovery_limit": 3,
+    "started_utc": "2026-11-02T07:37:09.154108Z",
+    "dual_rear": "not requested",
+    "backend": "camera2",
+    "status": "stopped",
+    "recoveries": 0,
+    "thermal_status": 0,
+    "transport_status": "failed",
+    "completed_utc": "2026-11-02T07:37:16.665662Z"
+  },
+  "override_reset": true
+}

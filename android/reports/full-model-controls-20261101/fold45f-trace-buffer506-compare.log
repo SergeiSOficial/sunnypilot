@@ -1,0 +1,45 @@
+{
+  "dmonitoring_model": {
+    "captured_tensors": 8,
+    "first_tolerance_failure": null
+  },
+  "driving_supercombo": {
+    "captured_tensors": 8,
+    "first_tolerance_failure": {
+      "operator": "fold3_half_source_474_0",
+      "operator_type": "While",
+      "tensor": "fold3_half_source_474_0",
+      "backend": "OpenCL",
+      "layout": "NCHW",
+      "dtype": "float32",
+      "shape": [
+        9,
+        1,
+        512
+      ],
+      "file": "0000.bin",
+      "original": {
+        "tensor": "fold3_half_source_474_0",
+        "node": "model/p_node_GatherND_7",
+        "operator": "GatherND",
+        "domain": ""
+      },
+      "parity": {
+        "passed": false,
+        "finite": true,
+        "shape": [
+          9,
+          1,
+          512
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": false,
+        "max_abs_error": 0.1468505859375,
+        "mismatched_elements": 510
+      },
+      "original_dtype": "float16"
+    }
+  }
+}

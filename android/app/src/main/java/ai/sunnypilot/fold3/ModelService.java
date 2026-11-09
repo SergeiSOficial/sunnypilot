@@ -25,8 +25,10 @@ public final class ModelService extends Service {
         final double started = System.currentTimeMillis() / 1000.0;
         new Thread(() -> {
             try {
+                AndroidHardware.initialize(this);
                 PythonRuntime.start(this);
-                Python.getInstance().getModule("fold3_models").callAttr("benchmark", getFilesDir().getAbsolutePath(), selected);
+                Python.getInstance().getModule("fold3_models").callAttr("benchmark", getFilesDir().getAbsolutePath(), selected,
+                    getApplicationInfo().nativeLibraryDir);
             } catch (Exception e) {
                 try {
                     Files.write(new File(getFilesDir(), "model-progress.txt").toPath(), e.toString().getBytes(StandardCharsets.UTF_8));

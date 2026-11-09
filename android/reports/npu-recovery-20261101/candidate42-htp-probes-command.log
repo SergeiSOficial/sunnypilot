@@ -1,0 +1,866 @@
+{
+  "fp16-conv": {
+    "status": "blocked",
+    "precision": "fp16",
+    "operator": "conv",
+    "cpu_fallback": "unverified",
+    "provider_options": {
+      "htp_arch": "68",
+      "device_id": "0",
+      "profiling_level": "detailed",
+      "profiling_file_path": "/data/user/0/com.samsung.sunnypilot.fold3/files/htp-fp16-conv-qnn.csv"
+    },
+    "performance_status": "blocked",
+    "error": "RuntimeError: Node 'probe_conv_token_1' OpType:Conv with domain:com.ms.internal.nhwc was inserted using the NHWC format as requested by QNNExecutionProvider, but was not selected by that EP. This means the graph is now invalid as there will not be an EP able to run the node. This could be a bug in layout transformer, or in the GetCapability implementation of the EP."
+  },
+  "a16w16-conv": {
+    "status": "blocked",
+    "precision": "a16w16",
+    "operator": "conv",
+    "cpu_fallback": "unverified",
+    "provider_options": {
+      "htp_arch": "68",
+      "device_id": "0",
+      "profiling_level": "detailed",
+      "profiling_file_path": "/data/user/0/com.samsung.sunnypilot.fold3/files/htp-a16w16-conv-qnn.csv"
+    },
+    "performance_status": "blocked",
+    "error": "RuntimeError: Node 'probe_conv_token_1' OpType:Conv with domain:com.ms.internal.nhwc was inserted using the NHWC format as requested by QNNExecutionProvider, but was not selected by that EP. This means the graph is now invalid as there will not be an EP able to run the node. This could be a bug in layout transformer, or in the GetCapability implementation of the EP."
+  },
+  "a16w8-conv": {
+    "status": "failed",
+    "precision": "a16w8",
+    "operator": "conv",
+    "cpu_fallback": "disabled",
+    "provider_options": {
+      "htp_arch": "68",
+      "device_id": "0",
+      "profiling_level": "detailed",
+      "profiling_file_path": "/data/user/0/com.samsung.sunnypilot.fold3/files/htp-a16w8-conv-qnn.csv"
+    },
+    "initialization_ms": 506.203958,
+    "assignment": {
+      "providers": {
+        "QNNExecutionProvider": {
+          "partitions": 1,
+          "nodes": 13
+        }
+      },
+      "device": {
+        "type": 2,
+        "vendor_id": 1297040209,
+        "device_id": 0
+      },
+      "assigned_nodes": [
+        {
+          "provider": "QNNExecutionProvider",
+          "name": "x_QuantizeLinear",
+          "domain": "",
+          "operator": "QuantizeLinear"
+        },
+        {
+          "provider": "QNNExecutionProvider",
+          "name": "w_DequantizeLinear",
+          "domain": "",
+          "operator": "DequantizeLinear"
+        },
+        {
+          "provider": "QNNExecutionProvider",
+          "name": "b_DequantizeLinear",
+          "domain": "",
+          "operator": "DequantizeLinear"
+        },
+        {
+          "provider": "QNNExecutionProvider",
+          "name": "DequantizeLinear",
+          "domain": "",
+          "operator": "DequantizeLinear"
+        },
+        {
+          "provider": "QNNExecutionProvider",
+          "name": "Transpose_token_4",
+          "domain": "",
+          "operator": "Transpose"
+        },
+        {
+          "provider": "QNNExecutionProvider",
+          "name": "QuantizeLinear_token_7",
+          "domain": "",
+          "operator": "QuantizeLinear"
+        },
+        {
+          "provider": "QNNExecutionProvider",
+          "name": "DequantizeLinear_token_8",
+          "domain": "",
+          "operator": "DequantizeLinear"
+        },
+        {
+          "provider": "QNNExecutionProvider",
+          "name": "probe_conv_token_1",
+          "domain": "com.ms.internal.nhwc",
+          "operator": "Conv"
+        },
+        {
+          "provider": "QNNExecutionProvider",
+          "name": "y_QuantizeLinear",
+          "domain": "",
+          "operator": "QuantizeLinear"
+        },
+        {
+          "provider": "QNNExecutionProvider",
+          "name": "y_DequantizeLinear",
+          "domain": "",
+          "operator": "DequantizeLinear"
+        },
+        {
+          "provider": "QNNExecutionProvider",
+          "name": "Transpose_token_6",
+          "domain": "",
+          "operator": "Transpose"
+        },
+        {
+          "provider": "QNNExecutionProvider",
+          "name": "QuantizeLinear_token_9",
+          "domain": "",
+          "operator": "QuantizeLinear"
+        },
+        {
+          "provider": "QNNExecutionProvider",
+          "name": "DequantizeLinear_token_10",
+          "domain": "",
+          "operator": "DequantizeLinear"
+        }
+      ]
+    },
+    "backend_parity": {
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        4,
+        6,
+        6
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.000782109797000885,
+      "mismatched_elements": 24
+    },
+    "original_parity": {
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        4,
+        6,
+        6
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.0009580031037330627,
+      "mismatched_elements": 102
+    },
+    "performance_status": "diagnostic_only",
+    "samples_ms": [
+      3.8525,
+      3.578541,
+      4.074688,
+      4.531146,
+      4.90625,
+      5.632031,
+      6.40901,
+      6.077396,
+      5.836146,
+      6.138334
+    ],
+    "profile_path": "/data/user/0/com.samsung.sunnypilot.fold3/files/htp-a16w8-conv_2026-11-01_12-56-25_307.json"
+  },
+  "fp16-gemm": {
+    "status": "blocked",
+    "precision": "fp16",
+    "operator": "gemm",
+    "cpu_fallback": "unverified",
+    "provider_options": {
+      "htp_arch": "68",
+      "device_id": "0",
+      "profiling_level": "detailed",
+      "profiling_file_path": "/data/user/0/com.samsung.sunnypilot.fold3/files/htp-fp16-gemm-qnn.csv"
+    },
+    "performance_status": "blocked",
+    "error": "RuntimeError: This session contains graph nodes that are assigned to the default CPU EP, but fallback to CPU EP has been explicitly disabled by the user."
+  },
+  "a16w16-gemm": {
+    "status": "blocked",
+    "precision": "a16w16",
+    "operator": "gemm",
+    "cpu_fallback": "unverified",
+    "provider_options": {
+      "htp_arch": "68",
+      "device_id": "0",
+      "profiling_level": "detailed",
+      "profiling_file_path": "/data/user/0/com.samsung.sunnypilot.fold3/files/htp-a16w16-gemm-qnn.csv"
+    },
+    "performance_status": "blocked",
+    "error": "RuntimeError: This session contains graph nodes that are assigned to the default CPU EP, but fallback to CPU EP has been explicitly disabled by the user."
+  },
+  "a16w8-gemm": {
+    "status": "passed",
+    "precision": "a16w8",
+    "operator": "gemm",
+    "cpu_fallback": "disabled",
+    "provider_options": {
+      "htp_arch": "68",
+      "device_id": "0",
+      "profiling_level": "detailed",
+      "profiling_file_path": "/data/user/0/com.samsung.sunnypilot.fold3/files/htp-a16w8-gemm-qnn.csv"
+    },
+    "initialization_ms": 341.094219,
+    "assignment": {
+      "providers": {
+        "QNNExecutionProvider": {
+          "partitions": 1,
+          "nodes": 7
+        }
+      },
+      "device": {
+        "type": 2,
+        "vendor_id": 1297040209,
+        "device_id": 0
+      },
+      "assigned_nodes": [
+        {
+          "provider": "QNNExecutionProvider",
+          "name": "x_QuantizeLinear",
+          "domain": "",
+          "operator": "QuantizeLinear"
+        },
+        {
+          "provider": "QNNExecutionProvider",
+          "name": "w_DequantizeLinear",
+          "domain": "",
+          "operator": "DequantizeLinear"
+        },
+        {
+          "provider": "QNNExecutionProvider",
+          "name": "b_DequantizeLinear",
+          "domain": "",
+          "operator": "DequantizeLinear"
+        },
+        {
+          "provider": "QNNExecutionProvider",
+          "name": "x_DequantizeLinear",
+          "domain": "",
+          "operator": "DequantizeLinear"
+        },
+        {
+          "provider": "QNNExecutionProvider",
+          "name": "probe_gemm",
+          "domain": "",
+          "operator": "Gemm"
+        },
+        {
+          "provider": "QNNExecutionProvider",
+          "name": "y_QuantizeLinear",
+          "domain": "",
+          "operator": "QuantizeLinear"
+        },
+        {
+          "provider": "QNNExecutionProvider",
+          "name": "y_DequantizeLinear",
+          "domain": "",
+          "operator": "DequantizeLinear"
+        }
+      ]
+    },
+    "backend_parity": {
+      "passed": true,
+      "finite": true,
+      "shape": [
+        2,
+        8
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.00017283111810684204,
+      "mismatched_elements": 0
+    },
+    "original_parity": {
+      "passed": false,
+      "finite": true,
+      "shape": [
+        2,
+        8
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.0004168860614299774,
+      "mismatched_elements": 8
+    },
+    "performance_status": "diagnostic_only",
+    "samples_ms": [
+      3.859636,
+      3.835468,
+      3.463958,
+      3.728021,
+      3.999271,
+      4.692865,
+      5.143646,
+      5.565677,
+      5.483333,
+      5.189114
+    ],
+    "profile_path": "/data/user/0/com.samsung.sunnypilot.fold3/files/htp-a16w8-gemm_2026-11-01_12-56-26_472.json"
+  },
+  "fp16-activation": {
+    "status": "blocked",
+    "precision": "fp16",
+    "operator": "activation",
+    "cpu_fallback": "unverified",
+    "provider_options": {
+      "htp_arch": "68",
+      "device_id": "0",
+      "profiling_level": "detailed",
+      "profiling_file_path": "/data/user/0/com.samsung.sunnypilot.fold3/files/htp-fp16-activation-qnn.csv"
+    },
+    "performance_status": "blocked",
+    "error": "RuntimeError: This session contains graph nodes that are assigned to the default CPU EP, but fallback to CPU EP has been explicitly disabled by the user."
+  },
+  "a16w16-activation": {
+    "status": "passed",
+    "precision": "a16w16",
+    "operator": "activation",
+    "cpu_fallback": "disabled",
+    "provider_options": {
+      "htp_arch": "68",
+      "device_id": "0",
+      "profiling_level": "detailed",
+      "profiling_file_path": "/data/user/0/com.samsung.sunnypilot.fold3/files/htp-a16w16-activation-qnn.csv"
+    },
+    "initialization_ms": 327.467864,
+    "assignment": {
+      "providers": {
+        "QNNExecutionProvider": {
+          "partitions": 1,
+          "nodes": 12
+        }
+      },
+      "device": {
+        "type": 2,
+        "vendor_id": 1297040209,
+        "device_id": 0
+      },
+      "assigned_nodes": [
+        {
+          "provider": "QNNExecutionProvider",
+          "name": "x_QuantizeLinear",
+          "domain": "",
+          "operator": "QuantizeLinear"
+        },
+        {
+          "provider": "QNNExecutionProvider",
+          "name": "x_DequantizeLinear",
+          "domain": "",
+          "operator": "DequantizeLinear"
+        },
+        {
+          "provider": "QNNExecutionProvider",
+          "name": "x_DequantizeLinear/duplicated",
+          "domain": "",
+          "operator": "DequantizeLinear"
+        },
+        {
+          "provider": "QNNExecutionProvider",
+          "name": "probe_sigmoid",
+          "domain": "",
+          "operator": "Sigmoid"
+        },
+        {
+          "provider": "QNNExecutionProvider",
+          "name": "s_QuantizeLinear",
+          "domain": "",
+          "operator": "QuantizeLinear"
+        },
+        {
+          "provider": "QNNExecutionProvider",
+          "name": "s_DequantizeLinear",
+          "domain": "",
+          "operator": "DequantizeLinear"
+        },
+        {
+          "provider": "QNNExecutionProvider",
+          "name": "probe_silu",
+          "domain": "",
+          "operator": "Mul"
+        },
+        {
+          "provider": "QNNExecutionProvider",
+          "name": "m_QuantizeLinear",
+          "domain": "",
+          "operator": "QuantizeLinear"
+        },
+        {
+          "provider": "QNNExecutionProvider",
+          "name": "m_DequantizeLinear",
+          "domain": "",
+          "operator": "DequantizeLinear"
+        },
+        {
+          "provider": "QNNExecutionProvider",
+          "name": "probe_tanh",
+          "domain": "",
+          "operator": "Tanh"
+        },
+        {
+          "provider": "QNNExecutionProvider",
+          "name": "y_QuantizeLinear",
+          "domain": "",
+          "operator": "QuantizeLinear"
+        },
+        {
+          "provider": "QNNExecutionProvider",
+          "name": "y_DequantizeLinear",
+          "domain": "",
+          "operator": "DequantizeLinear"
+        }
+      ]
+    },
+    "backend_parity": {
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        4,
+        6,
+        6
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 6.104260683059692e-05,
+      "mismatched_elements": 0
+    },
+    "original_parity": {
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        4,
+        6,
+        6
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 6.979331374168396e-05,
+      "mismatched_elements": 0
+    },
+    "performance_status": "diagnostic_only",
+    "samples_ms": [
+      4.069011,
+      4.345782,
+      4.622396,
+      4.296042,
+      4.272604,
+      3.978854,
+      3.732604,
+      3.518542,
+      3.544948,
+      4.043906
+    ],
+    "profile_path": "/data/user/0/com.samsung.sunnypilot.fold3/files/htp-a16w16-activation_2026-11-01_12-56-27_249.json"
+  },
+  "a16w8-activation": {
+    "status": "passed",
+    "precision": "a16w8",
+    "operator": "activation",
+    "cpu_fallback": "disabled",
+    "provider_options": {
+      "htp_arch": "68",
+      "device_id": "0",
+      "profiling_level": "detailed",
+      "profiling_file_path": "/data/user/0/com.samsung.sunnypilot.fold3/files/htp-a16w8-activation-qnn.csv"
+    },
+    "initialization_ms": 386.38151,
+    "assignment": {
+      "providers": {
+        "QNNExecutionProvider": {
+          "partitions": 1,
+          "nodes": 12
+        }
+      },
+      "device": {
+        "type": 2,
+        "vendor_id": 1297040209,
+        "device_id": 0
+      },
+      "assigned_nodes": [
+        {
+          "provider": "QNNExecutionProvider",
+          "name": "x_QuantizeLinear",
+          "domain": "",
+          "operator": "QuantizeLinear"
+        },
+        {
+          "provider": "QNNExecutionProvider",
+          "name": "x_DequantizeLinear",
+          "domain": "",
+          "operator": "DequantizeLinear"
+        },
+        {
+          "provider": "QNNExecutionProvider",
+          "name": "x_DequantizeLinear/duplicated",
+          "domain": "",
+          "operator": "DequantizeLinear"
+        },
+        {
+          "provider": "QNNExecutionProvider",
+          "name": "probe_sigmoid",
+          "domain": "",
+          "operator": "Sigmoid"
+        },
+        {
+          "provider": "QNNExecutionProvider",
+          "name": "s_QuantizeLinear",
+          "domain": "",
+          "operator": "QuantizeLinear"
+        },
+        {
+          "provider": "QNNExecutionProvider",
+          "name": "s_DequantizeLinear",
+          "domain": "",
+          "operator": "DequantizeLinear"
+        },
+        {
+          "provider": "QNNExecutionProvider",
+          "name": "probe_silu",
+          "domain": "",
+          "operator": "Mul"
+        },
+        {
+          "provider": "QNNExecutionProvider",
+          "name": "m_QuantizeLinear",
+          "domain": "",
+          "operator": "QuantizeLinear"
+        },
+        {
+          "provider": "QNNExecutionProvider",
+          "name": "m_DequantizeLinear",
+          "domain": "",
+          "operator": "DequantizeLinear"
+        },
+        {
+          "provider": "QNNExecutionProvider",
+          "name": "probe_tanh",
+          "domain": "",
+          "operator": "Tanh"
+        },
+        {
+          "provider": "QNNExecutionProvider",
+          "name": "y_QuantizeLinear",
+          "domain": "",
+          "operator": "QuantizeLinear"
+        },
+        {
+          "provider": "QNNExecutionProvider",
+          "name": "y_DequantizeLinear",
+          "domain": "",
+          "operator": "DequantizeLinear"
+        }
+      ]
+    },
+    "backend_parity": {
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        4,
+        6,
+        6
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 6.104260683059692e-05,
+      "mismatched_elements": 0
+    },
+    "original_parity": {
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        4,
+        6,
+        6
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 6.979331374168396e-05,
+      "mismatched_elements": 0
+    },
+    "performance_status": "diagnostic_only",
+    "samples_ms": [
+      6.5175,
+      4.359635,
+      5.886718,
+      6.220834,
+      6.074115,
+      6.364323,
+      6.265469,
+      5.999844,
+      5.936302,
+      6.079271
+    ],
+    "profile_path": "/data/user/0/com.samsung.sunnypilot.fold3/files/htp-a16w8-activation_2026-11-01_12-56-27_696.json"
+  },
+  "fp16-layout": {
+    "status": "blocked",
+    "precision": "fp16",
+    "operator": "layout",
+    "cpu_fallback": "unverified",
+    "provider_options": {
+      "htp_arch": "68",
+      "device_id": "0",
+      "profiling_level": "detailed",
+      "profiling_file_path": "/data/user/0/com.samsung.sunnypilot.fold3/files/htp-fp16-layout-qnn.csv"
+    },
+    "performance_status": "blocked",
+    "error": "RuntimeError: This session contains graph nodes that are assigned to the default CPU EP, but fallback to CPU EP has been explicitly disabled by the user."
+  },
+  "a16w16-layout": {
+    "status": "passed",
+    "precision": "a16w16",
+    "operator": "layout",
+    "cpu_fallback": "disabled",
+    "provider_options": {
+      "htp_arch": "68",
+      "device_id": "0",
+      "profiling_level": "detailed",
+      "profiling_file_path": "/data/user/0/com.samsung.sunnypilot.fold3/files/htp-a16w16-layout-qnn.csv"
+    },
+    "initialization_ms": 350.096406,
+    "assignment": {
+      "providers": {
+        "QNNExecutionProvider": {
+          "partitions": 1,
+          "nodes": 1
+        }
+      },
+      "device": {
+        "type": 2,
+        "vendor_id": 1297040209,
+        "device_id": 0
+      },
+      "assigned_nodes": [
+        {
+          "provider": "QNNExecutionProvider",
+          "name": "probe_nchw_nhwc",
+          "domain": "",
+          "operator": "Transpose"
+        }
+      ]
+    },
+    "backend_parity": {
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        6,
+        6,
+        4
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": true,
+      "max_abs_error": 0.0,
+      "mismatched_elements": 0
+    },
+    "original_parity": {
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        6,
+        6,
+        4
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": true,
+      "max_abs_error": 0.0,
+      "mismatched_elements": 0
+    },
+    "performance_status": "diagnostic_only",
+    "samples_ms": [
+      5.792448,
+      4.380678,
+      4.231615,
+      4.84625,
+      5.078281,
+      5.6475,
+      4.357812,
+      4.108646,
+      4.657708,
+      5.327708
+    ],
+    "profile_path": "/data/user/0/com.samsung.sunnypilot.fold3/files/htp-a16w16-layout_2026-11-01_12-56-28_582.json"
+  },
+  "a16w8-layout": {
+    "status": "passed",
+    "precision": "a16w8",
+    "operator": "layout",
+    "cpu_fallback": "disabled",
+    "provider_options": {
+      "htp_arch": "68",
+      "device_id": "0",
+      "profiling_level": "detailed",
+      "profiling_file_path": "/data/user/0/com.samsung.sunnypilot.fold3/files/htp-a16w8-layout-qnn.csv"
+    },
+    "initialization_ms": 364.959896,
+    "assignment": {
+      "providers": {
+        "QNNExecutionProvider": {
+          "partitions": 1,
+          "nodes": 1
+        }
+      },
+      "device": {
+        "type": 2,
+        "vendor_id": 1297040209,
+        "device_id": 0
+      },
+      "assigned_nodes": [
+        {
+          "provider": "QNNExecutionProvider",
+          "name": "probe_nchw_nhwc",
+          "domain": "",
+          "operator": "Transpose"
+        }
+      ]
+    },
+    "backend_parity": {
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        6,
+        6,
+        4
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": true,
+      "max_abs_error": 0.0,
+      "mismatched_elements": 0
+    },
+    "original_parity": {
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        6,
+        6,
+        4
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": true,
+      "max_abs_error": 0.0,
+      "mismatched_elements": 0
+    },
+    "performance_status": "diagnostic_only",
+    "samples_ms": [
+      3.319948,
+      4.706354,
+      5.464375,
+      5.966719,
+      5.016822,
+      5.163021,
+      5.557865,
+      5.986563,
+      6.018385,
+      5.533073
+    ],
+    "profile_path": "/data/user/0/com.samsung.sunnypilot.fold3/files/htp-a16w8-layout_2026-11-01_12-56-29_065.json"
+  }
+}
+{
+  "serial": "RFCR81Y1TBJ",
+  "command": [
+    "/Users/sergios/sunnypilot/.venv/bin/python",
+    "android/scripts/validate_models.py",
+    "--serial",
+    "RFCR81Y1TBJ",
+    "--package",
+    "com.samsung.sunnypilot.fold3",
+    "--profile",
+    "qnn-htp-probes",
+    "--report",
+    "android/reports/npu-recovery-20261101/candidate42-htp-probes.json",
+    "--timeout",
+    "600"
+  ],
+  "vehicle_tx_enabled": false,
+  "status": "failed",
+  "validation_status": "failed",
+  "isolation_status": "passed",
+  "forwards_before": [],
+  "before_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 28.4,
+    "thermal_override": false
+  },
+  "apk_sha256": "bc6398930f7bae41244920b7119ce6be1eda2dc7685392d017ebe86104646af5",
+  "baseline": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 27.8,
+    "thermal_override": false,
+    "idle_seconds": 32.939370542007964,
+    "normal_thermal_seconds": 32.53176983399317
+  },
+  "apk_sha256_at_start": "bc6398930f7bae41244920b7119ce6be1eda2dc7685392d017ebe86104646af5",
+  "returncode": 1,
+  "after_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.4,
+    "thermal_override": false
+  },
+  "forwards_removed": [],
+  "apk_sha256_after": "bc6398930f7bae41244920b7119ce6be1eda2dc7685392d017ebe86104646af5",
+  "artifact_stable": true,
+  "wrapper_status": "failed"
+}

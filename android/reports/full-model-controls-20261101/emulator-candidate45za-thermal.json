@@ -1,0 +1,2118 @@
+{
+  "serial": "emulator-5560",
+  "package": "com.samsung.sunnypilot.fold3",
+  "vehicle_tx_enabled": false,
+  "status": "passed",
+  "cases": [
+    {
+      "during_capture": false,
+      "abort_wait_seconds": 4.093362542014802,
+      "result": {
+        "vehicle_tx_enabled": false,
+        "valid": false,
+        "sessions": [
+          {
+            "camera_ids": [
+              "0",
+              "1"
+            ],
+            "width": 1280,
+            "height": 720,
+            "logical_camera": null,
+            "requested_duration_ms": 29969,
+            "startup_order": "open_all_then_configure",
+            "opened_camera_ids": [],
+            "image_callbacks_drained": true,
+            "camera_close_callbacks_complete": true,
+            "request_template": "record",
+            "stabilization": "disabled when advertised",
+            "sensor_pairs": [],
+            "streams": [],
+            "elapsed_ms": 2,
+            "completed_requested_duration": false,
+            "status": "failed",
+            "error": "IllegalStateException: critical_thermal_status:4"
+          }
+        ],
+        "requested_seconds": 30,
+        "recovery_limit": 3,
+        "started_utc": "2026-11-02T01:21:31.139838Z",
+        "dual_rear": "not requested",
+        "backend": "camera2",
+        "status": "failed",
+        "recoveries": 0,
+        "thermal_status": 4,
+        "transport_status": "failed",
+        "completed_utc": "2026-11-02T01:21:31.234162Z"
+      },
+      "shutdown_seconds": 0.002,
+      "shutdown_clock": "camera worker startup to rejection"
+    },
+    {
+      "during_capture": true,
+      "abort_wait_seconds": 1.5912516250100452,
+      "result": {
+        "vehicle_tx_enabled": false,
+        "valid": false,
+        "sessions": [
+          {
+            "camera_ids": [
+              "0",
+              "1"
+            ],
+            "width": 1280,
+            "height": 720,
+            "logical_camera": null,
+            "requested_duration_ms": 89935,
+            "startup_order": "open_all_then_configure",
+            "opened_camera_ids": [
+              "0",
+              "1"
+            ],
+            "image_callbacks_drained": true,
+            "camera_close_callbacks_complete": true,
+            "request_template": "record",
+            "stabilization": "disabled when advertised",
+            "sensor_pairs": [
+              {
+                "camera_ids": [
+                  "0",
+                  "1"
+                ],
+                "overlap_ns": 750923126,
+                "distinct_sensor_evidence": true,
+                "nearest_skew_p99_ns": 25769500
+              }
+            ],
+            "overlap_ns": 750923126,
+            "nearest_skew_p99_ns": 25769500,
+            "skew_sampling": "last 4096 timestamps per stream, shared overlap only",
+            "distinct_sensor_evidence": true,
+            "streams": [
+              {
+                "sensor_id": "0",
+                "width": 1280,
+                "height": 720,
+                "process_pid": 16712,
+                "session_started_elapsed_ns": 2475572561180,
+                "raw_acquired_frames": 1,
+                "image_rotation_applied_degrees": 0,
+                "output_width": 1280,
+                "output_height": 720,
+                "display_degrees_at_session_start": 90,
+                "mirrored": false,
+                "sensor_orientation": 90,
+                "timestamp_source": 1,
+                "intrinsic_calibration": [],
+                "lens_distortion": [],
+                "visionipc_valid": false,
+                "visionipc_stream": 0,
+                "focal_lengths_mm": [
+                  3.3
+                ],
+                "first_raw_sensor_timestamp_ns": 2476834458065,
+                "frames": 12,
+                "fps": 12.510577110067402,
+                "first_timestamp_ns": 2476834458065,
+                "last_timestamp_ns": 2477713714066,
+                "timestamp_errors": 0,
+                "changed_frames": 11,
+                "metadata_failures": 0,
+                "uncaptured_requests": 0,
+                "lost_buffers": 0,
+                "physical_metadata_frames": 23,
+                "measured_focal_length_mm": 3.3,
+                "packing_errors": 0,
+                "packing_p99_ns": 77397001,
+                "delivery_age_available": true,
+                "delivery_age_p50_ns": -7376302,
+                "delivery_age_p95_ns": 86222656,
+                "delivery_age_p99_ns": 86222656,
+                "delivery_over_100ms": 0,
+                "acquisition_age_p50_ns": -9530885,
+                "acquisition_age_p95_ns": 7131365,
+                "acquisition_age_p99_ns": 7131365,
+                "capture_result_age_p99_ns": 322738532,
+                "capture_result_timestamp_errors": 4,
+                "delivery_future_timestamps": 8,
+                "clock_sample_columns": "sensor_raw,elapsed_before,monotonic,elapsed_after",
+                "clock_samples_ns": [
+                  [
+                    2476834458065,
+                    2476920674222,
+                    2476920677889,
+                    2476920678139
+                  ],
+                  [
+                    2476989960440,
+                    2476985020680,
+                    2476985612430,
+                    2476985617180
+                  ],
+                  [
+                    2477025198357,
+                    2477017818680,
+                    2477017818972,
+                    2477017819180
+                  ],
+                  [
+                    2477093747065,
+                    2477080509055,
+                    2477080509264,
+                    2477080509389
+                  ],
+                  [
+                    2477128129440,
+                    2477134404889,
+                    2477134405097,
+                    2477134405305
+                  ],
+                  [
+                    2477163987982,
+                    2477148777347,
+                    2477148777555,
+                    2477148777722
+                  ],
+                  [
+                    2477198582107,
+                    2477177019597,
+                    2477177021264,
+                    2477177021472
+                  ],
+                  [
+                    2477569989149,
+                    2477551931139,
+                    2477551931389,
+                    2477551931556
+                  ],
+                  [
+                    2477611402024,
+                    2477618780264,
+                    2477618780514,
+                    2477618780681
+                  ],
+                  [
+                    2477645715941,
+                    2477669038472,
+                    2477669038847,
+                    2477669039097
+                  ],
+                  [
+                    2477679871732,
+                    2477670647222,
+                    2477670647472,
+                    2477670647639
+                  ],
+                  [
+                    2477713714066,
+                    2477698220139,
+                    2477698220431,
+                    2477698220764
+                  ]
+                ],
+                "capture_sample_columns": "sensor_raw,frame_number,exposure,duration,elapsed_before,monotonic,elapsed_after",
+                "capture_samples_ns": [
+                  [
+                    2476834458065,
+                    0,
+                    15000000,
+                    33331760,
+                    2476986360305,
+                    2476986360722,
+                    2476986360889
+                  ],
+                  [
+                    2476883201940,
+                    1,
+                    12833294,
+                    33331760,
+                    2476986439430,
+                    2476986439639,
+                    2476986439805
+                  ],
+                  [
+                    2476917133690,
+                    2,
+                    11099929,
+                    33331760,
+                    2476986574930,
+                    2476986575180,
+                    2476986575347
+                  ],
+                  [
+                    2476952874065,
+                    3,
+                    9713237,
+                    33331760,
+                    2476986813514,
+                    2476986813722,
+                    2476986813847
+                  ],
+                  [
+                    2476989960440,
+                    4,
+                    8603884,
+                    33331760,
+                    2476986994972,
+                    2476986995139,
+                    2476986995305
+                  ],
+                  [
+                    2477025198357,
+                    5,
+                    7716401,
+                    33331760,
+                    2477039419264,
+                    2477039420847,
+                    2477039421055
+                  ],
+                  [
+                    2477059333315,
+                    6,
+                    7006415,
+                    33331760,
+                    2477134628430,
+                    2477134628722,
+                    2477134628930
+                  ],
+                  [
+                    2477093747065,
+                    7,
+                    6438426,
+                    33331760,
+                    2477134706930,
+                    2477134707139,
+                    2477134707305
+                  ],
+                  [
+                    2477128129440,
+                    8,
+                    5984035,
+                    33331760,
+                    2477148408097,
+                    2477148409847,
+                    2477148410014
+                  ],
+                  [
+                    2477163987982,
+                    9,
+                    5620522,
+                    33331760,
+                    2477184276472,
+                    2477184278180,
+                    2477184278347
+                  ],
+                  [
+                    2477198582107,
+                    10,
+                    5329711,
+                    33331760,
+                    2477184390139,
+                    2477184390430,
+                    2477184390555
+                  ],
+                  [
+                    2477233681274,
+                    11,
+                    5097063,
+                    33331760,
+                    2477556419806,
+                    2477556420556,
+                    2477556420764
+                  ],
+                  [
+                    2477273297815,
+                    12,
+                    4910944,
+                    33331760,
+                    2477556538306,
+                    2477556538556,
+                    2477556538722
+                  ],
+                  [
+                    2477345781315,
+                    13,
+                    4762049,
+                    33331760,
+                    2477556636597,
+                    2477556636847,
+                    2477556637014
+                  ],
+                  [
+                    2477385813065,
+                    14,
+                    4642933,
+                    33331760,
+                    2477556741181,
+                    2477556741431,
+                    2477556741556
+                  ],
+                  [
+                    2477419382690,
+                    15,
+                    4547640,
+                    33331760,
+                    2477557765306,
+                    2477557766139,
+                    2477557766306
+                  ],
+                  [
+                    2477501556149,
+                    16,
+                    4547640,
+                    33331760,
+                    2477619621764,
+                    2477619623222,
+                    2477619623472
+                  ],
+                  [
+                    2477535094024,
+                    17,
+                    4547640,
+                    33331760,
+                    2477669502056,
+                    2477669502597,
+                    2477669502889
+                  ],
+                  [
+                    2477569989149,
+                    18,
+                    4547640,
+                    33331760,
+                    2477671018972,
+                    2477671019222,
+                    2477671019389
+                  ],
+                  [
+                    2477611402024,
+                    19,
+                    4547640,
+                    33331760,
+                    2477671312514,
+                    2477671312764,
+                    2477671312931
+                  ],
+                  [
+                    2477645715941,
+                    20,
+                    4547640,
+                    33331760,
+                    2477671408597,
+                    2477671408806,
+                    2477671408972
+                  ],
+                  [
+                    2477679871732,
+                    21,
+                    4547640,
+                    33331760,
+                    2477671723639,
+                    2477671723847,
+                    2477671724056
+                  ],
+                  [
+                    2477713714066,
+                    22,
+                    4547640,
+                    33331760,
+                    2477698710722,
+                    2477698711639,
+                    2477698711889
+                  ]
+                ],
+                "frame_interval_p99_ns": 371407042
+              },
+              {
+                "sensor_id": "1",
+                "width": 1280,
+                "height": 720,
+                "process_pid": 16712,
+                "session_started_elapsed_ns": 2475668514930,
+                "raw_acquired_frames": 1,
+                "image_rotation_applied_degrees": 0,
+                "output_width": 1280,
+                "output_height": 720,
+                "display_degrees_at_session_start": 90,
+                "mirrored": false,
+                "sensor_orientation": 270,
+                "timestamp_source": 1,
+                "intrinsic_calibration": [
+                  3225.7742,
+                  3225.7742,
+                  960.5043,
+                  540.46704,
+                  0
+                ],
+                "lens_distortion": [
+                  0.08807813,
+                  -0.22617353,
+                  0.16460505,
+                  0,
+                  0
+                ],
+                "visionipc_valid": false,
+                "visionipc_stream": 1,
+                "focal_lengths_mm": [
+                  4.38
+                ],
+                "first_raw_sensor_timestamp_ns": 2476954397315,
+                "frames": 11,
+                "fps": 13.316942378999258,
+                "first_timestamp_ns": 2476954397315,
+                "last_timestamp_ns": 2477705320441,
+                "timestamp_errors": 0,
+                "changed_frames": 10,
+                "metadata_failures": 0,
+                "uncaptured_requests": 0,
+                "lost_buffers": 0,
+                "physical_metadata_frames": 23,
+                "measured_focal_length_mm": 4.38,
+                "packing_errors": 0,
+                "packing_p99_ns": 336267709,
+                "delivery_age_available": true,
+                "delivery_age_p50_ns": -1467844,
+                "delivery_age_p95_ns": 330882824,
+                "delivery_age_p99_ns": 330882824,
+                "delivery_over_100ms": 1,
+                "acquisition_age_p50_ns": -5904593,
+                "acquisition_age_p95_ns": 28651740,
+                "acquisition_age_p99_ns": 28651740,
+                "capture_result_age_p99_ns": 336760907,
+                "capture_result_timestamp_errors": 5,
+                "delivery_future_timestamps": 7,
+                "clock_sample_columns": "sensor_raw,elapsed_before,monotonic,elapsed_after",
+                "clock_samples_ns": [
+                  [
+                    2476954397315,
+                    2476977246055,
+                    2476977247472,
+                    2476977247680
+                  ],
+                  [
+                    2476990767815,
+                    2476983675764,
+                    2476983676014,
+                    2476983676222
+                  ],
+                  [
+                    2477039987732,
+                    2477016663055,
+                    2477016663305,
+                    2477016663514
+                  ],
+                  [
+                    2477082967774,
+                    2477082137972,
+                    2477082138180,
+                    2477082138389
+                  ],
+                  [
+                    2477153008607,
+                    2477135020930,
+                    2477135021097,
+                    2477135021264
+                  ],
+                  [
+                    2477186550774,
+                    2477163625305,
+                    2477163625764,
+                    2477163625972
+                  ],
+                  [
+                    2477220078607,
+                    2477550957681,
+                    2477550958014,
+                    2477550958181
+                  ],
+                  [
+                    2477550779899,
+                    2477555529472,
+                    2477555529889,
+                    2477555530097
+                  ],
+                  [
+                    2477591115816,
+                    2477628775639,
+                    2477628775889,
+                    2477628776056
+                  ],
+                  [
+                    2477671485441,
+                    2477670015264,
+                    2477670015514,
+                    2477670015681
+                  ],
+                  [
+                    2477705320441,
+                    2477679909556,
+                    2477679909764,
+                    2477679909931
+                  ]
+                ],
+                "capture_sample_columns": "sensor_raw,frame_number,exposure,duration,elapsed_before,monotonic,elapsed_after",
+                "capture_samples_ns": [
+                  [
+                    2476830908398,
+                    0,
+                    15000000,
+                    33331760,
+                    2476984467972,
+                    2476984468555,
+                    2476984468764
+                  ],
+                  [
+                    2476880626857,
+                    1,
+                    12416647,
+                    33331760,
+                    2476984651639,
+                    2476984651930,
+                    2476984652222
+                  ],
+                  [
+                    2476915105815,
+                    2,
+                    10349965,
+                    33331760,
+                    2476986634805,
+                    2476986635014,
+                    2476986635180
+                  ],
+                  [
+                    2476954397315,
+                    3,
+                    8696619,
+                    33331760,
+                    2476986755222,
+                    2476986755430,
+                    2476986755555
+                  ],
+                  [
+                    2476990767815,
+                    4,
+                    7373942,
+                    33331760,
+                    2476986936180,
+                    2476986936389,
+                    2476986936514
+                  ],
+                  [
+                    2477039987732,
+                    5,
+                    6315800,
+                    33331760,
+                    2477018584055,
+                    2477018584680,
+                    2477018584889
+                  ],
+                  [
+                    2477082967774,
+                    6,
+                    5469287,
+                    33331760,
+                    2477149026555,
+                    2477149026805,
+                    2477149026972
+                  ],
+                  [
+                    2477116926107,
+                    7,
+                    4792076,
+                    33331760,
+                    2477149111972,
+                    2477149112222,
+                    2477149112347
+                  ],
+                  [
+                    2477153008607,
+                    8,
+                    4250308,
+                    33331760,
+                    2477149195430,
+                    2477149195680,
+                    2477149195805
+                  ],
+                  [
+                    2477186550774,
+                    9,
+                    3816893,
+                    33331760,
+                    2477184457847,
+                    2477184458055,
+                    2477184458180
+                  ],
+                  [
+                    2477220078607,
+                    10,
+                    3470161,
+                    33331760,
+                    2477556839514,
+                    2477556839722,
+                    2477556839889
+                  ],
+                  [
+                    2477261596482,
+                    11,
+                    3192775,
+                    33331760,
+                    2477556936472,
+                    2477556936681,
+                    2477556936847
+                  ],
+                  [
+                    2477295065399,
+                    12,
+                    2970867,
+                    33331760,
+                    2477557032389,
+                    2477557032639,
+                    2477557032764
+                  ],
+                  [
+                    2477355664857,
+                    13,
+                    2793340,
+                    33331760,
+                    2477557129556,
+                    2477557129764,
+                    2477557129931
+                  ],
+                  [
+                    2477398876565,
+                    14,
+                    2651319,
+                    33331760,
+                    2477629074264,
+                    2477629074556,
+                    2477629074722
+                  ],
+                  [
+                    2477432354524,
+                    15,
+                    2537702,
+                    33331760,
+                    2477629152722,
+                    2477629152931,
+                    2477629153056
+                  ],
+                  [
+                    2477479450732,
+                    16,
+                    2446808,
+                    33331760,
+                    2477631220139,
+                    2477631220722,
+                    2477631220889
+                  ],
+                  [
+                    2477515826690,
+                    17,
+                    2374093,
+                    33331760,
+                    2477631323639,
+                    2477631323847,
+                    2477631324014
+                  ],
+                  [
+                    2477550779899,
+                    18,
+                    2315921,
+                    33331760,
+                    2477670909181,
+                    2477670909639,
+                    2477670909847
+                  ],
+                  [
+                    2477591115816,
+                    19,
+                    2269383,
+                    33331760,
+                    2477671194847,
+                    2477671195097,
+                    2477671195264
+                  ],
+                  [
+                    2477628183482,
+                    20,
+                    2269383,
+                    33331760,
+                    2477671534139,
+                    2477671534347,
+                    2477671534514
+                  ],
+                  [
+                    2477671485441,
+                    21,
+                    2269383,
+                    33331760,
+                    2477671608806,
+                    2477671609014,
+                    2477671609181
+                  ],
+                  [
+                    2477705320441,
+                    22,
+                    2269383,
+                    33331760,
+                    2477681130222,
+                    2477681131514,
+                    2477681131722
+                  ]
+                ],
+                "frame_interval_p99_ns": 330701292
+              }
+            ],
+            "elapsed_ms": 2955,
+            "completed_requested_duration": false,
+            "status": "failed",
+            "error": "IllegalStateException: critical_thermal_status:4"
+          }
+        ],
+        "requested_seconds": 90,
+        "recovery_limit": 3,
+        "started_utc": "2026-11-02T01:21:36.753015Z",
+        "dual_rear": "not requested",
+        "backend": "camera2",
+        "status": "failed",
+        "recoveries": 0,
+        "thermal_status": 4,
+        "transport_status": "failed",
+        "completed_utc": "2026-11-02T01:21:39.959911Z"
+      },
+      "shutdown_seconds": 1.5912516250100452,
+      "shutdown_clock": "critical override to completed report"
+    }
+  ],
+  "moderate_pause": {
+    "modeld": {
+      "daemon": "modeld",
+      "pid": 15551,
+      "vehicle_tx_enabled": false,
+      "engagement_allowed": false,
+      "work_samples": 0,
+      "deadline_misses": 0,
+      "phase": "thermal_paused",
+      "simulation": false,
+      "thermal_status": 2,
+      "target_suspended": true,
+      "missing_physical_sensors": [
+        "0",
+        "2"
+      ],
+      "calibrated": false,
+      "valid": false,
+      "blocker": "Bench inference paused at Android MODERATE; requires ten cool seconds before resuming",
+      "target_hz": 20,
+      "computed_frames": 0,
+      "recurrent_resets": 1,
+      "p99_stages_ms": {}
+    },
+    "dmonitoringmodeld": {
+      "daemon": "dmonitoringmodeld",
+      "pid": 15567,
+      "vehicle_tx_enabled": false,
+      "engagement_allowed": false,
+      "work_samples": 0,
+      "deadline_misses": 0,
+      "phase": "thermal_paused",
+      "simulation": false,
+      "thermal_status": 2,
+      "target_suspended": true,
+      "missing_physical_sensors": [
+        "1"
+      ],
+      "calibrated": false,
+      "valid": false,
+      "blocker": "Bench inference paused at Android MODERATE; requires ten cool seconds before resuming",
+      "target_hz": 20,
+      "computed_frames": 0,
+      "recurrent_resets": 1,
+      "p99_stages_ms": {}
+    }
+  },
+  "moderate_resumed": {
+    "modeld": {
+      "daemon": "modeld",
+      "pid": 15551,
+      "vehicle_tx_enabled": false,
+      "engagement_allowed": false,
+      "work_samples": 0,
+      "deadline_misses": 0,
+      "phase": "waiting_for_camera",
+      "simulation": false,
+      "thermal_status": 0,
+      "target_suspended": false,
+      "missing_physical_sensors": [
+        "0",
+        "2"
+      ],
+      "calibrated": false,
+      "valid": false,
+      "blocker": "Distinct narrow and wide rear streams are required",
+      "target_hz": 20,
+      "computed_frames": 0,
+      "recurrent_resets": 1,
+      "p99_stages_ms": {}
+    },
+    "dmonitoringmodeld": {
+      "daemon": "dmonitoringmodeld",
+      "pid": 15567,
+      "vehicle_tx_enabled": false,
+      "engagement_allowed": false,
+      "work_samples": 0,
+      "deadline_misses": 0,
+      "phase": "waiting_for_camera",
+      "simulation": false,
+      "thermal_status": 0,
+      "target_suspended": false,
+      "missing_physical_sensors": [
+        "1"
+      ],
+      "calibrated": false,
+      "valid": false,
+      "blocker": "Driver camera unavailable",
+      "target_hz": 20,
+      "computed_frames": 0,
+      "recurrent_resets": 1,
+      "p99_stages_ms": {}
+    }
+  },
+  "capture_baselines": [
+    {
+      "during_capture": false,
+      "started_elapsed_ns": 2465830000000,
+      "previous_camera_metadata": [
+        {
+          "sensor_id": "0",
+          "width": 1280,
+          "height": 720,
+          "process_pid": 10746,
+          "session_started_elapsed_ns": 999828984518,
+          "raw_acquired_frames": 1,
+          "image_rotation_applied_degrees": 0,
+          "output_width": 1280,
+          "output_height": 720,
+          "display_degrees_at_session_start": 90,
+          "mirrored": false,
+          "sensor_orientation": 90,
+          "timestamp_source": 1,
+          "intrinsic_calibration": [],
+          "lens_distortion": [],
+          "visionipc_valid": false,
+          "visionipc_stream": 0,
+          "focal_lengths_mm": [
+            3.3
+          ],
+          "first_raw_sensor_timestamp_ns": 1000999833028
+        },
+        {
+          "sensor_id": "1",
+          "width": 1280,
+          "height": 720,
+          "process_pid": 10746,
+          "session_started_elapsed_ns": 999861448268,
+          "raw_acquired_frames": 1,
+          "image_rotation_applied_degrees": 0,
+          "output_width": 1280,
+          "output_height": 720,
+          "display_degrees_at_session_start": 90,
+          "mirrored": false,
+          "sensor_orientation": 270,
+          "timestamp_source": 1,
+          "intrinsic_calibration": [
+            3225.7742,
+            3225.7742,
+            960.5043,
+            540.46704,
+            0
+          ],
+          "lens_distortion": [
+            0.08807813,
+            -0.22617353,
+            0.16460505,
+            0,
+            0
+          ],
+          "visionipc_valid": false,
+          "visionipc_stream": 1,
+          "focal_lengths_mm": [
+            4.38
+          ],
+          "first_raw_sensor_timestamp_ns": 1001180874278
+        }
+      ]
+    },
+    {
+      "during_capture": true,
+      "started_elapsed_ns": 2471210000000,
+      "previous_camera_metadata": [
+        {
+          "sensor_id": "0",
+          "width": 1280,
+          "height": 720,
+          "process_pid": 10746,
+          "session_started_elapsed_ns": 999828984518,
+          "raw_acquired_frames": 1,
+          "image_rotation_applied_degrees": 0,
+          "output_width": 1280,
+          "output_height": 720,
+          "display_degrees_at_session_start": 90,
+          "mirrored": false,
+          "sensor_orientation": 90,
+          "timestamp_source": 1,
+          "intrinsic_calibration": [],
+          "lens_distortion": [],
+          "visionipc_valid": false,
+          "visionipc_stream": 0,
+          "focal_lengths_mm": [
+            3.3
+          ],
+          "first_raw_sensor_timestamp_ns": 1000999833028
+        },
+        {
+          "sensor_id": "1",
+          "width": 1280,
+          "height": 720,
+          "process_pid": 10746,
+          "session_started_elapsed_ns": 999861448268,
+          "raw_acquired_frames": 1,
+          "image_rotation_applied_degrees": 0,
+          "output_width": 1280,
+          "output_height": 720,
+          "display_degrees_at_session_start": 90,
+          "mirrored": false,
+          "sensor_orientation": 270,
+          "timestamp_source": 1,
+          "intrinsic_calibration": [
+            3225.7742,
+            3225.7742,
+            960.5043,
+            540.46704,
+            0
+          ],
+          "lens_distortion": [
+            0.08807813,
+            -0.22617353,
+            0.16460505,
+            0,
+            0
+          ],
+          "visionipc_valid": false,
+          "visionipc_stream": 1,
+          "focal_lengths_mm": [
+            4.38
+          ],
+          "first_raw_sensor_timestamp_ns": 1001180874278
+        }
+      ]
+    }
+  ],
+  "raw_capture_before_injection": [
+    [
+      {
+        "sensor_id": "0",
+        "width": 1280,
+        "height": 720,
+        "process_pid": 16712,
+        "session_started_elapsed_ns": 2475572561180,
+        "raw_acquired_frames": 1,
+        "image_rotation_applied_degrees": 0,
+        "output_width": 1280,
+        "output_height": 720,
+        "display_degrees_at_session_start": 90,
+        "mirrored": false,
+        "sensor_orientation": 90,
+        "timestamp_source": 1,
+        "intrinsic_calibration": [],
+        "lens_distortion": [],
+        "visionipc_valid": false,
+        "visionipc_stream": 0,
+        "focal_lengths_mm": [
+          3.3
+        ],
+        "first_raw_sensor_timestamp_ns": 2476834458065
+      },
+      {
+        "sensor_id": "1",
+        "width": 1280,
+        "height": 720,
+        "process_pid": 16712,
+        "session_started_elapsed_ns": 2475668514930,
+        "raw_acquired_frames": 1,
+        "image_rotation_applied_degrees": 0,
+        "output_width": 1280,
+        "output_height": 720,
+        "display_degrees_at_session_start": 90,
+        "mirrored": false,
+        "sensor_orientation": 270,
+        "timestamp_source": 1,
+        "intrinsic_calibration": [
+          3225.7742,
+          3225.7742,
+          960.5043,
+          540.46704,
+          0
+        ],
+        "lens_distortion": [
+          0.08807813,
+          -0.22617353,
+          0.16460505,
+          0,
+          0
+        ],
+        "visionipc_valid": false,
+        "visionipc_stream": 1,
+        "focal_lengths_mm": [
+          4.38
+        ],
+        "first_raw_sensor_timestamp_ns": 2476954397315
+      }
+    ]
+  ],
+  "live_validator": {
+    "status": "failed",
+    "error": "RuntimeError: Unsafe or unavailable Android thermal state: 4",
+    "cleanup": {
+      "processes": [],
+      "camera_provider_processes": [
+        "373 android.hardware.camera.provider.ranchu",
+        "374 android.hardware.camera.provider@2.7-service-google",
+        "436 cameraserver"
+      ],
+      "camera_owned": false,
+      "thermal_status": 4,
+      "skin_c": 30.8,
+      "thermal_override": true
+    },
+    "elapsed_s": 0.07790829101577401
+  },
+  "activity_stop_capture_baseline": {
+    "started_elapsed_ns": 2481580000000,
+    "previous_camera_metadata": [
+      {
+        "sensor_id": "0",
+        "width": 1280,
+        "height": 720,
+        "process_pid": 16712,
+        "session_started_elapsed_ns": 2475572561180,
+        "raw_acquired_frames": 1,
+        "image_rotation_applied_degrees": 0,
+        "output_width": 1280,
+        "output_height": 720,
+        "display_degrees_at_session_start": 90,
+        "mirrored": false,
+        "sensor_orientation": 90,
+        "timestamp_source": 1,
+        "intrinsic_calibration": [],
+        "lens_distortion": [],
+        "visionipc_valid": false,
+        "visionipc_stream": 0,
+        "focal_lengths_mm": [
+          3.3
+        ],
+        "first_raw_sensor_timestamp_ns": 2476834458065
+      },
+      {
+        "sensor_id": "1",
+        "width": 1280,
+        "height": 720,
+        "process_pid": 16712,
+        "session_started_elapsed_ns": 2475668514930,
+        "raw_acquired_frames": 1,
+        "image_rotation_applied_degrees": 0,
+        "output_width": 1280,
+        "output_height": 720,
+        "display_degrees_at_session_start": 90,
+        "mirrored": false,
+        "sensor_orientation": 270,
+        "timestamp_source": 1,
+        "intrinsic_calibration": [
+          3225.7742,
+          3225.7742,
+          960.5043,
+          540.46704,
+          0
+        ],
+        "lens_distortion": [
+          0.08807813,
+          -0.22617353,
+          0.16460505,
+          0,
+          0
+        ],
+        "visionipc_valid": false,
+        "visionipc_stream": 1,
+        "focal_lengths_mm": [
+          4.38
+        ],
+        "first_raw_sensor_timestamp_ns": 2476954397315
+      }
+    ]
+  },
+  "raw_capture_before_activity_stop": [
+    {
+      "sensor_id": "0",
+      "width": 1280,
+      "height": 720,
+      "process_pid": 17224,
+      "session_started_elapsed_ns": 2485305746518,
+      "raw_acquired_frames": 1,
+      "image_rotation_applied_degrees": 0,
+      "output_width": 1280,
+      "output_height": 720,
+      "display_degrees_at_session_start": 90,
+      "mirrored": false,
+      "sensor_orientation": 90,
+      "timestamp_source": 1,
+      "intrinsic_calibration": [],
+      "lens_distortion": [],
+      "visionipc_valid": false,
+      "visionipc_stream": 0,
+      "focal_lengths_mm": [
+        3.3
+      ],
+      "first_raw_sensor_timestamp_ns": 2485513136653
+    },
+    {
+      "sensor_id": "1",
+      "width": 1280,
+      "height": 720,
+      "process_pid": 17224,
+      "session_started_elapsed_ns": 2485323724684,
+      "raw_acquired_frames": 1,
+      "image_rotation_applied_degrees": 0,
+      "output_width": 1280,
+      "output_height": 720,
+      "display_degrees_at_session_start": 90,
+      "mirrored": false,
+      "sensor_orientation": 270,
+      "timestamp_source": 1,
+      "intrinsic_calibration": [
+        3225.7742,
+        3225.7742,
+        960.5043,
+        540.46704,
+        0
+      ],
+      "lens_distortion": [
+        0.08807813,
+        -0.22617353,
+        0.16460505,
+        0,
+        0
+      ],
+      "visionipc_valid": false,
+      "visionipc_stream": 1,
+      "focal_lengths_mm": [
+        4.38
+      ],
+      "first_raw_sensor_timestamp_ns": 2485520924903
+    }
+  ],
+  "new_activity_stop": {
+    "vehicle_tx_enabled": false,
+    "valid": false,
+    "sessions": [
+      {
+        "camera_ids": [
+          "0",
+          "1"
+        ],
+        "width": 1280,
+        "height": 720,
+        "logical_camera": null,
+        "requested_duration_ms": 89946,
+        "startup_order": "open_all_then_configure",
+        "opened_camera_ids": [
+          "0",
+          "1"
+        ],
+        "image_callbacks_drained": true,
+        "camera_close_callbacks_complete": true,
+        "request_template": "record",
+        "stabilization": "disabled when advertised",
+        "sensor_pairs": [
+          {
+            "camera_ids": [
+              "0",
+              "1"
+            ],
+            "overlap_ns": 962618750,
+            "distinct_sensor_evidence": true,
+            "nearest_skew_p99_ns": 32825000
+          }
+        ],
+        "overlap_ns": 962618750,
+        "nearest_skew_p99_ns": 32825000,
+        "skew_sampling": "last 4096 timestamps per stream, shared overlap only",
+        "distinct_sensor_evidence": true,
+        "streams": [
+          {
+            "sensor_id": "0",
+            "width": 1280,
+            "height": 720,
+            "process_pid": 17224,
+            "session_started_elapsed_ns": 2485305746518,
+            "raw_acquired_frames": 1,
+            "image_rotation_applied_degrees": 0,
+            "output_width": 1280,
+            "output_height": 720,
+            "display_degrees_at_session_start": 90,
+            "mirrored": false,
+            "sensor_orientation": 90,
+            "timestamp_source": 1,
+            "intrinsic_calibration": [],
+            "lens_distortion": [],
+            "visionipc_valid": false,
+            "visionipc_stream": 0,
+            "focal_lengths_mm": [
+              3.3
+            ],
+            "first_raw_sensor_timestamp_ns": 2485513136653,
+            "frames": 20,
+            "fps": 19.579413586258138,
+            "first_timestamp_ns": 2485513136653,
+            "last_timestamp_ns": 2486483543653,
+            "timestamp_errors": 0,
+            "changed_frames": 19,
+            "metadata_failures": 0,
+            "uncaptured_requests": 0,
+            "lost_buffers": 0,
+            "physical_metadata_frames": 24,
+            "measured_focal_length_mm": 3.3,
+            "packing_errors": 0,
+            "packing_p99_ns": 15792209,
+            "delivery_age_available": true,
+            "delivery_age_p50_ns": -12415677,
+            "delivery_age_p95_ns": 24642887,
+            "delivery_age_p99_ns": 24642887,
+            "delivery_over_100ms": 0,
+            "acquisition_age_p50_ns": -15898510,
+            "acquisition_age_p95_ns": 24255824,
+            "acquisition_age_p99_ns": 24255824,
+            "capture_result_age_p99_ns": 107922699,
+            "capture_result_timestamp_errors": 8,
+            "delivery_future_timestamps": 15,
+            "clock_sample_columns": "sensor_raw,elapsed_before,monotonic,elapsed_after",
+            "clock_samples_ns": [
+              [
+                2485513136653,
+                2485515471226,
+                2485515471768,
+                2485515471976
+              ],
+              [
+                2485549779694,
+                2485544576809,
+                2485544577143,
+                2485544577393
+              ],
+              [
+                2485583360528,
+                2485566119101,
+                2485566120768,
+                2485566121018
+              ],
+              [
+                2485661601236,
+                2485649182768,
+                2485649182976,
+                2485649183184
+              ],
+              [
+                2485729983736,
+                2485705025643,
+                2485705025976,
+                2485705026143
+              ],
+              [
+                2485764691944,
+                2485789331893,
+                2485789332184,
+                2485789332351
+              ],
+              [
+                2485855072861,
+                2485847052976,
+                2485847053226,
+                2485847053393
+              ],
+              [
+                2485966474611,
+                2485960456226,
+                2485960458768,
+                2485960458976
+              ],
+              [
+                2486000285403,
+                2486006461351,
+                2486006461685,
+                2486006461851
+              ],
+              [
+                2486068515861,
+                2486055928393,
+                2486055928601,
+                2486055928768
+              ],
+              [
+                2486102274986,
+                2486122125268,
+                2486122127185,
+                2486122127351
+              ],
+              [
+                2486135789028,
+                2486151587185,
+                2486151587351,
+                2486151587560
+              ],
+              [
+                2486185329820,
+                2486163211601,
+                2486163211935,
+                2486163212101
+              ],
+              [
+                2486218788778,
+                2486188463226,
+                2486188463518,
+                2486188463851
+              ],
+              [
+                2486314208403,
+                2486296332685,
+                2486296332935,
+                2486296333226
+              ],
+              [
+                2486347785861,
+                2486330578768,
+                2486330579060,
+                2486330579226
+              ],
+              [
+                2486382946778,
+                2486378405643,
+                2486378408601,
+                2486378408851
+              ],
+              [
+                2486416452945,
+                2486386975518,
+                2486386975810,
+                2486386975976
+              ],
+              [
+                2486449908361,
+                2486426477393,
+                2486426477643,
+                2486426477810
+              ],
+              [
+                2486483543653,
+                2486453618976,
+                2486453619226,
+                2486453619393
+              ]
+            ],
+            "capture_sample_columns": "sensor_raw,frame_number,exposure,duration,elapsed_before,monotonic,elapsed_after",
+            "capture_samples_ns": [
+              [
+                2485513136653,
+                0,
+                15000000,
+                33331760,
+                2485539102309,
+                2485539103726,
+                2485539103976
+              ],
+              [
+                2485549779694,
+                1,
+                12833294,
+                33331760,
+                2485550501434,
+                2485550501726,
+                2485550501893
+              ],
+              [
+                2485583360528,
+                2,
+                11099929,
+                33331760,
+                2485573999601,
+                2485574000184,
+                2485574000351
+              ],
+              [
+                2485624972236,
+                3,
+                9713237,
+                33331760,
+                2485650807726,
+                2485650808018,
+                2485650808184
+              ],
+              [
+                2485661601236,
+                4,
+                8603884,
+                33331760,
+                2485727287351,
+                2485727288809,
+                2485727289018
+              ],
+              [
+                2485729983736,
+                5,
+                7716401,
+                33331760,
+                2485727468851,
+                2485727469309,
+                2485727469518
+              ],
+              [
+                2485764691944,
+                6,
+                7006415,
+                33331760,
+                2485872614643,
+                2485872614934,
+                2485872615101
+              ],
+              [
+                2485855072861,
+                7,
+                6438426,
+                33331760,
+                2485872687268,
+                2485872687476,
+                2485872687643
+              ],
+              [
+                2485888487694,
+                8,
+                5984035,
+                33331760,
+                2485961572185,
+                2485961572601,
+                2485961572810
+              ],
+              [
+                2485966474611,
+                9,
+                5620522,
+                33331760,
+                2486005613935,
+                2486005615851,
+                2486005616101
+              ],
+              [
+                2486000285403,
+                10,
+                5329711,
+                33331760,
+                2486007456518,
+                2486007456726,
+                2486007456893
+              ],
+              [
+                2486034198820,
+                11,
+                5097063,
+                33331760,
+                2486065360476,
+                2486065360726,
+                2486065360893
+              ],
+              [
+                2486068515861,
+                12,
+                4910944,
+                33331760,
+                2486122804726,
+                2486122804976,
+                2486122805143
+              ],
+              [
+                2486102274986,
+                13,
+                4762049,
+                33331760,
+                2486122901976,
+                2486122902185,
+                2486122902310
+              ],
+              [
+                2486135789028,
+                14,
+                4642933,
+                33331760,
+                2486157061768,
+                2486157062893,
+                2486157063101
+              ],
+              [
+                2486185329820,
+                15,
+                4547640,
+                33331760,
+                2486188734935,
+                2486188735393,
+                2486188735560
+              ],
+              [
+                2486218788778,
+                16,
+                4547640,
+                33331760,
+                2486190212143,
+                2486190213060,
+                2486190213310
+              ],
+              [
+                2486266771028,
+                17,
+                4547640,
+                33331760,
+                2486330977268,
+                2486330977518,
+                2486330977685
+              ],
+              [
+                2486314208403,
+                18,
+                4547640,
+                33331760,
+                2486331076643,
+                2486331076851,
+                2486331077018
+              ],
+              [
+                2486347785861,
+                19,
+                4547640,
+                33331760,
+                2486331202518,
+                2486331202726,
+                2486331202893
+              ],
+              [
+                2486382946778,
+                20,
+                4547640,
+                33331760,
+                2486381963060,
+                2486381964018,
+                2486381964226
+              ],
+              [
+                2486416452945,
+                21,
+                4547640,
+                33331760,
+                2486388881310,
+                2486388882726,
+                2486388883018
+              ],
+              [
+                2486449908361,
+                22,
+                4547640,
+                33331760,
+                2486431914893,
+                2486431916018,
+                2486431916226
+              ],
+              [
+                2486483543653,
+                23,
+                4547640,
+                33331760,
+                2486461471268,
+                2486461472601,
+                2486461472893
+              ]
+            ],
+            "frame_interval_p99_ns": 111401750
+          },
+          {
+            "sensor_id": "1",
+            "width": 1280,
+            "height": 720,
+            "process_pid": 17224,
+            "session_started_elapsed_ns": 2485323724684,
+            "raw_acquired_frames": 1,
+            "image_rotation_applied_degrees": 0,
+            "output_width": 1280,
+            "output_height": 720,
+            "display_degrees_at_session_start": 90,
+            "mirrored": false,
+            "sensor_orientation": 270,
+            "timestamp_source": 1,
+            "intrinsic_calibration": [
+              3225.7742,
+              3225.7742,
+              960.5043,
+              540.46704,
+              0
+            ],
+            "lens_distortion": [
+              0.08807813,
+              -0.22617353,
+              0.16460505,
+              0,
+              0
+            ],
+            "visionipc_valid": false,
+            "visionipc_stream": 1,
+            "focal_lengths_mm": [
+              4.38
+            ],
+            "first_raw_sensor_timestamp_ns": 2485520924903,
+            "frames": 25,
+            "fps": 24.418081309215474,
+            "first_timestamp_ns": 2485520924903,
+            "last_timestamp_ns": 2486503803111,
+            "timestamp_errors": 0,
+            "changed_frames": 24,
+            "metadata_failures": 0,
+            "uncaptured_requests": 0,
+            "lost_buffers": 0,
+            "physical_metadata_frames": 27,
+            "measured_focal_length_mm": 4.38,
+            "packing_errors": 0,
+            "packing_p99_ns": 121540292,
+            "delivery_age_available": true,
+            "delivery_age_p50_ns": -15851156,
+            "delivery_age_p95_ns": 14191802,
+            "delivery_age_p99_ns": 120487928,
+            "delivery_over_100ms": 1,
+            "acquisition_age_p50_ns": -16131135,
+            "acquisition_age_p95_ns": -464760,
+            "acquisition_age_p99_ns": 6162074,
+            "capture_result_age_p99_ns": 31977324,
+            "capture_result_timestamp_errors": 19,
+            "delivery_future_timestamps": 22,
+            "clock_sample_columns": "sensor_raw,elapsed_before,monotonic,elapsed_after",
+            "clock_samples_ns": [
+              [
+                2485520924903,
+                2485535113184,
+                2485535114226,
+                2485535114393
+              ],
+              [
+                2485554542528,
+                2485545794434,
+                2485545795309,
+                2485545795518
+              ],
+              [
+                2485588094611,
+                2485567117726,
+                2485567117934,
+                2485567118184
+              ],
+              [
+                2485665980611,
+                2485650127643,
+                2485650127851,
+                2485650128018
+              ],
+              [
+                2485705807111,
+                2485688434851,
+                2485688437018,
+                2485688437268
+              ],
+              [
+                2485739464361,
+                2485713180226,
+                2485713180559,
+                2485713180809
+              ],
+              [
+                2485772916444,
+                2485758005018,
+                2485758005268,
+                2485758005393
+              ],
+              [
+                2485806373569,
+                2485784852434,
+                2485784852809,
+                2485784852976
+              ],
+              [
+                2485839989361,
+                2485810072893,
+                2485810073143,
+                2485810073309
+              ],
+              [
+                2485873499528,
+                2485872379101,
+                2485872379393,
+                2485872379559
+              ],
+              [
+                2485907232528,
+                2485891373768,
+                2485891373976,
+                2485891374184
+              ],
+              [
+                2485940833236,
+                2485930809810,
+                2485930810101,
+                2485930810226
+              ],
+              [
+                2485974827653,
+                2485961253643,
+                2485961253976,
+                2485961254143
+              ],
+              [
+                2486008579570,
+                2486007102393,
+                2486007102560,
+                2486007102768
+              ],
+              [
+                2486077194361,
+                2486064649685,
+                2486064650101,
+                2486064650435
+              ],
+              [
+                2486116225736,
+                2486122617726,
+                2486122617893,
+                2486122618101
+              ],
+              [
+                2486153319445,
+                2486146556268,
+                2486146556560,
+                2486146556768
+              ],
+              [
+                2486190481278,
+                2486163603226,
+                2486163603393,
+                2486163603601
+              ],
+              [
+                2486224856070,
+                2486199469185,
+                2486199469435,
+                2486199469643
+              ],
+              [
+                2486266787528,
+                2486237161726,
+                2486237161935,
+                2486237162101
+              ],
+              [
+                2486314960861,
+                2486309220060,
+                2486309220268,
+                2486309220476
+              ],
+              [
+                2486397903195,
+                2486379366143,
+                2486379368768,
+                2486379368976
+              ],
+              [
+                2486435912195,
+                2486415865810,
+                2486415866226,
+                2486415866560
+              ],
+              [
+                2486469917653,
+                2486439324685,
+                2486439324976,
+                2486439325143
+              ],
+              [
+                2486503803111,
+                2486624287643,
+                2486624287976,
+                2486624288101
+              ]
+            ],
+            "capture_sample_columns": "sensor_raw,frame_number,exposure,duration,elapsed_before,monotonic,elapsed_after",
+            "capture_samples_ns": [
+              [
+                2485520924903,
+                0,
+                15000000,
+                33331760,
+                2485539212893,
+                2485539213143,
+                2485539213351
+              ],
+              [
+                2485554542528,
+                1,
+                12416647,
+                33331760,
+                2485550399768,
+                2485550402018,
+                2485550402226
+              ],
+              [
+                2485588094611,
+                2,
+                10349965,
+                33331760,
+                2485574083101,
+                2485574083351,
+                2485574083518
+              ],
+              [
+                2485626918111,
+                3,
+                8696619,
+                33331760,
+                2485650924268,
+                2485650924476,
+                2485650924601
+              ],
+              [
+                2485665980611,
+                4,
+                7373942,
+                33331760,
+                2485651004393,
+                2485651004601,
+                2485651004726
+              ],
+              [
+                2485705807111,
+                5,
+                6315800,
+                33331760,
+                2485688811559,
+                2485688812059,
+                2485688812393
+              ],
+              [
+                2485739464361,
+                6,
+                5469287,
+                33331760,
+                2485727587934,
+                2485727588184,
+                2485727588351
+              ],
+              [
+                2485772916444,
+                7,
+                4792076,
+                33331760,
+                2485759924351,
+                2485759925476,
+                2485759925684
+              ],
+              [
+                2485806373569,
+                8,
+                4250308,
+                33331760,
+                2485789623851,
+                2485789624226,
+                2485789624393
+              ],
+              [
+                2485839989361,
+                9,
+                3816893,
+                33331760,
+                2485871764018,
+                2485871765184,
+                2485871765309
+              ],
+              [
+                2485873499528,
+                10,
+                3470161,
+                33331760,
+                2485891586684,
+                2485891586934,
+                2485891587101
+              ],
+              [
+                2485907232528,
+                11,
+                3192775,
+                33331760,
+                2485891681059,
+                2485891681268,
+                2485891681434
+              ],
+              [
+                2485940833236,
+                12,
+                2970867,
+                33331760,
+                2485931207435,
+                2485931208018,
+                2485931208226
+              ],
+              [
+                2485974827653,
+                13,
+                2793340,
+                33331760,
+                2485961662476,
+                2485961662685,
+                2485961662851
+              ],
+              [
+                2486008579570,
+                14,
+                2651319,
+                33331760,
+                2486007362726,
+                2486007362976,
+                2486007363143
+              ],
+              [
+                2486042381070,
+                15,
+                2537702,
+                33331760,
+                2486065089685,
+                2486065090310,
+                2486065090518
+              ],
+              [
+                2486077194361,
+                16,
+                2446808,
+                33331760,
+                2486065257726,
+                2486065257976,
+                2486065258143
+              ],
+              [
+                2486116225736,
+                17,
+                2374093,
+                33331760,
+                2486122981726,
+                2486122981935,
+                2486122982060
+              ],
+              [
+                2486153319445,
+                18,
+                2315921,
+                33331760,
+                2486148259935,
+                2486148260726,
+                2486148260893
+              ],
+              [
+                2486190481278,
+                19,
+                2269383,
+                33331760,
+                2486167455268,
+                2486167455810,
+                2486167455976
+              ],
+              [
+                2486224856070,
+                20,
+                2269383,
+                33331760,
+                2486199734268,
+                2486199736768,
+                2486199736935
+              ],
+              [
+                2486266787528,
+                21,
+                2269383,
+                33331760,
+                2486239930060,
+                2486239930601,
+                2486239930810
+              ],
+              [
+                2486314960861,
+                22,
+                2269383,
+                33331760,
+                2486330888976,
+                2486330889476,
+                2486330889643
+              ],
+              [
+                2486348542986,
+                23,
+                2269383,
+                33331760,
+                2486380520310,
+                2486380522435,
+                2486380522643
+              ],
+              [
+                2486397903195,
+                24,
+                2269383,
+                33331760,
+                2486382042060,
+                2486382042310,
+                2486382042476
+              ],
+              [
+                2486435912195,
+                25,
+                2269383,
+                33331760,
+                2486428337351,
+                2486428338476,
+                2486428338685
+              ],
+              [
+                2486469917653,
+                26,
+                2269383,
+                33331760,
+                2486447451393,
+                2486447453018,
+                2486447453185
+              ]
+            ],
+            "frame_interval_p99_ns": 82942334
+          }
+        ],
+        "elapsed_ms": 1987,
+        "completed_requested_duration": false,
+        "status": "failed",
+        "error": "IllegalStateException: Live camera session stopped"
+      }
+    ],
+    "requested_seconds": 90,
+    "recovery_limit": 3,
+    "started_utc": "2026-11-02T01:21:46.550638Z",
+    "dual_rear": "not requested",
+    "backend": "camera2",
+    "status": "stopped",
+    "recoveries": 0,
+    "thermal_status": 0,
+    "transport_status": "failed",
+    "completed_utc": "2026-11-02T01:21:48.700776Z"
+  },
+  "override_reset": true
+}

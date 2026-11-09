@@ -3,6 +3,57 @@ import json
 from pathlib import Path
 
 
+def accelerator_contract():
+  import fold3_accel_native as native
+  from fold3_accel import qualified
+  assert native.check_tensor_copy()
+  assert native.check_profile_clock()
+  try:
+    native.create("/does-not-exist", "cpu")
+  except RuntimeError as exc:
+    assert "Unsupported accelerator" in str(exc)
+  else:
+    raise AssertionError("Diagnostic engine silently selected CPU")
+  assert not qualified({}, {})
+  return json.dumps({"status": "passed", "cpu_selection_rejected": True, "incomplete_qualification_rejected": True,
+                     "vehicle_tx_enabled": False})
+
+
+def faults():
+  """Exercise gates with synthetic faults without overriding phone thermal state."""
+  import numpy as np
+  from fold3_vision import FrameGate, ThermalGate, carry_model_state
+  gate = ThermalGate()
+  assert not gate.update(0, 0)
+  assert gate.update(2, 1)
+  assert gate.update(0, 2)
+  assert gate.update(3, 9_000_000_002)
+  assert gate.update(0, 10_000_000_002)
+  assert not gate.update(0, 20_000_000_002)
+  critical = 0
+  for status in (4, 5, 6):
+    try:
+      gate.update(status, 21_000_000_002)
+    except RuntimeError:
+      critical += 1
+    else:
+      raise AssertionError("Critical thermal status accepted")
+  inputs = {"state_feat": np.ones((1, 2)), "traffic_convention": np.array([[0., 1.]])}
+  for bad in (np.nan, np.inf, -np.inf):
+    assert not carry_model_state(inputs, {"outputs": np.array([bad]), "next_state_feat": np.ones((1, 2))})
+    np.testing.assert_array_equal(inputs["state_feat"], [[0., 0.]])
+    np.testing.assert_array_equal(inputs["traffic_convention"], [[0., 1.]])
+  frames = FrameGate(("0", "2"))
+  assert not frames.add("0", 100_000_001, b"future", 100_000_000)
+  assert not frames.add("0", 1, b"stale", 100_000_002)
+  assert frames.add("0", 100_000_000, b"road", 100_000_000)
+  assert frames.add("2", 121_000_000, b"skew", 121_000_000)
+  assert frames.pair(121_000_000) is None
+  return json.dumps({"status": "passed", "critical_thermal_statuses_rejected": critical,
+                     "nonfinite_predictions_rejected": 3, "synthetic_faults": True,
+                     "thermal_override_used": False, "vehicle_tx_enabled": False})
+
+
 def ort():
   import numpy as np
   from fold3_ort import OrtModel
@@ -27,7 +78,15 @@ def ort():
     pass
   else:
     raise AssertionError("Invalid thread count accepted")
-  return json.dumps({"status": "passed", "changed_inputs": 2, "rejected_invalid_inputs": 5, "vehicle_tx_enabled": False})
+  grouped = 0
+  for channels, kernel in ((4, 1), (4, 3), (64, 7)):
+    check = path.parent / f"fp16-groups-{channels}-{kernel}.onnx"
+    with np.load(check.with_suffix(".npz")) as fixture:
+      for strict in (False, True):
+        np.testing.assert_array_equal(OrtModel(check, "cpu", strict=strict)({"x": fixture["x"]})["y"], fixture["y"])
+        grouped += 1
+  return json.dumps({"status": "passed", "changed_inputs": 2, "rejected_invalid_inputs": 5,
+                     "exact_fp16_group_checks": grouped, "vehicle_tx_enabled": False})
 
 
 def gather():

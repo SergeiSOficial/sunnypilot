@@ -1,0 +1,133 @@
+{
+  "candidate": "candidate45zb",
+  "apk_sha256": "aa336e3b8a27690f303b97ac53a3711c728e1ba2cb2a6d74d69f639786dbc361",
+  "vehicle_tx_enabled": false,
+  "engagement_allowed": false,
+  "status": "failed",
+  "accuracy_status": "failed",
+  "qualified": false,
+  "required_comparisons": 795,
+  "comparisons_run": 15,
+  "passed_comparisons": 9,
+  "failed_comparisons": 6,
+  "models": {
+    "road": {
+      "evidence": "fold45zb-mnn-road-accuracy-initial.json",
+      "isolation": "fold45zb-mnn-road-accuracy-initial-isolation.json",
+      "checks": {
+        "42": {
+          "outputs": {
+            "passed": false,
+            "max_abs_error": 0.046875,
+            "mismatched_elements": 160,
+            "unexpected_nonfinite_elements": 0
+          },
+          "next_state_img_q": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "mismatched_elements": 0,
+            "unexpected_nonfinite_elements": 0
+          },
+          "next_state_desire_q": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "mismatched_elements": 0,
+            "unexpected_nonfinite_elements": 0
+          },
+          "next_state_feat_q": {
+            "passed": true,
+            "max_abs_error": 0.0001220703125,
+            "mismatched_elements": 0,
+            "unexpected_nonfinite_elements": 0
+          }
+        },
+        "7": {
+          "outputs": {
+            "passed": false,
+            "max_abs_error": 0.0625,
+            "mismatched_elements": 324,
+            "unexpected_nonfinite_elements": 0
+          },
+          "next_state_img_q": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "mismatched_elements": 0,
+            "unexpected_nonfinite_elements": 0
+          },
+          "next_state_desire_q": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "mismatched_elements": 0,
+            "unexpected_nonfinite_elements": 0
+          },
+          "next_state_feat_q": {
+            "passed": true,
+            "max_abs_error": 6.103515625e-05,
+            "mismatched_elements": 0,
+            "unexpected_nonfinite_elements": 0
+          }
+        },
+        "123": {
+          "outputs": {
+            "passed": false,
+            "max_abs_error": 0.125,
+            "mismatched_elements": 302,
+            "unexpected_nonfinite_elements": 0
+          },
+          "next_state_img_q": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "mismatched_elements": 0,
+            "unexpected_nonfinite_elements": 0
+          },
+          "next_state_desire_q": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "mismatched_elements": 0,
+            "unexpected_nonfinite_elements": 0
+          },
+          "next_state_feat_q": {
+            "passed": true,
+            "max_abs_error": 6.103515625e-05,
+            "mismatched_elements": 0,
+            "unexpected_nonfinite_elements": 0
+          }
+        }
+      }
+    },
+    "driver": {
+      "evidence": "fold45zb-mnn-driver-accuracy-initial.json",
+      "isolation": "fold45zb-mnn-driver-accuracy-initial-isolation.json",
+      "checks": {
+        "42": {
+          "outputs": {
+            "passed": false,
+            "max_abs_error": 0.00390625,
+            "mismatched_elements": 8,
+            "unexpected_nonfinite_elements": 0
+          }
+        },
+        "7": {
+          "outputs": {
+            "passed": false,
+            "max_abs_error": 0.00390625,
+            "mismatched_elements": 12,
+            "unexpected_nonfinite_elements": 0
+          }
+        },
+        "123": {
+          "outputs": {
+            "passed": false,
+            "max_abs_error": 0.00390625,
+            "mismatched_elements": 4,
+            "unexpected_nonfinite_elements": 0
+          }
+        }
+      }
+    }
+  },
+  "inference_timing": "not_run_accuracy_gate_failed",
+  "combined_workloads": "not_run_accuracy_gate_failed",
+  "emulator": "installed_hash_verified_no_validation_on_rejected_candidate",
+  "replacement": "Candidate45zc restores correctly rounded FMA; its acceptance requires new phone evidence."
+}

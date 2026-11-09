@@ -1,0 +1,5332 @@
+{
+  "candidate": "candidate35",
+  "apk_sha256": "38645e91f806076517de1497cdb6b5c0cbf4873cfecf5efabb980297a014ad51",
+  "vehicle_tx_enabled": false,
+  "engagement_allowed": false,
+  "status": "blocked",
+  "artifact": "candidate35-artifact.json",
+  "host_results": "candidate35-host-results.json",
+  "experiment_count": 26,
+  "raw_status_counts": {
+    "passed": 15,
+    "blocked": 4,
+    "failed": 7
+  },
+  "validation_exit_counts": {
+    "passed": 15,
+    "failed": 11
+  },
+  "isolation_counts": {
+    "passed": 26
+  },
+  "experiments": [
+    {
+      "experiment": "fold-candidate35-instrumentation",
+      "report": "fold-candidate35-instrumentation.json",
+      "raw_status": "passed",
+      "validation_status": "passed",
+      "isolation_status": "passed",
+      "wrapper_status": "passed",
+      "returncode": 0,
+      "apk_sha256": "38645e91f806076517de1497cdb6b5c0cbf4873cfecf5efabb980297a014ad51",
+      "command": [
+        "/Users/sergios/sunnypilot/.venv/bin/python",
+        "android/scripts/experiment.py",
+        "--serial",
+        "RFCR81Y1TBJ",
+        "--adb",
+        "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+        "--package",
+        "com.samsung.sunnypilot.fold3",
+        "--report",
+        "/Users/sergios/sunnypilot/android/reports/blocker-fixes/fold-candidate35-instrumentation-isolation.json",
+        "--",
+        "/Users/sergios/sunnypilot/.venv/bin/python",
+        "android/scripts/validate_instrumentation.py",
+        "--expected-tests",
+        "22",
+        "--output",
+        "/Users/sergios/sunnypilot/android/reports/blocker-fixes/fold-candidate35-instrumentation.txt",
+        "--serial",
+        "RFCR81Y1TBJ",
+        "--adb",
+        "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+        "--report",
+        "/Users/sergios/sunnypilot/android/reports/blocker-fixes/fold-candidate35-instrumentation.json",
+        "--package",
+        "com.samsung.sunnypilot.fold3"
+      ]
+    },
+    {
+      "experiment": "fold-candidate35-camera-record",
+      "report": "fold-candidate35-camera-record.json",
+      "raw_status": "blocked",
+      "validation_status": "failed",
+      "isolation_status": "passed",
+      "wrapper_status": "failed",
+      "returncode": 1,
+      "apk_sha256": "38645e91f806076517de1497cdb6b5c0cbf4873cfecf5efabb980297a014ad51",
+      "command": [
+        "/Users/sergios/sunnypilot/.venv/bin/python",
+        "android/scripts/experiment.py",
+        "--serial",
+        "RFCR81Y1TBJ",
+        "--adb",
+        "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+        "--package",
+        "com.samsung.sunnypilot.fold3",
+        "--report",
+        "/Users/sergios/sunnypilot/android/reports/blocker-fixes/fold-candidate35-camera-record-isolation.json",
+        "--",
+        "/Users/sergios/sunnypilot/.venv/bin/python",
+        "android/scripts/validate_cameras.py",
+        "--ids",
+        "0,2,1",
+        "--logical",
+        "20",
+        "--samsung-multiview",
+        "--seconds",
+        "12",
+        "--camera-profile",
+        "record",
+        "--continuous-readback",
+        "--serial",
+        "RFCR81Y1TBJ",
+        "--adb",
+        "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+        "--output",
+        "/Users/sergios/sunnypilot/android/reports/blocker-fixes/fold-candidate35-camera-record.json",
+        "--package",
+        "com.samsung.sunnypilot.fold3"
+      ]
+    },
+    {
+      "experiment": "fold-candidate35-camera-preview",
+      "report": "fold-candidate35-camera-preview.json",
+      "raw_status": "blocked",
+      "validation_status": "failed",
+      "isolation_status": "passed",
+      "wrapper_status": "failed",
+      "returncode": 1,
+      "apk_sha256": "38645e91f806076517de1497cdb6b5c0cbf4873cfecf5efabb980297a014ad51",
+      "command": [
+        "/Users/sergios/sunnypilot/.venv/bin/python",
+        "android/scripts/experiment.py",
+        "--serial",
+        "RFCR81Y1TBJ",
+        "--adb",
+        "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+        "--package",
+        "com.samsung.sunnypilot.fold3",
+        "--report",
+        "/Users/sergios/sunnypilot/android/reports/blocker-fixes/fold-candidate35-camera-preview-isolation.json",
+        "--",
+        "/Users/sergios/sunnypilot/.venv/bin/python",
+        "android/scripts/validate_cameras.py",
+        "--ids",
+        "0,2,1",
+        "--logical",
+        "20",
+        "--samsung-multiview",
+        "--seconds",
+        "12",
+        "--camera-profile",
+        "preview",
+        "--continuous-readback",
+        "--serial",
+        "RFCR81Y1TBJ",
+        "--adb",
+        "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+        "--output",
+        "/Users/sergios/sunnypilot/android/reports/blocker-fixes/fold-candidate35-camera-preview.json",
+        "--package",
+        "com.samsung.sunnypilot.fold3"
+      ]
+    },
+    {
+      "experiment": "fold-candidate35-camera-record-720p",
+      "report": "fold-candidate35-camera-record-720p.json",
+      "raw_status": "blocked",
+      "validation_status": "failed",
+      "isolation_status": "passed",
+      "wrapper_status": "failed",
+      "returncode": 1,
+      "apk_sha256": "38645e91f806076517de1497cdb6b5c0cbf4873cfecf5efabb980297a014ad51",
+      "command": [
+        "/Users/sergios/sunnypilot/.venv/bin/python",
+        "android/scripts/experiment.py",
+        "--serial",
+        "RFCR81Y1TBJ",
+        "--adb",
+        "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+        "--package",
+        "com.samsung.sunnypilot.fold3",
+        "--report",
+        "/Users/sergios/sunnypilot/android/reports/blocker-fixes/fold-candidate35-camera-record-720p-isolation.json",
+        "--",
+        "/Users/sergios/sunnypilot/.venv/bin/python",
+        "android/scripts/validate_cameras.py",
+        "--ids",
+        "0,2,1",
+        "--logical",
+        "20",
+        "--samsung-multiview",
+        "--seconds",
+        "12",
+        "--camera-profile",
+        "record-720p",
+        "--continuous-readback",
+        "--serial",
+        "RFCR81Y1TBJ",
+        "--adb",
+        "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+        "--output",
+        "/Users/sergios/sunnypilot/android/reports/blocker-fixes/fold-candidate35-camera-record-720p.json",
+        "--package",
+        "com.samsung.sunnypilot.fold3"
+      ]
+    },
+    {
+      "experiment": "fold-candidate35-camera-record-depth2",
+      "report": "fold-candidate35-camera-record-depth2.json",
+      "raw_status": "blocked",
+      "validation_status": "failed",
+      "isolation_status": "passed",
+      "wrapper_status": "failed",
+      "returncode": 1,
+      "apk_sha256": "38645e91f806076517de1497cdb6b5c0cbf4873cfecf5efabb980297a014ad51",
+      "command": [
+        "/Users/sergios/sunnypilot/.venv/bin/python",
+        "android/scripts/experiment.py",
+        "--serial",
+        "RFCR81Y1TBJ",
+        "--adb",
+        "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+        "--package",
+        "com.samsung.sunnypilot.fold3",
+        "--report",
+        "/Users/sergios/sunnypilot/android/reports/blocker-fixes/fold-candidate35-camera-record-depth2-isolation.json",
+        "--",
+        "/Users/sergios/sunnypilot/.venv/bin/python",
+        "android/scripts/validate_cameras.py",
+        "--ids",
+        "0,2,1",
+        "--logical",
+        "20",
+        "--samsung-multiview",
+        "--seconds",
+        "12",
+        "--camera-profile",
+        "record-depth2",
+        "--continuous-readback",
+        "--serial",
+        "RFCR81Y1TBJ",
+        "--adb",
+        "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+        "--output",
+        "/Users/sergios/sunnypilot/android/reports/blocker-fixes/fold-candidate35-camera-record-depth2.json",
+        "--package",
+        "com.samsung.sunnypilot.fold3"
+      ]
+    },
+    {
+      "experiment": "fold-candidate35-opencl-mad-road",
+      "report": "fold-candidate35-opencl-mad-road.json",
+      "raw_status": "failed",
+      "validation_status": "failed",
+      "isolation_status": "passed",
+      "wrapper_status": "failed",
+      "returncode": 1,
+      "apk_sha256": "38645e91f806076517de1497cdb6b5c0cbf4873cfecf5efabb980297a014ad51",
+      "command": [
+        "/Users/sergios/sunnypilot/.venv/bin/python",
+        "android/scripts/experiment.py",
+        "--serial",
+        "RFCR81Y1TBJ",
+        "--adb",
+        "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+        "--package",
+        "com.samsung.sunnypilot.fold3",
+        "--report",
+        "/Users/sergios/sunnypilot/android/reports/blocker-fixes/fold-candidate35-opencl-mad-road-isolation.json",
+        "--",
+        "/Users/sergios/sunnypilot/.venv/bin/python",
+        "android/scripts/validate_models.py",
+        "--profile",
+        "host-fusion-cl-mad-road",
+        "--timeout",
+        "900",
+        "--serial",
+        "RFCR81Y1TBJ",
+        "--adb",
+        "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+        "--report",
+        "/Users/sergios/sunnypilot/android/reports/blocker-fixes/fold-candidate35-opencl-mad-road.json",
+        "--package",
+        "com.samsung.sunnypilot.fold3"
+      ]
+    },
+    {
+      "experiment": "fold-candidate35-opencl-mad-driver",
+      "report": "fold-candidate35-opencl-mad-driver.json",
+      "raw_status": "failed",
+      "validation_status": "failed",
+      "isolation_status": "passed",
+      "wrapper_status": "failed",
+      "returncode": 1,
+      "apk_sha256": "38645e91f806076517de1497cdb6b5c0cbf4873cfecf5efabb980297a014ad51",
+      "command": [
+        "/Users/sergios/sunnypilot/.venv/bin/python",
+        "android/scripts/experiment.py",
+        "--serial",
+        "RFCR81Y1TBJ",
+        "--adb",
+        "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+        "--package",
+        "com.samsung.sunnypilot.fold3",
+        "--report",
+        "/Users/sergios/sunnypilot/android/reports/blocker-fixes/fold-candidate35-opencl-mad-driver-isolation.json",
+        "--",
+        "/Users/sergios/sunnypilot/.venv/bin/python",
+        "android/scripts/validate_models.py",
+        "--profile",
+        "host-fusion-cl-mad-driver",
+        "--timeout",
+        "900",
+        "--serial",
+        "RFCR81Y1TBJ",
+        "--adb",
+        "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+        "--report",
+        "/Users/sergios/sunnypilot/android/reports/blocker-fixes/fold-candidate35-opencl-mad-driver.json",
+        "--package",
+        "com.samsung.sunnypilot.fold3"
+      ]
+    },
+    {
+      "experiment": "fold-candidate35-opencl-reference-road",
+      "report": "fold-candidate35-opencl-reference-road.json",
+      "raw_status": "failed",
+      "validation_status": "failed",
+      "isolation_status": "passed",
+      "wrapper_status": "failed",
+      "returncode": 1,
+      "apk_sha256": "38645e91f806076517de1497cdb6b5c0cbf4873cfecf5efabb980297a014ad51",
+      "command": [
+        "/Users/sergios/sunnypilot/.venv/bin/python",
+        "android/scripts/experiment.py",
+        "--serial",
+        "RFCR81Y1TBJ",
+        "--adb",
+        "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+        "--package",
+        "com.samsung.sunnypilot.fold3",
+        "--report",
+        "/Users/sergios/sunnypilot/android/reports/blocker-fixes/fold-candidate35-opencl-reference-road-isolation.json",
+        "--",
+        "/Users/sergios/sunnypilot/.venv/bin/python",
+        "android/scripts/validate_models.py",
+        "--profile",
+        "host-fusion-cl-road",
+        "--timeout",
+        "900",
+        "--serial",
+        "RFCR81Y1TBJ",
+        "--adb",
+        "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+        "--report",
+        "/Users/sergios/sunnypilot/android/reports/blocker-fixes/fold-candidate35-opencl-reference-road.json",
+        "--package",
+        "com.samsung.sunnypilot.fold3"
+      ]
+    },
+    {
+      "experiment": "fold-candidate35-opencl-reference-driver",
+      "report": "fold-candidate35-opencl-reference-driver.json",
+      "raw_status": "failed",
+      "validation_status": "failed",
+      "isolation_status": "passed",
+      "wrapper_status": "failed",
+      "returncode": 1,
+      "apk_sha256": "38645e91f806076517de1497cdb6b5c0cbf4873cfecf5efabb980297a014ad51",
+      "command": [
+        "/Users/sergios/sunnypilot/.venv/bin/python",
+        "android/scripts/experiment.py",
+        "--serial",
+        "RFCR81Y1TBJ",
+        "--adb",
+        "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+        "--package",
+        "com.samsung.sunnypilot.fold3",
+        "--report",
+        "/Users/sergios/sunnypilot/android/reports/blocker-fixes/fold-candidate35-opencl-reference-driver-isolation.json",
+        "--",
+        "/Users/sergios/sunnypilot/.venv/bin/python",
+        "android/scripts/validate_models.py",
+        "--profile",
+        "host-fusion-cl-driver",
+        "--timeout",
+        "900",
+        "--serial",
+        "RFCR81Y1TBJ",
+        "--adb",
+        "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+        "--report",
+        "/Users/sergios/sunnypilot/android/reports/blocker-fixes/fold-candidate35-opencl-reference-driver.json",
+        "--package",
+        "com.samsung.sunnypilot.fold3"
+      ]
+    },
+    {
+      "experiment": "fold-candidate35-chain-device-steady",
+      "report": "fold-candidate35-chain-device-steady.json",
+      "raw_status": "passed",
+      "validation_status": "passed",
+      "isolation_status": "passed",
+      "wrapper_status": "passed",
+      "returncode": 0,
+      "apk_sha256": "38645e91f806076517de1497cdb6b5c0cbf4873cfecf5efabb980297a014ad51",
+      "command": [
+        "/Users/sergios/sunnypilot/.venv/bin/python",
+        "android/scripts/experiment.py",
+        "--serial",
+        "RFCR81Y1TBJ",
+        "--adb",
+        "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+        "--package",
+        "com.samsung.sunnypilot.fold3",
+        "--report",
+        "/Users/sergios/sunnypilot/android/reports/blocker-fixes/fold-candidate35-chain-device-steady-isolation.json",
+        "--runtime",
+        "full-chain",
+        "--",
+        "/Users/sergios/sunnypilot/.venv/bin/python",
+        "-m",
+        "openpilot.tools.sim.android_chain_validation",
+        "--seconds",
+        "30",
+        "--device-replay",
+        "--steady-inputs",
+        "--serial",
+        "RFCR81Y1TBJ",
+        "--adb",
+        "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+        "--report",
+        "/Users/sergios/sunnypilot/android/reports/blocker-fixes/fold-candidate35-chain-device-steady.json",
+        "--package",
+        "com.samsung.sunnypilot.fold3"
+      ]
+    },
+    {
+      "experiment": "fold-candidate35-chain-device-faults",
+      "report": "fold-candidate35-chain-device-faults.json",
+      "raw_status": "passed",
+      "validation_status": "passed",
+      "isolation_status": "passed",
+      "wrapper_status": "passed",
+      "returncode": 0,
+      "apk_sha256": "38645e91f806076517de1497cdb6b5c0cbf4873cfecf5efabb980297a014ad51",
+      "command": [
+        "/Users/sergios/sunnypilot/.venv/bin/python",
+        "android/scripts/experiment.py",
+        "--serial",
+        "RFCR81Y1TBJ",
+        "--adb",
+        "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+        "--package",
+        "com.samsung.sunnypilot.fold3",
+        "--report",
+        "/Users/sergios/sunnypilot/android/reports/blocker-fixes/fold-candidate35-chain-device-faults-isolation.json",
+        "--runtime",
+        "full-chain",
+        "--",
+        "/Users/sergios/sunnypilot/.venv/bin/python",
+        "-m",
+        "openpilot.tools.sim.android_chain_validation",
+        "--seconds",
+        "30",
+        "--device-replay",
+        "--serial",
+        "RFCR81Y1TBJ",
+        "--adb",
+        "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+        "--report",
+        "/Users/sergios/sunnypilot/android/reports/blocker-fixes/fold-candidate35-chain-device-faults.json",
+        "--package",
+        "com.samsung.sunnypilot.fold3"
+      ]
+    },
+    {
+      "experiment": "fold-candidate35-lifecycle",
+      "report": "fold-candidate35-lifecycle.json",
+      "raw_status": "passed",
+      "validation_status": "passed",
+      "isolation_status": "passed",
+      "wrapper_status": "passed",
+      "returncode": 0,
+      "apk_sha256": "38645e91f806076517de1497cdb6b5c0cbf4873cfecf5efabb980297a014ad51",
+      "command": [
+        "/Users/sergios/sunnypilot/.venv/bin/python",
+        "android/scripts/experiment.py",
+        "--serial",
+        "RFCR81Y1TBJ",
+        "--adb",
+        "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+        "--package",
+        "com.samsung.sunnypilot.fold3",
+        "--report",
+        "/Users/sergios/sunnypilot/android/reports/blocker-fixes/fold-candidate35-lifecycle-isolation.json",
+        "--runtime",
+        "simulation",
+        "--",
+        "/Users/sergios/sunnypilot/.venv/bin/python",
+        "android/scripts/validate_lifecycle.py",
+        "--serial",
+        "RFCR81Y1TBJ",
+        "--adb",
+        "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+        "--report",
+        "/Users/sergios/sunnypilot/android/reports/blocker-fixes/fold-candidate35-lifecycle.json",
+        "--package",
+        "com.samsung.sunnypilot.fold3"
+      ]
+    },
+    {
+      "experiment": "fold-candidate35-adb-faults",
+      "report": "fold-candidate35-adb-faults.json",
+      "raw_status": "passed",
+      "validation_status": "passed",
+      "isolation_status": "passed",
+      "wrapper_status": "passed",
+      "returncode": 0,
+      "apk_sha256": "38645e91f806076517de1497cdb6b5c0cbf4873cfecf5efabb980297a014ad51",
+      "command": [
+        "/Users/sergios/sunnypilot/.venv/bin/python",
+        "android/scripts/experiment.py",
+        "--serial",
+        "RFCR81Y1TBJ",
+        "--adb",
+        "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+        "--package",
+        "com.samsung.sunnypilot.fold3",
+        "--report",
+        "/Users/sergios/sunnypilot/android/reports/blocker-fixes/fold-candidate35-adb-faults-isolation.json",
+        "--runtime",
+        "simulation",
+        "--",
+        "/Users/sergios/sunnypilot/.venv/bin/python",
+        "android/scripts/validate_adb_faults.py",
+        "--serial",
+        "RFCR81Y1TBJ",
+        "--adb",
+        "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+        "--report",
+        "/Users/sergios/sunnypilot/android/reports/blocker-fixes/fold-candidate35-adb-faults.json",
+        "--package",
+        "com.samsung.sunnypilot.fold3"
+      ]
+    },
+    {
+      "experiment": "fold-candidate35-vision",
+      "report": "fold-candidate35-vision.json",
+      "raw_status": "failed",
+      "validation_status": "failed",
+      "isolation_status": "passed",
+      "wrapper_status": "failed",
+      "returncode": 1,
+      "apk_sha256": "38645e91f806076517de1497cdb6b5c0cbf4873cfecf5efabb980297a014ad51",
+      "command": [
+        "/Users/sergios/sunnypilot/.venv/bin/python",
+        "android/scripts/experiment.py",
+        "--serial",
+        "RFCR81Y1TBJ",
+        "--adb",
+        "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+        "--package",
+        "com.samsung.sunnypilot.fold3",
+        "--report",
+        "/Users/sergios/sunnypilot/android/reports/blocker-fixes/fold-candidate35-vision-isolation.json",
+        "--",
+        "/Users/sergios/sunnypilot/.venv/bin/python",
+        "android/scripts/validate_vision.py",
+        "--seconds",
+        "30",
+        "--samsung-multiview",
+        "--serial",
+        "RFCR81Y1TBJ",
+        "--adb",
+        "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+        "--report",
+        "/Users/sergios/sunnypilot/android/reports/blocker-fixes/fold-candidate35-vision.json",
+        "--package",
+        "com.samsung.sunnypilot.fold3"
+      ]
+    },
+    {
+      "experiment": "fold-candidate35-ipc",
+      "report": "fold-candidate35-ipc.json",
+      "raw_status": "passed",
+      "validation_status": "passed",
+      "isolation_status": "passed",
+      "wrapper_status": "passed",
+      "returncode": 0,
+      "apk_sha256": "38645e91f806076517de1497cdb6b5c0cbf4873cfecf5efabb980297a014ad51",
+      "command": [
+        "/Users/sergios/sunnypilot/.venv/bin/python",
+        "android/scripts/experiment.py",
+        "--serial",
+        "RFCR81Y1TBJ",
+        "--adb",
+        "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+        "--package",
+        "com.samsung.sunnypilot.fold3",
+        "--report",
+        "/Users/sergios/sunnypilot/android/reports/blocker-fixes/fold-candidate35-ipc-isolation.json",
+        "--",
+        "/Users/sergios/sunnypilot/.venv/bin/python",
+        "android/scripts/validate_msgq_wakeup.py",
+        "--serial",
+        "RFCR81Y1TBJ",
+        "--adb",
+        "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+        "--output",
+        "/Users/sergios/sunnypilot/android/reports/blocker-fixes/fold-candidate35-ipc.json"
+      ]
+    },
+    {
+      "experiment": "emulator-candidate35-instrumentation",
+      "report": "emulator-candidate35-instrumentation.json",
+      "raw_status": "passed",
+      "validation_status": "passed",
+      "isolation_status": "passed",
+      "wrapper_status": "passed",
+      "returncode": 0,
+      "apk_sha256": "38645e91f806076517de1497cdb6b5c0cbf4873cfecf5efabb980297a014ad51",
+      "command": [
+        "/Users/sergios/sunnypilot/.venv/bin/python",
+        "android/scripts/experiment.py",
+        "--serial",
+        "emulator-5560",
+        "--adb",
+        "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+        "--package",
+        "com.samsung.sunnypilot.fold3",
+        "--report",
+        "/Users/sergios/sunnypilot/android/reports/blocker-fixes/emulator-candidate35-instrumentation-isolation.json",
+        "--",
+        "/Users/sergios/sunnypilot/.venv/bin/python",
+        "android/scripts/validate_instrumentation.py",
+        "--expected-tests",
+        "22",
+        "--output",
+        "/Users/sergios/sunnypilot/android/reports/blocker-fixes/emulator-candidate35-instrumentation.txt",
+        "--serial",
+        "emulator-5560",
+        "--adb",
+        "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+        "--report",
+        "/Users/sergios/sunnypilot/android/reports/blocker-fixes/emulator-candidate35-instrumentation.json",
+        "--package",
+        "com.samsung.sunnypilot.fold3"
+      ]
+    },
+    {
+      "experiment": "emulator-candidate35-camera-timing",
+      "report": "emulator-candidate35-camera-timing.json",
+      "raw_status": "failed",
+      "validation_status": "failed",
+      "isolation_status": "passed",
+      "wrapper_status": "failed",
+      "returncode": 1,
+      "apk_sha256": "38645e91f806076517de1497cdb6b5c0cbf4873cfecf5efabb980297a014ad51",
+      "command": [
+        "/Users/sergios/sunnypilot/.venv/bin/python",
+        "android/scripts/experiment.py",
+        "--serial",
+        "emulator-5560",
+        "--adb",
+        "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+        "--package",
+        "com.samsung.sunnypilot.fold3",
+        "--report",
+        "/Users/sergios/sunnypilot/android/reports/blocker-fixes/emulator-candidate35-camera-timing-isolation.json",
+        "--",
+        "/Users/sergios/sunnypilot/.venv/bin/python",
+        "android/scripts/validate_cameras.py",
+        "--ids",
+        "1",
+        "--seconds",
+        "10",
+        "--serial",
+        "emulator-5560",
+        "--adb",
+        "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+        "--output",
+        "/Users/sergios/sunnypilot/android/reports/blocker-fixes/emulator-candidate35-camera-timing.json",
+        "--package",
+        "com.samsung.sunnypilot.fold3"
+      ]
+    },
+    {
+      "experiment": "emulator-candidate35-chain-device-steady",
+      "report": "emulator-candidate35-chain-device-steady.json",
+      "raw_status": "passed",
+      "validation_status": "passed",
+      "isolation_status": "passed",
+      "wrapper_status": "passed",
+      "returncode": 0,
+      "apk_sha256": "38645e91f806076517de1497cdb6b5c0cbf4873cfecf5efabb980297a014ad51",
+      "command": [
+        "/Users/sergios/sunnypilot/.venv/bin/python",
+        "android/scripts/experiment.py",
+        "--serial",
+        "emulator-5560",
+        "--adb",
+        "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+        "--package",
+        "com.samsung.sunnypilot.fold3",
+        "--report",
+        "/Users/sergios/sunnypilot/android/reports/blocker-fixes/emulator-candidate35-chain-device-steady-isolation.json",
+        "--runtime",
+        "full-chain",
+        "--",
+        "/Users/sergios/sunnypilot/.venv/bin/python",
+        "-m",
+        "openpilot.tools.sim.android_chain_validation",
+        "--seconds",
+        "30",
+        "--device-replay",
+        "--steady-inputs",
+        "--serial",
+        "emulator-5560",
+        "--adb",
+        "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+        "--report",
+        "/Users/sergios/sunnypilot/android/reports/blocker-fixes/emulator-candidate35-chain-device-steady.json",
+        "--package",
+        "com.samsung.sunnypilot.fold3"
+      ]
+    },
+    {
+      "experiment": "emulator-candidate35-chain-device-faults",
+      "report": "emulator-candidate35-chain-device-faults.json",
+      "raw_status": "passed",
+      "validation_status": "passed",
+      "isolation_status": "passed",
+      "wrapper_status": "passed",
+      "returncode": 0,
+      "apk_sha256": "38645e91f806076517de1497cdb6b5c0cbf4873cfecf5efabb980297a014ad51",
+      "command": [
+        "/Users/sergios/sunnypilot/.venv/bin/python",
+        "android/scripts/experiment.py",
+        "--serial",
+        "emulator-5560",
+        "--adb",
+        "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+        "--package",
+        "com.samsung.sunnypilot.fold3",
+        "--report",
+        "/Users/sergios/sunnypilot/android/reports/blocker-fixes/emulator-candidate35-chain-device-faults-isolation.json",
+        "--runtime",
+        "full-chain",
+        "--",
+        "/Users/sergios/sunnypilot/.venv/bin/python",
+        "-m",
+        "openpilot.tools.sim.android_chain_validation",
+        "--seconds",
+        "30",
+        "--device-replay",
+        "--serial",
+        "emulator-5560",
+        "--adb",
+        "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+        "--report",
+        "/Users/sergios/sunnypilot/android/reports/blocker-fixes/emulator-candidate35-chain-device-faults.json",
+        "--package",
+        "com.samsung.sunnypilot.fold3"
+      ]
+    },
+    {
+      "experiment": "emulator-candidate35-lifecycle",
+      "report": "emulator-candidate35-lifecycle.json",
+      "raw_status": "passed",
+      "validation_status": "passed",
+      "isolation_status": "passed",
+      "wrapper_status": "passed",
+      "returncode": 0,
+      "apk_sha256": "38645e91f806076517de1497cdb6b5c0cbf4873cfecf5efabb980297a014ad51",
+      "command": [
+        "/Users/sergios/sunnypilot/.venv/bin/python",
+        "android/scripts/experiment.py",
+        "--serial",
+        "emulator-5560",
+        "--adb",
+        "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+        "--package",
+        "com.samsung.sunnypilot.fold3",
+        "--report",
+        "/Users/sergios/sunnypilot/android/reports/blocker-fixes/emulator-candidate35-lifecycle-isolation.json",
+        "--runtime",
+        "simulation",
+        "--",
+        "/Users/sergios/sunnypilot/.venv/bin/python",
+        "android/scripts/validate_lifecycle.py",
+        "--resize",
+        "--serial",
+        "emulator-5560",
+        "--adb",
+        "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+        "--report",
+        "/Users/sergios/sunnypilot/android/reports/blocker-fixes/emulator-candidate35-lifecycle.json",
+        "--package",
+        "com.samsung.sunnypilot.fold3"
+      ]
+    },
+    {
+      "experiment": "emulator-candidate35-adb-faults",
+      "report": "emulator-candidate35-adb-faults.json",
+      "raw_status": "passed",
+      "validation_status": "passed",
+      "isolation_status": "passed",
+      "wrapper_status": "passed",
+      "returncode": 0,
+      "apk_sha256": "38645e91f806076517de1497cdb6b5c0cbf4873cfecf5efabb980297a014ad51",
+      "command": [
+        "/Users/sergios/sunnypilot/.venv/bin/python",
+        "android/scripts/experiment.py",
+        "--serial",
+        "emulator-5560",
+        "--adb",
+        "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+        "--package",
+        "com.samsung.sunnypilot.fold3",
+        "--report",
+        "/Users/sergios/sunnypilot/android/reports/blocker-fixes/emulator-candidate35-adb-faults-isolation.json",
+        "--runtime",
+        "simulation",
+        "--",
+        "/Users/sergios/sunnypilot/.venv/bin/python",
+        "android/scripts/validate_adb_faults.py",
+        "--serial",
+        "emulator-5560",
+        "--adb",
+        "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+        "--report",
+        "/Users/sergios/sunnypilot/android/reports/blocker-fixes/emulator-candidate35-adb-faults.json",
+        "--package",
+        "com.samsung.sunnypilot.fold3"
+      ]
+    },
+    {
+      "experiment": "emulator-candidate35-thermal",
+      "report": "emulator-candidate35-thermal.json",
+      "raw_status": "failed",
+      "validation_status": "failed",
+      "isolation_status": "passed",
+      "wrapper_status": "failed",
+      "returncode": 1,
+      "apk_sha256": "38645e91f806076517de1497cdb6b5c0cbf4873cfecf5efabb980297a014ad51",
+      "command": [
+        "/Users/sergios/sunnypilot/.venv/bin/python",
+        "android/scripts/experiment.py",
+        "--serial",
+        "emulator-5560",
+        "--adb",
+        "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+        "--package",
+        "com.samsung.sunnypilot.fold3",
+        "--report",
+        "/Users/sergios/sunnypilot/android/reports/blocker-fixes/emulator-candidate35-thermal-isolation.json",
+        "--",
+        "/Users/sergios/sunnypilot/.venv/bin/python",
+        "android/scripts/validate_thermal.py",
+        "--serial",
+        "emulator-5560",
+        "--adb",
+        "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+        "--report",
+        "/Users/sergios/sunnypilot/android/reports/blocker-fixes/emulator-candidate35-thermal.json",
+        "--package",
+        "com.samsung.sunnypilot.fold3"
+      ]
+    },
+    {
+      "experiment": "emulator-candidate35-metadrive-cancel",
+      "report": "emulator-candidate35-metadrive-cancel.json",
+      "raw_status": "passed",
+      "validation_status": "passed",
+      "isolation_status": "passed",
+      "wrapper_status": "passed",
+      "returncode": 0,
+      "apk_sha256": "38645e91f806076517de1497cdb6b5c0cbf4873cfecf5efabb980297a014ad51",
+      "command": [
+        "/Users/sergios/sunnypilot/.venv/bin/python",
+        "android/scripts/experiment.py",
+        "--serial",
+        "emulator-5560",
+        "--adb",
+        "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+        "--package",
+        "com.samsung.sunnypilot.fold3",
+        "--report",
+        "/Users/sergios/sunnypilot/android/reports/blocker-fixes/emulator-candidate35-metadrive-cancel-isolation.json",
+        "--runtime",
+        "simulation",
+        "--",
+        "/Users/sergios/sunnypilot/.venv/bin/python",
+        "-m",
+        "openpilot.tools.sim.android_validation",
+        "--duration",
+        "20",
+        "--metadrive",
+        "--fault",
+        "cancel",
+        "--serial",
+        "emulator-5560",
+        "--adb",
+        "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+        "--report",
+        "/Users/sergios/sunnypilot/android/reports/blocker-fixes/emulator-candidate35-metadrive-cancel.json"
+      ]
+    },
+    {
+      "experiment": "emulator-candidate35-metadrive-stale",
+      "report": "emulator-candidate35-metadrive-stale.json",
+      "raw_status": "passed",
+      "validation_status": "passed",
+      "isolation_status": "passed",
+      "wrapper_status": "passed",
+      "returncode": 0,
+      "apk_sha256": "38645e91f806076517de1497cdb6b5c0cbf4873cfecf5efabb980297a014ad51",
+      "command": [
+        "/Users/sergios/sunnypilot/.venv/bin/python",
+        "android/scripts/experiment.py",
+        "--serial",
+        "emulator-5560",
+        "--adb",
+        "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+        "--package",
+        "com.samsung.sunnypilot.fold3",
+        "--report",
+        "/Users/sergios/sunnypilot/android/reports/blocker-fixes/emulator-candidate35-metadrive-stale-isolation.json",
+        "--runtime",
+        "simulation",
+        "--",
+        "/Users/sergios/sunnypilot/.venv/bin/python",
+        "-m",
+        "openpilot.tools.sim.android_validation",
+        "--duration",
+        "20",
+        "--metadrive",
+        "--fault",
+        "stale",
+        "--serial",
+        "emulator-5560",
+        "--adb",
+        "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+        "--report",
+        "/Users/sergios/sunnypilot/android/reports/blocker-fixes/emulator-candidate35-metadrive-stale.json"
+      ]
+    },
+    {
+      "experiment": "emulator-candidate35-ipc",
+      "report": "emulator-candidate35-ipc.json",
+      "raw_status": "passed",
+      "validation_status": "passed",
+      "isolation_status": "passed",
+      "wrapper_status": "passed",
+      "returncode": 0,
+      "apk_sha256": "38645e91f806076517de1497cdb6b5c0cbf4873cfecf5efabb980297a014ad51",
+      "command": [
+        "/Users/sergios/sunnypilot/.venv/bin/python",
+        "android/scripts/experiment.py",
+        "--serial",
+        "emulator-5560",
+        "--adb",
+        "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+        "--package",
+        "com.samsung.sunnypilot.fold3",
+        "--report",
+        "/Users/sergios/sunnypilot/android/reports/blocker-fixes/emulator-candidate35-ipc-isolation.json",
+        "--",
+        "/Users/sergios/sunnypilot/.venv/bin/python",
+        "android/scripts/validate_msgq_wakeup.py",
+        "--serial",
+        "emulator-5560",
+        "--adb",
+        "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+        "--output",
+        "/Users/sergios/sunnypilot/android/reports/blocker-fixes/emulator-candidate35-ipc.json"
+      ]
+    },
+    {
+      "experiment": "emulator-candidate35-thermal-retry",
+      "report": "emulator-candidate35-thermal-retry.json",
+      "raw_status": "passed",
+      "validation_status": "passed",
+      "isolation_status": "passed",
+      "wrapper_status": "passed",
+      "returncode": 0,
+      "apk_sha256": "38645e91f806076517de1497cdb6b5c0cbf4873cfecf5efabb980297a014ad51",
+      "command": [
+        "/Users/sergios/sunnypilot/.venv/bin/python",
+        "android/scripts/experiment.py",
+        "--serial",
+        "emulator-5560",
+        "--adb",
+        "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+        "--package",
+        "com.samsung.sunnypilot.fold3",
+        "--report",
+        "/Users/sergios/sunnypilot/android/reports/blocker-fixes/emulator-candidate35-thermal-retry-isolation.json",
+        "--",
+        "/Users/sergios/sunnypilot/.venv/bin/python",
+        "android/scripts/validate_thermal.py",
+        "--serial",
+        "emulator-5560",
+        "--adb",
+        "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+        "--package",
+        "com.samsung.sunnypilot.fold3",
+        "--report",
+        "/Users/sergios/sunnypilot/android/reports/blocker-fixes/emulator-candidate35-thermal-retry.json"
+      ]
+    }
+  ],
+  "model_accuracy_gate": "candidate35-model-accuracy-gate.json",
+  "performance_comparison": "candidate35-performance-comparison.json",
+  "camera_profile_comparison": "candidate35-camera-comparison.json",
+  "controls": {
+    "fold": {
+      "daemon": "controlsd",
+      "pid": 10749,
+      "vehicle_tx_enabled": false,
+      "engagement_allowed": false,
+      "work_samples": 2727,
+      "deadline_misses": 17,
+      "phase": "running",
+      "simulation": true,
+      "updated_input_samples": 2618,
+      "input_handling_ms": 13.610312,
+      "computation_ms": 1.053282,
+      "publishing_ms": 0.890416,
+      "parameters_extensions_ms": 0.687656,
+      "cycle_before_reporting_ms": 16.241666,
+      "work_timing_excludes_input_wait": true,
+      "cycle_deadline_misses": 1303,
+      "reporting_ms": 0.031458,
+      "complete_cycle_ms": 5.656823,
+      "mean_cycle_hz": 98.79141730808438,
+      "p99_work_ms": 9.013021,
+      "p99_complete_cycle_ms": 23.490312,
+      "p99_stages_ms": {
+        "input_handling_ms": 19.231823,
+        "computation_ms": 5.82901,
+        "publishing_ms": 4.118438,
+        "parameters_extensions_ms": 4.441823,
+        "cycle_before_reporting_ms": 22.905052,
+        "reporting_ms": 1.344896
+      }
+    },
+    "emulator": {
+      "daemon": "controlsd",
+      "pid": 4349,
+      "vehicle_tx_enabled": false,
+      "engagement_allowed": false,
+      "work_samples": 2774,
+      "deadline_misses": 1,
+      "phase": "running",
+      "simulation": true,
+      "updated_input_samples": 2735,
+      "input_handling_ms": 7.309,
+      "computation_ms": 0.155083,
+      "publishing_ms": 0.260459,
+      "parameters_extensions_ms": 0.221041,
+      "cycle_before_reporting_ms": 7.945583,
+      "work_timing_excludes_input_wait": true,
+      "cycle_deadline_misses": 1334,
+      "reporting_ms": 0.030083,
+      "complete_cycle_ms": 12.6305,
+      "mean_cycle_hz": 100.48605018767601,
+      "p99_work_ms": 2.983333,
+      "p99_complete_cycle_ms": 18.165250999999998,
+      "p99_stages_ms": {
+        "input_handling_ms": 16.176167,
+        "computation_ms": 1.362125,
+        "publishing_ms": 1.791375,
+        "parameters_extensions_ms": 0.886583,
+        "cycle_before_reporting_ms": 18.039084,
+        "reporting_ms": 0.275416
+      }
+    }
+  },
+  "vision": {
+    "serial": "RFCR81Y1TBJ",
+    "status": "failed",
+    "requested_seconds": 30,
+    "vehicle_tx_enabled": false,
+    "road_readiness": "blocked",
+    "calibration": "unqualified",
+    "model_parity": "failed",
+    "physical_vehicle_verified": false,
+    "package": "com.samsung.sunnypilot.fold3",
+    "samsung_multiview": true,
+    "resource_sampling_seconds": 30,
+    "last_sample": {
+      "elapsed_s": 34.5941647090076,
+      "ui-report": {
+        "pid": 14481,
+        "backend": "Raylib Android NativeActivity",
+        "vehicle_tx_enabled": false,
+        "status": "running",
+        "full_upstream_ui": true,
+        "camera_preview": [
+          {
+            "stream": "road",
+            "frame_id": 895,
+            "age_ms": 590.503674,
+            "fresh": false
+          },
+          {
+            "stream": "driver",
+            "frame_id": 894,
+            "age_ms": 513.477011,
+            "fresh": false
+          }
+        ],
+        "frames": 930,
+        "mean_fps": 29.495694744448265,
+        "width": 2160,
+        "height": 1080,
+        "surface_size": [
+          2289,
+          840
+        ],
+        "last_frame_seconds": 0.033334530889987946,
+        "last_cpu_seconds": 0.0015682289667893201,
+        "recent_p99_frame_ms": 33.93176943063736,
+        "recent_p99_cpu_ms": 13.380468997638673
+      },
+      "manager": {
+        "pid": 14480,
+        "simulation": false,
+        "full_chain": false,
+        "vehicle_tx_enabled": false,
+        "engagement_allowed": false,
+        "engagement_blocker": "camera calibration, model parity/performance and physical Panda qualification incomplete",
+        "processes": {
+          "Controls": {
+            "daemon": "controlsd",
+            "pid": 14521,
+            "phase": "waiting_for_car_params",
+            "error": "",
+            "last_progress_ms": 162068544,
+            "ticks": 64,
+            "restarts": 0
+          },
+          "Monitoring": {
+            "daemon": "dmonitoringd",
+            "pid": 14522,
+            "phase": "waiting_for_driver_model",
+            "error": "",
+            "last_progress_ms": 162067742,
+            "ticks": 29,
+            "restarts": 0
+          },
+          "Sensors": {
+            "daemon": "sensord",
+            "pid": 14527,
+            "phase": "running",
+            "error": "",
+            "last_progress_ms": 162068553,
+            "ticks": 126,
+            "restarts": 0
+          },
+          "RoadModel": {
+            "daemon": "modeld",
+            "pid": 14538,
+            "phase": "waiting_for_synchronized_frames",
+            "error": "",
+            "last_progress_ms": 162068429,
+            "ticks": 117,
+            "restarts": 0
+          },
+          "DriverModel": {
+            "daemon": "dmonitoringmodeld",
+            "pid": 14543,
+            "phase": "waiting_for_synchronized_frames",
+            "error": "",
+            "last_progress_ms": 162068412,
+            "ticks": 822,
+            "restarts": 0
+          },
+          "Vehicle": {
+            "daemon": "card",
+            "pid": 14555,
+            "phase": "waiting_for_passive_can",
+            "error": "",
+            "last_progress_ms": 162068424,
+            "ticks": 109,
+            "restarts": 0
+          },
+          "Localization": {
+            "daemon": "locationd",
+            "pid": 14561,
+            "phase": "waiting_for_car_params",
+            "error": "",
+            "last_progress_ms": 162068294,
+            "ticks": 57,
+            "restarts": 0
+          },
+          "Calibration": {
+            "daemon": "calibrationd",
+            "pid": 14562,
+            "phase": "waiting_for_car_params",
+            "error": "",
+            "last_progress_ms": 162068641,
+            "ticks": 59,
+            "restarts": 0
+          },
+          "Parameters": {
+            "daemon": "paramsd",
+            "pid": 14564,
+            "phase": "waiting_for_car_params",
+            "error": "",
+            "last_progress_ms": 162068293,
+            "ticks": 61,
+            "restarts": 0
+          },
+          "Torque": {
+            "daemon": "torqued",
+            "pid": 14566,
+            "phase": "waiting_for_car_params",
+            "error": "",
+            "last_progress_ms": 162068552,
+            "ticks": 64,
+            "restarts": 0
+          },
+          "Delay": {
+            "daemon": "lagd",
+            "pid": 14567,
+            "phase": "waiting_for_car_params",
+            "error": "",
+            "last_progress_ms": 162068543,
+            "ticks": 65,
+            "restarts": 0
+          },
+          "Radar": {
+            "daemon": "radard",
+            "pid": 14568,
+            "phase": "waiting_for_car_params",
+            "error": "",
+            "last_progress_ms": 162068249,
+            "ticks": 62,
+            "restarts": 0
+          },
+          "Planning": {
+            "daemon": "plannerd",
+            "pid": 14579,
+            "phase": "waiting_for_car_params",
+            "error": "",
+            "last_progress_ms": 162068398,
+            "ticks": 58,
+            "restarts": 0
+          },
+          "Selfdrive": {
+            "daemon": "selfdrived",
+            "pid": 14587,
+            "phase": "waiting_for_car_params",
+            "error": "",
+            "last_progress_ms": 162068382,
+            "ticks": 62,
+            "restarts": 0
+          }
+        },
+        "updated_elapsed_ms": 162068651
+      },
+      "dmonitoringmodeld": {
+        "daemon": "dmonitoringmodeld",
+        "pid": 14543,
+        "vehicle_tx_enabled": false,
+        "engagement_allowed": false,
+        "work_samples": 432,
+        "deadline_misses": 8,
+        "phase": "waiting_for_synchronized_frames",
+        "simulation": false,
+        "thermal_status": 0,
+        "target_suspended": false,
+        "missing_physical_sensors": [],
+        "rejected_frames": 427,
+        "computed_frames": 432,
+        "published_frames": 2,
+        "late_outputs": 430,
+        "valid": false,
+        "calibrated": false,
+        "stream_origins": {
+          "0": "logical20:selected-wide-preview-rgba-bt601",
+          "2": "logical20:multiview-thumbnail-sensor-unverified",
+          "1": "front1:yuv"
+        },
+        "stage_p50_ms": {
+          "receive_copy": 0.09375,
+          "input_age": 87.797901,
+          "prepare": 1.178542,
+          "inference": 25.415104,
+          "output_age": 115.03816
+        },
+        "stage_p95_ms": {
+          "receive_copy": 0.5517392999999996,
+          "input_age": 97.289148,
+          "prepare": 2.606916399999993,
+          "inference": 36.081010799999994,
+          "output_age": 132.3663474
+        },
+        "stage_p99_ms": {
+          "receive_copy": 1.6252329000000012,
+          "input_age": 99.56771992,
+          "prepare": 7.823889359999989,
+          "inference": 53.42093503999994,
+          "output_age": 150.29276892
+        },
+        "nonfinite_outputs": 0,
+        "recurrent_resets": 4,
+        "work_ms": 26.445781,
+        "projection": "uncalibrated preview affine; not suitable for driving",
+        "backend": "ORT CPU, 2 threads; OpenCL qualification blocked",
+        "measured_projection_loaded": false,
+        "calibration_blocker": "Measured optical and final mount calibration missing",
+        "input_frame_ids": {
+          "1": 894
+        },
+        "input_timestamps_ns": {
+          "1": 146426606661869
+        },
+        "input_skew_ns": 0,
+        "numerical_parity": "failed on original synthetic reference; diagnostic only",
+        "target_hz": 20,
+        "stage_sampling": "last 4096 computations",
+        "p99_work_ms": 57.873958,
+        "p99_stages_ms": {}
+      },
+      "modeld": {
+        "daemon": "modeld",
+        "pid": 14538,
+        "vehicle_tx_enabled": false,
+        "engagement_allowed": false,
+        "work_samples": 0,
+        "deadline_misses": 0,
+        "phase": "waiting_for_synchronized_frames",
+        "simulation": false,
+        "thermal_status": 0,
+        "target_suspended": false,
+        "missing_physical_sensors": [],
+        "rejected_frames": 1692,
+        "computed_frames": 0,
+        "published_frames": 0,
+        "late_outputs": 0,
+        "valid": false,
+        "calibrated": false,
+        "p99_stages_ms": {}
+      },
+      "sensord": {
+        "daemon": "sensord",
+        "pid": 14527,
+        "vehicle_tx_enabled": false,
+        "engagement_allowed": false,
+        "work_samples": 0,
+        "deadline_misses": 0,
+        "phase": "running",
+        "simulation": false,
+        "published_samples": 13170,
+        "dropped_samples": 0,
+        "stale_samples": 0,
+        "calibrated": false,
+        "validity_blocker": "phone-to-vehicle mounting rotation has not been calibrated",
+        "thermal_status": 0,
+        "power_watts": -0.001646907,
+        "p99_stages_ms": {}
+      },
+      "vision-report": {
+        "vehicle_tx_enabled": false,
+        "valid": false,
+        "sessions": [
+          {
+            "camera_ids": [
+              "0",
+              "2",
+              "1"
+            ],
+            "logical_camera": "20",
+            "backend": "samsung_multiview",
+            "requested_duration_ms": 29969,
+            "diagnostic_profile": "record",
+            "preview_width": 1920,
+            "preview_height": 1080,
+            "image_reader_depth": 3,
+            "request_template": 3,
+            "output_timestamp_base": "sensor",
+            "readout_timestamp_enabled": false,
+            "visionipc_valid": false,
+            "distinct_sensor_evidence": false,
+            "visionipc_publishing": true,
+            "width": 960,
+            "height": 540,
+            "stream_origins": {
+              "0": "logical20:selected-wide-preview-rgba-bt601",
+              "2": "logical20:multiview-thumbnail-sensor-unverified",
+              "1": "front1:yuv"
+            },
+            "optical_calibration": "missing",
+            "mount_calibration": "missing",
+            "continuous_readback": true,
+            "samsung_parameters_requested": "samsungcamera=true;shootingmode=37;recording-fps=30;",
+            "samsung_shooting_mode": 37,
+            "samsung_parameters_applied": true,
+            "composite_frames": 893,
+            "composite_fps": 29.87372053836864,
+            "preview_frames": 1787,
+            "metadata_frames": 895,
+            "multiview_crop_roi": [
+              0,
+              0,
+              960,
+              540,
+              0,
+              243,
+              133,
+              723,
+              403,
+              1,
+              405,
+              223,
+              565,
+              313,
+              0,
+              0,
+              0,
+              960,
+              540,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              960,
+              540,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              960,
+              540,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "capture_metadata": {
+              "physical_results": [],
+              "noise_reduction_mode": 0,
+              "edge_mode": 0,
+              "video_stabilization_mode": 0,
+              "optical_stabilization_mode": 0,
+              "samsung.android.control.runningPhysicalId": [
+                48,
+                0
+              ],
+              "samsung.android.control.multiSensorSensitivityList": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "samsung.android.control.multiExposureTimeList": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "samsung.android.lens.info.currentInfo": [
+                511,
+                1267,
+                3082,
+                1283
+              ]
+            },
+            "timestamp_errors": 0,
+            "packing_errors": 0,
+            "packing_p99_ns": 5572969,
+            "late_deliveries": 834,
+            "future_deliveries": 0,
+            "delivery_age_p50_ns": 118601825,
+            "delivery_age_p95_ns": 129950366,
+            "delivery_age_p99_ns": 136485627,
+            "completed_requested_duration": true,
+            "acquisition_age_p50_ns": 117973960,
+            "acquisition_age_p95_ns": 128081929,
+            "acquisition_age_p99_ns": 135690522,
+            "capture_sample_columns": "sensor_raw,frame_number,exposure,duration,elapsed_before,monotonic,elapsed_after",
+            "capture_samples_ns": [
+              [
+                162065617913600,
+                832,
+                19982648,
+                33333333,
+                162065754157508,
+                146424599696954,
+                162065754159279
+              ],
+              [
+                162065651225683,
+                833,
+                19982648,
+                33333333,
+                162065786261102,
+                146424631803933,
+                162065786266258
+              ],
+              [
+                162065684566048,
+                834,
+                19982648,
+                33333333,
+                162065817885633,
+                146424663426068,
+                162065817888341
+              ],
+              [
+                162065717904746,
+                835,
+                19982648,
+                33333333,
+                162065861126987,
+                146424706667318,
+                162065861129643
+              ],
+              [
+                162065751206360,
+                836,
+                19982648,
+                33333333,
+                162065872968393,
+                146424718510964,
+                162065872973029
+              ],
+              [
+                162065784613287,
+                837,
+                19982648,
+                33333333,
+                162065917472404,
+                146424763014298,
+                162065917476518
+              ],
+              [
+                162065817856048,
+                838,
+                19982648,
+                33333333,
+                162065943633445,
+                146424789174975,
+                162065943637195
+              ],
+              [
+                162065851207089,
+                839,
+                19982648,
+                33333333,
+                162065985192716,
+                146424831356745,
+                162065985822091
+              ],
+              [
+                162065884492194,
+                840,
+                19982648,
+                33333333,
+                162066012911101,
+                146424858453933,
+                162066012916362
+              ],
+              [
+                162065917828548,
+                841,
+                19982648,
+                33333333,
+                162066047965060,
+                146424893503464,
+                162066047965476
+              ],
+              [
+                162065951143860,
+                842,
+                19982648,
+                33333333,
+                162066084439799,
+                146424929979402,
+                162066084441362
+              ],
+              [
+                162065984469277,
+                843,
+                19982648,
+                33333333,
+                162066116190476,
+                146424961730495,
+                162066116192560
+              ],
+              [
+                162066017808287,
+                844,
+                19982648,
+                33333333,
+                162066155566883,
+                146425001106277,
+                162066155568549
+              ],
+              [
+                162066051166256,
+                845,
+                19982648,
+                33333333,
+                162066185275685,
+                146425030816745,
+                162066185278758
+              ],
+              [
+                162066084528860,
+                846,
+                19982648,
+                33333333,
+                162066219219903,
+                146425064764402,
+                162066219226883
+              ],
+              [
+                162066117891933,
+                847,
+                19982648,
+                33333333,
+                162066246283549,
+                146425091824714,
+                162066246286726
+              ],
+              [
+                162066151107871,
+                848,
+                19982648,
+                33333333,
+                162066287826258,
+                146425133367214,
+                162066287829487
+              ],
+              [
+                162066184463964,
+                849,
+                19982648,
+                33333333,
+                162066318729435,
+                146425164269245,
+                162066318731570
+              ],
+              [
+                162066217737975,
+                850,
+                19982648,
+                33333333,
+                162066348152976,
+                146425193693360,
+                162066348155633
+              ],
+              [
+                162066251137141,
+                851,
+                19982648,
+                33333333,
+                162066373491726,
+                146425219033308,
+                162066373495580
+              ],
+              [
+                162066284400631,
+                852,
+                19982648,
+                33333333,
+                162066413073966,
+                146425258614037,
+                162066413076310
+              ],
+              [
+                162066317717298,
+                853,
+                19982648,
+                33333333,
+                162066441623601,
+                146425287165183,
+                162066441627560
+              ],
+              [
+                162066351046204,
+                854,
+                19982648,
+                33333333,
+                162066495975789,
+                146425341515860,
+                162066495978185
+              ],
+              [
+                162066384361516,
+                855,
+                19982648,
+                33333333,
+                162066515660737,
+                146425361202631,
+                162066515664903
+              ],
+              [
+                162066417731829,
+                856,
+                19982648,
+                33333333,
+                162066557690841,
+                146425403230287,
+                162066557692560
+              ],
+              [
+                162066451133548,
+                857,
+                19982648,
+                33333333,
+                162066582162143,
+                146425427703933,
+                162066582166205
+              ],
+              [
+                162066484342975,
+                858,
+                19982648,
+                33333333,
+                162066611903810,
+                146425457445235,
+                162066611907195
+              ],
+              [
+                162066517681256,
+                859,
+                19982648,
+                33333333,
+                162066643680632,
+                146425489222631,
+                162066643684643
+              ],
+              [
+                162066551076308,
+                860,
+                19982648,
+                33333333,
+                162066681850580,
+                146425527392526,
+                162066681854799
+              ],
+              [
+                162066584540162,
+                861,
+                19982648,
+                33333333,
+                162066707468237,
+                146425553007058,
+                162066707469278
+              ],
+              [
+                162066617640631,
+                862,
+                19982648,
+                33333333,
+                162066746745112,
+                146425592286485,
+                162066746748757
+              ],
+              [
+                162066650993079,
+                863,
+                19982648,
+                33333333,
+                162066777291414,
+                146425622833308,
+                162066777295632
+              ],
+              [
+                162066684276256,
+                864,
+                19982648,
+                33333333,
+                162066814768184,
+                146425660307839,
+                162066814770112
+              ],
+              [
+                162066717607766,
+                865,
+                19982648,
+                33333333,
+                162066842918237,
+                146425688457735,
+                162066842920007
+              ],
+              [
+                162066750972610,
+                866,
+                19982648,
+                33333333,
+                162066880391101,
+                146425725933568,
+                162066880395841
+              ],
+              [
+                162066784258183,
+                867,
+                19982648,
+                33333333,
+                162066919607195,
+                146425765146016,
+                162066919607976
+              ],
+              [
+                162066817590162,
+                868,
+                19982648,
+                33333333,
+                162066946944382,
+                146425792486797,
+                162066946949070
+              ],
+              [
+                162066850904745,
+                869,
+                19982648,
+                33333333,
+                162066979393028,
+                146425824933412,
+                162066979395684
+              ],
+              [
+                162066884414954,
+                870,
+                19982648,
+                33333333,
+                162067016653861,
+                146425862194245,
+                162067016656205
+              ],
+              [
+                162066917559068,
+                871,
+                19982648,
+                33333333,
+                162067057798861,
+                146425903340547,
+                162067057802820
+              ],
+              [
+                162066950886204,
+                872,
+                19982648,
+                33333333,
+                162067080067820,
+                146425925615026,
+                162067080077299
+              ],
+              [
+                162066984215631,
+                873,
+                19982648,
+                33333333,
+                162067112016830,
+                146425957558985,
+                162067112021622
+              ],
+              [
+                162067017559068,
+                874,
+                19982648,
+                33333333,
+                162067147007559,
+                146425992549089,
+                162067147011361
+              ],
+              [
+                162067050861360,
+                875,
+                19982648,
+                33333333,
+                162067170740111,
+                146426016280391,
+                162067170742716
+              ],
+              [
+                162067084208287,
+                876,
+                19982648,
+                33333333,
+                162067221814799,
+                146426067354505,
+                162067221816518
+              ],
+              [
+                162067117531099,
+                877,
+                19982648,
+                33333333,
+                162067247375893,
+                146426092917839,
+                162067247380111
+              ],
+              [
+                162067150854329,
+                878,
+                19982648,
+                33333333,
+                162067285260945,
+                146426130801120,
+                162067285263080
+              ],
+              [
+                162067184217818,
+                879,
+                19982648,
+                33333333,
+                162067320271413,
+                146426165811328,
+                162067320273653
+              ],
+              [
+                162067217488391,
+                880,
+                19982648,
+                33333333,
+                162067358378132,
+                146426203917787,
+                162067358379799
+              ],
+              [
+                162067250809329,
+                881,
+                19982648,
+                33333333,
+                162067397718080,
+                146426243257057,
+                162067397719018
+              ],
+              [
+                162067284221620,
+                882,
+                19982648,
+                33333333,
+                162067415626830,
+                146426261167943,
+                162067415630215
+              ],
+              [
+                162067317481568,
+                883,
+                19982648,
+                33333333,
+                162067445500059,
+                146426291041953,
+                162067445503965
+              ],
+              [
+                162067350792401,
+                884,
+                19982648,
+                33333333,
+                162067478215528,
+                146426323757474,
+                162067478219747
+              ],
+              [
+                162067384167349,
+                885,
+                19982648,
+                33333333,
+                162067507468913,
+                146426353008568,
+                162067507470840
+              ],
+              [
+                162067417443391,
+                886,
+                19982648,
+                33333333,
+                162067550929851,
+                146426396468932,
+                162067550930893
+              ],
+              [
+                162067450774953,
+                887,
+                19982648,
+                33333333,
+                162067582076830,
+                146426427616745,
+                162067582079018
+              ],
+              [
+                162067484103495,
+                888,
+                19982648,
+                33333333,
+                162067615954122,
+                146426461495547,
+                162067615957820
+              ],
+              [
+                162067517431256,
+                889,
+                19982648,
+                33333333,
+                162067643534382,
+                146426489075599,
+                162067643537611
+              ],
+              [
+                162067550789224,
+                890,
+                19982648,
+                33333333,
+                162067673831049,
+                146426519370599,
+                162067673832820
+              ],
+              [
+                162067584105578,
+                891,
+                19982648,
+                33333333,
+                162067707578497,
+                146426553119974,
+                162067707582142
+              ],
+              [
+                162067617437974,
+                892,
+                19982648,
+                33333333,
+                162067745184330,
+                146426590725495,
+                162067745187767
+              ],
+              [
+                162067650727505,
+                893,
+                19982648,
+                33333333,
+                162067781456309,
+                146426626996849,
+                162067781459174
+              ],
+              [
+                162067684093703,
+                894,
+                19982648,
+                33333333,
+                162067815857559,
+                146426661397370,
+                162067815859642
+              ],
+              [
+                162065584592819,
+                831,
+                19982648,
+                33333333,
+                162065723890737,
+                146424569429298,
+                162065723891258
+              ]
+            ],
+            "elapsed_ms": 31461,
+            "transport_status": "passed",
+            "status": "blocked",
+            "qualification_blocker": "Composite transport does not establish independent physical sensor delivery",
+            "front_frames": 894,
+            "front_fps": 29.891330015836004,
+            "front_packing_p99_ns": 4141458,
+            "front_late_deliveries": 24,
+            "front_future_deliveries": 0,
+            "front_timestamp_errors": 0,
+            "front_packing_errors": 0,
+            "front_delivery_age_p50_ns": 85974754,
+            "front_delivery_age_p95_ns": 96260486,
+            "front_delivery_age_p99_ns": 107968394,
+            "front_acquisition_age_p50_ns": 85004077,
+            "front_acquisition_age_p95_ns": 94746267,
+            "front_acquisition_age_p99_ns": 107231572,
+            "front_capture_samples_ns": [
+              [
+                162065667555574,
+                832,
+                29994234,
+                33333333,
+                162065753891518,
+                146424599430443,
+                162065753892456
+              ],
+              [
+                162065700786824,
+                833,
+                29994234,
+                33333333,
+                162065776563237,
+                146424622104402,
+                162065776566674
+              ],
+              [
+                162065734018022,
+                834,
+                29994234,
+                33333333,
+                162065809160581,
+                146424654702162,
+                162065809164435
+              ],
+              [
+                162065767249272,
+                835,
+                29994234,
+                33333333,
+                162065846134695,
+                146424691676798,
+                162065846139122
+              ],
+              [
+                162065800480522,
+                836,
+                29994234,
+                33333333,
+                162065875965372,
+                146424721506016,
+                162065875968289
+              ],
+              [
+                162065833711772,
+                837,
+                29994234,
+                33333333,
+                162065909869539,
+                146424755410027,
+                162065909871987
+              ],
+              [
+                162065866943022,
+                838,
+                29994234,
+                33333333,
+                162065944707820,
+                146424790247579,
+                162065944709851
+              ],
+              [
+                162065900174219,
+                839,
+                29994234,
+                33333333,
+                162065983913185,
+                146424829454818,
+                162065983917091
+              ],
+              [
+                162065933405469,
+                840,
+                29994234,
+                33333333,
+                162066008784747,
+                146424854325287,
+                162066008787247
+              ],
+              [
+                162065966636719,
+                841,
+                29994234,
+                33333333,
+                162066047902508,
+                146424893441016,
+                162066047903029
+              ],
+              [
+                162065999867969,
+                842,
+                29994234,
+                33333333,
+                162066084598133,
+                146424930136433,
+                162066084598445
+              ],
+              [
+                162066033099167,
+                843,
+                29994234,
+                33333333,
+                162066108089539,
+                146424953630391,
+                162066108092403
+              ],
+              [
+                162066066330417,
+                844,
+                29994234,
+                33333333,
+                162066141474539,
+                146424987016016,
+                162066141478237
+              ],
+              [
+                162066099561667,
+                845,
+                29994234,
+                33333333,
+                162066178947247,
+                146425024490287,
+                162066178952560
+              ],
+              [
+                162066132792917,
+                846,
+                29994234,
+                33333333,
+                162066210642456,
+                146425056182891,
+                162066210645164
+              ],
+              [
+                162066166024167,
+                847,
+                29994234,
+                33333333,
+                162066244950633,
+                146425090492266,
+                162066244954278
+              ],
+              [
+                162066199255365,
+                848,
+                29994234,
+                33333333,
+                162066276402403,
+                146425121943881,
+                162066276406153
+              ],
+              [
+                162066232486615,
+                849,
+                29994234,
+                33333333,
+                162066308811310,
+                146425154352162,
+                162066308814174
+              ],
+              [
+                162066265717865,
+                850,
+                29994234,
+                33333333,
+                162066342718966,
+                146425188260339,
+                162066342722299
+              ],
+              [
+                162066298949115,
+                851,
+                29994234,
+                33333333,
+                162066369114799,
+                146425214655183,
+                162066369117455
+              ],
+              [
+                162066332180313,
+                852,
+                29994234,
+                33333333,
+                162066407814747,
+                146425253356433,
+                162066407818705
+              ],
+              [
+                162066365411563,
+                853,
+                29994234,
+                33333333,
+                162066436847664,
+                146425282388360,
+                162066436850633
+              ],
+              [
+                162066398642813,
+                854,
+                29994234,
+                33333333,
+                162066488217976,
+                146425333758047,
+                162066488220060
+              ],
+              [
+                162066431874063,
+                855,
+                29994234,
+                33333333,
+                162066505854278,
+                146425351395079,
+                162066505857091
+              ],
+              [
+                162066465105261,
+                856,
+                29994234,
+                33333333,
+                162066554061153,
+                146425399602266,
+                162066554064278
+              ],
+              [
+                162066498336511,
+                857,
+                29994234,
+                33333333,
+                162066572811674,
+                146425418352058,
+                162066572814070
+              ],
+              [
+                162066531567761,
+                858,
+                29994234,
+                33333333,
+                162066616198653,
+                146425461737943,
+                162066616199955
+              ],
+              [
+                162066564799011,
+                859,
+                29994234,
+                33333333,
+                162066638986622,
+                146425484527891,
+                162066638990164
+              ],
+              [
+                162066598030261,
+                860,
+                29994234,
+                33333333,
+                162066673629278,
+                146425519172474,
+                162066673634955
+              ],
+              [
+                162066631261459,
+                861,
+                29994234,
+                33333333,
+                162066707368185,
+                146425552910026,
+                162066707372351
+              ],
+              [
+                162066664492709,
+                862,
+                29994234,
+                33333333,
+                162066741697091,
+                146425587239193,
+                162066741701518
+              ],
+              [
+                162066697723959,
+                863,
+                29994234,
+                33333333,
+                162066768370424,
+                146425613913933,
+                162066768375893
+              ],
+              [
+                162066730955209,
+                864,
+                29994234,
+                33333333,
+                162066805001101,
+                146425650541172,
+                162066805003445
+              ],
+              [
+                162066764186459,
+                865,
+                29994234,
+                33333333,
+                162066843328914,
+                146425688867787,
+                162066843330059
+              ],
+              [
+                162066797417657,
+                866,
+                29994234,
+                33333333,
+                162066880779695,
+                146425726319141,
+                162066880781466
+              ],
+              [
+                162066830648907,
+                867,
+                29994234,
+                33333333,
+                162066901886882,
+                146425747426589,
+                162066901888862
+              ],
+              [
+                162066863880157,
+                868,
+                29994234,
+                33333333,
+                162066939775580,
+                146425785317214,
+                162066939779487
+              ],
+              [
+                162066897111355,
+                869,
+                29994234,
+                33333333,
+                162066971157351,
+                146425816699089,
+                162066971161362
+              ],
+              [
+                162066930342605,
+                870,
+                29994234,
+                33333333,
+                162067026299018,
+                146425871838047,
+                162067026300007
+              ],
+              [
+                162066963573855,
+                871,
+                29994234,
+                33333333,
+                162067038229330,
+                146425883770964,
+                162067038232976
+              ],
+              [
+                162066996805105,
+                872,
+                29994234,
+                33333333,
+                162067070632143,
+                146425916173099,
+                162067070635111
+              ],
+              [
+                162067030036355,
+                873,
+                29994234,
+                33333333,
+                162067104339851,
+                146425949883255,
+                162067104345580
+              ],
+              [
+                162067063267553,
+                874,
+                29994234,
+                33333333,
+                162067145734382,
+                146425991276901,
+                162067145739174
+              ],
+              [
+                162067096498803,
+                875,
+                29994234,
+                33333333,
+                162067170200632,
+                146426015742526,
+                162067170204539
+              ],
+              [
+                162067129730053,
+                876,
+                29994234,
+                33333333,
+                162067205749330,
+                146426051290599,
+                162067205753080
+              ],
+              [
+                162067162961303,
+                877,
+                29994234,
+                33333333,
+                162067235640945,
+                146426081182162,
+                162067235644434
+              ],
+              [
+                162067196192553,
+                878,
+                29994234,
+                33333333,
+                162067276548341,
+                146426122090130,
+                162067276552403
+              ],
+              [
+                162067229423751,
+                879,
+                29994234,
+                33333333,
+                162067303788184,
+                146426149331589,
+                162067303793861
+              ],
+              [
+                162067262655001,
+                880,
+                29994234,
+                33333333,
+                162067340588861,
+                146426186128724,
+                162067340591101
+              ],
+              [
+                162067295886251,
+                881,
+                29994234,
+                33333333,
+                162067369554018,
+                146426215094505,
+                162067369556778
+              ],
+              [
+                162067329117501,
+                882,
+                29994234,
+                33333333,
+                162067406924851,
+                146426252464141,
+                162067406926413
+              ],
+              [
+                162067362348699,
+                883,
+                29994234,
+                33333333,
+                162067439107507,
+                146426284647370,
+                162067439109330
+              ],
+              [
+                162067395579949,
+                884,
+                29994234,
+                33333333,
+                162067470001153,
+                146426315542943,
+                162067470005215
+              ],
+              [
+                162067428811199,
+                885,
+                29994234,
+                33333333,
+                162067511861726,
+                146426357402995,
+                162067511865268
+              ],
+              [
+                162067462042449,
+                886,
+                29994234,
+                33333333,
+                162067534183601,
+                146426379724922,
+                162067534187247
+              ],
+              [
+                162067495273647,
+                887,
+                29994234,
+                33333333,
+                162067568998340,
+                146426414540391,
+                162067569002663
+              ],
+              [
+                162067528504897,
+                888,
+                29994234,
+                33333333,
+                162067608427090,
+                146426453966901,
+                162067608429174
+              ],
+              [
+                162067561736147,
+                889,
+                29994234,
+                33333333,
+                162067634915372,
+                146426480455286,
+                162067634917299
+              ],
+              [
+                162067594967397,
+                890,
+                29994234,
+                33333333,
+                162067671455736,
+                146426516998984,
+                162067671461413
+              ],
+              [
+                162067628198647,
+                891,
+                29994234,
+                33333333,
+                162067703314226,
+                146426548855911,
+                162067703318080
+              ],
+              [
+                162067661429844,
+                892,
+                29994234,
+                33333333,
+                162067736349278,
+                146426581893672,
+                162067736356309
+              ],
+              [
+                162067694661094,
+                893,
+                29994234,
+                33333333,
+                162067769441101,
+                146426614982474,
+                162067769444747
+              ],
+              [
+                162067727892344,
+                894,
+                29994234,
+                33333333,
+                162067804184903,
+                146426649731589,
+                162067804193913
+              ],
+              [
+                162067761123594,
+                895,
+                29994234,
+                33333333,
+                162067837216986,
+                146426682757734,
+                162067837219695
+              ]
+            ],
+            "rear_preview_frames": 895,
+            "preview_sample_timestamp_ns": 162038824725954,
+            "preview_sample_texture_transform": [
+              0,
+              -1,
+              0,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              1,
+              1,
+              0,
+              1
+            ],
+            "thumbnail_sample_timestamp_ns": 0,
+            "preview_timestamp_errors": 0,
+            "preview_coalesced_callbacks": 0,
+            "preview_readback_frames": 895,
+            "preview_readback_p99_ns": 11245469,
+            "preview_readback_p50_ns": 4007187,
+            "preview_readback_p95_ns": 8699688,
+            "preview_gles_version": 3,
+            "preview_render_p99_ns": 2392031,
+            "preview_render_p50_ns": 182396,
+            "preview_render_p95_ns": 1046718,
+            "preview_submit_p99_ns": 5287344,
+            "preview_submit_p50_ns": 444844,
+            "preview_submit_p95_ns": 2766354,
+            "preview_cpu_conversion_p99_ns": 0,
+            "preview_cpu_conversion_p50_ns": 0,
+            "preview_cpu_conversion_p95_ns": 0,
+            "preview_hash_p99_ns": 1570573,
+            "preview_hash_p50_ns": 109740,
+            "preview_hash_p95_ns": 516927,
+            "preview_publication_p99_ns": 3219375,
+            "preview_publication_p50_ns": 387188,
+            "preview_publication_p95_ns": 1460625,
+            "preview_dropped_readbacks": 0,
+            "preview_superseded_publications": 0,
+            "preview_duplicate_texture_callbacks": 0,
+            "preview_delivery_age_p50_ns": 133399532,
+            "preview_delivery_age_p95_ns": 147392033,
+            "preview_delivery_age_p99_ns": 160988127,
+            "preview_late_deliveries": 873,
+            "preview_acquisition_age_p50_ns": 128960575,
+            "preview_acquisition_age_p95_ns": 140415731,
+            "preview_acquisition_age_p99_ns": 158062294,
+            "preview_future_deliveries": 0,
+            "clock_sample_columns": "sensor_raw,elapsed_before,monotonic,elapsed_after",
+            "preview_clock_samples_ns": [
+              [
+                162065617913600,
+                162065756236727,
+                146424601775704,
+                162065756238237
+              ],
+              [
+                162065651225683,
+                162065793992195,
+                146424639531173,
+                162065793993706
+              ],
+              [
+                162065684566048,
+                162065822128393,
+                146424667667423,
+                162065822129956
+              ],
+              [
+                162065717904746,
+                162065862994070,
+                146424708533048,
+                162065862995581
+              ],
+              [
+                162065751206360,
+                162065885984018,
+                146424731523256,
+                162065885985841
+              ],
+              [
+                162065784613287,
+                162065925051987,
+                146424770591016,
+                162065925053549
+              ],
+              [
+                162065817856048,
+                162065952993549,
+                146424798532839,
+                162065952995424
+              ],
+              [
+                162065851207089,
+                162065993186831,
+                146424838725912,
+                162065993188497
+              ],
+              [
+                162065884492194,
+                162066021461154,
+                146424867000235,
+                162066021462820
+              ],
+              [
+                162065917828548,
+                162066065034331,
+                146424910573673,
+                162066065036206
+              ],
+              [
+                162065951143860,
+                162066086099695,
+                146424931638673,
+                162066086101206
+              ],
+              [
+                162065984469277,
+                162066124190008,
+                146424969729454,
+                162066124192091
+              ],
+              [
+                162066017808287,
+                162066162740424,
+                146425008279610,
+                162066162742143
+              ],
+              [
+                162066051166256,
+                162066193772768,
+                146425039312579,
+                162066193776726
+              ],
+              [
+                162066084528860,
+                162066226519122,
+                146425072058100,
+                162066226520633
+              ],
+              [
+                162066117891933,
+                162066252610581,
+                146425098149558,
+                162066252612143
+              ],
+              [
+                162066151107871,
+                162066293889435,
+                146425139428464,
+                162066293891049
+              ],
+              [
+                162066184463964,
+                162066318653028,
+                146425164191954,
+                162066318654539
+              ],
+              [
+                162066217737975,
+                162066353587508,
+                146425199126485,
+                162066353589070
+              ],
+              [
+                162066251137141,
+                162066380005112,
+                146425225544089,
+                162066380006674
+              ],
+              [
+                162066284400631,
+                162066414584383,
+                146425260123464,
+                162066414585997
+              ],
+              [
+                162066317717298,
+                162066446203393,
+                146425291742474,
+                162066446205164
+              ],
+              [
+                162066351046204,
+                162066493650580,
+                146425339189818,
+                162066493652508
+              ],
+              [
+                162066384361516,
+                162066527433601,
+                146425372972787,
+                162066527435320
+              ],
+              [
+                162066417731829,
+                162066560114226,
+                146425405653308,
+                162066560115841
+              ],
+              [
+                162066451133548,
+                162066591180997,
+                146425436720026,
+                162066591182560
+              ],
+              [
+                162066484342975,
+                162066619229643,
+                146425464768724,
+                162066619231257
+              ],
+              [
+                162066517681256,
+                162066652245060,
+                146425497783516,
+                162066652245580
+              ],
+              [
+                162066551076308,
+                162066691351310,
+                146425536890339,
+                162066691352872
+              ],
+              [
+                162066584540162,
+                162066713685112,
+                146425559224245,
+                162066713686778
+              ],
+              [
+                162066617640631,
+                162066758661362,
+                146425604200443,
+                162066758663028
+              ],
+              [
+                162066650993079,
+                162066782404747,
+                146425627943776,
+                162066782406309
+              ],
+              [
+                162066684276256,
+                162066822044591,
+                146425667583568,
+                162066822046153
+              ],
+              [
+                162066717607766,
+                162066846166987,
+                146425691706433,
+                162066846169122
+              ],
+              [
+                162066750972610,
+                162066891427039,
+                146425736965443,
+                162066891427612
+              ],
+              [
+                162066784258183,
+                162066922065372,
+                146425767604453,
+                162066922066987
+              ],
+              [
+                162066817590162,
+                162066953099591,
+                146425798638672,
+                162066953101257
+              ],
+              [
+                162066850904745,
+                162066981151570,
+                146425826690547,
+                162066981153080
+              ],
+              [
+                162066884414954,
+                162067025340476,
+                146425870879505,
+                162067025342091
+              ],
+              [
+                162066917559068,
+                162067056042299,
+                146425901590078,
+                162067056052768
+              ],
+              [
+                162066950886204,
+                162067091649434,
+                146425937188464,
+                162067091651049
+              ],
+              [
+                162066984215631,
+                162067114732872,
+                146425960271953,
+                162067114734486
+              ],
+              [
+                162067017559068,
+                162067156542976,
+                146426002081953,
+                162067156544486
+              ],
+              [
+                162067050861360,
+                162067179355111,
+                146426024894141,
+                162067179356674
+              ],
+              [
+                162067084208287,
+                162067225958705,
+                146426071497787,
+                162067225960372
+              ],
+              [
+                162067117531099,
+                162067252785841,
+                146426098325026,
+                162067252787611
+              ],
+              [
+                162067150854329,
+                162067289980893,
+                146426135520078,
+                162067289982611
+              ],
+              [
+                162067184217818,
+                162067324854070,
+                146426170393099,
+                162067324855632
+              ],
+              [
+                162067217488391,
+                162067364186778,
+                146426209726328,
+                162067364188913
+              ],
+              [
+                162067250809329,
+                162067397525841,
+                146426243064193,
+                162067397526257
+              ],
+              [
+                162067284221620,
+                162067427735528,
+                146426273274714,
+                162067427737247
+              ],
+              [
+                162067317481568,
+                162067449387872,
+                146426294926849,
+                162067449389434
+              ],
+              [
+                162067350792401,
+                162067492156413,
+                146426337695495,
+                162067492158028
+              ],
+              [
+                162067384167349,
+                162067512417351,
+                146426357956484,
+                162067512419070
+              ],
+              [
+                162067417443391,
+                162067553041101,
+                146426398580182,
+                162067553042715
+              ],
+              [
+                162067450774953,
+                162067586118601,
+                146426431657891,
+                162067586120424
+              ],
+              [
+                162067484103495,
+                162067627675840,
+                146426473214818,
+                162067627677403
+              ],
+              [
+                162067517431256,
+                162067650193028,
+                146426495731589,
+                162067650193965
+              ],
+              [
+                162067550789224,
+                162067676578445,
+                146426522117474,
+                162067676580007
+              ],
+              [
+                162067584105578,
+                162067716752507,
+                146426562291693,
+                162067716754226
+              ],
+              [
+                162067617437974,
+                162067753254642,
+                146426598793568,
+                162067753256153
+              ],
+              [
+                162067650727505,
+                162067781103392,
+                146426626642422,
+                162067781105007
+              ],
+              [
+                162067684093703,
+                162067823659122,
+                146426669197526,
+                162067823659590
+              ],
+              [
+                162065584592819,
+                162065727180841,
+                146424572719975,
+                162065727182560
+              ]
+            ],
+            "thumbnail_clock_samples_ns": [
+              [
+                162065684566048,
+                162065799821466,
+                146424645361329,
+                162065799823966
+              ],
+              [
+                162065717904746,
+                162065837803029,
+                146424683342579,
+                162065837805164
+              ],
+              [
+                162065751206360,
+                162065864179904,
+                146424709719089,
+                162065864181674
+              ],
+              [
+                162065784613287,
+                162065906334174,
+                146424751874923,
+                162065906337508
+              ],
+              [
+                162065817856048,
+                162065934011310,
+                146424779549662,
+                162065934011674
+              ],
+              [
+                162065851207089,
+                162065974106883,
+                146424819645287,
+                162065974107351
+              ],
+              [
+                162065884492194,
+                162066002881570,
+                146424848421016,
+                162066002883601
+              ],
+              [
+                162065917828548,
+                162066047700008,
+                146424893238620,
+                162066047700841
+              ],
+              [
+                162065951143860,
+                162066072059435,
+                146424917598985,
+                162066072061570
+              ],
+              [
+                162065984469277,
+                162066108706101,
+                146424954245131,
+                162066108707403
+              ],
+              [
+                162066017808287,
+                162066145799903,
+                146424991338360,
+                162066145800424
+              ],
+              [
+                162066051166256,
+                162066175891414,
+                146425021430912,
+                162066175893497
+              ],
+              [
+                162066084528860,
+                162066208751206,
+                146425054290756,
+                162066208753341
+              ],
+              [
+                162066117891933,
+                162066238086674,
+                146425083626433,
+                162066238089070
+              ],
+              [
+                162066151107871,
+                162066275364174,
+                146425120903725,
+                162066275366310
+              ],
+              [
+                162066184463964,
+                162066304683810,
+                146425150223464,
+                162066304686049
+              ],
+              [
+                162066217737975,
+                162066338573758,
+                146425184113881,
+                162066338576518
+              ],
+              [
+                162066251137141,
+                162066366992091,
+                146425212530860,
+                162066366993028
+              ],
+              [
+                162066284400631,
+                162066398295997,
+                146425243834506,
+                162066398296622
+              ],
+              [
+                162066317717298,
+                162066433973080,
+                146425279512839,
+                162066433975476
+              ],
+              [
+                162066351046204,
+                162066484691518,
+                146425330231589,
+                162066484694330
+              ],
+              [
+                162066384361516,
+                162066513016778,
+                146425358555183,
+                162066513017247
+              ],
+              [
+                162066417731829,
+                162066546765112,
+                146425392305808,
+                162066546768445
+              ],
+              [
+                162066451133548,
+                162066569200007,
+                146425414738829,
+                162066569201101
+              ],
+              [
+                162066484342975,
+                162066608122716,
+                146425453661433,
+                162066608123601
+              ],
+              [
+                162066517681256,
+                162066635116310,
+                146425480655912,
+                162066635118601
+              ],
+              [
+                162066551076308,
+                162066677901778,
+                146425523441381,
+                162066677903966
+              ],
+              [
+                162066584540162,
+                162066700578028,
+                146425546117787,
+                162066700580580
+              ],
+              [
+                162066617640631,
+                162066743948080,
+                146425589488099,
+                162066743950685
+              ],
+              [
+                162066650993079,
+                162066762945372,
+                146425608484974,
+                162066762947559
+              ],
+              [
+                162066684276256,
+                162066804466466,
+                146425650005964,
+                162066804468601
+              ],
+              [
+                162066717607766,
+                162066832745789,
+                146425678285547,
+                162066832748184
+              ],
+              [
+                162066750972610,
+                162066871404330,
+                146425716943881,
+                162066871406466
+              ],
+              [
+                162066784258183,
+                162066901333705,
+                146425746873412,
+                162066901336049
+              ],
+              [
+                162066817590162,
+                162066936072143,
+                146425781612006,
+                162066936074643
+              ],
+              [
+                162066850904745,
+                162066968104382,
+                146425813643881,
+                162066968106518
+              ],
+              [
+                162066884414954,
+                162067011111309,
+                146425856649766,
+                162067011111882
+              ],
+              [
+                162066917559068,
+                162067032399018,
+                146425877937526,
+                162067032399643
+              ],
+              [
+                162066950886204,
+                162067073596049,
+                146425919134610,
+                162067073596934
+              ],
+              [
+                162066984215631,
+                162067098762820,
+                146425944301380,
+                162067098763497
+              ],
+              [
+                162067017559068,
+                162067141669851,
+                146425987210287,
+                162067141672820
+              ],
+              [
+                162067050861360,
+                162067160186778,
+                146426005725287,
+                162067160187403
+              ],
+              [
+                162067084208287,
+                162067205096257,
+                146426050636276,
+                162067205098913
+              ],
+              [
+                162067117531099,
+                162067232268288,
+                146426077809662,
+                162067232272299
+              ],
+              [
+                162067150854329,
+                162067279843236,
+                146426125383360,
+                162067279845997
+              ],
+              [
+                162067184217818,
+                162067313859278,
+                146426159398724,
+                162067313861309
+              ],
+              [
+                162067217488391,
+                162067339320736,
+                146426184859505,
+                162067339321518
+              ],
+              [
+                162067250809329,
+                162067376262663,
+                146426221801589,
+                162067376264122
+              ],
+              [
+                162067284221620,
+                162067414698340,
+                146426260236849,
+                162067414698965
+              ],
+              [
+                162067317481568,
+                162067437961101,
+                146426283500859,
+                162067437963497
+              ],
+              [
+                162067350792401,
+                162067468608757,
+                146426314148203,
+                162067468610788
+              ],
+              [
+                162067384167349,
+                162067505027090,
+                146426350567526,
+                162067505030111
+              ],
+              [
+                162067417443391,
+                162067540157559,
+                146426385697214,
+                162067540159799
+              ],
+              [
+                162067450774953,
+                162067570169486,
+                146426415707891,
+                162067570169903
+              ],
+              [
+                162067484103495,
+                162067599176205,
+                146426444716380,
+                162067599178913
+              ],
+              [
+                162067517431256,
+                162067633905267,
+                146426479444766,
+                162067633907507
+              ],
+              [
+                162067550789224,
+                162067667735684,
+                146426513275495,
+                162067667737663
+              ],
+              [
+                162067584105578,
+                162067693973445,
+                146426539513151,
+                162067693975788
+              ],
+              [
+                162067617437974,
+                162067730886205,
+                146426576426120,
+                162067730888757
+              ],
+              [
+                162067650727505,
+                162067768757351,
+                146426614297526,
+                162067768760163
+              ],
+              [
+                162067684093703,
+                162067807715997,
+                146426653255651,
+                162067807718288
+              ],
+              [
+                162065584592819,
+                162065703665477,
+                146424549204871,
+                162065703667508
+              ],
+              [
+                162065617913600,
+                162065742989904,
+                146424588528412,
+                162065742990424
+              ],
+              [
+                162065651225683,
+                162065771869695,
+                146424617408308,
+                162065771870424
+              ]
+            ],
+            "rear_candidate_skew_p99_ns": 0,
+            "rear_candidate_overlap_ns": 29859019363,
+            "preview_changed_frames": 894,
+            "thumbnail_changed_frames": 892
+          }
+        ],
+        "requested_seconds": 30,
+        "recovery_limit": 3,
+        "started_utc": "2026-11-01T09:18:45.631572Z",
+        "dual_rear": "bench candidate feeds; physical identities and calibration unverified",
+        "backend": "samsung_multiview",
+        "status": "blocked",
+        "recoveries": 0,
+        "thermal_status": 0,
+        "transport_status": "passed",
+        "completed_utc": "2026-11-01T09:19:17.138887Z"
+      }
+    },
+    "fresh_samples": {
+      "road": 0,
+      "driver": 4
+    },
+    "distinct_frame_ids": {
+      "road": 12,
+      "driver": 12
+    },
+    "error": "AssertionError: Insufficient fresh preview samples: {'road': 0, 'driver': 4}",
+    "elapsed_s": 34.879171417007456,
+    "panda_receive_only": {},
+    "cleanup": {
+      "processes": [],
+      "camera_provider_processes": [
+        "1707 cameraserver",
+        "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+      ],
+      "camera_owned": false,
+      "thermal_status": 0,
+      "skin_c": 36.4,
+      "thermal_override": false
+    }
+  },
+  "resource_samples": [
+    {
+      "elapsed_s": 0.06139212500420399,
+      "process_pss_kib": [
+        17409,
+        13826,
+        13862,
+        16192,
+        41519,
+        16234,
+        16376,
+        38762,
+        16262,
+        16536,
+        15478,
+        15478,
+        16881,
+        39052,
+        15490,
+        38426,
+        222387
+      ],
+      "total_pss_kib": 570170,
+      "skin_c": 29.9,
+      "thermal_override": false
+    },
+    {
+      "elapsed_s": 30.573161209002137,
+      "process_pss_kib": [
+        18326,
+        68465,
+        49731,
+        54774,
+        53289,
+        115518,
+        53204,
+        53291,
+        53216,
+        58889,
+        67235,
+        53201,
+        53216,
+        55634,
+        53243,
+        118087,
+        39646,
+        204331
+      ],
+      "total_pss_kib": 1223296,
+      "skin_c": 36.1,
+      "thermal_override": false
+    }
+  ],
+  "runtime_chain_behavior": {
+    "fold": {
+      "steady": "passed",
+      "faults": "passed"
+    },
+    "emulator": {
+      "steady": "passed",
+      "faults": "passed"
+    }
+  },
+  "instrumentation": {
+    "fold": {
+      "serial": "RFCR81Y1TBJ",
+      "package": "com.samsung.sunnypilot.fold3",
+      "completed_tests": 22,
+      "expected_tests": 22,
+      "returncode": 0,
+      "status": "passed"
+    },
+    "emulator": {
+      "serial": "emulator-5560",
+      "package": "com.samsung.sunnypilot.fold3",
+      "completed_tests": 22,
+      "expected_tests": 22,
+      "returncode": 0,
+      "status": "passed"
+    }
+  },
+  "lifecycle": {
+    "fold": {
+      "physical_fold_transition_verified": false,
+      "status": "passed",
+      "display_override_test": false
+    },
+    "emulator": {
+      "physical_fold_transition_verified": false,
+      "status": "passed",
+      "display_override_test": true,
+      "display_sizes": {
+        "requested": [
+          1280,
+          720
+        ],
+        "restore": [
+          1440,
+          2960
+        ]
+      }
+    }
+  },
+  "adb_faults": {
+    "fold": "passed",
+    "emulator": "passed"
+  },
+  "ipc": {
+    "fold": {
+      "report": "fold-candidate35-ipc.json",
+      "status": "passed",
+      "scope": "Separate native kernel/IPC probe; APK VisionIPC is independently covered by instrumentation."
+    },
+    "emulator": {
+      "report": "emulator-candidate35-ipc.json",
+      "status": "passed",
+      "scope": "Separate native kernel/IPC probe; APK VisionIPC is independently covered by instrumentation."
+    }
+  },
+  "metadrive": {
+    "cancel": {
+      "status": "passed",
+      "vehicle_tx_enabled": false,
+      "physical_vehicle_verified": false,
+      "perception_verified": false,
+      "synthetic_driver_and_calibration": true,
+      "factory_acc_fixture": true,
+      "metadrive": true,
+      "fault": "cancel",
+      "packets": 1751,
+      "active_samples": 1104,
+      "inactive_after_fault": 605,
+      "longitudinal_active_samples": 0,
+      "max_abs_steering_deg": 0.5836212753035349,
+      "below_minimum_active_samples": 0,
+      "max_abs_torque": 0.052951738238334656,
+      "steering_plant": "synthetic damped torque-to-angle; not a Hyundai vehicle model",
+      "adb_port": 55230,
+      "metadrive_world_started": true,
+      "perception_source": "synthetic straight-lane curvature from MetaDrive ground truth; not camera inference",
+      "android_profile": {
+        "version": 1,
+        "op": "hello",
+        "simulation": true,
+        "full_chain": false,
+        "vehicle_tx_enabled": false,
+        "car_fingerprint": "HYUNDAI_IONIQ_PHEV_2019",
+        "factory_acc": true,
+        "min_steer_speed_m_s": 14.305279731750488,
+        "physical_fingerprint_verified": false
+      },
+      "max_lateral_error_m": 0.6010293960571289,
+      "feedback_samples": [
+        {
+          "elapsed_s": 0.3765602920029778,
+          "lateral_m": 0.0,
+          "heading_rad": -3.9947416397012603e-07,
+          "desired_curvature": -8.357731983940255e-05,
+          "steering_deg": 0,
+          "fault": null
+        },
+        {
+          "elapsed_s": 1.384309375018347,
+          "lateral_m": 0.012676715850830078,
+          "heading_rad": 0.0024499750448185864,
+          "desired_curvature": -9.261274259858988e-05,
+          "steering_deg": 0.5534076605211145,
+          "fault": null
+        },
+        {
+          "elapsed_s": 2.389905375021044,
+          "lateral_m": 0.09514904022216797,
+          "heading_rad": 0.005297027408167843,
+          "desired_curvature": 0.00015112054310323616,
+          "steering_deg": -0.40222119273842194,
+          "fault": null
+        },
+        {
+          "elapsed_s": 3.392370583023876,
+          "lateral_m": 0.1602630615234375,
+          "heading_rad": 0.0007715177677960483,
+          "desired_curvature": -3.342143275381185e-05,
+          "steering_deg": -0.16951009914067625,
+          "fault": null
+        },
+        {
+          "elapsed_s": 4.395690375007689,
+          "lateral_m": 0.16691827774047852,
+          "heading_rad": 0.0005623264641698711,
+          "desired_curvature": 4.853401216622565e-05,
+          "steering_deg": 0.03417637740534443,
+          "fault": null
+        },
+        {
+          "elapsed_s": 5.39963679201901,
+          "lateral_m": 0.17178630828857422,
+          "heading_rad": -0.000922119527439591,
+          "desired_curvature": 0.00013028361890269274,
+          "steering_deg": -0.5263027539449443,
+          "fault": null
+        },
+        {
+          "elapsed_s": 6.403466208023019,
+          "lateral_m": 0.1182103157043457,
+          "heading_rad": -0.004942161192914797,
+          "desired_curvature": -4.006193062114988e-05,
+          "steering_deg": -0.048713138841404095,
+          "fault": null
+        },
+        {
+          "elapsed_s": 7.405516041995725,
+          "lateral_m": 0.029366016387939453,
+          "heading_rad": -0.004408863184625744,
+          "desired_curvature": 7.86337931899749e-06,
+          "steering_deg": 0.13357124532056752,
+          "fault": null
+        },
+        {
+          "elapsed_s": 8.410093417012831,
+          "lateral_m": -0.044089317321777344,
+          "heading_rad": -0.004150802874997694,
+          "desired_curvature": 1.3769645474894445e-05,
+          "steering_deg": -0.1121042226321245,
+          "fault": null
+        },
+        {
+          "elapsed_s": 9.41739337501349,
+          "lateral_m": -0.12293720245361328,
+          "heading_rad": -0.004161588677412453,
+          "desired_curvature": -0.00010619110120483424,
+          "steering_deg": 0.3165640034069238,
+          "fault": null
+        },
+        {
+          "elapsed_s": 10.418668166996213,
+          "lateral_m": -0.17243289947509766,
+          "heading_rad": -0.0006037386191213301,
+          "desired_curvature": -3.2747794474774024e-05,
+          "steering_deg": 0.2947083978710967,
+          "fault": null
+        },
+        {
+          "elapsed_s": 11.421822250005789,
+          "lateral_m": -0.16252899169921875,
+          "heading_rad": 0.0013543505723596638,
+          "desired_curvature": -3.0199337331985472e-05,
+          "steering_deg": 0.07347374878878678,
+          "fault": null
+        },
+        {
+          "elapsed_s": 12.430455042020185,
+          "lateral_m": -0.12703275680541992,
+          "heading_rad": 0.0027513117221609207,
+          "desired_curvature": -6.869531368721697e-05,
+          "steering_deg": 0.2683591488718179,
+          "fault": null
+        },
+        {
+          "elapsed_s": 13.430602833017474,
+          "lateral_m": -0.05390214920043945,
+          "heading_rad": 0.0049814428189929325,
+          "desired_curvature": 1.4313238864554425e-05,
+          "steering_deg": 0.15463414901923758,
+          "fault": "cancel"
+        },
+        {
+          "elapsed_s": 14.440244166995399,
+          "lateral_m": 0.05067920684814453,
+          "heading_rad": 0.00645403774375275,
+          "desired_curvature": 0.0001690224149999763,
+          "steering_deg": 0.13436630627552784,
+          "fault": "cancel"
+        },
+        {
+          "elapsed_s": 15.446773875009967,
+          "lateral_m": 0.16012287139892578,
+          "heading_rad": 0.0075540564320100145,
+          "desired_curvature": 0.0005106454709641792,
+          "steering_deg": 0.11757800850891673,
+          "fault": "cancel"
+        },
+        {
+          "elapsed_s": 16.452962292009033,
+          "lateral_m": 0.27684640884399414,
+          "heading_rad": 0.008457800147928296,
+          "desired_curvature": 0.001282032726336098,
+          "steering_deg": 0.10216710088151532,
+          "fault": "cancel"
+        },
+        {
+          "elapsed_s": 17.46124062500894,
+          "lateral_m": 0.3827853202819824,
+          "heading_rad": 0.009116799359668805,
+          "desired_curvature": 0.0021858682963322774,
+          "steering_deg": 0.08940190878020754,
+          "fault": "cancel"
+        },
+        {
+          "elapsed_s": 18.468302875000518,
+          "lateral_m": 0.4792618751525879,
+          "heading_rad": 0.009615209957676285,
+          "desired_curvature": 0.0031683562651571647,
+          "steering_deg": 0.07823165407046054,
+          "fault": "cancel"
+        },
+        {
+          "elapsed_s": 19.469687250006245,
+          "lateral_m": 0.5629515647888184,
+          "heading_rad": 0.009982459871998195,
+          "desired_curvature": 0.0041181249811837696,
+          "steering_deg": 0.0684570584912963,
+          "fault": "cancel"
+        }
+      ],
+      "max_speed_m_s": 19.999929164152054,
+      "duration_s": 20.003318417002447,
+      "qualification_blocker": "Synthetic perception/DM/calibration fixture; no visual closed-loop or physical vehicle qualification"
+    },
+    "stale": {
+      "status": "passed",
+      "vehicle_tx_enabled": false,
+      "physical_vehicle_verified": false,
+      "perception_verified": false,
+      "synthetic_driver_and_calibration": true,
+      "factory_acc_fixture": true,
+      "metadrive": true,
+      "fault": "stale",
+      "packets": 1747,
+      "active_samples": 1098,
+      "inactive_after_fault": 604,
+      "longitudinal_active_samples": 0,
+      "max_abs_steering_deg": 0.6121543457516357,
+      "below_minimum_active_samples": 0,
+      "max_abs_torque": 0.055840760469436646,
+      "steering_plant": "synthetic damped torque-to-angle; not a Hyundai vehicle model",
+      "adb_port": 55446,
+      "metadrive_world_started": true,
+      "perception_source": "synthetic straight-lane curvature from MetaDrive ground truth; not camera inference",
+      "android_profile": {
+        "version": 1,
+        "op": "hello",
+        "simulation": true,
+        "full_chain": false,
+        "vehicle_tx_enabled": false,
+        "car_fingerprint": "HYUNDAI_IONIQ_PHEV_2019",
+        "factory_acc": true,
+        "min_steer_speed_m_s": 14.305279731750488,
+        "physical_fingerprint_verified": false
+      },
+      "max_lateral_error_m": 0.5681447982788086,
+      "feedback_samples": [
+        {
+          "elapsed_s": 0.4330001250200439,
+          "lateral_m": 0.0,
+          "heading_rad": -2.663161087212984e-07,
+          "desired_curvature": -9.597789084354727e-05,
+          "steering_deg": 0,
+          "fault": null
+        },
+        {
+          "elapsed_s": 1.438043000001926,
+          "lateral_m": 0.013934135437011719,
+          "heading_rad": 0.0026583674001168234,
+          "desired_curvature": -8.508050884653809e-05,
+          "steering_deg": 0.5620178789153084,
+          "fault": null
+        },
+        {
+          "elapsed_s": 2.4412210830196273,
+          "lateral_m": 0.10493707656860352,
+          "heading_rad": 0.005160673560355988,
+          "desired_curvature": 0.00015974883958874835,
+          "steering_deg": -0.4950726236922249,
+          "fault": null
+        },
+        {
+          "elapsed_s": 3.4510094160214067,
+          "lateral_m": 0.1612691879272461,
+          "heading_rad": 0.0005302353730343157,
+          "desired_curvature": -4.5461082867792385e-05,
+          "steering_deg": -0.12580426168443662,
+          "fault": null
+        },
+        {
+          "elapsed_s": 4.45193658300559,
+          "lateral_m": 0.16729068756103516,
+          "heading_rad": 0.0007105313788331459,
+          "desired_curvature": 6.672352988028125e-05,
+          "steering_deg": -0.016290526107740164,
+          "fault": null
+        },
+        {
+          "elapsed_s": 5.458258333004778,
+          "lateral_m": 0.17155885696411133,
+          "heading_rad": -0.0010950918402405918,
+          "desired_curvature": 0.00013010864364964666,
+          "steering_deg": -0.5580195820468457,
+          "fault": null
+        },
+        {
+          "elapsed_s": 6.465859916002955,
+          "lateral_m": 0.10840129852294922,
+          "heading_rad": -0.00525055524714535,
+          "desired_curvature": -6.859526211974125e-05,
+          "steering_deg": 0.04613165727674906,
+          "fault": null
+        },
+        {
+          "elapsed_s": 7.4709600410133135,
+          "lateral_m": 0.01984548568725586,
+          "heading_rad": -0.004171975005663242,
+          "desired_curvature": 1.4684130880443922e-05,
+          "steering_deg": 0.09913311490904897,
+          "fault": null
+        },
+        {
+          "elapsed_s": 8.473452958016424,
+          "lateral_m": -0.047711849212646484,
+          "heading_rad": -0.004156395513286171,
+          "desired_curvature": 1.1992102923964276e-05,
+          "steering_deg": -0.127361682434842,
+          "fault": null
+        },
+        {
+          "elapsed_s": 9.476747666019946,
+          "lateral_m": -0.1271510124206543,
+          "heading_rad": -0.004147607081689486,
+          "desired_curvature": -0.00011477007271425874,
+          "steering_deg": 0.35362376215965147,
+          "fault": null
+        },
+        {
+          "elapsed_s": 10.483251875004498,
+          "lateral_m": -0.1737051010131836,
+          "heading_rad": -0.00034101777758444035,
+          "desired_curvature": -2.510486625706107e-05,
+          "steering_deg": 0.28137645289568536,
+          "fault": null
+        },
+        {
+          "elapsed_s": 11.489677416015184,
+          "lateral_m": -0.16126394271850586,
+          "heading_rad": 0.0014785870372122645,
+          "desired_curvature": -3.191820977789181e-05,
+          "steering_deg": 0.0818871973605133,
+          "fault": null
+        },
+        {
+          "elapsed_s": 12.499294666020432,
+          "lateral_m": -0.12030029296875,
+          "heading_rad": 0.002981009366179954,
+          "desired_curvature": -5.3698214600935776e-05,
+          "steering_deg": 0.2401472091574124,
+          "fault": null
+        },
+        {
+          "elapsed_s": 13.500242458016146,
+          "lateral_m": -0.04089927673339844,
+          "heading_rad": 0.004982374925374344,
+          "desired_curvature": 2.762383374415326e-05,
+          "steering_deg": 0.13713730305145355,
+          "fault": "stale"
+        },
+        {
+          "elapsed_s": 14.506386541004758,
+          "lateral_m": 0.05564308166503906,
+          "heading_rad": 0.006214885877863452,
+          "desired_curvature": 0.00015295206322068426,
+          "steering_deg": 0.12000278516259563,
+          "fault": "stale"
+        },
+        {
+          "elapsed_s": 15.512412541022059,
+          "lateral_m": 0.15979242324829102,
+          "heading_rad": 0.007191999681813499,
+          "desired_curvature": 0.00047737741233422885,
+          "steering_deg": 0.10500912681195863,
+          "fault": "stale"
+        },
+        {
+          "elapsed_s": 16.52145912501146,
+          "lateral_m": 0.2643609046936035,
+          "heading_rad": 0.007959655866028648,
+          "desired_curvature": 0.0011842078701125914,
+          "steering_deg": 0.0918888399037513,
+          "fault": "stale"
+        },
+        {
+          "elapsed_s": 17.530579708021833,
+          "lateral_m": 0.36890554428100586,
+          "heading_rad": 0.008579373451690131,
+          "desired_curvature": 0.0020897526865960585,
+          "steering_deg": 0.0798450024404012,
+          "fault": "stale"
+        },
+        {
+          "elapsed_s": 18.54027558301459,
+          "lateral_m": 0.45873498916625977,
+          "heading_rad": 0.009021191876534829,
+          "desired_curvature": 0.0030417695610985796,
+          "steering_deg": 0.0698688282543182,
+          "fault": "stale"
+        },
+        {
+          "elapsed_s": 19.545601833000546,
+          "lateral_m": 0.5400080680847168,
+          "heading_rad": 0.009358880702756702,
+          "desired_curvature": 0.003976968367783273,
+          "steering_deg": 0.06071114586186285,
+          "fault": "stale"
+        }
+      ],
+      "max_speed_m_s": 19.999934661221257,
+      "duration_s": 20.000755290995585,
+      "qualification_blocker": "Synthetic perception/DM/calibration fixture; no visual closed-loop or physical vehicle qualification"
+    }
+  },
+  "thermal_report": "emulator-candidate35-thermal-retry.json",
+  "initial_thermal_failure": "emulator-candidate35-thermal.json",
+  "host_tooling_update": "candidate35-host-tooling-update.json",
+  "emulator_camera_timing": {
+    "device": "sdk_gphone64_arm64",
+    "sdk": 35,
+    "pid": 4031,
+    "fingerprint": "google/sdk_gphone64_arm64/emu64a:15/AE3A.240806.043/12960925:userdebug/dev-keys",
+    "started_utc": "2026-11-01T09:23:41.229551Z",
+    "package": "com.samsung.sunnypilot.fold3",
+    "logical_access": {
+      "20": {
+        "accessible": false,
+        "error": "java.lang.IllegalArgumentException: getCameraCharacteristics:1329: Unable to retrieve camera characteristics for unknown device 20: No such file or directory (-2)"
+      },
+      "21": {
+        "accessible": false,
+        "error": "java.lang.IllegalArgumentException: getCameraCharacteristics:1329: Unable to retrieve camera characteristics for unknown device 21: No such file or directory (-2)"
+      },
+      "23": {
+        "accessible": false,
+        "error": "java.lang.IllegalArgumentException: getCameraCharacteristics:1329: Unable to retrieve camera characteristics for unknown device 23: No such file or directory (-2)"
+      },
+      "52": {
+        "accessible": false,
+        "error": "java.lang.IllegalArgumentException: getCameraCharacteristics:1329: Unable to retrieve camera characteristics for unknown device 52: No such file or directory (-2)"
+      }
+    },
+    "vehicle_tx_enabled": false,
+    "driving_runtime_ready": false,
+    "opencl": {
+      "status": "blocked",
+      "error": "libOpenCL.so inaccessible to app"
+    },
+    "capabilities": {
+      "cameras": [
+        {
+          "id": "0",
+          "facing": 1,
+          "orientation": 90,
+          "timestamp_source": 1,
+          "output_timestamp_base": "sensor",
+          "readout_timestamp_enabled": false,
+          "hardware_level": 3,
+          "physical_ids": [],
+          "focal_lengths_mm": [
+            3.3
+          ],
+          "capabilities": [
+            0,
+            1,
+            2,
+            5,
+            6,
+            4,
+            7,
+            3,
+            18,
+            19,
+            20
+          ],
+          "yuv_sizes": [
+            {
+              "width": 160,
+              "height": 120,
+              "min_frame_duration_ns": 33331760
+            },
+            {
+              "width": 320,
+              "height": 240,
+              "min_frame_duration_ns": 33331760
+            },
+            {
+              "width": 640,
+              "height": 480,
+              "min_frame_duration_ns": 33331760
+            },
+            {
+              "width": 1280,
+              "height": 720,
+              "min_frame_duration_ns": 33331760
+            },
+            {
+              "width": 1856,
+              "height": 1392,
+              "min_frame_duration_ns": 33331760
+            },
+            {
+              "width": 176,
+              "height": 144,
+              "min_frame_duration_ns": 33331760
+            },
+            {
+              "width": 1024,
+              "height": 768,
+              "min_frame_duration_ns": 33331760
+            }
+          ]
+        },
+        {
+          "id": "1",
+          "facing": 0,
+          "orientation": 270,
+          "timestamp_source": 1,
+          "output_timestamp_base": "sensor",
+          "readout_timestamp_enabled": false,
+          "hardware_level": 1,
+          "physical_ids": [
+            "4",
+            "5"
+          ],
+          "focal_lengths_mm": [
+            4.38
+          ],
+          "capabilities": [
+            0,
+            5,
+            1,
+            6,
+            2,
+            11,
+            4,
+            16,
+            7,
+            3,
+            17,
+            18,
+            19,
+            20
+          ],
+          "yuv_sizes": [
+            {
+              "width": 1920,
+              "height": 1440,
+              "min_frame_duration_ns": 33331760
+            },
+            {
+              "width": 1920,
+              "height": 1080,
+              "min_frame_duration_ns": 33331760
+            },
+            {
+              "width": 1920,
+              "height": 960,
+              "min_frame_duration_ns": 33331760
+            },
+            {
+              "width": 1600,
+              "height": 1200,
+              "min_frame_duration_ns": 33331760
+            },
+            {
+              "width": 1440,
+              "height": 1080,
+              "min_frame_duration_ns": 33331760
+            },
+            {
+              "width": 1280,
+              "height": 960,
+              "min_frame_duration_ns": 33331760
+            },
+            {
+              "width": 1280,
+              "height": 720,
+              "min_frame_duration_ns": 33331760
+            },
+            {
+              "width": 1024,
+              "height": 768,
+              "min_frame_duration_ns": 33331760
+            },
+            {
+              "width": 800,
+              "height": 600,
+              "min_frame_duration_ns": 33331760
+            },
+            {
+              "width": 720,
+              "height": 480,
+              "min_frame_duration_ns": 33331760
+            },
+            {
+              "width": 640,
+              "height": 480,
+              "min_frame_duration_ns": 33331760
+            },
+            {
+              "width": 640,
+              "height": 360,
+              "min_frame_duration_ns": 33331760
+            },
+            {
+              "width": 352,
+              "height": 288,
+              "min_frame_duration_ns": 33331760
+            },
+            {
+              "width": 320,
+              "height": 240,
+              "min_frame_duration_ns": 33331760
+            },
+            {
+              "width": 176,
+              "height": 144,
+              "min_frame_duration_ns": 33331760
+            }
+          ]
+        }
+      ],
+      "concurrent_id_sets": [
+        [
+          "0",
+          "1"
+        ]
+      ]
+    },
+    "attempts": [
+      {
+        "camera_ids": [
+          "1"
+        ],
+        "width": 1280,
+        "height": 720,
+        "logical_camera": null,
+        "requested_duration_ms": 10000,
+        "startup_order": "open_all_then_configure",
+        "opened_camera_ids": [
+          "1"
+        ],
+        "image_callbacks_drained": true,
+        "camera_close_callbacks_complete": true,
+        "request_template": "record",
+        "stabilization": "disabled when advertised",
+        "sensor_pairs": [],
+        "streams": [
+          {
+            "sensor_id": "1",
+            "width": 1280,
+            "height": 720,
+            "image_rotation_applied_degrees": 0,
+            "output_width": 1280,
+            "output_height": 720,
+            "display_degrees_at_session_start": 90,
+            "mirrored": false,
+            "sensor_orientation": 270,
+            "timestamp_source": 1,
+            "intrinsic_calibration": [
+              3225.7742,
+              3225.7742,
+              960.5043,
+              540.46704,
+              0
+            ],
+            "lens_distortion": [
+              0.08807813,
+              -0.22617353,
+              0.16460505,
+              0,
+              0
+            ],
+            "visionipc_valid": false,
+            "visionipc_stream": 1,
+            "focal_lengths_mm": [
+              4.38
+            ],
+            "frames": 289,
+            "fps": 28.990381998366733,
+            "first_timestamp_ns": 133267122823,
+            "last_timestamp_ns": 143201452078,
+            "timestamp_errors": 0,
+            "changed_frames": 288,
+            "metadata_failures": 0,
+            "uncaptured_requests": 0,
+            "lost_buffers": 0,
+            "physical_metadata_frames": 289,
+            "measured_focal_length_mm": 4.38,
+            "packing_errors": 0,
+            "packing_p99_ns": 739416,
+            "delivery_age_available": true,
+            "delivery_age_p50_ns": -30925552,
+            "delivery_age_p95_ns": -29609802,
+            "delivery_age_p99_ns": -27965969,
+            "delivery_over_100ms": 0,
+            "acquisition_age_p50_ns": -31254093,
+            "acquisition_age_p95_ns": -29975760,
+            "acquisition_age_p99_ns": -28332843,
+            "delivery_future_timestamps": 289,
+            "clock_sample_columns": "sensor_raw,elapsed_before,monotonic,elapsed_after",
+            "clock_samples_ns": [
+              [
+                142100355161,
+                142070009317,
+                142070009609,
+                142070009776
+              ],
+              [
+                142133902452,
+                142103690901,
+                142103691151,
+                142103691276
+              ],
+              [
+                142169751494,
+                142138892067,
+                142138892317,
+                142138892567
+              ],
+              [
+                142204677786,
+                142174342234,
+                142174342651,
+                142174342776
+              ],
+              [
+                142238999369,
+                142208359526,
+                142208360026,
+                142208360192
+              ],
+              [
+                142274304119,
+                142243528234,
+                142243528567,
+                142243528692
+              ],
+              [
+                142308565494,
+                142278395817,
+                142278396109,
+                142278396276
+              ],
+              [
+                142344076119,
+                142313339026,
+                142313339359,
+                142313339567
+              ],
+              [
+                142378233702,
+                142347569901,
+                142347570234,
+                142347570401
+              ],
+              [
+                142412697869,
+                142382659234,
+                142382659526,
+                142382659776
+              ],
+              [
+                142446412827,
+                142415463026,
+                142415463317,
+                142415463526
+              ],
+              [
+                142479961036,
+                142448956609,
+                142448956859,
+                142448956984
+              ],
+              [
+                142513540827,
+                142482656401,
+                142482656651,
+                142482656817
+              ],
+              [
+                142547344327,
+                142516392901,
+                142516393151,
+                142516393317
+              ],
+              [
+                142580985827,
+                142552107192,
+                142552107484,
+                142552107609
+              ],
+              [
+                142614741036,
+                142584120734,
+                142584121067,
+                142584121234
+              ],
+              [
+                142648640411,
+                142617517817,
+                142617518109,
+                142617518234
+              ],
+              [
+                142682378327,
+                142652233109,
+                142652233359,
+                142652233526
+              ],
+              [
+                142716090661,
+                142686205776,
+                142686206068,
+                142686206234
+              ],
+              [
+                142750637119,
+                142720337651,
+                142720338026,
+                142720338109
+              ],
+              [
+                142785419619,
+                142754728193,
+                142754728484,
+                142754728651
+              ],
+              [
+                142819040619,
+                142788888776,
+                142788889484,
+                142788889651
+              ],
+              [
+                142853729328,
+                142822846151,
+                142822846401,
+                142822846568
+              ],
+              [
+                142887733744,
+                142857234318,
+                142857234651,
+                142857235026
+              ],
+              [
+                142921596869,
+                142890879734,
+                142890880109,
+                142890880318
+              ],
+              [
+                142956712119,
+                142926170484,
+                142926171568,
+                142926171734
+              ],
+              [
+                142991936744,
+                142961780276,
+                142961781109,
+                142961781318
+              ],
+              [
+                143025772161,
+                142996700026,
+                142996700359,
+                142996700526
+              ],
+              [
+                143065270578,
+                143034667359,
+                143034667651,
+                143034667818
+              ],
+              [
+                143098780453,
+                143070198901,
+                143070199151,
+                143070199276
+              ],
+              [
+                143132435369,
+                143101498359,
+                143101498651,
+                143101498776
+              ],
+              [
+                143166762494,
+                143135448484,
+                143135448693,
+                143135448859
+              ],
+              [
+                143201452078,
+                143170160693,
+                143170161151,
+                143170161318
+              ],
+              [
+                141024653535,
+                140994366400,
+                140994366775,
+                140994367025
+              ],
+              [
+                141058647618,
+                141028583233,
+                141028583608,
+                141028583775
+              ],
+              [
+                141094506493,
+                141063654025,
+                141063654358,
+                141063654483
+              ],
+              [
+                141130702035,
+                141099847900,
+                141099848108,
+                141099848400
+              ],
+              [
+                141164644452,
+                141133474942,
+                141133475150,
+                141133475317
+              ],
+              [
+                141199009285,
+                141167786108,
+                141167786442,
+                141167786608
+              ],
+              [
+                141232666618,
+                141201657775,
+                141201658067,
+                141201658233
+              ],
+              [
+                141267084660,
+                141236409108,
+                141236409400,
+                141236409525
+              ],
+              [
+                141304599202,
+                141273751650,
+                141273751983,
+                141273752150
+              ],
+              [
+                141339851285,
+                141309621859,
+                141309622192,
+                141309622400
+              ],
+              [
+                141377316202,
+                141346306609,
+                141346306984,
+                141346307109
+              ],
+              [
+                141411337744,
+                141380305317,
+                141380305567,
+                141380305692
+              ],
+              [
+                141445660452,
+                141414732900,
+                141414733192,
+                141414733400
+              ],
+              [
+                141479798952,
+                141448636275,
+                141448636525,
+                141448636734
+              ],
+              [
+                141513629285,
+                141482458817,
+                141482459859,
+                141482460234
+              ],
+              [
+                141547388369,
+                141516658317,
+                141516658650,
+                141516658817
+              ],
+              [
+                141581386452,
+                141550525900,
+                141550526150,
+                141550526317
+              ],
+              [
+                141615901994,
+                141585715942,
+                141585716275,
+                141585716442
+              ],
+              [
+                141650117202,
+                141618975150,
+                141618975400,
+                141618975650
+              ],
+              [
+                141685287827,
+                141654528525,
+                141654528859,
+                141654529025
+              ],
+              [
+                141719094994,
+                141687657900,
+                141687658275,
+                141687658442
+              ],
+              [
+                141752888994,
+                141722138025,
+                141722138317,
+                141722138609
+              ],
+              [
+                141786601952,
+                141755735484,
+                141755735775,
+                141755735984
+              ],
+              [
+                141821432619,
+                141790240317,
+                141790240817,
+                141790240942
+              ],
+              [
+                141856334327,
+                141825344067,
+                141825344275,
+                141825344484
+              ],
+              [
+                141892306785,
+                141861215025,
+                141861215400,
+                141861215692
+              ],
+              [
+                141928163244,
+                141896791109,
+                141896791734,
+                141896791900
+              ],
+              [
+                141963660785,
+                141933329025,
+                141933329359,
+                141933329484
+              ],
+              [
+                141997226619,
+                141967319525,
+                141967319859,
+                141967320025
+              ],
+              [
+                142031198369,
+                142005276192,
+                142005276442,
+                142005276651
+              ],
+              [
+                142065742827,
+                142035473192,
+                142035473526,
+                142035473692
+              ]
+            ],
+            "capture_sample_columns": "sensor_raw,frame_number,exposure,duration,elapsed_before,monotonic,elapsed_after",
+            "capture_samples_ns": [
+              [
+                142100355161,
+                256,
+                2202369,
+                33331760,
+                142070425651,
+                142070426192,
+                142070426442
+              ],
+              [
+                142133902452,
+                257,
+                2202369,
+                33331760,
+                142104271109,
+                142104271651,
+                142104271901
+              ],
+              [
+                142169751494,
+                258,
+                2202369,
+                33331760,
+                142139094942,
+                142139095401,
+                142139095651
+              ],
+              [
+                142204677786,
+                259,
+                2202369,
+                33331760,
+                142174546817,
+                142174547317,
+                142174547567
+              ],
+              [
+                142238999369,
+                260,
+                2202369,
+                33331760,
+                142208526359,
+                142208526609,
+                142208526776
+              ],
+              [
+                142274304119,
+                261,
+                2202369,
+                33331760,
+                142244098692,
+                142244099526,
+                142244099817
+              ],
+              [
+                142308565494,
+                262,
+                2202369,
+                33331760,
+                142279144359,
+                142279145484,
+                142279145651
+              ],
+              [
+                142344076119,
+                263,
+                2202369,
+                33331760,
+                142313555817,
+                142313556359,
+                142313556567
+              ],
+              [
+                142378233702,
+                264,
+                2202369,
+                33331760,
+                142348305942,
+                142348307067,
+                142348307359
+              ],
+              [
+                142412697869,
+                265,
+                2202369,
+                33331760,
+                142383719317,
+                142383720109,
+                142383720359
+              ],
+              [
+                142446412827,
+                266,
+                2202369,
+                33331760,
+                142415680359,
+                142415680734,
+                142415680901
+              ],
+              [
+                142479961036,
+                267,
+                2202369,
+                33331760,
+                142449141109,
+                142449141442,
+                142449141651
+              ],
+              [
+                142513540827,
+                268,
+                2202369,
+                33331760,
+                142483442567,
+                142483443151,
+                142483443317
+              ],
+              [
+                142547344327,
+                269,
+                2202369,
+                33331760,
+                142516581859,
+                142516582317,
+                142516582692
+              ],
+              [
+                142580985827,
+                270,
+                2202369,
+                33331760,
+                142552325484,
+                142552325734,
+                142552325859
+              ],
+              [
+                142614741036,
+                271,
+                2202369,
+                33331760,
+                142584386734,
+                142584387317,
+                142584387651
+              ],
+              [
+                142648640411,
+                272,
+                2202369,
+                33331760,
+                142617660067,
+                142617660276,
+                142617660526
+              ],
+              [
+                142682378327,
+                273,
+                2202369,
+                33331760,
+                142652971776,
+                142652972776,
+                142652973067
+              ],
+              [
+                142716090661,
+                274,
+                2202369,
+                33331760,
+                142686718151,
+                142686719109,
+                142686719318
+              ],
+              [
+                142750637119,
+                275,
+                2202369,
+                33331760,
+                142720627693,
+                142720627943,
+                142720628193
+              ],
+              [
+                142785419619,
+                276,
+                2202369,
+                33331760,
+                142754927401,
+                142754927818,
+                142754928234
+              ],
+              [
+                142819040619,
+                277,
+                2202369,
+                33331760,
+                142789664859,
+                142789665609,
+                142789665943
+              ],
+              [
+                142853729328,
+                278,
+                2202369,
+                33331760,
+                142823051943,
+                142823052359,
+                142823052609
+              ],
+              [
+                142887733744,
+                279,
+                2202369,
+                33331760,
+                142857417526,
+                142857417943,
+                142857418234
+              ],
+              [
+                142921596869,
+                280,
+                2202369,
+                33331760,
+                142891660234,
+                142891661318,
+                142891661609
+              ],
+              [
+                142956712119,
+                281,
+                2202369,
+                33331760,
+                142926811984,
+                142926812651,
+                142926812943
+              ],
+              [
+                142991936744,
+                282,
+                2202369,
+                33331760,
+                142963406984,
+                142963407818,
+                142963408109
+              ],
+              [
+                143025772161,
+                283,
+                2202369,
+                33331760,
+                142996915818,
+                142996916234,
+                142996916484
+              ],
+              [
+                143065270578,
+                284,
+                2202369,
+                33331760,
+                143035802734,
+                143035803401,
+                143035803609
+              ],
+              [
+                143098780453,
+                285,
+                2202369,
+                33331760,
+                143071395859,
+                143071396943,
+                143071397276
+              ],
+              [
+                143132435369,
+                286,
+                2202369,
+                33331760,
+                143102436443,
+                143102437443,
+                143102437609
+              ],
+              [
+                143166762494,
+                287,
+                2202369,
+                33331760,
+                143136882234,
+                143136883151,
+                143136883443
+              ],
+              [
+                143201452078,
+                288,
+                2202369,
+                33331760,
+                143172537401,
+                143172538318,
+                143172538609
+              ],
+              [
+                141024653535,
+                225,
+                2202369,
+                33331760,
+                140995185400,
+                140995186192,
+                140995186483
+              ],
+              [
+                141058647618,
+                226,
+                2202369,
+                33331760,
+                141028797608,
+                141028798150,
+                141028798275
+              ],
+              [
+                141094506493,
+                227,
+                2202369,
+                33331760,
+                141063993275,
+                141063993900,
+                141063994150
+              ],
+              [
+                141130702035,
+                228,
+                2202369,
+                33331760,
+                141099972567,
+                141099972817,
+                141099972942
+              ],
+              [
+                141164644452,
+                229,
+                2202369,
+                33331760,
+                141133660942,
+                141133661358,
+                141133661608
+              ],
+              [
+                141199009285,
+                230,
+                2202369,
+                33331760,
+                141168122983,
+                141168123192,
+                141168123358
+              ],
+              [
+                141232666618,
+                231,
+                2202369,
+                33331760,
+                141201912983,
+                141201913525,
+                141201913817
+              ],
+              [
+                141267084660,
+                232,
+                2202369,
+                33331760,
+                141236553483,
+                141236553858,
+                141236554025
+              ],
+              [
+                141304599202,
+                233,
+                2202369,
+                33331760,
+                141273928650,
+                141273928900,
+                141273929067
+              ],
+              [
+                141339851285,
+                234,
+                2202369,
+                33331760,
+                141309883775,
+                141309884359,
+                141309884650
+              ],
+              [
+                141377316202,
+                235,
+                2202369,
+                33331760,
+                141347153817,
+                141347154609,
+                141347154859
+              ],
+              [
+                141411337744,
+                236,
+                2202369,
+                33331760,
+                141381546067,
+                141381546942,
+                141381547275
+              ],
+              [
+                141445660452,
+                237,
+                2202369,
+                33331760,
+                141414939692,
+                141414940109,
+                141414940359
+              ],
+              [
+                141479798952,
+                238,
+                2202369,
+                33331760,
+                141448961692,
+                141448962234,
+                141448962525
+              ],
+              [
+                141513629285,
+                239,
+                2202369,
+                33331760,
+                141482733775,
+                141482734400,
+                141482734650
+              ],
+              [
+                141547388369,
+                240,
+                2202369,
+                33331760,
+                141517641150,
+                141517641734,
+                141517642025
+              ],
+              [
+                141581386452,
+                241,
+                2202369,
+                33331760,
+                141550708650,
+                141550709109,
+                141550709359
+              ],
+              [
+                141615901994,
+                242,
+                2202369,
+                33331760,
+                141586169609,
+                141586170150,
+                141586170525
+              ],
+              [
+                141650117202,
+                243,
+                2202369,
+                33331760,
+                141619184025,
+                141619184525,
+                141619184692
+              ],
+              [
+                141685287827,
+                244,
+                2202369,
+                33331760,
+                141654718859,
+                141654719275,
+                141654719484
+              ],
+              [
+                141719094994,
+                245,
+                2202369,
+                33331760,
+                141688633150,
+                141688633900,
+                141688634109
+              ],
+              [
+                141752888994,
+                246,
+                2202369,
+                33331760,
+                141722491900,
+                141722492525,
+                141722492775
+              ],
+              [
+                141786601952,
+                247,
+                2202369,
+                33331760,
+                141755927734,
+                141755928234,
+                141755928442
+              ],
+              [
+                141821432619,
+                248,
+                2202369,
+                33331760,
+                141790879234,
+                141790880317,
+                141790880567
+              ],
+              [
+                141856334327,
+                249,
+                2202369,
+                33331760,
+                141825587984,
+                141825588734,
+                141825589025
+              ],
+              [
+                141892306785,
+                250,
+                2202369,
+                33331760,
+                141862057317,
+                141862057984,
+                141862058317
+              ],
+              [
+                141928163244,
+                251,
+                2202369,
+                33331760,
+                141897775442,
+                141897776400,
+                141897776650
+              ],
+              [
+                141963660785,
+                252,
+                2202369,
+                33331760,
+                141933796400,
+                141933797275,
+                141933797567
+              ],
+              [
+                141997226619,
+                253,
+                2202369,
+                33331760,
+                141967597567,
+                141967598150,
+                141967598525
+              ],
+              [
+                142031198369,
+                254,
+                2202369,
+                33331760,
+                142005824192,
+                142005824901,
+                142005825192
+              ],
+              [
+                142065742827,
+                255,
+                2202369,
+                33331760,
+                142035649151,
+                142035649401,
+                142035649567
+              ]
+            ],
+            "frame_interval_p99_ns": 37741875
+          }
+        ],
+        "elapsed_ms": 10460,
+        "completed_requested_duration": true,
+        "status": "failed",
+        "error": "frame loss/metadata failure or insufficient independent, overlapping, monotonic frames"
+      }
+    ],
+    "completed_utc": "2026-11-01T09:23:51.852228Z",
+    "status": "failed"
+  },
+  "isolation_audit": "candidate35-isolation-audit.json",
+  "final_cleanup": "candidate35-final-cleanup.json",
+  "delivery_audit": "candidate35-delivery-audit.json",
+  "reproduction_commands": "candidate35-reproduce.md",
+  "thirty_minute_workload": {
+    "status": "blocked",
+    "reason": "Short correctness, freshness, performance and identity gates are unmet; no 30-minute acceptance soak was run."
+  },
+  "blocked_physical_gates": [
+    "Independent rear identity: deferred lens-cover trials",
+    "Measured optical and mounted calibration: phone unmounted",
+    "Panda firmware, passive CAN fingerprint/bus mapping, harness and vehicle behavior: Panda disconnected",
+    "Physical fold/cover/inner-display transitions: not exercised; emulator resizing is separate"
+  ],
+  "acceptance": {
+    "original_model_numerical_parity": "passed",
+    "accurate_20hz_inference": "failed",
+    "native_mad_accuracy": "failed",
+    "camera_transport": "passed",
+    "independent_rear_sensor_identity": "blocked",
+    "phone_camera_freshness": "failed",
+    "complete_100hz_controls_deadlines": "failed",
+    "thermal_pause_recovery": "passed",
+    "runtime_chain_behavior": "passed",
+    "emulator_actual_camera_timing": "failed",
+    "physical_vehicle": "blocked",
+    "sustained_30minute_combined": "blocked"
+  },
+  "latest_phone_snapshot": "candidate35-phone-final-snapshot.json"
+}

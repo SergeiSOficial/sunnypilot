@@ -1,0 +1,66 @@
+{
+  "serial": "RFCR81Y1TBJ",
+  "command": [
+    "/Users/sergios/sunnypilot/.venv/bin/python",
+    "android/scripts/validate_models.py",
+    "--serial",
+    "RFCR81Y1TBJ",
+    "--adb",
+    "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+    "--package",
+    "com.samsung.sunnypilot.fold3",
+    "--profile",
+    "mnn-buffer-accuracy-driver-camera-replay",
+    "--timeout",
+    "7200",
+    "--report",
+    "/Users/sergios/sunnypilot/android/reports/full-model-controls-20261101/fold45zd-mnn-driver-accuracy-camera-replay.json"
+  ],
+  "vehicle_tx_enabled": false,
+  "status": "passed",
+  "validation_status": "passed",
+  "isolation_status": "passed",
+  "forwards_before": [],
+  "before_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 32.9,
+    "thermal_override": false
+  },
+  "apk_sha256": "e7ae5461257aae2abef31e1631c4c79e7a32bc1513523f5d38db021ab9a2334e",
+  "baseline": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 28.6,
+    "thermal_override": false,
+    "idle_seconds": 48.61714245897019,
+    "normal_thermal_seconds": 32.181848959007766
+  },
+  "apk_sha256_at_start": "e7ae5461257aae2abef31e1631c4c79e7a32bc1513523f5d38db021ab9a2334e",
+  "returncode": 0,
+  "after_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 34.7,
+    "thermal_override": false
+  },
+  "forwards_removed": [],
+  "apk_sha256_after": "e7ae5461257aae2abef31e1631c4c79e7a32bc1513523f5d38db021ab9a2334e",
+  "artifact_stable": true,
+  "wrapper_status": "passed"
+}

@@ -1,0 +1,72 @@
+{
+  "serial": "RFCR81Y1TBJ",
+  "command": [
+    ".venv/bin/python",
+    "-m",
+    "openpilot.tools.sim.android_chain_validation",
+    "--serial",
+    "RFCR81Y1TBJ",
+    "--package",
+    "com.samsung.sunnypilot.fold3",
+    "--adb",
+    "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+    "--seconds",
+    "30",
+    "--device-replay",
+    "--steady-inputs",
+    "--report",
+    "android/reports/full-model-controls-20261101/fold45i-controls.json"
+  ],
+  "vehicle_tx_enabled": false,
+  "status": "passed",
+  "validation_status": "passed",
+  "isolation_status": "passed",
+  "forwards_before": [],
+  "before_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 27.6,
+    "thermal_override": false
+  },
+  "apk_sha256": "00fafa18e3a8456db65b8f913325cb88b15e555bd5ce9616f6bc9b1a82d8d6de",
+  "baseline": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 26.4,
+    "thermal_override": false,
+    "idle_seconds": 32.466452332999324,
+    "normal_thermal_seconds": 32.13198054098757
+  },
+  "apk_sha256_at_start": "00fafa18e3a8456db65b8f913325cb88b15e555bd5ce9616f6bc9b1a82d8d6de",
+  "runtime": {
+    "manager_pid": 7738,
+    "ui_pid": 7948,
+    "simulation": true
+  },
+  "returncode": 0,
+  "after_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 27.7,
+    "thermal_override": false
+  },
+  "forwards_removed": [],
+  "apk_sha256_after": "00fafa18e3a8456db65b8f913325cb88b15e555bd5ce9616f6bc9b1a82d8d6de",
+  "artifact_stable": true,
+  "wrapper_status": "passed"
+}

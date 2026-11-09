@@ -1,0 +1,34 @@
+11-01 16:33:59.383   828   828 D io_stats: !@ Read_top(KB): ot.fold3:models(7576) 8284 loop46(4117) 256 ndroid.systemui(2952) 136
+11-01 16:34:03.386   828   828 D io_stats: !@ Read_top(KB): ot.fold3:models(7576) 2588 loop34(1003) 68 system_server(1569) 20
+11-01 16:34:07.391   828   828 D io_stats: !@ Read_top(KB): ot.fold3:models(7576) 16384 loop36(1014) 68 android.vending(12774) 48
+11-01 16:34:11.394   828   828 D io_stats: !@ Read_top(KB): ot.fold3:models(7576) 4356 ndroid.systemui(2952) 188 android.vending(12774) 28
+11-01 16:34:11.569  7576  7608 I MNNJNI  : CPU Group: [ 0  1  2  3 ], 300000 - 1804800
+11-01 16:34:11.569  7576  7608 I MNNJNI  : CPU Group: [ 4  5  6 ], 710400 - 2419200
+11-01 16:34:11.569  7576  7608 I MNNJNI  : CPU Group: [ 7 ], 844800 - 2841600
+11-01 16:34:11.569  7576  7608 I MNNJNI  : parsed /proc/cpuinfo Hardware = "SM8350"
+11-01 16:34:11.569  7576  7608 W libc    : Access denied finding property "ro.mediatek.platform"
+11-01 16:34:11.569  7576  7608 I MNNJNI  : (last_midr & (CPUINFO_ARM_MIDR_IMPLEMENTER_MASK | CPUINFO_ARM_MIDR_PART_MASK))=0x 4100d440 in _getInfoArm, 1250 
+11-01 16:34:11.569  7576  7608 I MNNJNI  : The device supports: i8sdot:1, fp16:1, i8mm: 0, sve2: 0, sme2: 0, perfCores: 0
+11-01 16:34:11.579  7576  7608 W libc    : Access denied finding property "ro.vendor.gfx.32bit.target"
+11-01 16:34:11.736  7576  7753 I MNNJNI  : Program build log: BC-src-code:18:14: error: 'half' is an OpenCL extension, cl_khr_fp16 must be enabled
+11-01 16:34:11.736  7576  7753 I MNNJNI  :  half rounded[4];
+11-01 16:34:11.736  7576  7753 I MNNJNI  :              ^
+11-01 16:34:11.736  7576  7753 I MNNJNI  : 1 diagnostic(s) generated.
+11-01 16:34:11.736  7576  7753 I MNNJNI  :  
+11-01 16:34:11.736  7576  7753 I MNNJNI  : Build program failed, err:-11 ! 
+11-01 16:34:11.846  7576  7608 F libc    : Fatal signal 11 (SIGSEGV), code 1 (SEGV_MAPERR), fault addr 0x0 in tid 7608 (model-validatio), pid 7576 (ot.fold3:models)
+11-01 16:34:11.907  7756  7756 E crash_dump64: failed to get the guest state header for thread 7576: Bad address
+11-01 16:34:11.914  7756  7756 E crash_dump64: failed to get the guest state header for thread 7608: Bad address
+11-01 16:34:11.953   899   899 I tombstoned: received crash request for pid 7608
+11-01 16:34:11.955  7756  7756 I crash_dump64: performing dump of process 7576 (target tid = 7608)
+11-01 16:34:12.197  7576  7753 I MNNJNI  : Program build log: BC-src-code:18:14: error: 'half' is an OpenCL extension, cl_khr_fp16 must be enabled
+11-01 16:34:12.197  7576  7753 I MNNJNI  :  half rounded[4];
+11-01 16:34:12.197  7576  7753 I MNNJNI  :              ^
+11-01 16:34:12.197  7576  7753 I MNNJNI  : 1 diagnostic(s) generated.
+11-01 16:34:12.197  7576  7753 I MNNJNI  :  
+11-01 16:34:12.197  7576  7753 I MNNJNI  : Build program failed, err:-11 ! 
+11-01 16:34:12.817  7756  7756 F DEBUG   : pid: 7576, tid: 7608, name: model-validatio  >>> com.samsung.sunnypilot.fold3:models <<<
+11-01 16:34:13.029  1114  1114 I Zygote  : Process 7576 exited due to signal 11 (Segmentation fault)
+11-01 16:34:13.029  1569  2062 I libprocessgroup: Removed cgroup /sys/fs/cgroup/uid_10005/pid_7576
+11-01 16:34:13.030  1569  5528 I ActivityManager: Process com.samsung.sunnypilot.fold3:models (pid 7576) has died: prcp FGS (2128,5586)
+11-01 16:34:15.399   828   828 D io_stats: !@ Read_top(KB): crash_dump64(7756) 33584 loop36(1014) 5392 ot.fold3:models(7576) 2608

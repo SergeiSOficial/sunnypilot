@@ -1,0 +1,39 @@
+[
+  {
+    "name": "chain-device-steady",
+    "command": [
+      "/Users/sergios/sunnypilot/.venv/bin/python",
+      "android/scripts/experiment.py",
+      "--serial",
+      "emulator-5560",
+      "--adb",
+      "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+      "--package",
+      "com.samsung.sunnypilot.fold3",
+      "--report",
+      "/Users/sergios/sunnypilot/android/reports/full-model-controls-20261101/emulator-candidate45x-swiftshader-chain-device-steady-isolation.json",
+      "--runtime",
+      "full-chain",
+      "--",
+      "/Users/sergios/sunnypilot/.venv/bin/python",
+      "-m",
+      "openpilot.tools.sim.android_chain_validation",
+      "--seconds",
+      "30",
+      "--device-replay",
+      "--steady-inputs",
+      "--serial",
+      "emulator-5560",
+      "--adb",
+      "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+      "--report",
+      "/Users/sergios/sunnypilot/android/reports/full-model-controls-20261101/emulator-candidate45x-swiftshader-chain-device-steady.json",
+      "--package",
+      "com.samsung.sunnypilot.fold3"
+    ],
+    "status": "failed",
+    "returncode": 1,
+    "log": "emulator-candidate45x-swiftshader-chain-device-steady-command.log",
+    "isolation_status": "passed"
+  }
+]

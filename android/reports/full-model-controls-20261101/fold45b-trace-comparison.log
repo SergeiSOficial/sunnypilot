@@ -1,0 +1,47 @@
+{
+  "dmonitoring_model": {
+    "captured_tensors": 8,
+    "first_tolerance_failure": {
+      "operator": "android_precision_8_result",
+      "operator_type": "Convolution",
+      "tensor": "android_precision_8_result",
+      "backend": "OpenCL",
+      "layout": "NCHW",
+      "dtype": "float32",
+      "shape": [
+        1,
+        32,
+        120,
+        180
+      ],
+      "file": "0003.bin",
+      "original": {
+        "tensor": "android_precision_8_result",
+        "node": "node_Conv_805_token_561",
+        "operator": "Conv",
+        "domain": ""
+      },
+      "parity": {
+        "passed": false,
+        "finite": true,
+        "shape": [
+          1,
+          32,
+          120,
+          180
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": false,
+        "max_abs_error": 0.013998031616210938,
+        "mismatched_elements": 82125
+      },
+      "original_dtype": "float32"
+    }
+  },
+  "driving_supercombo": {
+    "captured_tensors": 8,
+    "first_tolerance_failure": null
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "candidate": "candidate45",
+  "apk_sha256": "9868e5b9ca7d24feaefd9acfbcdabaf4f5226e85063e03fffec4400aecc1a859",
+  "diagnostic_only": true,
+  "original_node": "fused node_linear_3",
+  "operator": "Gemm+Relu (MNN fusion)",
+  "graph_tensor_before_fused_relu": "android_precision_335_result",
+  "captured_tensor_after_fused_relu": "ConvertTensor631",
+  "actual_gpu_input_sha256": "4e62609b9e0e3510e53a9009961fae04eaf0af2c5471c6a2036f7c357f306c3c",
+  "diagnostic_graph_sha256": "9308c3e157128e412249797c53dff4c52cf6fde2429c7048476709516949a281",
+  "parity_on_actual_input": {
+    "passed": true,
+    "finite": true,
+    "shape": [
+      1,
+      16
+    ],
+    "dtype": "float32",
+    "expected_nonfinite_elements": 0,
+    "unexpected_nonfinite_elements": 0,
+    "exact": false,
+    "max_abs_error": 2.384185791015625e-07,
+    "mismatched_elements": 0
+  },
+  "gpu_vs_float64_diagnostic": {
+    "passed": true,
+    "finite": true,
+    "shape": [
+      1,
+      16
+    ],
+    "dtype": "float32",
+    "expected_nonfinite_elements": 0,
+    "unexpected_nonfinite_elements": 0,
+    "exact": false,
+    "max_abs_error": 4.76837158203125e-07,
+    "mismatched_elements": 0
+  },
+  "host_vs_float64_diagnostic": {
+    "passed": true,
+    "finite": true,
+    "shape": [
+      1,
+      16
+    ],
+    "dtype": "float32",
+    "expected_nonfinite_elements": 0,
+    "unexpected_nonfinite_elements": 0,
+    "exact": false,
+    "max_abs_error": 4.76837158203125e-07,
+    "mismatched_elements": 0
+  },
+  "note": "Actual-input local agreement cannot qualify full-model output or locate an earlier upstream error."
+}

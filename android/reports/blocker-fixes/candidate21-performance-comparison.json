@@ -1,0 +1,570 @@
+{
+  "scope": "Short bench diagnostics, different model profiles and native builds. These are observations, not controlled speedup or sustained-stack acceptance claims.",
+  "vehicle_tx_enabled": false,
+  "rtol": 0.001,
+  "atol": 0.0001,
+  "candidate21": {
+    "apk_sha256": "4c48351cf6d6166ad32d0ab309072e6900438decb1751f86ab30fcdb5109bbfe",
+    "model_profile": "host-fusion-cl",
+    "models": {
+      "dmonitoring_model": {
+        "status": "failed",
+        "performance_status": "failed",
+        "samples": 100,
+        "work_p99_ms": 75.40413878000001,
+        "deadline_misses_50ms": 39,
+        "parity": {
+          "outputs": {
+            "passed": false,
+            "max_abs_error": 0.00390625,
+            "shape": [
+              1,
+              553
+            ]
+          }
+        },
+        "additional_seed_parity": {
+          "7": {
+            "outputs": {
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                553
+              ],
+              "dtype": "float16",
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 0.00390625,
+              "mismatched_elements": 12
+            }
+          },
+          "123": {
+            "outputs": {
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                553
+              ],
+              "dtype": "float16",
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 0.00390625,
+              "mismatched_elements": 5
+            }
+          }
+        },
+        "sequences": {
+          "seed42": {
+            "frames": 32,
+            "passed": false,
+            "failed_frames": 31
+          },
+          "seed7": {
+            "frames": 32,
+            "passed": false,
+            "failed_frames": 32
+          },
+          "seed123": {
+            "frames": 32,
+            "passed": false,
+            "failed_frames": 32
+          },
+          "camera-replay": {
+            "frames": 60,
+            "passed": false,
+            "failed_frames": 54
+          }
+        }
+      },
+      "driving_supercombo": {
+        "status": "failed",
+        "performance_status": "failed",
+        "samples": 100,
+        "work_p99_ms": 105.58489018000002,
+        "deadline_misses_50ms": 100,
+        "parity": {
+          "outputs": {
+            "passed": false,
+            "max_abs_error": 0.0625,
+            "shape": [
+              1,
+              2576
+            ]
+          },
+          "next_state_img_q": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "shape": [
+              2,
+              5,
+              6,
+              128,
+              256
+            ]
+          },
+          "next_state_desire_q": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "shape": [
+              100,
+              1,
+              8
+            ]
+          },
+          "next_state_feat_q": {
+            "passed": true,
+            "max_abs_error": 6.103515625e-05,
+            "shape": [
+              96,
+              1,
+              512
+            ]
+          }
+        },
+        "additional_seed_parity": {
+          "7": {
+            "outputs": {
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                2576
+              ],
+              "dtype": "float32",
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 0.0625,
+              "mismatched_elements": 280
+            },
+            "next_state_img_q": {
+              "passed": true,
+              "finite": true,
+              "shape": [
+                2,
+                5,
+                6,
+                128,
+                256
+              ],
+              "dtype": "uint8",
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": true,
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            "next_state_desire_q": {
+              "passed": true,
+              "finite": true,
+              "shape": [
+                100,
+                1,
+                8
+              ],
+              "dtype": "float32",
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": true,
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            "next_state_feat_q": {
+              "passed": true,
+              "finite": true,
+              "shape": [
+                96,
+                1,
+                512
+              ],
+              "dtype": "float32",
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 6.103515625e-05,
+              "mismatched_elements": 0
+            }
+          },
+          "123": {
+            "outputs": {
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                2576
+              ],
+              "dtype": "float32",
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 0.125,
+              "mismatched_elements": 435
+            },
+            "next_state_img_q": {
+              "passed": true,
+              "finite": true,
+              "shape": [
+                2,
+                5,
+                6,
+                128,
+                256
+              ],
+              "dtype": "uint8",
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": true,
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            "next_state_desire_q": {
+              "passed": true,
+              "finite": true,
+              "shape": [
+                100,
+                1,
+                8
+              ],
+              "dtype": "float32",
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": true,
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            "next_state_feat_q": {
+              "passed": true,
+              "finite": true,
+              "shape": [
+                96,
+                1,
+                512
+              ],
+              "dtype": "float32",
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 6.103515625e-05,
+              "mismatched_elements": 0
+            }
+          }
+        },
+        "sequences": {
+          "seed42": {
+            "frames": 32,
+            "passed": false,
+            "failed_frames": 32
+          },
+          "seed7": {
+            "frames": 32,
+            "passed": false,
+            "failed_frames": 32
+          },
+          "seed123": {
+            "frames": 32,
+            "passed": false,
+            "failed_frames": 32
+          },
+          "camera-replay": {
+            "frames": 60,
+            "passed": false,
+            "failed_frames": 60
+          }
+        }
+      }
+    },
+    "vision": {
+      "transport_status": "passed",
+      "status": "blocked",
+      "composite_frames": 894,
+      "composite_fps": 29.788242805274187,
+      "rear_preview_frames": 897,
+      "front_frames": 895,
+      "front_fps": 29.89155315726371,
+      "delivery_age_p99_ns": 98491216,
+      "acquisition_age_p99_ns": 98182154,
+      "preview_delivery_age_p99_ns": 124674602,
+      "preview_acquisition_age_p99_ns": 119413925,
+      "front_delivery_age_p99_ns": 104597090,
+      "front_acquisition_age_p99_ns": 104244018,
+      "preview_readback_p99_ns": 11080208,
+      "preview_render_p99_ns": 2781198,
+      "preview_submit_p99_ns": 6850364,
+      "preview_cpu_conversion_p99_ns": 0,
+      "preview_hash_p99_ns": 1660105,
+      "preview_publication_p99_ns": 3863542,
+      "preview_dropped_readbacks": 0,
+      "packing_errors": 0,
+      "timestamp_errors": 0,
+      "front_timestamp_errors": 0,
+      "rear_candidate_skew_p99_ns": 0,
+      "rear_candidate_overlap_ns": 29944824284,
+      "preview_changed_frames": 894,
+      "thumbnail_changed_frames": 893,
+      "validation_status": "failed",
+      "error": "AssertionError: Insufficient fresh preview samples: {'road': 0, 'driver': 3}",
+      "recoveries": 0,
+      "independent_rear_identity": "blocked: lens-cover evidence deferred; shared parent timestamps do not prove identity",
+      "ui": {
+        "pid": 31201,
+        "backend": "Raylib Android NativeActivity",
+        "vehicle_tx_enabled": false,
+        "status": "running",
+        "full_upstream_ui": true,
+        "camera_preview": [
+          {
+            "stream": "road",
+            "frame_id": 897,
+            "age_ms": 1687.326971,
+            "fresh": false
+          },
+          {
+            "stream": "driver",
+            "frame_id": 895,
+            "age_ms": 1661.741699,
+            "fresh": false
+          }
+        ],
+        "frames": 960,
+        "mean_fps": 29.54716551065543,
+        "width": 2160,
+        "height": 1080,
+        "surface_size": [
+          2289,
+          840
+        ],
+        "last_frame_seconds": 0.03333380073308945,
+        "last_cpu_seconds": 0.0014885940036037937,
+        "recent_p99_frame_ms": 33.72297063469887,
+        "recent_p99_cpu_ms": 14.573855005437508
+      },
+      "models": {
+        "modeld": {
+          "backend": "ORT CPU, 2 threads; OpenCL qualification blocked",
+          "computed_frames": 54,
+          "published_frames": 0,
+          "late_outputs": 54,
+          "rejected_frames": 1601,
+          "nonfinite_outputs": 0,
+          "recurrent_resets": 23,
+          "stage_p99_ms": {
+            "receive_copy": 3.939656800000009,
+            "input_age": 100.01831925,
+            "prepare": 5.105456,
+            "inference": 55.85529975,
+            "output_age": 156.144412
+          },
+          "p99_work_ms": 67.440938
+        },
+        "dmonitoringmodeld": {
+          "backend": "ORT CPU, 2 threads; OpenCL qualification blocked",
+          "computed_frames": 443,
+          "published_frames": 1,
+          "late_outputs": 442,
+          "rejected_frames": 432,
+          "nonfinite_outputs": 0,
+          "recurrent_resets": 3,
+          "stage_p99_ms": {
+            "receive_copy": 1.2946181500000002,
+            "input_age": 99.51905264,
+            "prepare": 7.674332870000003,
+            "inference": 41.57143726000001,
+            "output_age": 139.76825153000001
+          },
+          "p99_work_ms": 47.074271
+        }
+      },
+      "resource_samples": [
+        {
+          "process_pss_kib": [
+            17834,
+            16625,
+            14177,
+            31960,
+            14442,
+            16263,
+            16664,
+            16352,
+            38583,
+            67481
+          ],
+          "total_pss_kib": 250381,
+          "skin_c": 30.3,
+          "thermal_override": false
+        },
+        {
+          "process_pss_kib": [
+            18762,
+            110770,
+            160260,
+            69072,
+            57814,
+            53429,
+            67479,
+            53000,
+            53091,
+            49339,
+            52937,
+            53072,
+            53062,
+            53061,
+            53064,
+            119124,
+            27431,
+            202245
+          ],
+          "total_pss_kib": 1307012,
+          "skin_c": 36.5,
+          "thermal_override": false
+        }
+      ],
+      "cleanup": {
+        "processes": [],
+        "camera_provider_processes": [
+          "1707 cameraserver",
+          "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+        ],
+        "camera_owned": false,
+        "thermal_status": 0,
+        "skin_c": 36.8,
+        "thermal_override": false
+      }
+    },
+    "controls": {
+      "fold": {
+        "status": "passed",
+        "source_mean_hz": 99.99463528780743,
+        "source_exchange_work_p99_ms": 16.140833002282307,
+        "source_deadline_misses": 390,
+        "unsafe_outputs": 0,
+        "worker_failures": {},
+        "elapsed_s": 30.321327958983602,
+        "report": "fold-full-chain-steady-candidate21.json",
+        "controlsd": {
+          "daemon": "controlsd",
+          "pid": 2144,
+          "vehicle_tx_enabled": false,
+          "engagement_allowed": false,
+          "work_samples": 2688,
+          "deadline_misses": 20,
+          "phase": "running",
+          "simulation": true,
+          "p99_stages_ms": {
+            "input_handling_ms": 19.202708,
+            "computation_ms": 4.984635,
+            "publishing_ms": 5.478542,
+            "parameters_extensions_ms": 4.302344,
+            "cycle_before_reporting_ms": 23.422969,
+            "reporting_ms": 3.425261
+          },
+          "updated_input_samples": 2563,
+          "input_handling_ms": 13.670781,
+          "computation_ms": 2.15875,
+          "publishing_ms": 0.745209,
+          "parameters_extensions_ms": 0.696354,
+          "cycle_before_reporting_ms": 17.271094,
+          "work_timing_excludes_input_wait": true,
+          "cycle_deadline_misses": 1218,
+          "reporting_ms": 0.078802,
+          "complete_cycle_ms": 12.490988999999999,
+          "mean_cycle_hz": 100.44706623234792,
+          "p99_work_ms": 9.541614,
+          "p99_complete_cycle_ms": 23.991563000000003
+        },
+        "emulator_stopped": true,
+        "synthetic_sources": true,
+        "sustained_100hz_qualified": false,
+        "physical_vehicle_verified": false
+      },
+      "emulator": {
+        "status": "passed",
+        "source_mean_hz": 99.99418311500212,
+        "source_exchange_work_p99_ms": 5.061500007286668,
+        "source_deadline_misses": 1,
+        "unsafe_outputs": 0,
+        "worker_failures": {},
+        "elapsed_s": 30.190853959007654,
+        "report": "emulator-full-chain-steady-candidate21.json",
+        "controlsd": {
+          "daemon": "controlsd",
+          "pid": 14980,
+          "vehicle_tx_enabled": false,
+          "engagement_allowed": false,
+          "work_samples": 2715,
+          "deadline_misses": 0,
+          "phase": "running",
+          "simulation": true,
+          "p99_stages_ms": {
+            "input_handling_ms": 15.53675,
+            "computation_ms": 0.690167,
+            "publishing_ms": 1.329416,
+            "parameters_extensions_ms": 1.02575,
+            "cycle_before_reporting_ms": 16.271333,
+            "reporting_ms": 0.569917
+          },
+          "updated_input_samples": 2688,
+          "input_handling_ms": 11.586208,
+          "computation_ms": 0.1945,
+          "publishing_ms": 0.168958,
+          "parameters_extensions_ms": 0.097667,
+          "cycle_before_reporting_ms": 12.047333,
+          "work_timing_excludes_input_wait": true,
+          "cycle_deadline_misses": 1353,
+          "reporting_ms": 0.013417,
+          "complete_cycle_ms": 9.060208000000001,
+          "mean_cycle_hz": 99.73355979225927,
+          "p99_work_ms": 1.904625,
+          "p99_complete_cycle_ms": 16.440584
+        },
+        "emulator_stopped": false,
+        "synthetic_sources": true,
+        "sustained_100hz_qualified": false,
+        "physical_vehicle_verified": false
+      }
+    }
+  },
+  "historical_candidate10": {
+    "apk_sha256": "566e4c253c05aae9a6d8fdce82c68b67f3558612ad97560a5d12b2ca2ce83a9a",
+    "controls": {
+      "report": "fold-isolated-steady-chain-candidate10.json",
+      "scope": "Absolute-deadline source with steady inputs; emulator off",
+      "work_samples": 2702,
+      "p99_work_ms": 9.244739,
+      "deadline_misses": 18,
+      "p99_complete_cycle_ms": 24.52724,
+      "cycle_deadline_misses": 1267,
+      "mean_cycle_hz": 98.9732616147874,
+      "p99_stages_ms": {
+        "input_handling_ms": 18.919948,
+        "computation_ms": 4.751042,
+        "publishing_ms": 5.491094,
+        "parameters_extensions_ms": 4.468333,
+        "cycle_before_reporting_ms": 23.560677,
+        "reporting_ms": 4.23401
+      },
+      "fixture_sha256": "8dac3b46d116eff9a1d84165e75036cc65e21063003eb9056b3a27e2ab5986e3"
+    },
+    "source": "candidate10-performance-comparison.json",
+    "model_work_p99_ms": {
+      "dmonitoring_model": 111.57,
+      "driving_supercombo": 88.41
+    },
+    "camera_delivery_age_p99_ms": {
+      "composite": 126.12,
+      "preview": 144.84,
+      "front": 102.11
+    },
+    "controls_emulator_stopped": {
+      "work_p99_ms": 9.2447,
+      "work_misses": 18,
+      "cycle_p99_ms": 24.527,
+      "cycle_misses": 1267,
+      "mean_hz": 98.973,
+      "samples": 2702
+    }
+  }
+}

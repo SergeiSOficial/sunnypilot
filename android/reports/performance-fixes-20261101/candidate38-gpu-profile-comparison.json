@@ -1,0 +1,173 @@
+{
+  "scope": "Matched asynchronous diagnostic profiles; 3 warmups then 5 samples, no concurrent emulator. Not 100-sample p99 or sustained acceptance. Profiling/JIT warmup overhead remains visible.",
+  "selected_candidate": 38,
+  "profiles": [
+    {
+      "candidate": 37,
+      "apk_sha256": "e3b7f892e99f73f83fe77b51c0066e514717f515834b6eb9638a16fac13d091f",
+      "model": "dmonitoring_model",
+      "source_report": "candidate37-cl-profile-driver.json",
+      "samples_ms": [
+        646.602448,
+        692.201875,
+        509.979687,
+        537.056146,
+        523.636927
+      ],
+      "mean_ms": 581.8954166,
+      "kernel_ms_per_inference": {
+        "host_conv": 362.0159488000001,
+        "host_Tanh": 90.88793599999994,
+        "host_divide": 11.306496000000001,
+        "host_matmul": 1.035519999999999,
+        "readback": 0.005990400000000001,
+        "copyin": 0.011622400000000001
+      },
+      "sampled_seed42_parity_passed": true,
+      "full_model_qualification": false,
+      "serialized_checkpoints": false,
+      "dropped_events": 0,
+      "decision": "profile_baseline"
+    },
+    {
+      "candidate": 37,
+      "apk_sha256": "e3b7f892e99f73f83fe77b51c0066e514717f515834b6eb9638a16fac13d091f",
+      "model": "driving_supercombo",
+      "source_report": "candidate37-cl-profile-road.json",
+      "samples_ms": [
+        903.671041,
+        913.363906,
+        899.638072,
+        888.224271,
+        937.341614
+      ],
+      "mean_ms": 908.4477807999999,
+      "kernel_ms_per_inference": {
+        "host_conv": 659.1201280000002,
+        "host_Tanh": 80.19589120000003,
+        "host_divide": 6.478284800000002,
+        "host_matmul": 21.746073599999995,
+        "readback": 0.8771072,
+        "copyin": 0.0703488
+      },
+      "sampled_seed42_parity_passed": true,
+      "full_model_qualification": false,
+      "serialized_checkpoints": false,
+      "dropped_events": 0,
+      "decision": "profile_baseline"
+    },
+    {
+      "candidate": 38,
+      "apk_sha256": "e00e67684a50ed5cd23cd8f55d0bcd7a0337dec049774012feeccbd665b8959f",
+      "model": "dmonitoring_model",
+      "source_report": "candidate38-cl-profile-driver.json",
+      "samples_ms": [
+        425.61599,
+        472.443386,
+        341.819375,
+        354.286718,
+        350.038802
+      ],
+      "mean_ms": 388.8408542,
+      "kernel_ms_per_inference": {
+        "host_conv": 186.39447040000007,
+        "host_Tanh": 84.19712000000001,
+        "host_divide": 10.732032,
+        "host_matmul": 1.038028799999999,
+        "readback": 0.0059392,
+        "copyin": 0.011519999999999997
+      },
+      "sampled_seed42_parity_passed": true,
+      "full_model_qualification": false,
+      "serialized_checkpoints": false,
+      "dropped_events": 0,
+      "decision": "selected_for_full_validation"
+    },
+    {
+      "candidate": 38,
+      "apk_sha256": "e00e67684a50ed5cd23cd8f55d0bcd7a0337dec049774012feeccbd665b8959f",
+      "model": "driving_supercombo",
+      "source_report": "candidate38-cl-profile-road.json",
+      "samples_ms": [
+        505.130625,
+        503.324479,
+        503.486562,
+        506.052083,
+        516.528281
+      ],
+      "mean_ms": 506.904406,
+      "kernel_ms_per_inference": {
+        "host_conv": 284.7080448000003,
+        "host_Tanh": 74.84451839999998,
+        "host_divide": 6.1835264,
+        "host_matmul": 21.77095680000001,
+        "readback": 1.158144,
+        "copyin": 0.06927359999999999
+      },
+      "sampled_seed42_parity_passed": true,
+      "full_model_qualification": false,
+      "serialized_checkpoints": false,
+      "dropped_events": 0,
+      "decision": "selected_for_full_validation"
+    },
+    {
+      "candidate": 39,
+      "apk_sha256": "000ce250c1b593be165258fd5fbc234faceea86f454a24de6ae3079184532610",
+      "model": "dmonitoring_model",
+      "source_report": "candidate39-cl-profile-driver.json",
+      "samples_ms": [
+        517.420938,
+        558.050209,
+        428.131511,
+        431.078021,
+        432.487812
+      ],
+      "mean_ms": 473.4336982,
+      "kernel_ms_per_inference": {
+        "host_conv": 190.15459840000005,
+        "host_Tanh": 177.66062079999998,
+        "host_divide": 18.834995199999998,
+        "host_matmul": 1.0439679999999991,
+        "readback": 0.0053248,
+        "copyin": 0.0210944
+      },
+      "sampled_seed42_parity_passed": true,
+      "full_model_qualification": false,
+      "serialized_checkpoints": false,
+      "dropped_events": 0,
+      "decision": "rejected_regression"
+    },
+    {
+      "candidate": 39,
+      "apk_sha256": "000ce250c1b593be165258fd5fbc234faceea86f454a24de6ae3079184532610",
+      "model": "driving_supercombo",
+      "source_report": "candidate39-cl-profile-road.json",
+      "samples_ms": [
+        591.664062,
+        592.719218,
+        602.332448,
+        597.804427,
+        597.518854
+      ],
+      "mean_ms": 596.4078018,
+      "kernel_ms_per_inference": {
+        "host_conv": 286.7504640000001,
+        "host_Tanh": 154.02623999999997,
+        "host_divide": 11.322623999999994,
+        "host_matmul": 21.750220799999997,
+        "readback": 1.0049536,
+        "copyin": 0.0699392
+      },
+      "sampled_seed42_parity_passed": true,
+      "full_model_qualification": false,
+      "serialized_checkpoints": false,
+      "dropped_events": 0,
+      "decision": "rejected_regression"
+    }
+  ],
+  "original_tolerances": {
+    "rtol": 0.001,
+    "atol": 0.0001
+  },
+  "vehicle_tx_enabled": false
+}

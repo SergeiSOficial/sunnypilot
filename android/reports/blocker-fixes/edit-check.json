@@ -1,0 +1,41 @@
+[
+  {
+    "target": "android/app/src/main/java/ai/sunnypilot/fold3/CameraProbe.java:samsungMultiview",
+    "exit_code": 0,
+    "result": "<edit-check sym=\"samsungMultiview\" t=\"method\" p=\"android/app/src/main/java/ai/sunnypilot/fold3/CameraProbe.java:340\" status=\"unchanged\" defs=\"2\" callers=\"3\" incompatible=\"0\" at=\"7631d5248+dirty\" graph_ambiguous=\"12237\" graph_unresolved=\"8174\" counts_floor=\"1\" root=\".\" next=\"--test-gate=android/app/src/main/java/ai/sunnypilot/fold3/CameraProbe.java\"><def p=\"android/app/src/main/java/ai/sunnypilot/fold3/CameraProbe.java:340\" t=\"method\" params=\"2\"/><def p=\"android/app/src/main/java/ai/sunnypilot/fold3/CameraProbe.java:344\" t=\"method\" params=\"3\"/><c n=\"samsungMultiview\" p=\"android/app/src/main/java/ai/sunnypilot/fold3/CameraProbe.java:340\"/><c n=\"run\" p=\"android/app/src/main/java/ai/sunnypilot/fold3/ProbeService.java:45\"/><c n=\"run\" p=\"android/app/src/main/java/ai/sunnypilot/fold3/VisionService.java:28\"/></edit-check>",
+    "stderr": ""
+  },
+  {
+    "target": "android/app/src/main/python/fold3_sim.py:receive_input",
+    "exit_code": 0,
+    "result": "<edit-check sym=\"receive_input\" t=\"fn\" p=\"android/app/src/main/python/fold3_sim.py:19\" status=\"new-symbol\" defs=\"1\" callers=\"2\" incompatible=\"0\" at=\"7631d5248+dirty\" graph_ambiguous=\"12237\" graph_unresolved=\"8174\" counts_floor=\"1\" root=\".\" next=\"--test-gate=android/app/src/main/python/fold3_sim.py\"><c n=\"serve\" p=\"android/app/src/main/python/fold3_sim.py:65\"/><c n=\"test_idle_relay_withdraws_inputs_before_accepting_another_packet\" p=\"android/tests/test_driving.py:17\"/></edit-check>",
+    "stderr": ""
+  },
+  {
+    "target": "openpilot/selfdrive/car/card.py:can_comm_callbacks",
+    "exit_code": 0,
+    "result": "<edit-check sym=\"can_comm_callbacks\" t=\"fn\" p=\"openpilot/selfdrive/car/card.py:47\" status=\"new-symbol\" defs=\"1\" callers=\"7\" incompatible=\"0\" at=\"7631d5248+dirty\" graph_ambiguous=\"12237\" graph_unresolved=\"8174\" counts_floor=\"1\" root=\".\" next=\"--test-gate=openpilot/selfdrive/car/card.py\"><c n=\"vehicle\" p=\"android/app/src/main/python/fold3_driving.py:57\"/><c n=\"test_receive_only_callback_and_controls_reject_transmission\" p=\"android/tests/test_driving.py:172\"/><c n=\"__init__\" p=\"openpilot/selfdrive/car/card.py:74\"/><c n=\"can_callbacks\" p=\"tools/scripts/car/disable_ecu.py:10\"/><c n=\"can_callbacks\" p=\"tools/scripts/car/ecu_addrs.py:24\"/><c n=\"can_callbacks\" p=\"tools/scripts/car/fw_versions.py:28\"/><c n=\"can_callbacks\" p=\"tools/scripts/car/vin.py:22\"/></edit-check>",
+    "stderr": ""
+  },
+  {
+    "target": "openpilot/selfdrive/controls/controlsd.py:run",
+    "exit_code": 0,
+    "result": "<edit-check sym=\"run\" t=\"fn\" p=\"openpilot/selfdrive/controls/controlsd.py:246\" status=\"new-symbol\" defs=\"1\" callers=\"1\" incompatible=\"0\" at=\"7631d5248+dirty\" graph_ambiguous=\"12237\" graph_unresolved=\"8174\" counts_floor=\"1\" root=\".\" next=\"--test-gate=openpilot/selfdrive/controls/controlsd.py\"><c n=\"main\" p=\"openpilot/selfdrive/controls/controlsd.py:271\"/></edit-check>",
+    "stderr": ""
+  },
+  {
+    "target": "android/app/src/main/java/ai/sunnypilot/fold3/DrivingActivity.java:onDestroy",
+    "exit_code": 0,
+    "result": "<edit-check sym=\"onDestroy\" t=\"method\" p=\"android/app/src/main/java/ai/sunnypilot/fold3/DrivingActivity.java:54\" status=\"unchanged\" defs=\"1\" callers=\"0\" incompatible=\"0\" at=\"7631d5248+dirty\" graph_ambiguous=\"12237\" graph_unresolved=\"8175\" counts_floor=\"1\" root=\".\" next=\"--test-gate=android/app/src/main/java/ai/sunnypilot/fold3/DrivingActivity.java\"></edit-check>"
+  },
+  {
+    "target": "android/scripts/validate_adb_faults.py:validate",
+    "exit_code": 0,
+    "result": "<edit-check sym=\"validate\" t=\"fn\" p=\"android/scripts/validate_adb_faults.py:22\" status=\"contract-change\" defs=\"1\" params_was=\"3\" params_now=\"4\" public_was=\"0\" public_now=\"0\" defs_was=\"1\" defs_now=\"1\" change=\"params\" callers=\"0\" incompatible=\"0\" at=\"7631d5248+dirty\" graph_ambiguous=\"12237\" graph_unresolved=\"8175\" counts_floor=\"1\" root=\".\" next=\"--uses=validate\"></edit-check>"
+  },
+  {
+    "target": "openpilot/tools/sim/android_validation.py:validate",
+    "exit_code": 0,
+    "result": "<edit-check sym=\"validate\" t=\"fn\" p=\"openpilot/tools/sim/android_validation.py:57\" status=\"new-symbol\" defs=\"1\" callers=\"1\" incompatible=\"0\" at=\"7631d5248+dirty\" graph_ambiguous=\"12237\" graph_unresolved=\"8175\" counts_floor=\"1\" root=\".\" next=\"--test-gate=openpilot/tools/sim/android_validation.py\"><c n=\"main\" p=\"openpilot/tools/sim/android_validation.py:187\"/></edit-check>"
+  }
+]

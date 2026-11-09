@@ -10,6 +10,27 @@ import static org.junit.Assert.*;
 
 @RunWith(AndroidJUnit4.class)
 public class PerceptionTest {
+    @Test public void qualificationIdentityReadsPackagedCodeAssets() throws Exception {
+        android.content.Context app = androidx.test.platform.app.InstrumentationRegistry.getInstrumentation().getTargetContext();
+        PythonRuntime.start(app);
+        com.chaquo.python.PyObject backend = Python.getInstance().getModule("fold3_opencl");
+        for (String module : new String[]{"fold3_opencl", "fold3_host_math", "tinygrad.nn.onnx", "tinygrad.uop.ops",
+                                          "tinygrad.renderer.cstyle", "tinygrad.runtime.ops_cl"}) {
+            String digest = backend.callAttr("code_digest", module).toString();
+            assertTrue(module, digest.matches("[0-9a-f]{64}"));
+            assertEquals(module, digest, backend.callAttr("code_digest", module).toString());
+        }
+    }
+    @Test public void numericalTimingAndThermalFaultsFailClosed() throws Exception {
+        android.content.Context app = androidx.test.platform.app.InstrumentationRegistry.getInstrumentation().getTargetContext();
+        PythonRuntime.start(app);
+        JSONObject report = new JSONObject(Python.getInstance().getModule("fold3_checks").callAttr("faults").toString());
+        assertEquals("passed", report.getString("status"));
+        assertEquals(3, report.getInt("critical_thermal_statuses_rejected"));
+        assertEquals(3, report.getInt("nonfinite_predictions_rejected"));
+        assertFalse(report.getBoolean("thermal_override_used"));
+        assertFalse(report.getBoolean("vehicle_tx_enabled"));
+    }
     @Test public void nativePreprocessingMatchesNumpyAndRejectsInvalidIndices() throws Exception {
         android.content.Context app = androidx.test.platform.app.InstrumentationRegistry.getInstrumentation().getTargetContext();
         PythonRuntime.start(app);

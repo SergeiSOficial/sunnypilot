@@ -1,0 +1,1263 @@
+{
+  "started_utc": 1793710460.514752,
+  "backend": "mnn-opencl",
+  "memory_mode": "buffer",
+  "stage": "accuracy",
+  "diagnostic_tracing": false,
+  "vehicle_tx_enabled": false,
+  "models": {
+    "dmonitoring_model": {
+      "status": "passed",
+      "diagnostic_only": true,
+      "performance_status": "not_run",
+      "qualified": false,
+      "accuracy_status": "partial",
+      "rtol": 0.001,
+      "atol": 0.0001,
+      "identity": {
+        "name": "dmonitoring_model",
+        "backend": "mnn-opencl",
+        "memory_mode": "buffer",
+        "cpu_fallback": false,
+        "fingerprint": "samsung/q2qxser/q2q:15/AP3A.240905.015.A2/F926BXXSJJZH3:user/release-keys",
+        "sha256": {
+          "model": "0684c40d99bbf4e291a6bd3f9a8e8cdb55644cdbb8aee58c9b90fb709802ccfe",
+          "original_model": "dee5a294e8afaacc9295ac5d100e00733ecac278e79264b96331e40a3ede1b04",
+          "references": "610f877bd0f98353a6e7228698ee869d02a5b2976430234b96d097e96e773381",
+          "sequences": "6acb2ec99babfe57b5ec33b601e262ee9f5b4e54a2fd185f2b59e939256ca3d6",
+          "conversion": "cbd8d05f0ca1c93fce538483f2129fb07eda221b54154e61f7fef7589b18647c",
+          "apk": "54a613533c10795ab754e2737d5bf2facfd387dfb2bd58ef43017260dd063a3f",
+          "provider": "e36918faa1de962635a70fb980f84302b69f0a82dbe36861e8930bf77fa7188e",
+          "opencl_plugin": "b85b8da1146fb8bea73da01a57934985a273485eae8b057c45120f2810d2ac4d",
+          "driver": "f64d432f19fd3f2732cd95050b47328e0c84837b7b60376d55fd7a73a6e9dc8c",
+          "implementation": "4117c841e8dde4bfbca40652ca7935b7f9b1f2c1d0b50efeee368e2dbb876486",
+          "native": "cd26dfc00fb6629cc9f8357348ceb09056161852bb03804c82b3ec263f948a01"
+        }
+      },
+      "initialization_ms": 3406.516717,
+      "assignment": {
+        "backend": "mnn-opencl",
+        "memory_mode": "buffer",
+        "trace_limit": 0,
+        "trace_skip": 0,
+        "inputs": {
+          "calib": {
+            "shape": [
+              1,
+              3
+            ],
+            "dtype": "float32"
+          },
+          "input_img": {
+            "shape": [
+              1,
+              1382400
+            ],
+            "dtype": "float32"
+          }
+        },
+        "outputs": {
+          "outputs": {
+            "shape": [
+              1,
+              553
+            ],
+            "dtype": "float32"
+          }
+        },
+        "assignments": [
+          "InsertedPrecisionFreeCast_div:BinaryOp:OpenCL",
+          "div:Cast:OpenCL",
+          "InsertedPrecisionFreeCast_permute_1_token_572_raster_0:Raster:OpenCL",
+          "InsertedPrecisionFreeCast_permute_1_token_572:Cast:OpenCL",
+          "fold3_host_conv_bf_android_precision_8_result_raster_0:Raster:OpenCL",
+          "fold3_host_conv_bf_android_precision_8_result:Convolution:OpenCL",
+          "_token_574_raster_0:Raster:OpenCL",
+          "_token_574:BinaryOp:OpenCL",
+          "fold3_host_power_square_12:UnaryOp:OpenCL",
+          "_token_576:BinaryOp:OpenCL",
+          "_token_578:BinaryOp:OpenCL",
+          "_token_580:BinaryOp:OpenCL",
+          "_token_582:BinaryOp:OpenCL",
+          "_token_584:UnaryOp:OpenCL",
+          "_token_586:BinaryOp:OpenCL",
+          "_token_588:BinaryOp:OpenCL",
+          "fold3_host_conv_bf_android_precision_18_result_raster_0:Raster:OpenCL",
+          "fold3_host_conv_bf_android_precision_18_result:Convolution:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_0_MultX_raster_0:Raster:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_0_MultX:BinaryOp:OpenCL",
+          "fold3_host_power_square_25:UnaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_0_XCubed:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_0_XCubedC0:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_0_XC0XCubed:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_0_TanhInput:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_0_ErfApprox:UnaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_0_PhiApprox:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast_gelu_1:BinaryOp:OpenCL",
+          "fold3_host_conv_bl_InsertedPrecisionFreeCast_getitem_6:Convolution:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_1_MultX:BinaryOp:OpenCL",
+          "fold3_host_power_square_35:UnaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_1_XCubed:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_1_XCubedC0:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_1_XC0XCubed:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_1_TanhInput:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_1_ErfApprox:UnaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_1_PhiApprox:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast_gelu_2:BinaryOp:OpenCL",
+          "fold3_host_conv_bf_android_precision_40_result_raster_0:Raster:OpenCL",
+          "fold3_host_conv_bf_android_precision_40_result:Convolution:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_2_MultX_raster_0:Raster:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_2_MultX:BinaryOp:OpenCL",
+          "fold3_host_power_square_49:UnaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_2_XCubed:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_2_XCubedC0:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_2_XC0XCubed:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_2_TanhInput:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_2_ErfApprox:UnaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_2_PhiApprox:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast_gelu_3:BinaryOp:OpenCL",
+          "fold3_host_conv_bl_InsertedPrecisionFreeCast_getitem_12:Convolution:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_3_MultX:BinaryOp:OpenCL",
+          "fold3_host_power_square_59:UnaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_3_XCubed:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_3_XCubedC0:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_3_XC0XCubed:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_3_TanhInput:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_3_ErfApprox:UnaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_3_PhiApprox:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast_gelu_4:BinaryOp:OpenCL",
+          "fold3_host_conv_bl_InsertedPrecisionFreeCast_getitem_15:ConvolutionDepthwise:OpenCL",
+          "fold3_host_conv_bl_InsertedPrecisionFreeCast_getitem_18:Convolution:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_4_MultX:BinaryOp:OpenCL",
+          "fold3_host_power_square_70:UnaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_4_XCubed:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_4_XCubedC0:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_4_XC0XCubed:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_4_TanhInput:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_4_ErfApprox:UnaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_4_PhiApprox:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast_gelu_5:BinaryOp:OpenCL",
+          "fold3_host_conv_bl_InsertedPrecisionFreeCast_getitem_21:ConvolutionDepthwise:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_5_MultX:BinaryOp:OpenCL",
+          "fold3_host_power_square_80:UnaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_5_XCubed:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_5_XCubedC0:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_5_XC0XCubed:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_5_TanhInput:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_5_ErfApprox:UnaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_5_PhiApprox:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast_gelu_6:BinaryOp:OpenCL",
+          "fold3_host_conv_bl_InsertedPrecisionFreeCast_getitem_24:Convolution:OpenCL",
+          "fold3_host_conv_bl_InsertedPrecisionFreeCast_getitem_27:Convolution:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_6_MultX:BinaryOp:OpenCL",
+          "fold3_host_power_square_91:UnaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_6_XCubed:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_6_XCubedC0:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_6_XC0XCubed:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_6_TanhInput:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_6_ErfApprox:UnaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_6_PhiApprox:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast_gelu_7:BinaryOp:OpenCL",
+          "fold3_host_conv_bl_InsertedPrecisionFreeCast_getitem_30:ConvolutionDepthwise:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_7_MultX:BinaryOp:OpenCL",
+          "fold3_host_power_square_101:UnaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_7_XCubed:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_7_XCubedC0:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_7_XC0XCubed:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_7_TanhInput:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_7_ErfApprox:UnaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_7_PhiApprox:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast_gelu_8:BinaryOp:OpenCL",
+          "fold3_host_conv_bl_android_precision_103_result:Convolution:OpenCL",
+          "android_precision_103_residual:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast_add_1_raster_0:Raster:OpenCL",
+          "InsertedPrecisionFreeCast_add_1:BinaryOp:OpenCL",
+          "fold3_host_conv_bl_InsertedPrecisionFreeCast_getitem_36:Convolution:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_8_MultX:BinaryOp:OpenCL",
+          "fold3_host_power_square_116:UnaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_8_XCubed:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_8_XCubedC0:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_8_XC0XCubed:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_8_TanhInput:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_8_ErfApprox:UnaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_8_PhiApprox:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast_gelu_9:BinaryOp:OpenCL",
+          "fold3_host_conv_bl_InsertedPrecisionFreeCast_getitem_39:ConvolutionDepthwise:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_9_MultX:BinaryOp:OpenCL",
+          "fold3_host_power_square_126:UnaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_9_XCubed:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_9_XCubedC0:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_9_XC0XCubed:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_9_TanhInput:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_9_ErfApprox:UnaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_9_PhiApprox:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast_gelu_10:BinaryOp:OpenCL",
+          "fold3_host_conv_bl_android_precision_124_result:Convolution:OpenCL",
+          "android_precision_124_residual:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast_add_2_raster_0:Raster:OpenCL",
+          "InsertedPrecisionFreeCast_add_2:BinaryOp:OpenCL",
+          "fold3_host_conv_bl_InsertedPrecisionFreeCast_getitem_45:Convolution:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_10_MultX:BinaryOp:OpenCL",
+          "fold3_host_power_square_141:UnaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_10_XCubed:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_10_XCubedC0:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_10_XC0XCubed:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_10_TanhInput:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_10_ErfApprox:UnaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_10_PhiApprox:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast_gelu_11:BinaryOp:OpenCL",
+          "fold3_host_conv_bl_InsertedPrecisionFreeCast_getitem_48:ConvolutionDepthwise:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_11_MultX:BinaryOp:OpenCL",
+          "fold3_host_power_square_151:UnaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_11_XCubed:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_11_XCubedC0:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_11_XC0XCubed:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_11_TanhInput:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_11_ErfApprox:UnaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_11_PhiApprox:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast_gelu_12:BinaryOp:OpenCL",
+          "fold3_host_conv_bl_android_precision_145_result:Convolution:OpenCL",
+          "android_precision_145_residual:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast_add_3_raster_0:Raster:OpenCL",
+          "InsertedPrecisionFreeCast_add_3:BinaryOp:OpenCL",
+          "fold3_host_conv_bl_InsertedPrecisionFreeCast_getitem_54:Convolution:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_12_MultX:BinaryOp:OpenCL",
+          "fold3_host_power_square_166:UnaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_12_XCubed:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_12_XCubedC0:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_12_XC0XCubed:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_12_TanhInput:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_12_ErfApprox:UnaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_12_PhiApprox:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast_gelu_13:BinaryOp:OpenCL",
+          "fold3_host_conv_bl_InsertedPrecisionFreeCast_getitem_57:ConvolutionDepthwise:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_13_MultX:BinaryOp:OpenCL",
+          "fold3_host_power_square_176:UnaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_13_XCubed:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_13_XCubedC0:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_13_XC0XCubed:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_13_TanhInput:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_13_ErfApprox:UnaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_13_PhiApprox:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast_gelu_14:BinaryOp:OpenCL",
+          "fold3_host_conv_bl_android_precision_166_result:Convolution:OpenCL",
+          "android_precision_166_residual:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast_add_4_raster_0:Raster:OpenCL",
+          "InsertedPrecisionFreeCast_add_4:BinaryOp:OpenCL",
+          "fold3_host_conv_bl_InsertedPrecisionFreeCast_getitem_63:ConvolutionDepthwise:OpenCL",
+          "fold3_host_conv_bl_InsertedPrecisionFreeCast_getitem_66:Convolution:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_14_MultX:BinaryOp:OpenCL",
+          "fold3_host_power_square_192:UnaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_14_XCubed:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_14_XCubedC0:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_14_XC0XCubed:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_14_TanhInput:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_14_ErfApprox:UnaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_14_PhiApprox:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast_gelu_15:BinaryOp:OpenCL",
+          "fold3_host_conv_bl_android_precision_178_result:Convolution:OpenCL",
+          "android_precision_178_residual:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast_add_5_raster_0:Raster:OpenCL",
+          "InsertedPrecisionFreeCast_add_5:BinaryOp:OpenCL",
+          "fold3_host_conv_bl_InsertedPrecisionFreeCast_getitem_72:ConvolutionDepthwise:OpenCL",
+          "fold3_host_conv_bl_InsertedPrecisionFreeCast_getitem_75:Convolution:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_15_MultX:BinaryOp:OpenCL",
+          "fold3_host_power_square_208:UnaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_15_XCubed:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_15_XCubedC0:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_15_XC0XCubed:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_15_TanhInput:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_15_ErfApprox:UnaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_15_PhiApprox:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast_gelu_16:BinaryOp:OpenCL",
+          "fold3_host_conv_bl_InsertedPrecisionFreeCast_getitem_78:ConvolutionDepthwise:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_16_MultX:BinaryOp:OpenCL",
+          "fold3_host_power_square_218:UnaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_16_XCubed:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_16_XCubedC0:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_16_XC0XCubed:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_16_TanhInput:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_16_ErfApprox:UnaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_16_PhiApprox:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast_gelu_17:BinaryOp:OpenCL",
+          "fold3_host_conv_bl_InsertedPrecisionFreeCast_getitem_81:Convolution:OpenCL",
+          "fold3_host_conv_bl_InsertedPrecisionFreeCast_getitem_84:ConvolutionDepthwise:OpenCL",
+          "fold3_host_conv_bl_InsertedPrecisionFreeCast_getitem_87:Convolution:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_17_MultX:BinaryOp:OpenCL",
+          "fold3_host_power_square_230:UnaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_17_XCubed:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_17_XCubedC0:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_17_XC0XCubed:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_17_TanhInput:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_17_ErfApprox:UnaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_17_PhiApprox:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast_gelu_18:BinaryOp:OpenCL",
+          "fold3_host_conv_bl_InsertedPrecisionFreeCast_getitem_90:ConvolutionDepthwise:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_18_MultX:BinaryOp:OpenCL",
+          "fold3_host_power_square_240:UnaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_18_XCubed:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_18_XCubedC0:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_18_XC0XCubed:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_18_TanhInput:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_18_ErfApprox:UnaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_18_PhiApprox:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast_gelu_19:BinaryOp:OpenCL",
+          "fold3_host_conv_bl_android_precision_222_result:Convolution:OpenCL",
+          "android_precision_222_residual:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast_add_6_raster_0:Raster:OpenCL",
+          "InsertedPrecisionFreeCast_add_6:BinaryOp:OpenCL",
+          "fold3_host_conv_bl_InsertedPrecisionFreeCast_getitem_96:Convolution:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_19_MultX:BinaryOp:OpenCL",
+          "fold3_host_power_square_255:UnaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_19_XCubed:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_19_XCubedC0:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_19_XC0XCubed:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_19_TanhInput:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_19_ErfApprox:UnaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_19_PhiApprox:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast_gelu_20:BinaryOp:OpenCL",
+          "fold3_host_conv_bl_InsertedPrecisionFreeCast_getitem_99:ConvolutionDepthwise:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_20_MultX:BinaryOp:OpenCL",
+          "fold3_host_power_square_265:UnaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_20_XCubed:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_20_XCubedC0:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_20_XC0XCubed:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_20_TanhInput:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_20_ErfApprox:UnaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_20_PhiApprox:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast_gelu_21:BinaryOp:OpenCL",
+          "fold3_host_conv_bl_android_precision_243_result:Convolution:OpenCL",
+          "android_precision_243_residual:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast_add_7_raster_0:Raster:OpenCL",
+          "InsertedPrecisionFreeCast_add_7:BinaryOp:OpenCL",
+          "fold3_host_conv_bl_InsertedPrecisionFreeCast_getitem_105:Convolution:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_21_MultX:BinaryOp:OpenCL",
+          "fold3_host_power_square_280:UnaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_21_XCubed:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_21_XCubedC0:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_21_XC0XCubed:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_21_TanhInput:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_21_ErfApprox:UnaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_21_PhiApprox:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast_gelu_22:BinaryOp:OpenCL",
+          "fold3_host_conv_bl_InsertedPrecisionFreeCast_getitem_108:ConvolutionDepthwise:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_22_MultX:BinaryOp:OpenCL",
+          "fold3_host_power_square_290:UnaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_22_XCubed:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_22_XCubedC0:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_22_XC0XCubed:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_22_TanhInput:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_22_ErfApprox:UnaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_22_PhiApprox:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast_gelu_23:BinaryOp:OpenCL",
+          "fold3_host_conv_bl_android_precision_264_result:Convolution:OpenCL",
+          "android_precision_264_residual:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast_add_8_raster_0:Raster:OpenCL",
+          "InsertedPrecisionFreeCast_add_8:BinaryOp:OpenCL",
+          "fold3_host_conv_bl_InsertedPrecisionFreeCast_getitem_114:Convolution:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_23_MultX:BinaryOp:OpenCL",
+          "fold3_host_power_square_305:UnaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_23_XCubed:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_23_XCubedC0:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_23_XC0XCubed:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_23_TanhInput:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_23_ErfApprox:UnaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_23_PhiApprox:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast_gelu_24:BinaryOp:OpenCL",
+          "fold3_host_conv_bl_InsertedPrecisionFreeCast_getitem_117:ConvolutionDepthwise:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_24_MultX:BinaryOp:OpenCL",
+          "fold3_host_power_square_315:UnaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_24_XCubed:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_24_XCubedC0:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_24_XC0XCubed:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_24_TanhInput:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_24_ErfApprox:UnaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_24_PhiApprox:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast_gelu_25:BinaryOp:OpenCL",
+          "fold3_host_conv_bl_android_precision_285_result:Convolution:OpenCL",
+          "android_precision_285_residual:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast_add_9_raster_0:Raster:OpenCL",
+          "InsertedPrecisionFreeCast_add_9:BinaryOp:OpenCL",
+          "fold3_host_conv_bl_InsertedPrecisionFreeCast_getitem_123:Convolution:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_25_MultX:BinaryOp:OpenCL",
+          "fold3_host_power_square_330:UnaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_25_XCubed:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_25_XCubedC0:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_25_XC0XCubed:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_25_TanhInput:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_25_ErfApprox:UnaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_25_PhiApprox:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast_gelu_26:BinaryOp:OpenCL",
+          "fold3_host_conv_bl_InsertedPrecisionFreeCast_getitem_126:ConvolutionDepthwise:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_26_MultX:BinaryOp:OpenCL",
+          "fold3_host_power_square_340:UnaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_26_XCubed:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_26_XCubedC0:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_26_XC0XCubed:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_26_TanhInput:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_26_ErfApprox:UnaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_26_PhiApprox:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast_gelu_27:BinaryOp:OpenCL",
+          "fold3_host_conv_bl_android_precision_306_result:Convolution:OpenCL",
+          "android_precision_306_residual:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast_add_10_raster_0:Raster:OpenCL",
+          "InsertedPrecisionFreeCast_add_10:BinaryOp:OpenCL",
+          "fold3_host_conv_bl_InsertedPrecisionFreeCast_getitem_132:Convolution:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_27_MultX:BinaryOp:OpenCL",
+          "fold3_host_power_square_355:UnaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_27_XCubed:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_27_XCubedC0:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_27_XC0XCubed:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_27_TanhInput:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_27_ErfApprox:UnaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_27_PhiApprox:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast_gelu_28:BinaryOp:OpenCL",
+          "fold3_host_mean8_InsertedPrecisionFreeCast_mean_raster_0:Raster:OpenCL",
+          "fold3_host_mean8_InsertedPrecisionFreeCast_mean:Reduction:OpenCL",
+          "fold3_host_conv_bl_InsertedPrecisionFreeCast_getitem_135_raster_0:Raster:OpenCL",
+          "fold3_host_conv_bl_InsertedPrecisionFreeCast_getitem_135:Convolution:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_28_MultX:BinaryOp:OpenCL",
+          "fold3_host_powf_cube_InsertedPrecisionFreeCast__inlfunc_Gelu_token_28_XCubed:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_28_XCubedC0:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_28_XC0XCubed:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_28_TanhInput:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_28_ErfApprox:UnaryOp:OpenCL",
+          "InsertedPrecisionFreeCast__inlfunc_Gelu_token_28_PhiApprox:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast_gelu_29:BinaryOp:OpenCL",
+          "gelu_29:Cast:OpenCL",
+          "fold3_half_gemv8_405_0__matmul_converted_raster_0:Raster:OpenCL",
+          "fold3_half_gemv8_405_0__matmul_converted:Convolution:OpenCL",
+          "linear_raster_0:Raster:OpenCL",
+          "linear:Cast:OpenCL",
+          "fold3_half_gemv8_522_0__matmul_converted_raster_0:Raster:OpenCL",
+          "fold3_half_gemv8_522_0__matmul_converted:Convolution:OpenCL",
+          "linear_9_raster_0:Raster:OpenCL",
+          "linear_9:Cast:OpenCL",
+          "InsertedPrecisionFreeCast_linear_9:Cast:OpenCL",
+          "InsertedPrecisionFreeCast_relu_6:ReLU:OpenCL",
+          "fold3_host_conv_bl_android_precision_426_result__matmul_converted_raster_0:Raster:OpenCL",
+          "fold3_host_conv_bl_android_precision_426_result__matmul_converted:Convolution:OpenCL",
+          "fold3_host_conv_bl_android_precision_427_result__matmul_converted_raster_0:Raster:OpenCL",
+          "fold3_host_conv_bl_android_precision_427_result__matmul_converted:Convolution:OpenCL",
+          "relu_8_raster_0:Raster:OpenCL",
+          "relu_8:Cast:OpenCL",
+          "fold3_half_gemv8_530_0__matmul_converted_raster_0:Raster:OpenCL",
+          "fold3_half_gemv8_530_0__matmul_converted:Convolution:OpenCL",
+          "linear_12_raster_0:Raster:OpenCL",
+          "linear_12:Cast:OpenCL",
+          "fold3_half_gemv8_513_0__matmul_converted:Convolution:OpenCL",
+          "linear_13_raster_0:Raster:OpenCL",
+          "linear_13:Cast:OpenCL",
+          "InsertedPrecisionFreeCast_linear_13:Cast:OpenCL",
+          "InsertedPrecisionFreeCast_relu_9:ReLU:OpenCL",
+          "fold3_host_conv_bl_android_precision_419_result__matmul_converted_raster_0:Raster:OpenCL",
+          "fold3_host_conv_bl_android_precision_419_result__matmul_converted:Convolution:OpenCL",
+          "fold3_host_conv_bl_android_precision_420_result__matmul_converted_raster_0:Raster:OpenCL",
+          "fold3_host_conv_bl_android_precision_420_result__matmul_converted:Convolution:OpenCL",
+          "relu_11_raster_0:Raster:OpenCL",
+          "relu_11:Cast:OpenCL",
+          "fold3_half_gemv8_521_0__matmul_converted_raster_0:Raster:OpenCL",
+          "fold3_half_gemv8_521_0__matmul_converted:Convolution:OpenCL",
+          "linear_16_raster_0:Raster:OpenCL",
+          "linear_16:Cast:OpenCL",
+          "fold3_half_gemv8_406_0__matmul_converted:Convolution:OpenCL",
+          "linear_1_raster_0:Raster:OpenCL",
+          "linear_1:Cast:OpenCL",
+          "InsertedPrecisionFreeCast_linear_1:Cast:OpenCL",
+          "InsertedPrecisionFreeCast_relu:ReLU:OpenCL",
+          "fold3_host_conv_bl_android_precision_334_result__matmul_converted_raster_0:Raster:OpenCL",
+          "fold3_host_conv_bl_android_precision_334_result__matmul_converted:Convolution:OpenCL",
+          "fold3_host_conv_bl_android_precision_335_result__matmul_converted_raster_0:Raster:OpenCL",
+          "fold3_host_conv_bl_android_precision_335_result__matmul_converted:Convolution:OpenCL",
+          "relu_2_raster_0:Raster:OpenCL",
+          "relu_2:Cast:OpenCL",
+          "fold3_half_gemv8_414_0__matmul_converted_raster_0:Raster:OpenCL",
+          "fold3_half_gemv8_414_0__matmul_converted:Convolution:OpenCL",
+          "linear_4_raster_0:Raster:OpenCL",
+          "linear_4:Cast:OpenCL",
+          "fold3_half_gemv8_416_0__matmul_converted:Convolution:OpenCL",
+          "linear_5_raster_0:Raster:OpenCL",
+          "linear_5:Cast:OpenCL",
+          "InsertedPrecisionFreeCast_linear_5:Cast:OpenCL",
+          "InsertedPrecisionFreeCast_relu_3:ReLU:OpenCL",
+          "fold3_host_conv_bl_android_precision_342_result__matmul_converted_raster_0:Raster:OpenCL",
+          "fold3_host_conv_bl_android_precision_342_result__matmul_converted:Convolution:OpenCL",
+          "fold3_host_conv_bl_android_precision_343_result__matmul_converted_raster_0:Raster:OpenCL",
+          "fold3_host_conv_bl_android_precision_343_result__matmul_converted:Convolution:OpenCL",
+          "relu_5_raster_0:Raster:OpenCL",
+          "relu_5:Cast:OpenCL",
+          "fold3_half_gemv8_424_0__matmul_converted_raster_0:Raster:OpenCL",
+          "fold3_half_gemv8_424_0__matmul_converted:Convolution:OpenCL",
+          "linear_8_raster_0:Raster:OpenCL",
+          "linear_8:Cast:OpenCL",
+          "InsertedPrecisionFreeCast_sub:BinaryOp:OpenCL",
+          "InsertedPrecisionFreeCast_mul:BinaryOp:OpenCL",
+          "mul:Cast:OpenCL",
+          "fold3_half_gemv8_504_0__matmul_converted_raster_0:Raster:OpenCL",
+          "fold3_half_gemv8_504_0__matmul_converted:Convolution:OpenCL",
+          "linear_17_raster_0:Raster:OpenCL",
+          "linear_17:Cast:OpenCL",
+          "InsertedPrecisionFreeCast_linear_17:Cast:OpenCL",
+          "InsertedPrecisionFreeCast_relu_12:ReLU:OpenCL",
+          "fold3_host_conv_bl_android_precision_412_result__matmul_converted_raster_0:Raster:OpenCL",
+          "fold3_host_conv_bl_android_precision_412_result__matmul_converted:Convolution:OpenCL",
+          "fold3_host_conv_bl_android_precision_413_result__matmul_converted_raster_0:Raster:OpenCL",
+          "fold3_host_conv_bl_android_precision_413_result__matmul_converted:Convolution:OpenCL",
+          "relu_14_raster_0:Raster:OpenCL",
+          "relu_14:Cast:OpenCL",
+          "fold3_half_gemv8_512_0__matmul_converted_raster_0:Raster:OpenCL",
+          "fold3_half_gemv8_512_0__matmul_converted:Convolution:OpenCL",
+          "linear_20_raster_0:Raster:OpenCL",
+          "linear_20:Cast:OpenCL",
+          "fold3_half_gemv8_495_0__matmul_converted:Convolution:OpenCL",
+          "linear_21_raster_0:Raster:OpenCL",
+          "linear_21:Cast:OpenCL",
+          "InsertedPrecisionFreeCast_linear_21:Cast:OpenCL",
+          "InsertedPrecisionFreeCast_relu_15:ReLU:OpenCL",
+          "fold3_host_conv_bl_android_precision_405_result__matmul_converted_raster_0:Raster:OpenCL",
+          "fold3_host_conv_bl_android_precision_405_result__matmul_converted:Convolution:OpenCL",
+          "fold3_host_conv_bl_android_precision_406_result__matmul_converted_raster_0:Raster:OpenCL",
+          "fold3_host_conv_bl_android_precision_406_result__matmul_converted:Convolution:OpenCL",
+          "relu_17_raster_0:Raster:OpenCL",
+          "relu_17:Cast:OpenCL",
+          "fold3_half_gemv8_503_0__matmul_converted_raster_0:Raster:OpenCL",
+          "fold3_half_gemv8_503_0__matmul_converted:Convolution:OpenCL",
+          "linear_24_raster_0:Raster:OpenCL",
+          "linear_24:Cast:OpenCL",
+          "fold3_half_gemv8_486_0__matmul_converted:Convolution:OpenCL",
+          "linear_33_raster_0:Raster:OpenCL",
+          "linear_33:Cast:OpenCL",
+          "InsertedPrecisionFreeCast_linear_33:Cast:OpenCL",
+          "InsertedPrecisionFreeCast_relu_24:ReLU:OpenCL",
+          "fold3_host_conv_bl_android_precision_398_result__matmul_converted_raster_0:Raster:OpenCL",
+          "fold3_host_conv_bl_android_precision_398_result__matmul_converted:Convolution:OpenCL",
+          "fold3_host_conv_bl_android_precision_399_result__matmul_converted_raster_0:Raster:OpenCL",
+          "fold3_host_conv_bl_android_precision_399_result__matmul_converted:Convolution:OpenCL",
+          "relu_26_raster_0:Raster:OpenCL",
+          "relu_26:Cast:OpenCL",
+          "fold3_half_gemv8_494_0__matmul_converted_raster_0:Raster:OpenCL",
+          "fold3_half_gemv8_494_0__matmul_converted:Convolution:OpenCL",
+          "linear_36_raster_0:Raster:OpenCL",
+          "linear_36:Cast:OpenCL",
+          "fold3_half_gemv8_477_0__matmul_converted:Convolution:OpenCL",
+          "linear_37_raster_0:Raster:OpenCL",
+          "linear_37:Cast:OpenCL",
+          "InsertedPrecisionFreeCast_linear_37:Cast:OpenCL",
+          "InsertedPrecisionFreeCast_relu_27:ReLU:OpenCL",
+          "fold3_host_conv_bl_android_precision_391_result__matmul_converted_raster_0:Raster:OpenCL",
+          "fold3_host_conv_bl_android_precision_391_result__matmul_converted:Convolution:OpenCL",
+          "fold3_host_conv_bl_android_precision_392_result__matmul_converted_raster_0:Raster:OpenCL",
+          "fold3_host_conv_bl_android_precision_392_result__matmul_converted:Convolution:OpenCL",
+          "relu_29_raster_0:Raster:OpenCL",
+          "relu_29:Cast:OpenCL",
+          "fold3_half_gemv8_485_0__matmul_converted_raster_0:Raster:OpenCL",
+          "fold3_half_gemv8_485_0__matmul_converted:Convolution:OpenCL",
+          "linear_40_raster_0:Raster:OpenCL",
+          "linear_40:Cast:OpenCL",
+          "fold3_half_gemv8_426_0__matmul_converted:Convolution:OpenCL",
+          "linear_25_raster_0:Raster:OpenCL",
+          "linear_25:Cast:OpenCL",
+          "InsertedPrecisionFreeCast_linear_25:Cast:OpenCL",
+          "InsertedPrecisionFreeCast_relu_18:ReLU:OpenCL",
+          "fold3_host_conv_bl_android_precision_350_result__matmul_converted_raster_0:Raster:OpenCL",
+          "fold3_host_conv_bl_android_precision_350_result__matmul_converted:Convolution:OpenCL",
+          "fold3_host_conv_bl_android_precision_351_result__matmul_converted_raster_0:Raster:OpenCL",
+          "fold3_host_conv_bl_android_precision_351_result__matmul_converted:Convolution:OpenCL",
+          "relu_20_raster_0:Raster:OpenCL",
+          "relu_20:Cast:OpenCL",
+          "fold3_half_gemv8_434_0__matmul_converted_raster_0:Raster:OpenCL",
+          "fold3_half_gemv8_434_0__matmul_converted:Convolution:OpenCL",
+          "linear_28_raster_0:Raster:OpenCL",
+          "linear_28:Cast:OpenCL",
+          "fold3_half_gemv8_436_0__matmul_converted:Convolution:OpenCL",
+          "linear_29_raster_0:Raster:OpenCL",
+          "linear_29:Cast:OpenCL",
+          "InsertedPrecisionFreeCast_linear_29:Cast:OpenCL",
+          "InsertedPrecisionFreeCast_relu_21:ReLU:OpenCL",
+          "fold3_host_conv_bl_android_precision_358_result__matmul_converted_raster_0:Raster:OpenCL",
+          "fold3_host_conv_bl_android_precision_358_result__matmul_converted:Convolution:OpenCL",
+          "fold3_host_conv_bl_android_precision_359_result__matmul_converted_raster_0:Raster:OpenCL",
+          "fold3_host_conv_bl_android_precision_359_result__matmul_converted:Convolution:OpenCL",
+          "relu_23_raster_0:Raster:OpenCL",
+          "relu_23:Cast:OpenCL",
+          "fold3_half_gemv8_444_0__matmul_converted_raster_0:Raster:OpenCL",
+          "fold3_half_gemv8_444_0__matmul_converted:Convolution:OpenCL",
+          "linear_32_raster_0:Raster:OpenCL",
+          "linear_32:Cast:OpenCL",
+          "fold3_half_gemv8_468_0__matmul_converted:Convolution:OpenCL",
+          "linear_41_raster_0:Raster:OpenCL",
+          "linear_41:Cast:OpenCL",
+          "InsertedPrecisionFreeCast_linear_41:Cast:OpenCL",
+          "InsertedPrecisionFreeCast_relu_30:ReLU:OpenCL",
+          "fold3_host_conv_bl_android_precision_384_result__matmul_converted_raster_0:Raster:OpenCL",
+          "fold3_host_conv_bl_android_precision_384_result__matmul_converted:Convolution:OpenCL",
+          "fold3_host_conv_bl_android_precision_385_result__matmul_converted_raster_0:Raster:OpenCL",
+          "fold3_host_conv_bl_android_precision_385_result__matmul_converted:Convolution:OpenCL",
+          "relu_32_raster_0:Raster:OpenCL",
+          "relu_32:Cast:OpenCL",
+          "fold3_half_gemv8_476_0__matmul_converted_raster_0:Raster:OpenCL",
+          "fold3_half_gemv8_476_0__matmul_converted:Convolution:OpenCL",
+          "linear_44_raster_0:Raster:OpenCL",
+          "linear_44:Cast:OpenCL",
+          "fold3_half_gemv8_459_0__matmul_converted:Convolution:OpenCL",
+          "linear_45_raster_0:Raster:OpenCL",
+          "linear_45:Cast:OpenCL",
+          "InsertedPrecisionFreeCast_linear_45:Cast:OpenCL",
+          "InsertedPrecisionFreeCast_relu_33:ReLU:OpenCL",
+          "fold3_host_conv_bl_android_precision_377_result__matmul_converted_raster_0:Raster:OpenCL",
+          "fold3_host_conv_bl_android_precision_377_result__matmul_converted:Convolution:OpenCL",
+          "fold3_host_conv_bl_android_precision_378_result__matmul_converted_raster_0:Raster:OpenCL",
+          "fold3_host_conv_bl_android_precision_378_result__matmul_converted:Convolution:OpenCL",
+          "relu_35_raster_0:Raster:OpenCL",
+          "relu_35:Cast:OpenCL",
+          "fold3_half_gemv8_467_0__matmul_converted_raster_0:Raster:OpenCL",
+          "fold3_half_gemv8_467_0__matmul_converted:Convolution:OpenCL",
+          "linear_48_raster_0:Raster:OpenCL",
+          "linear_48:Cast:OpenCL",
+          "fold3_half_gemv8_446_0__matmul_converted:Convolution:OpenCL",
+          "linear_49_raster_0:Raster:OpenCL",
+          "linear_49:Cast:OpenCL",
+          "InsertedPrecisionFreeCast_linear_49:Cast:OpenCL",
+          "InsertedPrecisionFreeCast_relu_36:ReLU:OpenCL",
+          "fold3_host_conv_bl_android_precision_366_result__matmul_converted_raster_0:Raster:OpenCL",
+          "fold3_host_conv_bl_android_precision_366_result__matmul_converted:Convolution:OpenCL",
+          "fold3_host_conv_bl_android_precision_367_result__matmul_converted_raster_0:Raster:OpenCL",
+          "fold3_host_conv_bl_android_precision_367_result__matmul_converted:Convolution:OpenCL",
+          "relu_38_raster_0:Raster:OpenCL",
+          "relu_38:Cast:OpenCL",
+          "fold3_half_gemv8_454_0__matmul_converted_raster_0:Raster:OpenCL",
+          "fold3_half_gemv8_454_0__matmul_converted:Convolution:OpenCL",
+          "linear_52_raster_0:Raster:OpenCL",
+          "linear_52:Cast:OpenCL",
+          "outputs_raster_0:Raster:OpenCL"
+        ],
+        "no_cpu_fallback_verified": true,
+        "upload_ms": 3.031042,
+        "compute_ms": 511.878333,
+        "readback_ms": 495.135416
+      },
+      "sequences": {
+        "seed7": {
+          "passed": true,
+          "frames": 32,
+          "checks": [
+            {
+              "frame": 0,
+              "outputs": {
+                "outputs": {
+                  "passed": true,
+                  "finite": true,
+                  "shape": [
+                    1,
+                    553
+                  ],
+                  "dtype": "float16",
+                  "expected_nonfinite_elements": 0,
+                  "unexpected_nonfinite_elements": 0,
+                  "exact": true,
+                  "max_abs_error": 0.0,
+                  "mismatched_elements": 0
+                }
+              }
+            },
+            {
+              "frame": 1,
+              "outputs": {
+                "outputs": {
+                  "passed": true,
+                  "finite": true,
+                  "shape": [
+                    1,
+                    553
+                  ],
+                  "dtype": "float16",
+                  "expected_nonfinite_elements": 0,
+                  "unexpected_nonfinite_elements": 0,
+                  "exact": true,
+                  "max_abs_error": 0.0,
+                  "mismatched_elements": 0
+                }
+              }
+            },
+            {
+              "frame": 2,
+              "outputs": {
+                "outputs": {
+                  "passed": true,
+                  "finite": true,
+                  "shape": [
+                    1,
+                    553
+                  ],
+                  "dtype": "float16",
+                  "expected_nonfinite_elements": 0,
+                  "unexpected_nonfinite_elements": 0,
+                  "exact": true,
+                  "max_abs_error": 0.0,
+                  "mismatched_elements": 0
+                }
+              }
+            },
+            {
+              "frame": 3,
+              "outputs": {
+                "outputs": {
+                  "passed": true,
+                  "finite": true,
+                  "shape": [
+                    1,
+                    553
+                  ],
+                  "dtype": "float16",
+                  "expected_nonfinite_elements": 0,
+                  "unexpected_nonfinite_elements": 0,
+                  "exact": true,
+                  "max_abs_error": 0.0,
+                  "mismatched_elements": 0
+                }
+              }
+            },
+            {
+              "frame": 4,
+              "outputs": {
+                "outputs": {
+                  "passed": true,
+                  "finite": true,
+                  "shape": [
+                    1,
+                    553
+                  ],
+                  "dtype": "float16",
+                  "expected_nonfinite_elements": 0,
+                  "unexpected_nonfinite_elements": 0,
+                  "exact": true,
+                  "max_abs_error": 0.0,
+                  "mismatched_elements": 0
+                }
+              }
+            },
+            {
+              "frame": 5,
+              "outputs": {
+                "outputs": {
+                  "passed": true,
+                  "finite": true,
+                  "shape": [
+                    1,
+                    553
+                  ],
+                  "dtype": "float16",
+                  "expected_nonfinite_elements": 0,
+                  "unexpected_nonfinite_elements": 0,
+                  "exact": true,
+                  "max_abs_error": 0.0,
+                  "mismatched_elements": 0
+                }
+              }
+            },
+            {
+              "frame": 6,
+              "outputs": {
+                "outputs": {
+                  "passed": true,
+                  "finite": true,
+                  "shape": [
+                    1,
+                    553
+                  ],
+                  "dtype": "float16",
+                  "expected_nonfinite_elements": 0,
+                  "unexpected_nonfinite_elements": 0,
+                  "exact": true,
+                  "max_abs_error": 0.0,
+                  "mismatched_elements": 0
+                }
+              }
+            },
+            {
+              "frame": 7,
+              "outputs": {
+                "outputs": {
+                  "passed": true,
+                  "finite": true,
+                  "shape": [
+                    1,
+                    553
+                  ],
+                  "dtype": "float16",
+                  "expected_nonfinite_elements": 0,
+                  "unexpected_nonfinite_elements": 0,
+                  "exact": true,
+                  "max_abs_error": 0.0,
+                  "mismatched_elements": 0
+                }
+              }
+            },
+            {
+              "frame": 8,
+              "outputs": {
+                "outputs": {
+                  "passed": true,
+                  "finite": true,
+                  "shape": [
+                    1,
+                    553
+                  ],
+                  "dtype": "float16",
+                  "expected_nonfinite_elements": 0,
+                  "unexpected_nonfinite_elements": 0,
+                  "exact": true,
+                  "max_abs_error": 0.0,
+                  "mismatched_elements": 0
+                }
+              }
+            },
+            {
+              "frame": 9,
+              "outputs": {
+                "outputs": {
+                  "passed": true,
+                  "finite": true,
+                  "shape": [
+                    1,
+                    553
+                  ],
+                  "dtype": "float16",
+                  "expected_nonfinite_elements": 0,
+                  "unexpected_nonfinite_elements": 0,
+                  "exact": true,
+                  "max_abs_error": 0.0,
+                  "mismatched_elements": 0
+                }
+              }
+            },
+            {
+              "frame": 10,
+              "outputs": {
+                "outputs": {
+                  "passed": true,
+                  "finite": true,
+                  "shape": [
+                    1,
+                    553
+                  ],
+                  "dtype": "float16",
+                  "expected_nonfinite_elements": 0,
+                  "unexpected_nonfinite_elements": 0,
+                  "exact": true,
+                  "max_abs_error": 0.0,
+                  "mismatched_elements": 0
+                }
+              }
+            },
+            {
+              "frame": 11,
+              "outputs": {
+                "outputs": {
+                  "passed": true,
+                  "finite": true,
+                  "shape": [
+                    1,
+                    553
+                  ],
+                  "dtype": "float16",
+                  "expected_nonfinite_elements": 0,
+                  "unexpected_nonfinite_elements": 0,
+                  "exact": true,
+                  "max_abs_error": 0.0,
+                  "mismatched_elements": 0
+                }
+              }
+            },
+            {
+              "frame": 12,
+              "outputs": {
+                "outputs": {
+                  "passed": true,
+                  "finite": true,
+                  "shape": [
+                    1,
+                    553
+                  ],
+                  "dtype": "float16",
+                  "expected_nonfinite_elements": 0,
+                  "unexpected_nonfinite_elements": 0,
+                  "exact": true,
+                  "max_abs_error": 0.0,
+                  "mismatched_elements": 0
+                }
+              }
+            },
+            {
+              "frame": 13,
+              "outputs": {
+                "outputs": {
+                  "passed": true,
+                  "finite": true,
+                  "shape": [
+                    1,
+                    553
+                  ],
+                  "dtype": "float16",
+                  "expected_nonfinite_elements": 0,
+                  "unexpected_nonfinite_elements": 0,
+                  "exact": true,
+                  "max_abs_error": 0.0,
+                  "mismatched_elements": 0
+                }
+              }
+            },
+            {
+              "frame": 14,
+              "outputs": {
+                "outputs": {
+                  "passed": true,
+                  "finite": true,
+                  "shape": [
+                    1,
+                    553
+                  ],
+                  "dtype": "float16",
+                  "expected_nonfinite_elements": 0,
+                  "unexpected_nonfinite_elements": 0,
+                  "exact": true,
+                  "max_abs_error": 0.0,
+                  "mismatched_elements": 0
+                }
+              }
+            },
+            {
+              "frame": 15,
+              "outputs": {
+                "outputs": {
+                  "passed": true,
+                  "finite": true,
+                  "shape": [
+                    1,
+                    553
+                  ],
+                  "dtype": "float16",
+                  "expected_nonfinite_elements": 0,
+                  "unexpected_nonfinite_elements": 0,
+                  "exact": true,
+                  "max_abs_error": 0.0,
+                  "mismatched_elements": 0
+                }
+              }
+            },
+            {
+              "frame": 16,
+              "outputs": {
+                "outputs": {
+                  "passed": true,
+                  "finite": true,
+                  "shape": [
+                    1,
+                    553
+                  ],
+                  "dtype": "float16",
+                  "expected_nonfinite_elements": 0,
+                  "unexpected_nonfinite_elements": 0,
+                  "exact": true,
+                  "max_abs_error": 0.0,
+                  "mismatched_elements": 0
+                }
+              }
+            },
+            {
+              "frame": 17,
+              "outputs": {
+                "outputs": {
+                  "passed": true,
+                  "finite": true,
+                  "shape": [
+                    1,
+                    553
+                  ],
+                  "dtype": "float16",
+                  "expected_nonfinite_elements": 0,
+                  "unexpected_nonfinite_elements": 0,
+                  "exact": true,
+                  "max_abs_error": 0.0,
+                  "mismatched_elements": 0
+                }
+              }
+            },
+            {
+              "frame": 18,
+              "outputs": {
+                "outputs": {
+                  "passed": true,
+                  "finite": true,
+                  "shape": [
+                    1,
+                    553
+                  ],
+                  "dtype": "float16",
+                  "expected_nonfinite_elements": 0,
+                  "unexpected_nonfinite_elements": 0,
+                  "exact": true,
+                  "max_abs_error": 0.0,
+                  "mismatched_elements": 0
+                }
+              }
+            },
+            {
+              "frame": 19,
+              "outputs": {
+                "outputs": {
+                  "passed": true,
+                  "finite": true,
+                  "shape": [
+                    1,
+                    553
+                  ],
+                  "dtype": "float16",
+                  "expected_nonfinite_elements": 0,
+                  "unexpected_nonfinite_elements": 0,
+                  "exact": true,
+                  "max_abs_error": 0.0,
+                  "mismatched_elements": 0
+                }
+              }
+            },
+            {
+              "frame": 20,
+              "outputs": {
+                "outputs": {
+                  "passed": true,
+                  "finite": true,
+                  "shape": [
+                    1,
+                    553
+                  ],
+                  "dtype": "float16",
+                  "expected_nonfinite_elements": 0,
+                  "unexpected_nonfinite_elements": 0,
+                  "exact": true,
+                  "max_abs_error": 0.0,
+                  "mismatched_elements": 0
+                }
+              }
+            },
+            {
+              "frame": 21,
+              "outputs": {
+                "outputs": {
+                  "passed": true,
+                  "finite": true,
+                  "shape": [
+                    1,
+                    553
+                  ],
+                  "dtype": "float16",
+                  "expected_nonfinite_elements": 0,
+                  "unexpected_nonfinite_elements": 0,
+                  "exact": true,
+                  "max_abs_error": 0.0,
+                  "mismatched_elements": 0
+                }
+              }
+            },
+            {
+              "frame": 22,
+              "outputs": {
+                "outputs": {
+                  "passed": true,
+                  "finite": true,
+                  "shape": [
+                    1,
+                    553
+                  ],
+                  "dtype": "float16",
+                  "expected_nonfinite_elements": 0,
+                  "unexpected_nonfinite_elements": 0,
+                  "exact": true,
+                  "max_abs_error": 0.0,
+                  "mismatched_elements": 0
+                }
+              }
+            },
+            {
+              "frame": 23,
+              "outputs": {
+                "outputs": {
+                  "passed": true,
+                  "finite": true,
+                  "shape": [
+                    1,
+                    553
+                  ],
+                  "dtype": "float16",
+                  "expected_nonfinite_elements": 0,
+                  "unexpected_nonfinite_elements": 0,
+                  "exact": true,
+                  "max_abs_error": 0.0,
+                  "mismatched_elements": 0
+                }
+              }
+            },
+            {
+              "frame": 24,
+              "outputs": {
+                "outputs": {
+                  "passed": true,
+                  "finite": true,
+                  "shape": [
+                    1,
+                    553
+                  ],
+                  "dtype": "float16",
+                  "expected_nonfinite_elements": 0,
+                  "unexpected_nonfinite_elements": 0,
+                  "exact": true,
+                  "max_abs_error": 0.0,
+                  "mismatched_elements": 0
+                }
+              }
+            },
+            {
+              "frame": 25,
+              "outputs": {
+                "outputs": {
+                  "passed": true,
+                  "finite": true,
+                  "shape": [
+                    1,
+                    553
+                  ],
+                  "dtype": "float16",
+                  "expected_nonfinite_elements": 0,
+                  "unexpected_nonfinite_elements": 0,
+                  "exact": true,
+                  "max_abs_error": 0.0,
+                  "mismatched_elements": 0
+                }
+              }
+            },
+            {
+              "frame": 26,
+              "outputs": {
+                "outputs": {
+                  "passed": true,
+                  "finite": true,
+                  "shape": [
+                    1,
+                    553
+                  ],
+                  "dtype": "float16",
+                  "expected_nonfinite_elements": 0,
+                  "unexpected_nonfinite_elements": 0,
+                  "exact": true,
+                  "max_abs_error": 0.0,
+                  "mismatched_elements": 0
+                }
+              }
+            },
+            {
+              "frame": 27,
+              "outputs": {
+                "outputs": {
+                  "passed": true,
+                  "finite": true,
+                  "shape": [
+                    1,
+                    553
+                  ],
+                  "dtype": "float16",
+                  "expected_nonfinite_elements": 0,
+                  "unexpected_nonfinite_elements": 0,
+                  "exact": true,
+                  "max_abs_error": 0.0,
+                  "mismatched_elements": 0
+                }
+              }
+            },
+            {
+              "frame": 28,
+              "outputs": {
+                "outputs": {
+                  "passed": true,
+                  "finite": true,
+                  "shape": [
+                    1,
+                    553
+                  ],
+                  "dtype": "float16",
+                  "expected_nonfinite_elements": 0,
+                  "unexpected_nonfinite_elements": 0,
+                  "exact": true,
+                  "max_abs_error": 0.0,
+                  "mismatched_elements": 0
+                }
+              }
+            },
+            {
+              "frame": 29,
+              "outputs": {
+                "outputs": {
+                  "passed": true,
+                  "finite": true,
+                  "shape": [
+                    1,
+                    553
+                  ],
+                  "dtype": "float16",
+                  "expected_nonfinite_elements": 0,
+                  "unexpected_nonfinite_elements": 0,
+                  "exact": true,
+                  "max_abs_error": 0.0,
+                  "mismatched_elements": 0
+                }
+              }
+            },
+            {
+              "frame": 30,
+              "outputs": {
+                "outputs": {
+                  "passed": true,
+                  "finite": true,
+                  "shape": [
+                    1,
+                    553
+                  ],
+                  "dtype": "float16",
+                  "expected_nonfinite_elements": 0,
+                  "unexpected_nonfinite_elements": 0,
+                  "exact": true,
+                  "max_abs_error": 0.0,
+                  "mismatched_elements": 0
+                }
+              }
+            },
+            {
+              "frame": 31,
+              "outputs": {
+                "outputs": {
+                  "passed": true,
+                  "finite": true,
+                  "shape": [
+                    1,
+                    553
+                  ],
+                  "dtype": "float16",
+                  "expected_nonfinite_elements": 0,
+                  "unexpected_nonfinite_elements": 0,
+                  "exact": true,
+                  "max_abs_error": 0.0,
+                  "mismatched_elements": 0
+                }
+              }
+            }
+          ]
+        }
+      },
+      "accuracy_part": "seed7",
+      "started_utc": 1793710460.514752,
+      "completed_utc": 1793710505.7386355
+    }
+  },
+  "accuracy_part": "seed7",
+  "completed_utc": 1793710505.7983966,
+  "validation_status": "passed"
+}

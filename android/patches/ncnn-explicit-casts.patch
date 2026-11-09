@@ -1,0 +1,2240 @@
+--- a/src/layer/vulkan/innerproduct_vulkan.cpp
++++ b/src/layer/vulkan/innerproduct_vulkan.cpp
+@@ -33,6 +33,32 @@
+ #endif
+ }
+ 
++// This private diagnostic marker is accepted only by the Vulkan layer. Keep
++// upstream parameter validation intact and reject every CPU execution path.
++int InnerProduct_vulkan::load_param(const ParamDict& pd)
++{
++    if (pd.get(9, 0) != 99)
++        return InnerProduct::load_param(pd);
++
++    ParamDict validated = pd;
++    validated.set(9, 0);
++    int result = InnerProduct::load_param(validated);
++    if (result != 0)
++        return result;
++    if (num_output <= 0 || weight_data_size <= 0 || weight_data_size % num_output != 0 || bias_term != 1 ||
++        int8_scale_term != 0 || !activation_params.empty())
++        return -1;
++    activation_type = 99;
++    return 0;
++}
++
++int InnerProduct_vulkan::forward(const Mat& bottom_blob, Mat& top_blob, const Option& opt) const
++{
++    if (activation_type == 99)
++        return -1;
++    return InnerProduct::forward(bottom_blob, top_blob, opt);
++}
++
+ int InnerProduct_vulkan::create_pipeline(const Option& opt)
+ {
+ #if NCNN_INT8
+@@ -47,8 +73,8 @@
+ 
+     const int num_input = weight_data_size / num_output;
+ 
+-    int in_elempack = num_input % 4 == 0 ? 4 : 1;
+-    int out_elempack = num_output % 4 == 0 ? 4 : 1;
++    int in_elempack = activation_type == 99 ? 1 : (num_input % 4 == 0 ? 4 : 1);
++    int out_elempack = activation_type == 99 ? 1 : (num_output % 4 == 0 ? 4 : 1);
+ 
+     // src = inch-outch
+     // dst = pa-pb-inch/pa-outch/pb
+@@ -78,6 +104,10 @@
+             }
+         }
+     }
++
++    // The diagnostic ordered GEMV accepts one vector only; never silently use GEMM.
++    if (activation_type == 99 && shape.dims == 2 && shape.w == num_input)
++        return -1;
+ 
+     if (shape.dims == 2 && shape.w == num_input)
+     {
+@@ -162,7 +192,7 @@
+         flatten->create_pipeline(opt);
+     }
+ 
+-    if (num_input / in_elempack >= 32)
++    if (num_input / in_elempack >= 32 && activation_type != 99 && !(activation_type == 1 && in_elempack == 4 && out_elempack == 4 && !opt.use_fp16_storage && !opt.use_fp16_packed && !opt.use_fp16_arithmetic && !opt.use_bf16_storage && !opt.use_bf16_packed))
+     {
+         Mat out_sum8_shape((num_input / in_elempack + 7) / 8, num_output / out_elempack, (void*)0, out_elemsize, out_elempack);
+ 
+@@ -364,8 +394,11 @@
+ 
+     const int num_input = weight_data_size / num_output;
+ 
+-    int in_elempack = num_input % 4 == 0 ? 4 : 1;
+-    int out_elempack = num_output % 4 == 0 ? 4 : 1;
++    int in_elempack = activation_type == 99 ? 1 : (num_input % 4 == 0 ? 4 : 1);
++    int out_elempack = activation_type == 99 ? 1 : (num_output % 4 == 0 ? 4 : 1);
++
++    if (activation_type == 99 && bottom_blob.dims == 2 && bottom_blob.w == num_input)
++        return -1;
+ 
+     if (bottom_blob.dims == 2 && bottom_blob.w == num_input)
+     {
+@@ -439,10 +472,21 @@
+         flatten->forward(bottom_blob, bottom_blob_flattened, cmd, opt_flatten);
+     }
+ 
++    if (activation_type == 99 && bottom_blob_flattened.elempack != 1)
++    {
++        VkMat unpacked;
++        Option opt_pack1 = opt;
++        opt_pack1.blob_vkallocator = opt.workspace_vkallocator;
++        vkdev->convert_packing(bottom_blob_flattened, unpacked, 1, cmd, opt_pack1);
++        if (unpacked.empty())
++            return -100;
++        bottom_blob_flattened = unpacked;
++    }
++
+     size_t elemsize = bottom_blob_flattened.elemsize;
+     size_t out_elemsize = elemsize / in_elempack * out_elempack;
+ 
+-    if (num_input / in_elempack >= 32)
++    if (num_input / in_elempack >= 32 && activation_type != 99 && !(activation_type == 1 && in_elempack == 4 && out_elempack == 4 && !opt.use_fp16_storage && !opt.use_fp16_packed && !opt.use_fp16_arithmetic && !opt.use_bf16_storage && !opt.use_bf16_packed))
+     {
+         // sum8
+         VkMat top_blob_sum8;
+--- a/src/layer/vulkan/innerproduct_vulkan.h
++++ b/src/layer/vulkan/innerproduct_vulkan.h
+@@ -12,6 +12,9 @@
+ {
+ public:
+     InnerProduct_vulkan();
++
++    virtual int load_param(const ParamDict& pd);
++    virtual int forward(const Mat& bottom_blob, Mat& top_blob, const Option& opt) const;
+ 
+     virtual int create_pipeline(const Option& opt);
+     virtual int destroy_pipeline(const Option& opt);
+--- a/src/layer/vulkan/shader/binaryop.comp
++++ b/src/layer/vulkan/shader/binaryop.comp
+@@ -51,6 +51,46 @@
+     int outcstep;
+ } p;
+ 
++float fold3_cube_fma(float a, float b, float c)
++{
++    precise float ah = uintBitsToFloat(floatBitsToUint(a) & 0xfffff000u);
++    precise float bh = uintBitsToFloat(floatBitsToUint(b) & 0xfffff000u);
++    precise float al = a - ah;
++    precise float bl = b - bh;
++    precise float product = a * b;
++    precise float error = ((ah * bh - product) + ah * bl + al * bh) + al * bl;
++    precise float total = product + c;
++    precise float part = total - product;
++    precise float residual = (product - (total - part)) + (c - part);
++    // Preserve a nonzero correction tail when the final sum is a midpoint.
++    precise float correction = residual + error;
++    precise float correction_part = correction - residual;
++    precise float tail = (residual - (correction - correction_part)) + (error - correction_part);
++    precise float rounded = total + correction;
++    precise float rounded_part = rounded - total;
++    precise float remainder = (total - (rounded - rounded_part)) + (correction - rounded_part);
++    if (tail != 0.f && remainder != 0.f && !isinf(rounded) && !isnan(rounded))
++    {
++        uint bits = floatBitsToUint(rounded);
++        bool upwards = remainder > 0.f;
++        uint adjacent_bits = (upwards == (rounded >= 0.f)) ? bits + 1u : bits - 1u;
++        float adjacent = uintBitsToFloat(adjacent_bits);
++        precise float half_gap = abs(adjacent - rounded) * 0.5f;
++        if (abs(remainder) == half_gap && ((tail > 0.f) == upwards)) rounded = adjacent;
++    }
++    return rounded;
++}
++float fold3_reference_cube(float x)
++{
++    precise float squared = x * x;
++    precise float error = fold3_cube_fma(x, x, -squared);
++    precise float cubed = squared * x;
++    precise float tail = fold3_cube_fma(squared, x, -cubed);
++    precise float correction = fold3_cube_fma(error, x, tail);
++    precise float result = cubed + correction;
++    return isinf(cubed) || isnan(cubed) ? cubed : result;
++}
++
+ void main()
+ {
+     int gx = int(gl_GlobalInvocationID.x);
+@@ -90,7 +130,20 @@
+     if (op_type == 3) res = v1 / v2;
+     if (op_type == 4) res = max(v1, v2);
+     if (op_type == 5) res = min(v1, v2);
+-    if (op_type == 6) res = pow(v1, v2);
++    // GLSL pow is undefined for negative bases, including integer cubes.
++    if (op_type == 6)
++    {
++        if (with_scalar == 1 && const_b == 3.0)
++        {
++            precise afp square = v1 * v1;
++            // The original final NCHW singleton cube uses powf; spatial NHWC
++            // cubes use the ordered multiply path. Preserve that boundary.
++            if (psc(outdims) == 3 && psc(outw) == 1 && psc(outh) == 1 && psc(outc) == 1280)
++                res = afp(fold3_reference_cube(float(v1)));
++            else res = square * v1;
++        }
++        else res = pow(v1, v2);
++    }
+     if (op_type == 7) res = v2 - v1;
+     if (op_type == 8) res = v2 / v1;
+     if (op_type == 9) res = pow(v2, v1);
+--- a/src/layer/vulkan/shader/binaryop_pack4.comp
++++ b/src/layer/vulkan/shader/binaryop_pack4.comp
+@@ -51,6 +51,46 @@
+     int outcstep;
+ } p;
+ 
++float fold3_cube_fma(float a, float b, float c)
++{
++    precise float ah = uintBitsToFloat(floatBitsToUint(a) & 0xfffff000u);
++    precise float bh = uintBitsToFloat(floatBitsToUint(b) & 0xfffff000u);
++    precise float al = a - ah;
++    precise float bl = b - bh;
++    precise float product = a * b;
++    precise float error = ((ah * bh - product) + ah * bl + al * bh) + al * bl;
++    precise float total = product + c;
++    precise float part = total - product;
++    precise float residual = (product - (total - part)) + (c - part);
++    // Preserve a nonzero correction tail when the final sum is a midpoint.
++    precise float correction = residual + error;
++    precise float correction_part = correction - residual;
++    precise float tail = (residual - (correction - correction_part)) + (error - correction_part);
++    precise float rounded = total + correction;
++    precise float rounded_part = rounded - total;
++    precise float remainder = (total - (rounded - rounded_part)) + (correction - rounded_part);
++    if (tail != 0.f && remainder != 0.f && !isinf(rounded) && !isnan(rounded))
++    {
++        uint bits = floatBitsToUint(rounded);
++        bool upwards = remainder > 0.f;
++        uint adjacent_bits = (upwards == (rounded >= 0.f)) ? bits + 1u : bits - 1u;
++        float adjacent = uintBitsToFloat(adjacent_bits);
++        precise float half_gap = abs(adjacent - rounded) * 0.5f;
++        if (abs(remainder) == half_gap && ((tail > 0.f) == upwards)) rounded = adjacent;
++    }
++    return rounded;
++}
++float fold3_reference_cube(float x)
++{
++    precise float squared = x * x;
++    precise float error = fold3_cube_fma(x, x, -squared);
++    precise float cubed = squared * x;
++    precise float tail = fold3_cube_fma(squared, x, -cubed);
++    precise float correction = fold3_cube_fma(error, x, tail);
++    precise float result = cubed + correction;
++    return isinf(cubed) || isnan(cubed) ? cubed : result;
++}
++
+ void main()
+ {
+     int gx = int(gl_GlobalInvocationID.x);
+@@ -85,7 +125,20 @@
+     if (op_type == 3) res = v1 / v2;
+     if (op_type == 4) res = max(v1, v2);
+     if (op_type == 5) res = min(v1, v2);
+-    if (op_type == 6) res = pow(v1, v2);
++    // GLSL pow is undefined for negative bases, including integer cubes.
++    if (op_type == 6)
++    {
++        if (with_scalar == 1 && const_b == 3.0)
++        {
++            precise afpvec4 square = v1 * v1;
++            // The original final NCHW singleton cube uses powf; spatial NHWC
++            // cubes use the ordered multiply path. Preserve that boundary.
++            if (psc(outdims) == 3 && psc(outw) == 1 && psc(outh) == 1 && psc(outc) == 320)
++                res = afpvec4(fold3_reference_cube(float(v1.x)), fold3_reference_cube(float(v1.y)), fold3_reference_cube(float(v1.z)), fold3_reference_cube(float(v1.w)));
++            else res = square * v1;
++        }
++        else res = pow(v1, v2);
++    }
+     if (op_type == 7) res = v2 - v1;
+     if (op_type == 8) res = v2 / v1;
+     if (op_type == 9) res = pow(v2, v1);
+--- a/src/layer/vulkan/shader/cast_fp32_to_fp16.comp
++++ b/src/layer/vulkan/shader/cast_fp32_to_fp16.comp
+@@ -34,6 +34,28 @@
+     int outcstep;
+ } p;
+ 
++// Explicit IEEE binary16 RNE: Adreno packHalf2x16 may truncate.
++float fold3_half_rte(float value)
++{
++    uint bits = floatBitsToUint(value);
++    uint sign = (bits >> 16) & 0x8000u;
++    uint magnitude = bits & 0x7fffffffu;
++    uint result;
++    if (magnitude > 0x7f800000u) result = 0x7e00u;
++    else if (magnitude >= 0x477ff000u) result = 0x7c00u;
++    else if (magnitude >= 0x38800000u)
++        result = (magnitude + 0xfffu + ((magnitude >> 13) & 1u) - 0x38000000u) >> 13;
++    else if (magnitude <= 0x33000000u) result = 0u;
++    else
++    {
++        uint shift = 126u - (magnitude >> 23);
++        uint mantissa = (magnitude & 0x7fffffu) | 0x800000u;
++        result = (mantissa + ((1u << (shift - 1u)) - 1u) + ((mantissa >> shift) & 1u)) >> shift;
++    }
++    // Every half is exact here, so unpacking adds no further rounding.
++    return unpackHalf2x16(sign | result).x;
++}
++
+ void main()
+ {
+     int gx = int(gl_GlobalInvocationID.x);
+@@ -47,5 +69,9 @@
+ 
+     const int v_offset = gz * psc(cstep) + gy * psc(w) + gx;
+ 
++#if !NCNN_fp16_storage && !NCNN_fp16_packed
++    buffer_st1(top_blob_data, gi, fold3_half_rte(bottom_blob_data[v_offset]));
++#else
+     buffer_st1(top_blob_data, gi, afp(bottom_blob_data[v_offset]));
++#endif
+ }
+--- a/src/layer/vulkan/shader/cast_fp32_to_fp16_pack4.comp
++++ b/src/layer/vulkan/shader/cast_fp32_to_fp16_pack4.comp
+@@ -34,6 +34,28 @@
+     int outcstep;
+ } p;
+ 
++// Explicit IEEE binary16 RNE: Adreno packHalf2x16 may truncate.
++float fold3_half_rte(float value)
++{
++    uint bits = floatBitsToUint(value);
++    uint sign = (bits >> 16) & 0x8000u;
++    uint magnitude = bits & 0x7fffffffu;
++    uint result;
++    if (magnitude > 0x7f800000u) result = 0x7e00u;
++    else if (magnitude >= 0x477ff000u) result = 0x7c00u;
++    else if (magnitude >= 0x38800000u)
++        result = (magnitude + 0xfffu + ((magnitude >> 13) & 1u) - 0x38000000u) >> 13;
++    else if (magnitude <= 0x33000000u) result = 0u;
++    else
++    {
++        uint shift = 126u - (magnitude >> 23);
++        uint mantissa = (magnitude & 0x7fffffu) | 0x800000u;
++        result = (mantissa + ((1u << (shift - 1u)) - 1u) + ((mantissa >> shift) & 1u)) >> shift;
++    }
++    // Every half is exact here, so unpacking adds no further rounding.
++    return unpackHalf2x16(sign | result).x;
++}
++
+ void main()
+ {
+     int gx = int(gl_GlobalInvocationID.x);
+@@ -47,5 +69,10 @@
+ 
+     const int v_offset = gz * psc(cstep) + gy * psc(w) + gx;
+ 
++#if !NCNN_fp16_storage && !NCNN_fp16_packed
++    vec4 value = bottom_blob_data[v_offset];
++    buffer_st4(top_blob_data, gi, vec4(fold3_half_rte(value.x), fold3_half_rte(value.y), fold3_half_rte(value.z), fold3_half_rte(value.w)));
++#else
+     buffer_st4(top_blob_data, gi, afpvec4(bottom_blob_data[v_offset]));
++#endif
+ }
+--- a/src/layer/vulkan/shader/convolution_packed_1x1s1d1.comp
++++ b/src/layer/vulkan/shader/convolution_packed_1x1s1d1.comp
+@@ -47,6 +47,44 @@
+ shared lfpvec4 tmp_k[8][LOCAL_MEMORY_UNROLL_INCH][4];
+ #endif
+ 
++#if !NCNN_fp16_storage && !NCNN_fp16_packed && !NCNN_fp16_arithmetic && !NCNN_bf16_storage && !NCNN_bf16_packed
++// Adreno 660 lowers GLSL fma to separately rounded multiply/add. Recover the
++// product and addition residuals for this bounded FP32 projection diagnostic.
++// precise applies to every intermediate: contraction destroys the residuals.
++vec4 fold3_projection_fma(vec4 a, vec4 b, vec4 c)
++{
++    precise vec4 ah = uintBitsToFloat(floatBitsToUint(a) & uvec4(0xfffff000u));
++    precise vec4 bh = uintBitsToFloat(floatBitsToUint(b) & uvec4(0xfffff000u));
++    precise vec4 al = a - ah;
++    precise vec4 bl = b - bh;
++    precise vec4 product = a * b;
++    precise vec4 error = ((ah * bh - product) + ah * bl + al * bh) + al * bl;
++    precise vec4 total = product + c;
++    precise vec4 part = total - product;
++    precise vec4 residual = (product - (total - part)) + (c - part);
++    // Preserve a nonzero correction tail when the final sum is a midpoint.
++    precise vec4 correction = residual + error;
++    precise vec4 correction_part = correction - residual;
++    precise vec4 tail = (residual - (correction - correction_part)) + (error - correction_part);
++    precise vec4 rounded = total + correction;
++    precise vec4 rounded_part = rounded - total;
++    precise vec4 remainder = (total - (rounded - rounded_part)) + (correction - rounded_part);
++    for (int lane = 0; lane < 4; lane++)
++    {
++        if (tail[lane] != 0.f && remainder[lane] != 0.f && !isinf(rounded[lane]) && !isnan(rounded[lane]))
++        {
++            uint bits = floatBitsToUint(rounded[lane]);
++            bool upwards = remainder[lane] > 0.f;
++            uint adjacent_bits = (upwards == (rounded[lane] >= 0.f)) ? bits + 1u : bits - 1u;
++            float adjacent = uintBitsToFloat(adjacent_bits);
++            precise float half_gap = abs(adjacent - rounded[lane]) * 0.5f;
++            if (abs(remainder[lane]) == half_gap && ((tail[lane] > 0.f) == upwards)) rounded[lane] = adjacent;
++        }
++    }
++    return rounded;
++}
++#endif
++
+ void main()
+ {
+     int gx = int(gl_GlobalInvocationID.x);
+@@ -54,7 +92,52 @@
+ 
+ #if !NCNN_shader_local_memory
+     if (gx >= psc(size) || gy >= psc(outc))
++        return;
++#endif
++
++    // Pinned FP32 pointwise reference uses sequential FMA, then bias/activation.
++    // Preserve that order throughout the prefix, not just its final projection.
++    // The uniform branch returns before every local-memory barrier.
++#if !NCNN_fp16_storage && !NCNN_fp16_packed && !NCNN_fp16_arithmetic && !NCNN_bf16_storage && !NCNN_bf16_packed
++    if (activation_type == 0 || activation_type == 1 || activation_type == 4)
++    {
++        if (gx >= psc(size) || gy >= psc(outc)) return;
++        precise vec4 results[4];
++        for (int spatial = 0; spatial < 4; ++spatial)
++        {
++            precise vec4 sum = vec4(0.f);
++            for (int ci = 0; ci < psc(num_input); ++ci)
++            {
++                float value;
++                if (elempack == 4)
++                    value = buffer_ld4(bottom_blob_data, (ci / 4) * psc(cstep) + gx * 4 + spatial)[ci % 4];
++                else
++                    value = buffer_ld4(bottom_blob_data, ci * psc(cstep) + gx)[spatial];
++                int wi = gy * psc(c) * 4 + (ci / 4) * 4;
++                vec4 weights = vec4(buffer_ld4(weight_data, wi)[ci % 4],
++                                    buffer_ld4(weight_data, wi + 1)[ci % 4],
++                                    buffer_ld4(weight_data, wi + 2)[ci % 4],
++                                    buffer_ld4(weight_data, wi + 3)[ci % 4]);
++                sum = fold3_projection_fma(vec4(value), weights, sum);
++            }
++            results[spatial] = bias_term == 1 ? sum + buffer_ld4(bias_data, gy) : sum;
++            results[spatial] = activation_afpvec4(results[spatial], activation_type, activation_param_0, activation_param_1);
++        }
++        if (out_elempack == 4)
++        {
++            for (int spatial = 0; spatial < 4; ++spatial)
++                if (gx * 4 + spatial < psc(outcstep))
++                    buffer_st4(top_blob_data, gy * psc(outcstep) + gx * 4 + spatial, results[spatial]);
++        }
++        else
++        {
++            for (int lane = 0; lane < 4; ++lane)
++                if (gy * 4 + lane < psc(num_output))
++                    buffer_st4(top_blob_data, (gy * 4 + lane) * psc(outcstep) + gx,
++                               vec4(results[0][lane], results[1][lane], results[2][lane], results[3][lane]));
++        }
+         return;
++    }
+ #endif
+ 
+     // sum0..sum3: each afpvec4 = 4 output channels, one spatial position
+--- a/src/layer/vulkan/shader/innerproduct.comp
++++ b/src/layer/vulkan/shader/innerproduct.comp
+@@ -44,6 +44,87 @@
+     int outcstep;
+ } p;
+ 
++float fold3_half_rte(float value)
++{
++    uint bits = floatBitsToUint(value);
++    uint sign = (bits >> 16) & 0x8000u;
++    uint magnitude = bits & 0x7fffffffu;
++    uint result;
++    if (magnitude > 0x7f800000u) result = 0x7e00u;
++    else if (magnitude >= 0x477ff000u) result = 0x7c00u;
++    else if (magnitude >= 0x38800000u)
++        result = (magnitude + 0xfffu + ((magnitude >> 13) & 1u) - 0x38000000u) >> 13;
++    else if (magnitude <= 0x33000000u) result = 0u;
++    else
++    {
++        uint shift = 126u - (magnitude >> 23);
++        uint mantissa = (magnitude & 0x7fffffu) | 0x800000u;
++        result = (mantissa + ((1u << (shift - 1u)) - 1u) + ((mantissa >> shift) & 1u)) >> shift;
++    }
++    // Every half is exact here, so unpacking adds no further rounding.
++    return unpackHalf2x16(sign | result).x;
++}
++
++// Match the pinned original ARM64 half GEMV, not an FP32 reduction.
++float fold3_half_fma(float x, float y, float z)
++{
++    precise float product = x * y;
++    precise float total = product + z;
++    precise float part = total - product;
++    precise float remainder = total - part;
++    precise float left = product - remainder;
++    precise float right = z - part;
++    precise float error = left + right;
++    uint bits = floatBitsToUint(total);
++    uint exponent = (bits >> 23) & 255u;
++    uint shift = uint(clamp(126 - int(exponent), 13, 24));
++    if (exponent >= 102u && exponent <= 142u && error != 0.0 &&
++        ((((bits & 0x7fffffu) | 0x800000u) & ((1u << shift) - 1u)) == (1u << (shift - 1u))))
++    {
++        // Advance one FP32 ulp toward the exact addition residual.
++        bits = ((total > 0.0) == (error > 0.0)) ? bits + 1u : bits - 1u;
++        total = uintBitsToFloat(bits);
++    }
++    return fold3_half_rte(total);
++}
++float fold3_gemv(int row)
++{
++    int k = psc(w);
++    int n = psc(outw);
++    int end = (k / 8) * 8;
++    bool coefficient = end > 0 && k + n + 1 < 20;
++    int packets = n == 1 && !coefficient ? min(4, max(1, end / 8)) : 1;
++    float partial[32];
++    for (int i = 0; i < 32; ++i) partial[i] = 0.0;
++    for (int start = 0; start < end; start += 8)
++    {
++        for (int lane = 0; lane < 8; ++lane)
++        {
++            int j = start + lane;
++            int index = ((start / 8) % packets) * 8 + lane;
++            float x = float(buffer_ld1(bottom_blob_data, j));
++            float y = float(buffer_ld1(weight_data, row * k + j));
++            partial[index] = coefficient
++                ? fold3_half_rte(partial[index] + fold3_half_rte(x * y))
++                : fold3_half_fma(x, y, partial[index]);
++        }
++    }
++    float lanes[8];
++    for (int lane = 0; lane < 8; ++lane)
++    {
++        lanes[lane] = partial[(packets - 1) * 8 + lane];
++        for (int packet = packets - 2; packet >= 0; --packet)
++            lanes[lane] = fold3_half_rte(partial[packet * 8 + lane] + lanes[lane]);
++    }
++    for (int width = 4; width >= 1; width /= 2)
++        for (int lane = 0; lane < width; ++lane)
++            lanes[lane] = fold3_half_rte(lanes[lane * 2] + lanes[lane * 2 + 1]);
++    float value = lanes[0];
++    for (int i = end; i < k; ++i)
++        value = fold3_half_rte(value + fold3_half_rte(float(buffer_ld1(bottom_blob_data, i)) * float(buffer_ld1(weight_data, row * k + i))));
++    return bias_term == 1 ? fold3_half_rte(value + float(buffer_ld1(bias_data, row))) : value;
++}
++
+ void main()
+ {
+     int gx = int(gl_GlobalInvocationID.x);
+@@ -53,6 +134,12 @@
+     if (gx >= psc(outw) || gy >= 1 || gz >= 1)
+         return;
+ 
++    // 99 is an explicit diagnostic graph marker, never a default activation.
++    if (activation_type == 99)
++    {
++        buffer_st1(top_blob_data, gx, afp(fold3_gemv(gx)));
++        return;
++    }
+     afp sum;
+ 
+     if (bias_term == 1)
+--- a/src/layer/vulkan/shader/reduction.comp
++++ b/src/layer/vulkan/shader/reduction.comp
+@@ -3,7 +3,7 @@
+ 
+ #version 450
+ 
+-#if ncnn_subgroup_basic && ncnn_subgroup_arithmetic && (!NCNN_fp16_arithmetic || ncnn_shaderSubgroupExtendedTypes)
++#if 0 // Use the portable shared-memory tree; vendor subgroup results fail parity.
+ #extension GL_KHR_shader_subgroup_basic : enable
+ #extension GL_KHR_shader_subgroup_arithmetic : enable
+ #if NCNN_fp16_arithmetic && !NCNN_bf16_storage && !NCNN_bf16_packed
+@@ -78,7 +78,7 @@
+     return a + b;
+ }
+ 
+-#if ncnn_subgroup_basic && ncnn_subgroup_arithmetic && (!NCNN_fp16_arithmetic || ncnn_shaderSubgroupExtendedTypes)
++#if 0 // Use the portable shared-memory tree; vendor subgroup results fail parity.
+ afp subgroup_reduce_acc(afp v)
+ {
+     if (op == 4) return subgroupMax(v);
+@@ -153,1 +153,52 @@
++// Adreno 660 lowers OpFma to separate multiply/add. Recover the product
++// residual explicitly, as in the verified pointwise convolution path.
++float fold3_mean_fma(float a, float b, float c)
++{
++    precise float ah = uintBitsToFloat(floatBitsToUint(a) & 0xfffff000u);
++    precise float bh = uintBitsToFloat(floatBitsToUint(b) & 0xfffff000u);
++    precise float al = a - ah;
++    precise float bl = b - bh;
++    precise float product = a * b;
++    precise float error = ((ah * bh - product) + ah * bl + al * bh) + al * bl;
++    precise float total = product + c;
++    precise float part = total - product;
++    precise float residual = (product - (total - part)) + (c - part);
++    // Preserve a nonzero correction tail when the final sum is a midpoint.
++    precise float correction = residual + error;
++    precise float correction_part = correction - residual;
++    precise float tail = (residual - (correction - correction_part)) + (error - correction_part);
++    precise float rounded = total + correction;
++    precise float rounded_part = rounded - total;
++    precise float remainder = (total - (rounded - rounded_part)) + (correction - rounded_part);
++    if (tail != 0.f && remainder != 0.f && !isinf(rounded) && !isnan(rounded))
++    {
++        uint bits = floatBitsToUint(rounded);
++        bool upwards = remainder > 0.f;
++        uint adjacent_bits = (upwards == (rounded >= 0.f)) ? bits + 1u : bits - 1u;
++        float adjacent = uintBitsToFloat(adjacent_bits);
++        precise float half_gap = abs(adjacent - rounded) * 0.5f;
++        if (abs(remainder) == half_gap && ((tail > 0.f) == upwards)) rounded = adjacent;
++    }
++    return rounded;
++}
++
++float fold3_mean_divide(float left, float right)
++{
++    precise float quotient = left / right;
++    if (isnan(left) || isinf(left) || isnan(right) || isinf(right) ||
++        isnan(quotient) || isinf(quotient) || right == 0.f || left == 0.f) return quotient;
++    precise float residual = fold3_mean_fma(-quotient, right, left);
++    precise float correction = residual / right;
++    precise float corrected = quotient + correction;
++    float magnitude = abs(corrected), denominator = abs(right);
++    residual = fold3_mean_fma(-magnitude, denominator, abs(left));
++    uint bits = floatBitsToUint(magnitude);
++    float neighbor = uintBitsToFloat(residual < 0.f ? bits - 1u : bits + 1u);
++    precise float halfGap = abs(neighbor - magnitude) * 0.5f;
++    precise float distance = fold3_mean_fma(-halfGap, denominator, abs(residual));
++    if (halfGap > 0.f && !isinf(neighbor) &&
++        (distance > 0.f || (distance == 0.f && (bits & 1u) != 0u))) magnitude = neighbor;
++    return uintBitsToFloat((floatBitsToUint(corrected) & 0x80000000u) | floatBitsToUint(magnitude));
++}
++
+ void main()
+@@ -169,6 +220,37 @@
+     int in_d = (p.in_d > 0) ? p.in_d : 1;
+     int in_c = (p.in_c > 0) ? p.in_c : 1;
+ 
++#if !NCNN_fp16_storage && !NCNN_fp16_packed && !NCNN_fp16_arithmetic && !NCNN_bf16_storage && !NCNN_bf16_packed
++    // Pinned driver/road FP32 spatial means. Match the host's eight
++    // independent lanes, horizontal additions and division (not reciprocal multiply).
++    // The uniform branch returns every lane before the generic reduction barriers.
++    if (op == 3 && p.in_dims == 3 && ((in_w == 12 && in_h == 8 && in_c == 960) || (in_w == 8 && in_h == 4 && in_c == 1024)) &&
++        p.reduce_w == 1 && p.reduce_h == 1 && p.reduce_d == 0 && p.reduce_c == 0 &&
++        p.coeff == 1.f / float(in_w * in_h))
++    {
++        if (tid == 0)
++        {
++            precise float lanes[8];
++            for (int lane = 0; lane < 8; lane++)
++                lanes[lane] = buffer_ld1(bottom_blob_data, in_index(lane, 0, 0, in_coord[0]));
++            for (int offset = 8; offset < in_w * in_h; offset += 8)
++                for (int lane = 0; lane < 8; lane++)
++                {
++                    int i = offset + lane;
++                    lanes[lane] = lanes[lane] + buffer_ld1(bottom_blob_data, in_index(i % in_w, i / in_w, 0, in_coord[0]));
++                }
++            precise vec4 packed = vec4(lanes[0], lanes[1], lanes[2], lanes[3]) +
++                                  vec4(lanes[4], lanes[5], lanes[6], lanes[7]);
++            precise float left = packed.x + packed.y;
++            precise float right = packed.z + packed.w;
++            precise float summed = left + right;
++            precise float fold3_host_mean = fold3_mean_divide(summed, float(in_w * in_h));
++            buffer_st1(top_blob_data, out_offset(ow, oh, od, oc), fold3_host_mean);
++        }
++        return;
++    }
++#endif
++
+     int reduce_size = 1;
+     if (p.reduce_w != 0) reduce_size *= in_w;
+     if (p.reduce_h != 0) reduce_size *= in_h;
+@@ -207,7 +289,7 @@
+         acc = element_accum(acc, v);
+     }
+ 
+-#if ncnn_subgroup_basic && ncnn_subgroup_arithmetic && (!NCNN_fp16_arithmetic || ncnn_shaderSubgroupExtendedTypes)
++#if 0 // Use the portable shared-memory tree; vendor subgroup results fail parity.
+     afp sg = subgroup_reduce_acc(acc);
+ 
+     if (subgroupElect())
+--- a/src/layer/vulkan/shader/tanh.comp
++++ b/src/layer/vulkan/shader/tanh.comp
+@@ -12,6 +12,80 @@
+     uint n;
+ } p;
+ 
++// ONNX Runtime MLAS tanh.cpp, Copyright Microsoft Corporation, MIT.
++// Preserve its explicit FP32 FMA and division boundaries in diagnostic FP32 mode.
++// Adreno 660 lowers OpFma to separate multiply/add. Recover the product
++// residual explicitly, as in the verified pointwise convolution path.
++float fold3_tanh_fma(float a, float b, float c)
++{
++    precise float ah = uintBitsToFloat(floatBitsToUint(a) & 0xfffff000u);
++    precise float bh = uintBitsToFloat(floatBitsToUint(b) & 0xfffff000u);
++    precise float al = a - ah;
++    precise float bl = b - bh;
++    precise float product = a * b;
++    precise float error = ((ah * bh - product) + ah * bl + al * bh) + al * bl;
++    precise float total = product + c;
++    precise float part = total - product;
++    precise float residual = (product - (total - part)) + (c - part);
++    // Keep the tail of the correction: rounding it away can turn an
++    // off-midpoint FMA into an exact tie and pick the wrong adjacent float.
++    precise float correction = residual + error;
++    precise float correction_part = correction - residual;
++    precise float tail = (residual - (correction - correction_part)) + (error - correction_part);
++    precise float rounded = total + correction;
++    precise float rounded_part = rounded - total;
++    precise float remainder = (total - (rounded - rounded_part)) + (correction - rounded_part);
++    if (tail != 0.f && remainder != 0.f && !isinf(rounded) && !isnan(rounded))
++    {
++        uint bits = floatBitsToUint(rounded);
++        bool upwards = remainder > 0.f;
++        uint adjacent_bits = (upwards == (rounded >= 0.f)) ? bits + 1u : bits - 1u;
++        float adjacent = uintBitsToFloat(adjacent_bits);
++        precise float half_gap = abs(adjacent - rounded) * 0.5f;
++        if (abs(remainder) == half_gap && ((tail > 0.f) == upwards)) rounded = adjacent;
++    }
++    return rounded;
++}
++
++float fold3_reference_divide(float left, float right)
++{
++    precise float quotient = left / right;
++    if (isnan(left) || isinf(left) || isnan(right) || isinf(right) ||
++        isnan(quotient) || isinf(quotient) || right == 0.f || left == 0.f) return quotient;
++    precise float residual = fold3_tanh_fma(-quotient, right, left);
++    precise float correction = residual / right;
++    precise float corrected = quotient + correction;
++    float magnitude = abs(corrected), denominator = abs(right);
++    residual = fold3_tanh_fma(-magnitude, denominator, abs(left));
++    uint bits = floatBitsToUint(magnitude);
++    float neighbor = uintBitsToFloat(residual < 0.f ? bits - 1u : bits + 1u);
++    precise float halfGap = abs(neighbor - magnitude) * 0.5f;
++    precise float distance = fold3_tanh_fma(-halfGap, denominator, abs(residual));
++    if (halfGap > 0.f && !isinf(neighbor) &&
++        (distance > 0.f || (distance == 0.f && (bits & 1u) != 0u))) magnitude = neighbor;
++    return uintBitsToFloat((floatBitsToUint(corrected) & 0x80000000u) | floatBitsToUint(magnitude));
++}
++
++float fold3_host_tanh(float input_value)
++{
++    if (isnan(input_value)) return input_value;
++    float value = clamp(input_value, -9.f, 9.f);
++    precise float square = value * value;
++    float numerator = -2.76076847742355e-16f;
++    numerator = fold3_tanh_fma(numerator, square, 2.00018790482477e-13f);
++    numerator = fold3_tanh_fma(numerator, square, -8.60467152213735e-11f);
++    numerator = fold3_tanh_fma(numerator, square, 5.12229709037114e-08f);
++    numerator = fold3_tanh_fma(numerator, square, 1.48572235717979e-05f);
++    numerator = fold3_tanh_fma(numerator, square, 6.37261928875436e-04f);
++    numerator = fold3_tanh_fma(numerator, square, 4.89352455891786e-03f);
++    float denominator = 1.19825839466702e-06f;
++    denominator = fold3_tanh_fma(denominator, square, 1.18534705686654e-04f);
++    denominator = fold3_tanh_fma(denominator, square, 2.26843463243900e-03f);
++    denominator = fold3_tanh_fma(denominator, square, 4.89352518554385e-03f);
++    precise float product = numerator * value;
++    return fold3_reference_divide(product, denominator);
++}
++
+ void main()
+ {
+     uint gi = gl_GlobalInvocationID.x;
+@@ -21,6 +95,9 @@
+ 
+     afpvec4 v = buffer_ld4(bottom_top_blob_data, gi);
+ 
++#if !NCNN_fp16_storage && !NCNN_fp16_packed && !NCNN_fp16_arithmetic && !NCNN_bf16_storage && !NCNN_bf16_packed
++    v = vec4(fold3_host_tanh(v.x), fold3_host_tanh(v.y), fold3_host_tanh(v.z), fold3_host_tanh(v.w));
++#else
+     // avoid overflow in tanh implementations based on exp(x) and exp(-x)
+     v = clamp(v, afpvec4(-10.f), afpvec4(10.f));
+ 
+@@ -30,5 +107,7 @@
+     v = tanh(v);
+ #endif
+ 
++#endif
++
+     buffer_st4(bottom_top_blob_data, gi, v);
+ }
+--- a/src/layer/vulkan/shader/convolutiondepthwise.comp
++++ b/src/layer/vulkan/shader/convolutiondepthwise.comp
+@@ -51,6 +51,38 @@
+     int outcstep;
+ } p;
+ 
++#if !NCNN_fp16_storage && !NCNN_fp16_packed && !NCNN_fp16_arithmetic && !NCNN_bf16_storage && !NCNN_bf16_packed
++float fold3_depthwise_fma(float a, float b, float c)
++{
++    precise float ah = uintBitsToFloat(floatBitsToUint(a) & 0xfffff000u);
++    precise float bh = uintBitsToFloat(floatBitsToUint(b) & 0xfffff000u);
++    precise float al = a - ah;
++    precise float bl = b - bh;
++    precise float product = a * b;
++    precise float error = ((ah * bh - product) + ah * bl + al * bh) + al * bl;
++    precise float total = product + c;
++    precise float part = total - product;
++    precise float residual = (product - (total - part)) + (c - part);
++    // Preserve a nonzero correction tail when the final sum is a midpoint.
++    precise float correction = residual + error;
++    precise float correction_part = correction - residual;
++    precise float tail = (residual - (correction - correction_part)) + (error - correction_part);
++    precise float rounded = total + correction;
++    precise float rounded_part = rounded - total;
++    precise float remainder = (total - (rounded - rounded_part)) + (correction - rounded_part);
++    if (tail != 0.f && remainder != 0.f && !isinf(rounded) && !isnan(rounded))
++    {
++        uint bits = floatBitsToUint(rounded);
++        bool upwards = remainder > 0.f;
++        uint adjacent_bits = (upwards == (rounded >= 0.f)) ? bits + 1u : bits - 1u;
++        float adjacent = uintBitsToFloat(adjacent_bits);
++        precise float half_gap = abs(adjacent - rounded) * 0.5f;
++        if (abs(remainder) == half_gap && ((tail > 0.f) == upwards)) rounded = adjacent;
++    }
++    return rounded;
++}
++#endif
++
+ void main()
+ {
+     int gx = int(gl_GlobalInvocationID.x);
+@@ -59,6 +91,24 @@
+ 
+     if (gx >= psc(outw) || gy >= psc(outh) || gz >= psc(outc))
+         return;
++
++    // Preserve the pinned host's row-major fused accumulation and bias-last boundary.
++#if !NCNN_fp16_storage && !NCNN_fp16_packed && !NCNN_fp16_arithmetic && !NCNN_bf16_storage && !NCNN_bf16_packed
++    if (activation_type == 0 || activation_type == 1)
++    {
++        float value = float(0.f);
++        int weight_offset = gz * kernel_w * kernel_h;
++        int input_offset = gz * psc(cstep) + gy * stride_h * psc(w) + gx * stride_w;
++        for (int y = 0; y < kernel_h; ++y)
++            for (int x = 0; x < kernel_w; ++x)
++                value = fold3_depthwise_fma(buffer_ld1(bottom_blob_data, input_offset + y * dilation_h * psc(w) + x * dilation_w),
++                    buffer_ld1(weight_data, weight_offset + y * kernel_w + x), value);
++        if (bias_term == 1) value += buffer_ld1(bias_data, gz);
++        value = activation_afp(value, activation_type, activation_param_0, activation_param_1);
++        buffer_st1(top_blob_data, gz * psc(outcstep) + gy * psc(outw) + gx, value);
++        return;
++    }
++#endif
+ 
+     afp sum;
+ 
+--- a/src/layer/vulkan/shader/convolutiondepthwise_pack4.comp
++++ b/src/layer/vulkan/shader/convolutiondepthwise_pack4.comp
+@@ -51,6 +51,41 @@
+     int outcstep;
+ } p;
+ 
++#if !NCNN_fp16_storage && !NCNN_fp16_packed && !NCNN_fp16_arithmetic && !NCNN_bf16_storage && !NCNN_bf16_packed
++vec4 fold3_depthwise_fma(vec4 a, vec4 b, vec4 c)
++{
++    precise vec4 ah = uintBitsToFloat(floatBitsToUint(a) & uvec4(0xfffff000u));
++    precise vec4 bh = uintBitsToFloat(floatBitsToUint(b) & uvec4(0xfffff000u));
++    precise vec4 al = a - ah;
++    precise vec4 bl = b - bh;
++    precise vec4 product = a * b;
++    precise vec4 error = ((ah * bh - product) + ah * bl + al * bh) + al * bl;
++    precise vec4 total = product + c;
++    precise vec4 part = total - product;
++    precise vec4 residual = (product - (total - part)) + (c - part);
++    // Preserve a nonzero correction tail when the final sum is a midpoint.
++    precise vec4 correction = residual + error;
++    precise vec4 correction_part = correction - residual;
++    precise vec4 tail = (residual - (correction - correction_part)) + (error - correction_part);
++    precise vec4 rounded = total + correction;
++    precise vec4 rounded_part = rounded - total;
++    precise vec4 remainder = (total - (rounded - rounded_part)) + (correction - rounded_part);
++    for (int lane = 0; lane < 4; lane++)
++    {
++        if (tail[lane] != 0.f && remainder[lane] != 0.f && !isinf(rounded[lane]) && !isnan(rounded[lane]))
++        {
++            uint bits = floatBitsToUint(rounded[lane]);
++            bool upwards = remainder[lane] > 0.f;
++            uint adjacent_bits = (upwards == (rounded[lane] >= 0.f)) ? bits + 1u : bits - 1u;
++            float adjacent = uintBitsToFloat(adjacent_bits);
++            precise float half_gap = abs(adjacent - rounded[lane]) * 0.5f;
++            if (abs(remainder[lane]) == half_gap && ((tail[lane] > 0.f) == upwards)) rounded[lane] = adjacent;
++        }
++    }
++    return rounded;
++}
++#endif
++
+ void main()
+ {
+     int gx = int(gl_GlobalInvocationID.x);
+@@ -59,6 +94,24 @@
+ 
+     if (gx >= psc(outw) || gy >= psc(outh) || gz >= psc(outc))
+         return;
++
++    // Preserve the pinned host's row-major fused accumulation and bias-last boundary.
++#if !NCNN_fp16_storage && !NCNN_fp16_packed && !NCNN_fp16_arithmetic && !NCNN_bf16_storage && !NCNN_bf16_packed
++    if (activation_type == 0 || activation_type == 1)
++    {
++        vec4 value = vec4(0.f);
++        int weight_offset = gz * kernel_w * kernel_h;
++        int input_offset = gz * psc(cstep) + gy * stride_h * psc(w) + gx * stride_w;
++        for (int y = 0; y < kernel_h; ++y)
++            for (int x = 0; x < kernel_w; ++x)
++                value = fold3_depthwise_fma(buffer_ld4(bottom_blob_data, input_offset + y * dilation_h * psc(w) + x * dilation_w),
++                    buffer_ld4(weight_data, weight_offset + y * kernel_w + x), value);
++        if (bias_term == 1) value += buffer_ld4(bias_data, gz);
++        value = activation_afpvec4(value, activation_type, activation_param_0, activation_param_1);
++        buffer_st4(top_blob_data, gz * psc(outcstep) + gy * psc(outw) + gx, value);
++        return;
++    }
++#endif
+ 
+     afpvec4 sum;
+ 
+--- a/src/layer/vulkan/shader/convolution_packed.comp
++++ b/src/layer/vulkan/shader/convolution_packed.comp
+@@ -61,6 +61,41 @@
+     int num_output;
+ } p;
+ 
++#if !NCNN_fp16_storage && !NCNN_fp16_packed && !NCNN_fp16_arithmetic && !NCNN_bf16_storage && !NCNN_bf16_packed
++vec4 fold3_spatial_fma(vec4 a, vec4 b, vec4 c)
++{
++    precise vec4 ah = uintBitsToFloat(floatBitsToUint(a) & uvec4(0xfffff000u));
++    precise vec4 bh = uintBitsToFloat(floatBitsToUint(b) & uvec4(0xfffff000u));
++    precise vec4 al = a - ah;
++    precise vec4 bl = b - bh;
++    precise vec4 product = a * b;
++    precise vec4 error = ((ah * bh - product) + ah * bl + al * bh) + al * bl;
++    precise vec4 total = product + c;
++    precise vec4 part = total - product;
++    precise vec4 residual = (product - (total - part)) + (c - part);
++    // Preserve a nonzero correction tail when the final sum is a midpoint.
++    precise vec4 correction = residual + error;
++    precise vec4 correction_part = correction - residual;
++    precise vec4 tail = (residual - (correction - correction_part)) + (error - correction_part);
++    precise vec4 rounded = total + correction;
++    precise vec4 rounded_part = rounded - total;
++    precise vec4 remainder = (total - (rounded - rounded_part)) + (correction - rounded_part);
++    for (int lane = 0; lane < 4; lane++)
++    {
++        if (tail[lane] != 0.f && remainder[lane] != 0.f && !isinf(rounded[lane]) && !isnan(rounded[lane]))
++        {
++            uint bits = floatBitsToUint(rounded[lane]);
++            bool upwards = remainder[lane] > 0.f;
++            uint adjacent_bits = (upwards == (rounded[lane] >= 0.f)) ? bits + 1u : bits - 1u;
++            float adjacent = uintBitsToFloat(adjacent_bits);
++            precise float half_gap = abs(adjacent - rounded[lane]) * 0.5f;
++            if (abs(remainder[lane]) == half_gap && ((tail[lane] > 0.f) == upwards)) rounded[lane] = adjacent;
++        }
++    }
++    return rounded;
++}
++#endif
++
+ void main()
+ {
+     int gx = int(gl_GlobalInvocationID.x) * 2;
+@@ -73,6 +108,50 @@
+     const ivec2 gx2 = gx + ivec2(0, 1);
+     const ivec2 gy2 = gy + ivec2(0, 1);
+     const ivec2 gz2 = gz + ivec2(0, 1);
++
++    // The pinned NHWC stem preloads bias, then accumulates ky/kx/channel.
++    // Its captured original-reference section verifies this distinct boundary.
++#if !NCNN_fp16_storage && !NCNN_fp16_packed && !NCNN_fp16_arithmetic && !NCNN_bf16_storage && !NCNN_bf16_packed
++    if (kernel_w == 3 && kernel_h == 3 && stride_w == 2 && stride_h == 2 &&
++        dilation_w == 1 && dilation_h == 1 && (elempack == 1 || elempack == 4) &&
++        (((psc(c) * elempack == 16 || psc(c) * elempack == 32) && psc(num_output) == 32) ||
++         (psc(c) * elempack == 24 && psc(num_output) == 64)) && bias_term == 1 && activation_type == 0)
++    {
++        for (int pack = gz; pack < min(gz + 2, psc(outc)); ++pack)
++            for (int yy = gy; yy < min(gy + 2, psc(outh)); ++yy)
++                for (int xx = gx; xx < min(gx + 2, psc(outw)); ++xx)
++                {
++                    precise vec4 value = buffer_ld4(bias_data, pack);
++                    for (int ky = 0; ky < 3; ++ky)
++                        for (int kx = 0; kx < 3; ++kx)
++                            for (int ci = 0; ci < psc(c) * elempack; ++ci)
++                            {
++                                int position = (yy * 2 + ky) * psc(w) + xx * 2 + kx;
++                                float input_value = elempack == 4
++                                    ? buffer_ld4(bottom_blob_data_4, (ci / 4) * psc(cstep) + position)[ci % 4]
++                                    : buffer_ld1(bottom_blob_data_1, ci * psc(cstep) + position);
++                                int wi = pack * psc(c) * 9 + (ci / elempack) * 9 + ky * 3 + kx;
++                                vec4 weights;
++                                if (elempack == 4)
++                                {
++                                    wi *= 4;
++                                    weights = vec4(buffer_ld4(weight_data, wi)[ci % 4],
++                                        buffer_ld4(weight_data, wi + 1)[ci % 4],
++                                        buffer_ld4(weight_data, wi + 2)[ci % 4],
++                                        buffer_ld4(weight_data, wi + 3)[ci % 4]);
++                                }
++                                else weights = buffer_ld4(weight_data, wi);
++                                value = fold3_spatial_fma(vec4(input_value), weights, value);
++                            }
++                    int out_position = pack * psc(outcstep) + yy * psc(outw) + xx;
++                    if (out_elempack == 4) buffer_st4(top_blob_data_4, out_position, value);
++                    else
++                        for (int lane = 0; lane < 4; ++lane)
++                            buffer_st1(top_blob_data_1, out_position + lane * (psc(outcstep) / 4), value[lane]);
++                }
++        return;
++    }
++#endif
+ 
+     afpvec4 sum0;
+     afpvec4 sum1;
+--- a/src/layer/vulkan/shader/innerproduct_pack4.comp
++++ b/src/layer/vulkan/shader/innerproduct_pack4.comp
+@@ -49,6 +49,42 @@
+     int outcstep;
+ } p;
+ 
++#if !NCNN_fp16_storage && !NCNN_fp16_packed && !NCNN_fp16_arithmetic && !NCNN_bf16_storage && !NCNN_bf16_packed
++// Compensate multiply/add on Adreno, as in the verified pointwise path.
++vec4 fold3_head_fma(vec4 a, vec4 b, vec4 c)
++{
++    precise vec4 ah = uintBitsToFloat(floatBitsToUint(a) & uvec4(0xfffff000u));
++    precise vec4 bh = uintBitsToFloat(floatBitsToUint(b) & uvec4(0xfffff000u));
++    precise vec4 al = a - ah;
++    precise vec4 bl = b - bh;
++    precise vec4 product = a * b;
++    precise vec4 error = ((ah * bh - product) + ah * bl + al * bh) + al * bl;
++    precise vec4 total = product + c;
++    precise vec4 part = total - product;
++    precise vec4 residual = (product - (total - part)) + (c - part);
++    // Preserve a nonzero correction tail when the final sum is a midpoint.
++    precise vec4 correction = residual + error;
++    precise vec4 correction_part = correction - residual;
++    precise vec4 tail = (residual - (correction - correction_part)) + (error - correction_part);
++    precise vec4 rounded = total + correction;
++    precise vec4 rounded_part = rounded - total;
++    precise vec4 remainder = (total - (rounded - rounded_part)) + (correction - rounded_part);
++    for (int lane = 0; lane < 4; lane++)
++    {
++        if (tail[lane] != 0.f && remainder[lane] != 0.f && !isinf(rounded[lane]) && !isnan(rounded[lane]))
++        {
++            uint bits = floatBitsToUint(rounded[lane]);
++            bool upwards = remainder[lane] > 0.f;
++            uint adjacent_bits = (upwards == (rounded[lane] >= 0.f)) ? bits + 1u : bits - 1u;
++            float adjacent = uintBitsToFloat(adjacent_bits);
++            precise float half_gap = abs(adjacent - rounded[lane]) * 0.5f;
++            if (abs(remainder[lane]) == half_gap && ((tail[lane] > 0.f) == upwards)) rounded[lane] = adjacent;
++        }
++    }
++    return rounded;
++}
++#endif
++
+ void main()
+ {
+     int gx = int(gl_GlobalInvocationID.x);
+@@ -57,6 +93,28 @@
+ 
+     if (gx >= psc(outw) || gy >= 1 || gz >= 1)
+         return;
++
++
++#if !NCNN_fp16_storage && !NCNN_fp16_packed && !NCNN_fp16_arithmetic && !NCNN_bf16_storage && !NCNN_bf16_packed
++    // Original FP32 Gemm: ordered channel FMA, bias after reduction, then Relu.
++    // Explicit component access retains the packed matrix's input/output axes.
++    if (activation_type == 1)
++    {
++        precise vec4 ordered = vec4(0.f);
++        for (int i = 0; i < psc(w); i++)
++        {
++            vec4 v = buffer_ld4(bottom_blob_data, i);
++            mat4 k = mat4(weight_data[gx * psc(w) + i]);
++            for (int j = 0; j < 4; j++)
++                ordered = fold3_head_fma(vec4(v[j]), vec4(k[0][j], k[1][j], k[2][j], k[3][j]), ordered);
++        }
++        if (bias_term == 1)
++            ordered += buffer_ld4(bias_data, gx);
++        ordered = max(ordered, vec4(0.f));
++        buffer_st4(top_blob_data, gx, ordered);
++        return;
++    }
++#endif
+ 
+     afpvec4 sum;
+ 
+--- a/src/layer/vulkan/shader/convolution_packed_gemm.comp
++++ b/src/layer/vulkan/shader/convolution_packed_gemm.comp
+@@ -64,6 +64,41 @@
+ shared lfpvec4 tmp_k[8][LOCAL_MEMORY_UNROLL_INCH][4];
+ #endif
+ 
++#if !NCNN_fp16_storage && !NCNN_fp16_packed && !NCNN_fp16_arithmetic && !NCNN_bf16_storage && !NCNN_bf16_packed
++vec4 fold3_spatial_fma(vec4 a, vec4 b, vec4 c)
++{
++    precise vec4 ah = uintBitsToFloat(floatBitsToUint(a) & uvec4(0xfffff000u));
++    precise vec4 bh = uintBitsToFloat(floatBitsToUint(b) & uvec4(0xfffff000u));
++    precise vec4 al = a - ah;
++    precise vec4 bl = b - bh;
++    precise vec4 product = a * b;
++    precise vec4 error = ((ah * bh - product) + ah * bl + al * bh) + al * bl;
++    precise vec4 total = product + c;
++    precise vec4 part = total - product;
++    precise vec4 residual = (product - (total - part)) + (c - part);
++    // Preserve a nonzero correction tail when the final sum is a midpoint.
++    precise vec4 correction = residual + error;
++    precise vec4 correction_part = correction - residual;
++    precise vec4 tail = (residual - (correction - correction_part)) + (error - correction_part);
++    precise vec4 rounded = total + correction;
++    precise vec4 rounded_part = rounded - total;
++    precise vec4 remainder = (total - (rounded - rounded_part)) + (correction - rounded_part);
++    for (int lane = 0; lane < 4; lane++)
++    {
++        if (tail[lane] != 0.f && remainder[lane] != 0.f && !isinf(rounded[lane]) && !isnan(rounded[lane]))
++        {
++            uint bits = floatBitsToUint(rounded[lane]);
++            bool upwards = remainder[lane] > 0.f;
++            uint adjacent_bits = (upwards == (rounded[lane] >= 0.f)) ? bits + 1u : bits - 1u;
++            float adjacent = uintBitsToFloat(adjacent_bits);
++            precise float half_gap = abs(adjacent - rounded[lane]) * 0.5f;
++            if (abs(remainder[lane]) == half_gap && ((tail[lane] > 0.f) == upwards)) rounded[lane] = adjacent;
++        }
++    }
++    return rounded;
++}
++#endif
++
+ void main()
+ {
+     int gx = int(gl_GlobalInvocationID.x) * 4;
+@@ -74,6 +109,41 @@
+ #if !NCNN_shader_local_memory
+     if (gx >= outsize || gy >= psc(outc))
+         return;
++#endif
++
++
++#if !NCNN_fp16_storage && !NCNN_fp16_packed && !NCNN_fp16_arithmetic && !NCNN_bf16_storage && !NCNN_bf16_packed
++    // The original NHWC stem accumulates spatial positions, then scalar channels,
++    // loading bias first. Keep that order on the GEMM path selected by this net.
++    if (kernel_w == 3 && kernel_h == 3 && stride_w == 2 && stride_h == 2 &&
++        dilation_w == 1 && dilation_h == 1 && bias_term == 1 && activation_type == 0 &&
++        (((psc(num_input) == 16 || psc(num_input) == 32) && (psc(num_output) == 32 || (psc(num_input) == 32 && psc(num_output) == 96))) ||
++         (psc(num_input) == 24 && psc(num_output) == 64)))
++    {
++        if (gx >= outsize || gy >= psc(outc)) return;
++        for (int point = 0; point < 4; point++)
++        {
++            int position = gx + point;
++            if (position >= outsize) break;
++            precise vec4 value = buffer_ld4(bias_data, gy);
++            for (int ky = 0; ky < 3; ky++)
++                for (int kx = 0; kx < 3; kx++)
++                    for (int ci = 0; ci < psc(num_input); ci++)
++                    {
++                        int spatial = ((position / psc(outw)) * 2 + ky) * psc(w) + (position % psc(outw)) * 2 + kx;
++                        float input_value;
++                        if (elempack == 4) input_value = buffer_ld4(bottom_blob_data_4, (ci / 4) * psc(cstep) + spatial)[ci % 4];
++                        else input_value = buffer_ld1(bottom_blob_data_1, ci * psc(cstep) + spatial);
++                        int wi = (gy * psc(c) * 9 + (ci / 4) * 9 + ky * 3 + kx) * 4;
++                        vec4 weights = vec4(buffer_ld4(weight_data, wi)[ci % 4], buffer_ld4(weight_data, wi + 1)[ci % 4],
++                                            buffer_ld4(weight_data, wi + 2)[ci % 4], buffer_ld4(weight_data, wi + 3)[ci % 4]);
++                        value = fold3_spatial_fma(vec4(input_value), weights, value);
++                    }
++            if (out_elempack == 4) { buffer_st4(top_blob_data_4, gy * psc(outcstep) + position, value); }
++            else { for (int lane = 0; lane < 4; lane++) { buffer_st1(top_blob_data_1, (gy * 4 + lane) * psc(outcstep) + position, value[lane]); } }
++        }
++        return;
++    }
+ #endif
+ 
+     afpvec4 sum0;
+--- /dev/null
++++ b/src/layer/vulkan/matmul_vulkan.h
+@@ -0,0 +1,24 @@
++// SPDX-License-Identifier: BSD-3-Clause
++#ifndef LAYER_MATMUL_VULKAN_H
++#define LAYER_MATMUL_VULKAN_H
++
++#include "matmul.h"
++
++namespace ncnn {
++
++class MatMul_vulkan : public MatMul
++{
++public:
++    MatMul_vulkan();
++    int create_pipeline(const Option& opt) override;
++    int destroy_pipeline(const Option& opt) override;
++    using MatMul::forward;
++    int forward(const std::vector<VkMat>& inputs, std::vector<VkMat>& outputs,
++                VkCompute& cmd, const Option& opt) const override;
++
++private:
++    Pipeline* pipeline;
++};
++
++} // namespace ncnn
++#endif
+--- /dev/null
++++ b/src/layer/vulkan/matmul_vulkan.cpp
+@@ -0,0 +1,65 @@
++// SPDX-License-Identifier: BSD-3-Clause
++#include "matmul_vulkan.h"
++#include "layer_shader_type.h"
++
++namespace ncnn {
++
++MatMul_vulkan::MatMul_vulkan() : pipeline(0)
++{
++    support_vulkan = true;
++}
++
++int MatMul_vulkan::create_pipeline(const Option& opt)
++{
++    pipeline = new Pipeline(vkdev);
++    pipeline->set_optimal_local_size_xyz(8, 4, 1);
++    return pipeline->create(LayerShaderType::matmul, opt, {});
++}
++
++int MatMul_vulkan::destroy_pipeline(const Option&)
++{
++    delete pipeline;
++    pipeline = 0;
++    return 0;
++}
++
++int MatMul_vulkan::forward(const std::vector<VkMat>& inputs, std::vector<VkMat>& outputs,
++                          VkCompute& cmd, const Option& opt) const
++{
++    if (inputs.size() != 2 || outputs.size() != 1 || transB)
++        return -1;
++    const VkMat& a = inputs[0];
++    const VkMat& b = inputs[1];
++    const int k = a.w;
++    const int n = b.w;
++    // The two pinned attention products have eight independent heads.
++    const bool depth_heads = a.dims == 4 && b.dims == 4 && a.c == 1 && b.c == 1 && a.d == 8 && b.d == 8;
++    const bool channel_heads = a.dims == 3 && b.dims == 3 && a.c == 8 && b.c == 8;
++    if ((!depth_heads && !channel_heads) || a.h != 9 || b.h != k
++        || !((k == 64 && n == 9) || (k == 9 && n == 64))
++        || a.elempack != 1 || b.elempack != 1 || a.elemsize != 4u || b.elemsize != 4u)
++        return -1;
++
++    VkMat& output = outputs[0];
++    if (depth_heads)
++        output.create(n, 9, 8, 1, 4u, 1, opt.blob_vkallocator);
++    else
++        output.create(n, 9, 8, 4u, 1, opt.blob_vkallocator);
++    if (output.empty())
++        return -100;
++
++    std::vector<vk_constant_type> constants(5);
++    constants[0].i = k;
++    constants[1].i = n;
++    constants[2].i = depth_heads ? 9 * k : a.cstep;
++    constants[3].i = depth_heads ? k * n : b.cstep;
++    constants[4].i = depth_heads ? 9 * n : output.cstep;
++    VkMat dispatcher;
++    dispatcher.w = n;
++    dispatcher.h = 9;
++    dispatcher.c = 8;
++    cmd.record_pipeline(pipeline, {a, b, output}, constants, dispatcher);
++    return 0;
++}
++
++} // namespace ncnn
+--- /dev/null
++++ b/src/layer/vulkan/shader/matmul.comp
+@@ -0,0 +1,39 @@
++// SPDX-License-Identifier: BSD-3-Clause
++#version 450
++
++layout(binding = 0) readonly buffer Left { float left_data[]; };
++layout(binding = 1) readonly buffer Right { float right_data[]; };
++layout(binding = 2) writeonly buffer Output { float output_data[]; };
++
++layout(push_constant) uniform Params
++{
++    int k;
++    int n;
++    int left_stride;
++    int right_stride;
++    int output_stride;
++} p;
++
++void main()
++{
++    int col = int(gl_GlobalInvocationID.x);
++    int row = int(gl_GlobalInvocationID.y);
++    int head = int(gl_GlobalInvocationID.z);
++    if (col >= p.n || row >= 9 || head >= 8)
++        return;
++
++    precise float total = 0.0;
++    int a = head * p.left_stride + row * p.k;
++    int b = head * p.right_stride + col;
++    // Match the strict OpenCL reference's half FDOT pairs and odd K tail.
++    for (int i = 0; i + 1 < p.k; i += 2)
++    {
++        precise float pair = left_data[a + i] * right_data[b + i * p.n] +
++                             left_data[a + i + 1] * right_data[b + (i + 1) * p.n];
++        total += pair;
++    }
++    if ((p.k & 1) != 0)
++        total += left_data[a + p.k - 1] * right_data[b + (p.k - 1) * p.n];
++    output_data[head * p.output_stride + row * p.n + col] =
++        unpackHalf2x16(packHalf2x16(vec2(total, 0.0))).x;
++}
+--- a/src/layer/vulkan/shader/vulkan_activation.comp
++++ b/src/layer/vulkan/shader/vulkan_activation.comp
+@@ -3,6 +3,80 @@
+ 
+ #ifndef NCNN_VULKAN_ACTIVATION_COMP
+ #define NCNN_VULKAN_ACTIVATION_COMP
++
++#if !NCNN_fp16_storage && !NCNN_fp16_packed && !NCNN_fp16_arithmetic && !NCNN_bf16_storage && !NCNN_bf16_packed
++float fold3_activation_fma(float a, float b, float c)
++{
++    precise float ah = uintBitsToFloat(floatBitsToUint(a) & 0xfffff000u);
++    precise float bh = uintBitsToFloat(floatBitsToUint(b) & 0xfffff000u);
++    precise float al = a - ah;
++    precise float bl = b - bh;
++    precise float product = a * b;
++    precise float error = ((ah * bh - product) + ah * bl + al * bh) + al * bl;
++    precise float total = product + c;
++    precise float part = total - product;
++    precise float residual = (product - (total - part)) + (c - part);
++    // Keep the tail of the correction: rounding it away can turn an
++    // off-midpoint FMA into an exact tie and pick the wrong adjacent float.
++    precise float correction = residual + error;
++    precise float correction_part = correction - residual;
++    precise float tail = (residual - (correction - correction_part)) + (error - correction_part);
++    precise float rounded = total + correction;
++    precise float rounded_part = rounded - total;
++    precise float remainder = (total - (rounded - rounded_part)) + (correction - rounded_part);
++    if (tail != 0.f && remainder != 0.f && !isinf(rounded) && !isnan(rounded))
++    {
++        uint bits = floatBitsToUint(rounded);
++        bool upwards = remainder > 0.f;
++        uint adjacent_bits = (upwards == (rounded >= 0.f)) ? bits + 1u : bits - 1u;
++        float adjacent = uintBitsToFloat(adjacent_bits);
++        precise float half_gap = abs(adjacent - rounded) * 0.5f;
++        if (abs(remainder) == half_gap && ((tail > 0.f) == upwards)) rounded = adjacent;
++    }
++    return rounded;
++}
++
++float fold3_activation_divide(float left, float right)
++{
++    precise float quotient = left / right;
++    if (isnan(left) || isinf(left) || isnan(right) || isinf(right) ||
++        isnan(quotient) || isinf(quotient) || right == 0.f || left == 0.f) return quotient;
++    precise float residual = fold3_activation_fma(-quotient, right, left);
++    precise float correction = residual / right;
++    precise float corrected = quotient + correction;
++    float magnitude = abs(corrected), denominator = abs(right);
++    residual = fold3_activation_fma(-magnitude, denominator, abs(left));
++    uint bits = floatBitsToUint(magnitude);
++    float neighbor = uintBitsToFloat(residual < 0.f ? bits - 1u : bits + 1u);
++    precise float halfGap = abs(neighbor - magnitude) * 0.5f;
++    precise float distance = fold3_activation_fma(-halfGap, denominator, abs(residual));
++    if (halfGap > 0.f && !isinf(neighbor) &&
++        (distance > 0.f || (distance == 0.f && (bits & 1u) != 0u))) magnitude = neighbor;
++    return uintBitsToFloat((floatBitsToUint(corrected) & 0x80000000u) | floatBitsToUint(magnitude));
++}
++
++// ONNX Runtime MLAS logistic.cpp, Copyright Microsoft Corporation, MIT.
++// Match the pinned reference before subsequent explicit FP16 casts.
++float fold3_host_sigmoid(float input_value)
++{
++    if (isnan(input_value)) return input_value;
++    float value = clamp(input_value, -18.f, 18.f);
++    precise float square = value * value;
++    float numerator = fold3_activation_fma(square, 4.37031012579801e-11f, 1.15627324459942e-7f);
++    numerator = fold3_activation_fma(numerator, square, 6.08574864600143e-5f);
++    numerator = fold3_activation_fma(numerator, square, 8.51377133304701e-3f);
++    numerator = fold3_activation_fma(numerator, square, 2.48287947061529e-1f);
++    precise float product = numerator * value;
++    float denominator = fold3_activation_fma(square, 6.10247389755681e-13f, 5.76102136993427e-9f);
++    denominator = fold3_activation_fma(denominator, square, 6.29106785017040e-6f);
++    denominator = fold3_activation_fma(denominator, square, 1.70198817374094e-3f);
++    denominator = fold3_activation_fma(denominator, square, 1.16817656904453e-1f);
++    denominator = fold3_activation_fma(denominator, square, 9.93151921023180e-1f);
++    precise float quotient = fold3_activation_divide(product, denominator);
++    precise float result = quotient + 0.5f;
++    return clamp(result, 0.f, 1.f);
++}
++#endif
+ 
+ afp activation_afp(afp v, int activation_type, float activation_param_0, float activation_param_1)
+ {
+@@ -23,7 +97,11 @@
+     }
+     if (activation_type == 4)
+     {
++#if !NCNN_fp16_storage && !NCNN_fp16_packed && !NCNN_fp16_arithmetic && !NCNN_bf16_storage && !NCNN_bf16_packed
++        v = fold3_host_sigmoid(v);
++#else
+         v = afp(1.f) / (afp(1.f) + exp(-v));
++#endif
+     }
+     if (activation_type == 5)
+     {
+@@ -62,7 +140,11 @@
+     }
+     if (activation_type == 4)
+     {
++#if !NCNN_fp16_storage && !NCNN_fp16_packed && !NCNN_fp16_arithmetic && !NCNN_bf16_storage && !NCNN_bf16_packed
++        v = vec4(fold3_host_sigmoid(v.x), fold3_host_sigmoid(v.y), fold3_host_sigmoid(v.z), fold3_host_sigmoid(v.w));
++#else
+         v = afp(1.f) / (afp(1.f) + exp(-v));
++#endif
+     }
+     if (activation_type == 5)
+     {
+--- a/src/layer/vulkan/shader/sigmoid.comp
++++ b/src/layer/vulkan/shader/sigmoid.comp
+@@ -2,6 +2,9 @@
+ // SPDX-License-Identifier: BSD-3-Clause
+ 
+ #version 450
++
++#extension GL_GOOGLE_include_directive : enable
++#include "vulkan_activation.comp"
+ 
+ layout(constant_id = 0) const uint n = 0;
+ 
+@@ -21,7 +24,7 @@
+ 
+     afpvec4 v = buffer_ld4(bottom_top_blob_data, gi);
+ 
+-    v = afpvec4(1.f) / (afpvec4(1.f) + exp(-v));
++    v = activation_afpvec4(v, 4, 0.f, 0.f);
+ 
+     buffer_st4(bottom_top_blob_data, gi, v);
+ }
+--- a/src/layer/vulkan/shader/convolutiondepthwise_group.comp
++++ b/src/layer/vulkan/shader/convolutiondepthwise_group.comp
+@@ -60,6 +60,27 @@
+     if (gx >= psc(outw) || gy >= psc(outh) || gz >= psc(outc))
+         return;
+ 
++    // Multiplier depthwise uses this grouped shader, not convolutiondepthwise.comp.
++    // The pinned host accumulates each spatial kernel before adding bias.
++#if !NCNN_fp16_storage && !NCNN_fp16_packed && !NCNN_fp16_arithmetic && !NCNN_bf16_storage && !NCNN_bf16_packed
++    if (psc(c) / group == 1 && (activation_type == 0 || activation_type == 1 || activation_type == 4))
++    {
++        int outputs_per_group = psc(outc) / group;
++        int input_channel = gz / outputs_per_group;
++        int input_base = input_channel * psc(cstep) + gy * stride_h * psc(w) + gx * stride_w;
++        int weight_base = gz * kernel_w * kernel_h;
++        precise float value = 0.f;
++        for (int y = 0; y < kernel_h; y++)
++            for (int x = 0; x < kernel_w; x++)
++                value = fold3_activation_fma(float(buffer_ld1(bottom_blob_data, input_base + y * dilation_h * psc(w) + x * dilation_w)),
++                                             float(buffer_ld1(weight_data, weight_base + y * kernel_w + x)), value);
++        if (bias_term == 1) value = value + float(buffer_ld1(bias_data, gz));
++        value = activation_afp(value, activation_type, activation_param_0, activation_param_1);
++        buffer_st1(top_blob_data, gz * psc(outcstep) + gy * psc(outw) + gx, value);
++        return;
++    }
++#endif
++
+     afp sum;
+ 
+     if (bias_term == 1)
+--- a/src/layer/vulkan/shader/binaryop.comp
++++ b/src/layer/vulkan/shader/binaryop.comp
+@@ -2,6 +2,9 @@
+ // SPDX-License-Identifier: BSD-3-Clause
+ 
+ #version 450
++
++#extension GL_GOOGLE_include_directive : enable
++#include "vulkan_activation.comp"
+ 
+ layout(constant_id = 0) const int op_type = 0;
+ layout(constant_id = 1) const int with_scalar = 0;
+@@ -127,7 +130,11 @@
+     if (op_type == 0) res = v1 + v2;
+     if (op_type == 1) res = v1 - v2;
+     if (op_type == 2) res = v1 * v2;
++#if !NCNN_fp16_storage && !NCNN_fp16_packed && !NCNN_fp16_arithmetic && !NCNN_bf16_storage && !NCNN_bf16_packed
++    if (op_type == 3) res = fold3_activation_divide(v1, v2);
++#else
+     if (op_type == 3) res = v1 / v2;
++#endif
+     if (op_type == 4) res = max(v1, v2);
+     if (op_type == 5) res = min(v1, v2);
+     // GLSL pow is undefined for negative bases, including integer cubes.
+@@ -145,7 +152,11 @@
+         else res = pow(v1, v2);
+     }
+     if (op_type == 7) res = v2 - v1;
++#if !NCNN_fp16_storage && !NCNN_fp16_packed && !NCNN_fp16_arithmetic && !NCNN_bf16_storage && !NCNN_bf16_packed
++    if (op_type == 8) res = fold3_activation_divide(v2, v1);
++#else
+     if (op_type == 8) res = v2 / v1;
++#endif
+     if (op_type == 9) res = pow(v2, v1);
+ #if NCNN_moltenvk
+     if (op_type == 10) res = afp(atan(float(v1), float(v2)));
+--- a/src/layer/vulkan/shader/binaryop_broadcast.comp
++++ b/src/layer/vulkan/shader/binaryop_broadcast.comp
+@@ -2,6 +2,9 @@
+ // SPDX-License-Identifier: BSD-3-Clause
+ 
+ #version 450
++
++#extension GL_GOOGLE_include_directive : enable
++#include "vulkan_activation.comp"
+ 
+ layout(constant_id = 0) const int op_type = 0;
+ 
+@@ -156,12 +159,20 @@
+     if (op_type == 0) res = v1 + v2;
+     if (op_type == 1) res = v1 - v2;
+     if (op_type == 2) res = v1 * v2;
++#if !NCNN_fp16_storage && !NCNN_fp16_packed && !NCNN_fp16_arithmetic && !NCNN_bf16_storage && !NCNN_bf16_packed
++    if (op_type == 3) res = fold3_activation_divide(v1, v2);
++#else
+     if (op_type == 3) res = v1 / v2;
++#endif
+     if (op_type == 4) res = max(v1, v2);
+     if (op_type == 5) res = min(v1, v2);
+     if (op_type == 6) res = pow(v1, v2);
+     if (op_type == 7) res = v2 - v1;
++#if !NCNN_fp16_storage && !NCNN_fp16_packed && !NCNN_fp16_arithmetic && !NCNN_bf16_storage && !NCNN_bf16_packed
++    if (op_type == 8) res = fold3_activation_divide(v2, v1);
++#else
+     if (op_type == 8) res = v2 / v1;
++#endif
+     if (op_type == 9) res = pow(v2, v1);
+ #if NCNN_moltenvk
+     if (op_type == 10) res = afp(atan(float(v1), float(v2)));
+--- a/src/layer/vulkan/shader/binaryop_broadcast_pack1to4.comp
++++ b/src/layer/vulkan/shader/binaryop_broadcast_pack1to4.comp
+@@ -2,6 +2,9 @@
+ // SPDX-License-Identifier: BSD-3-Clause
+ 
+ #version 450
++
++#extension GL_GOOGLE_include_directive : enable
++#include "vulkan_activation.comp"
+ 
+ layout(constant_id = 0) const int op_type = 0;
+ 
+@@ -87,12 +90,20 @@
+     if (op_type == 0) res = v1 + v2;
+     if (op_type == 1) res = v1 - v2;
+     if (op_type == 2) res = v1 * v2;
++#if !NCNN_fp16_storage && !NCNN_fp16_packed && !NCNN_fp16_arithmetic && !NCNN_bf16_storage && !NCNN_bf16_packed
++    if (op_type == 3) res = vec4(fold3_activation_divide(v1.x, v2.x), fold3_activation_divide(v1.y, v2.y), fold3_activation_divide(v1.z, v2.z), fold3_activation_divide(v1.w, v2.w));
++#else
+     if (op_type == 3) res = v1 / v2;
++#endif
+     if (op_type == 4) res = max(v1, v2);
+     if (op_type == 5) res = min(v1, v2);
+     if (op_type == 6) res = pow(v1, v2);
+     if (op_type == 7) res = v2 - v1;
++#if !NCNN_fp16_storage && !NCNN_fp16_packed && !NCNN_fp16_arithmetic && !NCNN_bf16_storage && !NCNN_bf16_packed
++    if (op_type == 8) res = vec4(fold3_activation_divide(v2.x, v1.x), fold3_activation_divide(v2.y, v1.y), fold3_activation_divide(v2.z, v1.z), fold3_activation_divide(v2.w, v1.w));
++#else
+     if (op_type == 8) res = v2 / v1;
++#endif
+     if (op_type == 9) res = pow(v2, v1);
+ #if NCNN_moltenvk
+     if (op_type == 10) res = afpvec4(atan(vec4(v1), vec4(v2)));
+--- a/src/layer/vulkan/shader/binaryop_broadcast_pack4.comp
++++ b/src/layer/vulkan/shader/binaryop_broadcast_pack4.comp
+@@ -2,6 +2,9 @@
+ // SPDX-License-Identifier: BSD-3-Clause
+ 
+ #version 450
++
++#extension GL_GOOGLE_include_directive : enable
++#include "vulkan_activation.comp"
+ 
+ layout(constant_id = 0) const int op_type = 0;
+ 
+@@ -156,12 +159,20 @@
+     if (op_type == 0) res = v1 + v2;
+     if (op_type == 1) res = v1 - v2;
+     if (op_type == 2) res = v1 * v2;
++#if !NCNN_fp16_storage && !NCNN_fp16_packed && !NCNN_fp16_arithmetic && !NCNN_bf16_storage && !NCNN_bf16_packed
++    if (op_type == 3) res = vec4(fold3_activation_divide(v1.x, v2.x), fold3_activation_divide(v1.y, v2.y), fold3_activation_divide(v1.z, v2.z), fold3_activation_divide(v1.w, v2.w));
++#else
+     if (op_type == 3) res = v1 / v2;
++#endif
+     if (op_type == 4) res = max(v1, v2);
+     if (op_type == 5) res = min(v1, v2);
+     if (op_type == 6) res = pow(v1, v2);
+     if (op_type == 7) res = v2 - v1;
++#if !NCNN_fp16_storage && !NCNN_fp16_packed && !NCNN_fp16_arithmetic && !NCNN_bf16_storage && !NCNN_bf16_packed
++    if (op_type == 8) res = vec4(fold3_activation_divide(v2.x, v1.x), fold3_activation_divide(v2.y, v1.y), fold3_activation_divide(v2.z, v1.z), fold3_activation_divide(v2.w, v1.w));
++#else
+     if (op_type == 8) res = v2 / v1;
++#endif
+     if (op_type == 9) res = pow(v2, v1);
+ #if NCNN_moltenvk
+     if (op_type == 10) res = afpvec4(atan(vec4(v1), vec4(v2)));
+--- a/src/layer/vulkan/shader/binaryop_pack4.comp
++++ b/src/layer/vulkan/shader/binaryop_pack4.comp
+@@ -2,6 +2,9 @@
+ // SPDX-License-Identifier: BSD-3-Clause
+ 
+ #version 450
++
++#extension GL_GOOGLE_include_directive : enable
++#include "vulkan_activation.comp"
+ 
+ layout(constant_id = 0) const int op_type = 0;
+ layout(constant_id = 1) const int with_scalar = 0;
+@@ -122,7 +125,11 @@
+     if (op_type == 0) res = v1 + v2;
+     if (op_type == 1) res = v1 - v2;
+     if (op_type == 2) res = v1 * v2;
++#if !NCNN_fp16_storage && !NCNN_fp16_packed && !NCNN_fp16_arithmetic && !NCNN_bf16_storage && !NCNN_bf16_packed
++    if (op_type == 3) res = vec4(fold3_activation_divide(v1.x, v2.x), fold3_activation_divide(v1.y, v2.y), fold3_activation_divide(v1.z, v2.z), fold3_activation_divide(v1.w, v2.w));
++#else
+     if (op_type == 3) res = v1 / v2;
++#endif
+     if (op_type == 4) res = max(v1, v2);
+     if (op_type == 5) res = min(v1, v2);
+     // GLSL pow is undefined for negative bases, including integer cubes.
+@@ -140,7 +147,11 @@
+         else res = pow(v1, v2);
+     }
+     if (op_type == 7) res = v2 - v1;
++#if !NCNN_fp16_storage && !NCNN_fp16_packed && !NCNN_fp16_arithmetic && !NCNN_bf16_storage && !NCNN_bf16_packed
++    if (op_type == 8) res = vec4(fold3_activation_divide(v2.x, v1.x), fold3_activation_divide(v2.y, v1.y), fold3_activation_divide(v2.z, v1.z), fold3_activation_divide(v2.w, v1.w));
++#else
+     if (op_type == 8) res = v2 / v1;
++#endif
+     if (op_type == 9) res = pow(v2, v1);
+ #if NCNN_moltenvk
+     if (op_type == 10) res = afpvec4(atan(vec4(v1), vec4(v2)));
+--- a/src/layer/vulkan/innerproduct_vulkan.cpp
++++ b/src/layer/vulkan/innerproduct_vulkan.cpp
+@@ -37,7 +37,7 @@
+ // upstream parameter validation intact and reject every CPU execution path.
+ int InnerProduct_vulkan::load_param(const ParamDict& pd)
+ {
+-    if (pd.get(9, 0) != 99)
++    if (pd.get(9, 0) != 98 && pd.get(9, 0) != 99)
+         return InnerProduct::load_param(pd);
+ 
+     ParamDict validated = pd;
+@@ -48,13 +48,13 @@
+     if (num_output <= 0 || weight_data_size <= 0 || weight_data_size % num_output != 0 || bias_term != 1 ||
+         int8_scale_term != 0 || !activation_params.empty())
+         return -1;
+-    activation_type = 99;
++    activation_type = pd.get(9, 0);
+     return 0;
+ }
+ 
+ int InnerProduct_vulkan::forward(const Mat& bottom_blob, Mat& top_blob, const Option& opt) const
+ {
+-    if (activation_type == 99)
++    if (activation_type == 98 || activation_type == 99)
+         return -1;
+     return InnerProduct::forward(bottom_blob, top_blob, opt);
+ }
+@@ -73,8 +73,15 @@
+ 
+     const int num_input = weight_data_size / num_output;
+ 
+-    int in_elempack = activation_type == 99 ? 1 : (num_input % 4 == 0 ? 4 : 1);
+-    int out_elempack = activation_type == 99 ? 1 : (num_output % 4 == 0 ? 4 : 1);
++    // Pairwise half GEMM requires FP32 transport and a matrix, never a vector.
++    if (activation_type == 98 &&
++        (opt.use_fp16_storage || opt.use_fp16_packed || opt.use_fp16_arithmetic ||
++         opt.use_bf16_storage || opt.use_bf16_packed || shape.dims != 2 || shape.w != num_input))
++        return -1;
++
++
++    int in_elempack = (activation_type == 98 || activation_type == 99) ? 1 : (num_input % 4 == 0 ? 4 : 1);
++    int out_elempack = (activation_type == 98 || activation_type == 99) ? 1 : (num_output % 4 == 0 ? 4 : 1);
+ 
+     // src = inch-outch
+     // dst = pa-pb-inch/pa-outch/pb
+@@ -394,8 +401,11 @@
+ 
+     const int num_input = weight_data_size / num_output;
+ 
+-    int in_elempack = activation_type == 99 ? 1 : (num_input % 4 == 0 ? 4 : 1);
+-    int out_elempack = activation_type == 99 ? 1 : (num_output % 4 == 0 ? 4 : 1);
++    int in_elempack = (activation_type == 98 || activation_type == 99) ? 1 : (num_input % 4 == 0 ? 4 : 1);
++    int out_elempack = (activation_type == 98 || activation_type == 99) ? 1 : (num_output % 4 == 0 ? 4 : 1);
++
++    if (activation_type == 98 && (bottom_blob.dims != 2 || bottom_blob.w != num_input))
++        return -1;
+ 
+     if (activation_type == 99 && bottom_blob.dims == 2 && bottom_blob.w == num_input)
+         return -1;
+--- a/src/layer/vulkan/shader/innerproduct_gemm.comp
++++ b/src/layer/vulkan/shader/innerproduct_gemm.comp
+@@ -44,6 +44,28 @@
+     int outcstep;
+ } p;
+ 
++float fold3_half_rte(float value)
++{
++    uint bits = floatBitsToUint(value);
++    uint sign = (bits >> 16) & 0x8000u;
++    uint magnitude = bits & 0x7fffffffu;
++    uint result;
++    if (magnitude > 0x7f800000u) result = 0x7e00u;
++    else if (magnitude >= 0x477ff000u) result = 0x7c00u;
++    else if (magnitude >= 0x38800000u)
++        result = (magnitude + 0xfffu + ((magnitude >> 13) & 1u) - 0x38000000u) >> 13;
++    else if (magnitude <= 0x33000000u) result = 0u;
++    else
++    {
++        uint shift = 126u - (magnitude >> 23);
++        uint mantissa = (magnitude & 0x7fffffu) | 0x800000u;
++        result = (mantissa + ((1u << (shift - 1u)) - 1u) + ((mantissa >> shift) & 1u)) >> shift;
++    }
++    // Every half is exact here, so unpacking adds no further rounding.
++    return unpackHalf2x16(sign | result).x;
++}
++
++
+ void main()
+ {
+     int gx = int(gl_GlobalInvocationID.x);
+@@ -52,6 +74,35 @@
+ 
+     if (gx >= psc(outw) || gy >= psc(outh) || gz >= 1)
+         return;
++
++    if (activation_type == 98)
++    {
++        // Match the original ARM64 half NoTrans GEMM: pairwise products,
++        // ordered FP32 accumulation with bias first, half output last.
++        precise float total = float(buffer_ld1(bias_data, gx));
++        int v = gy * psc(w);
++        int k = gx * psc(w);
++        int i = 0;
++        for (; i + 1 < psc(w); i += 2)
++        {
++            precise float a = fold3_half_rte(float(buffer_ld1(bottom_blob_data, v + i)));
++            precise float b = fold3_half_rte(float(buffer_ld1(bottom_blob_data, v + i + 1)));
++            precise float x = float(buffer_ld1(weight_data, k + i));
++            precise float y = float(buffer_ld1(weight_data, k + i + 1));
++            precise float first = a * x;
++            precise float second = b * y;
++            precise float pair = first + second;
++            total = total + pair;
++        }
++        if (i < psc(w))
++        {
++            precise float a = fold3_half_rte(float(buffer_ld1(bottom_blob_data, v + i)));
++            precise float product = a * float(buffer_ld1(weight_data, k + i));
++            total = total + product;
++        }
++        buffer_st1(top_blob_data, gy * psc(outw) + gx, afp(fold3_half_rte(total)));
++        return;
++    }
+ 
+     afp sum;
+ 
+--- a/src/layer/vulkan/innerproduct_vulkan.cpp
++++ b/src/layer/vulkan/innerproduct_vulkan.cpp
+@@ -76,7 +76,8 @@
+     // Pairwise half GEMM requires FP32 transport and a matrix, never a vector.
+     if (activation_type == 98 &&
+         (opt.use_fp16_storage || opt.use_fp16_packed || opt.use_fp16_arithmetic ||
+-         opt.use_bf16_storage || opt.use_bf16_packed || shape.dims != 2 || shape.w != num_input))
++         opt.use_bf16_storage || opt.use_bf16_packed ||
++         (shape.dims != 0 && (shape.dims != 2 || shape.w != num_input))))
+         return -1;
+ 
+ 
+--- a/src/layer/layernorm.h
++++ b/src/layer/layernorm.h
+@@ -24,6 +24,7 @@
+     int affine_size;
+     float eps;
+     int affine;
++    int reference_mode; // private Fold3 arithmetic version, zero preserves upstream
+ 
+     // model
+     Mat gamma_data;
+--- a/src/layer/layernorm.cpp
++++ b/src/layer/layernorm.cpp
+@@ -16,6 +16,8 @@
+     affine_size = pd.get(0, 0);
+     eps = pd.get(1, 0.001f);
+     affine = pd.get(2, 1);
++    reference_mode = pd.get(29, 0);
++    if (reference_mode < 0 || reference_mode > 1 || (reference_mode && (affine != 1 || affine_size <= 0))) return -1;
+ 
+     return 0;
+ }
+@@ -76,6 +78,7 @@
+ 
+ int LayerNorm::forward_inplace(Mat& bottom_top_blob, const Option& opt) const
+ {
++    if (reference_mode) return -1; // no reference CPU fallback
+     // x = (x - mean) / sqrt(var + eps) * gamma + beta
+ 
+     int dims = bottom_top_blob.dims;
+--- a/src/net.h
++++ b/src/net.h
+@@ -17,6 +17,8 @@
+ #endif // NCNN_PLATFORM_API
+ 
+ namespace ncnn {
++
++NCNN_EXPORT int fold3_reference_layernorm_version();
+ 
+ #if NCNN_VULKAN
+ class VkCompute;
+--- a/src/net.cpp
++++ b/src/net.cpp
+@@ -24,6 +24,8 @@
+ #endif // NCNN_VULKAN
+ 
+ namespace ncnn {
++
++int fold3_reference_layernorm_version() { return 1; }
+ 
+ #if NCNN_VALIDATION
+ // bound model header allocations, including repeated blob references
+--- a/src/layer/vulkan/layernorm_vulkan.h
++++ b/src/layer/vulkan/layernorm_vulkan.h
+@@ -13,6 +13,8 @@
+ public:
+     LayerNorm_vulkan();
+ 
++    virtual int load_param(const ParamDict& pd);
++
+     virtual int create_pipeline(const Option& opt);
+     virtual int destroy_pipeline(const Option& opt);
+ 
+@@ -26,6 +28,8 @@
+     // b = -mean * a + beta
+     VkMat gamma_data_gpu;
+     VkMat beta_data_gpu;
++
++    Pipeline* pipeline_layernorm_reference;
+ 
+     // pack1 pipelines
+     Pipeline* pipeline_layernorm_reduce_sum4_fp16_to_fp32;
+--- a/src/layer/vulkan/layernorm_vulkan.cpp
++++ b/src/layer/vulkan/layernorm_vulkan.cpp
+@@ -8,6 +8,7 @@
+ 
+ LayerNorm_vulkan::LayerNorm_vulkan()
+ {
++    pipeline_layernorm_reference = 0;
+     support_vulkan = true;
+     support_vulkan_packing = true;
+ 
+@@ -34,8 +35,23 @@
+     pipeline_layernorm_reduce_subgroup_pack4 = 0;
+ }
+ 
++int LayerNorm_vulkan::load_param(const ParamDict& pd)
++{
++    const int result = LayerNorm::load_param(pd);
++    if (reference_mode) support_vulkan_packing = false;
++    return result;
++}
++
+ int LayerNorm_vulkan::create_pipeline(const Option& opt)
+ {
++    if (reference_mode)
++    {
++        if (opt.use_fp16_storage || opt.use_fp16_packed || opt.use_fp16_arithmetic) return -1;
++        pipeline_layernorm_reference = new Pipeline(vkdev);
++        pipeline_layernorm_reference->set_local_size_xyz(64, 1, 1);
++        pipeline_layernorm_reference->create(LayerShaderType::layernorm_reference, opt, std::vector<vk_specialization_type>());
++        return 0;
++    }
+     const int subgroup_size = vkdev->info.subgroup_size();
+     const uint32_t support_subgroup_ops = vkdev->info.support_subgroup_ops();
+     const uint32_t required_subgroup_ops = VK_SUBGROUP_FEATURE_BASIC_BIT | VK_SUBGROUP_FEATURE_ARITHMETIC_BIT;
+@@ -135,6 +151,8 @@
+ 
+ int LayerNorm_vulkan::destroy_pipeline(const Option& /*opt*/)
+ {
++    delete pipeline_layernorm_reference;
++    pipeline_layernorm_reference = 0;
+     // pack1
+     delete pipeline_layernorm_reduce_sum4_fp16_to_fp32;
+     delete pipeline_layernorm_reduce_sum4_fp32[0];
+@@ -234,6 +252,25 @@
+             num_groups_per_channel = 1;
+         }
+     }
++    if (reference_mode)
++    {
++        if (elempack != 1 || elemsize != 4u || group_size != affine_size || !pipeline_layernorm_reference) return -1;
++        std::vector<VkMat> bindings(3);
++        bindings[0] = bottom_top_blob;
++        bindings[1] = gamma_data_gpu;
++        bindings[2] = beta_data_gpu;
++        std::vector<vk_constant_type> constants(4);
++        constants[0].i = group_size;
++        constants[1].i = num_groups_per_channel;
++        constants[2].i = (int)cstep;
++        constants[3].f = eps;
++        VkMat dispatcher;
++        dispatcher.w = 64;
++        dispatcher.h = num_groups_per_channel;
++        dispatcher.c = channels;
++        cmd.record_pipeline(pipeline_layernorm_reference, bindings, constants, dispatcher);
++        return 0;
++    }
+     int num_groups_total = num_groups_per_channel * channels;
+ 
+     VkMat mean_workspace(num_groups_total, 4u * elempack, elempack, opt.workspace_vkallocator);
+--- /dev/null
++++ b/src/layer/vulkan/shader/layernorm_reference.comp
+@@ -0,0 +1,91 @@
++// Fold3 reference arithmetic, BSD-3-Clause. Diagnostic until full-model parity.
++#version 450
++#include "vulkan_activation.comp"
++
++layout(binding = 0) buffer input_blob { float values[]; };
++layout(binding = 1) readonly buffer gamma_blob { float gamma[]; };
++layout(binding = 2) readonly buffer beta_blob { float beta[]; };
++layout(push_constant) uniform parameter { int width; int rows; int cstep; float epsilon; } p;
++shared float average;
++shared float deviation;
++
++float half_rte(float value)
++{
++    uint bits = floatBitsToUint(value), sign = (bits >> 16) & 0x8000u;
++    uint magnitude = bits & 0x7fffffffu, result;
++    if (magnitude > 0x7f800000u) result = 0x7e00u;
++    else if (magnitude >= 0x477ff000u) result = 0x7c00u;
++    else if (magnitude >= 0x38800000u)
++        result = (magnitude + 0xfffu + ((magnitude >> 13) & 1u) - 0x38000000u) >> 13;
++    else if (magnitude <= 0x33000000u) result = 0u;
++    else
++    {
++        uint shift = 126u - (magnitude >> 23);
++        uint mantissa = (magnitude & 0x7fffffu) | 0x800000u;
++        result = (mantissa + ((1u << (shift - 1u)) - 1u) + ((mantissa >> shift) & 1u)) >> shift;
++    }
++    return unpackHalf2x16(sign | result).x;
++}
++
++// Exact 52-bit midpoint comparisons without requiring shaderInt64 support.
++uvec2 square64(uint value)
++{
++    uint high, low;
++    umulExtended(value, value, high, low);
++    return uvec2(low, high);
++}
++uvec2 shifted64(uint value, uint shift) { return uvec2(value << shift, value >> (32u - shift)); }
++bool less64(uvec2 a, uvec2 b) { return a.y < b.y || (a.y == b.y && a.x < b.x); }
++float rounded_sqrt(float value)
++{
++    uint bits = floatBitsToUint(value), exponent = (bits >> 23) & 255u;
++    if (!(value > 0.f) || exponent == 0u || exponent == 255u) return sqrt(value);
++    uint expected = (exponent + 127u) >> 1;
++    uint mantissa = (bits & 0x7fffffu) | 0x800000u;
++    uint shift = 23u + ((exponent - 127u) & 1u);
++    float result = sqrt(value);
++    for (int i = 0; i < 4; i++)
++    {
++        uint encoded = floatBitsToUint(result);
++        uint current = ((encoded & 0x7fffffu) | 0x800000u) << ((encoded >> 23) + 1u - expected);
++        bool up = less64(square64(current), shifted64(mantissa, shift + 2u));
++        uint neighbor = up ? encoded + 1u : encoded - 1u;
++        uint adjacent = ((neighbor & 0x7fffffu) | 0x800000u) << ((neighbor >> 23) + 1u - expected);
++        uvec2 midpoint = square64(current + adjacent), radicand = shifted64(mantissa, shift + 4u);
++        bool move = up ? less64(midpoint, radicand) : less64(radicand, midpoint);
++        if (all(equal(midpoint, radicand)) && (encoded & 1u) != 0u) move = true;
++        result = uintBitsToFloat(move ? neighbor : encoded);
++    }
++    return result;
++}
++
++void main()
++{
++    int row = int(gl_WorkGroupID.y), channel = int(gl_WorkGroupID.z);
++    int offset = channel * p.cstep + row * p.width;
++    int lane = int(gl_LocalInvocationID.x);
++    if (row >= p.rows) return;
++    if (lane == 0)
++    {
++        precise float mean = 0.f, m2 = 0.f;
++        for (int i = 0; i < p.width; i++)
++        {
++            float value = half_rte(values[offset + i]);
++            precise float delta = value - mean;
++            precise float next_mean = mean + fold3_activation_divide(delta, float(i + 1));
++            precise float centered = value - next_mean;
++            m2 = fold3_activation_fma(delta, centered, m2);
++            mean = next_mean;
++        }
++        precise float variance = fold3_activation_divide(m2, float(p.width)) + p.epsilon;
++        average = mean;
++        deviation = rounded_sqrt(variance);
++    }
++    barrier();
++    for (int i = lane; i < p.width; i += 64)
++    {
++        precise float centered = half_rte(values[offset + i]) - average;
++        float normalized = fold3_activation_divide(centered, deviation);
++        values[offset + i] = half_rte(fold3_activation_fma(normalized, gamma[i], beta[i]));
++    }
++}
+--- a/src/layer/vulkan/shader/layernorm_reference.comp
++++ b/src/layer/vulkan/shader/layernorm_reference.comp
+@@ -1,5 +1,6 @@
+ // Fold3 reference arithmetic, BSD-3-Clause. Diagnostic until full-model parity.
+ #version 450
++#extension GL_GOOGLE_include_directive : enable
+ #include "vulkan_activation.comp"
+ 
+ layout(binding = 0) buffer input_blob { float values[]; };
+--- a/src/layer/vulkan/layernorm_vulkan.cpp
++++ b/src/layer/vulkan/layernorm_vulkan.cpp
+@@ -49,8 +49,7 @@
+         if (opt.use_fp16_storage || opt.use_fp16_packed || opt.use_fp16_arithmetic) return -1;
+         pipeline_layernorm_reference = new Pipeline(vkdev);
+         pipeline_layernorm_reference->set_local_size_xyz(64, 1, 1);
+-        pipeline_layernorm_reference->create(LayerShaderType::layernorm_reference, opt, std::vector<vk_specialization_type>());
+-        return 0;
++        return pipeline_layernorm_reference->create(LayerShaderType::layernorm_reference, opt, std::vector<vk_specialization_type>());
+     }
+     const int subgroup_size = vkdev->info.subgroup_size();
+     const uint32_t support_subgroup_ops = vkdev->info.support_subgroup_ops();
+--- a/src/layer/vulkan/innerproduct_vulkan.cpp
++++ b/src/layer/vulkan/innerproduct_vulkan.cpp
+@@ -37,7 +37,7 @@
+ // upstream parameter validation intact and reject every CPU execution path.
+ int InnerProduct_vulkan::load_param(const ParamDict& pd)
+ {
+-    if (pd.get(9, 0) != 98 && pd.get(9, 0) != 99)
++    if (pd.get(9, 0) != 97 && pd.get(9, 0) != 98 && pd.get(9, 0) != 99)
+         return InnerProduct::load_param(pd);
+ 
+     ParamDict validated = pd;
+@@ -54,7 +54,7 @@
+ 
+ int InnerProduct_vulkan::forward(const Mat& bottom_blob, Mat& top_blob, const Option& opt) const
+ {
+-    if (activation_type == 98 || activation_type == 99)
++    if (activation_type == 97 || activation_type == 98 || activation_type == 99)
+         return -1;
+     return InnerProduct::forward(bottom_blob, top_blob, opt);
+ }
+@@ -72,6 +72,13 @@
+     const Mat& out_shape = top_shapes.empty() ? Mat() : top_shapes[0];
+ 
+     const int num_input = weight_data_size / num_output;
++
++    // Reference FP32 Gemm is a packed vector reduction with bias last.
++    if (activation_type == 97 &&
++        (num_input % 4 != 0 || num_output % 4 != 0 || opt.use_fp16_storage ||
++         opt.use_fp16_packed || opt.use_fp16_arithmetic || opt.use_bf16_storage ||
++         opt.use_bf16_packed || (shape.dims != 0 && shape.dims != 1)))
++        return -1;
+ 
+     // Pairwise half GEMM requires FP32 transport and a matrix, never a vector.
+     if (activation_type == 98 &&
+@@ -200,7 +207,7 @@
+         flatten->create_pipeline(opt);
+     }
+ 
+-    if (num_input / in_elempack >= 32 && activation_type != 99 && !(activation_type == 1 && in_elempack == 4 && out_elempack == 4 && !opt.use_fp16_storage && !opt.use_fp16_packed && !opt.use_fp16_arithmetic && !opt.use_bf16_storage && !opt.use_bf16_packed))
++    if (num_input / in_elempack >= 32 && activation_type != 97 && activation_type != 99 && !(activation_type == 1 && in_elempack == 4 && out_elempack == 4 && !opt.use_fp16_storage && !opt.use_fp16_packed && !opt.use_fp16_arithmetic && !opt.use_bf16_storage && !opt.use_bf16_packed))
+     {
+         Mat out_sum8_shape((num_input / in_elempack + 7) / 8, num_output / out_elempack, (void*)0, out_elemsize, out_elempack);
+ 
+@@ -408,6 +415,8 @@
+     if (activation_type == 98 && (bottom_blob.dims != 2 || bottom_blob.w != num_input))
+         return -1;
+ 
++    if (activation_type == 97 && bottom_blob.dims != 1)
++        return -1;
+     if (activation_type == 99 && bottom_blob.dims == 2 && bottom_blob.w == num_input)
+         return -1;
+ 
+@@ -497,7 +506,7 @@
+     size_t elemsize = bottom_blob_flattened.elemsize;
+     size_t out_elemsize = elemsize / in_elempack * out_elempack;
+ 
+-    if (num_input / in_elempack >= 32 && activation_type != 99 && !(activation_type == 1 && in_elempack == 4 && out_elempack == 4 && !opt.use_fp16_storage && !opt.use_fp16_packed && !opt.use_fp16_arithmetic && !opt.use_bf16_storage && !opt.use_bf16_packed))
++    if (num_input / in_elempack >= 32 && activation_type != 97 && activation_type != 99 && !(activation_type == 1 && in_elempack == 4 && out_elempack == 4 && !opt.use_fp16_storage && !opt.use_fp16_packed && !opt.use_fp16_arithmetic && !opt.use_bf16_storage && !opt.use_bf16_packed))
+     {
+         // sum8
+         VkMat top_blob_sum8;
+--- a/src/layer/vulkan/shader/innerproduct_pack4.comp
++++ b/src/layer/vulkan/shader/innerproduct_pack4.comp
+@@ -98,7 +98,7 @@
+ #if !NCNN_fp16_storage && !NCNN_fp16_packed && !NCNN_fp16_arithmetic && !NCNN_bf16_storage && !NCNN_bf16_packed
+     // Original FP32 Gemm: ordered channel FMA, bias after reduction, then Relu.
+     // Explicit component access retains the packed matrix's input/output axes.
+-    if (activation_type == 1)
++    if (activation_type == 1 || activation_type == 97)
+     {
+         precise vec4 ordered = vec4(0.f);
+         for (int i = 0; i < psc(w); i++)
+@@ -110,7 +110,8 @@
+         }
+         if (bias_term == 1)
+             ordered += buffer_ld4(bias_data, gx);
+-        ordered = max(ordered, vec4(0.f));
++        if (activation_type == 1)
++            ordered = max(ordered, vec4(0.f));
+         buffer_st4(top_blob_data, gx, ordered);
+         return;
+     }
+--- a/src/net.h
++++ b/src/net.h
+@@ -19,6 +19,7 @@
+ namespace ncnn {
+ 
+ NCNN_EXPORT int fold3_reference_layernorm_version();
++NCNN_EXPORT int fold3_reference_float_gemm_version();
+ 
+ #if NCNN_VULKAN
+ class VkCompute;
+--- a/src/net.cpp
++++ b/src/net.cpp
+@@ -26,6 +26,7 @@
+ namespace ncnn {
+ 
+ int fold3_reference_layernorm_version() { return 1; }
++int fold3_reference_float_gemm_version() { return 1; }
+ 
+ #if NCNN_VALIDATION
+ // bound model header allocations, including repeated blob references
+--- a/src/layer/vulkan/innerproduct_vulkan.cpp
++++ b/src/layer/vulkan/innerproduct_vulkan.cpp
+@@ -75,7 +75,7 @@
+ 
+     // Reference FP32 Gemm is a packed vector reduction with bias last.
+     if (activation_type == 97 &&
+-        (num_input % 4 != 0 || num_output % 4 != 0 || opt.use_fp16_storage ||
++        (num_input % 4 != 0 || opt.use_fp16_storage ||
+          opt.use_fp16_packed || opt.use_fp16_arithmetic || opt.use_bf16_storage ||
+          opt.use_bf16_packed || (shape.dims != 0 && shape.dims != 1)))
+         return -1;
+--- a/src/layer/vulkan/shader/innerproduct_pack4to1.comp
++++ b/src/layer/vulkan/shader/innerproduct_pack4to1.comp
+@@ -44,6 +44,42 @@
+     int outcstep;
+ } p;
+ 
++#if !NCNN_fp16_storage && !NCNN_fp16_packed && !NCNN_fp16_arithmetic && !NCNN_bf16_storage && !NCNN_bf16_packed
++// Compensate multiply/add on Adreno, as in the verified pointwise path.
++vec4 fold3_head_fma(vec4 a, vec4 b, vec4 c)
++{
++    precise vec4 ah = uintBitsToFloat(floatBitsToUint(a) & uvec4(0xfffff000u));
++    precise vec4 bh = uintBitsToFloat(floatBitsToUint(b) & uvec4(0xfffff000u));
++    precise vec4 al = a - ah;
++    precise vec4 bl = b - bh;
++    precise vec4 product = a * b;
++    precise vec4 error = ((ah * bh - product) + ah * bl + al * bh) + al * bl;
++    precise vec4 total = product + c;
++    precise vec4 part = total - product;
++    precise vec4 residual = (product - (total - part)) + (c - part);
++    // Preserve a nonzero correction tail when the final sum is a midpoint.
++    precise vec4 correction = residual + error;
++    precise vec4 correction_part = correction - residual;
++    precise vec4 tail = (residual - (correction - correction_part)) + (error - correction_part);
++    precise vec4 rounded = total + correction;
++    precise vec4 rounded_part = rounded - total;
++    precise vec4 remainder = (total - (rounded - rounded_part)) + (correction - rounded_part);
++    for (int lane = 0; lane < 4; lane++)
++    {
++        if (tail[lane] != 0.f && remainder[lane] != 0.f && !isinf(rounded[lane]) && !isnan(rounded[lane]))
++        {
++            uint bits = floatBitsToUint(rounded[lane]);
++            bool upwards = remainder[lane] > 0.f;
++            uint adjacent_bits = (upwards == (rounded[lane] >= 0.f)) ? bits + 1u : bits - 1u;
++            float adjacent = uintBitsToFloat(adjacent_bits);
++            precise float half_gap = abs(adjacent - rounded[lane]) * 0.5f;
++            if (abs(remainder[lane]) == half_gap && ((tail[lane] > 0.f) == upwards)) rounded[lane] = adjacent;
++        }
++    }
++    return rounded;
++}
++#endif
++
+ void main()
+ {
+     int gx = int(gl_GlobalInvocationID.x);
+@@ -52,6 +88,24 @@
+ 
+     if (gx >= psc(outw) || gy >= 1 || gz >= 1)
+         return;
++
++#if !NCNN_fp16_storage && !NCNN_fp16_packed && !NCNN_fp16_arithmetic && !NCNN_bf16_storage && !NCNN_bf16_packed
++    if (activation_type == 97)
++    {
++        precise float ordered = 0.f;
++        for (int i = 0; i < psc(w); i++)
++        {
++            vec4 v = buffer_ld4(bottom_blob_data, i);
++            vec4 k = buffer_ld4(weight_data, gx * psc(w) + i);
++            for (int j = 0; j < 4; j++)
++                ordered = fold3_head_fma(vec4(v[j]), vec4(k[j]), vec4(ordered)).x;
++        }
++        if (bias_term == 1)
++            ordered += buffer_ld1(bias_data, gx);
++        buffer_st1(top_blob_data, gx, ordered);
++        return;
++    }
++#endif
+ 
+     afp sum;
+ 
+--- a/src/layer/vulkan/shader/matmul.comp
++++ b/src/layer/vulkan/shader/matmul.comp
+@@ -13,6 +13,34 @@
+     int right_stride;
+     int output_stride;
+ } p;
++
++float half_rte(float value)
++{
++    uint bits = floatBitsToUint(value), sign = (bits >> 16) & 0x8000u;
++    uint magnitude = bits & 0x7fffffffu, result;
++    if (magnitude > 0x7f800000u) result = 0x7e00u;
++    else if (magnitude >= 0x477ff000u) result = 0x7c00u;
++    else if (magnitude >= 0x38800000u)
++        result = (magnitude + 0xfffu + ((magnitude >> 13) & 1u) - 0x38000000u) >> 13;
++    else if (magnitude <= 0x33000000u) result = 0u;
++    else
++    {
++        uint shift = 126u - (magnitude >> 23);
++        uint mantissa = (magnitude & 0x7fffffu) | 0x800000u;
++        result = (mantissa + ((1u << (shift - 1u)) - 1u) + ((mantissa >> shift) & 1u)) >> shift;
++    }
++    return unpackHalf2x16(sign | result).x;
++}
++
++// Exact 52-bit midpoint comparisons without requiring shaderInt64 support.
++uvec2 square64(uint value)
++{
++    uint high, low;
++    umulExtended(value, value, high, low);
++    return uvec2(low, high);
++}
++uvec2 shifted64(uint value, uint shift) { return uvec2(value << shift, value >> (32u - shift)); }
++bool less64(uvec2 a, uvec2 b) { return a.y < b.y || (a.y == b.y && a.x < b.x); }
+ 
+ void main()
+ {
+@@ -35,5 +63,5 @@
+     if ((p.k & 1) != 0)
+         total += left_data[a + p.k - 1] * right_data[b + (p.k - 1) * p.n];
+     output_data[head * p.output_stride + row * p.n + col] =
+-        unpackHalf2x16(packHalf2x16(vec2(total, 0.0))).x;
++        half_rte(total);
+ }

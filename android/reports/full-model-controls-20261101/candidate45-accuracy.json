@@ -1,0 +1,344 @@
+{
+  "status": "failed",
+  "apk_sha256": "9868e5b9ca7d24feaefd9acfbcdabaf4f5226e85063e03fffec4400aecc1a859",
+  "backend": "mnn-opencl-buffer",
+  "rtol": 0.001,
+  "atol": 0.0001,
+  "required_original_reference_comparisons": 795,
+  "initial_seed_comparisons_run": 15,
+  "passed": 9,
+  "failed": 6,
+  "remaining_recurrent_replay_comparisons_blocked": 780,
+  "unexpected_nonfinite_elements": 0,
+  "no_cpu_fallback_verified": true,
+  "models_promoted": [],
+  "identities": {
+    "dmonitoring_model": {
+      "name": "dmonitoring_model",
+      "backend": "mnn-opencl",
+      "memory_mode": "buffer",
+      "cpu_fallback": false,
+      "fingerprint": "samsung/q2qxser/q2q:15/AP3A.240905.015.A2/F926BXXSJJZH3:user/release-keys",
+      "sha256": {
+        "model": "395f9c2624973957eb9a7bde0430ca4d55ecd85fbd4be83c08a1d5f08b5d6daf",
+        "original_model": "dee5a294e8afaacc9295ac5d100e00733ecac278e79264b96331e40a3ede1b04",
+        "references": "610f877bd0f98353a6e7228698ee869d02a5b2976430234b96d097e96e773381",
+        "sequences": "6acb2ec99babfe57b5ec33b601e262ee9f5b4e54a2fd185f2b59e939256ca3d6",
+        "conversion": "e8198df724def78519b042df6ffb0d30f2885f094b86f9ae8efad508d8541708",
+        "apk": "9868e5b9ca7d24feaefd9acfbcdabaf4f5226e85063e03fffec4400aecc1a859",
+        "provider": "ff6226aca4df6de189af207baad515e5f9286792f89323820cbbcf72d7d87591",
+        "opencl_plugin": "697d5987bbbaf4cadef2b5382eac8c7c2e34a637544ff1400b2171062281da25",
+        "driver": "f64d432f19fd3f2732cd95050b47328e0c84837b7b60376d55fd7a73a6e9dc8c",
+        "implementation": "a08c65eeedfef0d2285e1a8e611adfed5611ae1e851bb7edfaa808be79382278",
+        "native": "c76995745ef49ac4af2bafa3254e4676b6916c7f1902ee971b81e8e202fa7151"
+      }
+    },
+    "driving_supercombo": {
+      "name": "driving_supercombo",
+      "backend": "mnn-opencl",
+      "memory_mode": "buffer",
+      "cpu_fallback": false,
+      "fingerprint": "samsung/q2qxser/q2q:15/AP3A.240905.015.A2/F926BXXSJJZH3:user/release-keys",
+      "sha256": {
+        "model": "23a6ccb3581846329eda081a816e9473eb25d71d0ffd094af6b7e14350842bad",
+        "original_model": "65a08adc31d5c456219687d99b7bf5e44d61dae2d49ea67850e76105c7248cce",
+        "references": "610f877bd0f98353a6e7228698ee869d02a5b2976430234b96d097e96e773381",
+        "sequences": "6acb2ec99babfe57b5ec33b601e262ee9f5b4e54a2fd185f2b59e939256ca3d6",
+        "conversion": "e8198df724def78519b042df6ffb0d30f2885f094b86f9ae8efad508d8541708",
+        "apk": "9868e5b9ca7d24feaefd9acfbcdabaf4f5226e85063e03fffec4400aecc1a859",
+        "provider": "ff6226aca4df6de189af207baad515e5f9286792f89323820cbbcf72d7d87591",
+        "opencl_plugin": "697d5987bbbaf4cadef2b5382eac8c7c2e34a637544ff1400b2171062281da25",
+        "driver": "f64d432f19fd3f2732cd95050b47328e0c84837b7b60376d55fd7a73a6e9dc8c",
+        "implementation": "a08c65eeedfef0d2285e1a8e611adfed5611ae1e851bb7edfaa808be79382278",
+        "native": "c76995745ef49ac4af2bafa3254e4676b6916c7f1902ee971b81e8e202fa7151"
+      }
+    }
+  },
+  "checks": [
+    {
+      "model": "dmonitoring_model",
+      "seed": 42,
+      "output": "outputs",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        553
+      ],
+      "dtype": "float16",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.00390625,
+      "mismatched_elements": 7
+    },
+    {
+      "model": "dmonitoring_model",
+      "seed": 7,
+      "output": "outputs",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        553
+      ],
+      "dtype": "float16",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.00390625,
+      "mismatched_elements": 3
+    },
+    {
+      "model": "dmonitoring_model",
+      "seed": 123,
+      "output": "outputs",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        553
+      ],
+      "dtype": "float16",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.00390625,
+      "mismatched_elements": 3
+    },
+    {
+      "model": "driving_supercombo",
+      "seed": 42,
+      "output": "outputs",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        2576
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.078125,
+      "mismatched_elements": 436
+    },
+    {
+      "model": "driving_supercombo",
+      "seed": 42,
+      "output": "next_state_img_q",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        2,
+        5,
+        6,
+        128,
+        256
+      ],
+      "dtype": "uint8",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": true,
+      "max_abs_error": 0.0,
+      "mismatched_elements": 0
+    },
+    {
+      "model": "driving_supercombo",
+      "seed": 42,
+      "output": "next_state_desire_q",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        100,
+        1,
+        8
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": true,
+      "max_abs_error": 0.0,
+      "mismatched_elements": 0
+    },
+    {
+      "model": "driving_supercombo",
+      "seed": 42,
+      "output": "next_state_feat_q",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        96,
+        1,
+        512
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.0001220703125,
+      "mismatched_elements": 0
+    },
+    {
+      "model": "driving_supercombo",
+      "seed": 7,
+      "output": "outputs",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        2576
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.1875,
+      "mismatched_elements": 543
+    },
+    {
+      "model": "driving_supercombo",
+      "seed": 7,
+      "output": "next_state_img_q",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        2,
+        5,
+        6,
+        128,
+        256
+      ],
+      "dtype": "uint8",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": true,
+      "max_abs_error": 0.0,
+      "mismatched_elements": 0
+    },
+    {
+      "model": "driving_supercombo",
+      "seed": 7,
+      "output": "next_state_desire_q",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        100,
+        1,
+        8
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": true,
+      "max_abs_error": 0.0,
+      "mismatched_elements": 0
+    },
+    {
+      "model": "driving_supercombo",
+      "seed": 7,
+      "output": "next_state_feat_q",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        96,
+        1,
+        512
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 6.103515625e-05,
+      "mismatched_elements": 0
+    },
+    {
+      "model": "driving_supercombo",
+      "seed": 123,
+      "output": "outputs",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        2576
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.09375,
+      "mismatched_elements": 234
+    },
+    {
+      "model": "driving_supercombo",
+      "seed": 123,
+      "output": "next_state_img_q",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        2,
+        5,
+        6,
+        128,
+        256
+      ],
+      "dtype": "uint8",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": true,
+      "max_abs_error": 0.0,
+      "mismatched_elements": 0
+    },
+    {
+      "model": "driving_supercombo",
+      "seed": 123,
+      "output": "next_state_desire_q",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        100,
+        1,
+        8
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": true,
+      "max_abs_error": 0.0,
+      "mismatched_elements": 0
+    },
+    {
+      "model": "driving_supercombo",
+      "seed": 123,
+      "output": "next_state_feat_q",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        96,
+        1,
+        512
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 6.103515625e-05,
+      "mismatched_elements": 0
+    }
+  ],
+  "host_converted_graph_comparisons": {
+    "status": "passed",
+    "count": 795,
+    "evidence": "candidate45h-conversion.log",
+    "qualifies_android_engine": false
+  },
+  "historical_strict_opencl_comparisons": {
+    "status": "passed",
+    "count": 795,
+    "candidates": [
+      "candidate35",
+      "candidate40"
+    ],
+    "qualifies_candidate45_mnn": false
+  }
+}

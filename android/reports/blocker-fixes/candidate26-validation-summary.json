@@ -1,0 +1,58 @@
+{
+  "candidate": "candidate26",
+  "status": "blocked",
+  "apk_sha256": "76e10aaa7aa2a0e8cdb0f98c9e4a97904aa67d23659419f4b78d09b28c1538b6",
+  "artifact": "candidate26-artifact.json",
+  "vehicle_tx_enabled": false,
+  "engagement_allowed": false,
+  "isolation_counts": {
+    "failed": 1
+  },
+  "validation_counts": {
+    "blocked": 1
+  },
+  "experiments": [
+    {
+      "name": "fold-camera-trace-candidate26",
+      "report": "fold-camera-trace-candidate26.json",
+      "isolation": "fold-camera-trace-candidate26-isolation.json",
+      "isolation_status": "failed",
+      "validation_status": "blocked",
+      "apk_sha256": "76e10aaa7aa2a0e8cdb0f98c9e4a97904aa67d23659419f4b78d09b28c1538b6",
+      "artifact_stable": true,
+      "returncode": 1
+    }
+  ],
+  "models": {},
+  "vision": {
+    "validation_status": "blocked",
+    "error": null,
+    "recoveries": null,
+    "ui": null,
+    "independent_rear_identity": "blocked: lens-cover evidence deferred; shared parent timestamps do not prove identity",
+    "models": {
+      "modeld": {},
+      "dmonitoringmodeld": {}
+    }
+  },
+  "controls": {
+    "fold": {
+      "controls": {}
+    },
+    "emulator": {
+      "controls": {}
+    }
+  },
+  "emulator_camera_timing": {
+    "status": "blocked",
+    "streams": []
+  },
+  "blocked_physical_gates": [
+    "independent rear sensor identity",
+    "mounted optical/vehicle calibration",
+    "Panda firmware compatibility",
+    "passive vehicle fingerprint and bus mapping",
+    "Hyundai harness and vehicle behavior"
+  ],
+  "thirty_minute_workload": "blocked: short correctness, camera freshness and complete-cycle timing must pass first"
+}

@@ -1,0 +1,56 @@
+B023 Function definition does not bind loop variable `unsafe`
+  --> android/tests/test_experiment.py:24:37
+   |
+22 |           if args[-1] == "files/manager.json":
+23 |             return json.dumps({"pid": 2, "updated_elapsed_ms": 100001,
+24 |               "vehicle_tx_enabled": unsafe, "engagement_allowed": False,
+   |                                     ^^^^^^
+25 |               "simulation": True, "full_chain": True})
+26 |           if args[-1] == "files/ui-report.json":
+   |
+
+B023 Function definition does not bind loop variable `clock`
+  --> android/tests/test_experiment.py:27:44
+   |
+25 |               "simulation": True, "full_chain": True})
+26 |           if args[-1] == "files/ui-report.json":
+27 |             return json.dumps({"pid": 1 if clock[0] == 0 else 3,
+   |                                            ^^^^^
+28 |               "status": "running" if clock[0] >= 70 else "starting",
+29 |               "full_upstream_ui": True, "frames": 30})
+   |
+
+B023 Function definition does not bind loop variable `clock`
+  --> android/tests/test_experiment.py:28:38
+   |
+26 |           if args[-1] == "files/ui-report.json":
+27 |             return json.dumps({"pid": 1 if clock[0] == 0 else 3,
+28 |               "status": "running" if clock[0] >= 70 else "starting",
+   |                                      ^^^^^
+29 |               "full_upstream_ui": True, "frames": 30})
+30 |           return ""
+   |
+
+B023 Function definition does not bind loop variable `clock`
+  --> android/tests/test_experiment.py:34:11
+   |
+32 |         device.command = command
+33 |         def sleep(seconds):
+34 |           clock[0] += seconds
+   |           ^^^^^
+35 |         with patch.object(experiment.time, "monotonic", side_effect=lambda: clock[0]), \
+36 |              patch.object(experiment.time, "sleep", side_effect=sleep):
+   |
+
+B023 Function definition does not bind loop variable `clock`
+  --> android/tests/test_experiment.py:35:77
+   |
+33 |         def sleep(seconds):
+34 |           clock[0] += seconds
+35 |         with patch.object(experiment.time, "monotonic", side_effect=lambda: clock[0]), \
+   |                                                                             ^^^^^
+36 |              patch.object(experiment.time, "sleep", side_effect=sleep):
+37 |           if unsafe:
+   |
+
+Found 5 errors.

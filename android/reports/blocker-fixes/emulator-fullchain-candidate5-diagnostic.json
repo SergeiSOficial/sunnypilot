@@ -1,0 +1,209 @@
+{
+  "status": "failed",
+  "vehicle_tx_enabled": false,
+  "physical_engagement_allowed": false,
+  "synthetic_sources": true,
+  "physical_vehicle_verified": false,
+  "camera_model_parity_verified": false,
+  "derived_inputs_injected": false,
+  "received_services": [],
+  "packets": 85,
+  "unsafe_outputs": 0,
+  "profile": {
+    "version": 1,
+    "op": "hello",
+    "simulation": true,
+    "full_chain": true,
+    "vehicle_tx_enabled": false,
+    "car_fingerprint": "HYUNDAI_IONIQ_PHEV_2019",
+    "factory_acc": true,
+    "min_steer_speed_m_s": 14.305279731750488,
+    "physical_fingerprint_verified": false
+  },
+  "error": "EOFError: ADB stream disconnected",
+  "failure_reports": {
+    "manager": {
+      "pid": 6044,
+      "simulation": true,
+      "full_chain": true,
+      "vehicle_tx_enabled": false,
+      "engagement_allowed": false,
+      "engagement_blocker": "camera calibration, model parity/performance and physical Panda qualification incomplete",
+      "processes": {
+        "Controls": {
+          "daemon": "controlsd",
+          "pid": 6067,
+          "phase": "waiting_for_car_params",
+          "error": "",
+          "last_progress_ms": 1184900,
+          "ticks": 37,
+          "restarts": 0
+        },
+        "Monitoring": {
+          "daemon": "dmonitoringd",
+          "pid": 6070,
+          "phase": "running",
+          "error": "",
+          "last_progress_ms": 1185107,
+          "ticks": 36,
+          "restarts": 0
+        },
+        "Vehicle": {
+          "daemon": "card",
+          "pid": 6071,
+          "phase": "collecting_passive_can",
+          "error": "",
+          "last_progress_ms": 1185119,
+          "ticks": 706,
+          "restarts": 0
+        },
+        "Localization": {
+          "daemon": "locationd",
+          "pid": 6107,
+          "phase": "waiting_for_car_params",
+          "error": "",
+          "last_progress_ms": 1184898,
+          "ticks": 38,
+          "restarts": 0
+        },
+        "Calibration": {
+          "daemon": "calibrationd",
+          "pid": 6113,
+          "phase": "waiting_for_car_params",
+          "error": "",
+          "last_progress_ms": 1184860,
+          "ticks": 36,
+          "restarts": 0
+        },
+        "Parameters": {
+          "daemon": "paramsd",
+          "pid": 6147,
+          "phase": "waiting_for_car_params",
+          "error": "",
+          "last_progress_ms": 1184904,
+          "ticks": 29,
+          "restarts": 0
+        },
+        "Torque": {
+          "daemon": "torqued",
+          "pid": 6156,
+          "phase": "waiting_for_car_params",
+          "error": "",
+          "last_progress_ms": 1184819,
+          "ticks": 28,
+          "restarts": 0
+        },
+        "Delay": {
+          "daemon": "lagd",
+          "pid": 6157,
+          "phase": "waiting_for_car_params",
+          "error": "",
+          "last_progress_ms": 1185112,
+          "ticks": 35,
+          "restarts": 0
+        },
+        "Radar": {
+          "daemon": "radard",
+          "pid": 6162,
+          "phase": "waiting_for_car_params",
+          "error": "",
+          "last_progress_ms": 1185105,
+          "ticks": 27,
+          "restarts": 0
+        },
+        "Planning": {
+          "daemon": "plannerd",
+          "pid": 6175,
+          "phase": "waiting_for_car_params",
+          "error": "",
+          "last_progress_ms": 1184965,
+          "ticks": 32,
+          "restarts": 0
+        },
+        "Selfdrive": {
+          "daemon": "selfdrived",
+          "pid": 6196,
+          "phase": "waiting_for_car_params",
+          "error": "",
+          "last_progress_ms": 1184938,
+          "ticks": 31,
+          "restarts": 0
+        },
+        "Simulator": {
+          "daemon": "sim_bridge",
+          "pid": 6206,
+          "phase": "running",
+          "error": "",
+          "last_progress_ms": 1185126,
+          "ticks": 96,
+          "restarts": 0
+        }
+      },
+      "updated_elapsed_ms": 1185146
+    },
+    "sim_bridge": {
+      "daemon": "sim_bridge",
+      "pid": 6206,
+      "vehicle_tx_enabled": false,
+      "engagement_allowed": false,
+      "work_samples": 0,
+      "deadline_misses": 0,
+      "phase": "running",
+      "simulation": true,
+      "p99_stages_ms": {},
+      "accepted_packets": 62,
+      "rejected_sessions": 0,
+      "latest_input_services": [
+        "accelerometer",
+        "can",
+        "gyroscope"
+      ],
+      "stale_control_inputs": [],
+      "car_fingerprint": "HYUNDAI_IONIQ_PHEV_2019",
+      "factory_acc": true,
+      "min_steer_speed_m_s": 14.305279731750488,
+      "physical_fingerprint_verified": false
+    },
+    "controlsd": {
+      "daemon": "controlsd",
+      "pid": 6067,
+      "vehicle_tx_enabled": false,
+      "engagement_allowed": false,
+      "work_samples": 0,
+      "deadline_misses": 0,
+      "phase": "waiting_for_car_params",
+      "simulation": true,
+      "p99_stages_ms": {}
+    },
+    "selfdrived": {
+      "daemon": "selfdrived",
+      "pid": 6196,
+      "vehicle_tx_enabled": false,
+      "engagement_allowed": false,
+      "work_samples": 0,
+      "deadline_misses": 0,
+      "phase": "waiting_for_car_params",
+      "simulation": true,
+      "p99_stages_ms": {}
+    },
+    "ui-report": {
+      "pid": 6279,
+      "backend": "Raylib Android NativeActivity",
+      "vehicle_tx_enabled": false,
+      "status": "running",
+      "full_upstream_ui": true,
+      "frames": 60,
+      "mean_fps": 6.091326081182373,
+      "width": 2160,
+      "height": 1080,
+      "surface_size": [
+        1280,
+        720
+      ],
+      "last_frame_seconds": 0.09425175189971924,
+      "last_cpu_seconds": 0.002575624999963111,
+      "recent_p99_frame_ms": 1035.104513168335,
+      "recent_p99_cpu_ms": 129.30658300024334
+    }
+  }
+}

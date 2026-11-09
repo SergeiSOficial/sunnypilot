@@ -1,0 +1,235 @@
+/Users/sergios/sunnypilot/android/reports/full-model-controls-20261101/diagnostics/opencl-division-probe: 1 file pushed, 0 skipped. 333.1 MB/s (5689480 bytes in 0.016s)
+/Users/sergios/sunnypilot/android/reports/full-model-controls-20261101/diagnostics/opencl-division-probe.cl: 1 file pushed, 0 skipped. 17.7 MB/s (2834 bytes in 0.000s)
+{
+  "diagnostic_only": true,
+  "vehicle_tx_enabled": false,
+  "single_fp_config": 22,
+  "outputs": 1024,
+  "variants": [
+    {
+      "options": "",
+      "checks": [
+        {
+          "mode": 0,
+          "unequal": 1024,
+          "max_abs_error": 1.19209289551e-07
+        },
+        {
+          "mode": 1,
+          "unequal": 0,
+          "max_abs_error": 0
+        },
+        {
+          "mode": 2,
+          "unequal": 0,
+          "max_abs_error": 0
+        }
+      ],
+      "examples": [
+        {
+          "left": -127.5,
+          "right": 63.75,
+          "expected": -2,
+          "stages": [
+            -1.99999988079,
+            -2,
+            -2,
+            -2,
+            0,
+            2.00000023842,
+            1.19209289551e-07,
+            -7.59959220886e-06
+          ]
+        },
+        {
+          "left": -126.5,
+          "right": 63.75,
+          "expected": -1.984313726,
+          "stages": [
+            -1.98431360722,
+            -1.98431372643,
+            -1.98431372643,
+            -1.98431372643,
+            -5.96046447754e-08,
+            1.98431360722,
+            5.96046447754e-08,
+            -3.74019145966e-06
+          ]
+        },
+        {
+          "left": -125.5,
+          "right": 63.75,
+          "expected": -1.968627453,
+          "stages": [
+            -1.96862733364,
+            -1.96862745285,
+            -1.96862745285,
+            -1.96862745285,
+            -1.19209289551e-07,
+            1.96862733364,
+            5.96046447754e-08,
+            -3.68058681488e-06
+          ]
+        },
+        {
+          "left": -124.5,
+          "right": 63.75,
+          "expected": -1.952941179,
+          "stages": [
+            -1.95294106007,
+            -1.95294117928,
+            -1.95294117928,
+            -1.95294117928,
+            -1.78813934326e-07,
+            1.95294106007,
+            5.96046447754e-08,
+            -3.6209821701e-06
+          ]
+        }
+      ]
+    },
+    {
+      "options": "-cl-mad-enable -w",
+      "checks": [
+        {
+          "mode": 0,
+          "unequal": 1024,
+          "max_abs_error": 1.19209289551e-07
+        },
+        {
+          "mode": 1,
+          "unequal": 0,
+          "max_abs_error": 0
+        },
+        {
+          "mode": 2,
+          "unequal": 0,
+          "max_abs_error": 0
+        }
+      ],
+      "examples": [
+        {
+          "left": -127.5,
+          "right": 63.75,
+          "expected": -2,
+          "stages": [
+            -1.99999988079,
+            -2,
+            -2,
+            -2,
+            0,
+            2.00000023842,
+            1.19209289551e-07,
+            -7.59959220886e-06
+          ]
+        },
+        {
+          "left": -126.5,
+          "right": 63.75,
+          "expected": -1.984313726,
+          "stages": [
+            -1.98431360722,
+            -1.98431372643,
+            -1.98431372643,
+            -1.98431372643,
+            -5.96046447754e-08,
+            1.98431360722,
+            5.96046447754e-08,
+            -3.74019145966e-06
+          ]
+        },
+        {
+          "left": -125.5,
+          "right": 63.75,
+          "expected": -1.968627453,
+          "stages": [
+            -1.96862733364,
+            -1.96862745285,
+            -1.96862745285,
+            -1.96862745285,
+            -1.19209289551e-07,
+            1.96862733364,
+            5.96046447754e-08,
+            -3.68058681488e-06
+          ]
+        },
+        {
+          "left": -124.5,
+          "right": 63.75,
+          "expected": -1.952941179,
+          "stages": [
+            -1.95294106007,
+            -1.95294117928,
+            -1.95294117928,
+            -1.95294117928,
+            -1.78813934326e-07,
+            1.95294106007,
+            5.96046447754e-08,
+            -3.6209821701e-06
+          ]
+        }
+      ]
+    }
+  ],
+  "device": "RFCR81Y1TBJ",
+  "fingerprint": "samsung/q2qxser/q2q:15/AP3A.240905.015.A2/F926BXXSJJZH3:user/release-keys",
+  "source_sha256": {
+    "opencl-division-probe.cpp": "3535b5d86b480b0a296c2abbe53bb2e9cc736ac24795662045cfe54ce1f6aaf9",
+    "opencl-division-probe.cl": "da7bd90682eb9df4c9de7ca76b99cb6ab677c78f8dc2ee22f30b298aac18a280",
+    "opencl-division-probe": "f4e9371090735d5b1b336b543094f467c988582a738180347ddca69cc7e796e9"
+  }
+}
+{
+  "serial": "RFCR81Y1TBJ",
+  "command": [
+    ".venv/bin/python",
+    "android/reports/full-model-controls-20261101/diagnostics/run_division_probe.py"
+  ],
+  "vehicle_tx_enabled": false,
+  "status": "passed",
+  "validation_status": "passed",
+  "isolation_status": "passed",
+  "forwards_before": [],
+  "before_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 28.0,
+    "thermal_override": false
+  },
+  "apk_sha256": "8d83f5c4e121eff430e6eead6adc4a076f402dc5cc60c8da1fb4f1f7765c0a4c",
+  "baseline": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 27.6,
+    "thermal_override": false,
+    "idle_seconds": 32.610914541000966,
+    "normal_thermal_seconds": 32.30056020797929
+  },
+  "apk_sha256_at_start": "8d83f5c4e121eff430e6eead6adc4a076f402dc5cc60c8da1fb4f1f7765c0a4c",
+  "returncode": 0,
+  "after_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 27.6,
+    "thermal_override": false
+  },
+  "forwards_removed": [],
+  "apk_sha256_after": "8d83f5c4e121eff430e6eead6adc4a076f402dc5cc60c8da1fb4f1f7765c0a4c",
+  "artifact_stable": true,
+  "wrapper_status": "passed"
+}

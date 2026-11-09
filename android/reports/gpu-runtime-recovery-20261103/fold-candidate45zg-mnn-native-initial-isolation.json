@@ -1,0 +1,66 @@
+{
+  "serial": "RFCR81Y1TBJ",
+  "command": [
+    "/Users/sergios/sunnypilot/.venv/bin/python",
+    "android/scripts/validate_models.py",
+    "--serial",
+    "RFCR81Y1TBJ",
+    "--adb",
+    "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+    "--package",
+    "com.samsung.sunnypilot.fold3",
+    "--profile",
+    "mnn-buffer-accuracy-driver-initial",
+    "--timeout",
+    "600",
+    "--report",
+    "/Users/sergios/sunnypilot/android/reports/gpu-runtime-recovery-20261103/fold-candidate45zg-mnn-native-initial.json"
+  ],
+  "vehicle_tx_enabled": false,
+  "status": "failed",
+  "validation_status": "failed",
+  "isolation_status": "passed",
+  "forwards_before": [],
+  "before_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 26.9,
+    "thermal_override": false
+  },
+  "apk_sha256": "28c7d37923f7b2537c56181a85bc406f65011030a37205f2bbc1524a0e10a3f7",
+  "baseline": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 26.6,
+    "thermal_override": false,
+    "idle_seconds": 33.21819320798386,
+    "normal_thermal_seconds": 32.8520033750101
+  },
+  "apk_sha256_at_start": "28c7d37923f7b2537c56181a85bc406f65011030a37205f2bbc1524a0e10a3f7",
+  "returncode": 1,
+  "after_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 28.2,
+    "thermal_override": false
+  },
+  "forwards_removed": [],
+  "apk_sha256_after": "28c7d37923f7b2537c56181a85bc406f65011030a37205f2bbc1524a0e10a3f7",
+  "artifact_stable": true,
+  "wrapper_status": "failed"
+}

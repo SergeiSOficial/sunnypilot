@@ -1,0 +1,231 @@
+{
+  "started_utc": 1793537860.8042188,
+  "diagnostic_only": true,
+  "vehicle_tx_enabled": false,
+  "models": {
+    "mnn-opencl-conv": {
+      "status": "blocked",
+      "performance_status": "diagnostic_only",
+      "model_sha256": "03037d64115db12d8fbd9caae68d25cf18c5bcc08e576b7505da4aa0a337a7e6",
+      "error": "RuntimeError: MNN OpenCL unavailable; CPU fallback rejected"
+    },
+    "mnn-opencl-gemm": {
+      "status": "blocked",
+      "performance_status": "diagnostic_only",
+      "model_sha256": "e312012ba764ad7ac898a6f7a342da3b45a0e58486c9fd2774594fa2e48216c5",
+      "error": "RuntimeError: MNN OpenCL unavailable; CPU fallback rejected"
+    },
+    "mnn-opencl-activation": {
+      "status": "blocked",
+      "performance_status": "diagnostic_only",
+      "model_sha256": "767fd436aee1567ff55ee7dac0b9baec2ffec513622e34b169f572f37ae41786",
+      "error": "RuntimeError: MNN OpenCL unavailable; CPU fallback rejected"
+    },
+    "mnn-opencl-layout": {
+      "status": "blocked",
+      "performance_status": "diagnostic_only",
+      "model_sha256": "7307ddae7ae406b6dfd2674ddcc88ca9d87582ff02a64bf661541eb6a2056744",
+      "error": "RuntimeError: MNN OpenCL unavailable; CPU fallback rejected"
+    },
+    "ncnn-vulkan-conv": {
+      "status": "passed",
+      "performance_status": "diagnostic_only",
+      "model_sha256": "bd1b425ecffa6e536aea9d8b5daf795f5982dd3f313919b37caf69820e322cc8",
+      "initialization_ms": 503.700937,
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          4,
+          6,
+          6
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": false,
+        "max_abs_error": 2.9802322387695312e-08,
+        "mismatched_elements": 0
+      },
+      "assignment": {
+        "backend": "ncnn-vulkan",
+        "inputs": {},
+        "outputs": {},
+        "assignments": [
+          "in0:Input:Vulkan",
+          "conv_0:Convolution:Vulkan"
+        ],
+        "no_cpu_fallback_verified": true,
+        "upload_ms": 0.006562,
+        "compute_ms": 21.24026,
+        "readback_ms": 0.0
+      },
+      "samples_ms": [
+        0.6775,
+        0.62,
+        0.605937,
+        0.553854,
+        0.548177,
+        0.560937,
+        0.547083,
+        0.546511,
+        0.540573,
+        0.54526,
+        0.543386,
+        0.6575,
+        0.554843,
+        0.53625,
+        0.547552,
+        0.54625,
+        0.551406,
+        0.574427,
+        0.603594,
+        0.65375
+      ],
+      "work_p50_ms": 0.55263,
+      "work_p99_ms": 0.6737
+    },
+    "ncnn-vulkan-gemm": {
+      "status": "blocked",
+      "performance_status": "diagnostic_only",
+      "model_sha256": "d8920d5b63e2b7228ba43b06090e88e770259c242a415b265270ea0dd7950ba4",
+      "initialization_ms": 40.611562,
+      "error": "RuntimeError: ncnn input allocation/packing mismatch",
+      "assignment": {
+        "backend": "ncnn-vulkan",
+        "inputs": {},
+        "outputs": {},
+        "assignments": [
+          "in0:Input:Vulkan",
+          "gemm_0:Gemm:Vulkan"
+        ],
+        "no_cpu_fallback_verified": true,
+        "upload_ms": 0.0,
+        "compute_ms": 0.0,
+        "readback_ms": 0.0
+      }
+    },
+    "ncnn-vulkan-activation": {
+      "status": "passed",
+      "performance_status": "diagnostic_only",
+      "model_sha256": "53030e2b72f9d8e2b71bb1063629f8f1d3be064c2f0c7c5160edaec3b76714fd",
+      "initialization_ms": 10.804635,
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          4,
+          6,
+          6
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": false,
+        "max_abs_error": 6.705522537231445e-08,
+        "mismatched_elements": 0
+      },
+      "assignment": {
+        "backend": "ncnn-vulkan",
+        "inputs": {},
+        "outputs": {},
+        "assignments": [
+          "in0:Input:Vulkan",
+          "silu_0:Swish:Vulkan",
+          "tanh_1:TanH:Vulkan"
+        ],
+        "no_cpu_fallback_verified": true,
+        "upload_ms": 0.00573,
+        "compute_ms": 0.568281,
+        "readback_ms": 0.0
+      },
+      "samples_ms": [
+        0.637136,
+        0.568229,
+        0.60224,
+        0.540625,
+        0.523229,
+        0.524063,
+        0.533177,
+        0.540364,
+        0.527083,
+        0.525364,
+        0.556771,
+        0.550886,
+        0.533177,
+        0.612552,
+        0.590782,
+        0.541355,
+        0.525104,
+        0.516719,
+        0.528698,
+        0.518958
+      ],
+      "work_p50_ms": 0.5367705,
+      "work_p99_ms": 0.63246504
+    },
+    "ncnn-vulkan-layout": {
+      "status": "passed",
+      "performance_status": "diagnostic_only",
+      "model_sha256": "80b692827e237a64e882c903cf42478474e8683741eb8882b1ae2b3d8b4346e0",
+      "initialization_ms": 85.847812,
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          6,
+          6,
+          4
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "assignment": {
+        "backend": "ncnn-vulkan",
+        "inputs": {},
+        "outputs": {},
+        "assignments": [
+          "in0:Input:Vulkan",
+          "permute_0:Permute:Vulkan"
+        ],
+        "no_cpu_fallback_verified": true,
+        "upload_ms": 0.006145,
+        "compute_ms": 0.692187,
+        "readback_ms": 0.0
+      },
+      "samples_ms": [
+        1.777812,
+        0.574375,
+        0.557865,
+        0.595157,
+        0.544062,
+        0.535313,
+        0.53401,
+        0.554323,
+        0.541875,
+        0.659271,
+        0.545052,
+        0.540677,
+        0.525156,
+        0.530677,
+        0.523177,
+        0.574115,
+        0.54526,
+        0.559635,
+        0.548854,
+        0.537344
+      ],
+      "work_p50_ms": 0.545156,
+      "work_p99_ms": 1.5652892099999984
+    }
+  },
+  "completed_utc": 1793537861.6013997,
+  "validation_status": "blocked"
+}

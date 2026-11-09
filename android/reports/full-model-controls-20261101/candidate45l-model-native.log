@@ -1,0 +1,26 @@
+--------- beginning of main
+11-01 20:10:44.281 19878 19878 I ot.fold3:models: Late-enabling -Xcheck:jni
+11-01 20:10:44.295 19878 19878 I ot.fold3:models: Using generational CollectorTypeCC GC.
+11-01 20:10:58.056 19878 19905 I MNNJNI  : CPU Group: [ 0  1  2  3 ], 300000 - 1804800
+11-01 20:10:58.056 19878 19905 I MNNJNI  : CPU Group: [ 4  5  6 ], 710400 - 2419200
+11-01 20:10:58.056 19878 19905 I MNNJNI  : CPU Group: [ 7 ], 844800 - 2841600
+11-01 20:10:58.056 19878 19905 I MNNJNI  : parsed /proc/cpuinfo Hardware = "SM8350"
+11-01 20:10:58.056 19878 19905 W libc    : Access denied finding property "ro.mediatek.platform"
+11-01 20:10:58.056 19878 19905 I MNNJNI  : (last_midr & (CPUINFO_ARM_MIDR_IMPLEMENTER_MASK | CPUINFO_ARM_MIDR_PART_MASK))=0x 4100d440 in _getInfoArm, 1250 
+11-01 20:10:58.056 19878 19905 I MNNJNI  : The device supports: i8sdot:1, fp16:1, i8mm: 0, sve2: 0, sme2: 0, perfCores: 0
+11-01 20:10:58.060 19878 19905 W libc    : Access denied finding property "ro.vendor.gfx.32bit.target"
+11-01 20:11:00.930 19878 20022 I MNNJNI  : Program build log: BC-src-code:22:29: error: use of undeclared identifier 'VALUE'
+11-01 20:11:00.930 19878 20022 I MNNJNI  :  INPUT_TYPE out=(INPUT_TYPE)VALUE;
+11-01 20:11:00.930 19878 20022 I MNNJNI  :                             ^
+11-01 20:11:00.930 19878 20022 I MNNJNI  : BC-src-code:43:6: error: implicit declaration of function 'OPERATE' is invalid in C99 [-Werror,-Wimplicit-function-declaration]
+11-01 20:11:00.930 19878 20022 I MNNJNI  :  out=OPERATE(out,in);
+11-01 20:11:00.930 19878 20022 I MNNJNI  :      ^
+11-01 20:11:00.930 19878 20022 I MNNJNI  : BC-src-code:62:31: error: use of undeclared identifier 'VALUE'
+11-01 20:11:00.930 19878 20022 I MNNJNI  :  INPUT_TYPE4 out=(INPUT_TYPE4)VALUE;
+11-01 20:11:00.930 19878 20022 I MNNJNI  :                               ^
+11-01 20:11:00.930 19878 20022 I MNNJNI  : 3 diagnostic(s) generated.
+11-01 20:11:00.930 19878 20022 I MNNJNI  :  
+11-01 20:11:00.930 19878 20022 I MNNJNI  : Build program failed, err:-11 ! 
+11-01 20:11:00.931 19878 19905 E MNNJNI  : Resize error for type = Reduction, name = fold3_host_mean8_InsertedPrecisionFreeCast_mean 
+--------- beginning of crash
+11-01 20:11:00.965 19878 19905 F libc    : Fatal signal 11 (SIGSEGV), code 1 (SEGV_MAPERR), fault addr 0x0 in tid 19905 (model-validatio), pid 19878 (ot.fold3:models)

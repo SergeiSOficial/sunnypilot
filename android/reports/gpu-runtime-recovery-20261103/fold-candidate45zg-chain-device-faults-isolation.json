@@ -1,0 +1,71 @@
+{
+  "serial": "RFCR81Y1TBJ",
+  "command": [
+    "/Users/sergios/sunnypilot/.venv/bin/python",
+    "-m",
+    "openpilot.tools.sim.android_chain_validation",
+    "--seconds",
+    "30",
+    "--device-replay",
+    "--serial",
+    "RFCR81Y1TBJ",
+    "--adb",
+    "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+    "--report",
+    "/Users/sergios/sunnypilot/android/reports/gpu-runtime-recovery-20261103/fold-candidate45zg-chain-device-faults.json",
+    "--package",
+    "com.samsung.sunnypilot.fold3"
+  ],
+  "vehicle_tx_enabled": false,
+  "status": "passed",
+  "validation_status": "passed",
+  "isolation_status": "passed",
+  "forwards_before": [],
+  "before_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 27.9,
+    "thermal_override": false
+  },
+  "apk_sha256": "28c7d37923f7b2537c56181a85bc406f65011030a37205f2bbc1524a0e10a3f7",
+  "baseline": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 26.7,
+    "thermal_override": false,
+    "idle_seconds": 32.49899233301403,
+    "normal_thermal_seconds": 32.187898083007894
+  },
+  "apk_sha256_at_start": "28c7d37923f7b2537c56181a85bc406f65011030a37205f2bbc1524a0e10a3f7",
+  "runtime": {
+    "manager_pid": 19465,
+    "ui_pid": 19670,
+    "simulation": true
+  },
+  "returncode": 0,
+  "after_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 28.2,
+    "thermal_override": false
+  },
+  "forwards_removed": [],
+  "apk_sha256_after": "28c7d37923f7b2537c56181a85bc406f65011030a37205f2bbc1524a0e10a3f7",
+  "artifact_stable": true,
+  "wrapper_status": "passed"
+}

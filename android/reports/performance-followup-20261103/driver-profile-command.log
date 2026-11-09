@@ -1,0 +1,79 @@
+Traceback (most recent call last):
+  File "/Users/sergios/sunnypilot/android/scripts/profile_mnn.py", line 129, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/Users/sergios/sunnypilot/android/scripts/profile_mnn.py", line 73, in main
+    "sha256": {p.name: sha(p) for p in [*files, cpp, Path(__file__)]}, "status": "running"}
+                       ^^^^^^
+  File "/Users/sergios/sunnypilot/android/scripts/profile_mnn.py", line 39, in sha
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+                          ^^^^^^^^^^^^^^^^^
+  File "/Users/sergios/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/pathlib.py", line 1019, in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sergios/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/pathlib.py", line 1013, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/Users/sergios/sunnypilot/android/app/build/model-reference/accelerators/dmonitoring_model.mnn'
+{
+  "serial": "RFCR81Y1TBJ",
+  "command": [
+    ".venv/bin/python",
+    "android/scripts/profile_mnn.py",
+    "--serial",
+    "RFCR81Y1TBJ",
+    "--adb",
+    "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+    "--model",
+    "dmonitoring_model",
+    "--report",
+    "android/reports/performance-followup-20261103/driver-profile.json"
+  ],
+  "vehicle_tx_enabled": false,
+  "status": "failed",
+  "validation_status": "failed",
+  "isolation_status": "passed",
+  "forwards_before": [],
+  "before_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 23.6,
+    "thermal_override": false
+  },
+  "apk_sha256": "e7ae5461257aae2abef31e1631c4c79e7a32bc1513523f5d38db021ab9a2334e",
+  "baseline": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 23.7,
+    "thermal_override": false,
+    "idle_seconds": 32.91395170800388,
+    "normal_thermal_seconds": 32.46489354100777
+  },
+  "apk_sha256_at_start": "e7ae5461257aae2abef31e1631c4c79e7a32bc1513523f5d38db021ab9a2334e",
+  "returncode": 1,
+  "after_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 23.7,
+    "thermal_override": false
+  },
+  "forwards_removed": [],
+  "apk_sha256_after": "e7ae5461257aae2abef31e1631c4c79e7a32bc1513523f5d38db021ab9a2334e",
+  "artifact_stable": true,
+  "wrapper_status": "failed"
+}

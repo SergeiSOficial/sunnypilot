@@ -1,0 +1,162 @@
+{
+  "fp16-conv": {
+    "status": "blocked",
+    "precision": "fp16",
+    "operator": "conv",
+    "cpu_fallback": "unverified",
+    "performance_status": "blocked",
+    "error": "RuntimeError: Node 'probe_conv_token_1' OpType:Conv with domain:com.ms.internal.nhwc was inserted using the NHWC format as requested by QNNExecutionProvider, but was not selected by that EP. This means the graph is now invalid as there will not be an EP able to run the node. This could be a bug in layout transformer, or in the GetCapability implementation of the EP."
+  },
+  "a16w16-conv": {
+    "status": "blocked",
+    "precision": "a16w16",
+    "operator": "conv",
+    "cpu_fallback": "unverified",
+    "performance_status": "blocked",
+    "error": "RuntimeError: Node 'probe_conv_token_1' OpType:Conv with domain:com.ms.internal.nhwc was inserted using the NHWC format as requested by QNNExecutionProvider, but was not selected by that EP. This means the graph is now invalid as there will not be an EP able to run the node. This could be a bug in layout transformer, or in the GetCapability implementation of the EP."
+  },
+  "a16w8-conv": {
+    "status": "blocked",
+    "precision": "a16w8",
+    "operator": "conv",
+    "cpu_fallback": "unverified",
+    "performance_status": "blocked",
+    "error": "RuntimeError: Need to specify a CSV file via provider option profiling_file_path if ETW not enabled."
+  },
+  "fp16-gemm": {
+    "status": "blocked",
+    "precision": "fp16",
+    "operator": "gemm",
+    "cpu_fallback": "unverified",
+    "performance_status": "blocked",
+    "error": "RuntimeError: This session contains graph nodes that are assigned to the default CPU EP, but fallback to CPU EP has been explicitly disabled by the user."
+  },
+  "a16w16-gemm": {
+    "status": "blocked",
+    "precision": "a16w16",
+    "operator": "gemm",
+    "cpu_fallback": "unverified",
+    "performance_status": "blocked",
+    "error": "RuntimeError: This session contains graph nodes that are assigned to the default CPU EP, but fallback to CPU EP has been explicitly disabled by the user."
+  },
+  "a16w8-gemm": {
+    "status": "blocked",
+    "precision": "a16w8",
+    "operator": "gemm",
+    "cpu_fallback": "unverified",
+    "performance_status": "blocked",
+    "error": "RuntimeError: Need to specify a CSV file via provider option profiling_file_path if ETW not enabled."
+  },
+  "fp16-activation": {
+    "status": "blocked",
+    "precision": "fp16",
+    "operator": "activation",
+    "cpu_fallback": "unverified",
+    "performance_status": "blocked",
+    "error": "RuntimeError: This session contains graph nodes that are assigned to the default CPU EP, but fallback to CPU EP has been explicitly disabled by the user."
+  },
+  "a16w16-activation": {
+    "status": "blocked",
+    "precision": "a16w16",
+    "operator": "activation",
+    "cpu_fallback": "unverified",
+    "performance_status": "blocked",
+    "error": "RuntimeError: Need to specify a CSV file via provider option profiling_file_path if ETW not enabled."
+  },
+  "a16w8-activation": {
+    "status": "blocked",
+    "precision": "a16w8",
+    "operator": "activation",
+    "cpu_fallback": "unverified",
+    "performance_status": "blocked",
+    "error": "RuntimeError: Need to specify a CSV file via provider option profiling_file_path if ETW not enabled."
+  },
+  "fp16-layout": {
+    "status": "blocked",
+    "precision": "fp16",
+    "operator": "layout",
+    "cpu_fallback": "unverified",
+    "performance_status": "blocked",
+    "error": "RuntimeError: This session contains graph nodes that are assigned to the default CPU EP, but fallback to CPU EP has been explicitly disabled by the user."
+  },
+  "a16w16-layout": {
+    "status": "blocked",
+    "precision": "a16w16",
+    "operator": "layout",
+    "cpu_fallback": "unverified",
+    "performance_status": "blocked",
+    "error": "RuntimeError: Need to specify a CSV file via provider option profiling_file_path if ETW not enabled."
+  },
+  "a16w8-layout": {
+    "status": "blocked",
+    "precision": "a16w8",
+    "operator": "layout",
+    "cpu_fallback": "unverified",
+    "performance_status": "blocked",
+    "error": "RuntimeError: Need to specify a CSV file via provider option profiling_file_path if ETW not enabled."
+  }
+}
+{
+  "serial": "RFCR81Y1TBJ",
+  "command": [
+    ".venv/bin/python",
+    "android/scripts/validate_models.py",
+    "--serial",
+    "RFCR81Y1TBJ",
+    "--package",
+    "com.samsung.sunnypilot.fold3",
+    "--profile",
+    "qnn-htp-probes",
+    "--report",
+    "android/reports/npu-recovery-20261101/candidate41-htp-probes.json",
+    "--timeout",
+    "600"
+  ],
+  "vehicle_tx_enabled": false,
+  "status": "failed",
+  "validation_status": "failed",
+  "isolation_status": "passed",
+  "forwards_before": [],
+  "before_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 29.0,
+    "thermal_override": false
+  },
+  "apk_sha256": "98264759812d34300d49c043d016bb57dec4fa11b3e20fc1f656f730a7de41e7",
+  "baseline": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 28.5,
+    "thermal_override": false,
+    "idle_seconds": 32.891840416996274,
+    "normal_thermal_seconds": 32.537219417019514
+  },
+  "apk_sha256_at_start": "98264759812d34300d49c043d016bb57dec4fa11b3e20fc1f656f730a7de41e7",
+  "returncode": 1,
+  "after_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 28.7,
+    "thermal_override": false
+  },
+  "forwards_removed": [],
+  "apk_sha256_after": "98264759812d34300d49c043d016bb57dec4fa11b3e20fc1f656f730a7de41e7",
+  "artifact_stable": true,
+  "wrapper_status": "failed"
+}

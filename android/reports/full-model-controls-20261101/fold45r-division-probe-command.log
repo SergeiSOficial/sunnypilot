@@ -1,0 +1,70 @@
+/Users/sergios/sunnypilot/android/reports/full-model-controls-20261101/diagnostics/opencl-division-probe: 1 file pushed, 0 skipped. 288.1 MB/s (55168 bytes in 0.000s)
+/Users/sergios/sunnypilot/android/reports/full-model-controls-20261101/diagnostics/opencl-division-probe.cl: 1 file pushed, 0 skipped. 10.5 MB/s (2834 bytes in 0.000s)
+CANNOT LINK EXECUTABLE "/data/local/tmp/fold3_divprobe": cannot locate symbol "_ZTTNSt6__ndk114basic_ifstreamIcNS_11char_traitsIcEEEE" referenced by "/data/local/tmp/fold3_divprobe"...
+Traceback (most recent call last):
+  File "/Users/sergios/sunnypilot/android/reports/full-model-controls-20261101/diagnostics/run_division_probe.py", line 18, in <module>
+    result=json.loads(call("shell","timeout","45",remote,source))
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sergios/sunnypilot/android/reports/full-model-controls-20261101/diagnostics/run_division_probe.py", line 13, in call
+    return subprocess.check_output([adb,"-s",serial,*args],text=True,timeout=60)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sergios/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/subprocess.py", line 466, in check_output
+    return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sergios/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['/Users/sergios/Library/Android/sdk/platform-tools/adb', '-s', 'RFCR81Y1TBJ', 'shell', 'timeout', '45', '/data/local/tmp/fold3_divprobe', '/data/local/tmp/fold3_divprobe.cl']' returned non-zero exit status 1.
+{
+  "serial": "RFCR81Y1TBJ",
+  "command": [
+    ".venv/bin/python",
+    "android/reports/full-model-controls-20261101/diagnostics/run_division_probe.py"
+  ],
+  "vehicle_tx_enabled": false,
+  "status": "failed",
+  "validation_status": "failed",
+  "isolation_status": "passed",
+  "forwards_before": [],
+  "before_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 27.9,
+    "thermal_override": false
+  },
+  "apk_sha256": "8d83f5c4e121eff430e6eead6adc4a076f402dc5cc60c8da1fb4f1f7765c0a4c",
+  "baseline": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 27.8,
+    "thermal_override": false,
+    "idle_seconds": 32.423193082999205,
+    "normal_thermal_seconds": 32.109229541005334
+  },
+  "apk_sha256_at_start": "8d83f5c4e121eff430e6eead6adc4a076f402dc5cc60c8da1fb4f1f7765c0a4c",
+  "returncode": 1,
+  "after_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 27.8,
+    "thermal_override": false
+  },
+  "forwards_removed": [],
+  "apk_sha256_after": "8d83f5c4e121eff430e6eead6adc4a076f402dc5cc60c8da1fb4f1f7765c0a4c",
+  "artifact_stable": true,
+  "wrapper_status": "failed"
+}

@@ -1,0 +1,353 @@
+{
+  "candidate": "candidate44",
+  "created_utc": "2026-11-01T14:05:01.358867+00:00",
+  "branch": "codex/fold3-android-port",
+  "inspected_head": "7631d5248cc9efd10b962107aadacbb908a9f14d",
+  "status": "blocked",
+  "vehicle_tx_enabled": false,
+  "physical_engagement_allowed": false,
+  "cooling_optimization_performed": false,
+  "thermal_safeguards_enabled": true,
+  "apk_sha256": "f18262c93c2132b1e61a1746af6b2c55dcae8820e3d8a9db0dd84bc5472c6360",
+  "test_apk_sha256": "27ce2124ae041ab24fa3f321cf9ee864d849230a7cf89758bff9dad54f7f16a7",
+  "artifact_report": "candidate44-artifact.json",
+  "build": {
+    "status": "passed",
+    "log": "../../build/candidate44-build.txt"
+  },
+  "host_checks": {
+    "status": "passed",
+    "focused_tests": 120,
+    "safety_protocol_tests": 3940,
+    "safety_protocol_skipped": 356,
+    "java_unit_task": "passed; up-to-date, unchanged Java sources",
+    "evidence": "host-checks.json"
+  },
+  "installed_hash_verification": {
+    "fold3": {
+      "status": "passed",
+      "report": "candidate44-installed-fold-final.json",
+      "artifacts": [
+        {
+          "serial": "RFCR81Y1TBJ",
+          "package": "com.samsung.sunnypilot.fold3",
+          "apk_sha256": "f18262c93c2132b1e61a1746af6b2c55dcae8820e3d8a9db0dd84bc5472c6360"
+        },
+        {
+          "serial": "RFCR81Y1TBJ",
+          "package": "com.samsung.sunnypilot.fold3.test",
+          "apk_sha256": "27ce2124ae041ab24fa3f321cf9ee864d849230a7cf89758bff9dad54f7f16a7"
+        }
+      ]
+    },
+    "emulator": {
+      "status": "passed",
+      "report": "candidate44-installed-emulator-final.json",
+      "artifacts": [
+        {
+          "serial": "emulator-5560",
+          "package": "com.samsung.sunnypilot.fold3",
+          "apk_sha256": "f18262c93c2132b1e61a1746af6b2c55dcae8820e3d8a9db0dd84bc5472c6360"
+        },
+        {
+          "serial": "emulator-5560",
+          "package": "com.samsung.sunnypilot.fold3.test",
+          "apk_sha256": "27ce2124ae041ab24fa3f321cf9ee864d849230a7cf89758bff9dad54f7f16a7"
+        }
+      ]
+    }
+  },
+  "numerical_contract": {
+    "rtol": 0.001,
+    "atol": 0.0001,
+    "original_models_and_goldens_unchanged": true,
+    "host_portable_export": {
+      "status": "passed",
+      "comparisons": 795
+    },
+    "host_mnn_image_transport": {
+      "status": "passed",
+      "comparisons": 795
+    },
+    "scope": "Three seeds, recurrent sequences and pinned 60-frame replay on host. Does not qualify the converted device engines.",
+    "evidence": "candidate44-host-conversion.json",
+    "packaged_reference_identity": "candidate44-packaged-models.json",
+    "failed_precision_rewrite": {
+      "status": "failed",
+      "packaged": false,
+      "evidence": "host-precision-seed42.json"
+    },
+    "accurate_device_reference": "Historical candidate35/40 strict OpenCL results retained; not rerun or transferred to new engines."
+  },
+  "accelerators": {
+    "qnn_htp": {
+      "status": "blocked",
+      "probe_outcomes": {
+        "blocked": 6,
+        "failed": 2,
+        "passed": 4
+      },
+      "evidence": "candidate44-htp-probes.json",
+      "reason": "FP16 and a16w16 Conv/Gemm rejected; a16w8 Conv/Gemm execute with no CPU fallback but fail original tolerance. Full-model stage not advanced."
+    },
+    "tiny_gpu_probes": {
+      "status": "passed",
+      "comparisons": 8,
+      "evidence": "candidate44-gpu-probes.json",
+      "scope": "Small Conv/Gemm/activation/layout probes only; not full-model performance."
+    },
+    "mnn_opencl": {
+      "status": "blocked",
+      "version": "3.6.2",
+      "evidence": "candidate44-mnn.json",
+      "reason": "Full graphs select rejected CPU BinaryOp/Raster operations; diagnostic assignment audit cannot qualify perception."
+    },
+    "ncnn_vulkan": {
+      "status": "failed",
+      "version": "20261020",
+      "evidence": "candidate44-ncnn.json",
+      "driver": "All 553 outputs mismatch at each original seed; recurrent/replay/timing not advanced.",
+      "road": "Blocked by unsupported operators and tensor rank before device load."
+    },
+    "new_qualified_models": [],
+    "profile_evidence": "candidate44-qnn-profiles/manifest.json",
+    "comparison": "candidate44-comparison.json"
+  },
+  "functional_validation": {
+    "fold3": {
+      "status": "passed",
+      "groups": 6,
+      "instrumentation_tests": 23,
+      "inventory": "fold-candidate44-validation-driver.json"
+    },
+    "emulator": {
+      "status": "passed",
+      "groups": 8,
+      "instrumentation_tests": 23,
+      "inventory": "emulator-candidate44-validation-driver.json",
+      "retry_inventory": "emulator-candidate44-retry1-validation-driver.json",
+      "retained_initial_failures": 2,
+      "initial_failure_reason": "Base interpreter lacked capnp; failed before simulation. Corrected retries use repository virtual environment.",
+      "avd": "sunnypilot_fold3_candidate44_api35",
+      "data_partition_gb": 12,
+      "storage_failure_evidence": "candidate44-emulator-install.json",
+      "install_evidence": "candidate44-emulator-fresh-install.json"
+    },
+    "scope": "Injected/diagnostic inputs; establishes recovery, IPC, lifecycle and cancellation, not qualified perception or a vehicle."
+  },
+  "controls_fixture": {
+    "functional_status": "passed",
+    "work_p99_status": "passed",
+    "complete_cycle_status": "failed",
+    "control_mean_hz": 99.909663972664,
+    "work_p99_ms": 7.304167,
+    "complete_cycle_p99_ms": 16.612917,
+    "complete_cycle_deadline_misses": 1350,
+    "ui_mean_fps": 29.675004522902988,
+    "unsafe_outputs": 0,
+    "report": "fold-candidate44-chain-device-steady.json",
+    "scope": "30-second steady source fixture with injected perception. Separate cooled run; no causal accelerator improvement claim."
+  },
+  "staged_visual_workloads": [
+    {
+      "stage": "accurate_isolated_inference",
+      "status": "blocked",
+      "executed": false,
+      "reason": "No new accurate, no-fallback full-model backend passed prerequisites."
+    },
+    {
+      "stage": "30_second_combined",
+      "status": "blocked",
+      "executed": false,
+      "reason": "No new accurate, no-fallback full-model backend passed prerequisites."
+    },
+    {
+      "stage": "2_minute_combined",
+      "status": "blocked",
+      "executed": false,
+      "reason": "No new accurate, no-fallback full-model backend passed prerequisites."
+    },
+    {
+      "stage": "30_minute_combined",
+      "status": "blocked",
+      "executed": false,
+      "reason": "No new accurate, no-fallback full-model backend passed prerequisites."
+    }
+  ],
+  "remaining_gates": {
+    "camera_freshness": "blocked; candidate40 combined latency failure retained",
+    "emulator_real_camera_timestamps": "failed historical candidate40; deterministic fixture passes do not clear it",
+    "independent_rear_sensor_identity": "blocked; manual lens-cover trials deferred",
+    "mounted_calibration": "blocked; phone unmounted",
+    "physical_panda_firmware_fingerprint_harness_vehicle": "blocked; Panda disconnected"
+  },
+  "experiment_isolation": {
+    "status": "passed",
+    "experiments": 20,
+    "records": [
+      {
+        "report": "candidate44-gpu-probes-isolation.json",
+        "status": "passed",
+        "validation_status": "passed",
+        "apk_sha256": "f18262c93c2132b1e61a1746af6b2c55dcae8820e3d8a9db0dd84bc5472c6360"
+      },
+      {
+        "report": "candidate44-htp-probes-isolation.json",
+        "status": "passed",
+        "validation_status": "failed",
+        "apk_sha256": "f18262c93c2132b1e61a1746af6b2c55dcae8820e3d8a9db0dd84bc5472c6360"
+      },
+      {
+        "report": "candidate44-mnn-isolation.json",
+        "status": "passed",
+        "validation_status": "failed",
+        "apk_sha256": "f18262c93c2132b1e61a1746af6b2c55dcae8820e3d8a9db0dd84bc5472c6360"
+      },
+      {
+        "report": "candidate44-ncnn-isolation.json",
+        "status": "passed",
+        "validation_status": "failed",
+        "apk_sha256": "f18262c93c2132b1e61a1746af6b2c55dcae8820e3d8a9db0dd84bc5472c6360"
+      },
+      {
+        "report": "emulator-candidate44-adb-faults-isolation.json",
+        "status": "passed",
+        "validation_status": "passed",
+        "apk_sha256": "f18262c93c2132b1e61a1746af6b2c55dcae8820e3d8a9db0dd84bc5472c6360"
+      },
+      {
+        "report": "emulator-candidate44-chain-device-faults-isolation.json",
+        "status": "passed",
+        "validation_status": "passed",
+        "apk_sha256": "f18262c93c2132b1e61a1746af6b2c55dcae8820e3d8a9db0dd84bc5472c6360"
+      },
+      {
+        "report": "emulator-candidate44-chain-device-steady-isolation.json",
+        "status": "passed",
+        "validation_status": "passed",
+        "apk_sha256": "f18262c93c2132b1e61a1746af6b2c55dcae8820e3d8a9db0dd84bc5472c6360"
+      },
+      {
+        "report": "emulator-candidate44-instrumentation-isolation.json",
+        "status": "passed",
+        "validation_status": "passed",
+        "apk_sha256": "f18262c93c2132b1e61a1746af6b2c55dcae8820e3d8a9db0dd84bc5472c6360"
+      },
+      {
+        "report": "emulator-candidate44-ipc-isolation.json",
+        "status": "passed",
+        "validation_status": "passed",
+        "apk_sha256": "f18262c93c2132b1e61a1746af6b2c55dcae8820e3d8a9db0dd84bc5472c6360"
+      },
+      {
+        "report": "emulator-candidate44-lifecycle-isolation.json",
+        "status": "passed",
+        "validation_status": "passed",
+        "apk_sha256": "f18262c93c2132b1e61a1746af6b2c55dcae8820e3d8a9db0dd84bc5472c6360"
+      },
+      {
+        "report": "emulator-candidate44-metadrive-cancel-isolation.json",
+        "status": "passed",
+        "validation_status": "failed",
+        "apk_sha256": "f18262c93c2132b1e61a1746af6b2c55dcae8820e3d8a9db0dd84bc5472c6360"
+      },
+      {
+        "report": "emulator-candidate44-metadrive-stale-isolation.json",
+        "status": "passed",
+        "validation_status": "failed",
+        "apk_sha256": "f18262c93c2132b1e61a1746af6b2c55dcae8820e3d8a9db0dd84bc5472c6360"
+      },
+      {
+        "report": "emulator-candidate44-retry1-metadrive-cancel-isolation.json",
+        "status": "passed",
+        "validation_status": "passed",
+        "apk_sha256": "f18262c93c2132b1e61a1746af6b2c55dcae8820e3d8a9db0dd84bc5472c6360"
+      },
+      {
+        "report": "emulator-candidate44-retry1-metadrive-stale-isolation.json",
+        "status": "passed",
+        "validation_status": "passed",
+        "apk_sha256": "f18262c93c2132b1e61a1746af6b2c55dcae8820e3d8a9db0dd84bc5472c6360"
+      },
+      {
+        "report": "fold-candidate44-adb-faults-isolation.json",
+        "status": "passed",
+        "validation_status": "passed",
+        "apk_sha256": "f18262c93c2132b1e61a1746af6b2c55dcae8820e3d8a9db0dd84bc5472c6360"
+      },
+      {
+        "report": "fold-candidate44-chain-device-faults-isolation.json",
+        "status": "passed",
+        "validation_status": "passed",
+        "apk_sha256": "f18262c93c2132b1e61a1746af6b2c55dcae8820e3d8a9db0dd84bc5472c6360"
+      },
+      {
+        "report": "fold-candidate44-chain-device-steady-isolation.json",
+        "status": "passed",
+        "validation_status": "passed",
+        "apk_sha256": "f18262c93c2132b1e61a1746af6b2c55dcae8820e3d8a9db0dd84bc5472c6360"
+      },
+      {
+        "report": "fold-candidate44-instrumentation-isolation.json",
+        "status": "passed",
+        "validation_status": "passed",
+        "apk_sha256": "f18262c93c2132b1e61a1746af6b2c55dcae8820e3d8a9db0dd84bc5472c6360"
+      },
+      {
+        "report": "fold-candidate44-ipc-isolation.json",
+        "status": "passed",
+        "validation_status": "passed",
+        "apk_sha256": "f18262c93c2132b1e61a1746af6b2c55dcae8820e3d8a9db0dd84bc5472c6360"
+      },
+      {
+        "report": "fold-candidate44-lifecycle-isolation.json",
+        "status": "passed",
+        "validation_status": "passed",
+        "apk_sha256": "f18262c93c2132b1e61a1746af6b2c55dcae8820e3d8a9db0dd84bc5472c6360"
+      }
+    ],
+    "fold_final_state": "candidate44-fold-final-state.json",
+    "emulator_final_state": "candidate44-emulator-final-state.json"
+  },
+  "retained_baselines_and_failures": "candidate44-retained-failures.json",
+  "reproducible_commands": "reproduce.md",
+  "evidence_sha256": {
+    "candidate44-artifact.json": "6e1a7b95d45cf6bf67d07a38ab10bbc244fdd883fe5d40594a4f4db48f059c3d",
+    "candidate44-comparison.json": "62498daea20addceb55d51c99e750f0638802967a9b7ce7d3b3f1f3632f15859",
+    "candidate44-emulator-final-state.json": "be78d4d2c562df4eeebf244651b0b2032ba90cf995ebbcc6c254467eef6d9980",
+    "candidate44-fold-final-state.json": "5a52c1106f5184d38cec018182683021b3e119470c979e02c177b5f4a5319c52",
+    "candidate44-gpu-probes-isolation.json": "2be52bad50231e8094b85f4154befe0871e6a956fd91986e92f18c95e2870ddf",
+    "candidate44-gpu-probes.json": "283d91230be08b41c30e21983f6ddb0ec196f270a05f95769192b37cf159b34f",
+    "candidate44-host-conversion.json": "9c3288150bba5bc6109ffd1fbf62a8dba73fda831e830e4c2db6d4f2a85b735e",
+    "candidate44-htp-probes-isolation.json": "0d21e1f31cbd6c48019f761a6b5cc6051c3a7936751d03af7975e4baff6f9c05",
+    "candidate44-htp-probes.json": "c095ef20b8ae4c15eab4e92194700c50ff4922c4cf5842ba68a067a89468b414",
+    "candidate44-installed-emulator-final.json": "b4fed65e588597edc7190362374321a4568ede675eb250d23b89ae047870f9c3",
+    "candidate44-installed-fold-final.json": "ef28b433eb8945d074931352623af1e0e020eb8e452c8a0966181c18c26b7d3a",
+    "candidate44-mnn-isolation.json": "1d5d64819cb51193ea1b470887ebdb0f7c703c88862c041dbbe5afdf7b1dfdeb",
+    "candidate44-mnn.json": "0af8ca94c25786ea627522fd0b71a6f0a2c1e96fc372ab73512e9a7a8018b3e8",
+    "candidate44-ncnn-isolation.json": "98793e0370d1166f38bb56c35ed6a71d7cd223809b9255fc06ecaf3a9c54f3d9",
+    "candidate44-ncnn.json": "a79ba13693b315ce4cb7805652a3f5978185c418b966725abf1979d9655a91a1",
+    "candidate44-packaged-models.json": "5654ca99429fc23e1e6971b64f8a82e7c927d83f727132c06340275da6301d90",
+    "candidate44-retained-failures.json": "8652f596404efba7ef29db25a7f419ecf5157c7aa3b463379b023d0ff5831133",
+    "emulator-candidate44-adb-faults-isolation.json": "dbc8146867175d982893d6f5219659ac39136e199fc91bd14b3d30a31f67f83f",
+    "emulator-candidate44-chain-device-faults-isolation.json": "b9609416dd580e7c6876188d5fbdf7d967c6fc7970dc2b02211069a4da650af5",
+    "emulator-candidate44-chain-device-steady-isolation.json": "563e47e20e3461a922645d7ae1cabed15241e598e3d1964126aeb82b502c3c40",
+    "emulator-candidate44-instrumentation-isolation.json": "66807a94a96f268135a9330c2b9412811403deed242fcd4ef2d56a91aad4836b",
+    "emulator-candidate44-ipc-isolation.json": "88237b0c44ee9a2216a61c62d9e7db6e1bbea8290b2a905ffedb778b52e3d142",
+    "emulator-candidate44-lifecycle-isolation.json": "b8de571b70087b1b0bda9235e1abb649421f40134b1a53c4e859ef5c3f7d93bb",
+    "emulator-candidate44-metadrive-cancel-isolation.json": "71caf044b35573ba8250ee4f3d5d82487c4f939ba011c0bcb2ae3c3d53fef09d",
+    "emulator-candidate44-metadrive-stale-isolation.json": "32eb204f8659be6c829df3d8ef7e000af5237ee764dc2bcc2ce56eb721ea5c62",
+    "emulator-candidate44-retry1-metadrive-cancel-isolation.json": "b18a643c203616a7044817efe5b68186ff8b5be9046e5f5a199ddc1183e298c3",
+    "emulator-candidate44-retry1-metadrive-stale-isolation.json": "f9b8a645458edd2a67fdf656024992844b46fdca8d3a1fe5e41fe84d51e7016c",
+    "emulator-candidate44-retry1-validation-driver.json": "e09f474d1a17c810469802c2e3734be8b8af18c32178c486ac61b0119f8ec608",
+    "emulator-candidate44-validation-driver.json": "442cd4eb573b4904db3e02cff2cc16a0e252e7b9e9985cfe19790f999c507279",
+    "fold-candidate44-adb-faults-isolation.json": "0c7731cff6fa34a1e566a027a5a025aa93850cc27203b71db794645672b788d8",
+    "fold-candidate44-chain-device-faults-isolation.json": "ffe609086809bc0e99c61ca56dbec83af91a8d159c00283623f070ceb3c20753",
+    "fold-candidate44-chain-device-steady-isolation.json": "dd4a5faab5ab5ee9eb44f079e09ae9d2a2e5016bc61110155772be43334b0b2b",
+    "fold-candidate44-instrumentation-isolation.json": "9894f3d9e47d989c5b6b718e337133811591a18ec8e17ac3842f0e16cfa500d6",
+    "fold-candidate44-ipc-isolation.json": "a5438216cf967257b3bc8a1867fa6c81d174f08ae3cde5283f8612785270b638",
+    "fold-candidate44-lifecycle-isolation.json": "2446837bd6e3ebec5b23ae3fac41703f8cfdabaddf0e963410f01ac586ecacae",
+    "fold-candidate44-validation-driver.json": "59bb4f65d0d6f360e7047128e3100ef21796a348e3d2910f6575f6f0d67bcfb8",
+    "host-checks.json": "33b2ad77943cd71ab905de5e9193d177f25799f0b12777c59fe0352c0246fda7"
+  }
+}

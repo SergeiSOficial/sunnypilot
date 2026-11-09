@@ -29,6 +29,8 @@ public final class AndroidHardware implements SensorEventListener {
         return -(double) currentMicroamps * voltageMillivolts / 1e9;
     }
     public static int thermalStatus() { return context.getSystemService(PowerManager.class).getCurrentThermalStatus(); }
+    public static String applicationApk() { return context.getApplicationInfo().sourceDir; }
+    public static String nativeLibraries() { return context.getApplicationInfo().nativeLibraryDir; }
     public static void openNetworkSettings() {
         context.startActivity(new Intent(android.provider.Settings.Panel.ACTION_INTERNET_CONNECTIVITY)
             .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));

@@ -1,0 +1,37 @@
+{
+  "diagnostic_only": true,
+  "shape": [
+    9,
+    512,
+    512
+  ],
+  "pair_accumulation_vs_onnx_host": {
+    "passed": true,
+    "finite": true,
+    "shape": [
+      9,
+      512
+    ],
+    "dtype": "float16",
+    "expected_nonfinite_elements": 0,
+    "unexpected_nonfinite_elements": 0,
+    "exact": true,
+    "max_abs_error": 0.0,
+    "mismatched_elements": 0
+  },
+  "mnn_after_fp16_cast_vs_onnx_host": {
+    "passed": true,
+    "finite": true,
+    "shape": [
+      9,
+      512
+    ],
+    "dtype": "float32",
+    "expected_nonfinite_elements": 0,
+    "unexpected_nonfinite_elements": 0,
+    "exact": false,
+    "max_abs_error": 9.5367431640625e-07,
+    "mismatched_elements": 0
+  },
+  "nonzero_input_elements": 512
+}

@@ -1,0 +1,75 @@
+{
+  "serial": "emulator-5560",
+  "command": [
+    "/Users/sergios/sunnypilot/.venv/bin/python",
+    "-m",
+    "openpilot.tools.sim.android_chain_validation",
+    "--seconds",
+    "30",
+    "--device-replay",
+    "--steady-inputs",
+    "--serial",
+    "emulator-5560",
+    "--adb",
+    "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+    "--report",
+    "/Users/sergios/sunnypilot/android/reports/full-model-timing-repair-20261103/candidate45zk-controls-ab.json",
+    "--package",
+    "com.samsung.sunnypilot.fold3"
+  ],
+  "vehicle_tx_enabled": false,
+  "status": "passed",
+  "validation_status": "passed",
+  "isolation_status": "passed",
+  "forwards_before": [],
+  "before_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "375 android.hardware.camera.provider.ranchu",
+      "376 android.hardware.camera.provider@2.7-service-google",
+      "466 cameraserver"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.8,
+    "thermal_override": false
+  },
+  "apk_sha256": "440e6feaa946f1f7541d1af9dc32cb19a6a80954941669c8499025f9e8b8fdaf",
+  "baseline": {
+    "processes": [],
+    "camera_provider_processes": [
+      "375 android.hardware.camera.provider.ranchu",
+      "376 android.hardware.camera.provider@2.7-service-google",
+      "466 cameraserver"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.8,
+    "thermal_override": false,
+    "idle_seconds": 30.894064708030783,
+    "normal_thermal_seconds": 30.783961333043408
+  },
+  "apk_sha256_at_start": "440e6feaa946f1f7541d1af9dc32cb19a6a80954941669c8499025f9e8b8fdaf",
+  "runtime": {
+    "manager_pid": 4256,
+    "ui_pid": 4484,
+    "simulation": true
+  },
+  "returncode": 0,
+  "after_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "375 android.hardware.camera.provider.ranchu",
+      "376 android.hardware.camera.provider@2.7-service-google",
+      "466 cameraserver"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.8,
+    "thermal_override": false
+  },
+  "forwards_removed": [],
+  "apk_sha256_after": "440e6feaa946f1f7541d1af9dc32cb19a6a80954941669c8499025f9e8b8fdaf",
+  "artifact_stable": true,
+  "wrapper_status": "passed"
+}

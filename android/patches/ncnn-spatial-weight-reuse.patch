@@ -1,0 +1,62 @@
+--- a/src/layer/vulkan/shader/convolution_packed_gemm.comp
++++ b/src/layer/vulkan/shader/convolution_packed_gemm.comp
+@@ -155,28 +155,48 @@
+          (psc(num_input) == 24 && psc(num_output) == 64)))
+     {
+         if (gx >= outsize || gy >= psc(outc)) return;
+-        for (int point = 0; point < 4; point++)
++        // Reuse each packed weight across two independent spatial sums.
++        // A second bounded pair retains four outputs per invocation without
++        // keeping all four corrected FMA accumulators live simultaneously.
++        for (int point = 0; point < 4; point += 2)
+         {
+             int position = gx + point;
+             if (position >= outsize) break;
+-            precise vec4 value = buffer_ld4(bias_data, gy);
++            precise vec4 value0 = buffer_ld4(bias_data, gy);
++            precise vec4 value1 = value0;
++            int base0 = ((position / psc(outw)) * 2) * psc(w) + (position % psc(outw)) * 2;
++            int base1 = (((position + 1) / psc(outw)) * 2) * psc(w) + ((position + 1) % psc(outw)) * 2;
+             for (int ky = 0; ky < 3; ky++)
+                 for (int kx = 0; kx < 3; kx++)
+                     for (int ci = 0; ci < psc(num_input); ci++)
+                     {
+-                        int spatial = ((position / psc(outw)) * 2 + ky) * psc(w) + (position % psc(outw)) * 2 + kx;
+-                        float input_value;
+-                        if (elempack == 4) input_value = buffer_ld4(bottom_blob_data_4, (ci / 4) * psc(cstep) + spatial)[ci % 4];
+-                        else input_value = buffer_ld1(bottom_blob_data_1, ci * psc(cstep) + spatial);
++                        int offset = ky * psc(w) + kx;
+                         int wi = (gy * psc(c) * 9 + (ci / 4) * 9 + ky * 3 + kx) * 4;
+                         vec4 weights = vec4(buffer_ld4(weight_data, wi)[ci % 4], buffer_ld4(weight_data, wi + 1)[ci % 4],
+                                             buffer_ld4(weight_data, wi + 2)[ci % 4], buffer_ld4(weight_data, wi + 3)[ci % 4]);
+-                        value = (psc(num_input) == 16 && psc(num_output) == 32)
+-                            ? fold3_half_stem_fma(vec4(input_value), weights, value)
+-                            : fold3_spatial_fma(vec4(input_value), weights, value);
++                        float input0;
++                        if (elempack == 4) input0 = buffer_ld4(bottom_blob_data_4, (ci / 4) * psc(cstep) + base0 + offset)[ci % 4];
++                        else input0 = buffer_ld1(bottom_blob_data_1, ci * psc(cstep) + base0 + offset);
++                        value0 = (psc(num_input) == 16 && psc(num_output) == 32)
++                            ? fold3_half_stem_fma(vec4(input0), weights, value0)
++                            : fold3_spatial_fma(vec4(input0), weights, value0);
++                        if (position + 1 < outsize)
++                        {
++                            float input1;
++                            if (elempack == 4) input1 = buffer_ld4(bottom_blob_data_4, (ci / 4) * psc(cstep) + base1 + offset)[ci % 4];
++                            else input1 = buffer_ld1(bottom_blob_data_1, ci * psc(cstep) + base1 + offset);
++                            value1 = (psc(num_input) == 16 && psc(num_output) == 32)
++                                ? fold3_half_stem_fma(vec4(input1), weights, value1)
++                                : fold3_spatial_fma(vec4(input1), weights, value1);
++                        }
+                     }
+-            if (out_elempack == 4) { buffer_st4(top_blob_data_4, gy * psc(outcstep) + position, value); }
+-            else { for (int lane = 0; lane < 4; lane++) { buffer_st1(top_blob_data_1, (gy * 4 + lane) * psc(outcstep) + position, value[lane]); } }
++            if (out_elempack == 4) { buffer_st4(top_blob_data_4, gy * psc(outcstep) + position, value0); }
++            else { for (int lane = 0; lane < 4; lane++) { buffer_st1(top_blob_data_1, (gy * 4 + lane) * psc(outcstep) + position, value0[lane]); } }
++            if (position + 1 < outsize)
++            {
++                if (out_elempack == 4) { buffer_st4(top_blob_data_4, gy * psc(outcstep) + position + 1, value1); }
++                else { for (int lane = 0; lane < 4; lane++) { buffer_st1(top_blob_data_1, (gy * 4 + lane) * psc(outcstep) + position + 1, value1[lane]); } }
++            }
+         }
+         return;
+     }

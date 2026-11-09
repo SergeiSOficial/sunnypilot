@@ -1,0 +1,33 @@
+{
+  "status": "passed",
+  "vehicle_tx_enabled": false,
+  "android_tests": {
+    "discovered": 116,
+    "first_run": "114 passed; two IPC C++ compiler checks failed due to incompatible default macOS SDK and compiler",
+    "retry": "both passed with documented Xcode CXX and SDKROOT",
+    "initial_log": "../../build/candidate42-host-tests.log"
+  },
+  "safety_and_simulator": {
+    "tests": 3940,
+    "skipped": 356,
+    "status": "passed",
+    "includes": [
+      "IPC compiler checks",
+      "Hyundai behavior",
+      "Hyundai and CAN-FD safety",
+      "Android simulator protocol"
+    ],
+    "log": "../../build/candidate42-host-safety-tests.log"
+  },
+  "candidate44_android_tests": {
+    "discovered": 120,
+    "status": "passed",
+    "command": "CXX=/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ SDKROOT=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk .venv/bin/python -m unittest discover -s android/tests",
+    "log": "../../build/candidate44-host-tests.log"
+  },
+  "candidate44_java_unit_task": {
+    "status": "passed",
+    "log": "../../build/candidate44-java-tests.log",
+    "note": "Gradle task was up to date; no Java changes since prior successful execution."
+  }
+}

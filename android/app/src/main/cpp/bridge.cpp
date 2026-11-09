@@ -8,6 +8,19 @@
 #include <vector>
 
 extern "C" JNIEXPORT jlong JNICALL
+Java_ai_sunnypilot_fold3_NativeBridge_nv12Hash(JNIEnv *env, jclass, jobject data, jint w, jint h) {
+  auto *source = data ? static_cast<const uint8_t *>(env->GetDirectBufferAddress(data)) : nullptr;
+  if (!source || w <= 0 || h <= 0 || w > 4096 || h > 4096 || ((w | h) & 1) ||
+      env->GetDirectBufferCapacity(data) < static_cast<int64_t>(w) * h * 3 / 2) {
+    env->ThrowNew(env->FindClass("java/lang/IllegalArgumentException"), "Invalid NV12 buffer");
+    return 0;
+  }
+  uint64_t hash = 1469598103934665603ULL;
+  for (int64_t i = 0; i < static_cast<int64_t>(w) * h; i += 64) hash = (hash ^ source[i]) * 1099511628211ULL;
+  return static_cast<jlong>(hash);
+}
+
+extern "C" JNIEXPORT jlong JNICALL
 Java_ai_sunnypilot_fold3_NativeBridge_rgbaToNv12(JNIEnv *env, jclass, jobject rgba, jint w, jint h, jobject output) {
   auto *src = rgba ? static_cast<uint8_t *>(env->GetDirectBufferAddress(rgba)) : nullptr;
   auto *dst = output ? static_cast<uint8_t *>(env->GetDirectBufferAddress(output)) : nullptr;
@@ -103,10 +116,15 @@ Java_ai_sunnypilot_fold3_NativeBridge_openClProbe(JNIEnv *env, jclass) {
   if (!err) err = devices(platform, 4 /* CL_DEVICE_TYPE_GPU */, 1, &device, nullptr);
   char name[256] = {};
   if (!err) err = info(device, 0x102B /* CL_DEVICE_NAME */, sizeof(name), name, nullptr);
+  uint64_t half_config = 0, single_config = 0;
+  int half_error = err ? err : info(device, 0x1033 /* CL_DEVICE_HALF_FP_CONFIG */, sizeof(half_config), &half_config, nullptr);
+  int single_error = err ? err : info(device, 0x101B /* CL_DEVICE_SINGLE_FP_CONFIG */, sizeof(single_config), &single_config, nullptr);
   std::string safeName;
   for (unsigned char c : std::string(name)) if (c >= 32 && c != '"' && c != '\\') safeName += static_cast<char>(c);
   std::ostringstream result;
-  result << "{\"status\":\"" << (err ? "blocked" : "passed") << "\",\"device\":\"" << safeName << "\",\"error_code\":" << err << "}";
+  result << "{\"status\":\"" << (err ? "blocked" : "passed") << "\",\"device\":\"" << safeName << "\",\"error_code\":" << err
+         << ",\"half_fp_config\":" << half_config << ",\"half_query_error\":" << half_error
+         << ",\"single_fp_config\":" << single_config << ",\"single_query_error\":" << single_error << "}";
   dlclose(lib);
   return env->NewStringUTF(result.str().c_str());
 }

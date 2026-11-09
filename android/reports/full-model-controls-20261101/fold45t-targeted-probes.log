@@ -1,0 +1,675 @@
+Starting android/reports/full-model-controls-20261101/fold45t-sigmoid-probe-isolation.json
+/Users/sergios/sunnypilot/android/reports/full-model-controls-20261101/diagnostics/opencl-sigmoid-probe: 1 file pushed, 0 skipped. 302.0 MB/s (5689832 bytes in 0.018s)
+/Users/sergios/sunnypilot/android/reports/full-model-controls-20261101/diagnostics/opencl-sigmoid-probe.cl: 1 file pushed, 0 skipped. 27.8 MB/s (4633 bytes in 0.000s)
+/Users/sergios/sunnypilot/android/reports/full-model-controls-20261101/diagnostics/sigmoid-actual-input.bin: 1 file pushed, 0 skipped. 4.2 MB/s (4096 bytes in 0.001s)
+/Users/sergios/sunnypilot/android/reports/full-model-controls-20261101/diagnostics/sigmoid-host-expected.bin: 1 file pushed, 0 skipped. 7.5 MB/s (4096 bytes in 0.001s)
+{
+  "diagnostic_only": true,
+  "vehicle_tx_enabled": false,
+  "single_fp_config": 22,
+  "outputs": 1024,
+  "variants": [
+    {
+      "options": "",
+      "checks": [
+        {
+          "mode": 0,
+          "unequal": 807,
+          "max_abs_error": 1.19209289551e-07
+        },
+        {
+          "mode": 1,
+          "unequal": 0,
+          "max_abs_error": 0
+        },
+        {
+          "mode": 2,
+          "unequal": 815,
+          "max_abs_error": 1.19209289551e-07
+        }
+      ],
+      "examples": [
+        {
+          "left": -4.47673893,
+          "right": 0,
+          "expected": 0.0112425983,
+          "stages": [
+            0.0112425992265,
+            0.0112425982952,
+            0.0112425992265,
+            -4.47673892975,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "left": -1.812468529,
+          "right": 0,
+          "expected": 0.1403400004,
+          "stages": [
+            0.140340045094,
+            0.140340000391,
+            0.140340045094,
+            -1.81246852875,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "left": 8.722600937,
+          "right": 0,
+          "expected": 0.9998371601,
+          "stages": [
+            0.99983716011,
+            0.99983716011,
+            0.99983716011,
+            8.72260093689,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "left": 11.25910664,
+          "right": 0,
+          "expected": 0.9999871254,
+          "stages": [
+            0.999987125397,
+            0.999987125397,
+            0.999987125397,
+            11.259106636,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "options": "-cl-mad-enable -w",
+      "checks": [
+        {
+          "mode": 0,
+          "unequal": 807,
+          "max_abs_error": 1.19209289551e-07
+        },
+        {
+          "mode": 1,
+          "unequal": 0,
+          "max_abs_error": 0
+        },
+        {
+          "mode": 2,
+          "unequal": 815,
+          "max_abs_error": 1.19209289551e-07
+        }
+      ],
+      "examples": [
+        {
+          "left": -4.47673893,
+          "right": 0,
+          "expected": 0.0112425983,
+          "stages": [
+            0.0112425992265,
+            0.0112425982952,
+            0.0112425992265,
+            -4.47673892975,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "left": -1.812468529,
+          "right": 0,
+          "expected": 0.1403400004,
+          "stages": [
+            0.140340045094,
+            0.140340000391,
+            0.140340045094,
+            -1.81246852875,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "left": 8.722600937,
+          "right": 0,
+          "expected": 0.9998371601,
+          "stages": [
+            0.99983716011,
+            0.99983716011,
+            0.99983716011,
+            8.72260093689,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "left": 11.25910664,
+          "right": 0,
+          "expected": 0.9999871254,
+          "stages": [
+            0.999987125397,
+            0.999987125397,
+            0.999987125397,
+            11.259106636,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    }
+  ],
+  "device": "RFCR81Y1TBJ",
+  "fingerprint": "samsung/q2qxser/q2q:15/AP3A.240905.015.A2/F926BXXSJJZH3:user/release-keys",
+  "source_sha256": {
+    "opencl-sigmoid-probe.cpp": "e4dc711a4fbb80471ffd2b0bec619e3aa6f2c8667b4fadc4a4ef02accd98304a",
+    "opencl-sigmoid-probe.cl": "06f39efa8246ac18eb33d37251270370c1c3cfad1e35dee52810c245468faf16",
+    "opencl-sigmoid-probe": "2cfab52fd2dd984360dc9f4ac4225b9057af0bd2caa52c9b1a9bad28a5cc51ca",
+    "sigmoid-actual-input.bin": "d18204ccf623da3a0791d1e8cafcde9f17f3011bbd997505f12394351aef6113",
+    "sigmoid-host-expected.bin": "bbd374ad216a63ff77f8d8d96507789a62d2ab3829ebaf696ca7772e78d4c1ff"
+  }
+}
+{
+  "serial": "RFCR81Y1TBJ",
+  "command": [
+    "/Users/sergios/sunnypilot/.venv/bin/python",
+    "android/reports/full-model-controls-20261101/diagnostics/run_sigmoid_probe.py"
+  ],
+  "vehicle_tx_enabled": false,
+  "status": "passed",
+  "validation_status": "passed",
+  "isolation_status": "passed",
+  "forwards_before": [],
+  "before_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 29.3,
+    "thermal_override": false
+  },
+  "apk_sha256": "266fbc1dd1ac476c9e806d851c2193709732507a8e9a3124679554114e14fd2d",
+  "baseline": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 29.0,
+    "thermal_override": false,
+    "idle_seconds": 32.618748832988786,
+    "normal_thermal_seconds": 32.22002679199795
+  },
+  "apk_sha256_at_start": "266fbc1dd1ac476c9e806d851c2193709732507a8e9a3124679554114e14fd2d",
+  "returncode": 0,
+  "after_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 29.0,
+    "thermal_override": false
+  },
+  "forwards_removed": [],
+  "apk_sha256_after": "266fbc1dd1ac476c9e806d851c2193709732507a8e9a3124679554114e14fd2d",
+  "artifact_stable": true,
+  "wrapper_status": "passed"
+}
+Starting android/reports/full-model-controls-20261101/fold45t-affinity46-isolation.json
+{
+  "status": "passed",
+  "vehicle_tx_enabled": false,
+  "physical_engagement_allowed": false,
+  "synthetic_sources": true,
+  "physical_vehicle_verified": false,
+  "camera_model_parity_verified": false,
+  "derived_inputs_injected": false,
+  "received_services": [
+    "carControl",
+    "carControlSP",
+    "carOutput",
+    "carState",
+    "controlsState",
+    "deviceMotion",
+    "driverAssistance",
+    "driverMonitoringState",
+    "extrinsicsCalibration",
+    "lateralDelay",
+    "lateralTorqueParameters",
+    "longitudinalPlan",
+    "onroadEvents",
+    "radarState",
+    "radarTracks",
+    "selfdriveState",
+    "selfdriveStateSP",
+    "vehicleParameters"
+  ],
+  "packets": 3000,
+  "unsafe_outputs": 0,
+  "input_pacing": "android_absolute_deadline_100_hz",
+  "steady_inputs": true,
+  "fixture_sha256": "b5ea99327f0ffc121e5556d29b32d4ce8e6e855d14518f46a3f060ea38721f99",
+  "source_deadline_misses": 231,
+  "profile": {
+    "version": 1,
+    "op": "hello",
+    "simulation": true,
+    "full_chain": true,
+    "vehicle_tx_enabled": false,
+    "car_fingerprint": "HYUNDAI_IONIQ_PHEV_2019",
+    "factory_acc": true,
+    "min_steer_speed_m_s": 14.305279731750488,
+    "physical_fingerprint_verified": false
+  },
+  "version": 1,
+  "output_samples": {
+    "driverMonitoringState": 600,
+    "carState": 2478,
+    "carOutput": 2492,
+    "radarTracks": 557,
+    "carControl": 2181,
+    "carControlSP": 2047,
+    "controlsState": 2241,
+    "radarState": 552,
+    "longitudinalPlan": 552,
+    "driverAssistance": 552,
+    "deviceMotion": 548,
+    "lateralTorqueParameters": 110,
+    "lateralDelay": 110,
+    "vehicleParameters": 547,
+    "selfdriveState": 2172,
+    "selfdriveStateSP": 2138,
+    "onroadEvents": 29,
+    "extrinsicsCalibration": 109
+  },
+  "cruise_can_valid_samples": 2478,
+  "cruise_can_invalid_samples": 0,
+  "cruise_acc_disabled_samples": 0,
+  "cruise_acc_enabled_samples": 2478,
+  "input_elapsed_s": 30.00010613401537,
+  "source_mean_hz": 99.99964622120036,
+  "source_exchange_work_p99_ms": 14.677239989396185,
+  "processes": {
+    "pid": 29313,
+    "simulation": true,
+    "full_chain": true,
+    "vehicle_tx_enabled": false,
+    "engagement_allowed": false,
+    "engagement_blocker": "camera calibration, model parity/performance and physical Panda qualification incomplete",
+    "processes": {
+      "Controls": {
+        "daemon": "controlsd",
+        "pid": 29338,
+        "phase": "running",
+        "error": "",
+        "last_progress_ms": 211421369,
+        "ticks": 121,
+        "restarts": 0
+      },
+      "Monitoring": {
+        "daemon": "dmonitoringd",
+        "pid": 29339,
+        "phase": "running",
+        "error": "",
+        "last_progress_ms": 211421525,
+        "ticks": 111,
+        "restarts": 0
+      },
+      "Vehicle": {
+        "daemon": "card",
+        "pid": 29340,
+        "phase": "running",
+        "error": "",
+        "last_progress_ms": 211421434,
+        "ticks": 130,
+        "restarts": 0
+      },
+      "Localization": {
+        "daemon": "locationd",
+        "pid": 29341,
+        "phase": "running",
+        "error": "",
+        "last_progress_ms": 211421377,
+        "ticks": 109,
+        "restarts": 0
+      },
+      "Calibration": {
+        "daemon": "calibrationd",
+        "pid": 29349,
+        "phase": "running",
+        "error": "",
+        "last_progress_ms": 211421427,
+        "ticks": 110,
+        "restarts": 0
+      },
+      "Parameters": {
+        "daemon": "paramsd",
+        "pid": 29363,
+        "phase": "running",
+        "error": "",
+        "last_progress_ms": 211421390,
+        "ticks": 109,
+        "restarts": 0
+      },
+      "Torque": {
+        "daemon": "torqued",
+        "pid": 29365,
+        "phase": "running",
+        "error": "",
+        "last_progress_ms": 211421435,
+        "ticks": 108,
+        "restarts": 0
+      },
+      "Delay": {
+        "daemon": "lagd",
+        "pid": 29367,
+        "phase": "running",
+        "error": "",
+        "last_progress_ms": 211421587,
+        "ticks": 110,
+        "restarts": 0
+      },
+      "Radar": {
+        "daemon": "radard",
+        "pid": 29397,
+        "phase": "running",
+        "error": "",
+        "last_progress_ms": 211421372,
+        "ticks": 107,
+        "restarts": 0
+      },
+      "Planning": {
+        "daemon": "plannerd",
+        "pid": 29407,
+        "phase": "running",
+        "error": "",
+        "last_progress_ms": 211421323,
+        "ticks": 110,
+        "restarts": 0
+      },
+      "Selfdrive": {
+        "daemon": "selfdrived",
+        "pid": 29422,
+        "phase": "running",
+        "error": "",
+        "last_progress_ms": 211421402,
+        "ticks": 136,
+        "restarts": 0
+      },
+      "Simulator": {
+        "daemon": "sim_bridge",
+        "pid": 29425,
+        "phase": "replaying_debug_fixtures",
+        "error": "",
+        "last_progress_ms": 211421392,
+        "ticks": 119,
+        "restarts": 0
+      }
+    },
+    "updated_elapsed_ms": 211421593
+  },
+  "runtime_reports": {
+    "controlsd": {
+      "daemon": "controlsd",
+      "pid": 29338,
+      "vehicle_tx_enabled": false,
+      "engagement_allowed": false,
+      "work_samples": 2758,
+      "deadline_misses": 0,
+      "phase": "running",
+      "simulation": true,
+      "cyclic_gc_enabled": false,
+      "android_thread_priority": -4,
+      "android_worker_tid": 29479,
+      "android_allowed_cpus_at_start": [
+        0,
+        1,
+        2,
+        4,
+        5,
+        6,
+        7
+      ],
+      "android_timer_slack_ns": 50000,
+      "android_controls_affinity": {
+        "diagnostic_only": true,
+        "before": [
+          0,
+          1,
+          2,
+          4,
+          5,
+          6,
+          7
+        ],
+        "after": [
+          4,
+          6
+        ]
+      },
+      "updated_input_samples": 1977,
+      "input_wait_budget_ms": 0,
+      "cycle_interval_ms": 9.94151,
+      "scheduler_delay_ms": 0.077958,
+      "skipped_slots": 0,
+      "selfdrive_ipc_age_ms": 8.141823,
+      "input_handling_ms": 0.367552,
+      "pacing_wait_ms": 7.034323,
+      "computation_ms": 0.356979,
+      "publishing_ms": 0.244375,
+      "parameters_extensions_ms": 0.157031,
+      "cycle_before_reporting_ms": 8.160938,
+      "active_cycle_before_reporting_ms": 1.126615,
+      "release_to_completion_before_reporting_ms": 1.204573,
+      "work_timing_excludes_input_wait": true,
+      "timing_schema_version": 2,
+      "cycle_deadline_misses": 1341,
+      "scheduled_deadline_misses": 1,
+      "skipped_slots_total": 0,
+      "reporting_ms": 0.0225,
+      "complete_cycle_ms": 8.183438,
+      "mean_cycle_hz": 100.00047156551716,
+      "p99_work_ms": 3.170989,
+      "p99_complete_cycle_ms": 14.012657,
+      "p99_stages_ms": {
+        "input_wait_budget_ms": 0,
+        "cycle_interval_ms": 13.074583,
+        "scheduler_delay_ms": 3.161241,
+        "skipped_slots": 0,
+        "selfdrive_ipc_age_ms": 20.704948,
+        "input_handling_ms": 1.68125,
+        "pacing_wait_ms": 10.81875,
+        "computation_ms": 1.122969,
+        "publishing_ms": 1.087448,
+        "parameters_extensions_ms": 0.771614,
+        "cycle_before_reporting_ms": 13.960938,
+        "active_cycle_before_reporting_ms": 4.649479,
+        "release_to_completion_before_reporting_ms": 6.408794,
+        "reporting_ms": 0.341303,
+        "release_to_completion_ms": 6.444471
+      },
+      "metrics_observed_samples": 2758,
+      "metrics_sequence": 35,
+      "metrics_coverage_complete": true,
+      "metrics_process": "manager",
+      "metrics_pid": 29313
+    },
+    "selfdrived": {
+      "daemon": "selfdrived",
+      "pid": 29422,
+      "vehicle_tx_enabled": false,
+      "engagement_allowed": false,
+      "work_samples": 2735,
+      "deadline_misses": 0,
+      "phase": "running",
+      "simulation": true,
+      "upstream_module": "selfdrived.selfdrived",
+      "updated_services": [
+        "controlsState",
+        "carControl"
+      ],
+      "invalid_services": [
+        "deviceState",
+        "pandaStates",
+        "peripheralState",
+        "modelV2",
+        "extrinsicsCalibration",
+        "driverMonitoringState",
+        "longitudinalPlan",
+        "managerState",
+        "vehicleParameters",
+        "radarState",
+        "driverAssistance",
+        "alertDebug",
+        "lateralManeuverPlan",
+        "modelDataV2SP",
+        "narrowRoadCameraState",
+        "cabinCameraState",
+        "wideRoadCameraState",
+        "gpsLocation"
+      ],
+      "input_handling_ms": 2.150729,
+      "computation_ms": 23.12651,
+      "complete_cycle_ms": 25.277239,
+      "timing_includes_report_overhead": true,
+      "p99_work_ms": 21.19974,
+      "p99_stages_ms": {}
+    },
+    "plannerd": {
+      "daemon": "plannerd",
+      "pid": 29407,
+      "vehicle_tx_enabled": false,
+      "engagement_allowed": false,
+      "work_samples": 547,
+      "deadline_misses": 0,
+      "phase": "running",
+      "simulation": true,
+      "upstream_module": "controls.plannerd",
+      "updated_services": [
+        "carControl",
+        "carState",
+        "controlsState",
+        "radarState",
+        "modelV2",
+        "selfdriveState",
+        "carStateSP",
+        "selfdriveStateSP"
+      ],
+      "invalid_services": [
+        "liveMapDataSP",
+        "gpsLocation"
+      ],
+      "input_handling_ms": 38.355104,
+      "computation_ms": 10.789167,
+      "complete_cycle_ms": 49.144271,
+      "timing_includes_report_overhead": true,
+      "p99_work_ms": 15.006614,
+      "p99_stages_ms": {}
+    },
+    "ui-report": {
+      "pid": 29452,
+      "backend": "Raylib Android NativeActivity",
+      "vehicle_tx_enabled": false,
+      "status": "running",
+      "full_upstream_ui": true,
+      "frames": 990,
+      "mean_fps": 29.59145296749207,
+      "width": 2160,
+      "height": 1080,
+      "surface_size": [
+        2289,
+        840
+      ],
+      "last_frame_seconds": 0.03333447873592377,
+      "last_cpu_seconds": 0.0011878650111611933,
+      "recent_p99_frame_ms": 34.36213731765747,
+      "recent_p99_cpu_ms": 3.618489019572735
+    }
+  },
+  "missing_outputs": [],
+  "factory_acc_cancellation_passed": null,
+  "fault_checks": "not_run_steady_inputs",
+  "worker_failures": {},
+  "elapsed_s": 30.43703016699874
+}
+{
+  "serial": "RFCR81Y1TBJ",
+  "command": [
+    "/Users/sergios/sunnypilot/.venv/bin/python",
+    "android/reports/full-model-controls-20261101/controls_affinity_experiment.py",
+    "android/reports/full-model-controls-20261101/fold45t-affinity46.json",
+    "--cpus",
+    "4",
+    "6"
+  ],
+  "vehicle_tx_enabled": false,
+  "status": "passed",
+  "validation_status": "passed",
+  "isolation_status": "passed",
+  "forwards_before": [],
+  "before_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 29.0,
+    "thermal_override": false
+  },
+  "apk_sha256": "266fbc1dd1ac476c9e806d851c2193709732507a8e9a3124679554114e14fd2d",
+  "baseline": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 29.0,
+    "thermal_override": false,
+    "idle_seconds": 32.681996750005055,
+    "normal_thermal_seconds": 32.30075300001772
+  },
+  "apk_sha256_at_start": "266fbc1dd1ac476c9e806d851c2193709732507a8e9a3124679554114e14fd2d",
+  "returncode": 0,
+  "after_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.7,
+    "thermal_override": false
+  },
+  "forwards_removed": [],
+  "apk_sha256_after": "266fbc1dd1ac476c9e806d851c2193709732507a8e9a3124679554114e14fd2d",
+  "artifact_stable": true,
+  "wrapper_status": "passed"
+}

@@ -1,0 +1,59 @@
+{
+  "dmonitoring_model": [],
+  "driving_supercombo": [
+    {
+      "node": "model/p_node_MatMul_13/MatMulAddFusion",
+      "inputs": [
+        "gemm_input_reshape_arg",
+        "model/p_val_12",
+        "model/p_policy_model.temporal_summarizer._feats_encode.0.bias"
+      ],
+      "output": "fold3_half_dot2_532_0"
+    },
+    {
+      "node": "model/p_node_MatMul_16/MatMulAddFusion",
+      "inputs": [
+        "gemm_input_reshape_arg_token_1",
+        "model/p_val_15",
+        "model/p_policy_model.temporal_summarizer._feats_encode.2.bias"
+      ],
+      "output": "fold3_half_dot2_539_0"
+    },
+    {
+      "node": "model/p_node_MatMul_27/MatMulAddFusion",
+      "inputs": [
+        "gemm_input_reshape_arg_token_7",
+        "model/p_val_28",
+        "model/p_policy_model.temporal_summarizer.transformer.0.attn.c_attn.bias"
+      ],
+      "output": "fold3_half_dot2_548_0"
+    },
+    {
+      "node": "model/p_node_MatMul_56/MatMulAddFusion",
+      "inputs": [
+        "gemm_input_reshape_arg_token_13",
+        "model/p_val_57",
+        "model/p_policy_model.temporal_summarizer.transformer.0.attn.c_proj.bias"
+      ],
+      "output": "fold3_half_dot2_572_0"
+    },
+    {
+      "node": "model/p_node_MatMul_58/MatMulAddFusion",
+      "inputs": [
+        "gemm_input_reshape_arg_token_19",
+        "model/p_val_61",
+        "model/p_policy_model.temporal_summarizer.transformer.0.mlp.c_fc.bias"
+      ],
+      "output": "fold3_half_dot2_579_0"
+    },
+    {
+      "node": "model/p_node_MatMul_60/MatMulAddFusion",
+      "inputs": [
+        "gemm_input_reshape_arg_token_25",
+        "model/p_val_63",
+        "model/p_policy_model.temporal_summarizer.transformer.0.mlp.c_proj.bias"
+      ],
+      "output": "fold3_half_dot2_594_0"
+    }
+  ]
+}

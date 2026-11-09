@@ -24,8 +24,24 @@ class Device:
       return next(self.processes)
     return ""
 
+  def assert_thermal_safe(self):
+    pass
+
+  def stop(self):
+    self.stopped = True
+
 
 class ModelsTest(unittest.TestCase):
+  def test_thermal_abort_stops_work_and_saves_blocked_evidence(self):
+    device = Device([{}])
+    device.assert_thermal_safe = lambda: (_ for _ in ()).throw(RuntimeError("moderate thermal state"))
+    with tempfile.TemporaryDirectory() as folder:
+      destination = Path(folder) / "report.json"
+      with self.assertRaisesRegex(RuntimeError, "thermal"):
+        validate(device, "qnn-htp", destination)
+      self.assertTrue(device.stopped)
+      self.assertEqual(json.loads(destination.read_text())["validation_status"], "blocked")
+
   def test_completed_failed_parity_is_evidence(self):
     report = {"started_utc": 2, "completed_utc": 3, "vehicle_tx_enabled": False, "models": {"driver": {"status": "failed"}}}
     with tempfile.TemporaryDirectory() as folder:
@@ -57,6 +73,17 @@ class ModelsTest(unittest.TestCase):
         with self.assertRaisesRegex(AssertionError, "TX guard"):
           validate(Device([{}, {**report, "vehicle_tx_enabled": tx}]), "ort-cpu", Path(folder) / "report.json")
 
+  def test_diagnostic_probes_are_separate_from_full_model_qualification(self):
+    models = {engine + "-" + op: {"status": "passed", "performance_status": "diagnostic_only"}
+              for engine in ("mnn-opencl", "ncnn-vulkan") for op in ("conv", "gemm", "activation", "layout")}
+    report = {"started_utc": 2, "completed_utc": 3, "vehicle_tx_enabled": False, "diagnostic_only": True, "models": models}
+    with tempfile.TemporaryDirectory() as folder:
+      destination = Path(folder) / "report.json"
+      self.assertEqual(validate(Device([{}, report]), "accel-probes", destination)["validation_status"], "passed")
+      self.assertEqual(validate(Device([{}, report]), "ort-cpu", destination)["validation_status"], "blocked")
+      models.pop("ncnn-vulkan-gemm")
+      self.assertEqual(validate(Device([{}, report]), "accel-probes", destination)["validation_status"], "blocked")
+
   @patch("validate_models.time.sleep")
   def test_crash_before_new_report_rejects_stale_completion(self, _sleep):
     old = {"started_utc": 1, "completed_utc": 2, "models": {"driver": {"status": "passed"}}}
@@ -68,6 +95,7 @@ class ModelsTest(unittest.TestCase):
       self.assertEqual(saved["validation_status"], "failed")
       self.assertNotIn("completed_utc", saved)
       self.assertNotIn("models", saved)
+      self.assertNotIn("vehicle_tx_enabled", saved)
 
   def test_crash_after_new_report_preserves_progress(self):
     progress = {"started_utc": 2, "models": {"driver": {"status": "running"}}}
@@ -76,6 +104,20 @@ class ModelsTest(unittest.TestCase):
       with self.assertRaises(RuntimeError):
         validate(Device([{"started_utc": 1}, progress], [""]), "ort-cpu", destination)
       self.assertEqual(json.loads(destination.read_text())["models"], progress["models"])
+
+  @patch("validate_models.time.monotonic", side_effect=[0, 1])
+  def test_timeout_stops_work_and_does_not_save_stale_acceptance(self, _clock):
+    old = {"started_utc": 1, "completed_utc": 2, "models": {"driver": {"status": "passed"}}}
+    device = Device([old])
+    with tempfile.TemporaryDirectory() as folder:
+      destination = Path(folder) / "report.json"
+      with self.assertRaises(TimeoutError):
+        validate(device, "qnn-gpu", destination, timeout=1)
+      self.assertTrue(device.stopped)
+      saved = json.loads(destination.read_text())
+      self.assertEqual(saved["validation_status"], "blocked")
+      self.assertNotIn("completed_utc", saved)
+      self.assertNotIn("models", saved)
 
 
 if __name__ == "__main__":

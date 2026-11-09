@@ -1,0 +1,42 @@
+test_android_reads_latest_inputs_without_blocking_and_counts_overruns (android.tests.test_controls_scheduling.SchedulingTest) ... ok
+test_cpu_diagnostics_do_not_subtract_waits_from_wall_deadlines (android.tests.test_controls_scheduling.SchedulingTest) ... ok
+test_immediate_input_cannot_run_controls_faster_than_100_hz (android.tests.test_controls_scheduling.SchedulingTest) ... ok
+test_late_wakeup_remains_visible_without_a_second_pacing_wait (android.tests.test_controls_scheduling.SchedulingTest) ... ok
+test_long_work_skips_expired_slots_once_without_waiting_another_slot (android.tests.test_controls_scheduling.SchedulingTest) ... ok
+test_missing_input_does_not_change_the_control_cadence (android.tests.test_controls_scheduling.SchedulingTest) ... ok
+test_other_platforms_do_not_add_deadline_pacing (android.tests.test_controls_scheduling.SchedulingTest) ... ok
+test_other_platforms_keep_the_existing_poll_timeout (android.tests.test_controls_scheduling.SchedulingTest) ... ok
+test_reporting_overrun_cannot_create_catchup_bursts (android.tests.test_controls_scheduling.SchedulingTest) ... ok
+test_wakeup_crossing_multiple_slots_counts_each_expired_release (android.tests.test_controls_scheduling.SchedulingTest) ... ok
+test_batches_preserve_every_sample_and_deadline_counter (android.tests.test_controls_reporting.ControlsReportingTest) ... ok
+test_controls_transient_phases_keep_heartbeat_frequency_and_immediate_failures (android.tests.test_controls_reporting.ControlsReportingTest) ... ok
+test_stalled_consumer_cannot_silently_discard_samples (android.tests.test_controls_reporting.ControlsReportingTest) ... ok
+test_writer_failure_remains_fatal_to_supervision (android.tests.test_controls_reporting.ControlsReportingTest) ... ok
+test_applies_and_verifies_only_current_thread (android.tests.test_controls_affinity.ControlsAffinityTest) ... ok
+test_controls_priority_is_scoped_and_observed_at_the_service_entry (android.tests.test_controls_affinity.ControlsAffinityTest) ... ok
+test_cpu4_unavailable_uses_remaining_homogeneous_pair (android.tests.test_controls_affinity.ControlsAffinityTest) ... ok
+test_measured_alternative_pair_handles_cpu5_offline (android.tests.test_controls_affinity.ControlsAffinityTest) ... ok
+test_measured_fold_pair_is_applied_to_calling_thread (android.tests.test_controls_affinity.ControlsAffinityTest) ... ok
+test_other_devices_and_explicit_diagnostics_keep_existing_policy (android.tests.test_controls_affinity.ControlsAffinityTest) ... ok
+test_physical_and_unconfigured_sessions_do_not_change_affinity (android.tests.test_controls_affinity.ControlsAffinityTest) ... ok
+test_placement_failure_remains_visible (android.tests.test_controls_affinity.ControlsAffinityTest) ... ok
+test_rejects_invalid_or_unavailable_cpus (android.tests.test_controls_affinity.ControlsAffinityTest) ... ok
+test_unavailable_topology_or_permission_failure_remains_visible (android.tests.test_controls_affinity.ControlsAffinityTest) ... ok
+test_active_client_and_test_process_are_detected_without_historic_clients (android.tests.test_experiment.ExperimentTest) ... ok
+test_both_package_variants_are_detected_and_stopped (android.tests.test_experiment.ExperimentTest) ... ok
+test_cooldown_refuses_running_processes_and_thermal_overrides (android.tests.test_experiment.ExperimentTest) ... ok
+test_cooldown_requires_continuous_normal_temperature (android.tests.test_experiment.ExperimentTest) ... ok
+test_failed_validator_does_not_mean_failed_isolation (android.tests.test_experiment.ExperimentTest) ... ok
+test_final_cleanup_always_runs_and_failed_cleanup_fails_experiment (android.tests.test_experiment.ExperimentTest) ... ok
+test_installation_races_invalidate_provenance_and_prevent_a_cooldown_race (android.tests.test_experiment.ExperimentTest) ... ok
+test_model_validator_must_target_the_hashed_package (android.tests.test_experiment.ExperimentTest) ... ok
+test_only_new_forwards_on_the_selected_device_are_removed (android.tests.test_experiment.ExperimentTest) ... ok
+test_provider_restart_fails_even_when_workload_returns_success (android.tests.test_experiment.ExperimentTest) ... ok
+test_runtime_starts_after_cooldown_and_startup_failure_still_cleans (android.tests.test_experiment.ExperimentTest) ... ok
+test_stop_reasserts_force_stop_for_late_worker_startup (android.tests.test_experiment.ExperimentTest) ... ok
+test_workload_thermal_guard_fails_closed (android.tests.test_experiment.ExperimentTest) ... ok
+
+----------------------------------------------------------------------
+Ran 37 tests in 0.525s
+
+OK

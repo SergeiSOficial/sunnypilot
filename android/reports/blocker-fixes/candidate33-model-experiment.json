@@ -1,0 +1,83 @@
+{
+  "candidate": "candidate33",
+  "apk_sha256": "cdaac6c4223ee64ba2f600e4cac3a0d7775bcde2f7a7d4ab5b69ec3e05092305",
+  "vehicle_tx_enabled": false,
+  "engagement_allowed": false,
+  "tolerances": {
+    "rtol": 0.001,
+    "atol": 0.0001
+  },
+  "models": {
+    "driving_supercombo": {
+      "numerical_status": "passed",
+      "comparisons": 636,
+      "failed_comparisons": 0,
+      "nonexact_outputs": 0,
+      "max_abs_error": 0.0,
+      "sequences": {
+        "seed42": {
+          "passed": true,
+          "frames": 32
+        },
+        "seed7": {
+          "passed": true,
+          "frames": 32
+        },
+        "seed123": {
+          "passed": true,
+          "frames": 32
+        },
+        "camera-replay": {
+          "passed": true,
+          "frames": 60
+        }
+      },
+      "timing": {
+        "performance_status": "failed",
+        "samples": 100,
+        "work_p50_ms": 2063.07776,
+        "work_p99_ms": 2109.0046665200002,
+        "work_max_ms": 2109.920468,
+        "deadline_misses_50ms": 100
+      },
+      "source_report": "fold-candidate33-opencl-road.json"
+    },
+    "dmonitoring_model": {
+      "numerical_status": "passed",
+      "comparisons": 159,
+      "failed_comparisons": 0,
+      "nonexact_outputs": 0,
+      "max_abs_error": 0.0,
+      "sequences": {
+        "seed42": {
+          "passed": true,
+          "frames": 32
+        },
+        "seed7": {
+          "passed": true,
+          "frames": 32
+        },
+        "seed123": {
+          "passed": true,
+          "frames": 32
+        },
+        "camera-replay": {
+          "passed": true,
+          "frames": 60
+        }
+      },
+      "timing": {
+        "performance_status": "failed",
+        "samples": 100,
+        "work_p50_ms": 1140.501458,
+        "work_p99_ms": 1203.2902971400001,
+        "work_max_ms": 1210.35802,
+        "deadline_misses_50ms": 100
+      },
+      "source_report": "fold-candidate33-opencl-driver.json"
+    }
+  },
+  "numerical_status": "passed",
+  "performance_status": "failed",
+  "decision": "Rejected output-channel tiling for reference FMA kernels. Both models pass the original gate, but p99 regresses against candidate32. Candidate34 restores scalar output scheduling for the reference path."
+}

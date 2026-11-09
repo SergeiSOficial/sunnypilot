@@ -1,0 +1,61 @@
+{
+  "candidate": "candidate38",
+  "apk_sha256": "e00e67684a50ed5cd23cd8f55d0bcd7a0337dec049774012feeccbd665b8959f",
+  "baseline35_apk_sha256": "38645e91f806076517de1497cdb6b5c0cbf4873cfecf5efabb980297a014ad51",
+  "baseline35_source": "../blocker-fixes/candidate35-model-accuracy-gate.json",
+  "scope": "Same model gate requests, same phone firmware, emulator stopped, separate cooled runs. Candidate38 road timing is incomplete after thermal abort; no 100-sample road p99 inferred from short profiles.",
+  "models": [
+    {
+      "model": "driving_supercombo",
+      "baseline35_timing": {
+        "performance_status": "failed",
+        "samples": 100,
+        "compile_ms": 26404.431448,
+        "work_p50_ms": 845.979479,
+        "work_p99_ms": 881.5674370800001,
+        "work_max_ms": 900.407343,
+        "deadline_misses_50ms": 100
+      },
+      "candidate38_timing": {
+        "compile_ms": 25510.255772,
+        "performance_status": "blocked",
+        "error": "Unsafe or unavailable Android thermal state: 2",
+        "scope": "All reference comparisons completed before MODERATE thermal abort; 100-sample timing did not complete."
+      },
+      "candidate38_numerical_status": "passed",
+      "comparisons": 636
+    },
+    {
+      "model": "dmonitoring_model",
+      "baseline35_timing": {
+        "performance_status": "failed",
+        "samples": 100,
+        "compile_ms": 18444.219837,
+        "work_p50_ms": 522.9349475,
+        "work_p99_ms": 560.16029585,
+        "work_max_ms": 561.024947,
+        "deadline_misses_50ms": 100
+      },
+      "candidate38_timing": {
+        "performance_status": "failed",
+        "samples": 100,
+        "compile_ms": 18064.050826,
+        "work_p50_ms": 319.779453,
+        "work_p99_ms": 379.21560649,
+        "work_max_ms": 380.157343,
+        "deadline_misses_50ms": 100
+      },
+      "candidate38_numerical_status": "passed",
+      "comparisons": 159,
+      "p99_reduction_percent": 32.30230537589788
+    }
+  ],
+  "async_kernel_profiles": "candidate38-gpu-profile-comparison.json",
+  "camera_profiles": "candidate38-camera-comparison.json",
+  "controls": "pending final device fixture",
+  "combined_workload": "pending short visual validation",
+  "vehicle_tx_enabled": false,
+  "engagement_allowed": false,
+  "sustained_acceptance_status": "blocked",
+  "reason": "QNN numerical gate fails; accurate OpenCL misses 20 Hz and reaches MODERATE under the road gate; independent rear camera identity and mounted calibration remain unverified."
+}

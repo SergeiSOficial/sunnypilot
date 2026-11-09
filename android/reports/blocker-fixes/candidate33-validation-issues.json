@@ -1,0 +1,16 @@
+{
+  "candidate": "candidate33",
+  "apk_sha256": "cdaac6c4223ee64ba2f600e4cac3a0d7775bcde2f7a7d4ab5b69ec3e05092305",
+  "vehicle_tx_enabled": false,
+  "issues": [
+    {
+      "experiment": "fold-candidate33-lifecycle",
+      "status": "failed",
+      "scope": "Test invocation; validator rejected physical-phone display overrides before testing the activity.",
+      "error": "display overrides are restricted to the dedicated emulator",
+      "command_record": "fold-candidate33-lifecycle-isolation.json",
+      "correction": "Candidate34 phone batch omits --resize. Emulator batch retains --resize.",
+      "historical_result_retained": true
+    }
+  ]
+}

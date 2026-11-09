@@ -1,0 +1,31 @@
+{
+  "candidate": "candidate45",
+  "apk_sha256": "9868e5b9ca7d24feaefd9acfbcdabaf4f5226e85063e03fffec4400aecc1a859",
+  "diagnostic_only": true,
+  "operator": "Gemm",
+  "original_node": "node_linear",
+  "tensor": "fold3_half_gemv8_346_0",
+  "shape": [
+    1,
+    512
+  ],
+  "semantic_dtype": "float16",
+  "physical_gpu_dtype": "float32",
+  "actual_gpu_input_sha256": "62a580351d2ad8a0fbf22ffde86110ec6c78118e1f75a1f0880e58dc4ef6076d",
+  "diagnostic_graph_sha256": "99803512f8fe55dcd0e57515634a4567fbb2a8f661ef046dee978d359e8981e4",
+  "parity_on_actual_input": {
+    "passed": true,
+    "finite": true,
+    "shape": [
+      1,
+      512
+    ],
+    "dtype": "float32",
+    "expected_nonfinite_elements": 0,
+    "unexpected_nonfinite_elements": 0,
+    "exact": true,
+    "max_abs_error": 0.0,
+    "mismatched_elements": 0
+  },
+  "note": "This local actual-input comparison does not qualify full-model accuracy."
+}

@@ -181,7 +181,8 @@ class FrequencyTracker:
 class SubMaster:
   def __init__(self, services: list[str], poll: str | None = None,
                ignore_alive: list[str] | None = None, ignore_avg_freq: list[str] | None = None,
-               ignore_valid: list[str] | None = None, addr: str = "127.0.0.1", frequency: float | None = None):
+               ignore_valid: list[str] | None = None, addr: str = "127.0.0.1", frequency: float | None = None,
+               *, poll_all: bool = False):
     self.frame = -1
     self.services = services
     self.seen = dict.fromkeys(services, False)
@@ -202,7 +203,9 @@ class SubMaster:
     self.freq_tracker: dict[str, FrequencyTracker] = {}
     self.poller = Poller()
     polled_services = set([poll, ] if poll is not None else services)
-    self.non_polled_services = set(services) - polled_services
+    # A nonblocking periodic consumer can scan all sockets in one native poll
+    # while still using its original frequency anchor.
+    self.non_polled_services = set() if poll_all else set(services) - polled_services
 
     self.ignore_average_freq = [] if ignore_avg_freq is None else ignore_avg_freq
     self.ignore_alive = [] if ignore_alive is None else ignore_alive

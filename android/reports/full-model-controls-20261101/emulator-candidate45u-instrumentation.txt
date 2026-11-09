@@ -1,0 +1,44 @@
+
+ai.sunnypilot.fold3.AcceleratorTest:.
+ai.sunnypilot.fold3.CameraPreviewSampleTest:....
+ai.sunnypilot.fold3.ControlsMetricsIntegrationTest:.....
+ai.sunnypilot.fold3.GpuNv12Test:.
+ai.sunnypilot.fold3.LifecycleTest:
+Error in activitySurvivesRecreation(ai.sunnypilot.fold3.LifecycleTest):
+java.lang.AssertionError: Activity never becomes requested state "[RESUMED]" (last lifecycle transition = "PAUSED")
+	at androidx.test.core.app.ActivityScenario.waitForActivityToBecomeAnyOf(ActivityScenario.java:454)
+	at androidx.test.core.app.ActivityScenario.moveToState(ActivityScenario.java:689)
+	at androidx.test.core.app.ActivityScenario.recreate(ActivityScenario.java:718)
+	at ai.sunnypilot.fold3.LifecycleTest.activitySurvivesRecreation(LifecycleTest.java:13)
+
+ai.sunnypilot.fold3.NativeBridgeTest:.......
+ai.sunnypilot.fold3.PerceptionTest:.......
+ai.sunnypilot.fold3.RuntimeTest:.
+ai.sunnypilot.fold3.SupervisorTest:
+Error in controlProcessRestartsAndActivityRecreationPreservesManager(ai.sunnypilot.fold3.SupervisorTest):
+java.lang.AssertionError: Activity never becomes requested state "[RESUMED]" (last lifecycle transition = "PAUSED")
+	at androidx.test.core.app.ActivityScenario.waitForActivityToBecomeAnyOf(ActivityScenario.java:454)
+	at androidx.test.core.app.ActivityScenario.moveToState(ActivityScenario.java:689)
+	at androidx.test.core.app.ActivityScenario.recreate(ActivityScenario.java:718)
+	at ai.sunnypilot.fold3.SupervisorTest.controlProcessRestartsAndActivityRecreationPreservesManager(SupervisorTest.java:44)
+
+
+Time: 119.513
+There were 2 failures:
+1) activitySurvivesRecreation(ai.sunnypilot.fold3.LifecycleTest)
+java.lang.AssertionError: Activity never becomes requested state "[RESUMED]" (last lifecycle transition = "PAUSED")
+	at androidx.test.core.app.ActivityScenario.waitForActivityToBecomeAnyOf(ActivityScenario.java:454)
+	at androidx.test.core.app.ActivityScenario.moveToState(ActivityScenario.java:689)
+	at androidx.test.core.app.ActivityScenario.recreate(ActivityScenario.java:718)
+	at ai.sunnypilot.fold3.LifecycleTest.activitySurvivesRecreation(LifecycleTest.java:13)
+2) controlProcessRestartsAndActivityRecreationPreservesManager(ai.sunnypilot.fold3.SupervisorTest)
+java.lang.AssertionError: Activity never becomes requested state "[RESUMED]" (last lifecycle transition = "PAUSED")
+	at androidx.test.core.app.ActivityScenario.waitForActivityToBecomeAnyOf(ActivityScenario.java:454)
+	at androidx.test.core.app.ActivityScenario.moveToState(ActivityScenario.java:689)
+	at androidx.test.core.app.ActivityScenario.recreate(ActivityScenario.java:718)
+	at ai.sunnypilot.fold3.SupervisorTest.controlProcessRestartsAndActivityRecreationPreservesManager(SupervisorTest.java:44)
+
+FAILURES!!!
+Tests run: 28,  Failures: 2
+
+

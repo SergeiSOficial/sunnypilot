@@ -1,0 +1,965 @@
+{
+  "diagnostic_only": true,
+  "performance_status": "not_measured",
+  "rtol": 0.001,
+  "atol": 0.0001,
+  "candidate": "candidate45r",
+  "model": "dmonitoring_model",
+  "seed": 123,
+  "frame": 27,
+  "derived_graph_sha256": "3dce4036dfcc6d50aef3aa80c89da7eb6fa2abbfe0efdcbf1af2349013a9703e",
+  "checks": [
+    {
+      "operator": "fold3_host_conv_bl_InsertedPrecisionFreeCast_getitem_135_raster_0",
+      "operator_type": "Raster",
+      "tensor": "fold3_host_mean8_InsertedPrecisionFreeCast_mean___tr4fold3_host_conv_bl_InsertedPrecisionFreeCast_getitem_135",
+      "backend": "OpenCL",
+      "layout": "NCHW",
+      "dtype": "float32",
+      "shape": [
+        1,
+        960,
+        1,
+        1
+      ],
+      "file": "0000.bin",
+      "original": null
+    },
+    {
+      "operator": "fold3_host_conv_bl_InsertedPrecisionFreeCast_getitem_135",
+      "operator_type": "Convolution",
+      "tensor": "fold3_host_conv_bl_InsertedPrecisionFreeCast_getitem_135",
+      "backend": "OpenCL",
+      "layout": "NCHW",
+      "dtype": "float32",
+      "shape": [
+        1,
+        1280,
+        1,
+        1
+      ],
+      "file": "0001.bin",
+      "original": {
+        "tensor": "fold3_host_conv_bl_InsertedPrecisionFreeCast_getitem_135",
+        "node": "node_Conv_895",
+        "operator": "Conv",
+        "domain": ""
+      },
+      "tapped_graph_sha256": "686b2795f18ff0cae9b82540af24d9e2787a63e1444a0ca9e09dd2c1630186b3",
+      "original_dtype": "float32",
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          1280,
+          1,
+          1
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "pre_rounding_diagnostic": false
+    },
+    {
+      "operator": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_28_MultX",
+      "operator_type": "BinaryOp",
+      "tensor": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_28_MultX",
+      "backend": "OpenCL",
+      "layout": "NCHW",
+      "dtype": "float32",
+      "shape": [
+        1,
+        1280,
+        1,
+        1
+      ],
+      "file": "0002.bin",
+      "original": {
+        "tensor": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_28_MultX",
+        "node": "",
+        "operator": "Mul",
+        "domain": ""
+      },
+      "tapped_graph_sha256": "82428c4c6b5e5740c21929cd43470a4d09391238dc064f8a50ad9b7297eb6284",
+      "original_dtype": "float32",
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          1280,
+          1,
+          1
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "pre_rounding_diagnostic": false
+    },
+    {
+      "operator": "fold3_host_powf_cube_InsertedPrecisionFreeCast__inlfunc_Gelu_token_28_XCubed",
+      "operator_type": "BinaryOp",
+      "tensor": "fold3_host_powf_cube_InsertedPrecisionFreeCast__inlfunc_Gelu_token_28_XCubed",
+      "backend": "OpenCL",
+      "layout": "NCHW",
+      "dtype": "float32",
+      "shape": [
+        1,
+        1280,
+        1,
+        1
+      ],
+      "file": "0003.bin",
+      "original": {
+        "tensor": "fold3_host_powf_cube_InsertedPrecisionFreeCast__inlfunc_Gelu_token_28_XCubed",
+        "node": "",
+        "operator": "Pow",
+        "domain": ""
+      },
+      "tapped_graph_sha256": "2bcc824ea84c22a6ebae09284ce8b3209c60e5b7a2cde595f214de6c7e0eaf6a",
+      "original_dtype": "float32",
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          1280,
+          1,
+          1
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": false,
+        "max_abs_error": 4.76837158203125e-07,
+        "mismatched_elements": 0
+      },
+      "pre_rounding_diagnostic": false
+    },
+    {
+      "operator": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_28_XCubedC0",
+      "operator_type": "BinaryOp",
+      "tensor": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_28_XCubedC0",
+      "backend": "OpenCL",
+      "layout": "NCHW",
+      "dtype": "float32",
+      "shape": [
+        1,
+        1280,
+        1,
+        1
+      ],
+      "file": "0004.bin",
+      "original": {
+        "tensor": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_28_XCubedC0",
+        "node": "",
+        "operator": "Mul",
+        "domain": ""
+      },
+      "tapped_graph_sha256": "f9537eaecba5d86b81a1e1651c219258fe8833268b92e30f2375efc2934cb492",
+      "original_dtype": "float32",
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          1280,
+          1,
+          1
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": false,
+        "max_abs_error": 2.9802322387695312e-08,
+        "mismatched_elements": 0
+      },
+      "pre_rounding_diagnostic": false
+    },
+    {
+      "operator": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_28_XC0XCubed",
+      "operator_type": "BinaryOp",
+      "tensor": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_28_XC0XCubed",
+      "backend": "OpenCL",
+      "layout": "NCHW",
+      "dtype": "float32",
+      "shape": [
+        1,
+        1280,
+        1,
+        1
+      ],
+      "file": "0005.bin",
+      "original": {
+        "tensor": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_28_XC0XCubed",
+        "node": "",
+        "operator": "Sum",
+        "domain": ""
+      },
+      "tapped_graph_sha256": "52d6205c9e89a412c684400199b149011b2654702428ff142427edf47c194fe2",
+      "original_dtype": "float32",
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          1280,
+          1,
+          1
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "pre_rounding_diagnostic": false
+    },
+    {
+      "operator": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_28_TanhInput",
+      "operator_type": "BinaryOp",
+      "tensor": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_28_TanhInput",
+      "backend": "OpenCL",
+      "layout": "NCHW",
+      "dtype": "float32",
+      "shape": [
+        1,
+        1280,
+        1,
+        1
+      ],
+      "file": "0006.bin",
+      "original": {
+        "tensor": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_28_TanhInput",
+        "node": "",
+        "operator": "Mul",
+        "domain": ""
+      },
+      "tapped_graph_sha256": "ff52749f9e6f0a353bf5b841d2731af5c91bafab5baa1ff0388915804bc11178",
+      "original_dtype": "float32",
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          1280,
+          1,
+          1
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "pre_rounding_diagnostic": false
+    },
+    {
+      "operator": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_28_ErfApprox",
+      "operator_type": "UnaryOp",
+      "tensor": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_28_ErfApprox",
+      "backend": "OpenCL",
+      "layout": "NCHW",
+      "dtype": "float32",
+      "shape": [
+        1,
+        1280,
+        1,
+        1
+      ],
+      "file": "0007.bin",
+      "original": {
+        "tensor": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_28_ErfApprox",
+        "node": "",
+        "operator": "Tanh",
+        "domain": ""
+      },
+      "tapped_graph_sha256": "36c6676c16005f19910fe6d1a444fa62df39bb9c2d3d285624d783aa634ca930",
+      "original_dtype": "float32",
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          1280,
+          1,
+          1
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "pre_rounding_diagnostic": false
+    },
+    {
+      "operator": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_28_PhiApprox",
+      "operator_type": "BinaryOp",
+      "tensor": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_28_PhiApprox",
+      "backend": "OpenCL",
+      "layout": "NCHW",
+      "dtype": "float32",
+      "shape": [
+        1,
+        1280,
+        1,
+        1
+      ],
+      "file": "0008.bin",
+      "original": {
+        "tensor": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_28_PhiApprox",
+        "node": "",
+        "operator": "Sum",
+        "domain": ""
+      },
+      "tapped_graph_sha256": "8b8a7637e2dde32d07a98fc47ce4c1a2c585cbbd3c3cd528262254b4955feaec",
+      "original_dtype": "float32",
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          1280,
+          1,
+          1
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "pre_rounding_diagnostic": false
+    },
+    {
+      "operator": "InsertedPrecisionFreeCast_gelu_29",
+      "operator_type": "BinaryOp",
+      "tensor": "InsertedPrecisionFreeCast_gelu_29",
+      "backend": "OpenCL",
+      "layout": "NCHW",
+      "dtype": "float32",
+      "shape": [
+        1,
+        1280,
+        1,
+        1
+      ],
+      "file": "0009.bin",
+      "original": {
+        "tensor": "InsertedPrecisionFreeCast_gelu_29",
+        "node": "",
+        "operator": "Mul",
+        "domain": ""
+      },
+      "tapped_graph_sha256": "5f28ad9f3bd41e367a33ed9a818668aac26cc712626b89e659bdcd6ae7932e54",
+      "original_dtype": "float32",
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          1280,
+          1,
+          1
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "pre_rounding_diagnostic": false
+    },
+    {
+      "operator": "gelu_29",
+      "operator_type": "Cast",
+      "tensor": "gelu_29",
+      "backend": "OpenCL",
+      "layout": "NCHW",
+      "dtype": "float32",
+      "shape": [
+        1,
+        1280,
+        1,
+        1
+      ],
+      "file": "0010.bin",
+      "original": {
+        "tensor": "gelu_29",
+        "node": "InsertedPrecisionFreeCast_gelu_29",
+        "operator": "Cast",
+        "domain": ""
+      },
+      "tapped_graph_sha256": "fda8145f1fcd5479fe4056e6fb3a77cd87f900fa0120215d37bb8ea1d17b036c",
+      "original_dtype": "float16",
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          1280,
+          1,
+          1
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "pre_rounding_diagnostic": false
+    },
+    {
+      "operator": "fold3_half_gemv8_405_0__matmul_converted_raster_0",
+      "operator_type": "Raster",
+      "tensor": "Reshape384",
+      "backend": "OpenCL",
+      "layout": "NCHW",
+      "dtype": "float32",
+      "shape": [
+        1,
+        1280,
+        1,
+        1
+      ],
+      "file": "0011.bin",
+      "original": null
+    },
+    {
+      "operator": "fold3_half_gemv8_405_0__matmul_converted",
+      "operator_type": "Convolution",
+      "tensor": "fold3_half_gemv8_405_0__matmul_converted",
+      "backend": "OpenCL",
+      "layout": "NCHW",
+      "dtype": "float32",
+      "shape": [
+        1,
+        512,
+        1,
+        1
+      ],
+      "file": "0012.bin",
+      "original": null
+    },
+    {
+      "operator": "linear_raster_0",
+      "operator_type": "Raster",
+      "tensor": "fold3_half_gemv8_405_0",
+      "backend": "OpenCL",
+      "layout": "NCHW",
+      "dtype": "float32",
+      "shape": [
+        1,
+        512
+      ],
+      "file": "0013.bin",
+      "original": {
+        "tensor": "fold3_half_gemv8_405_0",
+        "node": "node_linear",
+        "operator": "Gemm",
+        "domain": ""
+      },
+      "tapped_graph_sha256": "6c941b0aa5bb5e2e9ce5dee7aef29894be6b62dbdb3d48bbcc16b0b7d1f9cd36",
+      "original_dtype": "float16",
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          512
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "pre_rounding_diagnostic": false
+    },
+    {
+      "operator": "linear",
+      "operator_type": "Cast",
+      "tensor": "linear",
+      "backend": "OpenCL",
+      "layout": "NCHW",
+      "dtype": "float32",
+      "shape": [
+        1,
+        512
+      ],
+      "file": "0014.bin",
+      "original": {
+        "tensor": "linear",
+        "node": "fold3_half_round_405_0",
+        "operator": "Cast",
+        "domain": ""
+      },
+      "tapped_graph_sha256": "560f0fa75f20825162541b235bb5c7a96eb40fae88325044c2dc725a9d0a4b7f",
+      "original_dtype": "float16",
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          512
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "pre_rounding_diagnostic": false
+    },
+    {
+      "operator": "fold3_half_gemv8_522_0__matmul_converted_raster_0",
+      "operator_type": "Raster",
+      "tensor": "Reshape410___tr4fold3_half_gemv8_522_0__matmul_converted",
+      "backend": "OpenCL",
+      "layout": "NCHW",
+      "dtype": "float32",
+      "shape": [
+        1,
+        512,
+        1,
+        1
+      ],
+      "file": "0015.bin",
+      "original": null
+    },
+    {
+      "operator": "fold3_half_gemv8_522_0__matmul_converted",
+      "operator_type": "Convolution",
+      "tensor": "fold3_half_gemv8_522_0__matmul_converted",
+      "backend": "OpenCL",
+      "layout": "NCHW",
+      "dtype": "float32",
+      "shape": [
+        1,
+        64,
+        1,
+        1
+      ],
+      "file": "0016.bin",
+      "original": null
+    },
+    {
+      "operator": "linear_9_raster_0",
+      "operator_type": "Raster",
+      "tensor": "fold3_half_gemv8_522_0",
+      "backend": "OpenCL",
+      "layout": "NCHW",
+      "dtype": "float32",
+      "shape": [
+        1,
+        64
+      ],
+      "file": "0017.bin",
+      "original": {
+        "tensor": "fold3_half_gemv8_522_0",
+        "node": "node_linear_9",
+        "operator": "Gemm",
+        "domain": ""
+      },
+      "tapped_graph_sha256": "f01c0079ef1159b69bc700b461d4920fe70eabbf45ea64192498a85d1df84313",
+      "original_dtype": "float16",
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          64
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "pre_rounding_diagnostic": false
+    },
+    {
+      "operator": "linear_9",
+      "operator_type": "Cast",
+      "tensor": "linear_9",
+      "backend": "OpenCL",
+      "layout": "NCHW",
+      "dtype": "float32",
+      "shape": [
+        1,
+        64
+      ],
+      "file": "0018.bin",
+      "original": {
+        "tensor": "linear_9",
+        "node": "fold3_half_round_522_0",
+        "operator": "Cast",
+        "domain": ""
+      },
+      "tapped_graph_sha256": "b70acd0e733c6a620dff789a1776094da3a390f80fc51c9604fa2b155558b708",
+      "original_dtype": "float16",
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          64
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "pre_rounding_diagnostic": false
+    },
+    {
+      "operator": "InsertedPrecisionFreeCast_linear_9",
+      "operator_type": "Cast",
+      "tensor": "InsertedPrecisionFreeCast_linear_9",
+      "backend": "OpenCL",
+      "layout": "NCHW",
+      "dtype": "float32",
+      "shape": [
+        1,
+        64
+      ],
+      "file": "0019.bin",
+      "original": {
+        "tensor": "InsertedPrecisionFreeCast_linear_9",
+        "node": "InsertedPrecisionFreeCast_linear_9",
+        "operator": "Cast",
+        "domain": ""
+      },
+      "tapped_graph_sha256": "bf91561da7e27f894692f5a602a7f336c52bb7ab00eefc1e6a601955ec3ef26a",
+      "original_dtype": "float32",
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          64
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "pre_rounding_diagnostic": false
+    },
+    {
+      "operator": "InsertedPrecisionFreeCast_relu_6",
+      "operator_type": "ReLU",
+      "tensor": "InsertedPrecisionFreeCast_relu_6",
+      "backend": "OpenCL",
+      "layout": "NCHW",
+      "dtype": "float32",
+      "shape": [
+        1,
+        64
+      ],
+      "file": "0020.bin",
+      "original": {
+        "tensor": "InsertedPrecisionFreeCast_relu_6",
+        "node": "node_relu_6",
+        "operator": "Relu",
+        "domain": ""
+      },
+      "tapped_graph_sha256": "41225b55d427d6dc4837215fc6eb8b0c8d29025b92f43860524d1151e8937b31",
+      "original_dtype": "float32",
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          64
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "pre_rounding_diagnostic": false
+    },
+    {
+      "operator": "android_precision_426_result__matmul_converted_raster_0",
+      "operator_type": "Raster",
+      "tensor": "Reshape438___tr4android_precision_426_result__matmul_converted",
+      "backend": "OpenCL",
+      "layout": "NCHW",
+      "dtype": "float32",
+      "shape": [
+        1,
+        64,
+        1,
+        1
+      ],
+      "file": "0021.bin",
+      "original": null
+    },
+    {
+      "operator": "android_precision_426_result__matmul_converted",
+      "operator_type": "Convolution",
+      "tensor": "ConvertTensor440",
+      "backend": "OpenCL",
+      "layout": "NCHW",
+      "dtype": "float32",
+      "shape": [
+        1,
+        48,
+        1,
+        1
+      ],
+      "file": "0022.bin",
+      "original": null
+    },
+    {
+      "operator": "android_precision_427_result__matmul_converted_raster_0",
+      "operator_type": "Raster",
+      "tensor": "Reshape464___tr4android_precision_427_result__matmul_converted",
+      "backend": "OpenCL",
+      "layout": "NCHW",
+      "dtype": "float32",
+      "shape": [
+        1,
+        48,
+        1,
+        1
+      ],
+      "file": "0023.bin",
+      "original": null
+    },
+    {
+      "operator": "android_precision_427_result__matmul_converted",
+      "operator_type": "Convolution",
+      "tensor": "ConvertTensor466",
+      "backend": "OpenCL",
+      "layout": "NCHW",
+      "dtype": "float32",
+      "shape": [
+        1,
+        32,
+        1,
+        1
+      ],
+      "file": "0024.bin",
+      "original": null
+    },
+    {
+      "operator": "relu_8_raster_0",
+      "operator_type": "Raster",
+      "tensor": "InsertedPrecisionFreeCast_relu_8",
+      "backend": "OpenCL",
+      "layout": "NCHW",
+      "dtype": "float32",
+      "shape": [
+        1,
+        32
+      ],
+      "file": "0025.bin",
+      "original": {
+        "tensor": "InsertedPrecisionFreeCast_relu_8",
+        "node": "",
+        "operator": "Relu",
+        "domain": ""
+      },
+      "tapped_graph_sha256": "e49732df2d9f5f7df53aeb2f651354817c486cf401a89aa1c510a80f7021df47",
+      "original_dtype": "float32",
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          32
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": false,
+        "max_abs_error": 1.4901161193847656e-07,
+        "mismatched_elements": 0
+      },
+      "pre_rounding_diagnostic": false
+    },
+    {
+      "operator": "relu_8",
+      "operator_type": "Cast",
+      "tensor": "relu_8",
+      "backend": "OpenCL",
+      "layout": "NCHW",
+      "dtype": "float32",
+      "shape": [
+        1,
+        32
+      ],
+      "file": "0026.bin",
+      "original": {
+        "tensor": "relu_8",
+        "node": "InsertedPrecisionFreeCast_relu_8",
+        "operator": "Cast",
+        "domain": ""
+      },
+      "tapped_graph_sha256": "a80d73ecdae0968924ba08247e9b3e0b931c641aac058a55b85cbe57634f96cf",
+      "original_dtype": "float16",
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          32
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": false,
+        "max_abs_error": 6.103515625e-05,
+        "mismatched_elements": 0
+      },
+      "pre_rounding_diagnostic": false
+    },
+    {
+      "operator": "fold3_half_gemv8_530_0__matmul_converted_raster_0",
+      "operator_type": "Raster",
+      "tensor": "Reshape491___tr4fold3_half_gemv8_530_0__matmul_converted",
+      "backend": "OpenCL",
+      "layout": "NCHW",
+      "dtype": "float32",
+      "shape": [
+        1,
+        32,
+        1,
+        1
+      ],
+      "file": "0027.bin",
+      "original": null
+    },
+    {
+      "operator": "fold3_half_gemv8_530_0__matmul_converted",
+      "operator_type": "Convolution",
+      "tensor": "fold3_half_gemv8_530_0__matmul_converted",
+      "backend": "OpenCL",
+      "layout": "NCHW",
+      "dtype": "float32",
+      "shape": [
+        1,
+        12,
+        1,
+        1
+      ],
+      "file": "0028.bin",
+      "original": null
+    },
+    {
+      "operator": "linear_12_raster_0",
+      "operator_type": "Raster",
+      "tensor": "fold3_half_gemv8_530_0",
+      "backend": "OpenCL",
+      "layout": "NCHW",
+      "dtype": "float32",
+      "shape": [
+        1,
+        12
+      ],
+      "file": "0029.bin",
+      "original": {
+        "tensor": "fold3_half_gemv8_530_0",
+        "node": "node_linear_12",
+        "operator": "Gemm",
+        "domain": ""
+      },
+      "tapped_graph_sha256": "0ac29eedb7332e3d9f925e07e4f7fdeda63560596ad0350a0b7cfe70f437806c",
+      "original_dtype": "float16",
+      "parity": {
+        "passed": false,
+        "finite": true,
+        "shape": [
+          1,
+          12
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": false,
+        "max_abs_error": 0.00048828125,
+        "mismatched_elements": 1
+      },
+      "pre_rounding_diagnostic": false
+    },
+    {
+      "operator": "linear_12",
+      "operator_type": "Cast",
+      "tensor": "linear_12",
+      "backend": "OpenCL",
+      "layout": "NCHW",
+      "dtype": "float32",
+      "shape": [
+        1,
+        12
+      ],
+      "file": "0030.bin",
+      "original": {
+        "tensor": "linear_12",
+        "node": "fold3_half_round_530_0",
+        "operator": "Cast",
+        "domain": ""
+      },
+      "tapped_graph_sha256": "08186d8d3aa3f35e691f98654d275a3c24dbf4bcb44f8a13e0e8da3d445fa854",
+      "original_dtype": "float16",
+      "parity": {
+        "passed": false,
+        "finite": true,
+        "shape": [
+          1,
+          12
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": false,
+        "max_abs_error": 0.00048828125,
+        "mismatched_elements": 1
+      },
+      "pre_rounding_diagnostic": false
+    },
+    {
+      "operator": "fold3_half_gemv8_513_0__matmul_converted",
+      "operator_type": "Convolution",
+      "tensor": "fold3_half_gemv8_513_0__matmul_converted",
+      "backend": "OpenCL",
+      "layout": "NCHW",
+      "dtype": "float32",
+      "shape": [
+        1,
+        32,
+        1,
+        1
+      ],
+      "file": "0031.bin",
+      "original": null
+    }
+  ]
+}

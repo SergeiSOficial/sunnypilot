@@ -1,0 +1,61 @@
+EEEE...........
+======================================================================
+ERROR: test_applies_and_verifies_only_current_thread (android.tests.test_controls_affinity.ControlsAffinityTest.test_applies_and_verifies_only_current_thread)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sergios/sunnypilot/android/tests/test_controls_affinity.py", line 28, in test_applies_and_verifies_only_current_thread
+    with patch("fold3_daemons.os.sched_getaffinity", side_effect=[{0, 4, 5}, {4, 5}]), \
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sergios/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/unittest/mock.py", line 1467, in __enter__
+    original, local = self.get_original()
+                      ^^^^^^^^^^^^^^^^^^^
+  File "/Users/sergios/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/unittest/mock.py", line 1437, in get_original
+    raise AttributeError(
+AttributeError: <module 'os' (frozen)> does not have the attribute 'sched_getaffinity'
+
+======================================================================
+ERROR: test_physical_and_unconfigured_sessions_do_not_change_affinity (android.tests.test_controls_affinity.ControlsAffinityTest.test_physical_and_unconfigured_sessions_do_not_change_affinity)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sergios/sunnypilot/android/tests/test_controls_affinity.py", line 16, in test_physical_and_unconfigured_sessions_do_not_change_affinity
+    with tempfile.TemporaryDirectory() as directory, patch("fold3_daemons.os.sched_setaffinity") as change:
+                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sergios/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/unittest/mock.py", line 1467, in __enter__
+    original, local = self.get_original()
+                      ^^^^^^^^^^^^^^^^^^^
+  File "/Users/sergios/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/unittest/mock.py", line 1437, in get_original
+    raise AttributeError(
+AttributeError: <module 'os' (frozen)> does not have the attribute 'sched_setaffinity'
+
+======================================================================
+ERROR: test_placement_failure_remains_visible (android.tests.test_controls_affinity.ControlsAffinityTest.test_placement_failure_remains_visible)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sergios/sunnypilot/android/tests/test_controls_affinity.py", line 51, in test_placement_failure_remains_visible
+    with patch("fold3_daemons.os.sched_getaffinity", return_value={0, 4}), \
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sergios/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/unittest/mock.py", line 1467, in __enter__
+    original, local = self.get_original()
+                      ^^^^^^^^^^^^^^^^^^^
+  File "/Users/sergios/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/unittest/mock.py", line 1437, in get_original
+    raise AttributeError(
+AttributeError: <module 'os' (frozen)> does not have the attribute 'sched_getaffinity'
+
+======================================================================
+ERROR: test_rejects_invalid_or_unavailable_cpus (android.tests.test_controls_affinity.ControlsAffinityTest.test_rejects_invalid_or_unavailable_cpus)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sergios/sunnypilot/android/tests/test_controls_affinity.py", line 39, in test_rejects_invalid_or_unavailable_cpus
+    with patch("fold3_daemons.os.sched_getaffinity", return_value={4, 5}), \
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sergios/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/unittest/mock.py", line 1467, in __enter__
+    original, local = self.get_original()
+                      ^^^^^^^^^^^^^^^^^^^
+  File "/Users/sergios/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/unittest/mock.py", line 1437, in get_original
+    raise AttributeError(
+AttributeError: <module 'os' (frozen)> does not have the attribute 'sched_getaffinity'
+
+----------------------------------------------------------------------
+Ran 15 tests in 0.038s
+
+FAILED (errors=4)

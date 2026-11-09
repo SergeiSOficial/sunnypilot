@@ -1,0 +1,37 @@
+patching file 'tools/converter/source/onnx/CastOnnx.cpp'
+patching file 'source/shape/ShapeCast.cpp'
+patching file 'source/backend/opencl/execution/buffer/CastBufExecution.cpp'
+patching file 'source/backend/opencl/execution/cl/cast_buf.cl'
+patching file 'source/backend/opencl/execution/image/CastExecution.cpp'
+patching file 'source/backend/opencl/execution/cl/cast.cl'
+patching file 'source/backend/opencl/execution/buffer/ConvBufExecution.hpp'
+patching file 'source/backend/opencl/execution/buffer/ConvBufExecution.cpp'
+patching file 'source/backend/opencl/execution/cl/fold3_half_gemv_buf.cl'
+patching file 'source/backend/opencl/execution/buffer/UnaryBufExecution.cpp'
+patching file 'source/backend/opencl/execution/cl/unary_buf.cl'
+patching file 'source/backend/opencl/execution/buffer/DepthwiseConvBufExecution.cpp'
+patching file 'source/backend/opencl/execution/cl/fold3_host_conv_buf.cl'
+patching file 'tools/converter/source/optimizer/merge/TransformSmallGroupConvolutionToDepthwise.cpp'
+patching file 'source/backend/opencl/execution/buffer/BinaryBufExecution.cpp'
+patching file 'source/backend/opencl/execution/cl/binary_buf.cl'
+patching file 'source/geometry/GeometryComputerUtils.hpp'
+patching file 'source/geometry/GeometryComputerUtils.cpp'
+patching file 'source/geometry/GeometryReduce.cpp'
+patching file 'source/backend/opencl/execution/buffer/ReductionBufExecution.hpp'
+patching file 'source/backend/opencl/execution/buffer/ReductionBufExecution.cpp'
+patching file 'source/backend/opencl/execution/cl/reduction_buf.cl'
+patching file 'tools/converter/source/optimizer/merge/FuseTemplateOp.cpp'
+patching file 'source/backend/opencl/execution/buffer/LoopBufExecution.cpp'
+patching file 'source/backend/opencl/execution/cl/loop.cl'
+patching file 'source/backend/opencl/execution/buffer/LayerNormBufExecution.hpp'
+patching file 'source/backend/opencl/execution/buffer/LayerNormBufExecution.cpp'
+patching file 'source/backend/opencl/execution/cl/layernorm_buf.cl'
+patch: **** malformed patch at line 1200: --- a/source/backend/opencl/execution/buffer/LoopBufExecution.hpp
+Traceback (most recent call last):
+  File "/Users/sergios/sunnypilot/android/scripts/build_mnn.py", line 74, in <module>
+    main()
+  File "/Users/sergios/sunnypilot/android/scripts/build_mnn.py", line 45, in main
+    subprocess.run(["patch", "-p1", "-i", str(patch)], cwd=source, check=True)
+  File "/Users/sergios/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['patch', '-p1', '-i', '/Users/sergios/sunnypilot/android/patches/mnn-half-cast.patch']' returned non-zero exit status 2.

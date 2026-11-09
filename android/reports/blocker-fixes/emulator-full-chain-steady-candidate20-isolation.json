@@ -1,0 +1,71 @@
+{
+  "serial": "emulator-5554",
+  "command": [
+    "/Users/sergios/sunnypilot/.venv/bin/python",
+    "-m",
+    "openpilot.tools.sim.android_chain_validation",
+    "--serial",
+    "emulator-5554",
+    "--adb",
+    "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+    "--package",
+    "com.samsung.sunnypilot.fold3",
+    "--seconds",
+    "30",
+    "--steady-inputs",
+    "--report",
+    "/Users/sergios/sunnypilot/android/reports/blocker-fixes/emulator-full-chain-steady-candidate20.json"
+  ],
+  "vehicle_tx_enabled": false,
+  "status": "passed",
+  "forwards_before": [],
+  "before_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "352 android.hardware.camera.provider.ranchu",
+      "353 android.hardware.camera.provider@2.7-service-google",
+      "431 cameraserver"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.8,
+    "thermal_override": false
+  },
+  "apk_sha256": "af767d70c26a7a073266262a086fcc88614f838a39204a165ab54fd8c5224746",
+  "baseline": {
+    "processes": [],
+    "camera_provider_processes": [
+      "352 android.hardware.camera.provider.ranchu",
+      "353 android.hardware.camera.provider@2.7-service-google",
+      "431 cameraserver"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.8,
+    "thermal_override": false,
+    "idle_seconds": 30.873809417011216,
+    "normal_thermal_seconds": 30.75723241700325
+  },
+  "apk_sha256_at_start": "af767d70c26a7a073266262a086fcc88614f838a39204a165ab54fd8c5224746",
+  "runtime": {
+    "manager_pid": 10495,
+    "ui_pid": 10698,
+    "simulation": true
+  },
+  "returncode": 0,
+  "after_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "352 android.hardware.camera.provider.ranchu",
+      "353 android.hardware.camera.provider@2.7-service-google",
+      "431 cameraserver"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.8,
+    "thermal_override": false
+  },
+  "forwards_removed": [],
+  "apk_sha256_after": "af767d70c26a7a073266262a086fcc88614f838a39204a165ab54fd8c5224746",
+  "artifact_stable": true
+}

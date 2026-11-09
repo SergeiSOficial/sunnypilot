@@ -1,0 +1,101 @@
+cat: files/panda-rx.json: No such file or directory
+{
+  "serial": "RFCR81Y1TBJ",
+  "status": "failed",
+  "requested_seconds": 30,
+  "vehicle_tx_enabled": false,
+  "road_readiness": "blocked",
+  "calibration": "unqualified",
+  "model_parity": "failed",
+  "physical_vehicle_verified": false,
+  "package": "com.samsung.sunnypilot.fold3",
+  "samsung_multiview": true,
+  "resource_sampling_seconds": 30,
+  "fresh_samples": {
+    "road": 0,
+    "driver": 6
+  },
+  "distinct_frame_ids": {
+    "road": 12,
+    "driver": 12
+  },
+  "error": "AssertionError: Insufficient fresh preview samples: {'road': 0, 'driver': 6}",
+  "elapsed_s": 36.38982720801141,
+  "panda_receive_only": {},
+  "cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 36.4,
+    "thermal_override": false
+  }
+}
+{
+  "serial": "RFCR81Y1TBJ",
+  "command": [
+    "/Users/sergios/sunnypilot/.venv/bin/python",
+    "android/scripts/validate_vision.py",
+    "--seconds",
+    "30",
+    "--samsung-multiview",
+    "--serial",
+    "RFCR81Y1TBJ",
+    "--adb",
+    "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+    "--report",
+    "/Users/sergios/sunnypilot/android/reports/blocker-fixes/fold-candidate33-vision.json",
+    "--package",
+    "com.samsung.sunnypilot.fold3"
+  ],
+  "vehicle_tx_enabled": false,
+  "status": "failed",
+  "validation_status": "failed",
+  "isolation_status": "passed",
+  "forwards_before": [],
+  "before_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 31.2,
+    "thermal_override": false
+  },
+  "apk_sha256": "cdaac6c4223ee64ba2f600e4cac3a0d7775bcde2f7a7d4ab5b69ec3e05092305",
+  "baseline": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.0,
+    "thermal_override": false,
+    "idle_seconds": 32.57258200002252,
+    "normal_thermal_seconds": 32.26738200002001
+  },
+  "apk_sha256_at_start": "cdaac6c4223ee64ba2f600e4cac3a0d7775bcde2f7a7d4ab5b69ec3e05092305",
+  "returncode": 1,
+  "after_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 36.4,
+    "thermal_override": false
+  },
+  "forwards_removed": [],
+  "apk_sha256_after": "cdaac6c4223ee64ba2f600e4cac3a0d7775bcde2f7a7d4ab5b69ec3e05092305",
+  "artifact_stable": true,
+  "wrapper_status": "failed"
+}

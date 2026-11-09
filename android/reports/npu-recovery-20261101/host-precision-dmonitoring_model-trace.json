@@ -1,0 +1,1035 @@
+{
+  "diagnostic_only": true,
+  "seed": 42,
+  "model": "dmonitoring_model",
+  "checks": [
+    {
+      "tensor": "div",
+      "operator": "Cast",
+      "node": "InsertedPrecisionFreeCast_div",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        1382400
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": true,
+      "max_abs_error": 0.0,
+      "mismatched_elements": 0
+    },
+    {
+      "tensor": "view",
+      "operator": "Reshape",
+      "node": "node_view",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        960,
+        360,
+        4
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": true,
+      "max_abs_error": 0.0,
+      "mismatched_elements": 0
+    },
+    {
+      "tensor": "permute",
+      "operator": "Transpose",
+      "node": "node_permute",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        360,
+        960,
+        4
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": true,
+      "max_abs_error": 0.0,
+      "mismatched_elements": 0
+    },
+    {
+      "tensor": "_unsafe_view",
+      "operator": "Reshape",
+      "node": "node__unsafe_view",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        360,
+        240,
+        16
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": true,
+      "max_abs_error": 0.0,
+      "mismatched_elements": 0
+    },
+    {
+      "tensor": "gelu_29",
+      "operator": "Cast",
+      "node": "InsertedPrecisionFreeCast_gelu_29",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        1280,
+        1,
+        1
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": true,
+      "max_abs_error": 0.0,
+      "mismatched_elements": 0
+    },
+    {
+      "tensor": "view_1",
+      "operator": "Reshape",
+      "node": "node_view_1",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        1280
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": true,
+      "max_abs_error": 0.0,
+      "mismatched_elements": 0
+    },
+    {
+      "tensor": "linear",
+      "operator": "Gemm",
+      "node": "node_linear",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        512
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.005859375,
+      "mismatched_elements": 274
+    },
+    {
+      "tensor": "linear_1",
+      "operator": "Gemm",
+      "node": "node_linear_1",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        32
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.0078125,
+      "mismatched_elements": 15
+    },
+    {
+      "tensor": "relu_2",
+      "operator": "Cast",
+      "node": "InsertedPrecisionFreeCast_relu_2",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        16
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.00390625,
+      "mismatched_elements": 2
+    },
+    {
+      "tensor": "linear_4",
+      "operator": "Gemm",
+      "node": "node_linear_4",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        3
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.00390625,
+      "mismatched_elements": 0
+    },
+    {
+      "tensor": "slice_1",
+      "operator": "Split",
+      "node": "node_slice_3/GatherSliceToSplitFusion",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        1
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.0009765625,
+      "mismatched_elements": 0
+    },
+    {
+      "tensor": "slice_2",
+      "operator": "Split",
+      "node": "node_slice_3/GatherSliceToSplitFusion",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        1
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.0009765625,
+      "mismatched_elements": 0
+    },
+    {
+      "tensor": "slice_3",
+      "operator": "Split",
+      "node": "node_slice_3/GatherSliceToSplitFusion",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        1
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.00390625,
+      "mismatched_elements": 0
+    },
+    {
+      "tensor": "linear_5",
+      "operator": "Gemm",
+      "node": "node_linear_5",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        32
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.0078125,
+      "mismatched_elements": 25
+    },
+    {
+      "tensor": "relu_5",
+      "operator": "Cast",
+      "node": "InsertedPrecisionFreeCast_relu_5",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        16
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.001953125,
+      "mismatched_elements": 8
+    },
+    {
+      "tensor": "linear_8",
+      "operator": "Gemm",
+      "node": "node_linear_8",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        2
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.00146484375,
+      "mismatched_elements": 2
+    },
+    {
+      "tensor": "slice_4",
+      "operator": "Split",
+      "node": "node_slice_5/GatherSliceToSplitFusion",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        1
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.00146484375,
+      "mismatched_elements": 1
+    },
+    {
+      "tensor": "slice_5",
+      "operator": "Split",
+      "node": "node_slice_5/GatherSliceToSplitFusion",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        1
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.00146484375,
+      "mismatched_elements": 1
+    },
+    {
+      "tensor": "linear_25",
+      "operator": "Gemm",
+      "node": "node_linear_25",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        32
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.0078125,
+      "mismatched_elements": 16
+    },
+    {
+      "tensor": "relu_20",
+      "operator": "Cast",
+      "node": "InsertedPrecisionFreeCast_relu_20",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        16
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.0009765625,
+      "mismatched_elements": 3
+    },
+    {
+      "tensor": "linear_28",
+      "operator": "Gemm",
+      "node": "node_linear_28",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        3
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.00390625,
+      "mismatched_elements": 0
+    },
+    {
+      "tensor": "slice_6",
+      "operator": "Split",
+      "node": "node_slice_8/GatherSliceToSplitFusion",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        1
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.0009765625,
+      "mismatched_elements": 0
+    },
+    {
+      "tensor": "slice_7",
+      "operator": "Split",
+      "node": "node_slice_8/GatherSliceToSplitFusion",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        1
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.0009765625,
+      "mismatched_elements": 0
+    },
+    {
+      "tensor": "slice_8",
+      "operator": "Split",
+      "node": "node_slice_8/GatherSliceToSplitFusion",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        1
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.00390625,
+      "mismatched_elements": 0
+    },
+    {
+      "tensor": "linear_29",
+      "operator": "Gemm",
+      "node": "node_linear_29",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        32
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.0078125,
+      "mismatched_elements": 18
+    },
+    {
+      "tensor": "relu_23",
+      "operator": "Cast",
+      "node": "InsertedPrecisionFreeCast_relu_23",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        16
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.002685546875,
+      "mismatched_elements": 6
+    },
+    {
+      "tensor": "linear_32",
+      "operator": "Gemm",
+      "node": "node_linear_32",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        2
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.002197265625,
+      "mismatched_elements": 2
+    },
+    {
+      "tensor": "slice_9",
+      "operator": "Split",
+      "node": "node_slice_10/GatherSliceToSplitFusion",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        1
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.002197265625,
+      "mismatched_elements": 1
+    },
+    {
+      "tensor": "slice_10",
+      "operator": "Split",
+      "node": "node_slice_10/GatherSliceToSplitFusion",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        1
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.001220703125,
+      "mismatched_elements": 1
+    },
+    {
+      "tensor": "linear_49",
+      "operator": "Gemm",
+      "node": "node_linear_49",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        48
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.0078125,
+      "mismatched_elements": 16
+    },
+    {
+      "tensor": "relu_38",
+      "operator": "Cast",
+      "node": "InsertedPrecisionFreeCast_relu_38",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        16
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.003173828125,
+      "mismatched_elements": 8
+    },
+    {
+      "tensor": "linear_52",
+      "operator": "Gemm",
+      "node": "node_linear_52",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        1
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.0048828125,
+      "mismatched_elements": 1
+    },
+    {
+      "tensor": "mul",
+      "operator": "Cast",
+      "node": "InsertedPrecisionFreeCast_mul",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        3
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": true,
+      "max_abs_error": 0.0,
+      "mismatched_elements": 0
+    },
+    {
+      "tensor": "cat",
+      "operator": "Concat",
+      "node": "node_cat",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        515
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.005859375,
+      "mismatched_elements": 274
+    },
+    {
+      "tensor": "linear_45",
+      "operator": "Gemm",
+      "node": "node_linear_45",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        96
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.01171875,
+      "mismatched_elements": 45
+    },
+    {
+      "tensor": "relu_35",
+      "operator": "Cast",
+      "node": "InsertedPrecisionFreeCast_relu_35",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        32
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.001953125,
+      "mismatched_elements": 0
+    },
+    {
+      "tensor": "linear_48",
+      "operator": "Gemm",
+      "node": "node_linear_48",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        1
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.00390625,
+      "mismatched_elements": 0
+    },
+    {
+      "tensor": "linear_41",
+      "operator": "Gemm",
+      "node": "node_linear_41",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        128
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.0078125,
+      "mismatched_elements": 56
+    },
+    {
+      "tensor": "relu_32",
+      "operator": "Cast",
+      "node": "InsertedPrecisionFreeCast_relu_32",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        32
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.001953125,
+      "mismatched_elements": 1
+    },
+    {
+      "tensor": "linear_44",
+      "operator": "Gemm",
+      "node": "node_linear_44",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        1
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.001953125,
+      "mismatched_elements": 0
+    },
+    {
+      "tensor": "linear_37",
+      "operator": "Gemm",
+      "node": "node_linear_37",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        32
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.015625,
+      "mismatched_elements": 9
+    },
+    {
+      "tensor": "relu_29",
+      "operator": "Cast",
+      "node": "InsertedPrecisionFreeCast_relu_29",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        16
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.00390625,
+      "mismatched_elements": 1
+    },
+    {
+      "tensor": "linear_40",
+      "operator": "Gemm",
+      "node": "node_linear_40",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        1
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.001953125,
+      "mismatched_elements": 0
+    },
+    {
+      "tensor": "linear_33",
+      "operator": "Gemm",
+      "node": "node_linear_33",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        64
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.0078125,
+      "mismatched_elements": 25
+    },
+    {
+      "tensor": "relu_26",
+      "operator": "Cast",
+      "node": "InsertedPrecisionFreeCast_relu_26",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        32
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.001953125,
+      "mismatched_elements": 3
+    },
+    {
+      "tensor": "linear_36",
+      "operator": "Gemm",
+      "node": "node_linear_36",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        12
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.005859375,
+      "mismatched_elements": 7
+    },
+    {
+      "tensor": "linear_21",
+      "operator": "Gemm",
+      "node": "node_linear_21",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        96
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.005859375,
+      "mismatched_elements": 42
+    },
+    {
+      "tensor": "relu_17",
+      "operator": "Cast",
+      "node": "InsertedPrecisionFreeCast_relu_17",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        32
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.00390625,
+      "mismatched_elements": 1
+    },
+    {
+      "tensor": "linear_24",
+      "operator": "Gemm",
+      "node": "node_linear_24",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        1
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": true,
+      "max_abs_error": 0.0,
+      "mismatched_elements": 0
+    },
+    {
+      "tensor": "linear_17",
+      "operator": "Gemm",
+      "node": "node_linear_17",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        128
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.0078125,
+      "mismatched_elements": 67
+    },
+    {
+      "tensor": "relu_14",
+      "operator": "Cast",
+      "node": "InsertedPrecisionFreeCast_relu_14",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        32
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.0009765625,
+      "mismatched_elements": 1
+    },
+    {
+      "tensor": "linear_20",
+      "operator": "Gemm",
+      "node": "node_linear_20",
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        1
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": true,
+      "max_abs_error": 0.0,
+      "mismatched_elements": 0
+    },
+    {
+      "tensor": "linear_13",
+      "operator": "Gemm",
+      "node": "node_linear_13",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        32
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.0078125,
+      "mismatched_elements": 15
+    },
+    {
+      "tensor": "relu_11",
+      "operator": "Cast",
+      "node": "InsertedPrecisionFreeCast_relu_11",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        16
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.00390625,
+      "mismatched_elements": 2
+    },
+    {
+      "tensor": "linear_16",
+      "operator": "Gemm",
+      "node": "node_linear_16",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        1
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.00390625,
+      "mismatched_elements": 1
+    },
+    {
+      "tensor": "linear_9",
+      "operator": "Gemm",
+      "node": "node_linear_9",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        64
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.005859375,
+      "mismatched_elements": 31
+    },
+    {
+      "tensor": "relu_8",
+      "operator": "Cast",
+      "node": "InsertedPrecisionFreeCast_relu_8",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        32
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.0009765625,
+      "mismatched_elements": 3
+    },
+    {
+      "tensor": "linear_12",
+      "operator": "Gemm",
+      "node": "node_linear_12",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        12
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.001953125,
+      "mismatched_elements": 4
+    },
+    {
+      "tensor": "outputs",
+      "operator": "Concat",
+      "node": "node_cat_2",
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        553
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.005859375,
+      "mismatched_elements": 291
+    }
+  ],
+  "first_tolerance_failure": {
+    "tensor": "linear",
+    "operator": "Gemm",
+    "node": "node_linear",
+    "passed": false,
+    "finite": true,
+    "shape": [
+      1,
+      512
+    ],
+    "dtype": "float32",
+    "expected_nonfinite_elements": 0,
+    "unexpected_nonfinite_elements": 0,
+    "exact": false,
+    "max_abs_error": 0.005859375,
+    "mismatched_elements": 274
+  }
+}

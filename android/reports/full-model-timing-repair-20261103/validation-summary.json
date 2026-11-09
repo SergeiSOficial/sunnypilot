@@ -1,0 +1,129 @@
+{
+  "branch": "codex/fold3-android-port",
+  "candidate": "candidate45zl",
+  "artifacts": {
+    "apk_sha256": "0e035bbab912cc5607bde2a1a934a433d452cde8e46d6a69a6e09ae2ff79aa2a",
+    "ordered_half_gemv_feature": true,
+    "controls_gil_policy_preserved": true,
+    "vehicle_tx_enabled": false,
+    "marked_graph_sha256": "f3d9c2c47017f92ec45431568e6e506d57aa0d39dd958eab863eb3122c58927d",
+    "marked_graph_matches_archive": true,
+    "packaged_ncnn_sha256": "8498bd5d14e028a5f7856a78e71b565fa31f2e34e1aae80a6985a14d5c0cb9ab",
+    "native_build": {
+      "source": "7e36d25cb153092ba87a60530455c7376fedf452",
+      "archive_sha256": "5197a2ea772c97e8bc74547fe37f833d494476603a30bd5216371ea0c1751ba1",
+      "patch_sha256": "3d41d215589eec67b46b9342ddcfff7e619ebf3d9656c9dda774113a26bfdc43",
+      "recipe_sha256": "a3971aca7a3b0168778bbae6e9d221444e5d51e42b53eacb4cfa8dcba00df5d3",
+      "glslang": "780b6a209132dc74e99458f62ebe5fa7e57c41cf",
+      "glslang_archive_sha256": "9c80e985ae0ea5c7b6a0d59b99de3058ba170fcc0589a913023d12c3473a3617",
+      "ndk": "28.2.13676358",
+      "api": 35,
+      "explicit_half_rounding": true
+    }
+  },
+  "vehicle_tx_enabled": false,
+  "physical_engagement_allowed": false,
+  "cooling_optimization": false,
+  "host": {
+    "status": "passed",
+    "tests": 189,
+    "report": "host-suite-final.log",
+    "prior_environment_failure": "host-suite-sdk-mismatch.log"
+  },
+  "instrumentation": {
+    "serial": "emulator-5560",
+    "package": "com.samsung.sunnypilot.fold3",
+    "completed_tests": 28,
+    "expected_tests": 28,
+    "returncode": 0,
+    "status": "passed"
+  },
+  "emulator_groups": [
+    {
+      "name": "instrumentation",
+      "status": "passed",
+      "isolation_status": "passed"
+    },
+    {
+      "name": "chain-device-steady",
+      "status": "passed",
+      "isolation_status": "passed"
+    },
+    {
+      "name": "chain-device-faults",
+      "status": "passed",
+      "isolation_status": "passed"
+    },
+    {
+      "name": "lifecycle",
+      "status": "passed",
+      "isolation_status": "passed"
+    },
+    {
+      "name": "adb-faults",
+      "status": "passed",
+      "isolation_status": "passed"
+    },
+    {
+      "name": "ipc",
+      "status": "passed",
+      "isolation_status": "passed"
+    },
+    {
+      "name": "metadrive-cancel",
+      "status": "passed",
+      "isolation_status": "passed"
+    },
+    {
+      "name": "metadrive-stale",
+      "status": "passed",
+      "isolation_status": "passed"
+    },
+    {
+      "name": "thermal",
+      "status": "passed",
+      "isolation_status": "passed"
+    },
+    {
+      "name": "camera-timing",
+      "status": "failed",
+      "isolation_status": "passed"
+    }
+  ],
+  "full_model": {
+    "status": "failed",
+    "backend": "ncnn software Vulkan; diagnostic only",
+    "seed": 42,
+    "mismatched_elements": 8,
+    "elements": 553,
+    "max_abs_error": 0.00390625,
+    "report": "rounding-ncnn-seed42.json"
+  },
+  "controls": {
+    "work_gate": "passed in emulator fixture only",
+    "complete_cycle_gate": "failed",
+    "report": "emulator-candidate45zl-chain-device-steady.json",
+    "comparison": "controls-comparison.json"
+  },
+  "qualification": {
+    "status": "blocked",
+    "reason": "Full-model parity failed; Fold3 disconnected. No physical speed, complete 795-comparison qualification or longer workload accepted."
+  },
+  "physical_gates": {
+    "rear_sensor_identity": "blocked: lens-cover proof deferred",
+    "calibration": "blocked: unmounted",
+    "panda_vehicle": "blocked: disconnected"
+  },
+  "cleanup": {
+    "status": "passed",
+    "report": "rounding-heads-trace-cleanup.json",
+    "adb_devices_after": "List of devices attached",
+    "emulator_exit_code": 0
+  },
+  "final_rounding_gpu_trace": {
+    "local_operations": "passed: exact same-input agreement for Tanh and mean",
+    "full_model": "failed: 8/553",
+    "first_mapped_failure": "linear_100: 3/512",
+    "report": "rounding-activation-mean-gpu.json"
+  }
+}

@@ -1,0 +1,209 @@
+{
+  "serial": "RFCR81Y1TBJ",
+  "package": "com.samsung.sunnypilot.fold3",
+  "status": "failed",
+  "simulation": true,
+  "vehicle_tx_enabled": false,
+  "physical_vehicle_verified": false,
+  "rejected_cases": [
+    "can_service",
+    "output_service",
+    "sequence_gap",
+    "negative_age",
+    "service_payload_mismatch",
+    "malformed_cereal",
+    "invalid_base64",
+    "oversized_packet",
+    "malformed_json",
+    "non_simulation_handshake"
+  ],
+  "manager_before": {
+    "pid": 18367,
+    "simulation": true,
+    "full_chain": false,
+    "vehicle_tx_enabled": false,
+    "engagement_allowed": false,
+    "engagement_blocker": "camera calibration, model parity/performance and physical Panda qualification incomplete",
+    "processes": {
+      "Controls": {
+        "daemon": "controlsd",
+        "pid": 18406,
+        "phase": "waiting_for_selfdrive_state",
+        "error": "",
+        "last_progress_ms": 113245183,
+        "ticks": 103,
+        "restarts": 0
+      },
+      "Monitoring": {
+        "daemon": "dmonitoringd",
+        "pid": 18407,
+        "phase": "waiting_for_driver_model",
+        "error": "",
+        "last_progress_ms": 113244754,
+        "ticks": 3,
+        "restarts": 0
+      },
+      "Simulator": {
+        "daemon": "sim_bridge",
+        "pid": 18408,
+        "phase": "waiting_for_adb",
+        "error": "",
+        "last_progress_ms": 113244326,
+        "ticks": 4,
+        "restarts": 0
+      }
+    },
+    "updated_elapsed_ms": 113245204
+  },
+  "manager_after": {
+    "pid": 18367,
+    "simulation": true,
+    "full_chain": false,
+    "vehicle_tx_enabled": false,
+    "engagement_allowed": false,
+    "engagement_blocker": "camera calibration, model parity/performance and physical Panda qualification incomplete",
+    "processes": {
+      "Controls": {
+        "daemon": "controlsd",
+        "pid": 18406,
+        "phase": "waiting_for_selfdrive_state",
+        "error": "",
+        "last_progress_ms": 113253326,
+        "ticks": 552,
+        "restarts": 0
+      },
+      "Monitoring": {
+        "phase": "process_died",
+        "restarts": 2
+      },
+      "Simulator": {
+        "daemon": "sim_bridge",
+        "pid": 18408,
+        "phase": "waiting_for_adb",
+        "error": "",
+        "last_progress_ms": 113252617,
+        "ticks": 310,
+        "restarts": 0
+      }
+    },
+    "updated_elapsed_ms": 113253330
+  },
+  "error": "KeyError: 'pid'",
+  "manager_at_failure": {
+    "pid": 18367,
+    "simulation": true,
+    "full_chain": false,
+    "vehicle_tx_enabled": false,
+    "engagement_allowed": false,
+    "engagement_blocker": "camera calibration, model parity/performance and physical Panda qualification incomplete",
+    "processes": {
+      "Controls": {
+        "daemon": "controlsd",
+        "pid": 18406,
+        "phase": "waiting_for_selfdrive_state",
+        "error": "",
+        "last_progress_ms": 113253827,
+        "ticks": 574,
+        "restarts": 0
+      },
+      "Monitoring": {
+        "phase": "process_died",
+        "restarts": 2
+      },
+      "Simulator": {
+        "daemon": "sim_bridge",
+        "pid": 18408,
+        "phase": "waiting_for_adb",
+        "error": "",
+        "last_progress_ms": 113253619,
+        "ticks": 311,
+        "restarts": 0
+      }
+    },
+    "updated_elapsed_ms": 113253839
+  },
+  "sim_bridge_at_failure": {
+    "daemon": "sim_bridge",
+    "pid": 18408,
+    "vehicle_tx_enabled": false,
+    "engagement_allowed": false,
+    "work_samples": 0,
+    "deadline_misses": 0,
+    "phase": "waiting_for_adb",
+    "simulation": true,
+    "p99_stages_ms": {},
+    "accepted_packets": 281,
+    "rejected_sessions": 12,
+    "last_disconnect": "ADB stream disconnected",
+    "latest_input_services": [
+      "selfdriveState",
+      "selfdriveStateSP"
+    ],
+    "stale_control_inputs": [
+      "carState",
+      "driverStateV2",
+      "modelV2",
+      "selfdriveState",
+      "selfdriveStateSP"
+    ],
+    "car_fingerprint": "HYUNDAI_IONIQ_PHEV_2019",
+    "factory_acc": true,
+    "min_steer_speed_m_s": 14.305279731750488,
+    "physical_fingerprint_verified": false
+  },
+  "dmonitoringd_at_failure": {
+    "daemon": "dmonitoringd",
+    "pid": 18585,
+    "vehicle_tx_enabled": false,
+    "engagement_allowed": false,
+    "work_samples": 0,
+    "deadline_misses": 0,
+    "phase": "failed",
+    "simulation": true,
+    "p99_stages_ms": {},
+    "error": "Traceback (most recent call last):\n  File \"/data/data/com.samsung.sunnypilot.fold3/files/chaquopy/AssetFinder/app/fold3_daemons.py\", line 148, in run\n  File \"/data/data/com.samsung.sunnypilot.fold3/files/chaquopy/AssetFinder/app/fold3_daemons.py\", line 86, in monitoring\n  File \"/data/data/com.samsung.sunnypilot.fold3/files/chaquopy/AssetFinder/app/openpilot/selfdrive/monitoring/dmonitoringd.py\", line 32, in dmonitoringd_thread\n    DM.run_step(sm, demo=demo_mode)\n  File \"/data/data/com.samsung.sunnypilot.fold3/files/chaquopy/AssetFinder/app/openpilot/selfdrive/monitoring/policy.py\", line 447, in run_step\n    brake_disengage_prob = sm['modelV2'].meta.disengagePredictions.brakeDisengageProbs[0] # brake disengage prob in next 2s\n                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^\n  File \"capnp/lib/capnp.pyx\", line 438, in capnp.lib.capnp._DynamicListReader.__getitem__\nIndexError: Out of bounds\n"
+  },
+  "dmonitoringd-last-failure_at_failure": {
+    "daemon": "dmonitoringd",
+    "pid": 18585,
+    "vehicle_tx_enabled": false,
+    "engagement_allowed": false,
+    "work_samples": 0,
+    "deadline_misses": 0,
+    "phase": "failed",
+    "simulation": true,
+    "p99_stages_ms": {},
+    "error": "Traceback (most recent call last):\n  File \"/data/data/com.samsung.sunnypilot.fold3/files/chaquopy/AssetFinder/app/fold3_daemons.py\", line 148, in run\n  File \"/data/data/com.samsung.sunnypilot.fold3/files/chaquopy/AssetFinder/app/fold3_daemons.py\", line 86, in monitoring\n  File \"/data/data/com.samsung.sunnypilot.fold3/files/chaquopy/AssetFinder/app/openpilot/selfdrive/monitoring/dmonitoringd.py\", line 32, in dmonitoringd_thread\n    DM.run_step(sm, demo=demo_mode)\n  File \"/data/data/com.samsung.sunnypilot.fold3/files/chaquopy/AssetFinder/app/openpilot/selfdrive/monitoring/policy.py\", line 447, in run_step\n    brake_disengage_prob = sm['modelV2'].meta.disengagePredictions.brakeDisengageProbs[0] # brake disengage prob in next 2s\n                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^\n  File \"capnp/lib/capnp.pyx\", line 438, in capnp.lib.capnp._DynamicListReader.__getitem__\nIndexError: Out of bounds\n"
+  },
+  "controlsd_at_failure": {
+    "daemon": "controlsd",
+    "pid": 18406,
+    "vehicle_tx_enabled": false,
+    "engagement_allowed": false,
+    "work_samples": 577,
+    "deadline_misses": 0,
+    "phase": "waiting_for_selfdrive_state",
+    "simulation": true,
+    "p99_stages_ms": {
+      "input_handling_ms": 19.489583,
+      "computation_ms": 4.633541,
+      "publishing_ms": 2.278021,
+      "parameters_extensions_ms": 2.727396,
+      "cycle_before_reporting_ms": 25.267292,
+      "reporting_ms": 3.398542
+    },
+    "updated_input_samples": 293,
+    "input_handling_ms": 15.798594,
+    "computation_ms": 2.571562,
+    "publishing_ms": 1.695886,
+    "parameters_extensions_ms": 1.776927,
+    "cycle_before_reporting_ms": 21.842969,
+    "work_timing_excludes_input_wait": true,
+    "cycle_deadline_misses": 501,
+    "reporting_ms": 0.747448,
+    "complete_cycle_ms": 22.6325,
+    "mean_cycle_hz": 54.88518115056571,
+    "p99_work_ms": 7.62849,
+    "p99_complete_cycle_ms": 26.558854
+  }
+}

@@ -1,0 +1,641 @@
+{
+  "scope": "Short bench diagnostics; workloads and source fixture differ. Not a controlled speedup or sustained-stack acceptance claim.",
+  "units": {
+    "work_p99_ms": "milliseconds",
+    "camera_age_p99_ms": "milliseconds",
+    "pss_kib": "KiB"
+  },
+  "candidates": {
+    "candidate8": {
+      "apk_sha256": "98196287effbeaf809b71b256b243eee77fd5f04c92a720ba6244da0a5f93295",
+      "model_profiles": {
+        "opencl": {
+          "report": "fold-opencl-candidate8.json",
+          "status": "failed",
+          "models": {
+            "dmonitoring_model": {
+              "status": "failed",
+              "samples": 100,
+              "work_p99_ms": 112.60595072,
+              "deadline_misses_50ms": 100,
+              "parity": {
+                "outputs": {
+                  "passed": false,
+                  "max_abs_error": 0.048828125,
+                  "shape": [
+                    1,
+                    553
+                  ]
+                }
+              },
+              "additional_seed_parity": {
+                "7": {
+                  "outputs": {
+                    "passed": false,
+                    "finite": true,
+                    "shape": [
+                      1,
+                      553
+                    ],
+                    "dtype": "float16",
+                    "max_abs_error": 0.0625,
+                    "mismatched_elements": 501
+                  }
+                },
+                "123": {
+                  "outputs": {
+                    "passed": false,
+                    "finite": true,
+                    "shape": [
+                      1,
+                      553
+                    ],
+                    "dtype": "float16",
+                    "max_abs_error": 0.046875,
+                    "mismatched_elements": 492
+                  }
+                }
+              }
+            },
+            "driving_supercombo": {
+              "status": "failed",
+              "samples": 100,
+              "work_p99_ms": 89.72447642,
+              "deadline_misses_50ms": 100,
+              "parity": {
+                "outputs": {
+                  "passed": false,
+                  "max_abs_error": 2.90625,
+                  "shape": [
+                    1,
+                    2576
+                  ]
+                },
+                "next_state_img_q": {
+                  "passed": true,
+                  "max_abs_error": 0.0,
+                  "shape": [
+                    2,
+                    5,
+                    6,
+                    128,
+                    256
+                  ]
+                },
+                "next_state_desire_q": {
+                  "passed": true,
+                  "max_abs_error": 0.0,
+                  "shape": [
+                    100,
+                    1,
+                    8
+                  ]
+                },
+                "next_state_feat_q": {
+                  "passed": false,
+                  "max_abs_error": 0.011627197265625,
+                  "shape": [
+                    96,
+                    1,
+                    512
+                  ]
+                }
+              },
+              "additional_seed_parity": {
+                "7": {
+                  "outputs": {
+                    "passed": false,
+                    "finite": true,
+                    "shape": [
+                      1,
+                      2576
+                    ],
+                    "dtype": "float32",
+                    "max_abs_error": 9.3984375,
+                    "mismatched_elements": 2434
+                  },
+                  "next_state_img_q": {
+                    "passed": true,
+                    "finite": true,
+                    "shape": [
+                      2,
+                      5,
+                      6,
+                      128,
+                      256
+                    ],
+                    "dtype": "uint8",
+                    "max_abs_error": 0.0,
+                    "mismatched_elements": 0
+                  },
+                  "next_state_desire_q": {
+                    "passed": true,
+                    "finite": true,
+                    "shape": [
+                      100,
+                      1,
+                      8
+                    ],
+                    "dtype": "float32",
+                    "max_abs_error": 0.0,
+                    "mismatched_elements": 0
+                  },
+                  "next_state_feat_q": {
+                    "passed": false,
+                    "finite": true,
+                    "shape": [
+                      96,
+                      1,
+                      512
+                    ],
+                    "dtype": "float32",
+                    "max_abs_error": 0.016876220703125,
+                    "mismatched_elements": 485
+                  }
+                },
+                "123": {
+                  "outputs": {
+                    "passed": false,
+                    "finite": true,
+                    "shape": [
+                      1,
+                      2576
+                    ],
+                    "dtype": "float32",
+                    "max_abs_error": 3.0625,
+                    "mismatched_elements": 2378
+                  },
+                  "next_state_img_q": {
+                    "passed": true,
+                    "finite": true,
+                    "shape": [
+                      2,
+                      5,
+                      6,
+                      128,
+                      256
+                    ],
+                    "dtype": "uint8",
+                    "max_abs_error": 0.0,
+                    "mismatched_elements": 0
+                  },
+                  "next_state_desire_q": {
+                    "passed": true,
+                    "finite": true,
+                    "shape": [
+                      100,
+                      1,
+                      8
+                    ],
+                    "dtype": "float32",
+                    "max_abs_error": 0.0,
+                    "mismatched_elements": 0
+                  },
+                  "next_state_feat_q": {
+                    "passed": false,
+                    "finite": true,
+                    "shape": [
+                      96,
+                      1,
+                      512
+                    ],
+                    "dtype": "float32",
+                    "max_abs_error": 0.01357269287109375,
+                    "mismatched_elements": 493
+                  }
+                }
+              }
+            }
+          }
+        },
+        "ort_cpu": {
+          "report": "fold-ort-candidate8.json",
+          "status": "failed",
+          "models": {
+            "dmonitoring_model": {
+              "status": "failed",
+              "samples": 100,
+              "work_p99_ms": 43.14835085000001,
+              "deadline_misses_50ms": 0,
+              "parity": {
+                "outputs": {
+                  "passed": false,
+                  "max_abs_error": 0.078125
+                }
+              }
+            },
+            "driving_supercombo": {
+              "status": "failed",
+              "samples": 100,
+              "work_p99_ms": 209.30033264000002,
+              "deadline_misses_50ms": 100,
+              "parity": {
+                "outputs": {
+                  "passed": false,
+                  "max_abs_error": 1.296875
+                },
+                "next_state_img_q": {
+                  "passed": true,
+                  "max_abs_error": 0.0
+                },
+                "next_state_desire_q": {
+                  "passed": true,
+                  "max_abs_error": 0.0
+                },
+                "next_state_feat_q": {
+                  "passed": false,
+                  "max_abs_error": 0.00311279296875
+                }
+              }
+            }
+          }
+        }
+      },
+      "controls": {
+        "report": "fold-fullchain-candidate8.json",
+        "scope": "Relative-sleep source with cancellation/stale phases",
+        "work_samples": 2489,
+        "p99_work_ms": 9.306875,
+        "deadline_misses": 17,
+        "p99_complete_cycle_ms": 24.711875,
+        "cycle_deadline_misses": 1313,
+        "mean_cycle_hz": 91.34527956173484,
+        "p99_stages_ms": {
+          "input_handling_ms": 19.757136,
+          "computation_ms": 4.137032,
+          "publishing_ms": 5.089895,
+          "parameters_extensions_ms": 4.107916,
+          "cycle_before_reporting_ms": 23.926875,
+          "reporting_ms": 4.773229
+        }
+      },
+      "combined": {
+        "report": "fold-gpu-vision-candidate8.json",
+        "status": "failed",
+        "transport_status": "passed",
+        "recoveries": 0,
+        "frames": {
+          "thumbnail": 900,
+          "preview": 899,
+          "front": 899
+        },
+        "camera_age_p99_ms": {
+          "thumbnail": 82.00638,
+          "preview": 128.463566,
+          "front": 108.192724
+        },
+        "readback_p99_ms": 10.216041,
+        "dropped_readbacks": 0,
+        "ui_mean_fps": 29.537522896436176,
+        "models": {
+          "modeld": {
+            "computed_frames": 66,
+            "published_frames": 0,
+            "late_outputs": 66,
+            "nonfinite_outputs": 0,
+            "deadline_misses": 66,
+            "p99_work_ms": 392.917813,
+            "stage_p99_ms": {
+              "receive_copy": 2.8349494799999966,
+              "input_age": 100.57972638,
+              "prepare": 12.758635340000037,
+              "inference": 368.8096883,
+              "output_age": 480.4753510400001
+            }
+          },
+          "dmonitoringmodeld": {
+            "computed_frames": 414,
+            "published_frames": 0,
+            "late_outputs": 414,
+            "nonfinite_outputs": 0,
+            "deadline_misses": 17,
+            "p99_work_ms": 53.120104,
+            "stage_p99_ms": {
+              "receive_copy": 1.0536427399999997,
+              "input_age": 99.79649108,
+              "prepare": 2.6350689200000024,
+              "inference": 51.63793744,
+              "output_age": 147.670282
+            }
+          }
+        }
+      }
+    },
+    "candidate10": {
+      "apk_sha256": "566e4c253c05aae9a6d8fdce82c68b67f3558612ad97560a5d12b2ca2ce83a9a",
+      "model_profiles": {
+        "opencl": {
+          "report": "fold-opencl-candidate10.json",
+          "status": "failed",
+          "models": {
+            "dmonitoring_model": {
+              "status": "failed",
+              "samples": 100,
+              "work_p99_ms": 111.57200603,
+              "deadline_misses_50ms": 100,
+              "parity": {
+                "outputs": {
+                  "passed": false,
+                  "max_abs_error": 0.048828125,
+                  "shape": [
+                    1,
+                    553
+                  ]
+                }
+              },
+              "additional_seed_parity": {
+                "7": {
+                  "outputs": {
+                    "passed": false,
+                    "finite": true,
+                    "shape": [
+                      1,
+                      553
+                    ],
+                    "dtype": "float16",
+                    "max_abs_error": 0.0625,
+                    "mismatched_elements": 501
+                  }
+                },
+                "123": {
+                  "outputs": {
+                    "passed": false,
+                    "finite": true,
+                    "shape": [
+                      1,
+                      553
+                    ],
+                    "dtype": "float16",
+                    "max_abs_error": 0.046875,
+                    "mismatched_elements": 492
+                  }
+                }
+              }
+            },
+            "driving_supercombo": {
+              "status": "failed",
+              "samples": 100,
+              "work_p99_ms": 88.40747174,
+              "deadline_misses_50ms": 100,
+              "parity": {
+                "outputs": {
+                  "passed": false,
+                  "max_abs_error": 2.90625,
+                  "shape": [
+                    1,
+                    2576
+                  ]
+                },
+                "next_state_img_q": {
+                  "passed": true,
+                  "max_abs_error": 0.0,
+                  "shape": [
+                    2,
+                    5,
+                    6,
+                    128,
+                    256
+                  ]
+                },
+                "next_state_desire_q": {
+                  "passed": true,
+                  "max_abs_error": 0.0,
+                  "shape": [
+                    100,
+                    1,
+                    8
+                  ]
+                },
+                "next_state_feat_q": {
+                  "passed": false,
+                  "max_abs_error": 0.011627197265625,
+                  "shape": [
+                    96,
+                    1,
+                    512
+                  ]
+                }
+              },
+              "additional_seed_parity": {
+                "7": {
+                  "outputs": {
+                    "passed": false,
+                    "finite": true,
+                    "shape": [
+                      1,
+                      2576
+                    ],
+                    "dtype": "float32",
+                    "max_abs_error": 9.3984375,
+                    "mismatched_elements": 2434
+                  },
+                  "next_state_img_q": {
+                    "passed": true,
+                    "finite": true,
+                    "shape": [
+                      2,
+                      5,
+                      6,
+                      128,
+                      256
+                    ],
+                    "dtype": "uint8",
+                    "max_abs_error": 0.0,
+                    "mismatched_elements": 0
+                  },
+                  "next_state_desire_q": {
+                    "passed": true,
+                    "finite": true,
+                    "shape": [
+                      100,
+                      1,
+                      8
+                    ],
+                    "dtype": "float32",
+                    "max_abs_error": 0.0,
+                    "mismatched_elements": 0
+                  },
+                  "next_state_feat_q": {
+                    "passed": false,
+                    "finite": true,
+                    "shape": [
+                      96,
+                      1,
+                      512
+                    ],
+                    "dtype": "float32",
+                    "max_abs_error": 0.016876220703125,
+                    "mismatched_elements": 485
+                  }
+                },
+                "123": {
+                  "outputs": {
+                    "passed": false,
+                    "finite": true,
+                    "shape": [
+                      1,
+                      2576
+                    ],
+                    "dtype": "float32",
+                    "max_abs_error": 3.0625,
+                    "mismatched_elements": 2378
+                  },
+                  "next_state_img_q": {
+                    "passed": true,
+                    "finite": true,
+                    "shape": [
+                      2,
+                      5,
+                      6,
+                      128,
+                      256
+                    ],
+                    "dtype": "uint8",
+                    "max_abs_error": 0.0,
+                    "mismatched_elements": 0
+                  },
+                  "next_state_desire_q": {
+                    "passed": true,
+                    "finite": true,
+                    "shape": [
+                      100,
+                      1,
+                      8
+                    ],
+                    "dtype": "float32",
+                    "max_abs_error": 0.0,
+                    "mismatched_elements": 0
+                  },
+                  "next_state_feat_q": {
+                    "passed": false,
+                    "finite": true,
+                    "shape": [
+                      96,
+                      1,
+                      512
+                    ],
+                    "dtype": "float32",
+                    "max_abs_error": 0.01357269287109375,
+                    "mismatched_elements": 493
+                  }
+                }
+              }
+            }
+          }
+        },
+        "ort_cpu": {
+          "report": "fold-ort-candidate10.json",
+          "status": "failed",
+          "models": {
+            "dmonitoring_model": {
+              "status": "failed",
+              "samples": 100,
+              "work_p99_ms": 39.47111417000001,
+              "deadline_misses_50ms": 0,
+              "parity": {
+                "outputs": {
+                  "passed": false,
+                  "max_abs_error": 0.078125
+                }
+              }
+            },
+            "driving_supercombo": {
+              "status": "failed",
+              "samples": 100,
+              "work_p99_ms": 209.91913232,
+              "deadline_misses_50ms": 100,
+              "parity": {
+                "outputs": {
+                  "passed": false,
+                  "max_abs_error": 1.296875
+                },
+                "next_state_img_q": {
+                  "passed": true,
+                  "max_abs_error": 0.0
+                },
+                "next_state_desire_q": {
+                  "passed": true,
+                  "max_abs_error": 0.0
+                },
+                "next_state_feat_q": {
+                  "passed": false,
+                  "max_abs_error": 0.00311279296875
+                }
+              }
+            }
+          }
+        }
+      },
+      "controls": {
+        "report": "fold-isolated-steady-chain-candidate10.json",
+        "scope": "Absolute-deadline source with steady inputs; emulator off",
+        "work_samples": 2702,
+        "p99_work_ms": 9.244739,
+        "deadline_misses": 18,
+        "p99_complete_cycle_ms": 24.52724,
+        "cycle_deadline_misses": 1267,
+        "mean_cycle_hz": 98.9732616147874,
+        "p99_stages_ms": {
+          "input_handling_ms": 18.919948,
+          "computation_ms": 4.751042,
+          "publishing_ms": 5.491094,
+          "parameters_extensions_ms": 4.468333,
+          "cycle_before_reporting_ms": 23.560677,
+          "reporting_ms": 4.23401
+        },
+        "fixture_sha256": "8dac3b46d116eff9a1d84165e75036cc65e21063003eb9056b3a27e2ab5986e3"
+      },
+      "combined": {
+        "report": "fold-gpu-vision-candidate10.json",
+        "status": "failed",
+        "transport_status": "passed",
+        "recoveries": 0,
+        "frames": {
+          "thumbnail": 898,
+          "preview": 898,
+          "front": 899
+        },
+        "camera_age_p99_ms": {
+          "thumbnail": 126.121015,
+          "preview": 144.839608,
+          "front": 102.113026
+        },
+        "readback_p99_ms": 10.645678,
+        "dropped_readbacks": 0,
+        "ui_mean_fps": 29.684420655023075,
+        "models": {
+          "modeld": {
+            "computed_frames": 53,
+            "published_frames": 0,
+            "late_outputs": 53,
+            "nonfinite_outputs": 0,
+            "deadline_misses": 53,
+            "p99_work_ms": 247.386771,
+            "stage_p99_ms": {
+              "receive_copy": 3.344456579999997,
+              "input_age": 100.13548288,
+              "prepare": 9.124365709999998,
+              "inference": 232.99201319999997,
+              "output_age": 332.64898671
+            }
+          },
+          "dmonitoringmodeld": {
+            "computed_frames": 469,
+            "published_frames": 0,
+            "late_outputs": 469,
+            "nonfinite_outputs": 0,
+            "deadline_misses": 24,
+            "p99_work_ms": 73.612239,
+            "stage_p99_ms": {
+              "receive_copy": 1.3964712199999987,
+              "input_age": 99.89951,
+              "prepare": 2.8429347499999995,
+              "inference": 65.21136434999998,
+              "output_age": 163.82343724999993
+            }
+          }
+        }
+      }
+    }
+  }
+}

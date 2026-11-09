@@ -1,0 +1,174 @@
+{
+  "diagnostic_only": true,
+  "vehicle_tx_enabled": false,
+  "probes": {
+    "conv": {
+      "source_sha256": "1de5826a1b660d5fbc1935afa7527934581288c17c743629a28100a398da12e6",
+      "data_sha256": "c9ea0fdf770b3e39945c36c0a6ee58a89981570e0dc7c9ccc9085696adba4d6a",
+      "inputs": {
+        "x": {
+          "shape": [
+            1,
+            3,
+            8,
+            8
+          ],
+          "type": "tensor(float)"
+        }
+      },
+      "outputs": {
+        "y": {
+          "shape": [
+            1,
+            4,
+            6,
+            6
+          ],
+          "type": "tensor(float)"
+        }
+      },
+      "mnn": {
+        "exit_code": 0,
+        "status": "converted",
+        "sha256": "03037d64115db12d8fbd9caae68d25cf18c5bcc08e576b7505da4aa0a337a7e6"
+      },
+      "ncnn": {
+        "exit_code": 0,
+        "status": "converted",
+        "sha256": "bd1b425ecffa6e536aea9d8b5daf795f5982dd3f313919b37caf69820e322cc8",
+        "weights_sha256": "49da9b2627162f314bb2fb6a0bec43399afa71d70f1a4175866645ca90839f96",
+        "input_batch_axes": {
+          "x": 0
+        },
+        "output_batch_axes": {
+          "y": 0
+        }
+      }
+    },
+    "gemm": {
+      "source_sha256": "251192c17a381bfde7136c6c790d2316c467e993dfa90e07aae152ac3bc9700e",
+      "data_sha256": "e2c9fefc603a375a62fce1607b78e68573eaf8571a294f10d9e1048ddd45d984",
+      "inputs": {
+        "x": {
+          "shape": [
+            2,
+            16
+          ],
+          "type": "tensor(float)"
+        }
+      },
+      "outputs": {
+        "y": {
+          "shape": [
+            2,
+            8
+          ],
+          "type": "tensor(float)"
+        }
+      },
+      "mnn": {
+        "exit_code": 0,
+        "status": "converted",
+        "sha256": "e312012ba764ad7ac898a6f7a342da3b45a0e58486c9fd2774594fa2e48216c5"
+      },
+      "ncnn": {
+        "exit_code": 0,
+        "status": "converted",
+        "sha256": "d8920d5b63e2b7228ba43b06090e88e770259c242a415b265270ea0dd7950ba4",
+        "weights_sha256": "1aeeee0cd0acfa16d5a8de057e577c20c0f72a9f8fcd6d34ef7952c6a8cc4718",
+        "input_batch_axes": {
+          "x": null
+        },
+        "output_batch_axes": {
+          "y": null
+        }
+      }
+    },
+    "activation": {
+      "source_sha256": "59f17a856a2d87b05b50356f588afad03f30b96b37b2a057683200f9367a32d2",
+      "data_sha256": "35b49cd6081a4f065b7d40d12108344e6eb2ad746ef54c08e589e5baf8088218",
+      "inputs": {
+        "x": {
+          "shape": [
+            1,
+            4,
+            6,
+            6
+          ],
+          "type": "tensor(float)"
+        }
+      },
+      "outputs": {
+        "y": {
+          "shape": [
+            1,
+            4,
+            6,
+            6
+          ],
+          "type": "tensor(float)"
+        }
+      },
+      "mnn": {
+        "exit_code": 0,
+        "status": "converted",
+        "sha256": "767fd436aee1567ff55ee7dac0b9baec2ffec513622e34b169f572f37ae41786"
+      },
+      "ncnn": {
+        "exit_code": 0,
+        "status": "converted",
+        "sha256": "53030e2b72f9d8e2b71bb1063629f8f1d3be064c2f0c7c5160edaec3b76714fd",
+        "weights_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "input_batch_axes": {
+          "x": null
+        },
+        "output_batch_axes": {
+          "y": null
+        }
+      }
+    },
+    "layout": {
+      "source_sha256": "5639e8c1287cc3b56e1e8c7119edeac215279f42b9caae723df7af3e17d4f65e",
+      "data_sha256": "bd3c9007dcf2785087f7dd1440133793cadbab297b627286903b578f5e1115c9",
+      "inputs": {
+        "x": {
+          "shape": [
+            1,
+            4,
+            6,
+            6
+          ],
+          "type": "tensor(float)"
+        }
+      },
+      "outputs": {
+        "y": {
+          "shape": [
+            1,
+            6,
+            6,
+            4
+          ],
+          "type": "tensor(float)"
+        }
+      },
+      "mnn": {
+        "exit_code": 0,
+        "status": "converted",
+        "sha256": "7307ddae7ae406b6dfd2674ddcc88ca9d87582ff02a64bf661541eb6a2056744"
+      },
+      "ncnn": {
+        "exit_code": 0,
+        "status": "converted",
+        "sha256": "80b692827e237a64e882c903cf42478474e8683741eb8882b1ae2b3d8b4346e0",
+        "weights_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "input_batch_axes": {
+          "x": null
+        },
+        "output_batch_axes": {
+          "y": null
+        }
+      }
+    }
+  }
+}

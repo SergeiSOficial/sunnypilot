@@ -1,0 +1,65 @@
+{
+  "serial": "RFCR81Y1TBJ",
+  "command": [
+    ".venv/bin/python",
+    "-m",
+    "openpilot.tools.sim.android_chain_validation",
+    "--serial",
+    "RFCR81Y1TBJ",
+    "--adb",
+    "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+    "--seconds",
+    "30",
+    "--report",
+    "android/reports/blocker-fixes/fold-fullchain-candidate3.json"
+  ],
+  "vehicle_tx_enabled": false,
+  "status": "failed",
+  "forwards_before": [],
+  "before_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 26.1,
+    "thermal_override": false
+  },
+  "apk_sha256": "b6bf42bbce476d45fe821953b280afb0ab5048692c35b12ae37e385837105dc8",
+  "baseline": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 25.8,
+    "thermal_override": false,
+    "idle_seconds": 32.78162691698526,
+    "normal_thermal_seconds": 32.354160707996925
+  },
+  "apk_sha256_at_start": "b6bf42bbce476d45fe821953b280afb0ab5048692c35b12ae37e385837105dc8",
+  "runtime": {
+    "manager_pid": 29741,
+    "ui_pid": 29961,
+    "simulation": true
+  },
+  "returncode": 1,
+  "after_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 27.8,
+    "thermal_override": false
+  },
+  "forwards_removed": [],
+  "apk_sha256_after": "b6bf42bbce476d45fe821953b280afb0ab5048692c35b12ae37e385837105dc8",
+  "artifact_stable": true
+}

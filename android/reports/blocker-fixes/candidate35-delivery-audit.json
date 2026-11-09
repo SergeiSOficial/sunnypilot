@@ -1,0 +1,53 @@
+{
+  "candidate": "candidate35",
+  "apk_sha256": "38645e91f806076517de1497cdb6b5c0cbf4873cfecf5efabb980297a014ad51",
+  "vehicle_tx_enabled": false,
+  "engagement_allowed": false,
+  "application_and_instrumentation_sources_unchanged": true,
+  "unexpected_source_changes": [],
+  "verified_postbuild_host_tooling_updates": {
+    "android/scripts/experiment.py": {
+      "at_build": "f9ced71ad35e5878e1cde8c28f9f479438eee644fbcba5f4657641104bfae0ac",
+      "current": "cba252b022b22a406960d1bd1dafd5042ebba37ae264289c09a042519936cb86",
+      "build_source_archive": "candidate35-tooling-at-build/experiment.py"
+    },
+    "android/scripts/validate_thermal.py": {
+      "at_build": "acb052939272937354a020a22e1ec1859e3624e3f0b106d967250e32d1990e58",
+      "current": "f0c6ec1de5093c07f4ba30a3f2c36a654d6a9ec6910caa3621ea4250a1efe0d4",
+      "build_source_archive": "candidate35-tooling-at-build/validate_thermal.py"
+    },
+    "android/scripts/validate_vision.py": {
+      "at_build": "d4ceb9cb9bd0aecd265b6dfaf23816b0fa34608b0fb18e0d2c1b416c3f960816",
+      "current": "aaadbc33a938bc0c42cc2a49157a3c302afcc0461de364f5c54a1cbec54edea1",
+      "build_source_archive": "candidate35-tooling-at-build/validate_vision.py"
+    }
+  },
+  "archived_apks_match": {
+    "app-debug-androidTest.apk": true,
+    "app-debug.apk": true
+  },
+  "installed": {
+    "RFCR81Y1TBJ": {
+      "com.samsung.sunnypilot.fold3": {
+        "sha256": "38645e91f806076517de1497cdb6b5c0cbf4873cfecf5efabb980297a014ad51",
+        "matches": true
+      },
+      "com.samsung.sunnypilot.fold3.test": {
+        "sha256": "98d31adfd4ef7679e70a5fb51083bff55380a0c1080336e9a63278e531efa9fe",
+        "matches": true
+      }
+    },
+    "emulator-5560": {
+      "com.samsung.sunnypilot.fold3": {
+        "sha256": "38645e91f806076517de1497cdb6b5c0cbf4873cfecf5efabb980297a014ad51",
+        "matches": true
+      },
+      "com.samsung.sunnypilot.fold3.test": {
+        "sha256": "98d31adfd4ef7679e70a5fb51083bff55380a0c1080336e9a63278e531efa9fe",
+        "matches": true
+      }
+    }
+  },
+  "scope": "Application, native, models and instrumentation sources match the build-time hashes. Three host-only validation scripts were corrected after the thermal harness failure; their original sources and before/after hashes are retained. APKs are unchanged.",
+  "status": "passed"
+}

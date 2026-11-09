@@ -11,6 +11,7 @@ def configure(data_dir, simulation=False):
   os.chdir(data_dir)
   os.environ["ANDROID_DATA_ROOT"] = data_dir
   os.environ["PARAMS_ROOT"] = os.path.join(data_dir, "sim-params" if simulation else "params")
+  os.environ["ANDROID_PARAMS_MEMORY_ROOT"] = os.path.join(data_dir, "sim-memory-params" if simulation else "memory-params")
   os.environ["LOG_ROOT"] = os.path.join(data_dir, "logs")
   os.environ["COMMA_CACHE"] = os.path.join(data_dir, "cache")
   os.environ["XDG_CACHE_HOME"] = os.path.join(data_dir, "cache")
@@ -26,6 +27,10 @@ def configure(data_dir, simulation=False):
   # Android services provide process isolation. Python subprocess workers require
   # POSIX named semaphores, which Android does not implement.
   os.environ["PARALLEL"] = "0"
+  if simulation:
+    os.environ["SIMULATION"] = "1"
+  else:
+    os.environ.pop("SIMULATION", None)
   ipc_dir = os.path.join(data_dir, "sim-ipc" if simulation else "ipc")
   os.makedirs(ipc_dir, mode=0o700, exist_ok=True)
   os.chmod(ipc_dir, 0o700)
@@ -53,6 +58,21 @@ def probe(data_dir):
     except Exception as exc:
       import traceback
       result["modules"][name] = {"status": "blocked", "error": f"{type(exc).__name__}: {exc}", "traceback": traceback.format_exc()}
+  from fold3_driving import MODULES
+  for module in MODULES.values():
+    name = "openpilot.selfdrive." + module
+    try:
+      importlib.import_module(name)
+      result["modules"][name] = {"status": "passed"}
+    except Exception as exc:
+      import traceback
+      result["modules"][name] = {"status": "blocked", "error": str(exc), "traceback": traceback.format_exc()}
+  try:
+    from fold3_driving import native_check
+    result["native_driving"] = native_check()
+  except Exception as exc:
+    import traceback
+    result["native_driving"] = {"status": "failed", "error": str(exc), "traceback": traceback.format_exc()}
   try:
     import msgq
     from openpilot.cereal import log
@@ -81,7 +101,8 @@ def probe(data_dir):
   except Exception as exc:
     result["tinygrad_cl"] = {"status": "blocked", "error": f"{type(exc).__name__}: {exc}"}
   result["driving_runtime_ready"] = False
-  result["numpy_upstream_requirement"] = "blocked: diagnostic NumPy 1.26.2 does not satisfy upstream >=2.0"
+  import numpy as np
+  result["numpy_upstream_requirement"] = "passed" if int(np.__version__.split(".")[0]) >= 2 else "blocked: NumPy >=2.0 required"
   with open(report_path, "w") as report:
     json.dump(result, report, indent=2)
   return json.dumps(result, indent=2)

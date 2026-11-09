@@ -1,0 +1,323 @@
+{
+  "status": "failed",
+  "vehicle_tx_enabled": false,
+  "physical_engagement_allowed": false,
+  "synthetic_sources": true,
+  "physical_vehicle_verified": false,
+  "camera_model_parity_verified": false,
+  "derived_inputs_injected": false,
+  "received_services": [
+    "carOutput",
+    "carState",
+    "deviceMotion",
+    "driverAssistance",
+    "driverMonitoringState",
+    "extrinsicsCalibration",
+    "lateralDelay",
+    "lateralTorqueParameters",
+    "longitudinalPlan",
+    "onroadEvents",
+    "radarState",
+    "radarTracks",
+    "selfdriveState",
+    "selfdriveStateSP",
+    "vehicleParameters"
+  ],
+  "packets": 3000,
+  "unsafe_outputs": 0,
+  "input_pacing": "android_absolute_deadline_100_hz",
+  "steady_inputs": true,
+  "fixture_sha256": "b5ea99327f0ffc121e5556d29b32d4ce8e6e855d14518f46a3f060ea38721f99",
+  "source_deadline_misses": 160,
+  "profile": {
+    "version": 1,
+    "op": "hello",
+    "simulation": true,
+    "full_chain": true,
+    "vehicle_tx_enabled": false,
+    "car_fingerprint": "HYUNDAI_IONIQ_PHEV_2019",
+    "factory_acc": true,
+    "min_steer_speed_m_s": 14.305279731750488,
+    "physical_fingerprint_verified": false
+  },
+  "version": 1,
+  "output_samples": {
+    "driverMonitoringState": 600,
+    "carState": 2578,
+    "carOutput": 2583,
+    "radarTracks": 558,
+    "extrinsicsCalibration": 111,
+    "selfdriveState": 2246,
+    "selfdriveStateSP": 2207,
+    "onroadEvents": 29,
+    "radarState": 550,
+    "longitudinalPlan": 550,
+    "driverAssistance": 550,
+    "deviceMotion": 548,
+    "vehicleParameters": 548,
+    "lateralTorqueParameters": 110,
+    "lateralDelay": 110
+  },
+  "cruise_can_valid_samples": 2578,
+  "cruise_can_invalid_samples": 0,
+  "cruise_acc_disabled_samples": 0,
+  "cruise_acc_enabled_samples": 2578,
+  "input_elapsed_s": 30.000123633974,
+  "source_mean_hz": 99.9995878884517,
+  "source_exchange_work_p99_ms": 13.63093699910678,
+  "processes": {
+    "pid": 25263,
+    "simulation": true,
+    "full_chain": true,
+    "vehicle_tx_enabled": false,
+    "engagement_allowed": false,
+    "engagement_blocker": "camera calibration, model parity/performance and physical Panda qualification incomplete",
+    "processes": {
+      "Controls": {
+        "daemon": "controlsd",
+        "pid": 25738,
+        "phase": "failed",
+        "error": "com.chaquo.python.PyException: ValueError: Diagnostic controls CPUs must be a nonempty allowed subset",
+        "last_progress_ms": 193247203,
+        "ticks": 4,
+        "restarts": 3
+      },
+      "Monitoring": {
+        "daemon": "dmonitoringd",
+        "pid": 25287,
+        "phase": "running",
+        "error": "",
+        "last_progress_ms": 193265677,
+        "ticks": 116,
+        "restarts": 0
+      },
+      "Vehicle": {
+        "daemon": "card",
+        "pid": 25288,
+        "phase": "running",
+        "error": "",
+        "last_progress_ms": 193265789,
+        "ticks": 145,
+        "restarts": 0
+      },
+      "Localization": {
+        "daemon": "locationd",
+        "pid": 25289,
+        "phase": "running",
+        "error": "",
+        "last_progress_ms": 193265829,
+        "ticks": 121,
+        "restarts": 0
+      },
+      "Calibration": {
+        "daemon": "calibrationd",
+        "pid": 25290,
+        "phase": "running",
+        "error": "",
+        "last_progress_ms": 193265678,
+        "ticks": 121,
+        "restarts": 0
+      },
+      "Parameters": {
+        "daemon": "paramsd",
+        "pid": 25291,
+        "phase": "running",
+        "error": "",
+        "last_progress_ms": 193265594,
+        "ticks": 118,
+        "restarts": 0
+      },
+      "Torque": {
+        "daemon": "torqued",
+        "pid": 25292,
+        "phase": "running",
+        "error": "",
+        "last_progress_ms": 193265594,
+        "ticks": 113,
+        "restarts": 0
+      },
+      "Delay": {
+        "daemon": "lagd",
+        "pid": 25293,
+        "phase": "running",
+        "error": "",
+        "last_progress_ms": 193265594,
+        "ticks": 116,
+        "restarts": 0
+      },
+      "Radar": {
+        "daemon": "radard",
+        "pid": 25301,
+        "phase": "running",
+        "error": "",
+        "last_progress_ms": 193265725,
+        "ticks": 114,
+        "restarts": 0
+      },
+      "Planning": {
+        "daemon": "plannerd",
+        "pid": 25305,
+        "phase": "running",
+        "error": "",
+        "last_progress_ms": 193265874,
+        "ticks": 115,
+        "restarts": 0
+      },
+      "Selfdrive": {
+        "daemon": "selfdrived",
+        "pid": 25307,
+        "phase": "running",
+        "error": "",
+        "last_progress_ms": 193265818,
+        "ticks": 132,
+        "restarts": 0
+      },
+      "Simulator": {
+        "daemon": "sim_bridge",
+        "pid": 25319,
+        "phase": "waiting_for_adb",
+        "error": "",
+        "last_progress_ms": 193265883,
+        "ticks": 126,
+        "restarts": 0
+      }
+    },
+    "updated_elapsed_ms": 193265887
+  },
+  "runtime_reports": {
+    "controlsd": {
+      "daemon": "controlsd",
+      "pid": 25738,
+      "vehicle_tx_enabled": false,
+      "engagement_allowed": false,
+      "work_samples": 0,
+      "deadline_misses": 0,
+      "phase": "failed",
+      "simulation": true,
+      "cyclic_gc_enabled": false,
+      "android_thread_priority": -4,
+      "android_worker_tid": 25751,
+      "error": "Traceback (most recent call last):\n  File \"/data/data/com.samsung.sunnypilot.fold3/files/chaquopy/AssetFinder/app/fold3_daemons.py\", line 278, in run\n  File \"/data/data/com.samsung.sunnypilot.fold3/files/chaquopy/AssetFinder/app/fold3_daemons.py\", line 204, in controls\n  File \"/data/data/com.samsung.sunnypilot.fold3/files/chaquopy/AssetFinder/app/fold3_daemons.py\", line 172, in controls_affinity\nValueError: Diagnostic controls CPUs must be a nonempty allowed subset\n",
+      "p99_stages_ms": {},
+      "metrics_observed_samples": 0,
+      "metrics_sequence": 2,
+      "metrics_coverage_complete": true,
+      "metrics_process": "manager",
+      "metrics_pid": 25263
+    },
+    "selfdrived": {
+      "daemon": "selfdrived",
+      "pid": 25307,
+      "vehicle_tx_enabled": false,
+      "engagement_allowed": false,
+      "work_samples": 2684,
+      "deadline_misses": 0,
+      "phase": "running",
+      "simulation": true,
+      "upstream_module": "selfdrived.selfdrived",
+      "updated_services": [
+        "modelV2",
+        "carOutput",
+        "driverMonitoringState",
+        "radarState",
+        "accelerometer",
+        "gyroscope"
+      ],
+      "invalid_services": [
+        "deviceState",
+        "pandaStates",
+        "peripheralState",
+        "carOutput",
+        "driverMonitoringState",
+        "longitudinalPlan",
+        "lateralDelay",
+        "managerState",
+        "lateralTorqueParameters",
+        "controlsState",
+        "carControl",
+        "driverAssistance",
+        "alertDebug",
+        "lateralManeuverPlan",
+        "modelDataV2SP",
+        "longitudinalPlanSP",
+        "narrowRoadCameraState",
+        "cabinCameraState",
+        "wideRoadCameraState",
+        "gpsLocation"
+      ],
+      "input_handling_ms": 0.343229,
+      "computation_ms": 12.704323,
+      "complete_cycle_ms": 13.047552,
+      "timing_includes_report_overhead": true,
+      "p99_work_ms": 18.662709,
+      "p99_stages_ms": {}
+    },
+    "plannerd": {
+      "daemon": "plannerd",
+      "pid": 25305,
+      "vehicle_tx_enabled": false,
+      "engagement_allowed": false,
+      "work_samples": 541,
+      "deadline_misses": 0,
+      "phase": "running",
+      "simulation": true,
+      "upstream_module": "controls.plannerd",
+      "updated_services": [
+        "carState",
+        "radarState",
+        "modelV2",
+        "selfdriveState",
+        "carStateSP",
+        "selfdriveStateSP"
+      ],
+      "invalid_services": [
+        "carControl",
+        "controlsState",
+        "liveMapDataSP",
+        "gpsLocation"
+      ],
+      "input_handling_ms": 39.429427,
+      "computation_ms": 12.218125,
+      "complete_cycle_ms": 51.647552,
+      "timing_includes_report_overhead": true,
+      "p99_work_ms": 15.562136,
+      "p99_stages_ms": {}
+    },
+    "ui-report": {
+      "pid": 25471,
+      "backend": "Raylib Android NativeActivity",
+      "vehicle_tx_enabled": false,
+      "status": "running",
+      "full_upstream_ui": true,
+      "frames": 990,
+      "mean_fps": 29.786057749965995,
+      "width": 2160,
+      "height": 1080,
+      "surface_size": [
+        2289,
+        840
+      ],
+      "last_frame_seconds": 0.03333432227373123,
+      "last_cpu_seconds": 0.0012391140044201165,
+      "recent_p99_frame_ms": 34.06895697116852,
+      "recent_p99_cpu_ms": 3.8279169821180403
+    }
+  },
+  "missing_outputs": [
+    "carControl"
+  ],
+  "factory_acc_cancellation_passed": null,
+  "fault_checks": "not_run_steady_inputs",
+  "worker_failures": {
+    "Controls": {
+      "daemon": "controlsd",
+      "pid": 25738,
+      "phase": "failed",
+      "error": "com.chaquo.python.PyException: ValueError: Diagnostic controls CPUs must be a nonempty allowed subset",
+      "last_progress_ms": 193247203,
+      "ticks": 4,
+      "restarts": 3
+    }
+  },
+  "elapsed_s": 30.541443250025623
+}

@@ -2,6 +2,55 @@ plugins {
     id 'com.android.application'
     id 'com.chaquo.python'
 }
+def fold3QnnEnabled = providers.gradleProperty('fold3Qnn').getOrElse('false') == 'true'
+def fold3MnnPatched = providers.gradleProperty('fold3MnnPatched').getOrElse('false') == 'true'
+def fold3NcnnPatched = providers.gradleProperty('fold3NcnnPatched').getOrElse('false') == 'true'
+if (fold3NcnnPatched) {
+    def stamp = file('../build/native/accelerators/ncnn-patched/build.json')
+    if (!stamp.isFile()) throw new GradleException('Run android/scripts/build_ncnn.py before enabling fold3NcnnPatched')
+    def identity = new groovy.json.JsonSlurper().parse(stamp)
+    ['patch_sha256': file('../patches/ncnn-explicit-casts.patch'),
+     'profile_patch_sha256': file('../patches/ncnn-vulkan-profile.patch'),
+     'tiling_patch_sha256': file('../patches/ncnn-vulkan-tiling.patch'),
+     'exact_product_patch_sha256': file('../patches/ncnn-exact-product.patch'),
+     'dispatch_patch_sha256': file('../patches/ncnn-dispatch-batching.patch'),
+     'normalization_patch_sha256': file('../patches/ncnn-u8-normalization.patch'),
+     'spatial_patch_sha256': file('../patches/ncnn-spatial-weight-reuse.patch'),
+     'recipe_sha256': file('../scripts/build_ncnn.py')].each { key, source ->
+        def actual = java.security.MessageDigest.getInstance('SHA-256').digest(source.bytes).encodeHex().toString()
+        if (identity[key] != actual) throw new GradleException('Stale ncnn native build; run android/scripts/build_ncnn.py')
+    }
+}
+def qnnProvider = file('../build/native/qnn-2.7.0/onnxruntime-android-qnn-2.7.0.aar')
+def qnnRuntime = file('../build/native/qnn-2.7.0/qnn-runtime-2.51.0.aar')
+if (fold3MnnPatched) {
+    def stamp = file('../build/native/accelerators/mnn-patched/build.json')
+    def manifest = file("$buildDir/model-reference/accelerators/manifest.json")
+    if (!stamp.isFile() || !manifest.isFile()) throw new GradleException('Build pinned MNN and run prepare_accel_models.py --mnn-patched before Gradle')
+    def identity = new groovy.json.JsonSlurper().parse(stamp)
+    ['patch_sha256': file('../patches/mnn-half-cast.patch'),
+     'recipe_sha256': file('../scripts/build_mnn.py')].each { key, source ->
+        def actual = java.security.MessageDigest.getInstance('SHA-256').digest(source.bytes).encodeHex().toString()
+        if (identity[key] != actual) throw new GradleException('Stale MNN native build; run android/scripts/build_mnn.py and prepare_accel_models.py --mnn-patched')
+    }
+    def models = new groovy.json.JsonSlurper().parse(manifest).models
+    ['dmonitoring_model', 'driving_supercombo'].each { name ->
+        if (models[name]?.mnn?.source_build != identity) throw new GradleException("Stale MNN graph ${name}; run prepare_accel_models.py --mnn-patched")
+    }
+}
+if (fold3QnnEnabled) {
+    [(qnnProvider): 'ecd36df222e2a947ceb13bdd6fec181d1f1841b40379e21ce519830f2fbd562a',
+     (qnnRuntime): '6388face1d5aa5e8958d745e5a547e92b5bec6fc332dfb1b438b1e17ffa02861'].each { artifact, expected ->
+        if (!artifact.isFile()) throw new GradleException('Run android/scripts/prepare_qnn.py before enabling QNN')
+        def digest = java.security.MessageDigest.getInstance('SHA-256')
+        artifact.withInputStream { input ->
+            byte[] block = new byte[65536]
+            int count
+            while ((count = input.read(block)) != -1) digest.update(block, 0, count)
+        }
+        if (digest.digest().encodeHex().toString() != expected) throw new GradleException("QNN artifact hash mismatch: ${artifact.name}")
+    }
+}
 android {
     namespace 'ai.sunnypilot.fold3'
     compileSdk 35
@@ -16,7 +65,7 @@ android {
         versionCode 1
         versionName '0.1.0-port-validation'
         ndk { abiFilters 'arm64-v8a' }
-        externalNativeBuild { cmake { arguments '-DANDROID_STL=c++_shared'; cppFlags '-std=c++17 -O2 -Wall -Wextra -Werror' } }
+        externalNativeBuild { cmake { arguments '-DANDROID_STL=c++_shared', "-DFOLD3_MNN_PATCHED=${fold3MnnPatched ? 'ON' : 'OFF'}", "-DFOLD3_NCNN_PATCHED=${fold3NcnnPatched ? 'ON' : 'OFF'}"; cppFlags '-std=c++17 -O2 -Wall -Wextra -Werror' } }
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         buildConfigField 'boolean', 'VEHICLE_TX_ENABLED', 'false'
     }
@@ -25,39 +74,62 @@ android {
     packaging { jniLibs { useLegacyPackaging true } }
     externalNativeBuild { cmake { path 'src/main/cpp/CMakeLists.txt'; version '3.31.6' } }
     sourceSets { main { python.srcDir "$buildDir/generated/python"; assets.srcDir "$buildDir/generated/notices" } }
+    if (fold3QnnEnabled) sourceSets.debug.manifest.srcFile 'src/qnn/AndroidManifest.xml'
     testOptions { unitTests.returnDefaultValues = true }
 }
 chaquopy {
     defaultConfig {
         version '3.12'
-        extractPackages 'tinygrad', 'openpilot', 'opendbc', 'msgq', 'capnp', 'zmq', 'zstandard', 'pyray', 'raylib'
+        extractPackages 'numpy', 'tinygrad', 'openpilot', 'opendbc', 'msgq', 'capnp', 'zmq', 'zstandard', 'pyray', 'raylib', 'rednose'
         buildPython System.getenv('FOLD3_BUILD_PYTHON') ?: 'python3.12'
-        // Diagnostic runtime only: upstream requires NumPy 2, unavailable as a Chaquopy wheel.
-        pip { install 'numpy==1.26.2'; install 'cffi==1.17.1'; install 'requests==2.32.5'; install 'pyyaml==6.0.3'; install 'tqdm==4.70.1'; install 'pycryptodome==3.21.0'; install 'PyJWT==2.10.1' }
+        // NumPy is cross-compiled with the pinned target Python by build_numpy.py.
+        pip { install 'cffi==1.17.1'; install 'requests==2.32.5'; install 'pyyaml==6.0.3'; install 'tqdm==4.70.1'; install 'pycryptodome==3.21.0'; install 'PyJWT==2.10.1' }
     }
+}
+tasks.register('buildMetadata', Exec) {
+    workingDir '../..'
+    commandLine System.getenv('FOLD3_BUILD_PYTHON') ?: rootProject.file('../.venv/bin/python').absolutePath,
+        rootProject.file('scripts/build_metadata.py').absolutePath, "$buildDir/generated/metadata/openpilot/build.json"
+    outputs.file "$buildDir/generated/metadata/openpilot/build.json"
+    outputs.upToDateWhen { false }
 }
 tasks.register('stagePython', Copy) {
     inputs.file '../patches/tinygrad-android.patch'
     inputs.file '../patches/cereal-android.patch'
-    dependsOn 'externalNativeBuildDebug'
+    dependsOn 'externalNativeBuildDebug', 'buildMetadata'
     into "$buildDir/generated/python"
     doFirst {
         if (!file("$buildDir/model-reference/manifest.json").isFile()) {
             throw new GradleException('Run android/scripts/model_reference.py before building the validation APK')
         }
+        if (!file('../build/native/numpy-install/build.json').isFile()) {
+            throw new GradleException('Run android/scripts/build_numpy.py before building the APK')
+        }
         delete destinationDir
     }
     from('../..') { include 'openpilot/**/*.py', 'openpilot/cereal/**/*.capnp'; exclude '**/tests/**', '**/test/**', 'openpilot/tools/**', 'openpilot/third_party/**' }
     from('../..') { include 'openpilot/selfdrive/modeld/models/*.onnx' }
-    from("$buildDir/model-reference") { into 'fold3_reference' }
+    from("$buildDir/generated/metadata") { include 'openpilot/build.json' }
+    from("$buildDir/model-reference") {
+        into 'fold3_reference'
+        exclude '**/*-host.onnx', 'reference-precision*/**'
+        exclude 'accelerator-precision/**', '**/*-mnn-io.onnx', '**/*-ncnn-io.onnx'
+        // Conversion intermediates remain on the host; only engine graphs run on Android.
+        exclude '**/*.pnnx.onnx', '**/*.pnnxsim.onnx', '**/*.pnnx.param', '**/*.pnnx.bin', '**/*_pnnx.py', '**/*_ncnn.py'
+    }
     from('../../tinygrad_repo') { include 'tinygrad/**/*.py' }
     from('../../opendbc_repo') { include 'opendbc/**/*.py', 'opendbc/**/*.capnp' }
     from('../../msgq_repo') { include 'msgq/**/*.py' }
-    from('../../openpilot/tools/sim/lib') { include 'android_protocol.py' }
+    from('../build/native/driving/rednose-src') { include 'rednose/**/*.py' }
+    from('../../openpilot/tools/sim/lib') { include 'android_protocol.py', 'android_sources.py' }
     from('../build/native/pycapnp-2.1.0') { include 'capnp/**/*.py' }
     from('../build/native/pyzmq-27.2.0') { include 'zmq/**/*.py' }
     from('../build/native/zstandard-0.25.0') { include 'zstandard/*.py' }
     from('../build/native/setproctitle-1.3.7/pkg') { include 'setproctitle/*.py' }
+    from('../build/native/numpy-install/usr/lib/python3.12/site-packages') {
+        include 'numpy/**'
+        exclude '**/tests/**', '**/__pycache__/**', '**/_examples/**', '**/*.pyc'
+    }
     from('../build/native/raylib-python-cffi') { include 'pyray/*.py', 'raylib/*.py' }
     from('../..') { include 'openpilot/selfdrive/assets/**', 'openpilot/selfdrive/ui/translations/**'; exclude '**/*.py' }
     from('../..') { include 'openpilot/**/*.json', 'openpilot/**/*.yaml', 'openpilot/**/*.toml', 'openpilot/**/*.cl'; exclude '**/tests/**', '**/test/**', 'openpilot/tools/**', 'openpilot/third_party/**', 'openpilot/selfdrive/assets/**', 'openpilot/selfdrive/ui/translations/**' }
@@ -90,11 +162,24 @@ tasks.register('stageNotices', Copy) {
     from('../build/native/libzmq-4.3.5/LICENSE') { into 'libzmq' }
     from('../build/native/zstandard-0.25.0/LICENSE') { into 'zstandard' }
     from('../build/native/json11/LICENSE.txt') { into 'json11' }
+    from('../build/native/driving/rednose-src/LICENSE') { into 'rednose' }
+    from('../build/native/acados-src/LICENSE') { into 'acados' }
+    from('../build/native/acados-src/external/blasfeo/LICENSE.txt') { into 'blasfeo' }
+    from('../build/native/acados-src/external/hpipm/LICENSE.txt') { into 'hpipm' }
+    from('../build/native/numpy-2.5.3/LICENSE.txt') { into 'numpy' }
     from('../build/native/raylib-python-cffi') { include 'LICENSE', 'raylib-c/LICENSE'; into 'raylib' }
+    from('../build/native/accelerators/mnn-source/MNN-7e3c6fb5225d3ccf22807ee641332669df34650d') { include 'LICENSE'; into 'MNN' }
+    from('../build/native/accelerators/ncnn-source/ncnn-7e36d25cb153092ba87a60530455c7376fedf452') { include 'LICENSE.txt'; into 'ncnn' }
+    from('../build/native/accelerators/glslang-source/glslang-780b6a209132dc74e99458f62ebe5fa7e57c41cf') { include 'LICENSE.txt', 'LICENSES/**'; into 'glslang' }
+    if (fold3QnnEnabled) {
+        from('../qnn-provider-LICENSE') { into 'onnxruntime-qnn' }
+        from(zipTree(qnnRuntime)) { include 'LICENSE.pdf', 'NOTICE.txt'; into 'qnn-runtime' }
+    }
 }
 tasks.configureEach { if (name.startsWith('merge') && name.endsWith('PythonSources')) dependsOn 'stagePython' }
 tasks.configureEach { if (name.startsWith('merge') && name.endsWith('Assets')) dependsOn 'stageNotices' }
 dependencies {
+    if (fold3QnnEnabled) debugImplementation files(qnnProvider, qnnRuntime)
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test:runner:1.6.2'
     androidTestImplementation 'androidx.test.ext:junit:1.2.1'

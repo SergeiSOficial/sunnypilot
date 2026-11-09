@@ -1,0 +1,6177 @@
+{
+  "scope": "diagnostic: frozen host fusion",
+  "vehicle_tx_enabled": false,
+  "models": {
+    "dmonitoring_model": {
+      "sha256": "334b9ff18c042f73bf13041ea9d5f8941e68b63cf04e04b0d29403ed337b9513",
+      "original_sha256": "dee5a294e8afaacc9295ac5d100e00733ecac278e79264b96331e40a3ede1b04",
+      "instrumented_matches_original": {
+        "outputs": true
+      },
+      "engines": {
+        "ort": {
+          "nodes": [
+            {
+              "index": 0,
+              "operator": "Cast",
+              "name": "InsertedPrecisionFreeCast__to_copy_1",
+              "output": "InsertedPrecisionFreeCast__to_copy_1",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                1382400
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 1,
+              "operator": "Div",
+              "name": "node_div",
+              "output": "InsertedPrecisionFreeCast_div",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                1382400
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 2,
+              "operator": "Cast",
+              "name": "InsertedPrecisionFreeCast_div",
+              "output": "div",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                1382400
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 3,
+              "operator": "Reshape",
+              "name": "node_view",
+              "output": "view",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                960,
+                360,
+                4
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 4,
+              "operator": "Transpose",
+              "name": "node_permute",
+              "output": "permute",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                360,
+                960,
+                4
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 5,
+              "operator": "Reshape",
+              "name": "node__unsafe_view",
+              "output": "_unsafe_view",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                360,
+                240,
+                16
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 6,
+              "operator": "Cast",
+              "name": "InsertedPrecisionFreeCast_permute_1",
+              "output": "InsertedPrecisionFreeCast_permute_1_token_572",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                360,
+                240,
+                16
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 7,
+              "operator": "Transpose",
+              "name": "Transpose",
+              "output": "Transpose_out0",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                240,
+                360,
+                16
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 9,
+              "operator": "Mul",
+              "name": "",
+              "output": "_token_574",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                120,
+                180,
+                32
+              ],
+              "dtype": "float32",
+              "max_abs_error": 1.430511474609375e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 11,
+              "operator": "Mul",
+              "name": "",
+              "output": "_token_578",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                120,
+                180,
+                32
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0028076171875,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 13,
+              "operator": "Sqrt",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_SqrtTwoOverPi",
+              "passed": true,
+              "finite": true,
+              "shape": [],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 14,
+              "operator": "Mul",
+              "name": "",
+              "output": "_token_582",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                120,
+                180,
+                32
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0023193359375,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 15,
+              "operator": "Tanh",
+              "name": "",
+              "output": "_token_584",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                120,
+                180,
+                32
+              ],
+              "dtype": "float32",
+              "max_abs_error": 1.4603137969970703e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 16,
+              "operator": "Sum",
+              "name": "",
+              "output": "_token_586",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                120,
+                180,
+                32
+              ],
+              "dtype": "float32",
+              "max_abs_error": 1.4603137969970703e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 17,
+              "operator": "Mul",
+              "name": "",
+              "output": "_token_588",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                120,
+                180,
+                32
+              ],
+              "dtype": "float32",
+              "max_abs_error": 2.574920654296875e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 20,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_0_MultX",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                32,
+                60,
+                90
+              ],
+              "dtype": "float32",
+              "max_abs_error": 1.7523765563964844e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 22,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_0_XCubedC0",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                32,
+                60,
+                90
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.00225830078125,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 24,
+              "operator": "Sqrt",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_0_SqrtTwoOverPi",
+              "passed": true,
+              "finite": true,
+              "shape": [],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 25,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_0_TanhInput",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                32,
+                60,
+                90
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.00177001953125,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 26,
+              "operator": "Tanh",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_0_ErfApprox",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                32,
+                60,
+                90
+              ],
+              "dtype": "float32",
+              "max_abs_error": 2.2679567337036133e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 27,
+              "operator": "Sum",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_0_PhiApprox",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                32,
+                60,
+                90
+              ],
+              "dtype": "float32",
+              "max_abs_error": 2.2649765014648438e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 28,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast_gelu_1",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                32,
+                60,
+                90
+              ],
+              "dtype": "float32",
+              "max_abs_error": 3.147125244140625e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 29,
+              "operator": "Conv",
+              "name": "node_Conv_809",
+              "output": "InsertedPrecisionFreeCast_getitem_6",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                32,
+                60,
+                90
+              ],
+              "dtype": "float32",
+              "max_abs_error": 2.86102294921875e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 30,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_1_MultX",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                32,
+                60,
+                90
+              ],
+              "dtype": "float32",
+              "max_abs_error": 1.430511474609375e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 31,
+              "operator": "Pow",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_1_XCubed",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                32,
+                60,
+                90
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.05859375,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 32,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_1_XCubedC0",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                32,
+                60,
+                90
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.002685546875,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 33,
+              "operator": "Sum",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_1_XC0XCubed",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                32,
+                60,
+                90
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.002685546875,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 34,
+              "operator": "Sqrt",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_1_SqrtTwoOverPi",
+              "passed": true,
+              "finite": true,
+              "shape": [],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 35,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_1_TanhInput",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                32,
+                60,
+                90
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.00213623046875,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 36,
+              "operator": "Tanh",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_1_ErfApprox",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                32,
+                60,
+                90
+              ],
+              "dtype": "float32",
+              "max_abs_error": 1.7881393432617188e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 37,
+              "operator": "Sum",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_1_PhiApprox",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                32,
+                60,
+                90
+              ],
+              "dtype": "float32",
+              "max_abs_error": 1.7881393432617188e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 38,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast_gelu_2",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                32,
+                60,
+                90
+              ],
+              "dtype": "float32",
+              "max_abs_error": 2.86102294921875e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 39,
+              "operator": "Transpose",
+              "name": "Transpose_token_567",
+              "output": "Transpose_token_567_out0",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                60,
+                90,
+                32
+              ],
+              "dtype": "float32",
+              "max_abs_error": 2.86102294921875e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 42,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_2_MultX",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                96,
+                30,
+                45
+              ],
+              "dtype": "float32",
+              "max_abs_error": 1.52587890625e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 44,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_2_XCubedC0",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                96,
+                30,
+                45
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.004638671875,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 46,
+              "operator": "Sqrt",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_2_SqrtTwoOverPi",
+              "passed": true,
+              "finite": true,
+              "shape": [],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 47,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_2_TanhInput",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                96,
+                30,
+                45
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0037841796875,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 48,
+              "operator": "Tanh",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_2_ErfApprox",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                96,
+                30,
+                45
+              ],
+              "dtype": "float32",
+              "max_abs_error": 8.344650268554688e-06,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 49,
+              "operator": "Sum",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_2_PhiApprox",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                96,
+                30,
+                45
+              ],
+              "dtype": "float32",
+              "max_abs_error": 8.344650268554688e-06,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 50,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast_gelu_3",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                96,
+                30,
+                45
+              ],
+              "dtype": "float32",
+              "max_abs_error": 1.7642974853515625e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 51,
+              "operator": "Conv",
+              "name": "node_Conv_813",
+              "output": "InsertedPrecisionFreeCast_getitem_12",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                30,
+                45
+              ],
+              "dtype": "float32",
+              "max_abs_error": 4.9591064453125e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 52,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_3_MultX",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                30,
+                45
+              ],
+              "dtype": "float32",
+              "max_abs_error": 2.47955322265625e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 53,
+              "operator": "Pow",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_3_XCubed",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                30,
+                45
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0302734375,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 54,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_3_XCubedC0",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                30,
+                45
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0013427734375,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 55,
+              "operator": "Sum",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_3_XC0XCubed",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                30,
+                45
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.00140380859375,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 56,
+              "operator": "Sqrt",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_3_SqrtTwoOverPi",
+              "passed": true,
+              "finite": true,
+              "shape": [],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 57,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_3_TanhInput",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                30,
+                45
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0010986328125,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 58,
+              "operator": "Tanh",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_3_ErfApprox",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                30,
+                45
+              ],
+              "dtype": "float32",
+              "max_abs_error": 2.891290932893753e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 59,
+              "operator": "Sum",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_3_PhiApprox",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                30,
+                45
+              ],
+              "dtype": "float32",
+              "max_abs_error": 2.8967857360839844e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 60,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast_gelu_4",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                30,
+                45
+              ],
+              "dtype": "float32",
+              "max_abs_error": 4.9114227294921875e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 61,
+              "operator": "Conv",
+              "name": "node_Conv_815",
+              "output": "InsertedPrecisionFreeCast_getitem_15",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                30,
+                45
+              ],
+              "dtype": "float32",
+              "max_abs_error": 3.0517578125e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 62,
+              "operator": "Conv",
+              "name": "node_Conv_817",
+              "output": "InsertedPrecisionFreeCast_getitem_18",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                30,
+                45
+              ],
+              "dtype": "float32",
+              "max_abs_error": 4.00543212890625e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 63,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_4_MultX",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                30,
+                45
+              ],
+              "dtype": "float32",
+              "max_abs_error": 2.002716064453125e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 64,
+              "operator": "Pow",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_4_XCubed",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                30,
+                45
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0439453125,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 65,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_4_XCubedC0",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                30,
+                45
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.001953125,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 66,
+              "operator": "Sum",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_4_XC0XCubed",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                30,
+                45
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.001953125,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 67,
+              "operator": "Sqrt",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_4_SqrtTwoOverPi",
+              "passed": true,
+              "finite": true,
+              "shape": [],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 68,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_4_TanhInput",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                30,
+                45
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.00152587890625,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 69,
+              "operator": "Tanh",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_4_ErfApprox",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                30,
+                45
+              ],
+              "dtype": "float32",
+              "max_abs_error": 2.726912498474121e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 70,
+              "operator": "Sum",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_4_PhiApprox",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                30,
+                45
+              ],
+              "dtype": "float32",
+              "max_abs_error": 2.7298927307128906e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 71,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast_gelu_5",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                30,
+                45
+              ],
+              "dtype": "float32",
+              "max_abs_error": 4.494190216064453e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 72,
+              "operator": "Conv",
+              "name": "node_Conv_819",
+              "output": "InsertedPrecisionFreeCast_getitem_21",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                15,
+                23
+              ],
+              "dtype": "float32",
+              "max_abs_error": 1.621246337890625e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 73,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_5_MultX",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                15,
+                23
+              ],
+              "dtype": "float32",
+              "max_abs_error": 8.106231689453125e-06,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 74,
+              "operator": "Pow",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_5_XCubed",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                15,
+                23
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0107421875,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 75,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_5_XCubedC0",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                15,
+                23
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.00048828125,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 76,
+              "operator": "Sum",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_5_XC0XCubed",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                15,
+                23
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.000518798828125,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 77,
+              "operator": "Sqrt",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_5_SqrtTwoOverPi",
+              "passed": true,
+              "finite": true,
+              "shape": [],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 78,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_5_TanhInput",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                15,
+                23
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.00042724609375,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 79,
+              "operator": "Tanh",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_5_ErfApprox",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                15,
+                23
+              ],
+              "dtype": "float32",
+              "max_abs_error": 1.1414289474487305e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 80,
+              "operator": "Sum",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_5_PhiApprox",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                15,
+                23
+              ],
+              "dtype": "float32",
+              "max_abs_error": 1.138448715209961e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 81,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast_gelu_6",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                15,
+                23
+              ],
+              "dtype": "float32",
+              "max_abs_error": 1.33514404296875e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 82,
+              "operator": "Conv",
+              "name": "node_Conv_821",
+              "output": "InsertedPrecisionFreeCast_getitem_24",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                96,
+                15,
+                23
+              ],
+              "dtype": "float32",
+              "max_abs_error": 9.5367431640625e-06,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 83,
+              "operator": "Conv",
+              "name": "node_Conv_823",
+              "output": "InsertedPrecisionFreeCast_getitem_27",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                15,
+                23
+              ],
+              "dtype": "float32",
+              "max_abs_error": 2.2411346435546875e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 84,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_6_MultX",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                15,
+                23
+              ],
+              "dtype": "float32",
+              "max_abs_error": 1.1205673217773438e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 85,
+              "operator": "Pow",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_6_XCubed",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                15,
+                23
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.009765625,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 86,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_6_XCubedC0",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                15,
+                23
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.00043487548828125,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 87,
+              "operator": "Sum",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_6_XC0XCubed",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                15,
+                23
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.000457763671875,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 88,
+              "operator": "Sqrt",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_6_SqrtTwoOverPi",
+              "passed": true,
+              "finite": true,
+              "shape": [],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 89,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_6_TanhInput",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                15,
+                23
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0003662109375,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 90,
+              "operator": "Tanh",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_6_ErfApprox",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                15,
+                23
+              ],
+              "dtype": "float32",
+              "max_abs_error": 1.5228986740112305e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 91,
+              "operator": "Sum",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_6_PhiApprox",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                15,
+                23
+              ],
+              "dtype": "float32",
+              "max_abs_error": 1.52587890625e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 92,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast_gelu_7",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                15,
+                23
+              ],
+              "dtype": "float32",
+              "max_abs_error": 2.1576881408691406e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 93,
+              "operator": "Conv",
+              "name": "node_Conv_825",
+              "output": "InsertedPrecisionFreeCast_getitem_30",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                15,
+                23
+              ],
+              "dtype": "float32",
+              "max_abs_error": 1.33514404296875e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 94,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_7_MultX",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                15,
+                23
+              ],
+              "dtype": "float32",
+              "max_abs_error": 6.67572021484375e-06,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 95,
+              "operator": "Pow",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_7_XCubed",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                15,
+                23
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.01513671875,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 96,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_7_XCubedC0",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                15,
+                23
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.000701904296875,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 97,
+              "operator": "Sum",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_7_XC0XCubed",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                15,
+                23
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.000732421875,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 98,
+              "operator": "Sqrt",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_7_SqrtTwoOverPi",
+              "passed": true,
+              "finite": true,
+              "shape": [],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 99,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_7_TanhInput",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                15,
+                23
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0006103515625,
+              "mismatched_elements": 0
+            }
+          ],
+          "final": {
+            "outputs": {
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                553
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.00390625,
+              "mismatched_elements": 2
+            }
+          },
+          "first_divergence": null,
+          "first_nonfinite": null
+        },
+        "CL": {
+          "nodes": [
+            {
+              "index": 0,
+              "operator": "Cast",
+              "name": "InsertedPrecisionFreeCast__to_copy_1",
+              "output": "InsertedPrecisionFreeCast__to_copy_1",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                1382400
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 1,
+              "operator": "Div",
+              "name": "node_div",
+              "output": "InsertedPrecisionFreeCast_div",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                1382400
+              ],
+              "dtype": "float32",
+              "max_abs_error": 5.960464477539063e-08,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 2,
+              "operator": "Cast",
+              "name": "InsertedPrecisionFreeCast_div",
+              "output": "div",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                1382400
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 3,
+              "operator": "Reshape",
+              "name": "node_view",
+              "output": "view",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                960,
+                360,
+                4
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 4,
+              "operator": "Transpose",
+              "name": "node_permute",
+              "output": "permute",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                360,
+                960,
+                4
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 5,
+              "operator": "Reshape",
+              "name": "node__unsafe_view",
+              "output": "_unsafe_view",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                360,
+                240,
+                16
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 6,
+              "operator": "Cast",
+              "name": "InsertedPrecisionFreeCast_permute_1",
+              "output": "InsertedPrecisionFreeCast_permute_1_token_572",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                360,
+                240,
+                16
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 7,
+              "operator": "Transpose",
+              "name": "Transpose",
+              "output": "Transpose_out0",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                240,
+                360,
+                16
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 9,
+              "operator": "Mul",
+              "name": "",
+              "output": "_token_574",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                120,
+                180,
+                32
+              ],
+              "dtype": "float32",
+              "max_abs_error": 1.52587890625e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 11,
+              "operator": "Mul",
+              "name": "",
+              "output": "_token_578",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                120,
+                180,
+                32
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0025634765625,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 13,
+              "operator": "Sqrt",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_SqrtTwoOverPi",
+              "passed": true,
+              "finite": true,
+              "shape": [],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 14,
+              "operator": "Mul",
+              "name": "",
+              "output": "_token_582",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                120,
+                180,
+                32
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.002197265625,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 15,
+              "operator": "Tanh",
+              "name": "",
+              "output": "_token_584",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                120,
+                180,
+                32
+              ],
+              "dtype": "float32",
+              "max_abs_error": 1.5422701835632324e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 16,
+              "operator": "Sum",
+              "name": "",
+              "output": "_token_586",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                120,
+                180,
+                32
+              ],
+              "dtype": "float32",
+              "max_abs_error": 1.5437602996826172e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 17,
+              "operator": "Mul",
+              "name": "",
+              "output": "_token_588",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                120,
+                180,
+                32
+              ],
+              "dtype": "float32",
+              "max_abs_error": 2.574920654296875e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 20,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_0_MultX",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                32,
+                60,
+                90
+              ],
+              "dtype": "float32",
+              "max_abs_error": 2.002716064453125e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 22,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_0_XCubedC0",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                32,
+                60,
+                90
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0028076171875,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 24,
+              "operator": "Sqrt",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_0_SqrtTwoOverPi",
+              "passed": true,
+              "finite": true,
+              "shape": [],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 25,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_0_TanhInput",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                32,
+                60,
+                90
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.002197265625,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 26,
+              "operator": "Tanh",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_0_ErfApprox",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                32,
+                60,
+                90
+              ],
+              "dtype": "float32",
+              "max_abs_error": 2.4646520614624023e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 27,
+              "operator": "Sum",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_0_PhiApprox",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                32,
+                60,
+                90
+              ],
+              "dtype": "float32",
+              "max_abs_error": 2.4616718292236328e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 28,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast_gelu_1",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                32,
+                60,
+                90
+              ],
+              "dtype": "float32",
+              "max_abs_error": 4.00543212890625e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 29,
+              "operator": "Conv",
+              "name": "node_Conv_809",
+              "output": "InsertedPrecisionFreeCast_getitem_6",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                32,
+                60,
+                90
+              ],
+              "dtype": "float32",
+              "max_abs_error": 3.0517578125e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 30,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_1_MultX",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                32,
+                60,
+                90
+              ],
+              "dtype": "float32",
+              "max_abs_error": 1.52587890625e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 31,
+              "operator": "Pow",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_1_XCubed",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                32,
+                60,
+                90
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.080078125,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 32,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_1_XCubedC0",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                32,
+                60,
+                90
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.003662109375,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 33,
+              "operator": "Sum",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_1_XC0XCubed",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                32,
+                60,
+                90
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.003662109375,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 34,
+              "operator": "Sqrt",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_1_SqrtTwoOverPi",
+              "passed": true,
+              "finite": true,
+              "shape": [],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 35,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_1_TanhInput",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                32,
+                60,
+                90
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0029296875,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 36,
+              "operator": "Tanh",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_1_ErfApprox",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                32,
+                60,
+                90
+              ],
+              "dtype": "float32",
+              "max_abs_error": 2.029910683631897e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 37,
+              "operator": "Sum",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_1_PhiApprox",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                32,
+                60,
+                90
+              ],
+              "dtype": "float32",
+              "max_abs_error": 2.0265579223632812e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 38,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast_gelu_2",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                32,
+                60,
+                90
+              ],
+              "dtype": "float32",
+              "max_abs_error": 2.956390380859375e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 39,
+              "operator": "Transpose",
+              "name": "Transpose_token_567",
+              "output": "Transpose_token_567_out0",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                60,
+                90,
+                32
+              ],
+              "dtype": "float32",
+              "max_abs_error": 2.956390380859375e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 42,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_2_MultX",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                96,
+                30,
+                45
+              ],
+              "dtype": "float32",
+              "max_abs_error": 1.9073486328125e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 44,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_2_XCubedC0",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                96,
+                30,
+                45
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0047607421875,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 46,
+              "operator": "Sqrt",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_2_SqrtTwoOverPi",
+              "passed": true,
+              "finite": true,
+              "shape": [],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 47,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_2_TanhInput",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                96,
+                30,
+                45
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0037841796875,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 48,
+              "operator": "Tanh",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_2_ErfApprox",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                96,
+                30,
+                45
+              ],
+              "dtype": "float32",
+              "max_abs_error": 1.220405101776123e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 49,
+              "operator": "Sum",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_2_PhiApprox",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                96,
+                30,
+                45
+              ],
+              "dtype": "float32",
+              "max_abs_error": 1.2159347534179688e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 50,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast_gelu_3",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                96,
+                30,
+                45
+              ],
+              "dtype": "float32",
+              "max_abs_error": 1.9550323486328125e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 51,
+              "operator": "Conv",
+              "name": "node_Conv_813",
+              "output": "InsertedPrecisionFreeCast_getitem_12",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                30,
+                45
+              ],
+              "dtype": "float32",
+              "max_abs_error": 5.435943603515625e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 52,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_3_MultX",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                30,
+                45
+              ],
+              "dtype": "float32",
+              "max_abs_error": 2.7179718017578125e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 53,
+              "operator": "Pow",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_3_XCubed",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                30,
+                45
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0595703125,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 54,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_3_XCubedC0",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                30,
+                45
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.00262451171875,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 55,
+              "operator": "Sum",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_3_XC0XCubed",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                30,
+                45
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.002685546875,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 56,
+              "operator": "Sqrt",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_3_SqrtTwoOverPi",
+              "passed": true,
+              "finite": true,
+              "shape": [],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 57,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_3_TanhInput",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                30,
+                45
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.00213623046875,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 58,
+              "operator": "Tanh",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_3_ErfApprox",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                30,
+                45
+              ],
+              "dtype": "float32",
+              "max_abs_error": 3.266334533691406e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 59,
+              "operator": "Sum",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_3_PhiApprox",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                30,
+                45
+              ],
+              "dtype": "float32",
+              "max_abs_error": 3.266334533691406e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 60,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast_gelu_4",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                30,
+                45
+              ],
+              "dtype": "float32",
+              "max_abs_error": 5.435943603515625e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 61,
+              "operator": "Conv",
+              "name": "node_Conv_815",
+              "output": "InsertedPrecisionFreeCast_getitem_15",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                30,
+                45
+              ],
+              "dtype": "float32",
+              "max_abs_error": 3.1828880310058594e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 62,
+              "operator": "Conv",
+              "name": "node_Conv_817",
+              "output": "InsertedPrecisionFreeCast_getitem_18",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                30,
+                45
+              ],
+              "dtype": "float32",
+              "max_abs_error": 3.910064697265625e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 63,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_4_MultX",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                30,
+                45
+              ],
+              "dtype": "float32",
+              "max_abs_error": 1.9550323486328125e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 64,
+              "operator": "Pow",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_4_XCubed",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                30,
+                45
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.037109375,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 65,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_4_XCubedC0",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                30,
+                45
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.00164794921875,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 66,
+              "operator": "Sum",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_4_XC0XCubed",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                30,
+                45
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.00164794921875,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 67,
+              "operator": "Sqrt",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_4_SqrtTwoOverPi",
+              "passed": true,
+              "finite": true,
+              "shape": [],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 68,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_4_TanhInput",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                30,
+                45
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.00128173828125,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 69,
+              "operator": "Tanh",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_4_ErfApprox",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                30,
+                45
+              ],
+              "dtype": "float32",
+              "max_abs_error": 2.0876526832580566e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 70,
+              "operator": "Sum",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_4_PhiApprox",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                30,
+                45
+              ],
+              "dtype": "float32",
+              "max_abs_error": 2.086162567138672e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 71,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast_gelu_5",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                30,
+                45
+              ],
+              "dtype": "float32",
+              "max_abs_error": 3.8504600524902344e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 72,
+              "operator": "Conv",
+              "name": "node_Conv_819",
+              "output": "InsertedPrecisionFreeCast_getitem_21",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                15,
+                23
+              ],
+              "dtype": "float32",
+              "max_abs_error": 1.5735626220703125e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 73,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_5_MultX",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                15,
+                23
+              ],
+              "dtype": "float32",
+              "max_abs_error": 7.867813110351562e-06,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 74,
+              "operator": "Pow",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_5_XCubed",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                15,
+                23
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0126953125,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 75,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_5_XCubedC0",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                15,
+                23
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.00054931640625,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 76,
+              "operator": "Sum",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_5_XC0XCubed",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                15,
+                23
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.000579833984375,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 77,
+              "operator": "Sqrt",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_5_SqrtTwoOverPi",
+              "passed": true,
+              "finite": true,
+              "shape": [],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 78,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_5_TanhInput",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                15,
+                23
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.00048828125,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 79,
+              "operator": "Tanh",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_5_ErfApprox",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                15,
+                23
+              ],
+              "dtype": "float32",
+              "max_abs_error": 1.1086463928222656e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 80,
+              "operator": "Sum",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_5_PhiApprox",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                15,
+                23
+              ],
+              "dtype": "float32",
+              "max_abs_error": 1.1086463928222656e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 81,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast_gelu_6",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                15,
+                23
+              ],
+              "dtype": "float32",
+              "max_abs_error": 1.430511474609375e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 82,
+              "operator": "Conv",
+              "name": "node_Conv_821",
+              "output": "InsertedPrecisionFreeCast_getitem_24",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                96,
+                15,
+                23
+              ],
+              "dtype": "float32",
+              "max_abs_error": 9.5367431640625e-06,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 83,
+              "operator": "Conv",
+              "name": "node_Conv_823",
+              "output": "InsertedPrecisionFreeCast_getitem_27",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                15,
+                23
+              ],
+              "dtype": "float32",
+              "max_abs_error": 2.5987625122070312e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 84,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_6_MultX",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                15,
+                23
+              ],
+              "dtype": "float32",
+              "max_abs_error": 1.2993812561035156e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 85,
+              "operator": "Pow",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_6_XCubed",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                15,
+                23
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.010498046875,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 86,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_6_XCubedC0",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                15,
+                23
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.00046539306640625,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 87,
+              "operator": "Sum",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_6_XC0XCubed",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                15,
+                23
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.00048828125,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 88,
+              "operator": "Sqrt",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_6_SqrtTwoOverPi",
+              "passed": true,
+              "finite": true,
+              "shape": [],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 89,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_6_TanhInput",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                15,
+                23
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.00038909912109375,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 90,
+              "operator": "Tanh",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_6_ErfApprox",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                15,
+                23
+              ],
+              "dtype": "float32",
+              "max_abs_error": 1.895427703857422e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 91,
+              "operator": "Sum",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_6_PhiApprox",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                15,
+                23
+              ],
+              "dtype": "float32",
+              "max_abs_error": 1.895427703857422e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 92,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast_gelu_7",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                15,
+                23
+              ],
+              "dtype": "float32",
+              "max_abs_error": 2.8371810913085938e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 93,
+              "operator": "Conv",
+              "name": "node_Conv_825",
+              "output": "InsertedPrecisionFreeCast_getitem_30",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                15,
+                23
+              ],
+              "dtype": "float32",
+              "max_abs_error": 1.6689300537109375e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 94,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_7_MultX",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                15,
+                23
+              ],
+              "dtype": "float32",
+              "max_abs_error": 8.344650268554688e-06,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 95,
+              "operator": "Pow",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_7_XCubed",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                15,
+                23
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0146484375,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 96,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_7_XCubedC0",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                15,
+                23
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.00067138671875,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 97,
+              "operator": "Sum",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_7_XC0XCubed",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                15,
+                23
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.00067138671875,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 98,
+              "operator": "Sqrt",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_7_SqrtTwoOverPi",
+              "passed": true,
+              "finite": true,
+              "shape": [],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 99,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_7_TanhInput",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                15,
+                23
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.000518798828125,
+              "mismatched_elements": 0
+            }
+          ],
+          "final": {
+            "outputs": {
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                553
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.00390625,
+              "mismatched_elements": 10
+            }
+          },
+          "first_divergence": null,
+          "first_nonfinite": null
+        }
+      }
+    },
+    "driving_supercombo": {
+      "sha256": "fd5462e4fe49b8748546b3b0ec3da6a30d5c2ab0497e7e97f40dfcec9259ebae",
+      "original_sha256": "65a08adc31d5c456219687d99b7bf5e44d61dae2d49ea67850e76105c7248cce",
+      "instrumented_matches_original": {
+        "outputs": true,
+        "next_state_img_q": true,
+        "next_state_desire_q": true,
+        "next_state_feat_q": true
+      },
+      "engines": {
+        "ort": {
+          "nodes": [
+            {
+              "index": 0,
+              "operator": "Slice",
+              "name": "node_slice_7",
+              "output": "slice_7",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                95,
+                1,
+                512
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 1,
+              "operator": "Cast",
+              "name": "node__to_copy_2",
+              "output": "_to_copy_2",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                2
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 2,
+              "operator": "Gemm",
+              "name": "model/p_node_linear_4",
+              "output": "model/p_linear_4",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 3,
+              "operator": "Cast",
+              "name": "InsertedPrecisionFreeCast_model/p_linear_4",
+              "output": "InsertedPrecisionFreeCast_model/p_linear_4",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 5,
+              "operator": "Cast",
+              "name": "InsertedPrecisionFreeCast_model/p_silu_2",
+              "output": "model/p_silu_2",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 6,
+              "operator": "Gemm",
+              "name": "model/p_node_linear_5",
+              "output": "model/p_linear_5",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 7,
+              "operator": "Unsqueeze",
+              "name": "model/p_node_unsqueeze_1",
+              "output": "model/p_unsqueeze_1",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 8,
+              "operator": "Cast",
+              "name": "InsertedPrecisionFreeCast_model/p_unsqueeze_1",
+              "output": "InsertedPrecisionFreeCast_model/p_unsqueeze_1",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                1,
+                512
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 9,
+              "operator": "Slice",
+              "name": "node_slice_2",
+              "output": "slice_2",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                99,
+                1,
+                8
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 10,
+              "operator": "Reshape",
+              "name": "node_view",
+              "output": "view",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                1,
+                8
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 12,
+              "operator": "Reshape",
+              "name": "node_view_1",
+              "output": "view_1",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                25,
+                4,
+                1,
+                8
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 13,
+              "operator": "ReduceMax",
+              "name": "n0",
+              "output": "amax",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                25,
+                1,
+                8
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 14,
+              "operator": "Transpose",
+              "name": "node_transpose",
+              "output": "transpose",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                25,
+                8
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 15,
+              "operator": "Cast",
+              "name": "node__to_copy",
+              "output": "_to_copy",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                25,
+                8
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 16,
+              "operator": "Reshape",
+              "name": "model/p_node_view",
+              "output": "model/p_view",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                200
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 17,
+              "operator": "Gemm",
+              "name": "model/p_node_linear_2",
+              "output": "model/p_linear_2",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 18,
+              "operator": "Cast",
+              "name": "InsertedPrecisionFreeCast_model/p_linear_2",
+              "output": "InsertedPrecisionFreeCast_model/p_linear_2",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 20,
+              "operator": "Cast",
+              "name": "InsertedPrecisionFreeCast_model/p_silu_1",
+              "output": "model/p_silu_1",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 21,
+              "operator": "Gemm",
+              "name": "model/p_node_linear_3",
+              "output": "model/p_linear_3",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 22,
+              "operator": "Unsqueeze",
+              "name": "model/p_node_unsqueeze",
+              "output": "model/p_unsqueeze",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 23,
+              "operator": "Cast",
+              "name": "InsertedPrecisionFreeCast_model/p_unsqueeze",
+              "output": "InsertedPrecisionFreeCast_model/p_unsqueeze",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                1,
+                512
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 24,
+              "operator": "Cast",
+              "name": "InsertedPrecisionFreeCast_model/vision_model.policy.summarizer._mu.bias",
+              "output": "InsertedPrecisionFreeCast_model/vision_model.policy.summarizer._mu.bias",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                512
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 25,
+              "operator": "Cast",
+              "name": "InsertedPrecisionFreeCast_model/vision_model.policy.summarizer.resblock.block_b.1.bias",
+              "output": "InsertedPrecisionFreeCast_model/vision_model.policy.summarizer.resblock.block_b.1.bias",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1024
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 26,
+              "operator": "Cast",
+              "name": "InsertedPrecisionFreeCast_model/vision_model.policy.summarizer.resblock.block_a.0.bias",
+              "output": "InsertedPrecisionFreeCast_model/vision_model.policy.summarizer.resblock.block_a.0.bias",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1024
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 27,
+              "operator": "Unsqueeze",
+              "name": "node_unsqueeze",
+              "output": "unsqueeze",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                2,
+                1,
+                6,
+                128,
+                256
+              ],
+              "dtype": "uint8",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 28,
+              "operator": "Slice",
+              "name": "node_slice_1",
+              "output": "slice_1",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                2,
+                4,
+                6,
+                128,
+                256
+              ],
+              "dtype": "uint8",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 30,
+              "operator": "Split",
+              "name": "node_select_1/GatherSliceToSplitFusion",
+              "output": "split_output",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                5,
+                6,
+                128,
+                256
+              ],
+              "dtype": "uint8",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 30,
+              "operator": "Split",
+              "name": "node_select_1/GatherSliceToSplitFusion",
+              "output": "split_output_token_158",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                5,
+                6,
+                128,
+                256
+              ],
+              "dtype": "uint8",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 31,
+              "operator": "Squeeze",
+              "name": "Squeeze_token_160",
+              "output": "select_1",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                5,
+                6,
+                128,
+                256
+              ],
+              "dtype": "uint8",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 32,
+              "operator": "Slice",
+              "name": "node_slice_4",
+              "output": "slice_4",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                2,
+                6,
+                128,
+                256
+              ],
+              "dtype": "uint8",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 33,
+              "operator": "Reshape",
+              "name": "node__unsafe_view_1",
+              "output": "_unsafe_view_1",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                12,
+                128,
+                256
+              ],
+              "dtype": "uint8",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 34,
+              "operator": "Cast",
+              "name": "model/node__to_copy_1",
+              "output": "model/_to_copy_1",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                12,
+                128,
+                256
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 35,
+              "operator": "Squeeze",
+              "name": "Squeeze",
+              "output": "select",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                5,
+                6,
+                128,
+                256
+              ],
+              "dtype": "uint8",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 36,
+              "operator": "Slice",
+              "name": "node_slice_3",
+              "output": "slice_3",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                2,
+                6,
+                128,
+                256
+              ],
+              "dtype": "uint8",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 37,
+              "operator": "Reshape",
+              "name": "node__unsafe_view",
+              "output": "_unsafe_view",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                12,
+                128,
+                256
+              ],
+              "dtype": "uint8",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 38,
+              "operator": "Cast",
+              "name": "model/node__to_copy",
+              "output": "model/_to_copy",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                12,
+                128,
+                256
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 39,
+              "operator": "Concat",
+              "name": "model/node_cat",
+              "output": "model/cat",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                24,
+                128,
+                256
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 40,
+              "operator": "Cast",
+              "name": "InsertedPrecisionFreeCast_model/cat",
+              "output": "InsertedPrecisionFreeCast_model/cat",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                24,
+                128,
+                256
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 41,
+              "operator": "Sub",
+              "name": "model/node_sub",
+              "output": "InsertedPrecisionFreeCast_model/sub",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                24,
+                128,
+                256
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 42,
+              "operator": "Div",
+              "name": "model/node_div",
+              "output": "InsertedPrecisionFreeCast_model/div",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                24,
+                128,
+                256
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 43,
+              "operator": "Transpose",
+              "name": "Transpose_token_573",
+              "output": "Transpose_token_573_out0",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                128,
+                256,
+                24
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 46,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_MultX",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                64,
+                128
+              ],
+              "dtype": "float32",
+              "max_abs_error": 4.1961669921875e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 48,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_XCubedC0",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                64,
+                128
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.07421875,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 50,
+              "operator": "Sqrt",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_SqrtTwoOverPi",
+              "passed": true,
+              "finite": true,
+              "shape": [],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 51,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_TanhInput",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                64,
+                128
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.05859375,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 52,
+              "operator": "Tanh",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_ErfApprox",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                64,
+                128
+              ],
+              "dtype": "float32",
+              "max_abs_error": 1.2353062629699707e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 53,
+              "operator": "Sum",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_PhiApprox",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                64,
+                128
+              ],
+              "dtype": "float32",
+              "max_abs_error": 1.239776611328125e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 54,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast_model/gelu",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                64,
+                128
+              ],
+              "dtype": "float32",
+              "max_abs_error": 8.392333984375e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 55,
+              "operator": "Conv",
+              "name": "model/node_conv2d_1",
+              "output": "InsertedPrecisionFreeCast_model/conv2d_1",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.00030517578125,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 56,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_40_MultX",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.000152587890625,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 57,
+              "operator": "Pow",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_40_XCubed",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "dtype": "float32",
+              "max_abs_error": 384.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 58,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_40_XCubedC0",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "dtype": "float32",
+              "max_abs_error": 17.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 59,
+              "operator": "Sum",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_40_XC0XCubed",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "dtype": "float32",
+              "max_abs_error": 17.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 60,
+              "operator": "Sqrt",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_40_SqrtTwoOverPi",
+              "passed": true,
+              "finite": true,
+              "shape": [],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 61,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_40_TanhInput",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "dtype": "float32",
+              "max_abs_error": 13.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 62,
+              "operator": "Tanh",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_40_ErfApprox",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "dtype": "float32",
+              "max_abs_error": 3.725290298461914e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 63,
+              "operator": "Sum",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_40_PhiApprox",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "dtype": "float32",
+              "max_abs_error": 3.731250762939453e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 64,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast_model/gelu_1",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "dtype": "float32",
+              "max_abs_error": 5.7220458984375e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 65,
+              "operator": "Conv",
+              "name": "model/node_conv2d_2",
+              "output": "InsertedPrecisionFreeCast_model/conv2d_2",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0001220703125,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 66,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_41_MultX",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "dtype": "float32",
+              "max_abs_error": 6.103515625e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 67,
+              "operator": "Pow",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_41_XCubed",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "dtype": "float32",
+              "max_abs_error": 12.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 68,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_41_XCubedC0",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.53125,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 69,
+              "operator": "Sum",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_41_XC0XCubed",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.53125,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 70,
+              "operator": "Sqrt",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_41_SqrtTwoOverPi",
+              "passed": true,
+              "finite": true,
+              "shape": [],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 71,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_41_TanhInput",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.4375,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 72,
+              "operator": "Tanh",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_41_ErfApprox",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "dtype": "float32",
+              "max_abs_error": 3.784894943237305e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 73,
+              "operator": "Sum",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_41_PhiApprox",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "dtype": "float32",
+              "max_abs_error": 3.790855407714844e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 74,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast_model/gelu_2",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.000102996826171875,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 75,
+              "operator": "Conv",
+              "name": "model/node_conv2d_3",
+              "output": "InsertedPrecisionFreeCast_model/conv2d_3",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "dtype": "float32",
+              "max_abs_error": 2.09808349609375e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 76,
+              "operator": "Conv",
+              "name": "model/node_Conv_173",
+              "output": "InsertedPrecisionFreeCast_model/getitem",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0001373291015625,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 77,
+              "operator": "Conv",
+              "name": "model/node_conv2d_5",
+              "output": "InsertedPrecisionFreeCast_model/conv2d_5",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                32,
+                64
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.00030517578125,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 78,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_42_MultX",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                32,
+                64
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.000152587890625,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 79,
+              "operator": "Pow",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_42_XCubed",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                32,
+                64
+              ],
+              "dtype": "float32",
+              "max_abs_error": 448.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 80,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_42_XCubedC0",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                32,
+                64
+              ],
+              "dtype": "float32",
+              "max_abs_error": 20.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 81,
+              "operator": "Sum",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_42_XC0XCubed",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                32,
+                64
+              ],
+              "dtype": "float32",
+              "max_abs_error": 20.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 82,
+              "operator": "Sqrt",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_42_SqrtTwoOverPi",
+              "passed": true,
+              "finite": true,
+              "shape": [],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 83,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_42_TanhInput",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                32,
+                64
+              ],
+              "dtype": "float32",
+              "max_abs_error": 15.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 84,
+              "operator": "Tanh",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_42_ErfApprox",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                32,
+                64
+              ],
+              "dtype": "float32",
+              "max_abs_error": 5.7697296142578125e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 85,
+              "operator": "Sum",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_42_PhiApprox",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                32,
+                64
+              ],
+              "dtype": "float32",
+              "max_abs_error": 5.7697296142578125e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 86,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast_model/gelu_3",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                32,
+                64
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0001811981201171875,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 91,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_43_MultX",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                32,
+                64
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.000118255615234375,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 93,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_43_XCubedC0",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                32,
+                64
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.96875,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 95,
+              "operator": "Sqrt",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_43_SqrtTwoOverPi",
+              "passed": true,
+              "finite": true,
+              "shape": [],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 96,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_43_TanhInput",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                32,
+                64
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.78125,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 97,
+              "operator": "Tanh",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_43_ErfApprox",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                32,
+                64
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0001112818717956543,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 98,
+              "operator": "Sum",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_43_PhiApprox",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                32,
+                64
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0001112818717956543,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 99,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast_model/gelu_4",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                32,
+                64
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.000186920166015625,
+              "mismatched_elements": 0
+            }
+          ],
+          "final": {
+            "outputs": {
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                2576
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.1640625,
+              "mismatched_elements": 664
+            },
+            "next_state_img_q": {
+              "passed": true,
+              "finite": true,
+              "shape": [
+                2,
+                5,
+                6,
+                128,
+                256
+              ],
+              "dtype": "uint8",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            "next_state_desire_q": {
+              "passed": true,
+              "finite": true,
+              "shape": [
+                100,
+                1,
+                8
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            "next_state_feat_q": {
+              "passed": true,
+              "finite": true,
+              "shape": [
+                96,
+                1,
+                512
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0001220703125,
+              "mismatched_elements": 0
+            }
+          },
+          "first_divergence": null,
+          "first_nonfinite": null
+        },
+        "CL": {
+          "nodes": [
+            {
+              "index": 0,
+              "operator": "Slice",
+              "name": "node_slice_7",
+              "output": "slice_7",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                95,
+                1,
+                512
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 1,
+              "operator": "Cast",
+              "name": "node__to_copy_2",
+              "output": "_to_copy_2",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                2
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 2,
+              "operator": "Gemm",
+              "name": "model/p_node_linear_4",
+              "output": "model/p_linear_4",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 3,
+              "operator": "Cast",
+              "name": "InsertedPrecisionFreeCast_model/p_linear_4",
+              "output": "InsertedPrecisionFreeCast_model/p_linear_4",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 5,
+              "operator": "Cast",
+              "name": "InsertedPrecisionFreeCast_model/p_silu_2",
+              "output": "model/p_silu_2",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 6,
+              "operator": "Gemm",
+              "name": "model/p_node_linear_5",
+              "output": "model/p_linear_5",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.001953125,
+              "mismatched_elements": 18
+            },
+            {
+              "index": 7,
+              "operator": "Unsqueeze",
+              "name": "model/p_node_unsqueeze_1",
+              "output": "model/p_unsqueeze_1",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.001953125,
+              "mismatched_elements": 18
+            },
+            {
+              "index": 8,
+              "operator": "Cast",
+              "name": "InsertedPrecisionFreeCast_model/p_unsqueeze_1",
+              "output": "InsertedPrecisionFreeCast_model/p_unsqueeze_1",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                1,
+                512
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.001953125,
+              "mismatched_elements": 18
+            },
+            {
+              "index": 9,
+              "operator": "Slice",
+              "name": "node_slice_2",
+              "output": "slice_2",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                99,
+                1,
+                8
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 10,
+              "operator": "Reshape",
+              "name": "node_view",
+              "output": "view",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                1,
+                8
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 12,
+              "operator": "Reshape",
+              "name": "node_view_1",
+              "output": "view_1",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                25,
+                4,
+                1,
+                8
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 13,
+              "operator": "ReduceMax",
+              "name": "n0",
+              "output": "amax",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                25,
+                1,
+                8
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 14,
+              "operator": "Transpose",
+              "name": "node_transpose",
+              "output": "transpose",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                25,
+                8
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 15,
+              "operator": "Cast",
+              "name": "node__to_copy",
+              "output": "_to_copy",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                25,
+                8
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 16,
+              "operator": "Reshape",
+              "name": "model/p_node_view",
+              "output": "model/p_view",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                200
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 17,
+              "operator": "Gemm",
+              "name": "model/p_node_linear_2",
+              "output": "model/p_linear_2",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": 3.212690353393555e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 18,
+              "operator": "Cast",
+              "name": "InsertedPrecisionFreeCast_model/p_linear_2",
+              "output": "InsertedPrecisionFreeCast_model/p_linear_2",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float32",
+              "max_abs_error": 3.212690353393555e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 20,
+              "operator": "Cast",
+              "name": "InsertedPrecisionFreeCast_model/p_silu_1",
+              "output": "model/p_silu_1",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": 5.817413330078125e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 21,
+              "operator": "Gemm",
+              "name": "model/p_node_linear_3",
+              "output": "model/p_linear_3",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0007476806640625,
+              "mismatched_elements": 214
+            },
+            {
+              "index": 22,
+              "operator": "Unsqueeze",
+              "name": "model/p_node_unsqueeze",
+              "output": "model/p_unsqueeze",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                1,
+                512
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0007476806640625,
+              "mismatched_elements": 214
+            },
+            {
+              "index": 23,
+              "operator": "Cast",
+              "name": "InsertedPrecisionFreeCast_model/p_unsqueeze",
+              "output": "InsertedPrecisionFreeCast_model/p_unsqueeze",
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                1,
+                512
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0007476806640625,
+              "mismatched_elements": 214
+            },
+            {
+              "index": 24,
+              "operator": "Cast",
+              "name": "InsertedPrecisionFreeCast_model/vision_model.policy.summarizer._mu.bias",
+              "output": "InsertedPrecisionFreeCast_model/vision_model.policy.summarizer._mu.bias",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                512
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 25,
+              "operator": "Cast",
+              "name": "InsertedPrecisionFreeCast_model/vision_model.policy.summarizer.resblock.block_b.1.bias",
+              "output": "InsertedPrecisionFreeCast_model/vision_model.policy.summarizer.resblock.block_b.1.bias",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1024
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 26,
+              "operator": "Cast",
+              "name": "InsertedPrecisionFreeCast_model/vision_model.policy.summarizer.resblock.block_a.0.bias",
+              "output": "InsertedPrecisionFreeCast_model/vision_model.policy.summarizer.resblock.block_a.0.bias",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1024
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 27,
+              "operator": "Unsqueeze",
+              "name": "node_unsqueeze",
+              "output": "unsqueeze",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                2,
+                1,
+                6,
+                128,
+                256
+              ],
+              "dtype": "uint8",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 28,
+              "operator": "Slice",
+              "name": "node_slice_1",
+              "output": "slice_1",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                2,
+                4,
+                6,
+                128,
+                256
+              ],
+              "dtype": "uint8",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 30,
+              "operator": "Split",
+              "name": "node_select_1/GatherSliceToSplitFusion",
+              "output": "split_output",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                5,
+                6,
+                128,
+                256
+              ],
+              "dtype": "uint8",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 30,
+              "operator": "Split",
+              "name": "node_select_1/GatherSliceToSplitFusion",
+              "output": "split_output_token_158",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                5,
+                6,
+                128,
+                256
+              ],
+              "dtype": "uint8",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 31,
+              "operator": "Squeeze",
+              "name": "Squeeze_token_160",
+              "output": "select_1",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                5,
+                6,
+                128,
+                256
+              ],
+              "dtype": "uint8",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 32,
+              "operator": "Slice",
+              "name": "node_slice_4",
+              "output": "slice_4",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                2,
+                6,
+                128,
+                256
+              ],
+              "dtype": "uint8",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 33,
+              "operator": "Reshape",
+              "name": "node__unsafe_view_1",
+              "output": "_unsafe_view_1",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                12,
+                128,
+                256
+              ],
+              "dtype": "uint8",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 34,
+              "operator": "Cast",
+              "name": "model/node__to_copy_1",
+              "output": "model/_to_copy_1",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                12,
+                128,
+                256
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 35,
+              "operator": "Squeeze",
+              "name": "Squeeze",
+              "output": "select",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                5,
+                6,
+                128,
+                256
+              ],
+              "dtype": "uint8",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 36,
+              "operator": "Slice",
+              "name": "node_slice_3",
+              "output": "slice_3",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                2,
+                6,
+                128,
+                256
+              ],
+              "dtype": "uint8",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 37,
+              "operator": "Reshape",
+              "name": "node__unsafe_view",
+              "output": "_unsafe_view",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                12,
+                128,
+                256
+              ],
+              "dtype": "uint8",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 38,
+              "operator": "Cast",
+              "name": "model/node__to_copy",
+              "output": "model/_to_copy",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                12,
+                128,
+                256
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 39,
+              "operator": "Concat",
+              "name": "model/node_cat",
+              "output": "model/cat",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                24,
+                128,
+                256
+              ],
+              "dtype": "float16",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 40,
+              "operator": "Cast",
+              "name": "InsertedPrecisionFreeCast_model/cat",
+              "output": "InsertedPrecisionFreeCast_model/cat",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                24,
+                128,
+                256
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 41,
+              "operator": "Sub",
+              "name": "model/node_sub",
+              "output": "InsertedPrecisionFreeCast_model/sub",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                24,
+                128,
+                256
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 42,
+              "operator": "Div",
+              "name": "model/node_div",
+              "output": "InsertedPrecisionFreeCast_model/div",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                24,
+                128,
+                256
+              ],
+              "dtype": "float32",
+              "max_abs_error": 1.1920928955078125e-07,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 43,
+              "operator": "Transpose",
+              "name": "Transpose_token_573",
+              "output": "Transpose_token_573_out0",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                128,
+                256,
+                24
+              ],
+              "dtype": "float32",
+              "max_abs_error": 1.1920928955078125e-07,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 46,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_MultX",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                64,
+                128
+              ],
+              "dtype": "float32",
+              "max_abs_error": 4.57763671875e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 48,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_XCubedC0",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                64,
+                128
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.076171875,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 50,
+              "operator": "Sqrt",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_SqrtTwoOverPi",
+              "passed": true,
+              "finite": true,
+              "shape": [],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 51,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_TanhInput",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                64,
+                128
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0625,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 52,
+              "operator": "Tanh",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_ErfApprox",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                64,
+                128
+              ],
+              "dtype": "float32",
+              "max_abs_error": 1.1254101991653442e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 53,
+              "operator": "Sum",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_PhiApprox",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                64,
+                128
+              ],
+              "dtype": "float32",
+              "max_abs_error": 1.1205673217773438e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 54,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast_model/gelu",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                64,
+                128
+              ],
+              "dtype": "float32",
+              "max_abs_error": 9.1552734375e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 55,
+              "operator": "Conv",
+              "name": "model/node_conv2d_1",
+              "output": "InsertedPrecisionFreeCast_model/conv2d_1",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0003662109375,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 56,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_40_MultX",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.00018310546875,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 57,
+              "operator": "Pow",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_40_XCubed",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "dtype": "float32",
+              "max_abs_error": 448.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 58,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_40_XCubedC0",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "dtype": "float32",
+              "max_abs_error": 20.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 59,
+              "operator": "Sum",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_40_XC0XCubed",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "dtype": "float32",
+              "max_abs_error": 20.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 60,
+              "operator": "Sqrt",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_40_SqrtTwoOverPi",
+              "passed": true,
+              "finite": true,
+              "shape": [],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 61,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_40_TanhInput",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "dtype": "float32",
+              "max_abs_error": 16.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 62,
+              "operator": "Tanh",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_40_ErfApprox",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "dtype": "float32",
+              "max_abs_error": 3.672018647193909e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 63,
+              "operator": "Sum",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_40_PhiApprox",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "dtype": "float32",
+              "max_abs_error": 3.6716461181640625e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 64,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast_model/gelu_1",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "dtype": "float32",
+              "max_abs_error": 6.103515625e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 65,
+              "operator": "Conv",
+              "name": "model/node_conv2d_2",
+              "output": "InsertedPrecisionFreeCast_model/conv2d_2",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0001068115234375,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 66,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_41_MultX",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "dtype": "float32",
+              "max_abs_error": 5.340576171875e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 67,
+              "operator": "Pow",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_41_XCubed",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "dtype": "float32",
+              "max_abs_error": 14.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 68,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_41_XCubedC0",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.625,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 69,
+              "operator": "Sum",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_41_XC0XCubed",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.625,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 70,
+              "operator": "Sqrt",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_41_SqrtTwoOverPi",
+              "passed": true,
+              "finite": true,
+              "shape": [],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 71,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_41_TanhInput",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.5,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 72,
+              "operator": "Tanh",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_41_ErfApprox",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "dtype": "float32",
+              "max_abs_error": 5.4702162742614746e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 73,
+              "operator": "Sum",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_41_PhiApprox",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "dtype": "float32",
+              "max_abs_error": 5.4717063903808594e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 74,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast_model/gelu_2",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.000102996826171875,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 75,
+              "operator": "Conv",
+              "name": "model/node_conv2d_3",
+              "output": "InsertedPrecisionFreeCast_model/conv2d_3",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "dtype": "float32",
+              "max_abs_error": 1.9550323486328125e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 76,
+              "operator": "Conv",
+              "name": "model/node_Conv_173",
+              "output": "InsertedPrecisionFreeCast_model/getitem",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0001373291015625,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 77,
+              "operator": "Conv",
+              "name": "model/node_conv2d_5",
+              "output": "InsertedPrecisionFreeCast_model/conv2d_5",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                32,
+                64
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.00030517578125,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 78,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_42_MultX",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                32,
+                64
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.000152587890625,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 79,
+              "operator": "Pow",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_42_XCubed",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                32,
+                64
+              ],
+              "dtype": "float32",
+              "max_abs_error": 512.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 80,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_42_XCubedC0",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                32,
+                64
+              ],
+              "dtype": "float32",
+              "max_abs_error": 24.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 81,
+              "operator": "Sum",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_42_XC0XCubed",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                32,
+                64
+              ],
+              "dtype": "float32",
+              "max_abs_error": 24.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 82,
+              "operator": "Sqrt",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_42_SqrtTwoOverPi",
+              "passed": true,
+              "finite": true,
+              "shape": [],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 83,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_42_TanhInput",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                32,
+                64
+              ],
+              "dtype": "float32",
+              "max_abs_error": 20.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 84,
+              "operator": "Tanh",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_42_ErfApprox",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                32,
+                64
+              ],
+              "dtype": "float32",
+              "max_abs_error": 7.08550214767456e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 85,
+              "operator": "Sum",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_42_PhiApprox",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                32,
+                64
+              ],
+              "dtype": "float32",
+              "max_abs_error": 7.086992263793945e-05,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 86,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast_model/gelu_3",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                32,
+                64
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.000152587890625,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 91,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_43_MultX",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                32,
+                64
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0001049041748046875,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 93,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_43_XCubedC0",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                32,
+                64
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.53125,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 95,
+              "operator": "Sqrt",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_43_SqrtTwoOverPi",
+              "passed": true,
+              "finite": true,
+              "shape": [],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 96,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_43_TanhInput",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                32,
+                64
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.421875,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 97,
+              "operator": "Tanh",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_43_ErfApprox",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                32,
+                64
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.00011510401964187622,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 98,
+              "operator": "Sum",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_43_PhiApprox",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                32,
+                64
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0001150965690612793,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 99,
+              "operator": "Mul",
+              "name": "",
+              "output": "InsertedPrecisionFreeCast_model/gelu_4",
+              "passed": true,
+              "finite": true,
+              "shape": [
+                1,
+                192,
+                32,
+                64
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.000209808349609375,
+              "mismatched_elements": 0
+            }
+          ],
+          "final": {
+            "outputs": {
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                2576
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.125,
+              "mismatched_elements": 821
+            },
+            "next_state_img_q": {
+              "passed": true,
+              "finite": true,
+              "shape": [
+                2,
+                5,
+                6,
+                128,
+                256
+              ],
+              "dtype": "uint8",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            "next_state_desire_q": {
+              "passed": true,
+              "finite": true,
+              "shape": [
+                100,
+                1,
+                8
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            "next_state_feat_q": {
+              "passed": false,
+              "finite": true,
+              "shape": [
+                96,
+                1,
+                512
+              ],
+              "dtype": "float32",
+              "max_abs_error": 0.00018310546875,
+              "mismatched_elements": 11
+            }
+          },
+          "first_divergence": {
+            "index": 6,
+            "operator": "Gemm",
+            "name": "model/p_node_linear_5",
+            "output": "model/p_linear_5",
+            "passed": false,
+            "finite": true,
+            "shape": [
+              1,
+              512
+            ],
+            "dtype": "float16",
+            "max_abs_error": 0.001953125,
+            "mismatched_elements": 18
+          },
+          "first_nonfinite": null
+        }
+      }
+    }
+  },
+  "opencl_capabilities": {
+    "status": "passed",
+    "device": "QUALCOMM Adreno(TM)",
+    "error_code": 0,
+    "half_fp_config": 22,
+    "half_query_error": 0,
+    "single_fp_config": 22,
+    "single_query_error": 0
+  },
+  "gemm_checks": [
+    {
+      "seed": 42,
+      "length": 8,
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        32
+      ],
+      "dtype": "float16",
+      "max_abs_error": 0.0,
+      "mismatched_elements": 0,
+      "exact": true
+    },
+    {
+      "seed": 42,
+      "length": 19,
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        32
+      ],
+      "dtype": "float16",
+      "max_abs_error": 0.0,
+      "mismatched_elements": 0,
+      "exact": true
+    },
+    {
+      "seed": 42,
+      "length": 64,
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        32
+      ],
+      "dtype": "float16",
+      "max_abs_error": 0.0,
+      "mismatched_elements": 0,
+      "exact": true
+    },
+    {
+      "seed": 42,
+      "length": 512,
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        32
+      ],
+      "dtype": "float16",
+      "max_abs_error": 0.015625,
+      "mismatched_elements": 0,
+      "exact": false
+    },
+    {
+      "seed": 42,
+      "length": 1024,
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        32
+      ],
+      "dtype": "float16",
+      "max_abs_error": 0.0,
+      "mismatched_elements": 0,
+      "exact": true
+    },
+    {
+      "seed": 7,
+      "length": 8,
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        32
+      ],
+      "dtype": "float16",
+      "max_abs_error": 0.0,
+      "mismatched_elements": 0,
+      "exact": true
+    },
+    {
+      "seed": 7,
+      "length": 19,
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        32
+      ],
+      "dtype": "float16",
+      "max_abs_error": 0.0,
+      "mismatched_elements": 0,
+      "exact": true
+    },
+    {
+      "seed": 7,
+      "length": 64,
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        32
+      ],
+      "dtype": "float16",
+      "max_abs_error": 0.0,
+      "mismatched_elements": 0,
+      "exact": true
+    },
+    {
+      "seed": 7,
+      "length": 512,
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        32
+      ],
+      "dtype": "float16",
+      "max_abs_error": 0.0,
+      "mismatched_elements": 0,
+      "exact": true
+    },
+    {
+      "seed": 7,
+      "length": 1024,
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        32
+      ],
+      "dtype": "float16",
+      "max_abs_error": 0.0,
+      "mismatched_elements": 0,
+      "exact": true
+    },
+    {
+      "seed": 123,
+      "length": 8,
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        32
+      ],
+      "dtype": "float16",
+      "max_abs_error": 0.0,
+      "mismatched_elements": 0,
+      "exact": true
+    },
+    {
+      "seed": 123,
+      "length": 19,
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        32
+      ],
+      "dtype": "float16",
+      "max_abs_error": 0.0,
+      "mismatched_elements": 0,
+      "exact": true
+    },
+    {
+      "seed": 123,
+      "length": 64,
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        32
+      ],
+      "dtype": "float16",
+      "max_abs_error": 0.0,
+      "mismatched_elements": 0,
+      "exact": true
+    },
+    {
+      "seed": 123,
+      "length": 512,
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        32
+      ],
+      "dtype": "float16",
+      "max_abs_error": 0.0,
+      "mismatched_elements": 0,
+      "exact": true
+    },
+    {
+      "seed": 123,
+      "length": 1024,
+      "passed": true,
+      "finite": true,
+      "shape": [
+        1,
+        32
+      ],
+      "dtype": "float16",
+      "max_abs_error": 0.0,
+      "mismatched_elements": 0,
+      "exact": true
+    }
+  ],
+  "completed": true
+}

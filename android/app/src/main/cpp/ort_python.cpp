@@ -3,24 +3,84 @@
 #include <onnxruntime_cxx_api.h>
 #include <nnapi_provider_factory.h>
 #include <algorithm>
+#include <cstdlib>
 #include <cstring>
+#include <map>
 #include <memory>
+#include <mutex>
+#include <stdexcept>
 #include <string>
+#include <unordered_map>
 #include <vector>
+#include <sys/auxv.h>
+#include <asm/hwcap.h>
 
 namespace {
 Ort::Env environment(ORT_LOGGING_LEVEL_WARNING, "fold3");
+std::once_flag qnn_registration;
 struct Session {
   Ort::Session model{nullptr};
   std::vector<std::string> inputs, outputs;
-  explicit Session(const char *path, const char *backend, int threads, bool spinning, bool strict) {
+  int device_type = -1;
+  uint32_t device_vendor = 0, device_id = 0;
+  bool profiling = false;
+  std::string profile;
+  explicit Session(const char *path, const char *backend, int threads, bool spinning, bool strict,
+                   const char *library_dir, bool assignments, bool no_cpu_fallback,
+                   std::unordered_map<std::string, std::string> provider_options, const char *profile_path) {
     Ort::SessionOptions options;
     options.SetIntraOpNumThreads(threads).SetInterOpNumThreads(1);
     options.AddConfigEntry("session.intra_op.allow_spinning", spinning ? "1" : "0");
     options.AddConfigEntry("session.inter_op.allow_spinning", spinning ? "1" : "0");
+    if (assignments) options.AddConfigEntry("session.record_ep_graph_assignment_info", "1");
+    if (no_cpu_fallback) options.AddConfigEntry("session.disable_cpu_ep_fallback", "1");
+    if (profile_path && *profile_path) { options.EnableProfiling(profile_path); profiling = true; }
     if (strict) options.SetGraphOptimizationLevel(GraphOptimizationLevel::ORT_DISABLE_ALL).SetDeterministicCompute(true);
     if (std::strcmp(backend, "nnapi") == 0)
       Ort::ThrowOnError(OrtSessionOptionsAppendExecutionProvider_Nnapi(options, NNAPI_FLAG_CPU_DISABLED));
+    else if (std::strcmp(backend, "qnn-gpu") == 0 || std::strcmp(backend, "qnn-htp") == 0) {
+      if (profile_path && *profile_path) {
+        options.SetLogSeverityLevel(0);
+        Ort::ThrowOnError(Ort::GetApi().SetSessionLogVerbosityLevel(options, 1));
+      }
+      if (!library_dir || !*library_dir) throw std::invalid_argument("QNN native library directory is required");
+      const std::string directory(library_dir);
+      std::call_once(qnn_registration, [&directory] {
+        const char *existing = std::getenv("ADSP_LIBRARY_PATH");
+        const std::string search = directory + (existing && *existing ? std::string(";") + existing : "");
+        if (setenv("ADSP_LIBRARY_PATH", search.c_str(), 1) != 0) throw std::runtime_error("Cannot set QNN library path");
+        environment.RegisterExecutionProviderLibrary("QNNExecutionProvider", (directory + "/libonnxruntime_providers_qnn.so").c_str());
+      });
+      const bool gpu = std::strcmp(backend, "qnn-gpu") == 0;
+      const auto requested_type = gpu ? OrtHardwareDeviceType_GPU : OrtHardwareDeviceType_NPU;
+      std::vector<Ort::ConstEpDevice> selected;
+      auto devices = environment.GetEpDevices();
+      for (const auto &device : devices) {
+        if (std::strcmp(device.EpName(), "QNNExecutionProvider") == 0 && device.Device().Type() == requested_type) {
+          selected.push_back(device);
+          break;
+        }
+      }
+      // QNN on Android may advertise only its NPU device. The provider accepts
+      // an explicit GPU backend in this case; report the actual binding separately.
+      if (selected.empty() && gpu) {
+        for (const auto &device : devices) {
+          if (std::strcmp(device.EpName(), "QNNExecutionProvider") == 0 && device.Device().Type() == OrtHardwareDeviceType_NPU) {
+            selected.push_back(device);
+            break;
+          }
+        }
+      }
+      if (selected.empty()) throw std::runtime_error("QNN provider enumerated no compatible device");
+      const auto hardware = selected[0].Device();
+      device_type = static_cast<int>(hardware.Type());
+      device_vendor = hardware.VendorId();
+      device_id = hardware.DeviceId();
+      if (provider_options.count("backend_path") || provider_options.count("backend_type"))
+        throw std::invalid_argument("backend selection cannot be overridden by provider options");
+      provider_options["backend_path"] = directory + (gpu ? "/libQnnGpu.so" : "/libQnnHtp.so");
+      options.AppendExecutionProvider_V2(environment, selected, provider_options);
+    }
     else if (std::strcmp(backend, "cpu") != 0) throw std::invalid_argument("unsupported ORT backend");
     model = Ort::Session(environment, path, options);
     Ort::AllocatorWithDefaultOptions allocator;
@@ -60,13 +120,94 @@ const char *numpy_type(ONNXTensorElementDataType type) {
 }
 PyObject *create(PyObject *, PyObject *args) {
   const char *path, *backend;
-  int threads, spinning = 0, strict = 0;
-  if (!PyArg_ParseTuple(args, "ssi|pp", &path, &backend, &threads, &spinning, &strict)) return nullptr;
+  const char *library_dir = nullptr;
+  const char *profile_path = nullptr;
+  PyObject *provider_values = Py_None;
+  int threads, spinning = 0, strict = 0, assignments = 0, no_cpu_fallback = 0;
+  if (!PyArg_ParseTuple(args, "ssi|ppzppOz", &path, &backend, &threads, &spinning, &strict,
+                        &library_dir, &assignments, &no_cpu_fallback, &provider_values, &profile_path)) return nullptr;
   if (threads < 1 || threads > 4) { PyErr_SetString(PyExc_ValueError, "ORT thread count must be 1..4"); return nullptr; }
+  if ((getauxval(AT_HWCAP) & (HWCAP_FPHP | HWCAP_ASIMDHP)) != (HWCAP_FPHP | HWCAP_ASIMDHP)) {
+    PyErr_SetString(PyExc_RuntimeError, "Pinned arm64 ORT reference requires scalar and vector FP16 arithmetic");
+    return nullptr;
+  }
   try {
-    auto session = std::make_unique<Session>(path, backend, threads, spinning, strict);
+    std::unordered_map<std::string, std::string> provider_options;
+    if (provider_values != Py_None) {
+      if (!PyDict_Check(provider_values)) throw std::invalid_argument("provider options must be a string dictionary");
+      PyObject *key, *value;
+      Py_ssize_t position = 0;
+      while (PyDict_Next(provider_values, &position, &key, &value)) {
+        if (!PyUnicode_Check(key) || !PyUnicode_Check(value)) throw std::invalid_argument("provider options must contain strings");
+        const char *option = PyUnicode_AsUTF8(key), *setting = PyUnicode_AsUTF8(value);
+        if (!option || !setting) return nullptr;
+        provider_options.emplace(option, setting);
+      }
+    }
+    auto session = std::make_unique<Session>(path, backend, threads, spinning, strict, library_dir, assignments, no_cpu_fallback,
+                                            std::move(provider_options), profile_path);
     PyObject *result = PyCapsule_New(session.get(), capsule_name, destroy);
     if (result) session.release();
+    return result;
+  } catch (const std::exception &e) { PyErr_SetString(PyExc_RuntimeError, e.what()); return nullptr; }
+}
+PyObject *end_profiling(PyObject *, PyObject *args) {
+  PyObject *capsule;
+  if (!PyArg_ParseTuple(args, "O", &capsule)) return nullptr;
+  auto *session = static_cast<Session *>(PyCapsule_GetPointer(capsule, capsule_name));
+  if (!session) return nullptr;
+  try {
+    if (session->profiling) {
+      Ort::AllocatorWithDefaultOptions allocator;
+      session->profile = session->model.EndProfilingAllocated(allocator).get();
+      session->profiling = false;
+    }
+    return PyUnicode_FromString(session->profile.c_str());
+  } catch (const std::exception &e) { PyErr_SetString(PyExc_RuntimeError, e.what()); return nullptr; }
+}
+PyObject *describe(PyObject *, PyObject *args) {
+  PyObject *capsule;
+  if (!PyArg_ParseTuple(args, "O", &capsule)) return nullptr;
+  auto *session = static_cast<Session *>(PyCapsule_GetPointer(capsule, capsule_name));
+  if (!session) return nullptr;
+  try {
+    std::map<std::string, std::pair<size_t, size_t>> assignments;
+    for (const auto &graph : session->model.GetEpGraphAssignmentInfo()) {
+      auto &count = assignments[graph.GetEpName()];
+      ++count.first;
+      count.second += graph.GetNodes().size();
+    }
+    PyObject *result = PyDict_New();
+    PyObject *providers = PyDict_New();
+    if (!result || !providers) { Py_XDECREF(result); Py_XDECREF(providers); return nullptr; }
+    for (const auto &[name, count] : assignments) {
+      PyObject *value = Py_BuildValue("{sK,sK}", "partitions", static_cast<unsigned long long>(count.first),
+                                      "nodes", static_cast<unsigned long long>(count.second));
+      if (!value || PyDict_SetItemString(providers, name.c_str(), value) < 0) {
+        Py_XDECREF(value); Py_DECREF(providers); Py_DECREF(result); return nullptr;
+      }
+      Py_DECREF(value);
+    }
+    PyObject *device = Py_BuildValue("{si,sI,sI}", "type", session->device_type,
+                                    "vendor_id", session->device_vendor, "device_id", session->device_id);
+    if (!device || PyDict_SetItemString(result, "providers", providers) < 0 || PyDict_SetItemString(result, "device", device) < 0) {
+      Py_XDECREF(device); Py_DECREF(providers); Py_DECREF(result); return nullptr;
+    }
+    Py_DECREF(device); Py_DECREF(providers);
+    PyObject *nodes = PyList_New(0);
+    if (!nodes) { Py_DECREF(result); return nullptr; }
+    for (const auto &graph : session->model.GetEpGraphAssignmentInfo()) {
+      for (const auto &node : graph.GetNodes()) {
+        PyObject *value = Py_BuildValue("{ss,ss,ss,ss}", "provider", graph.GetEpName().c_str(),
+          "name", node.GetName().c_str(), "domain", node.GetDomain().c_str(), "operator", node.GetOperatorType().c_str());
+        if (!value || PyList_Append(nodes, value) < 0) {
+          Py_XDECREF(value); Py_DECREF(nodes); Py_DECREF(result); return nullptr;
+        }
+        Py_DECREF(value);
+      }
+    }
+    if (PyDict_SetItemString(result, "assigned_nodes", nodes) < 0) { Py_DECREF(nodes); Py_DECREF(result); return nullptr; }
+    Py_DECREF(nodes);
     return result;
   } catch (const std::exception &e) { PyErr_SetString(PyExc_RuntimeError, e.what()); return nullptr; }
 }
@@ -176,6 +317,8 @@ PyObject *gather_rows_u8(PyObject *, PyObject *args) {
   Py_RETURN_NONE;
 }
 PyMethodDef methods[] = {{"create", create, METH_VARARGS, nullptr}, {"run", run, METH_VARARGS, nullptr},
+                        {"describe", describe, METH_VARARGS, nullptr},
+                        {"end_profiling", end_profiling, METH_VARARGS, nullptr},
                         {"gather_rows_u8", gather_rows_u8, METH_VARARGS, nullptr}, {nullptr, nullptr, 0, nullptr}};
 PyModuleDef module = {PyModuleDef_HEAD_INIT, "fold3_ort_native", nullptr, -1, methods, nullptr, nullptr, nullptr, nullptr};
 }

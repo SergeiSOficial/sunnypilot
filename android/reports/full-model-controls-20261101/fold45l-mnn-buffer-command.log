@@ -1,0 +1,73 @@
+Traceback (most recent call last):
+  File "/Users/sergios/sunnypilot/android/scripts/validate_models.py", line 83, in <module>
+    report = validate(Device(args.serial, args.adb, args.package), args.profile, args.report, args.timeout)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sergios/sunnypilot/android/scripts/validate_models.py", line 62, in validate
+    raise RuntimeError(report["error"])
+RuntimeError: Model service exited without completing the benchmark
+{
+  "serial": "RFCR81Y1TBJ",
+  "command": [
+    ".venv/bin/python",
+    "android/scripts/validate_models.py",
+    "--serial",
+    "RFCR81Y1TBJ",
+    "--package",
+    "com.samsung.sunnypilot.fold3",
+    "--adb",
+    "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+    "--profile",
+    "mnn-opencl-buffer",
+    "--timeout",
+    "900",
+    "--report",
+    "android/reports/full-model-controls-20261101/fold45l-mnn-buffer.json"
+  ],
+  "vehicle_tx_enabled": false,
+  "status": "failed",
+  "validation_status": "failed",
+  "isolation_status": "passed",
+  "forwards_before": [],
+  "before_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 25.7,
+    "thermal_override": false
+  },
+  "apk_sha256": "c018adbbe27cdeced49576138b64b5934be7585af0e575cbb7a339eb7354ce48",
+  "baseline": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 25.4,
+    "thermal_override": false,
+    "idle_seconds": 32.6643514999887,
+    "normal_thermal_seconds": 32.39044550000108
+  },
+  "apk_sha256_at_start": "c018adbbe27cdeced49576138b64b5934be7585af0e575cbb7a339eb7354ce48",
+  "returncode": 1,
+  "after_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 28.2,
+    "thermal_override": false
+  },
+  "forwards_removed": [],
+  "apk_sha256_after": "c018adbbe27cdeced49576138b64b5934be7585af0e575cbb7a339eb7354ce48",
+  "artifact_stable": true,
+  "wrapper_status": "failed"
+}

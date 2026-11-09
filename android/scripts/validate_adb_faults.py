@@ -14,20 +14,22 @@ import subprocess
 import tempfile
 import time
 
+from experiment import PACKAGE, CAMERA_COMPAT_PACKAGE
 from openpilot.tools.sim.android_bridge import connect
 from openpilot.tools.sim.lib.android_protocol import MAX_PACKET, receive, send
 
 
-def validate(serial, adb, output):
+def validate(serial, adb, output, package=PACKAGE):
   def command(*args):
     return subprocess.check_output([adb, "-s", serial, *args], text=True, timeout=30)
   def state(name):
-    return json.loads(command("shell", "run-as", "ai.sunnypilot.fold3", "cat", f"files/{name}.json"))
-  report = {"serial": serial, "status": "starting", "simulation": True,
+    return json.loads(command("shell", "run-as", package, "cat", f"files/{name}.json"))
+  report = {"serial": serial, "package": package, "status": "starting", "simulation": True,
             "vehicle_tx_enabled": False, "physical_vehicle_verified": False, "rejected_cases": []}
   port = int(command("forward", "--no-rebind", "tcp:0", "localabstract:sunnypilot_fold3_sim").strip())
   try:
     before = state("manager")
+    report["manager_before"] = before
     assert before["simulation"] is True and before["vehicle_tx_enabled"] is False
     import openpilot.cereal.messaging as messaging
     from openpilot.tools.sim.android_validation import inputs
@@ -102,15 +104,23 @@ def validate(serial, adb, output):
     assert inactive_samples > 10, "no control output observed after disconnect"
     time.sleep(1.1)
     after = state("manager")
+    report["manager_after"] = after
+    report.update(active_samples_before_disconnect=counts["recovered"], input_freshness_samples=counts,
+                  inactive_samples_after_disconnect=inactive_samples)
     assert before["pid"] == after["pid"] and after["vehicle_tx_enabled"] is False
     for name, child in before["processes"].items():
-      assert child["pid"] == after["processes"][name]["pid"], f"{name} restarted after malformed session"
+      assert child["pid"] == after["processes"][name].get("pid"), f"{name} restarted after malformed session"
     report.update(status="passed", active_samples_before_disconnect=counts["recovered"],
                   input_freshness_samples=counts,
                   inactive_samples_after_disconnect=inactive_samples, manager_before=before,
                   manager_after=after, relay=state("sim_bridge"))
   except Exception as exc:
     report.update(status="failed", error=f"{type(exc).__name__}: {exc}")
+    for name in ("manager", "sim_bridge", "dmonitoringd", "dmonitoringd-last-failure", "controlsd"):
+      try:
+        report[name + "_at_failure"] = state(name)
+      except (subprocess.CalledProcessError, json.JSONDecodeError):
+        pass
   finally:
     command("forward", "--remove", f"tcp:{port}")
     Path(output).write_text(json.dumps(report, indent=2) + "\n")
@@ -121,11 +131,12 @@ if __name__ == "__main__":
   parser = argparse.ArgumentParser(description=__doc__)
   parser.add_argument("--serial", required=True)
   parser.add_argument("--adb", default="adb")
+  parser.add_argument("--package", choices=(PACKAGE, CAMERA_COMPAT_PACKAGE), default=PACKAGE)
   parser.add_argument("--report", default="adb-faults.json")
   args = parser.parse_args()
   with tempfile.TemporaryDirectory(prefix="fold3-adb-faults-") as directory:
     os.environ["PARAMS_ROOT"] = directory + "/params"
     os.environ["OPENPILOT_PREFIX"] = f"fold3_sim_faults_{os.getpid()}"
-    result = validate(args.serial, args.adb, args.report)
+    result = validate(args.serial, args.adb, args.report, args.package)
   print(json.dumps({key: result[key] for key in ("status", "rejected_cases", "vehicle_tx_enabled")}, indent=2))
   raise SystemExit(0 if result["status"] == "passed" else 1)

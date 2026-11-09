@@ -1,0 +1,87 @@
+{
+  "diagnostic_only": true,
+  "backend": "NumPy explicit float32/half rounding",
+  "seed": 42,
+  "nodes": {
+    "429": {
+      "name": "model/p_node_MatMul_13/MatMulAddFusion",
+      "samples": 4608,
+      "policies": {
+        "float32_2products_1lanes_biasfirstTrue": {
+          "exact": 4608,
+          "max_abs_error": 0.0,
+          "mismatched": 0
+        },
+        "float32_2products_1lanes_biasfirstFalse": {
+          "exact": 4607,
+          "max_abs_error": 0.000244140625,
+          "mismatched": 0
+        }
+      },
+      "best": [
+        "float32_2products_1lanes_biasfirstTrue",
+        "float32_2products_1lanes_biasfirstFalse"
+      ]
+    },
+    "435": {
+      "name": "model/p_node_MatMul_16/MatMulAddFusion",
+      "samples": 4608,
+      "policies": {
+        "float32_2products_1lanes_biasfirstTrue": {
+          "exact": 4608,
+          "max_abs_error": 0.0,
+          "mismatched": 0
+        },
+        "float32_2products_1lanes_biasfirstFalse": {
+          "exact": 4591,
+          "max_abs_error": 0.0001220703125,
+          "mismatched": 0
+        }
+      },
+      "best": [
+        "float32_2products_1lanes_biasfirstTrue",
+        "float32_2products_1lanes_biasfirstFalse"
+      ]
+    },
+    "444": {
+      "name": "model/p_node_MatMul_27/MatMulAddFusion",
+      "samples": 13824,
+      "policies": {
+        "float32_2products_1lanes_biasfirstTrue": {
+          "exact": 13824,
+          "max_abs_error": 0.0,
+          "mismatched": 0
+        },
+        "float32_2products_1lanes_biasfirstFalse": {
+          "exact": 13812,
+          "max_abs_error": 0.0001220703125,
+          "mismatched": 0
+        }
+      },
+      "best": [
+        "float32_2products_1lanes_biasfirstTrue",
+        "float32_2products_1lanes_biasfirstFalse"
+      ]
+    },
+    "475": {
+      "name": "model/p_node_MatMul_58/MatMulAddFusion",
+      "samples": 18432,
+      "policies": {
+        "float32_2products_1lanes_biasfirstTrue": {
+          "exact": 18432,
+          "max_abs_error": 0.0,
+          "mismatched": 0
+        },
+        "float32_2products_1lanes_biasfirstFalse": {
+          "exact": 18419,
+          "max_abs_error": 6.103515625e-05,
+          "mismatched": 0
+        }
+      },
+      "best": [
+        "float32_2products_1lanes_biasfirstTrue",
+        "float32_2products_1lanes_biasfirstFalse"
+      ]
+    }
+  }
+}

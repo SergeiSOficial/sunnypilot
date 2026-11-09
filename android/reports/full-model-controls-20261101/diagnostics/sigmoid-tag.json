@@ -1,0 +1,56 @@
+
+{ "bizCode": "fold3", "extraInfo": 
+{ "version": "3.6.2" }
+, "oplists": 
+[ 
+{ "main_type": "Input", "main": 
+{ "dims": 
+[ 1, 4, 1, 1 ]
+, "dtype": "DT_FLOAT", "dformat": "NCHW" }
+, "name": "x", "outputIndexes": 
+[ 0 ]
+, "type": "Input", "defaultDimentionFormat": "NHWC" }
+, 
+{ "inputIndexes": 
+[ 0 ]
+, "main_type": "TensorConvertInfo", "main": 
+{ "source": "NCHW", "dest": "NC4HW4" }
+, "name": "x___tr4conv", "outputIndexes": 
+[ 1 ]
+, "type": "ConvertTensor", "defaultDimentionFormat": "NHWC" }
+, 
+{ "inputIndexes": 
+[ 1 ]
+, "main_type": "Convolution2D", "main": 
+{ "common": 
+{ "padX": 0, "padY": 0, "kernelX": 1, "kernelY": 1, "strideX": 1, "strideY": 1, "dilateX": 1, "dilateY": 1, "padMode": "CAFFE", "group": 1, "outputCount": 4, "inputCount": 4, "relu": false, "relu6": false, "hasOutputShape": false }
+, "weight": 
+[ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ]
+, "bias": 
+[ 0.0, 0.0, 0.0, 0.0 ]
+ }
+, "name": "conv", "outputIndexes": 
+[ 2 ]
+, "type": "Convolution", "defaultDimentionFormat": "NHWC" }
+, 
+{ "inputIndexes": 
+[ 2 ]
+, "main_type": "UnaryOp", "main": 
+{ "opType": "SIGMOID", "T": "DT_INVALID" }
+, "name": "fold3_host_sigmoid_sigmoid", "outputIndexes": 
+[ 3 ]
+, "type": "UnaryOp", "defaultDimentionFormat": "NHWC" }
+, 
+{ "inputIndexes": 
+[ 3 ]
+, "main_type": "TensorConvertInfo", "main": 
+{ "source": "NC4HW4", "dest": "NCHW" }
+, "name": "y__before_tr", "outputIndexes": 
+[ 4 ]
+, "type": "ConvertTensor", "defaultDimentionFormat": "NHWC" }
+ ]
+, "outputName": 
+[ "y" ]
+, "preferForwardType": "CPU", "sourceType": "ONNX", "tensorName": 
+[ "x", "x___tr4conv", "conv", "y__before_tr", "y" ]
+, "tensorNumber": 0, "usage": "INFERENCE", "mnn_uuid": "a29ddb25-4802-4736-9257-400d3d3f242f" }

@@ -13,7 +13,8 @@ import numpy as np
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "android/app/src/main/python"))
-from fold3_vision import DiagnosticWarp, FrameGate, RoadWarp, ThermalGate, camera_available, carry_model_state, inference_delay_ns, load_road_calibration
+from fold3_vision import (DiagnosticWarp, FrameGate, MODEL_DEADLINE_NS, RoadWarp, ThermalGate, camera_available,
+                         carry_model_state, inference_delay_ns, load_road_calibration, publish_with_deadline)
 
 spec = importlib.util.spec_from_file_location("stage_panda", ROOT / "android/scripts/stage_panda.py")
 stage = importlib.util.module_from_spec(spec)
@@ -77,6 +78,15 @@ class VisionTest(unittest.TestCase):
     self.assertTrue(gate.update(0, 10_000_000_003))
     self.assertTrue(gate.update(1, 19_000_000_003))
     self.assertFalse(gate.update(0, 20_000_000_003))
+    for status in (4, 5, 6):
+      with self.assertRaises(RuntimeError):
+        gate.update(status, 21_000_000_003)
+
+  def test_on_device_fault_fixture_uses_the_runtime_gates(self):
+    from fold3_checks import faults
+    report = json.loads(faults())
+    self.assertEqual(report["status"], "passed")
+    self.assertFalse(report["thermal_override_used"])
 
   def test_model_cadence_is_20hz_without_catchup_after_stalls(self):
     self.assertEqual(inference_delay_ns(100_000_000, 125_000_000), 25_000_000)
@@ -101,6 +111,27 @@ class VisionTest(unittest.TestCase):
     with self.assertRaises(ValueError):
       FrameGate(("0", "0"))
 
+  def test_capture_budget_starts_at_older_rear_frame(self):
+    gate = FrameGate(("0", "2"), max_age_ns=MODEL_DEADLINE_NS)
+    gate.add("0", 100, None, 100)
+    gate.add("2", 20_000_100, None, 20_000_100)
+    self.assertIsNone(gate.pair(100 + MODEL_DEADLINE_NS + 1))
+    self.assertEqual(gate.expired, 1)
+    self.assertEqual(gate.rejected, 1)
+
+  def test_publication_counts_encoding_and_send_against_absolute_deadline(self):
+    publisher = Mock()
+    message = Mock()
+    message.to_bytes.return_value = b"payload"
+    output = (("modelV2", message),)
+    clock = Mock(side_effect=[50])
+    self.assertFalse(publish_with_deadline(publisher, output, 49, clock))
+    message.to_bytes.assert_called_once_with()
+    publisher.send.assert_not_called()
+    self.assertFalse(publish_with_deadline(publisher, output, 50, Mock(side_effect=[50, 51])))
+    publisher.send.assert_called_once_with("modelV2", b"payload")
+    self.assertTrue(publish_with_deadline(publisher, output, 50, Mock(side_effect=[49, 50])))
+
   def test_one_to_one_pairing_rejects_stale_duplicate_future_and_skew(self):
     gate = FrameGate(("0", "2"), max_age_ns=100, max_skew_ns=10)
     self.assertTrue(gate.add("0", 1000, "road", 1000))
@@ -122,6 +153,56 @@ class VisionTest(unittest.TestCase):
     self.assertEqual(len(gate.queues["0"]), 2)
     self.assertIsNone(gate.pair(100))
     self.assertEqual(gate.rejected, 97)
+
+  def test_rejected_frames_do_not_copy_or_discard_queued_pixels(self):
+    gate = FrameGate(("0", "2"), max_age_ns=100)
+    geometry = (2, 2, 2, 4)
+    self.assertTrue(gate.add_frame("0", 100, 1, bytearray(b"good"), geometry, 100))
+    for sensor, stamp, now in (("0", 100, 101), ("0", 101, 202), ("0", 103, 102), ("unknown", 103, 103)):
+      self.assertFalse(gate.add_frame(sensor, stamp, 2, object(), geometry, now))
+    self.assertEqual(gate.rejected, 4)
+    self.assertEqual(bytes(gate.queues["0"][0][1][1]), b"good")
+
+  def test_staging_owns_pixels_and_reuses_buffers_without_overwriting_queued_frames(self):
+    gate = FrameGate(("0", "2"), max_age_ns=100, max_skew_ns=5)
+    shared = bytearray(b"1234")
+    geometry = (2, 2, 2, 4)
+    for stamp, value in ((100, b"aaaa"), (110, b"bbbb")):
+      shared[:] = value
+      self.assertTrue(gate.add_frame("0", stamp, stamp, shared, geometry, stamp))
+    buffers = {id(buffer) for buffer in gate.staging["0"]}
+    for _ in range(10):
+      shared[:] = b"xxxx"
+      self.assertFalse(gate.add_frame("0", 110, 110, shared, geometry, 110))
+    self.assertEqual([bytes(payload[1]) for _, payload in gate.queues["0"]], [b"aaaa", b"bbbb"])
+    shared[:] = b"cccc"
+    self.assertTrue(gate.add_frame("0", 120, 120, shared, geometry, 120))
+    shared[:] = b"dddd"
+    gate.add_frame("2", 121, 121, shared, geometry, 121)
+    pair = gate.pair(121)
+    self.assertEqual(bytes(pair["0"][1][1]), b"cccc")
+    self.assertEqual(bytes(pair["2"][1][1]), b"dddd")
+    for stamp in range(130, 190):
+      gate.add_frame("0", stamp, stamp, shared, geometry, stamp)
+    self.assertEqual({id(buffer) for buffer in gate.staging["0"]}, buffers)
+
+  def test_newest_coherent_pair_discards_backlog_without_reusing_frames(self):
+    gate = FrameGate(("0", "2"), max_age_ns=100, max_skew_ns=5)
+    for sensor in gate.sensors:
+      gate.add(sensor, 100, "old", 100)
+      gate.add(sensor, 130, "new", 130)
+    self.assertEqual(gate.pair(135), {sensor: (130, "new") for sensor in gate.sensors})
+    self.assertEqual(gate.rejected, 2)
+    self.assertIsNone(gate.pair(135))
+
+  def test_newest_pair_keeps_a_newer_unmatched_frame(self):
+    gate = FrameGate(("0", "2"), max_age_ns=100, max_skew_ns=5)
+    gate.add("0", 100, "matched", 100)
+    gate.add("0", 140, "next", 140)
+    gate.add("2", 103, "matched", 140)
+    self.assertEqual(gate.pair(140)["0"], (100, "matched"))
+    gate.add("2", 142, "next", 142)
+    self.assertEqual(gate.pair(142)["0"], (140, "next"))
 
   def test_nv12_packing_matches_upstream_channel_order_with_stride_padding(self):
     # 4x2 luma, 6-byte stride, UV starts after a padded luma row.

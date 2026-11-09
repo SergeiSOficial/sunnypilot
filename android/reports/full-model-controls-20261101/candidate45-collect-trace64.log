@@ -1,0 +1,48 @@
+2026-11-01 18:37:59.079 python[67179:46810761] 2026-11-01 18:37:59.079115 [W:onnxruntime:, graph.cc:5777 CleanUnusedInitializersAndNodeArgs] Removing initializer 'model/p_val_6'. It is not used by any node and should be removed from the model.
+{
+  "dmonitoring_model": {
+    "captured_tensors": 32,
+    "first_tolerance_failure": null
+  },
+  "driving_supercombo": {
+    "captured_tensors": 32,
+    "first_tolerance_failure": {
+      "operator": "InsertedPrecisionFreeCast_model/add_1",
+      "operator_type": "BinaryOp",
+      "tensor": "InsertedPrecisionFreeCast_model/add_1",
+      "backend": "OpenCL",
+      "layout": "NCHW",
+      "dtype": "float32",
+      "shape": [
+        1,
+        64,
+        32,
+        64
+      ],
+      "file": "0000.bin",
+      "original": {
+        "tensor": "InsertedPrecisionFreeCast_model/add_1",
+        "node": "",
+        "operator": "Add",
+        "domain": ""
+      },
+      "parity": {
+        "passed": false,
+        "finite": true,
+        "shape": [
+          1,
+          64,
+          32,
+          64
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": false,
+        "max_abs_error": 0.0009765625,
+        "mismatched_elements": 1
+      },
+      "original_dtype": "float32"
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "daemon": "calibrationd",
+  "pid": 27951,
+  "vehicle_tx_enabled": false,
+  "engagement_allowed": false,
+  "work_samples": 496,
+  "deadline_misses": 0,
+  "phase": "failed",
+  "simulation": true,
+  "upstream_module": "locationd.calibrationd",
+  "updated_services": [
+    "cameraOdometry",
+    "carState"
+  ],
+  "invalid_services": [
+    "cameraOdometry",
+    "carState"
+  ],
+  "input_handling_ms": 52.082604,
+  "computation_ms": 3.13974,
+  "complete_cycle_ms": 55.222344,
+  "timing_includes_report_overhead": true,
+  "p99_work_ms": 9.155729,
+  "error": "Traceback (most recent call last):\n  File \"/data/data/com.samsung.sunnypilot.fold3/files/chaquopy/AssetFinder/app/fold3_daemons.py\", line 135, in run\n  File \"/data/data/com.samsung.sunnypilot.fold3/files/chaquopy/AssetFinder/app/fold3_driving.py\", line 52, in upstream\n  File \"/data/data/com.samsung.sunnypilot.fold3/files/chaquopy/AssetFinder/app/openpilot/selfdrive/locationd/calibrationd.py\", line 280, in main\n    new_rpy = calibrator.handle_cam_odom(sm['cameraOdometry'].trans,\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/data/data/com.samsung.sunnypilot.fold3/files/chaquopy/AssetFinder/app/openpilot/selfdrive/locationd/calibrationd.py\", line 190, in handle_cam_odom\n    straight_and_fast = ((self.v_ego > MIN_SPEED_FILTER) and (trans[0] > MIN_SPEED_FILTER) and (abs(rot[2]) < MAX_YAW_RATE_FILTER))\n                                                              ~~~~~^^^\n  File \"capnp/lib/capnp.pyx\", line 438, in capnp.lib.capnp._DynamicListReader.__getitem__\nIndexError: Out of bounds\n"
+}

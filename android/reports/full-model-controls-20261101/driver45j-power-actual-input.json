@@ -1,0 +1,149 @@
+{
+  "diagnostic_only": true,
+  "candidate": "candidate45j",
+  "model": "dmonitoring_model",
+  "apk_sha256": "cfac795591e24a81cc0dbc35a6a6bfdc2a05e86815dbe80613eef1caf8d0b219",
+  "checks": [
+    {
+      "tensor": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_21_XCubed",
+      "input": "fold3_host_conv_bl_InsertedPrecisionFreeCast_getitem_105",
+      "shape": [
+        1,
+        384,
+        8,
+        12
+      ],
+      "exponent": 3.0,
+      "diagnostic_graph_sha256": "42b259ede9c344b698771ff4fea671bd2c58b6649dc7747ee0c4fe0704b2d727",
+      "gpu_input_sha256": "19c3ee452c58b4523ccfe5dc8add1091ee665b39c372a95309f1c9de2007fb95",
+      "gpu_on_actual_input": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          384,
+          8,
+          12
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": false,
+        "max_abs_error": 0.000244140625,
+        "mismatched_elements": 0
+      },
+      "gpu_unequal_elements": 13591,
+      "separate_mul_host_parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          384,
+          8,
+          12
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "separate_mul_unequal_elements": 0
+    },
+    {
+      "tensor": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_22_XCubed",
+      "input": "fold3_host_conv_bl_InsertedPrecisionFreeCast_getitem_108",
+      "shape": [
+        1,
+        384,
+        8,
+        12
+      ],
+      "exponent": 3.0,
+      "diagnostic_graph_sha256": "67887e3e81303c4cd470b57efadba9da8c3294a02889778426497b5b37a4e404",
+      "gpu_input_sha256": "37ea84db607a20d4bdec1ae5ab3e8e044f399a927b3d7db57d5f23e16e86a06f",
+      "gpu_on_actual_input": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          384,
+          8,
+          12
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": false,
+        "max_abs_error": 0.000244140625,
+        "mismatched_elements": 0
+      },
+      "gpu_unequal_elements": 13540,
+      "separate_mul_host_parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          384,
+          8,
+          12
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "separate_mul_unequal_elements": 0
+    },
+    {
+      "tensor": "InsertedPrecisionFreeCast__inlfunc_Gelu_token_23_XCubed",
+      "input": "fold3_host_conv_bl_InsertedPrecisionFreeCast_getitem_114",
+      "shape": [
+        1,
+        512,
+        8,
+        12
+      ],
+      "exponent": 3.0,
+      "diagnostic_graph_sha256": "10544640316fef52a52eb9d26f4611b7d34c4b833c87f9ea1962c977fd4d4d1c",
+      "gpu_input_sha256": "7075caec50c55ff7ab0c50ff59e44c99d3a313eeb1a460dc4ca1465badba6805",
+      "gpu_on_actual_input": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          512,
+          8,
+          12
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": false,
+        "max_abs_error": 0.00048828125,
+        "mismatched_elements": 0
+      },
+      "gpu_unequal_elements": 18002,
+      "separate_mul_host_parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          512,
+          8,
+          12
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "separate_mul_unequal_elements": 0
+    }
+  ]
+}

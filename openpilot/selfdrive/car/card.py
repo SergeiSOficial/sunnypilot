@@ -44,7 +44,7 @@ def obd_callback(params: Params) -> ObdCallback:
   return set_obd_multiplexing
 
 
-def can_comm_callbacks(logcan: messaging.SubSocket, sendcan: messaging.PubSocket) -> tuple[CanRecvCallable, CanSendCallable]:
+def can_comm_callbacks(logcan: messaging.SubSocket, sendcan: messaging.PubSocket | None) -> tuple[CanRecvCallable, CanSendCallable]:
   def can_recv(wait_for_one: bool = False) -> list[list[CanData]]:
     """
     wait_for_one: wait the normal logcan socket timeout for a CAN packet, may return empty list if nothing comes
@@ -57,6 +57,8 @@ def can_comm_callbacks(logcan: messaging.SubSocket, sendcan: messaging.PubSocket
     return ret
 
   def can_send(msgs: list[CanData]) -> None:
+    if sendcan is None:
+      raise PermissionError("CAN transmission is disabled in receive-only mode")
     sendcan.send(can_list_to_can_capnp(msgs, msgtype='sendcan'))
 
   return can_recv, can_send
@@ -69,10 +71,14 @@ class Car:
   CP_SP: structs.CarParamsSP
   CP_SP_capnp: custom.CarParamsSP
 
-  def __init__(self, CI=None, RI=None) -> None:
+  def __init__(self, CI=None, RI=None, *, receive_only=False) -> None:
+    if receive_only and (CI is None or RI is None):
+      raise ValueError("Receive-only vehicle processing requires an explicitly configured interface")
+    self.receive_only = receive_only
     self.can_sock = messaging.sub_sock('can', timeout=20)
     self.sm = messaging.SubMaster(['pandaStates', 'carControl', 'onroadEvents'] + ['carControlSP', 'longitudinalPlanSP'])
-    self.pm = messaging.PubMaster(['sendcan', 'carState', 'carParams', 'carOutput', 'radarTracks'] + ['carParamsSP', 'carStateSP'])
+    services = ['carState', 'carParams', 'carOutput', 'radarTracks', 'carParamsSP', 'carStateSP']
+    self.pm = messaging.PubMaster(services if receive_only else ['sendcan'] + services)
 
     self.can_rcv_cum_timeout_counter = 0
 
@@ -85,7 +91,7 @@ class Car:
 
     self.params = Params()
 
-    self.can_callbacks = can_comm_callbacks(self.can_sock, self.pm.sock['sendcan'])
+    self.can_callbacks = can_comm_callbacks(self.can_sock, None if receive_only else self.pm.sock['sendcan'])
 
     is_release = False  # self.params.get_bool("IsReleaseBranch")
     is_release_sp = self.params.get_bool("IsReleaseSpBranch")
@@ -128,7 +134,7 @@ class Car:
     set_car_specific_params(self.CP, self.CP_SP, self.params)
 
     openpilot_enabled_toggle = self.params.get_bool("OpenpilotEnabledToggle")
-    controller_available = self.CI.CC is not None and openpilot_enabled_toggle and not self.CP.dashcamOnly
+    controller_available = not receive_only and self.CI.CC is not None and openpilot_enabled_toggle and not self.CP.dashcamOnly
     self.CP.passive = not controller_available or self.CP.dashcamOnly
     if self.CP.passive:
       safety_config = structs.CarParams.SafetyConfig()
@@ -263,6 +269,8 @@ class Car:
 
   def controls_update(self, CS: car.CarState, CC: car.CarControl, CC_SP: custom.CarControlSP):
     """control update loop, driven by carControl"""
+    if self.receive_only:
+      raise PermissionError("Receive-only vehicle processing cannot initialize or apply controls")
 
     if not self.initialized_prev:
       # Initialize CarInterface, once controls are ready
@@ -303,13 +311,16 @@ class Car:
 
       time.sleep(0.1)
 
-  def card_thread(self):
+  def card_thread(self, progress=None):
     e = threading.Event()
     t = threading.Thread(target=self.params_thread, args=(e, ))
     try:
       t.start()
       while True:
+        start = time.monotonic_ns()
         self.step()
+        if progress is not None:
+          progress(self.CS_prev.canValid, time.monotonic_ns() - start)
         self.rk.monitor_time()
     finally:
       e.set()

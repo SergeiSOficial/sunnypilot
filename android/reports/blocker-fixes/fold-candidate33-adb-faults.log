@@ -1,0 +1,83 @@
+{
+  "status": "passed",
+  "rejected_cases": [
+    "can_service",
+    "output_service",
+    "sequence_gap",
+    "negative_age",
+    "service_payload_mismatch",
+    "malformed_cereal",
+    "invalid_base64",
+    "oversized_packet",
+    "malformed_json",
+    "non_simulation_handshake"
+  ],
+  "vehicle_tx_enabled": false
+}
+{
+  "serial": "RFCR81Y1TBJ",
+  "command": [
+    "/Users/sergios/sunnypilot/.venv/bin/python",
+    "android/scripts/validate_adb_faults.py",
+    "--serial",
+    "RFCR81Y1TBJ",
+    "--adb",
+    "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+    "--report",
+    "/Users/sergios/sunnypilot/android/reports/blocker-fixes/fold-candidate33-adb-faults.json",
+    "--package",
+    "com.samsung.sunnypilot.fold3"
+  ],
+  "vehicle_tx_enabled": false,
+  "status": "passed",
+  "validation_status": "passed",
+  "isolation_status": "passed",
+  "forwards_before": [],
+  "before_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.4,
+    "thermal_override": false
+  },
+  "apk_sha256": "cdaac6c4223ee64ba2f600e4cac3a0d7775bcde2f7a7d4ab5b69ec3e05092305",
+  "baseline": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.3,
+    "thermal_override": false,
+    "idle_seconds": 32.575330874999054,
+    "normal_thermal_seconds": 32.300701166008366
+  },
+  "apk_sha256_at_start": "cdaac6c4223ee64ba2f600e4cac3a0d7775bcde2f7a7d4ab5b69ec3e05092305",
+  "runtime": {
+    "manager_pid": 30256,
+    "ui_pid": 30327,
+    "simulation": true
+  },
+  "returncode": 0,
+  "after_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 31.2,
+    "thermal_override": false
+  },
+  "forwards_removed": [],
+  "apk_sha256_after": "cdaac6c4223ee64ba2f600e4cac3a0d7775bcde2f7a7d4ab5b69ec3e05092305",
+  "artifact_stable": true,
+  "wrapper_status": "passed"
+}

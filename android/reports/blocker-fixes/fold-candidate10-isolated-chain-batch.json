@@ -1,0 +1,36 @@
+[
+  {
+    "name": "fold-isolated-steady-chain-candidate10",
+    "command": [
+      ".venv/bin/python",
+      "android/scripts/experiment.py",
+      "--serial",
+      "RFCR81Y1TBJ",
+      "--adb",
+      "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+      "--package",
+      "com.samsung.sunnypilot.fold3",
+      "--report",
+      "android/reports/blocker-fixes/fold-isolated-steady-chain-candidate10-isolation.json",
+      "--runtime",
+      "full-chain",
+      "--",
+      ".venv/bin/python",
+      "-m",
+      "openpilot.tools.sim.android_chain_validation",
+      "--serial",
+      "RFCR81Y1TBJ",
+      "--adb",
+      "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+      "--seconds",
+      "30",
+      "--report",
+      "android/reports/blocker-fixes/fold-isolated-steady-chain-candidate10.json",
+      "--steady-inputs"
+    ],
+    "returncode": 0,
+    "isolation_status": "passed",
+    "artifact_stable": true,
+    "emulator_running": false
+  }
+]

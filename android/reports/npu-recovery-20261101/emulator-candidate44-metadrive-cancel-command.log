@@ -1,0 +1,87 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/Users/sergios/sunnypilot/openpilot/tools/sim/android_validation.py", line 205, in <module>
+    main()
+  File "/Users/sergios/sunnypilot/openpilot/tools/sim/android_validation.py", line 201, in main
+    print(json.dumps(validate(args.serial, args.adb, args.duration, args.fault, args.metadrive, args.report, args.port), indent=2))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sergios/sunnypilot/openpilot/tools/sim/android_validation.py", line 63, in validate
+    from openpilot.cereal import messaging
+  File "/Users/sergios/sunnypilot/openpilot/cereal/__init__.py", line 2, in <module>
+    import capnp
+ModuleNotFoundError: No module named 'capnp'
+{
+  "serial": "emulator-5560",
+  "command": [
+    "/Users/sergios/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/bin/python3.12",
+    "-m",
+    "openpilot.tools.sim.android_validation",
+    "--serial",
+    "emulator-5560",
+    "--adb",
+    "/Users/sergios/Library/Android/sdk/platform-tools/adb",
+    "--duration",
+    "30",
+    "--fault",
+    "cancel",
+    "--metadrive",
+    "--report",
+    "/Users/sergios/sunnypilot/android/reports/npu-recovery-20261101/emulator-candidate44-metadrive-cancel.json"
+  ],
+  "vehicle_tx_enabled": false,
+  "status": "failed",
+  "validation_status": "failed",
+  "isolation_status": "passed",
+  "forwards_before": [],
+  "before_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "355 android.hardware.camera.provider.ranchu",
+      "356 android.hardware.camera.provider@2.7-service-google",
+      "446 cameraserver"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.8,
+    "thermal_override": false
+  },
+  "apk_sha256": "f18262c93c2132b1e61a1746af6b2c55dcae8820e3d8a9db0dd84bc5472c6360",
+  "baseline": {
+    "processes": [],
+    "camera_provider_processes": [
+      "355 android.hardware.camera.provider.ranchu",
+      "356 android.hardware.camera.provider@2.7-service-google",
+      "446 cameraserver"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.8,
+    "thermal_override": false,
+    "idle_seconds": 32.07420641600038,
+    "normal_thermal_seconds": 31.7815634579747
+  },
+  "apk_sha256_at_start": "f18262c93c2132b1e61a1746af6b2c55dcae8820e3d8a9db0dd84bc5472c6360",
+  "runtime": {
+    "manager_pid": 7543,
+    "ui_pid": 7616,
+    "simulation": true
+  },
+  "returncode": 1,
+  "after_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "355 android.hardware.camera.provider.ranchu",
+      "356 android.hardware.camera.provider@2.7-service-google",
+      "446 cameraserver"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.8,
+    "thermal_override": false
+  },
+  "forwards_removed": [],
+  "apk_sha256_after": "f18262c93c2132b1e61a1746af6b2c55dcae8820e3d8a9db0dd84bc5472c6360",
+  "artifact_stable": true,
+  "wrapper_status": "failed"
+}

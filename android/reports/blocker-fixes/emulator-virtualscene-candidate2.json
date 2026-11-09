@@ -1,0 +1,146 @@
+{
+  "device": "sdk_gphone64_arm64",
+  "sdk": 35,
+  "pid": 3490,
+  "fingerprint": "google/sdk_gphone64_arm64/emu64a:15/AE3A.240806.043/12960925:userdebug/dev-keys",
+  "started_utc": "2026-10-31T18:29:34.050143Z",
+  "package": "com.samsung.sunnypilot.fold3",
+  "logical_access": {
+    "20": {
+      "accessible": false,
+      "error": "java.lang.IllegalArgumentException: getCameraCharacteristics:1329: Unable to retrieve camera characteristics for unknown device 20: No such file or directory (-2)"
+    },
+    "21": {
+      "accessible": false,
+      "error": "java.lang.IllegalArgumentException: getCameraCharacteristics:1329: Unable to retrieve camera characteristics for unknown device 21: No such file or directory (-2)"
+    },
+    "23": {
+      "accessible": false,
+      "error": "java.lang.IllegalArgumentException: getCameraCharacteristics:1329: Unable to retrieve camera characteristics for unknown device 23: No such file or directory (-2)"
+    },
+    "52": {
+      "accessible": false,
+      "error": "java.lang.IllegalArgumentException: getCameraCharacteristics:1329: Unable to retrieve camera characteristics for unknown device 52: No such file or directory (-2)"
+    }
+  },
+  "vehicle_tx_enabled": false,
+  "driving_runtime_ready": false,
+  "opencl": {
+    "status": "blocked",
+    "error": "libOpenCL.so inaccessible to app"
+  },
+  "capabilities": {
+    "cameras": [
+      {
+        "id": "10",
+        "facing": 1,
+        "orientation": 90,
+        "timestamp_source": 0,
+        "hardware_level": 0,
+        "physical_ids": [],
+        "focal_lengths_mm": [
+          1
+        ],
+        "capabilities": [
+          0,
+          3,
+          5
+        ],
+        "yuv_sizes": [
+          {
+            "width": 320,
+            "height": 240,
+            "min_frame_duration_ns": 33333333
+          },
+          {
+            "width": 352,
+            "height": 288,
+            "min_frame_duration_ns": 33333333
+          },
+          {
+            "width": 640,
+            "height": 480,
+            "min_frame_duration_ns": 33333333
+          },
+          {
+            "width": 1280,
+            "height": 720,
+            "min_frame_duration_ns": 33333333
+          },
+          {
+            "width": 1280,
+            "height": 960,
+            "min_frame_duration_ns": 33333333
+          }
+        ]
+      }
+    ],
+    "concurrent_id_sets": []
+  },
+  "attempts": [
+    {
+      "camera_ids": [
+        "10"
+      ],
+      "width": 1280,
+      "height": 720,
+      "logical_camera": null,
+      "requested_duration_ms": 15000,
+      "startup_order": "open_all_then_configure",
+      "opened_camera_ids": [
+        "10"
+      ],
+      "image_callbacks_drained": true,
+      "camera_close_callbacks_complete": true,
+      "request_template": "record",
+      "stabilization": "disabled when advertised",
+      "sensor_pairs": [],
+      "streams": [
+        {
+          "sensor_id": "10",
+          "width": 1280,
+          "height": 720,
+          "image_rotation_applied_degrees": 0,
+          "output_width": 1280,
+          "output_height": 720,
+          "display_degrees_at_session_start": 90,
+          "mirrored": false,
+          "sensor_orientation": 90,
+          "timestamp_source": 0,
+          "intrinsic_calibration": [],
+          "lens_distortion": [],
+          "visionipc_valid": false,
+          "visionipc_stream": 1,
+          "focal_lengths_mm": [
+            1
+          ],
+          "frames": 42,
+          "fps": 2.8416540506415986,
+          "first_timestamp_ns": 763927262947,
+          "last_timestamp_ns": 778355479496,
+          "timestamp_errors": 0,
+          "changed_frames": 41,
+          "metadata_failures": 0,
+          "uncaptured_requests": 0,
+          "lost_buffers": 0,
+          "physical_metadata_frames": 41,
+          "measured_focal_length_mm": 1,
+          "packing_errors": 0,
+          "packing_p99_ns": 493995500,
+          "delivery_age_p99_ns": -1,
+          "delivery_over_100ms": 0,
+          "delivery_future_timestamps": 42,
+          "clock_sample_columns": "sensor_raw,elapsed_before,monotonic,elapsed_after",
+          "clock_samples_ns": [],
+          "frame_interval_p99_ns": 582242125
+        }
+      ],
+      "elapsed_ms": 16022,
+      "completed_requested_duration": true,
+      "status": "failed",
+      "error": "frame loss/metadata failure or insufficient independent, overlapping, monotonic frames"
+    }
+  ],
+  "completed_utc": "2026-10-31T18:29:50.433107Z",
+  "status": "failed"
+}

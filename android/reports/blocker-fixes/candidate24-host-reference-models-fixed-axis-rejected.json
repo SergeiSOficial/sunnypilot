@@ -1,0 +1,21 @@
+{
+  "scope": "host GPU numerical regression only; not Android qualification",
+  "device": "METAL",
+  "host": "macOS-27.2-arm64-arm-64bit",
+  "rtol": 0.001,
+  "atol": 0.0001,
+  "vehicle_tx_enabled": false,
+  "references_sha256": "610f877bd0f98353a6e7228698ee869d02a5b2976430234b96d097e96e773381",
+  "source_sha256": {
+    "fold3_opencl": "2fbaa7614da0adfae20284337c6e67f2572bfa98673424de1e0c419459fefea3",
+    "fold3_host_math": "968e8bf8d5aabc608ff554e06132c4eed29753ab7d582db077765340f85cde3c"
+  },
+  "models": {
+    "dmonitoring_model": {
+      "graph_sha256": "30f0326378aea3a8c2a59da73cb4e50c38272bb4fc487c810ebbe6f0daabc7b7",
+      "seeds": {}
+    }
+  },
+  "status": "failed",
+  "error": "KernelOptError: 32 can't divide UOp(Ops.CONST, arg=120, src=()) in  120  180   32    3    3   16"
+}

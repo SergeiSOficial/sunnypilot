@@ -1,0 +1,10 @@
+{
+  "status": "failed",
+  "diagnostic_only": true,
+  "vehicle_tx_enabled": false,
+  "artifact": "opencl-arithmetic-probe-artifact.json",
+  "elf_sha256": "9d19812ff2e7c3cdb2b74f25e63cb83f4da93d70d6db73cc7ccc6ea3e99fac5d",
+  "returncode": 1,
+  "stderr": "BC-src-code:2:15: error: definition of builtin function 'dot'\n__kernel void dot(__global const float*a,__global const float*b,__global float*c){int i=get_global_id(0);float v=.125f;for(int k=0;k<128;k++)v=fma(a[i+k],b[k],v);c[i]=v;}\n              ^\n1 diagnostic(s) generated.\n\nbuild: OpenCL error -11\n",
+  "error": "{\"diagnostic_only\":true,\"vehicle_tx_enabled\":false,\"single_fp_config\":22,\"outputs\":65536,\"terms\":128,\"variants\":[BC-src-code:2:15: error: definition of builtin function 'dot'\n__kernel void dot(__global const float*a,__global const float*b,__global float*c){int i=get_global_id(0);float v=.125f;for(int k=0;k<128;k++)v=fma(a[i+k],b[k],v);c[i]=v;}\n              ^\n1 diagnostic(s) generated.\n\nbuild: OpenCL error -11\n"
+}

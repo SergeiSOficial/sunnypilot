@@ -1,0 +1,12 @@
+B023 Function definition does not bind loop variable `gate`
+  --> android/tests/test_ncnn_cube.py:24:54
+   |
+22 |         values = dict.fromkeys(("adims", "aw", "ah", "ac"), 0)
+23 |         values.update(zip(("outdims", "outw", "outh", "outc"), output, strict=True))
+24 |         terms = re.findall(r"psc\((\w+)\) == (\d+)", gate)
+   |                                                      ^^^^
+25 |         self.assertEqual(len(terms), 4)
+26 |         return all(values[key] == int(expected) for key, expected in terms)
+   |
+
+Found 1 error.

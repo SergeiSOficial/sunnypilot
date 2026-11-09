@@ -1,0 +1,83 @@
+2026-11-01 18:15:36.141 python[61981:46785139] 2026-11-01 18:15:36.141405 [W:onnxruntime:, graph.cc:5777 CleanUnusedInitializersAndNodeArgs] Removing initializer 'model/p_val_6'. It is not used by any node and should be removed from the model.
+2026-11-01 18:15:36.415 python[61981:46785139] 2026-11-01 18:15:36.414938 [W:onnxruntime:, graph.cc:5777 CleanUnusedInitializersAndNodeArgs] Removing initializer 'model/p_val_6'. It is not used by any node and should be removed from the model.
+2026-11-01 18:15:36.617 python[61981:46785139] 2026-11-01 18:15:36.617246 [W:onnxruntime:, graph.cc:5777 CleanUnusedInitializersAndNodeArgs] Removing initializer 'model/p_val_6'. It is not used by any node and should be removed from the model.
+2026-11-01 18:15:36.813 python[61981:46785139] 2026-11-01 18:15:36.813512 [W:onnxruntime:, graph.cc:5777 CleanUnusedInitializersAndNodeArgs] Removing initializer 'model/p_val_6'. It is not used by any node and should be removed from the model.
+2026-11-01 18:15:37.012 python[61981:46785139] 2026-11-01 18:15:37.012338 [W:onnxruntime:, graph.cc:5777 CleanUnusedInitializersAndNodeArgs] Removing initializer 'model/p_val_6'. It is not used by any node and should be removed from the model.
+2026-11-01 18:15:37.205 python[61981:46785139] 2026-11-01 18:15:37.205026 [W:onnxruntime:, graph.cc:5777 CleanUnusedInitializersAndNodeArgs] Removing initializer 'model/p_val_6'. It is not used by any node and should be removed from the model.
+2026-11-01 18:15:37.402 python[61981:46785139] 2026-11-01 18:15:37.402622 [W:onnxruntime:, graph.cc:5777 CleanUnusedInitializersAndNodeArgs] Removing initializer 'model/p_val_6'. It is not used by any node and should be removed from the model.
+{
+  "dmonitoring_model": {
+    "captured_tensors": 32,
+    "first_tolerance_failure": {
+      "operator": "relu_2_raster_0",
+      "operator_type": "Raster",
+      "tensor": "InsertedPrecisionFreeCast_relu_2",
+      "backend": "OpenCL",
+      "layout": "NCHW",
+      "dtype": "float32",
+      "shape": [
+        1,
+        16
+      ],
+      "file": "0002.bin",
+      "original": {
+        "tensor": "InsertedPrecisionFreeCast_relu_2",
+        "node": "",
+        "operator": "Relu",
+        "domain": ""
+      },
+      "parity": {
+        "passed": false,
+        "finite": true,
+        "shape": [
+          1,
+          16
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": false,
+        "max_abs_error": 0.0009341239929199219,
+        "mismatched_elements": 1
+      },
+      "original_dtype": "float32"
+    }
+  },
+  "driving_supercombo": {
+    "captured_tensors": 32,
+    "first_tolerance_failure": {
+      "operator": "model/linear_1_raster_0",
+      "operator_type": "Raster",
+      "tensor": "fold3_half_gemv8_300_0",
+      "backend": "OpenCL",
+      "layout": "NCHW",
+      "dtype": "float32",
+      "shape": [
+        1,
+        512
+      ],
+      "file": "0011.bin",
+      "original": {
+        "tensor": "fold3_half_gemv8_300_0",
+        "node": "model/node_linear_1",
+        "operator": "Gemm",
+        "domain": ""
+      },
+      "parity": {
+        "passed": false,
+        "finite": true,
+        "shape": [
+          1,
+          512
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": false,
+        "max_abs_error": 0.0078125,
+        "mismatched_elements": 35
+      },
+      "original_dtype": "float16"
+    }
+  }
+}

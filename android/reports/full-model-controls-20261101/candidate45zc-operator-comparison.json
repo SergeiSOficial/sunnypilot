@@ -1,0 +1,65 @@
+{
+  "candidate": "candidate45zc",
+  "apk_sha256": "3e3c44ec71339060d81cb8278498df64edf840dd9705dfe4b3b4e04d8ff83361",
+  "status": "passed",
+  "diagnostic_only": true,
+  "qualifies_model": false,
+  "qualifies_apk_performance": false,
+  "installed_apk_during_operator_probe": "17a87c7909af196941a6659a68c905ba41d5590dc361b8a309e2c4af53e95822",
+  "standalone_probe": "fold45za-conv-exact-probe.json",
+  "standalone_probe_sha256": "ea4190162dd97ab2396bd9855b01ca47a81444e13fc94b59ae30c230121aa931",
+  "kernel_and_probe_identity": {
+    "run_conv_probe.py": "3fdd508ddfb4cd2910979bdebca42aef876340492bcfd0773501964c95358bec",
+    "conv_exact_probe.cpp": "ea4c72695991f1377b5c28ddbce508cf4e9bb17d7d18517be33d953bfd9a96cb",
+    "conv_exact_probe": "aa923c376ebc1e53f810e303693a9b81dc3c3cf8d38656db7f4bd977406c03b0",
+    "fold3_host_conv_buf.cl": "cc0039aa8542bf0799f35a11963252fca7e2a98a9503ee19c06875477246d2cb"
+  },
+  "all_bit_exact": true,
+  "cases": 36,
+  "measurement": "GPU event times from a separately hashed standalone operator binary, no serialized diagnostic checkpoints; medians are not full-inference p99",
+  "geometries": [
+    {
+      "shape": 0,
+      "cases": 6,
+      "strict_gpu_median_ms": 258.449,
+      "vector_fma_gpu_median_ms": 237.71699999999998,
+      "improvement_percent": 8.021698671691523
+    },
+    {
+      "shape": 1,
+      "cases": 6,
+      "strict_gpu_median_ms": 228.6635,
+      "vector_fma_gpu_median_ms": 209.066,
+      "improvement_percent": 8.57045396401262
+    },
+    {
+      "shape": 2,
+      "cases": 6,
+      "strict_gpu_median_ms": 62.49395,
+      "vector_fma_gpu_median_ms": 56.736000000000004,
+      "improvement_percent": 9.213611877629745
+    },
+    {
+      "shape": 3,
+      "cases": 6,
+      "strict_gpu_median_ms": 0.114944,
+      "vector_fma_gpu_median_ms": 0.114176,
+      "improvement_percent": 0.668151447661474
+    },
+    {
+      "shape": 4,
+      "cases": 6,
+      "strict_gpu_median_ms": 0.759552,
+      "vector_fma_gpu_median_ms": 0.7104,
+      "improvement_percent": 6.471183013144587
+    },
+    {
+      "shape": 5,
+      "cases": 6,
+      "strict_gpu_median_ms": 0.013056,
+      "vector_fma_gpu_median_ms": 0.013056,
+      "improvement_percent": 0.0
+    }
+  ],
+  "rejected_faster_arithmetic": "candidate45zb-rejection.json"
+}

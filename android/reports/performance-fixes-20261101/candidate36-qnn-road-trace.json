@@ -1,0 +1,3950 @@
+{
+  "scope": "diagnostic: observing intermediate tensors can change fusion/rounding",
+  "diagnostic_only": true,
+  "vehicle_tx_enabled": false,
+  "models": {
+    "driving_supercombo": {
+      "sha256": "d3b16c960df55de5a22556d119ac3df56d4db8a06e11123eb0e595a9da313679",
+      "original_sha256": "65a08adc31d5c456219687d99b7bf5e44d61dae2d49ea67850e76105c7248cce",
+      "instrumented_matches_original": {
+        "outputs": false,
+        "next_state_img_q": true,
+        "next_state_desire_q": true,
+        "next_state_feat_q": false
+      },
+      "engines": {
+        "ort": {
+          "assignment": {
+            "providers": {
+              "CPUExecutionProvider": {
+                "partitions": 379,
+                "nodes": 379
+              }
+            },
+            "device": {
+              "type": -1,
+              "vendor_id": 0,
+              "device_id": 0
+            }
+          },
+          "profile_path": "/data/user/0/com.samsung.sunnypilot.fold3/files/trace-driving_supercombo-ort_2026-11-01_10-19-05_069.json",
+          "nodes": [
+            {
+              "index": 12,
+              "operator": "Reshape",
+              "name": "node_view_1",
+              "output": "view_1",
+              "dtype": "float32",
+              "shape": [
+                25,
+                4,
+                1,
+                8
+              ],
+              "inputs": [
+                "next_state_desire_q",
+                "val_71"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": true,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": true,
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 13,
+              "operator": "ReduceMax",
+              "name": "n0",
+              "output": "amax",
+              "dtype": "float32",
+              "shape": [
+                25,
+                1,
+                8
+              ],
+              "inputs": [
+                "view_1",
+                "val_3"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": true,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": true,
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 14,
+              "operator": "Transpose",
+              "name": "node_transpose",
+              "output": "transpose",
+              "dtype": "float32",
+              "shape": [
+                1,
+                25,
+                8
+              ],
+              "inputs": [
+                "amax"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": true,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": true,
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 15,
+              "operator": "Slice",
+              "name": "node_slice_5",
+              "output": "slice_5",
+              "dtype": "float32",
+              "shape": [
+                24,
+                1,
+                512
+              ],
+              "inputs": [
+                "state_feat_q",
+                "val_27",
+                "val_7",
+                "val_27",
+                "val_41"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": true,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": true,
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 16,
+              "operator": "Transpose",
+              "name": "node_transpose_1",
+              "output": "transpose_1",
+              "dtype": "float32",
+              "shape": [
+                1,
+                24,
+                512
+              ],
+              "inputs": [
+                "slice_5"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": true,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": true,
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 17,
+              "operator": "Cast",
+              "name": "node__to_copy",
+              "output": "_to_copy",
+              "dtype": "float16",
+              "shape": [
+                1,
+                25,
+                8
+              ],
+              "inputs": [
+                "transpose"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": true,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": true,
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 18,
+              "operator": "Cast",
+              "name": "node__to_copy_1",
+              "output": "_to_copy_1",
+              "dtype": "float16",
+              "shape": [
+                1,
+                24,
+                512
+              ],
+              "inputs": [
+                "transpose_1"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": true,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": true,
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 19,
+              "operator": "Cast",
+              "name": "node__to_copy_2",
+              "output": "_to_copy_2",
+              "dtype": "float16",
+              "shape": [
+                1,
+                2
+              ],
+              "inputs": [
+                "traffic_convention"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": true,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": true,
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 20,
+              "operator": "Cast",
+              "name": "node__to_copy_3",
+              "output": "_to_copy_3",
+              "dtype": "float16",
+              "shape": [
+                1,
+                2
+              ],
+              "inputs": [
+                "action_t"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": true,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": true,
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 21,
+              "operator": "Cast",
+              "name": "model/node__to_copy",
+              "output": "model/_to_copy",
+              "dtype": "float16",
+              "shape": [
+                1,
+                12,
+                128,
+                256
+              ],
+              "inputs": [
+                "_unsafe_view"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": true,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": true,
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 22,
+              "operator": "Cast",
+              "name": "model/node__to_copy_1",
+              "output": "model/_to_copy_1",
+              "dtype": "float16",
+              "shape": [
+                1,
+                12,
+                128,
+                256
+              ],
+              "inputs": [
+                "_unsafe_view_1"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": true,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": true,
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 23,
+              "operator": "Concat",
+              "name": "model/node_cat",
+              "output": "model/cat",
+              "dtype": "float16",
+              "shape": [
+                1,
+                24,
+                128,
+                256
+              ],
+              "inputs": [
+                "model/_to_copy",
+                "model/_to_copy_1"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": true,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": true,
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 24,
+              "operator": "Sub",
+              "name": "model/node_sub",
+              "output": "model/sub",
+              "dtype": "float16",
+              "shape": [
+                1,
+                24,
+                128,
+                256
+              ],
+              "inputs": [
+                "model/cat",
+                "model/vision_model.vision._mean"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": true,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": true,
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 25,
+              "operator": "Div",
+              "name": "model/node_div",
+              "output": "model/div",
+              "dtype": "float16",
+              "shape": [
+                1,
+                24,
+                128,
+                256
+              ],
+              "inputs": [
+                "model/sub",
+                "model/vision_model.vision._std"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": true,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": true,
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 26,
+              "operator": "Conv",
+              "name": "model/node_conv2d",
+              "output": "model/conv2d",
+              "dtype": "float16",
+              "shape": [
+                1,
+                64,
+                64,
+                128
+              ],
+              "inputs": [
+                "model/div",
+                "model/vision_model.vision._en.stem.0.reparam_conv.weight",
+                "model/vision_model.vision._en.stem.0.reparam_conv.bias"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 0.5625,
+              "mismatched_elements": 367345
+            },
+            {
+              "index": 27,
+              "operator": "Gelu",
+              "name": "model/node_gelu",
+              "output": "model/gelu",
+              "dtype": "float16",
+              "shape": [
+                1,
+                64,
+                64,
+                128
+              ],
+              "inputs": [
+                "model/conv2d"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 0.5625,
+              "mismatched_elements": 342248
+            },
+            {
+              "index": 28,
+              "operator": "Conv",
+              "name": "model/node_conv2d_1",
+              "output": "model/conv2d_1",
+              "dtype": "float16",
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "inputs": [
+                "model/gelu",
+                "model/vision_model.vision._en.stem.1.reparam_conv.weight",
+                "model/vision_model.vision._en.stem.1.reparam_conv.bias"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 1.5,
+              "mismatched_elements": 94896
+            },
+            {
+              "index": 29,
+              "operator": "Gelu",
+              "name": "model/node_gelu_1",
+              "output": "model/gelu_1",
+              "dtype": "float16",
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "inputs": [
+                "model/conv2d_1"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 0.515625,
+              "mismatched_elements": 81666
+            },
+            {
+              "index": 30,
+              "operator": "Conv",
+              "name": "model/node_conv2d_2",
+              "output": "model/conv2d_2",
+              "dtype": "float16",
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "inputs": [
+                "model/gelu_1",
+                "model/vision_model.vision._en.stem.2.reparam_conv.weight",
+                "model/vision_model.vision._en.stem.2.reparam_conv.bias"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 1.25,
+              "mismatched_elements": 101543
+            },
+            {
+              "index": 31,
+              "operator": "Gelu",
+              "name": "model/node_gelu_2",
+              "output": "model/gelu_2",
+              "dtype": "float16",
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "inputs": [
+                "model/conv2d_2"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 0.8125,
+              "mismatched_elements": 69141
+            },
+            {
+              "index": 32,
+              "operator": "Conv",
+              "name": "model/node_conv2d_3",
+              "output": "model/conv2d_3",
+              "dtype": "float16",
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "inputs": [
+                "model/gelu_2",
+                "model/vision_model.vision._en.stages.0.blocks.0.token_mixer.reparam_conv.weight",
+                "model/vision_model.vision._en.stages.0.blocks.0.token_mixer.reparam_conv.bias"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 0.15625,
+              "mismatched_elements": 80216
+            },
+            {
+              "index": 33,
+              "operator": "Conv",
+              "name": "model/node_Conv_173",
+              "output": "model/getitem",
+              "dtype": "float16",
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "inputs": [
+                "model/conv2d_3",
+                "model/vision_model.vision._en.stages.0.blocks.0.mlp.conv.conv.weight",
+                "model/vision_model.vision._en.stages.0.blocks.0.mlp.conv.conv.weight_bias"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 2.0,
+              "mismatched_elements": 105894
+            },
+            {
+              "index": 34,
+              "operator": "Conv",
+              "name": "model/node_conv2d_5",
+              "output": "model/conv2d_5",
+              "dtype": "float16",
+              "shape": [
+                1,
+                192,
+                32,
+                64
+              ],
+              "inputs": [
+                "model/getitem",
+                "model/vision_model.vision._en.stages.0.blocks.0.mlp.fc1.weight",
+                "model/vision_model.vision._en.stages.0.blocks.0.mlp.fc1.bias"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 4.5,
+              "mismatched_elements": 317101
+            },
+            {
+              "index": 35,
+              "operator": "Gelu",
+              "name": "model/node_gelu_3",
+              "output": "model/gelu_3",
+              "dtype": "float16",
+              "shape": [
+                1,
+                192,
+                32,
+                64
+              ],
+              "inputs": [
+                "model/conv2d_5"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 1.0283203125,
+              "mismatched_elements": 114078
+            },
+            {
+              "index": 36,
+              "operator": "Conv",
+              "name": "model/node_conv2d_6",
+              "output": "model/conv2d_6",
+              "dtype": "float16",
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "inputs": [
+                "model/gelu_3",
+                "model/vision_model.vision._en.stages.0.blocks.0.mlp.fc2.weight",
+                "model/vision_model.vision._en.stages.0.blocks.0.mlp.fc2.bias"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 2.25,
+              "mismatched_elements": 115523
+            },
+            {
+              "index": 37,
+              "operator": "Mul",
+              "name": "model/node_mul",
+              "output": "model/mul",
+              "dtype": "float16",
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "inputs": [
+                "model/conv2d_6",
+                "model/vision_model.vision._en.stages.0.blocks.0.layer_scale.gamma"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 1.375,
+              "mismatched_elements": 115120
+            },
+            {
+              "index": 38,
+              "operator": "Add",
+              "name": "model/node_add",
+              "output": "model/add",
+              "dtype": "float16",
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "inputs": [
+                "model/conv2d_3",
+                "model/mul"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 1.375,
+              "mismatched_elements": 114175
+            },
+            {
+              "index": 39,
+              "operator": "Conv",
+              "name": "model/node_conv2d_7",
+              "output": "model/conv2d_7",
+              "dtype": "float16",
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "inputs": [
+                "model/add",
+                "model/vision_model.vision._en.stages.0.blocks.1.token_mixer.reparam_conv.weight",
+                "model/vision_model.vision._en.stages.0.blocks.1.token_mixer.reparam_conv.bias"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 1.375,
+              "mismatched_elements": 115200
+            },
+            {
+              "index": 40,
+              "operator": "Conv",
+              "name": "model/node_Conv_175",
+              "output": "model/getitem_3",
+              "dtype": "float16",
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "inputs": [
+                "model/conv2d_7",
+                "model/vision_model.vision._en.stages.0.blocks.1.mlp.conv.conv.weight",
+                "model/vision_model.vision._en.stages.0.blocks.1.mlp.conv.conv.weight_bias"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 1.0625,
+              "mismatched_elements": 115592
+            },
+            {
+              "index": 41,
+              "operator": "Conv",
+              "name": "model/node_conv2d_9",
+              "output": "model/conv2d_9",
+              "dtype": "float16",
+              "shape": [
+                1,
+                192,
+                32,
+                64
+              ],
+              "inputs": [
+                "model/getitem_3",
+                "model/vision_model.vision._en.stages.0.blocks.1.mlp.fc1.weight",
+                "model/vision_model.vision._en.stages.0.blocks.1.mlp.fc1.bias"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 2.0185546875,
+              "mismatched_elements": 350453
+            },
+            {
+              "index": 42,
+              "operator": "Gelu",
+              "name": "model/node_gelu_4",
+              "output": "model/gelu_4",
+              "dtype": "float16",
+              "shape": [
+                1,
+                192,
+                32,
+                64
+              ],
+              "inputs": [
+                "model/conv2d_9"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 1.875,
+              "mismatched_elements": 128577
+            },
+            {
+              "index": 43,
+              "operator": "Conv",
+              "name": "model/node_conv2d_10",
+              "output": "model/conv2d_10",
+              "dtype": "float16",
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "inputs": [
+                "model/gelu_4",
+                "model/vision_model.vision._en.stages.0.blocks.1.mlp.fc2.weight",
+                "model/vision_model.vision._en.stages.0.blocks.1.mlp.fc2.bias"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 3.5,
+              "mismatched_elements": 123466
+            },
+            {
+              "index": 44,
+              "operator": "Mul",
+              "name": "model/node_mul_1",
+              "output": "model/mul_1",
+              "dtype": "float16",
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "inputs": [
+                "model/conv2d_10",
+                "model/vision_model.vision._en.stages.0.blocks.1.layer_scale.gamma"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 9.5,
+              "mismatched_elements": 123433
+            },
+            {
+              "index": 45,
+              "operator": "Add",
+              "name": "model/node_add_1",
+              "output": "model/add_1",
+              "dtype": "float16",
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "inputs": [
+                "model/conv2d_7",
+                "model/mul_1"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 9.5,
+              "mismatched_elements": 120812
+            },
+            {
+              "index": 46,
+              "operator": "Conv",
+              "name": "model/node_conv2d_11",
+              "output": "model/conv2d_11",
+              "dtype": "float16",
+              "shape": [
+                1,
+                128,
+                16,
+                32
+              ],
+              "inputs": [
+                "model/add_1",
+                "model/vision_model.vision._en.stages.1.downsample.proj.0.reparam_conv.weight",
+                "model/vision_model.vision._en.stages.1.downsample.proj.0.reparam_conv.bias"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 0.265625,
+              "mismatched_elements": 57489
+            },
+            {
+              "index": 47,
+              "operator": "Conv",
+              "name": "model/node_conv2d_12",
+              "output": "model/conv2d_12",
+              "dtype": "float16",
+              "shape": [
+                1,
+                128,
+                16,
+                32
+              ],
+              "inputs": [
+                "model/conv2d_11",
+                "model/vision_model.vision._en.stages.1.downsample.proj.1.reparam_conv.weight",
+                "model/vision_model.vision._en.stages.1.downsample.proj.1.reparam_conv.bias"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 0.140625,
+              "mismatched_elements": 52819
+            },
+            {
+              "index": 48,
+              "operator": "Gelu",
+              "name": "model/node_gelu_5",
+              "output": "model/gelu_5",
+              "dtype": "float16",
+              "shape": [
+                1,
+                128,
+                16,
+                32
+              ],
+              "inputs": [
+                "model/conv2d_12"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 0.140625,
+              "mismatched_elements": 44893
+            },
+            {
+              "index": 49,
+              "operator": "Conv",
+              "name": "model/node_conv2d_13",
+              "output": "model/conv2d_13",
+              "dtype": "float16",
+              "shape": [
+                1,
+                128,
+                16,
+                32
+              ],
+              "inputs": [
+                "model/gelu_5",
+                "model/vision_model.vision._en.stages.1.blocks.0.token_mixer.reparam_conv.weight",
+                "model/vision_model.vision._en.stages.1.blocks.0.token_mixer.reparam_conv.bias"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 0.140625,
+              "mismatched_elements": 49971
+            },
+            {
+              "index": 50,
+              "operator": "Conv",
+              "name": "model/node_Conv_177",
+              "output": "model/getitem_6",
+              "dtype": "float16",
+              "shape": [
+                1,
+                128,
+                16,
+                32
+              ],
+              "inputs": [
+                "model/conv2d_13",
+                "model/vision_model.vision._en.stages.1.blocks.0.mlp.conv.conv.weight",
+                "model/vision_model.vision._en.stages.1.blocks.0.mlp.conv.conv.weight_bias"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 0.09375,
+              "mismatched_elements": 56291
+            },
+            {
+              "index": 51,
+              "operator": "Conv",
+              "name": "model/node_conv2d_15",
+              "output": "model/conv2d_15",
+              "dtype": "float16",
+              "shape": [
+                1,
+                384,
+                16,
+                32
+              ],
+              "inputs": [
+                "model/getitem_6",
+                "model/vision_model.vision._en.stages.1.blocks.0.mlp.fc1.weight",
+                "model/vision_model.vision._en.stages.1.blocks.0.mlp.fc1.bias"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 0.1484375,
+              "mismatched_elements": 171994
+            },
+            {
+              "index": 52,
+              "operator": "Gelu",
+              "name": "model/node_gelu_6",
+              "output": "model/gelu_6",
+              "dtype": "float16",
+              "shape": [
+                1,
+                384,
+                16,
+                32
+              ],
+              "inputs": [
+                "model/conv2d_15"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 0.1015625,
+              "mismatched_elements": 154211
+            },
+            {
+              "index": 53,
+              "operator": "Conv",
+              "name": "model/node_conv2d_16",
+              "output": "model/conv2d_16",
+              "dtype": "float16",
+              "shape": [
+                1,
+                128,
+                16,
+                32
+              ],
+              "inputs": [
+                "model/gelu_6",
+                "model/vision_model.vision._en.stages.1.blocks.0.mlp.fc2.weight",
+                "model/vision_model.vision._en.stages.1.blocks.0.mlp.fc2.bias"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 0.25,
+              "mismatched_elements": 59673
+            },
+            {
+              "index": 54,
+              "operator": "Mul",
+              "name": "model/node_mul_2",
+              "output": "model/mul_2",
+              "dtype": "float16",
+              "shape": [
+                1,
+                128,
+                16,
+                32
+              ],
+              "inputs": [
+                "model/conv2d_16",
+                "model/vision_model.vision._en.stages.1.blocks.0.layer_scale.gamma"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 0.08203125,
+              "mismatched_elements": 58727
+            },
+            {
+              "index": 55,
+              "operator": "Add",
+              "name": "model/node_add_2",
+              "output": "model/add_2",
+              "dtype": "float16",
+              "shape": [
+                1,
+                128,
+                16,
+                32
+              ],
+              "inputs": [
+                "model/conv2d_13",
+                "model/mul_2"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 0.08203125,
+              "mismatched_elements": 58506
+            },
+            {
+              "index": 56,
+              "operator": "Conv",
+              "name": "model/node_conv2d_17",
+              "output": "model/conv2d_17",
+              "dtype": "float16",
+              "shape": [
+                1,
+                128,
+                16,
+                32
+              ],
+              "inputs": [
+                "model/add_2",
+                "model/vision_model.vision._en.stages.1.blocks.1.token_mixer.reparam_conv.weight",
+                "model/vision_model.vision._en.stages.1.blocks.1.token_mixer.reparam_conv.bias"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 0.099609375,
+              "mismatched_elements": 60102
+            },
+            {
+              "index": 57,
+              "operator": "Conv",
+              "name": "model/node_Conv_179",
+              "output": "model/getitem_9",
+              "dtype": "float16",
+              "shape": [
+                1,
+                128,
+                16,
+                32
+              ],
+              "inputs": [
+                "model/conv2d_17",
+                "model/vision_model.vision._en.stages.1.blocks.1.mlp.conv.conv.weight",
+                "model/vision_model.vision._en.stages.1.blocks.1.mlp.conv.conv.weight_bias"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 0.0748291015625,
+              "mismatched_elements": 61353
+            },
+            {
+              "index": 58,
+              "operator": "Conv",
+              "name": "model/node_conv2d_19",
+              "output": "model/conv2d_19",
+              "dtype": "float16",
+              "shape": [
+                1,
+                384,
+                16,
+                32
+              ],
+              "inputs": [
+                "model/getitem_9",
+                "model/vision_model.vision._en.stages.1.blocks.1.mlp.fc1.weight",
+                "model/vision_model.vision._en.stages.1.blocks.1.mlp.fc1.bias"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 0.1181640625,
+              "mismatched_elements": 179713
+            },
+            {
+              "index": 59,
+              "operator": "Gelu",
+              "name": "model/node_gelu_7",
+              "output": "model/gelu_7",
+              "dtype": "float16",
+              "shape": [
+                1,
+                384,
+                16,
+                32
+              ],
+              "inputs": [
+                "model/conv2d_19"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 0.114990234375,
+              "mismatched_elements": 162769
+            },
+            {
+              "index": 60,
+              "operator": "Conv",
+              "name": "model/node_conv2d_20",
+              "output": "model/conv2d_20",
+              "dtype": "float16",
+              "shape": [
+                1,
+                128,
+                16,
+                32
+              ],
+              "inputs": [
+                "model/gelu_7",
+                "model/vision_model.vision._en.stages.1.blocks.1.mlp.fc2.weight",
+                "model/vision_model.vision._en.stages.1.blocks.1.mlp.fc2.bias"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 0.12890625,
+              "mismatched_elements": 62748
+            },
+            {
+              "index": 61,
+              "operator": "Mul",
+              "name": "model/node_mul_3",
+              "output": "model/mul_3",
+              "dtype": "float16",
+              "shape": [
+                1,
+                128,
+                16,
+                32
+              ],
+              "inputs": [
+                "model/conv2d_20",
+                "model/vision_model.vision._en.stages.1.blocks.1.layer_scale.gamma"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 0.390625,
+              "mismatched_elements": 62593
+            },
+            {
+              "index": 62,
+              "operator": "Add",
+              "name": "model/node_add_3",
+              "output": "model/add_3",
+              "dtype": "float16",
+              "shape": [
+                1,
+                128,
+                16,
+                32
+              ],
+              "inputs": [
+                "model/conv2d_17",
+                "model/mul_3"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 0.390625,
+              "mismatched_elements": 61934
+            },
+            {
+              "index": 63,
+              "operator": "Conv",
+              "name": "model/node_conv2d_21",
+              "output": "model/conv2d_21",
+              "dtype": "float16",
+              "shape": [
+                1,
+                256,
+                8,
+                16
+              ],
+              "inputs": [
+                "model/add_3",
+                "model/vision_model.vision._en.stages.2.downsample.proj.0.reparam_conv.weight",
+                "model/vision_model.vision._en.stages.2.downsample.proj.0.reparam_conv.bias"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 0.228515625,
+              "mismatched_elements": 29993
+            },
+            {
+              "index": 64,
+              "operator": "Conv",
+              "name": "model/node_conv2d_22",
+              "output": "model/conv2d_22",
+              "dtype": "float16",
+              "shape": [
+                1,
+                256,
+                8,
+                16
+              ],
+              "inputs": [
+                "model/conv2d_21",
+                "model/vision_model.vision._en.stages.2.downsample.proj.1.reparam_conv.weight",
+                "model/vision_model.vision._en.stages.2.downsample.proj.1.reparam_conv.bias"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 0.04296875,
+              "mismatched_elements": 27782
+            },
+            {
+              "index": 65,
+              "operator": "Gelu",
+              "name": "model/node_gelu_8",
+              "output": "model/gelu_8",
+              "dtype": "float16",
+              "shape": [
+                1,
+                256,
+                8,
+                16
+              ],
+              "inputs": [
+                "model/conv2d_22"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 0.0439453125,
+              "mismatched_elements": 24784
+            },
+            {
+              "index": 66,
+              "operator": "Conv",
+              "name": "model/node_conv2d_23",
+              "output": "model/conv2d_23",
+              "dtype": "float16",
+              "shape": [
+                1,
+                256,
+                8,
+                16
+              ],
+              "inputs": [
+                "model/gelu_8",
+                "model/vision_model.vision._en.stages.2.blocks.0.token_mixer.reparam_conv.weight",
+                "model/vision_model.vision._en.stages.2.blocks.0.token_mixer.reparam_conv.bias"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 0.0576171875,
+              "mismatched_elements": 26069
+            },
+            {
+              "index": 67,
+              "operator": "Conv",
+              "name": "model/node_Conv_181",
+              "output": "model/getitem_12",
+              "dtype": "float16",
+              "shape": [
+                1,
+                256,
+                8,
+                16
+              ],
+              "inputs": [
+                "model/conv2d_23",
+                "model/vision_model.vision._en.stages.2.blocks.0.mlp.conv.conv.weight",
+                "model/vision_model.vision._en.stages.2.blocks.0.mlp.conv.conv.weight_bias"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 0.046875,
+              "mismatched_elements": 28061
+            },
+            {
+              "index": 68,
+              "operator": "Conv",
+              "name": "model/node_conv2d_25",
+              "output": "model/conv2d_25",
+              "dtype": "float16",
+              "shape": [
+                1,
+                768,
+                8,
+                16
+              ],
+              "inputs": [
+                "model/getitem_12",
+                "model/vision_model.vision._en.stages.2.blocks.0.mlp.fc1.weight",
+                "model/vision_model.vision._en.stages.2.blocks.0.mlp.fc1.bias"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 0.09375,
+              "mismatched_elements": 87417
+            },
+            {
+              "index": 69,
+              "operator": "Gelu",
+              "name": "model/node_gelu_9",
+              "output": "model/gelu_9",
+              "dtype": "float16",
+              "shape": [
+                1,
+                768,
+                8,
+                16
+              ],
+              "inputs": [
+                "model/conv2d_25"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 0.0625,
+              "mismatched_elements": 78360
+            },
+            {
+              "index": 70,
+              "operator": "Conv",
+              "name": "model/node_conv2d_26",
+              "output": "model/conv2d_26",
+              "dtype": "float16",
+              "shape": [
+                1,
+                256,
+                8,
+                16
+              ],
+              "inputs": [
+                "model/gelu_9",
+                "model/vision_model.vision._en.stages.2.blocks.0.mlp.fc2.weight",
+                "model/vision_model.vision._en.stages.2.blocks.0.mlp.fc2.bias"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 0.177734375,
+              "mismatched_elements": 30332
+            },
+            {
+              "index": 71,
+              "operator": "Mul",
+              "name": "model/node_mul_4",
+              "output": "model/mul_4",
+              "dtype": "float16",
+              "shape": [
+                1,
+                256,
+                8,
+                16
+              ],
+              "inputs": [
+                "model/conv2d_26",
+                "model/vision_model.vision._en.stages.2.blocks.0.layer_scale.gamma"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 0.0390625,
+              "mismatched_elements": 29592
+            },
+            {
+              "index": 72,
+              "operator": "Add",
+              "name": "model/node_add_4",
+              "output": "model/add_4",
+              "dtype": "float16",
+              "shape": [
+                1,
+                256,
+                8,
+                16
+              ],
+              "inputs": [
+                "model/conv2d_23",
+                "model/mul_4"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 0.05419921875,
+              "mismatched_elements": 29858
+            },
+            {
+              "index": 73,
+              "operator": "Conv",
+              "name": "model/node_conv2d_27",
+              "output": "model/conv2d_27",
+              "dtype": "float16",
+              "shape": [
+                1,
+                256,
+                8,
+                16
+              ],
+              "inputs": [
+                "model/add_4",
+                "model/vision_model.vision._en.stages.2.blocks.1.token_mixer.reparam_conv.weight",
+                "model/vision_model.vision._en.stages.2.blocks.1.token_mixer.reparam_conv.bias"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 0.05419921875,
+              "mismatched_elements": 29747
+            },
+            {
+              "index": 74,
+              "operator": "Conv",
+              "name": "model/node_Conv_183",
+              "output": "model/getitem_15",
+              "dtype": "float16",
+              "shape": [
+                1,
+                256,
+                8,
+                16
+              ],
+              "inputs": [
+                "model/conv2d_27",
+                "model/vision_model.vision._en.stages.2.blocks.1.mlp.conv.conv.weight",
+                "model/vision_model.vision._en.stages.2.blocks.1.mlp.conv.conv.weight_bias"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 0.03759765625,
+              "mismatched_elements": 29710
+            },
+            {
+              "index": 75,
+              "operator": "Conv",
+              "name": "model/node_conv2d_29",
+              "output": "model/conv2d_29",
+              "dtype": "float16",
+              "shape": [
+                1,
+                768,
+                8,
+                16
+              ],
+              "inputs": [
+                "model/getitem_15",
+                "model/vision_model.vision._en.stages.2.blocks.1.mlp.fc1.weight",
+                "model/vision_model.vision._en.stages.2.blocks.1.mlp.fc1.bias"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 0.1015625,
+              "mismatched_elements": 87812
+            },
+            {
+              "index": 76,
+              "operator": "Gelu",
+              "name": "model/node_gelu_10",
+              "output": "model/gelu_10",
+              "dtype": "float16",
+              "shape": [
+                1,
+                768,
+                8,
+                16
+              ],
+              "inputs": [
+                "model/conv2d_29"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 0.07421875,
+              "mismatched_elements": 77391
+            },
+            {
+              "index": 77,
+              "operator": "Conv",
+              "name": "model/node_conv2d_30",
+              "output": "model/conv2d_30",
+              "dtype": "float16",
+              "shape": [
+                1,
+                256,
+                8,
+                16
+              ],
+              "inputs": [
+                "model/gelu_10",
+                "model/vision_model.vision._en.stages.2.blocks.1.mlp.fc2.weight",
+                "model/vision_model.vision._en.stages.2.blocks.1.mlp.fc2.bias"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 0.15625,
+              "mismatched_elements": 30921
+            },
+            {
+              "index": 78,
+              "operator": "Mul",
+              "name": "model/node_mul_5",
+              "output": "model/mul_5",
+              "dtype": "float16",
+              "shape": [
+                1,
+                256,
+                8,
+                16
+              ],
+              "inputs": [
+                "model/conv2d_30",
+                "model/vision_model.vision._en.stages.2.blocks.1.layer_scale.gamma"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 0.044921875,
+              "mismatched_elements": 30421
+            },
+            {
+              "index": 79,
+              "operator": "Add",
+              "name": "model/node_add_5",
+              "output": "model/add_5",
+              "dtype": "float16",
+              "shape": [
+                1,
+                256,
+                8,
+                16
+              ],
+              "inputs": [
+                "model/conv2d_27",
+                "model/mul_5"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 0.060546875,
+              "mismatched_elements": 30382
+            },
+            {
+              "index": 80,
+              "operator": "Conv",
+              "name": "model/node_conv2d_31",
+              "output": "model/conv2d_31",
+              "dtype": "float16",
+              "shape": [
+                1,
+                256,
+                8,
+                16
+              ],
+              "inputs": [
+                "model/add_5",
+                "model/vision_model.vision._en.stages.2.blocks.2.token_mixer.reparam_conv.weight",
+                "model/vision_model.vision._en.stages.2.blocks.2.token_mixer.reparam_conv.bias"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 0.060546875,
+              "mismatched_elements": 29933
+            },
+            {
+              "index": 81,
+              "operator": "Conv",
+              "name": "model/node_Conv_185",
+              "output": "model/getitem_18",
+              "dtype": "float16",
+              "shape": [
+                1,
+                256,
+                8,
+                16
+              ],
+              "inputs": [
+                "model/conv2d_31",
+                "model/vision_model.vision._en.stages.2.blocks.2.mlp.conv.conv.weight",
+                "model/vision_model.vision._en.stages.2.blocks.2.mlp.conv.conv.weight_bias"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 0.0381622314453125,
+              "mismatched_elements": 29326
+            }
+          ],
+          "final": {
+            "outputs": {
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                2576
+              ],
+              "dtype": "float32",
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 0.875,
+              "mismatched_elements": 2202
+            },
+            "next_state_img_q": {
+              "passed": true,
+              "finite": true,
+              "shape": [
+                2,
+                5,
+                6,
+                128,
+                256
+              ],
+              "dtype": "uint8",
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": true,
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            "next_state_desire_q": {
+              "passed": true,
+              "finite": true,
+              "shape": [
+                100,
+                1,
+                8
+              ],
+              "dtype": "float32",
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": true,
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            "next_state_feat_q": {
+              "passed": false,
+              "finite": true,
+              "shape": [
+                96,
+                1,
+                512
+              ],
+              "dtype": "float32",
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 0.00311279296875,
+              "mismatched_elements": 447
+            }
+          },
+          "first_difference": {
+            "index": 26,
+            "operator": "Conv",
+            "name": "model/node_conv2d",
+            "output": "model/conv2d",
+            "dtype": "float16",
+            "shape": [
+              1,
+              64,
+              64,
+              128
+            ],
+            "inputs": [
+              "model/div",
+              "model/vision_model.vision._en.stem.0.reparam_conv.weight",
+              "model/vision_model.vision._en.stem.0.reparam_conv.bias"
+            ],
+            "domain": "",
+            "layout": "ONNX declared axes; provider transformations recorded separately",
+            "passed": false,
+            "finite": true,
+            "expected_nonfinite_elements": 0,
+            "unexpected_nonfinite_elements": 0,
+            "exact": false,
+            "max_abs_error": 0.5625,
+            "mismatched_elements": 367345
+          },
+          "first_divergence": {
+            "index": 26,
+            "operator": "Conv",
+            "name": "model/node_conv2d",
+            "output": "model/conv2d",
+            "dtype": "float16",
+            "shape": [
+              1,
+              64,
+              64,
+              128
+            ],
+            "inputs": [
+              "model/div",
+              "model/vision_model.vision._en.stem.0.reparam_conv.weight",
+              "model/vision_model.vision._en.stem.0.reparam_conv.bias"
+            ],
+            "domain": "",
+            "layout": "ONNX declared axes; provider transformations recorded separately",
+            "passed": false,
+            "finite": true,
+            "expected_nonfinite_elements": 0,
+            "unexpected_nonfinite_elements": 0,
+            "exact": false,
+            "max_abs_error": 0.5625,
+            "mismatched_elements": 367345
+          },
+          "first_nonfinite": null
+        },
+        "qnn-gpu": {
+          "assignment": {
+            "providers": {
+              "CPUExecutionProvider": {
+                "partitions": 4,
+                "nodes": 4
+              },
+              "QNNExecutionProvider": {
+                "partitions": 3,
+                "nodes": 429
+              }
+            },
+            "device": {
+              "type": 2,
+              "vendor_id": 1297040209,
+              "device_id": 0
+            }
+          },
+          "profile_path": "/data/user/0/com.samsung.sunnypilot.fold3/files/trace-driving_supercombo-qnn-gpu_2026-11-01_10-19-06_016.json",
+          "nodes": [
+            {
+              "index": 12,
+              "operator": "Reshape",
+              "name": "node_view_1",
+              "output": "view_1",
+              "dtype": "float32",
+              "shape": [
+                25,
+                4,
+                1,
+                8
+              ],
+              "inputs": [
+                "next_state_desire_q",
+                "val_71"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": true,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": true,
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 13,
+              "operator": "ReduceMax",
+              "name": "n0",
+              "output": "amax",
+              "dtype": "float32",
+              "shape": [
+                25,
+                1,
+                8
+              ],
+              "inputs": [
+                "view_1",
+                "val_3"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": true,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": true,
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 14,
+              "operator": "Transpose",
+              "name": "node_transpose",
+              "output": "transpose",
+              "dtype": "float32",
+              "shape": [
+                1,
+                25,
+                8
+              ],
+              "inputs": [
+                "amax"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": true,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": true,
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 15,
+              "operator": "Slice",
+              "name": "node_slice_5",
+              "output": "slice_5",
+              "dtype": "float32",
+              "shape": [
+                24,
+                1,
+                512
+              ],
+              "inputs": [
+                "state_feat_q",
+                "val_27",
+                "val_7",
+                "val_27",
+                "val_41"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": true,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": true,
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 16,
+              "operator": "Transpose",
+              "name": "node_transpose_1",
+              "output": "transpose_1",
+              "dtype": "float32",
+              "shape": [
+                1,
+                24,
+                512
+              ],
+              "inputs": [
+                "slice_5"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": true,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": true,
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 17,
+              "operator": "Cast",
+              "name": "node__to_copy",
+              "output": "_to_copy",
+              "dtype": "float16",
+              "shape": [
+                1,
+                25,
+                8
+              ],
+              "inputs": [
+                "transpose"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": true,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": true,
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 18,
+              "operator": "Cast",
+              "name": "node__to_copy_1",
+              "output": "_to_copy_1",
+              "dtype": "float16",
+              "shape": [
+                1,
+                24,
+                512
+              ],
+              "inputs": [
+                "transpose_1"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": true,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": true,
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 19,
+              "operator": "Cast",
+              "name": "node__to_copy_2",
+              "output": "_to_copy_2",
+              "dtype": "float16",
+              "shape": [
+                1,
+                2
+              ],
+              "inputs": [
+                "traffic_convention"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": true,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": true,
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 20,
+              "operator": "Cast",
+              "name": "node__to_copy_3",
+              "output": "_to_copy_3",
+              "dtype": "float16",
+              "shape": [
+                1,
+                2
+              ],
+              "inputs": [
+                "action_t"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": true,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": true,
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 21,
+              "operator": "Cast",
+              "name": "model/node__to_copy",
+              "output": "model/_to_copy",
+              "dtype": "float16",
+              "shape": [
+                1,
+                12,
+                128,
+                256
+              ],
+              "inputs": [
+                "_unsafe_view"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": true,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": true,
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 22,
+              "operator": "Cast",
+              "name": "model/node__to_copy_1",
+              "output": "model/_to_copy_1",
+              "dtype": "float16",
+              "shape": [
+                1,
+                12,
+                128,
+                256
+              ],
+              "inputs": [
+                "_unsafe_view_1"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": true,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": true,
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 23,
+              "operator": "Concat",
+              "name": "model/node_cat",
+              "output": "model/cat",
+              "dtype": "float16",
+              "shape": [
+                1,
+                24,
+                128,
+                256
+              ],
+              "inputs": [
+                "model/_to_copy",
+                "model/_to_copy_1"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": true,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": true,
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 24,
+              "operator": "Sub",
+              "name": "model/node_sub",
+              "output": "model/sub",
+              "dtype": "float16",
+              "shape": [
+                1,
+                24,
+                128,
+                256
+              ],
+              "inputs": [
+                "model/cat",
+                "model/vision_model.vision._mean"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": true,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": true,
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 25,
+              "operator": "Div",
+              "name": "model/node_div",
+              "output": "model/div",
+              "dtype": "float16",
+              "shape": [
+                1,
+                24,
+                128,
+                256
+              ],
+              "inputs": [
+                "model/sub",
+                "model/vision_model.vision._std"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": true,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": true,
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 26,
+              "operator": "Conv",
+              "name": "model/node_conv2d",
+              "output": "model/conv2d",
+              "dtype": "float16",
+              "shape": [
+                1,
+                64,
+                64,
+                128
+              ],
+              "inputs": [
+                "model/div",
+                "model/vision_model.vision._en.stem.0.reparam_conv.weight",
+                "model/vision_model.vision._en.stem.0.reparam_conv.bias"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 0.5,
+              "mismatched_elements": 241311
+            },
+            {
+              "index": 27,
+              "operator": "Gelu",
+              "name": "model/node_gelu",
+              "output": "model/gelu",
+              "dtype": "float16",
+              "shape": [
+                1,
+                64,
+                64,
+                128
+              ],
+              "inputs": [
+                "model/conv2d"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 0.375,
+              "mismatched_elements": 223562
+            },
+            {
+              "index": 28,
+              "operator": "Conv",
+              "name": "model/node_conv2d_1",
+              "output": "model/conv2d_1",
+              "dtype": "float16",
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "inputs": [
+                "model/gelu",
+                "model/vision_model.vision._en.stem.1.reparam_conv.weight",
+                "model/vision_model.vision._en.stem.1.reparam_conv.bias"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 2.0,
+              "mismatched_elements": 76802
+            },
+            {
+              "index": 29,
+              "operator": "Gelu",
+              "name": "model/node_gelu_1",
+              "output": "model/gelu_1",
+              "dtype": "float16",
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "inputs": [
+                "model/conv2d_1"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 0.40625,
+              "mismatched_elements": 65887
+            },
+            {
+              "index": 30,
+              "operator": "Conv",
+              "name": "model/node_conv2d_2",
+              "output": "model/conv2d_2",
+              "dtype": "float16",
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "inputs": [
+                "model/gelu_1",
+                "model/vision_model.vision._en.stem.2.reparam_conv.weight",
+                "model/vision_model.vision._en.stem.2.reparam_conv.bias"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 1.1875,
+              "mismatched_elements": 84990
+            },
+            {
+              "index": 31,
+              "operator": "Gelu",
+              "name": "model/node_gelu_2",
+              "output": "model/gelu_2",
+              "dtype": "float16",
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "inputs": [
+                "model/conv2d_2"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 0.5625,
+              "mismatched_elements": 57965
+            },
+            {
+              "index": 32,
+              "operator": "Conv",
+              "name": "model/node_conv2d_3",
+              "output": "model/conv2d_3",
+              "dtype": "float16",
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "inputs": [
+                "model/gelu_2",
+                "model/vision_model.vision._en.stages.0.blocks.0.token_mixer.reparam_conv.weight",
+                "model/vision_model.vision._en.stages.0.blocks.0.token_mixer.reparam_conv.bias"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 0.109375,
+              "mismatched_elements": 65603
+            },
+            {
+              "index": 33,
+              "operator": "Conv",
+              "name": "model/node_Conv_173",
+              "output": "model/getitem",
+              "dtype": "float16",
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "inputs": [
+                "model/conv2d_3",
+                "model/vision_model.vision._en.stages.0.blocks.0.mlp.conv.conv.weight",
+                "model/vision_model.vision._en.stages.0.blocks.0.mlp.conv.conv.weight_bias"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 2.25,
+              "mismatched_elements": 93276
+            },
+            {
+              "index": 34,
+              "operator": "Conv",
+              "name": "model/node_conv2d_5",
+              "output": "model/conv2d_5",
+              "dtype": "float16",
+              "shape": [
+                1,
+                192,
+                32,
+                64
+              ],
+              "inputs": [
+                "model/getitem",
+                "model/vision_model.vision._en.stages.0.blocks.0.mlp.fc1.weight",
+                "model/vision_model.vision._en.stages.0.blocks.0.mlp.fc1.bias"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 5.0,
+              "mismatched_elements": 277545
+            },
+            {
+              "index": 35,
+              "operator": "Gelu",
+              "name": "model/node_gelu_3",
+              "output": "model/gelu_3",
+              "dtype": "float16",
+              "shape": [
+                1,
+                192,
+                32,
+                64
+              ],
+              "inputs": [
+                "model/conv2d_5"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 0.9375,
+              "mismatched_elements": 103329
+            },
+            {
+              "index": 36,
+              "operator": "Conv",
+              "name": "model/node_conv2d_6",
+              "output": "model/conv2d_6",
+              "dtype": "float16",
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "inputs": [
+                "model/gelu_3",
+                "model/vision_model.vision._en.stages.0.blocks.0.mlp.fc2.weight",
+                "model/vision_model.vision._en.stages.0.blocks.0.mlp.fc2.bias"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 1.28125,
+              "mismatched_elements": 106432
+            },
+            {
+              "index": 37,
+              "operator": "Mul",
+              "name": "model/node_mul",
+              "output": "model/mul",
+              "dtype": "float16",
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "inputs": [
+                "model/conv2d_6",
+                "model/vision_model.vision._en.stages.0.blocks.0.layer_scale.gamma"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 1.03125,
+              "mismatched_elements": 106104
+            },
+            {
+              "index": 38,
+              "operator": "Add",
+              "name": "model/node_add",
+              "output": "model/add",
+              "dtype": "float16",
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "inputs": [
+                "model/conv2d_3",
+                "model/mul"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 1.03125,
+              "mismatched_elements": 104537
+            },
+            {
+              "index": 39,
+              "operator": "Conv",
+              "name": "model/node_conv2d_7",
+              "output": "model/conv2d_7",
+              "dtype": "float16",
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "inputs": [
+                "model/add",
+                "model/vision_model.vision._en.stages.0.blocks.1.token_mixer.reparam_conv.weight",
+                "model/vision_model.vision._en.stages.0.blocks.1.token_mixer.reparam_conv.bias"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 1.078125,
+              "mismatched_elements": 106347
+            },
+            {
+              "index": 40,
+              "operator": "Conv",
+              "name": "model/node_Conv_175",
+              "output": "model/getitem_3",
+              "dtype": "float16",
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "inputs": [
+                "model/conv2d_7",
+                "model/vision_model.vision._en.stages.0.blocks.1.mlp.conv.conv.weight",
+                "model/vision_model.vision._en.stages.0.blocks.1.mlp.conv.conv.weight_bias"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 0.8125,
+              "mismatched_elements": 107929
+            },
+            {
+              "index": 41,
+              "operator": "Conv",
+              "name": "model/node_conv2d_9",
+              "output": "model/conv2d_9",
+              "dtype": "float16",
+              "shape": [
+                1,
+                192,
+                32,
+                64
+              ],
+              "inputs": [
+                "model/getitem_3",
+                "model/vision_model.vision._en.stages.0.blocks.1.mlp.fc1.weight",
+                "model/vision_model.vision._en.stages.0.blocks.1.mlp.fc1.bias"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 1.5625,
+              "mismatched_elements": 323894
+            },
+            {
+              "index": 42,
+              "operator": "Gelu",
+              "name": "model/node_gelu_4",
+              "output": "model/gelu_4",
+              "dtype": "float16",
+              "shape": [
+                1,
+                192,
+                32,
+                64
+              ],
+              "inputs": [
+                "model/conv2d_9"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 1.5625,
+              "mismatched_elements": 120398
+            },
+            {
+              "index": 43,
+              "operator": "Conv",
+              "name": "model/node_conv2d_10",
+              "output": "model/conv2d_10",
+              "dtype": "float16",
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "inputs": [
+                "model/gelu_4",
+                "model/vision_model.vision._en.stages.0.blocks.1.mlp.fc2.weight",
+                "model/vision_model.vision._en.stages.0.blocks.1.mlp.fc2.bias"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 3.25,
+              "mismatched_elements": 118973
+            },
+            {
+              "index": 44,
+              "operator": "Mul",
+              "name": "model/node_mul_1",
+              "output": "model/mul_1",
+              "dtype": "float16",
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "inputs": [
+                "model/conv2d_10",
+                "model/vision_model.vision._en.stages.0.blocks.1.layer_scale.gamma"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 8.5,
+              "mismatched_elements": 118900
+            },
+            {
+              "index": 45,
+              "operator": "Add",
+              "name": "model/node_add_1",
+              "output": "model/add_1",
+              "dtype": "float16",
+              "shape": [
+                1,
+                64,
+                32,
+                64
+              ],
+              "inputs": [
+                "model/conv2d_7",
+                "model/mul_1"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 8.5,
+              "mismatched_elements": 115204
+            },
+            {
+              "index": 46,
+              "operator": "Conv",
+              "name": "model/node_conv2d_11",
+              "output": "model/conv2d_11",
+              "dtype": "float16",
+              "shape": [
+                1,
+                128,
+                16,
+                32
+              ],
+              "inputs": [
+                "model/add_1",
+                "model/vision_model.vision._en.stages.1.downsample.proj.0.reparam_conv.weight",
+                "model/vision_model.vision._en.stages.1.downsample.proj.0.reparam_conv.bias"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 0.21875,
+              "mismatched_elements": 53240
+            },
+            {
+              "index": 47,
+              "operator": "Conv",
+              "name": "model/node_conv2d_12",
+              "output": "model/conv2d_12",
+              "dtype": "float16",
+              "shape": [
+                1,
+                128,
+                16,
+                32
+              ],
+              "inputs": [
+                "model/conv2d_11",
+                "model/vision_model.vision._en.stages.1.downsample.proj.1.reparam_conv.weight",
+                "model/vision_model.vision._en.stages.1.downsample.proj.1.reparam_conv.bias"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 126.492431640625,
+              "mismatched_elements": 65536
+            },
+            {
+              "index": 48,
+              "operator": "Gelu",
+              "name": "model/node_gelu_5",
+              "output": "model/gelu_5",
+              "dtype": "float16",
+              "shape": [
+                1,
+                128,
+                16,
+                32
+              ],
+              "inputs": [
+                "model/conv2d_12"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 3.53955078125,
+              "mismatched_elements": 65242
+            },
+            {
+              "index": 49,
+              "operator": "Conv",
+              "name": "model/node_conv2d_13",
+              "output": "model/conv2d_13",
+              "dtype": "float16",
+              "shape": [
+                1,
+                128,
+                16,
+                32
+              ],
+              "inputs": [
+                "model/gelu_5",
+                "model/vision_model.vision._en.stages.1.blocks.0.token_mixer.reparam_conv.weight",
+                "model/vision_model.vision._en.stages.1.blocks.0.token_mixer.reparam_conv.bias"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 5.44091796875,
+              "mismatched_elements": 65392
+            },
+            {
+              "index": 50,
+              "operator": "Conv",
+              "name": "model/node_Conv_177",
+              "output": "model/getitem_6",
+              "dtype": "float16",
+              "shape": [
+                1,
+                128,
+                16,
+                32
+              ],
+              "inputs": [
+                "model/conv2d_13",
+                "model/vision_model.vision._en.stages.1.blocks.0.mlp.conv.conv.weight",
+                "model/vision_model.vision._en.stages.1.blocks.0.mlp.conv.conv.weight_bias"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 43.193359375,
+              "mismatched_elements": 65455
+            },
+            {
+              "index": 51,
+              "operator": "Conv",
+              "name": "model/node_conv2d_15",
+              "output": "model/conv2d_15",
+              "dtype": "float16",
+              "shape": [
+                1,
+                384,
+                16,
+                32
+              ],
+              "inputs": [
+                "model/getitem_6",
+                "model/vision_model.vision._en.stages.1.blocks.0.mlp.fc1.weight",
+                "model/vision_model.vision._en.stages.1.blocks.0.mlp.fc1.bias"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 45.453125,
+              "mismatched_elements": 196579
+            },
+            {
+              "index": 52,
+              "operator": "Gelu",
+              "name": "model/node_gelu_6",
+              "output": "model/gelu_6",
+              "dtype": "float16",
+              "shape": [
+                1,
+                384,
+                16,
+                32
+              ],
+              "inputs": [
+                "model/conv2d_15"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 35.252166748046875,
+              "mismatched_elements": 185791
+            },
+            {
+              "index": 53,
+              "operator": "Conv",
+              "name": "model/node_conv2d_16",
+              "output": "model/conv2d_16",
+              "dtype": "float16",
+              "shape": [
+                1,
+                128,
+                16,
+                32
+              ],
+              "inputs": [
+                "model/gelu_6",
+                "model/vision_model.vision._en.stages.1.blocks.0.mlp.fc2.weight",
+                "model/vision_model.vision._en.stages.1.blocks.0.mlp.fc2.bias"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 51.03515625,
+              "mismatched_elements": 65527
+            },
+            {
+              "index": 54,
+              "operator": "Mul",
+              "name": "model/node_mul_2",
+              "output": "model/mul_2",
+              "dtype": "float16",
+              "shape": [
+                1,
+                128,
+                16,
+                32
+              ],
+              "inputs": [
+                "model/conv2d_16",
+                "model/vision_model.vision._en.stages.1.blocks.0.layer_scale.gamma"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 25.50390625,
+              "mismatched_elements": 65525
+            },
+            {
+              "index": 55,
+              "operator": "Add",
+              "name": "model/node_add_2",
+              "output": "model/add_2",
+              "dtype": "float16",
+              "shape": [
+                1,
+                128,
+                16,
+                32
+              ],
+              "inputs": [
+                "model/conv2d_13",
+                "model/mul_2"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 25.4140625,
+              "mismatched_elements": 65527
+            },
+            {
+              "index": 56,
+              "operator": "Conv",
+              "name": "model/node_conv2d_17",
+              "output": "model/conv2d_17",
+              "dtype": "float16",
+              "shape": [
+                1,
+                128,
+                16,
+                32
+              ],
+              "inputs": [
+                "model/add_2",
+                "model/vision_model.vision._en.stages.1.blocks.1.token_mixer.reparam_conv.weight",
+                "model/vision_model.vision._en.stages.1.blocks.1.token_mixer.reparam_conv.bias"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 18.3870849609375,
+              "mismatched_elements": 65516
+            },
+            {
+              "index": 57,
+              "operator": "Conv",
+              "name": "model/node_Conv_179",
+              "output": "model/getitem_9",
+              "dtype": "float16",
+              "shape": [
+                1,
+                128,
+                16,
+                32
+              ],
+              "inputs": [
+                "model/conv2d_17",
+                "model/vision_model.vision._en.stages.1.blocks.1.mlp.conv.conv.weight",
+                "model/vision_model.vision._en.stages.1.blocks.1.mlp.conv.conv.weight_bias"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 24.8515625,
+              "mismatched_elements": 65505
+            },
+            {
+              "index": 58,
+              "operator": "Conv",
+              "name": "model/node_conv2d_19",
+              "output": "model/conv2d_19",
+              "dtype": "float16",
+              "shape": [
+                1,
+                384,
+                16,
+                32
+              ],
+              "inputs": [
+                "model/getitem_9",
+                "model/vision_model.vision._en.stages.1.blocks.1.mlp.fc1.weight",
+                "model/vision_model.vision._en.stages.1.blocks.1.mlp.fc1.bias"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 19.475341796875,
+              "mismatched_elements": 196549
+            },
+            {
+              "index": 59,
+              "operator": "Gelu",
+              "name": "model/node_gelu_7",
+              "output": "model/gelu_7",
+              "dtype": "float16",
+              "shape": [
+                1,
+                384,
+                16,
+                32
+              ],
+              "inputs": [
+                "model/conv2d_19"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 14.85595703125,
+              "mismatched_elements": 195486
+            },
+            {
+              "index": 60,
+              "operator": "Conv",
+              "name": "model/node_conv2d_20",
+              "output": "model/conv2d_20",
+              "dtype": "float16",
+              "shape": [
+                1,
+                128,
+                16,
+                32
+              ],
+              "inputs": [
+                "model/gelu_7",
+                "model/vision_model.vision._en.stages.1.blocks.1.mlp.fc2.weight",
+                "model/vision_model.vision._en.stages.1.blocks.1.mlp.fc2.bias"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 26.2265625,
+              "mismatched_elements": 65523
+            },
+            {
+              "index": 61,
+              "operator": "Mul",
+              "name": "model/node_mul_3",
+              "output": "model/mul_3",
+              "dtype": "float16",
+              "shape": [
+                1,
+                128,
+                16,
+                32
+              ],
+              "inputs": [
+                "model/conv2d_20",
+                "model/vision_model.vision._en.stages.1.blocks.1.layer_scale.gamma"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 65.046875,
+              "mismatched_elements": 65522
+            },
+            {
+              "index": 62,
+              "operator": "Add",
+              "name": "model/node_add_3",
+              "output": "model/add_3",
+              "dtype": "float16",
+              "shape": [
+                1,
+                128,
+                16,
+                32
+              ],
+              "inputs": [
+                "model/conv2d_17",
+                "model/mul_3"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 61.625,
+              "mismatched_elements": 65526
+            },
+            {
+              "index": 63,
+              "operator": "Conv",
+              "name": "model/node_conv2d_21",
+              "output": "model/conv2d_21",
+              "dtype": "float16",
+              "shape": [
+                1,
+                256,
+                8,
+                16
+              ],
+              "inputs": [
+                "model/add_3",
+                "model/vision_model.vision._en.stages.2.downsample.proj.0.reparam_conv.weight",
+                "model/vision_model.vision._en.stages.2.downsample.proj.0.reparam_conv.bias"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 86.7890625,
+              "mismatched_elements": 32762
+            },
+            {
+              "index": 64,
+              "operator": "Conv",
+              "name": "model/node_conv2d_22",
+              "output": "model/conv2d_22",
+              "dtype": "float16",
+              "shape": [
+                1,
+                256,
+                8,
+                16
+              ],
+              "inputs": [
+                "model/conv2d_21",
+                "model/vision_model.vision._en.stages.2.downsample.proj.1.reparam_conv.weight",
+                "model/vision_model.vision._en.stages.2.downsample.proj.1.reparam_conv.bias"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 14.951171875,
+              "mismatched_elements": 32758
+            },
+            {
+              "index": 65,
+              "operator": "Gelu",
+              "name": "model/node_gelu_8",
+              "output": "model/gelu_8",
+              "dtype": "float16",
+              "shape": [
+                1,
+                256,
+                8,
+                16
+              ],
+              "inputs": [
+                "model/conv2d_22"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 15.10595703125,
+              "mismatched_elements": 32718
+            },
+            {
+              "index": 66,
+              "operator": "Conv",
+              "name": "model/node_conv2d_23",
+              "output": "model/conv2d_23",
+              "dtype": "float16",
+              "shape": [
+                1,
+                256,
+                8,
+                16
+              ],
+              "inputs": [
+                "model/gelu_8",
+                "model/vision_model.vision._en.stages.2.blocks.0.token_mixer.reparam_conv.weight",
+                "model/vision_model.vision._en.stages.2.blocks.0.token_mixer.reparam_conv.bias"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 19.76812744140625,
+              "mismatched_elements": 32746
+            },
+            {
+              "index": 67,
+              "operator": "Conv",
+              "name": "model/node_Conv_181",
+              "output": "model/getitem_12",
+              "dtype": "float16",
+              "shape": [
+                1,
+                256,
+                8,
+                16
+              ],
+              "inputs": [
+                "model/conv2d_23",
+                "model/vision_model.vision._en.stages.2.blocks.0.mlp.conv.conv.weight",
+                "model/vision_model.vision._en.stages.2.blocks.0.mlp.conv.conv.weight_bias"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 48.2784423828125,
+              "mismatched_elements": 32751
+            },
+            {
+              "index": 68,
+              "operator": "Conv",
+              "name": "model/node_conv2d_25",
+              "output": "model/conv2d_25",
+              "dtype": "float16",
+              "shape": [
+                1,
+                768,
+                8,
+                16
+              ],
+              "inputs": [
+                "model/getitem_12",
+                "model/vision_model.vision._en.stages.2.blocks.0.mlp.fc1.weight",
+                "model/vision_model.vision._en.stages.2.blocks.0.mlp.fc1.bias"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 116.0703125,
+              "mismatched_elements": 98297
+            },
+            {
+              "index": 69,
+              "operator": "Gelu",
+              "name": "model/node_gelu_9",
+              "output": "model/gelu_9",
+              "dtype": "float16",
+              "shape": [
+                1,
+                768,
+                8,
+                16
+              ],
+              "inputs": [
+                "model/conv2d_25"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 47.5374755859375,
+              "mismatched_elements": 92254
+            },
+            {
+              "index": 70,
+              "operator": "Conv",
+              "name": "model/node_conv2d_26",
+              "output": "model/conv2d_26",
+              "dtype": "float16",
+              "shape": [
+                1,
+                256,
+                8,
+                16
+              ],
+              "inputs": [
+                "model/gelu_9",
+                "model/vision_model.vision._en.stages.2.blocks.0.mlp.fc2.weight",
+                "model/vision_model.vision._en.stages.2.blocks.0.mlp.fc2.bias"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 123.6328125,
+              "mismatched_elements": 32768
+            },
+            {
+              "index": 71,
+              "operator": "Mul",
+              "name": "model/node_mul_4",
+              "output": "model/mul_4",
+              "dtype": "float16",
+              "shape": [
+                1,
+                256,
+                8,
+                16
+              ],
+              "inputs": [
+                "model/conv2d_26",
+                "model/vision_model.vision._en.stages.2.blocks.0.layer_scale.gamma"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 20.6875,
+              "mismatched_elements": 32767
+            },
+            {
+              "index": 72,
+              "operator": "Add",
+              "name": "model/node_add_4",
+              "output": "model/add_4",
+              "dtype": "float16",
+              "shape": [
+                1,
+                256,
+                8,
+                16
+              ],
+              "inputs": [
+                "model/conv2d_23",
+                "model/mul_4"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 20.77294921875,
+              "mismatched_elements": 32766
+            },
+            {
+              "index": 73,
+              "operator": "Conv",
+              "name": "model/node_conv2d_27",
+              "output": "model/conv2d_27",
+              "dtype": "float16",
+              "shape": [
+                1,
+                256,
+                8,
+                16
+              ],
+              "inputs": [
+                "model/add_4",
+                "model/vision_model.vision._en.stages.2.blocks.1.token_mixer.reparam_conv.weight",
+                "model/vision_model.vision._en.stages.2.blocks.1.token_mixer.reparam_conv.bias"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 18.02001953125,
+              "mismatched_elements": 32765
+            },
+            {
+              "index": 74,
+              "operator": "Conv",
+              "name": "model/node_Conv_183",
+              "output": "model/getitem_15",
+              "dtype": "float16",
+              "shape": [
+                1,
+                256,
+                8,
+                16
+              ],
+              "inputs": [
+                "model/conv2d_27",
+                "model/vision_model.vision._en.stages.2.blocks.1.mlp.conv.conv.weight",
+                "model/vision_model.vision._en.stages.2.blocks.1.mlp.conv.conv.weight_bias"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 34.921875,
+              "mismatched_elements": 32762
+            },
+            {
+              "index": 75,
+              "operator": "Conv",
+              "name": "model/node_conv2d_29",
+              "output": "model/conv2d_29",
+              "dtype": "float16",
+              "shape": [
+                1,
+                768,
+                8,
+                16
+              ],
+              "inputs": [
+                "model/getitem_15",
+                "model/vision_model.vision._en.stages.2.blocks.1.mlp.fc1.weight",
+                "model/vision_model.vision._en.stages.2.blocks.1.mlp.fc1.bias"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 92.19873046875,
+              "mismatched_elements": 98294
+            },
+            {
+              "index": 76,
+              "operator": "Gelu",
+              "name": "model/node_gelu_10",
+              "output": "model/gelu_10",
+              "dtype": "float16",
+              "shape": [
+                1,
+                768,
+                8,
+                16
+              ],
+              "inputs": [
+                "model/conv2d_29"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 73.5445556640625,
+              "mismatched_elements": 89652
+            },
+            {
+              "index": 77,
+              "operator": "Conv",
+              "name": "model/node_conv2d_30",
+              "output": "model/conv2d_30",
+              "dtype": "float16",
+              "shape": [
+                1,
+                256,
+                8,
+                16
+              ],
+              "inputs": [
+                "model/gelu_10",
+                "model/vision_model.vision._en.stages.2.blocks.1.mlp.fc2.weight",
+                "model/vision_model.vision._en.stages.2.blocks.1.mlp.fc2.bias"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 192.7265625,
+              "mismatched_elements": 32768
+            },
+            {
+              "index": 78,
+              "operator": "Mul",
+              "name": "model/node_mul_5",
+              "output": "model/mul_5",
+              "dtype": "float16",
+              "shape": [
+                1,
+                256,
+                8,
+                16
+              ],
+              "inputs": [
+                "model/conv2d_30",
+                "model/vision_model.vision._en.stages.2.blocks.1.layer_scale.gamma"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 49.439453125,
+              "mismatched_elements": 32768
+            },
+            {
+              "index": 79,
+              "operator": "Add",
+              "name": "model/node_add_5",
+              "output": "model/add_5",
+              "dtype": "float16",
+              "shape": [
+                1,
+                256,
+                8,
+                16
+              ],
+              "inputs": [
+                "model/conv2d_27",
+                "model/mul_5"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 49.064453125,
+              "mismatched_elements": 32766
+            },
+            {
+              "index": 80,
+              "operator": "Conv",
+              "name": "model/node_conv2d_31",
+              "output": "model/conv2d_31",
+              "dtype": "float16",
+              "shape": [
+                1,
+                256,
+                8,
+                16
+              ],
+              "inputs": [
+                "model/add_5",
+                "model/vision_model.vision._en.stages.2.blocks.2.token_mixer.reparam_conv.weight",
+                "model/vision_model.vision._en.stages.2.blocks.2.token_mixer.reparam_conv.bias"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 50.724609375,
+              "mismatched_elements": 32766
+            },
+            {
+              "index": 81,
+              "operator": "Conv",
+              "name": "model/node_Conv_185",
+              "output": "model/getitem_18",
+              "dtype": "float16",
+              "shape": [
+                1,
+                256,
+                8,
+                16
+              ],
+              "inputs": [
+                "model/conv2d_31",
+                "model/vision_model.vision._en.stages.2.blocks.2.mlp.conv.conv.weight",
+                "model/vision_model.vision._en.stages.2.blocks.2.mlp.conv.conv.weight_bias"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 97.564453125,
+              "mismatched_elements": 32765
+            }
+          ],
+          "final": {
+            "outputs": {
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                2576
+              ],
+              "dtype": "float32",
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 1030.9609375,
+              "mismatched_elements": 2557
+            },
+            "next_state_img_q": {
+              "passed": true,
+              "finite": true,
+              "shape": [
+                2,
+                5,
+                6,
+                128,
+                256
+              ],
+              "dtype": "uint8",
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": true,
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            "next_state_desire_q": {
+              "passed": true,
+              "finite": true,
+              "shape": [
+                100,
+                1,
+                8
+              ],
+              "dtype": "float32",
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": true,
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            "next_state_feat_q": {
+              "passed": false,
+              "finite": true,
+              "shape": [
+                96,
+                1,
+                512
+              ],
+              "dtype": "float32",
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 0.1466064453125,
+              "mismatched_elements": 509
+            }
+          },
+          "first_difference": {
+            "index": 26,
+            "operator": "Conv",
+            "name": "model/node_conv2d",
+            "output": "model/conv2d",
+            "dtype": "float16",
+            "shape": [
+              1,
+              64,
+              64,
+              128
+            ],
+            "inputs": [
+              "model/div",
+              "model/vision_model.vision._en.stem.0.reparam_conv.weight",
+              "model/vision_model.vision._en.stem.0.reparam_conv.bias"
+            ],
+            "domain": "",
+            "layout": "ONNX declared axes; provider transformations recorded separately",
+            "passed": false,
+            "finite": true,
+            "expected_nonfinite_elements": 0,
+            "unexpected_nonfinite_elements": 0,
+            "exact": false,
+            "max_abs_error": 0.5,
+            "mismatched_elements": 241311
+          },
+          "first_divergence": {
+            "index": 26,
+            "operator": "Conv",
+            "name": "model/node_conv2d",
+            "output": "model/conv2d",
+            "dtype": "float16",
+            "shape": [
+              1,
+              64,
+              64,
+              128
+            ],
+            "inputs": [
+              "model/div",
+              "model/vision_model.vision._en.stem.0.reparam_conv.weight",
+              "model/vision_model.vision._en.stem.0.reparam_conv.bias"
+            ],
+            "domain": "",
+            "layout": "ONNX declared axes; provider transformations recorded separately",
+            "passed": false,
+            "finite": true,
+            "expected_nonfinite_elements": 0,
+            "unexpected_nonfinite_elements": 0,
+            "exact": false,
+            "max_abs_error": 0.5,
+            "mismatched_elements": 241311
+          },
+          "first_nonfinite": null
+        }
+      }
+    }
+  },
+  "completed": true
+}

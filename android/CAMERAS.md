@@ -1,5 +1,145 @@
 # SM-F926B camera qualification
 
+Latest APK-specific results, including public low-latency YUV/PRIVATE profiles and
+the three-stream rerun, are in the [candidate58 repair report](reports/road-camera-repair-20261107/README.md).
+Ultrawide acquisition p99 remains 84–85 ms; mode37 preview acquisition is 108.630 ms.
+These fail the 50 ms deadline before inference; independent rear identity remains blocked.
+Earlier manual-exposure trials remain in the [candidate54 report](reports/accelerator-controls-20261107/README.md).
+The preceding constrained-high-speed diagnostic remains in the
+[capture-method comparison](reports/capture-methods-20261107/README.md).
+The preceding results for direct YUV, GPU-backed PRIVATE outputs and Samsung
+mode 37 remain in the [camera-path comparison](reports/camera-paths-20261106/README.md).
+The [three-camera recovery report](reports/three-camera-recovery-20261106/README.md)
+records the preceding camera, model and controls work.
+The diagnostic model path applies a 50 ms capture-to-publication budget and a
+20 ms rear-pair skew limit. The earlier [blocker-fix report](reports/blocker-fixes/README.md)
+uses a 100 ms freshness limit. Raw camera timestamps are retained with
+elapsed-realtime and monotonic samples. REALTIME timestamps use the measured
+clock offset. UNKNOWN timestamps remain unqualified, and invalid sensor times
+are rejected.
+
+GLES3 performs verified NV12 conversion with bounded PBO/fence readback and a
+checked fallback. Preview/thumbnail/front transport works, but independent rear
+identity, composite-region geometry and freshness remain gates. The user has
+deferred the three-repetition lens-cover experiment. The phone is unmounted;
+no mounted calibration is claimed. Old results below retain their own APKs.
+
+## Candidate35 exposure timestamps and continuous readback
+
+APK SHA-256: `38645e91f806076517de1497cdb6b5c0cbf4873cfecf5efabb980297a014ad51`.
+API 33+ outputs explicitly request `TIMESTAMP_BASE_SENSOR`; API 34+ outputs
+disable readout timestamps. Android documents that the default SurfaceTexture
+timestamp policy can re-space frames and add delivery latency; explicitly
+requesting sensor time avoids that policy. Raw capture times and clock samples
+are retained without arrival-time substitution. See the
+[Android timestamp-base reference](https://developer.android.com/reference/android/hardware/camera2/params/OutputConfiguration#TIMESTAMP_BASE_DEFAULT).
+
+Acquisition, GL and publication have separate bounded workers. Three owned NV12
+buffers protect consumers from overwritten data; a newer pending publication
+replaces an older pending one. Instrumentation checks slow-consumer ownership,
+acquisition progress and camera teardown, plus GLES3/fallback conversion.
+
+Four isolated 12-second runs perform continuous GPU conversion/readback,
+hashing and publication timing. They retain zero timestamp/packing errors and
+no disconnects. Independent rear sensor identity remains **blocked** in all four.
+
+| Diagnostic profile | Composite delivery p99 | Rear preview delivery p99 | Front delivery p99 |
+| --- | --- | --- | --- |
+| Record, 1080p, depth 3 | 84.54 ms | 105.66 ms | 97.36 ms |
+| Preview template | 82.82 ms | 108.83 ms | 101.92 ms |
+| Record, 720p | 80.08 ms | 107.83 ms | 94.31 ms |
+| Record, reader depth 2 | 85.02 ms | 106.97 ms | 96.75 ms |
+
+All profiles still fail the 100 ms rear-preview delivery target; none is selected
+as qualified. Default capture remains record/1080p/depth 3. The
+[profile comparison](reports/blocker-fixes/candidate35-camera-comparison.json)
+retains readback, conversion, callback, queue and clock evidence. These are
+camera-only measurements, unlike historical combined-load results below.
+The [candidate35 validation report](reports/blocker-fixes/candidate35-validation.md)
+separately records combined-load and actual emulator-camera timing. Deterministic
+injected inputs cannot qualify either camera timing or physical rear identity.
+
+The [combined 30-second run](reports/blocker-fixes/fold-candidate35-vision.json)
+records **893 composite, 895 rear-preview readbacks and 894 front frames**, with
+zero recoveries and timestamp errors. Preview delivery p99 reaches 160.99 ms;
+preview acquisition p99 is 158.06 ms and readback p99 is 11.25 ms. These stage
+percentiles are separate measurements, not additive costs. All road inputs are
+rejected. The vendor diagnostic's aggregate `preview_frames` field sums GL
+preview and the additional record-reader counters; it cannot establish 60 fps
+or another independent physical sensor. Use `rear_preview_frames` and
+`preview_readback_frames` for the routed preview stream.
+
+The [actual emulator camera test](reports/blocker-fixes/emulator-candidate35-camera-timing.json)
+still fails: **289/289 frames have future capture timestamps**, median delivery
+age **-30.93 ms**, p99 **-27.97 ms**. Images change, raw timestamps are monotonic
+and callbacks close cleanly, but those facts cannot make future capture times
+valid. Explicit sensor timing does not resolve this emulator result. Invalid
+frames remain rejected; arrival times are not substituted. Deterministic debug
+fixtures are tested separately and do not qualify emulator camera timing.
+
+## Historical candidate32 transport and freshness
+
+APK `a62b5518…2810` produces **893 composite, 897 preview and 894 front
+frames** in the [30-second combined run](reports/blocker-fixes/fold-vision-candidate32.json).
+Composite/front capture averages **29.78/29.82 fps**, with zero recoveries,
+timestamp/packing errors or dropped PBO readbacks. Preview/thumbnail frames
+change, but shared parent timestamps and changing pixels
+do not establish distinct physical sensors. Lens-cover evidence remains pending.
+
+Composite/preview/front delivery-age p99 is **98.86/124.60/106.47 ms**;
+acquisition-age p99 is **98.52/119.80/105.37 ms**. Preview render, readback and
+publication p99 is **3.53/11.40/3.11 ms**. The recorded acquisition latency already
+exceeds the 100 ms budget for preview/front, so readback tuning alone cannot
+qualify those inputs. No arrival-time substitution or freshness relaxation is
+applied. All **58 road** predictions and **410 of 411 driver** predictions are
+late; the remaining driver message is explicitly invalid. These use the
+unqualified diagnostic CPU backend, separately from the accurate but slower
+OpenCL gate. Raylib averages **29.51 fps**. Camera/model acceptance **fails**.
+
+The final [emulator Camera2 timing run](reports/blocker-fixes/emulator-camera-timing-candidate32.json)
+records **289 future timestamps in 289 frames**, with delivery-age p99
+**−21.71 ms**. Raw timestamps remain in the evidence and are rejected. Passing
+deterministic injected-input tests does not qualify this virtual camera.
+
+Historical candidate21 (`4c48351c…09bbfe`) delivers **894 composite, 897 preview
+and 895 front frames** in the [30-second combined run](reports/blocker-fixes/fold-vision-candidate21.json),
+with zero recoveries, packing/timestamp errors or dropped PBO readbacks.
+The rear candidates overlap for **29.94 seconds**; 894 preview and 893 thumbnail
+frames change. This supports working transport, not independent sensor identity.
+Delivery-age p99 composite/preview/front is **98.49/124.68/104.60 ms**; acquisition
+age p99 is **98.18/119.41/104.24 ms**. Much of the latency precedes application
+delivery. GPU readback p99 is **11.08 ms**, render p99 **2.78 ms**; conversion
+continues on GLES3 with no synchronous CPU conversion in this run.
+
+Freshness fails. All 54 road predictions and 442 of 443 driver predictions are
+late; the remaining driver message is invalid and cannot enable engagement.
+Independent rear identity and model-input mapping remain blocked by the deferred
+lens-cover experiment. Both rear streams sharing a timestamp from their parent
+capture is not evidence of separate physical sensors.
+
+The [candidate21 emulator Camera2 test](reports/blocker-fixes/emulator-camera-timing-candidate21.json)
+delivers 288 frames at 28.96 fps, but every capture timestamp is ahead of its
+bracketing elapsed-realtime sample. Delivery-age p99 is **−26.41 ms**. These
+frames fail validation; raw timestamps are retained and arrival time is never
+substituted. Passing deterministic fixtures cannot qualify this camera timing.
+
+The historical candidate10 APK (`566e4c25…e83a9a`) records **898 thumbnail/composite,
+898 selected-wide preview and 899 front frames** in 30 seconds, with zero
+recoveries and no packing/timestamp errors. Actual noise reduction, sharpening,
+OIS and EIS modes are OFF. Image-age p99 is **126.12/144.84/102.11 ms**
+respectively, beyond the 100 ms freshness target. GPU readback p99 is 10.65 ms
+with no dropped readbacks. Physical capture results remain empty; vendor
+physical-ID metadata and shared-parent timestamps cannot qualify image identity.
+All 53 road and 469 driver predictions in the combined run are late and withheld.
+See the [APK-specific camera/model report](reports/blocker-fixes/fold-gpu-vision-candidate10.json)
+for raw clocks, stream origins, overlap and stage timings.
+
+The separate [candidate10 emulator camera test](reports/blocker-fixes/emulator-host-camera-dual-candidate10.json)
+delivers 437/436 frames, but every raw sensor timestamp is ahead of the
+bracketing elapsed-realtime clock. Age p99 is -27.43/-26.37 ms. The validator
+rejects those frames; arrival timestamps do not replace invalid sensor times.
+Deterministic injected-input passes do not qualify emulator camera timing.
+
 **Samsung multiview plus front capture now runs concurrently on stock Android 15.**
 The opt-in compatibility APK accesses logical rear camera 20 and uses the
 installed Samsung helper and public output-configuration extension to reproduce
@@ -12,7 +152,36 @@ Independent wide/ultrawide images suitable for the driving models remain
 unqualified; HAL activation and composite thumbnails alone cannot qualify
 separate calibrated driving inputs. Transmission remains disabled.
 
-The [current rear-pipeline bench run](reports/rear-pipeline/README.md) continuously
+For a lens-cover trial, keep the Fold 3 still and point the rear cameras at a
+well-lit, textured scene. Use a 45-second run. Start with both lenses clear,
+then cover and uncover each lens separately three times, leaving several seconds
+per step. Use the compatibility APK and run from the repository root.
+
+```sh
+adb_path="$HOME/Library/Android/sdk/platform-tools/adb"
+trial=$(mktemp -d android/build/lens-cover.XXXXXX)
+.venv/bin/python android/scripts/experiment.py --adb "$adb_path" --serial "$serial" \
+  --package com.samsung.sunnypilot.fold3 --report "$trial/isolation.json" -- \
+  .venv/bin/python android/scripts/validate_cameras.py --adb "$adb_path" --serial "$serial" \
+  --package com.samsung.sunnypilot.fold3 --ids 0,2 --logical 20 --samsung-multiview \
+  --seconds 45 --output "$trial/camera.json" --evidence-directory "$trial/clips"
+```
+
+The diagnostic saves up to four 960×540 NV12 frames per second per output. It
+exports preview and thumbnail frames in pairs within 20 ms and preserves their
+capture timestamps in `camera.json`. An exit status of 1 is expected while
+physical sensor identity remains blocked. Use the timestamps to locate any gaps
+and inspect the full thumbnail for composite regions. A paired recording alone
+does not establish optical identity.
+
+Use `preview_acquisition_age_p99_ns` to locate delay before GL conversion.
+`preview_delivery_age_p99_ns` measures age immediately before the output sink;
+`preview_sink_delivery_age_p99_ns` includes the sink callback. In evidence
+mode that callback can include a sampled disk write. Keep both metrics when
+comparing timing across APKs.
+
+
+The [earlier rear-pipeline bench run](reports/rear-pipeline/README.md) continuously
 bridges the selected GL preview, multiview thumbnail and front YUV into
 VisionIPC. In the initial 60-second trial, the rear candidates each delivered
 1,798 frames and the front delivered 1,800, with zero recoveries or provider
@@ -21,7 +190,7 @@ outputs were non-finite and remain invalid. The rear physical-result map was
 empty; timestamp overlap and changing buffers do not establish separate sensors.
 This is a transport implementation, not independent-camera qualification.
 
-The final compatibility APK's [30-minute capture](reports/rear-pipeline/fold3-final-soak-summary.json)
+The earlier `f725600b` APK's [30-minute capture](reports/rear-pipeline/fold3-final-soak-summary.json)
 also passed transport with zero recoveries: 54,006 rear-preview, 53,824 thumbnail
 and 53,738 front frames, with a 29.94 fps UI. Provider PIDs stayed unchanged and
 all app/camera clients exited. Physical rear identities remained unproven, and
@@ -159,3 +328,12 @@ minutes and never certified 30 minutes of capture. Original reports are retained
 
 Short clean sessions do not erase those failures or qualify required dual rear
 capture, timely driver monitoring or real vehicle use.
+
+### Candidate68 manual exposure and low-latency comparison (2026-11-08)
+
+[Artifact-bound report](reports/dispatch-batching-20261108/README.md).
+APK `925b4b0ab7b40e50c6b19b3ca8f8f4fba2ef5eefd74fcc8b5d0588e2dff8a048`.
+
+Diagnostic public Camera2 profile `manual-8ms-low-latency` combines supported short manual exposure with advertised processing controls in session parameters. Isolated ultrawide 640x360 direct YUV publication p99: low-latency 75.331 ms, manual 8 ms exposure 62.102 ms, combined 61.741 ms. Each publishes 357 frames and all exceed 50 ms. This does not qualify the new profile. Mode37 three-stream rear-preview/front delivery p99 is 102.725/98.047 ms; independent rear identity remains unproven. Emulator camera timing rejects 340 of 342 capture timestamps, with 338 result timestamp errors and 2 publications; it remains failed. No arrival-time substitution.
+
+TX and engagement remain disabled; cooling optimization is deferred and thermal safeguards remain active. Prior candidates and failures are preserved.

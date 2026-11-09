@@ -1,0 +1,274 @@
+{
+  "candidate": "candidate19",
+  "apk_sha256": "bd77a513901204113b3a2810c485314efc9123f158d63a1ead9107ad9cbb6626",
+  "collection_status": "passed",
+  "model_parity_status": "failed",
+  "half_conversion": {
+    "passed": true,
+    "values": 63512,
+    "mismatched_elements": 0,
+    "subnormal_values": 2056,
+    "first_mismatches": []
+  },
+  "gemm_cases": 18,
+  "gemm_exact_passed": 18,
+  "models": {
+    "dmonitoring_model": {
+      "ort": {
+        "final": {
+          "outputs": {
+            "passed": false,
+            "finite": true,
+            "shape": [
+              1,
+              553
+            ],
+            "dtype": "float16",
+            "expected_nonfinite_elements": 0,
+            "unexpected_nonfinite_elements": 0,
+            "exact": false,
+            "max_abs_error": 0.00390625,
+            "mismatched_elements": 2
+          }
+        },
+        "first_difference": {
+          "index": 8,
+          "operator": "NhwcFusedConv",
+          "name": "node_Conv_805_token_561",
+          "output": "node_Conv_805",
+          "passed": true,
+          "finite": true,
+          "shape": [
+            1,
+            120,
+            180,
+            32
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 2.86102294921875e-05,
+          "mismatched_elements": 0
+        },
+        "first_divergence": null,
+        "first_nonfinite": null
+      },
+      "CL": {
+        "final": {
+          "outputs": {
+            "passed": false,
+            "finite": true,
+            "shape": [
+              1,
+              553
+            ],
+            "dtype": "float16",
+            "expected_nonfinite_elements": 0,
+            "unexpected_nonfinite_elements": 0,
+            "exact": false,
+            "max_abs_error": 0.00390625,
+            "mismatched_elements": 6
+          }
+        },
+        "first_difference": {
+          "index": 1,
+          "operator": "Div",
+          "name": "node_div",
+          "output": "InsertedPrecisionFreeCast_div",
+          "passed": true,
+          "finite": true,
+          "shape": [
+            1,
+            1382400
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 5.960464477539063e-08,
+          "mismatched_elements": 0
+        },
+        "first_divergence": null,
+        "first_nonfinite": null
+      }
+    },
+    "driving_supercombo": {
+      "ort": {
+        "final": {
+          "outputs": {
+            "passed": false,
+            "finite": true,
+            "shape": [
+              1,
+              2576
+            ],
+            "dtype": "float32",
+            "expected_nonfinite_elements": 0,
+            "unexpected_nonfinite_elements": 0,
+            "exact": false,
+            "max_abs_error": 0.1640625,
+            "mismatched_elements": 664
+          },
+          "next_state_img_q": {
+            "passed": true,
+            "finite": true,
+            "shape": [
+              2,
+              5,
+              6,
+              128,
+              256
+            ],
+            "dtype": "uint8",
+            "expected_nonfinite_elements": 0,
+            "unexpected_nonfinite_elements": 0,
+            "exact": true,
+            "max_abs_error": 0.0,
+            "mismatched_elements": 0
+          },
+          "next_state_desire_q": {
+            "passed": true,
+            "finite": true,
+            "shape": [
+              100,
+              1,
+              8
+            ],
+            "dtype": "float32",
+            "expected_nonfinite_elements": 0,
+            "unexpected_nonfinite_elements": 0,
+            "exact": true,
+            "max_abs_error": 0.0,
+            "mismatched_elements": 0
+          },
+          "next_state_feat_q": {
+            "passed": true,
+            "finite": true,
+            "shape": [
+              96,
+              1,
+              512
+            ],
+            "dtype": "float32",
+            "expected_nonfinite_elements": 0,
+            "unexpected_nonfinite_elements": 0,
+            "exact": false,
+            "max_abs_error": 0.0001220703125,
+            "mismatched_elements": 0
+          }
+        },
+        "first_difference": {
+          "index": 44,
+          "operator": "NhwcFusedConv",
+          "name": "model/node_conv2d_token_575",
+          "output": "model/node_conv2d",
+          "passed": true,
+          "finite": true,
+          "shape": [
+            1,
+            64,
+            128,
+            64
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 8.392333984375e-05,
+          "mismatched_elements": 0
+        },
+        "first_divergence": null,
+        "first_nonfinite": null
+      },
+      "CL": {
+        "final": {
+          "outputs": {
+            "passed": false,
+            "finite": true,
+            "shape": [
+              1,
+              2576
+            ],
+            "dtype": "float32",
+            "expected_nonfinite_elements": 0,
+            "unexpected_nonfinite_elements": 0,
+            "exact": false,
+            "max_abs_error": 0.0625,
+            "mismatched_elements": 422
+          },
+          "next_state_img_q": {
+            "passed": true,
+            "finite": true,
+            "shape": [
+              2,
+              5,
+              6,
+              128,
+              256
+            ],
+            "dtype": "uint8",
+            "expected_nonfinite_elements": 0,
+            "unexpected_nonfinite_elements": 0,
+            "exact": true,
+            "max_abs_error": 0.0,
+            "mismatched_elements": 0
+          },
+          "next_state_desire_q": {
+            "passed": true,
+            "finite": true,
+            "shape": [
+              100,
+              1,
+              8
+            ],
+            "dtype": "float32",
+            "expected_nonfinite_elements": 0,
+            "unexpected_nonfinite_elements": 0,
+            "exact": true,
+            "max_abs_error": 0.0,
+            "mismatched_elements": 0
+          },
+          "next_state_feat_q": {
+            "passed": true,
+            "finite": true,
+            "shape": [
+              96,
+              1,
+              512
+            ],
+            "dtype": "float32",
+            "expected_nonfinite_elements": 0,
+            "unexpected_nonfinite_elements": 0,
+            "exact": false,
+            "max_abs_error": 6.103515625e-05,
+            "mismatched_elements": 0
+          }
+        },
+        "first_difference": {
+          "index": 4,
+          "operator": "QuickGelu",
+          "name": "model/p_node_silu_2/QuickGeluFusion/",
+          "output": "InsertedPrecisionFreeCast_model/p_silu_2",
+          "passed": true,
+          "finite": true,
+          "shape": [
+            1,
+            512
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 5.960464477539063e-08,
+          "mismatched_elements": 0
+        },
+        "first_divergence": null,
+        "first_nonfinite": null
+      }
+    }
+  },
+  "vehicle_tx_enabled": false,
+  "engagement_allowed": false,
+  "explanation": "CUSTOM float-to-half casts now use the same subnormal-preserving RTE helpers as ALU casts. Matrix microchecks are exact; original full-model outputs still fail unchanged tolerances."
+}

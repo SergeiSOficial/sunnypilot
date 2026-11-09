@@ -15,8 +15,6 @@ if __name__ == '__main__':  # generating code
 else:
   from openpilot.selfdrive.controls.lib.longitudinal_mpc_lib.c_generated_code.acados_ocp_solver_pyx import AcadosOcpSolverCython
 
-from casadi import SX, vertcat
-
 MODEL_NAME = 'long'
 LONG_MPC_DIR = os.path.dirname(os.path.abspath(__file__))
 EXPORT_DIR = os.path.join(LONG_MPC_DIR, "c_generated_code")
@@ -85,6 +83,7 @@ def get_safe_obstacle_distance(v_ego, t_follow):
   return (v_ego**2) / (2 * COMFORT_BRAKE) + t_follow * v_ego + STOP_DISTANCE
 
 def gen_long_model():
+  from casadi import SX, vertcat
   model = AcadosModel()
   model.name = MODEL_NAME
 
@@ -118,6 +117,7 @@ def gen_long_model():
   return model
 
 def gen_long_ocp():
+  from casadi import vertcat
   ocp = AcadosOcp()
   ocp.model = gen_long_model()
 

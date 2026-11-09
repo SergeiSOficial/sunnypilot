@@ -1,0 +1,38 @@
+{
+  "scope": "diagnostic only: pinned MLAS logistic polynomial, sampled original intermediate inputs",
+  "models": {
+    "dmonitoring_model": [],
+    "driving_supercombo": [
+      {
+        "index": 4,
+        "node": "model/p_node_silu_2/QuickGeluFusion/",
+        "operator": "QuickGelu",
+        "dtype": "float32",
+        "samples": 512,
+        "exact": 512,
+        "max_abs_error": 0.0,
+        "mismatched": 0
+      },
+      {
+        "index": 19,
+        "node": "model/p_node_silu_1/QuickGeluFusion/",
+        "operator": "QuickGelu",
+        "dtype": "float32",
+        "samples": 512,
+        "exact": 512,
+        "max_abs_error": 0.0,
+        "mismatched": 0
+      },
+      {
+        "index": 432,
+        "node": "model/p_node_silu/QuickGeluFusion/",
+        "operator": "QuickGelu",
+        "dtype": "float32",
+        "samples": 4096,
+        "exact": 4096,
+        "max_abs_error": 0.0,
+        "mismatched": 0
+      }
+    ]
+  }
+}

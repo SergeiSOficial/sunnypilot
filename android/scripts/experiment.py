@@ -1,14 +1,51 @@
 #!/usr/bin/env python3
 """Run one ADB experiment with verified exits and a measured cool baseline."""
 import argparse
+from contextlib import contextmanager
+import fcntl
+import hashlib
 import json
 from pathlib import Path
 import re
 import subprocess
+import tempfile
 import time
 
 PACKAGE = "ai.sunnypilot.fold3"
 CAMERA_COMPAT_PACKAGE = "com.samsung.sunnypilot.fold3"
+
+
+@contextmanager
+def device_lease(serial):
+  """Exclude other host experiments before any ADB stop or forwarding changes."""
+  key = hashlib.sha256(serial.encode()).hexdigest()
+  path = Path(tempfile.gettempdir()) / ("sunnypilot-experiment-" + key + ".lock")
+  with path.open("a+") as lock:
+    try:
+      fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+    except BlockingIOError as exc:
+      raise RuntimeError("Another experiment owns device " + serial) from exc
+    try:
+      yield
+    finally:
+      fcntl.flock(lock, fcntl.LOCK_UN)
+
+
+def check_model_target(command, package):
+  # Both app variants may be installed. validate_models defaults to PACKAGE;
+  # hashing one variant while launching the other cannot establish provenance.
+  if not any(Path(part).name == "validate_models.py" for part in command):
+    return
+  target = PACKAGE
+  for index, part in enumerate(command):
+    if part == "--package":
+      if index + 1 >= len(command):
+        raise ValueError("Model validator --package requires a value")
+      target = command[index + 1]
+    elif part.startswith("--package="):
+      target = part.split("=", 1)[1]
+  if target != package:
+    raise ValueError(f"Model validator targets {target}, but experiment hashes {package}; pass matching --package arguments")
 
 
 def parse_state(processes, cameras, thermal, package=PACKAGE):
@@ -36,9 +73,26 @@ class Device:
                        self.command("shell", "dumpsys", "media.camera"),
                        self.command("shell", "dumpsys", "thermalservice"), self.package)
 
+  def assert_thermal_safe(self):
+    thermal = parse_state("", "", self.command("shell", "dumpsys", "thermalservice"), self.package)
+    if thermal["thermal_override"] or thermal["thermal_status"] is None or thermal["thermal_status"] >= 2:
+      raise RuntimeError(f"Unsafe or unavailable Android thermal state: {thermal['thermal_status']}")
+
   def artifact(self):
     path = self.command("shell", "pm", "path", self.package).strip().removeprefix("package:")
     return self.command("shell", "sha256sum", path).split()[0]
+
+  def forwards(self):
+    return [fields[1:] for line in self.command("forward", "--list").splitlines()
+            if len(fields := line.split()) == 3 and fields[0] == self.serial]
+
+  def clean_forwards(self, baseline):
+    removed = []
+    for local, remote in self.forwards():
+      if [local, remote] not in baseline:
+        self.command("forward", "--remove", local)
+        removed.append([local, remote])
+    return removed
 
   def stop(self):
     for name in dict.fromkeys((PACKAGE, CAMERA_COMPAT_PACKAGE, self.package)):
@@ -51,22 +105,31 @@ class Device:
         return state
       if time.monotonic() >= deadline:
         raise RuntimeError(f"Experiment did not exit cleanly: {state}")
+      # An activity can finish launching a worker after the initial force-stop.
+      # Reassert the stop while waiting rather than leaving that worker alive.
+      for name in dict.fromkeys((PACKAGE, CAMERA_COMPAT_PACKAGE, self.package)):
+        for package in (name, name + ".test"):
+          self.command("shell", "am", "force-stop", package)
       time.sleep(1)
 
   def cool(self, idle_seconds=30, timeout=900):
     start = time.monotonic()
+    normal_since = None
     while True:
       state = self.state()
+      now = time.monotonic()
       if state["processes"] or state["camera_owned"] or state["thermal_override"]:
         raise RuntimeError(f"Unclean or overridden baseline: {state}")
-      if (time.monotonic() - start >= idle_seconds and state["thermal_status"] == 0
-          and (self.serial.startswith("emulator-") or state["skin_c"] is not None and state["skin_c"] <= 32)):
-        return {**state, "idle_seconds": time.monotonic() - start}
-      if time.monotonic() - start >= timeout:
+      normal = (state["thermal_status"] == 0 and
+                (self.serial.startswith("emulator-") or state["skin_c"] is not None and state["skin_c"] <= 32))
+      normal_since = (now if normal_since is None else normal_since) if normal else None
+      if normal_since is not None and now - normal_since >= idle_seconds:
+        return {**state, "idle_seconds": now - start, "normal_thermal_seconds": now - normal_since}
+      if now - start >= timeout:
         raise TimeoutError(f"Device did not cool: {state}")
       time.sleep(5)
 
-  def start_runtime(self, simulation):
+  def start_runtime(self, simulation, full_chain=False):
     def read(name):
       try:
         return json.loads(self.command("shell", "run-as", self.package, "cat", f"files/{name}.json"))
@@ -75,44 +138,69 @@ class Device:
     previous_ui = read("ui-report").get("pid")
     launched = float(self.command("shell", "cat", "/proc/uptime").split()[0]) * 1000
     self.command("shell", "am", "start", "-n", self.package + "/ai.sunnypilot.fold3.MainActivity", "--ez", "run_runtime", "true",
-                 "--ez", "simulation", str(simulation).lower(), "--ez", "raylib", "true")
-    deadline = time.monotonic() + 60
+                 "--ez", "simulation", str(simulation).lower(), "--ez", "full_chain", str(full_chain).lower(), "--ez", "raylib", "true")
+    # Cold SwiftShader/UI startup on the emulator is a correctness precondition,
+    # not a physical device latency measurement. Keep its bound explicit.
+    startup_budget = 180 if self.serial.startswith("emulator-") else 60
+    startup_started = time.monotonic()
+    deadline = startup_started + startup_budget
     while time.monotonic() < deadline:
       manager, ui = read("manager"), read("ui-report")
       if manager.get("updated_elapsed_ms", -1) >= launched:
         if manager.get("vehicle_tx_enabled") is not False or manager.get("engagement_allowed") is not False:
           raise RuntimeError("Runtime transmission/engagement guard failed")
-        if (manager.get("simulation") == simulation and ui.get("pid") != previous_ui
+        if (manager.get("simulation") == simulation and manager.get("full_chain", False) == full_chain and ui.get("pid") != previous_ui
             and ui.get("status") == "running" and ui.get("full_upstream_ui") and ui.get("frames", 0) >= 30):
-          return {"manager_pid": manager["pid"], "ui_pid": ui["pid"], "simulation": simulation}
+          return {"manager_pid": manager["pid"], "ui_pid": ui["pid"], "simulation": simulation,
+                  "startup_elapsed_s": time.monotonic() - startup_started, "startup_budget_s": startup_budget}
       time.sleep(1)
     raise TimeoutError(f"Fresh runtime and Raylib UI did not become ready: manager={manager}, ui={ui}")
 
 
-def run(device, command, output, idle_seconds=30, runtime=None):
-  report = {"serial": device.serial, "command": command, "vehicle_tx_enabled": False, "status": "starting"}
+def _run_locked(device, command, output, idle_seconds=30, runtime=None):
+  report = {"serial": device.serial, "command": command, "vehicle_tx_enabled": False, "status": "starting",
+            "validation_status": "not_run", "isolation_status": "starting"}
   try:
+    report["forwards_before"] = device.forwards()
     report["before_cleanup"] = device.stop()
     report["apk_sha256"] = device.artifact()
     report["baseline"] = device.cool(idle_seconds)
+    report["apk_sha256_at_start"] = device.artifact()
+    if report["apk_sha256_at_start"] != report["apk_sha256"]:
+      raise RuntimeError("Installed APK changed during cooldown; experiment was not started")
     if runtime is not None:
-      report["runtime"] = device.start_runtime(runtime == "simulation")
+      report["runtime"] = device.start_runtime(runtime in ("simulation", "full-chain"), full_chain=runtime == "full-chain")
     report["returncode"] = subprocess.run(command, check=False).returncode
-    report["status"] = "passed" if report["returncode"] == 0 else "failed"
+    report["validation_status"] = "passed" if report["returncode"] == 0 else "failed"
+    report["status"] = report["validation_status"]
   except Exception as exc:
     report.update(status="failed", error=f"{type(exc).__name__}: {exc}")
   finally:
     try:
       report["after_cleanup"] = device.stop()
+      report["forwards_removed"] = device.clean_forwards(report.get("forwards_before", []))
       before = report.get("baseline", {}).get("camera_provider_processes")
       after = report["after_cleanup"].get("camera_provider_processes")
       if before is not None and after != before:
         report.update(status="failed", camera_provider_error="Camera service/provider restarted during experiment")
+      report["apk_sha256_after"] = device.artifact()
+      report["artifact_stable"] = ("apk_sha256_at_start" in report and
+                                    report["apk_sha256"] == report["apk_sha256_at_start"] == report["apk_sha256_after"])
+      if not report["artifact_stable"]:
+        report.update(status="failed", artifact_error="Installed APK changed or could not be verified throughout the experiment")
     except Exception as exc:
       report.update(status="failed", cleanup_error=f"{type(exc).__name__}: {exc}")
+    report["isolation_status"] = ("passed" if "baseline" in report and report.get("artifact_stable") and
+      not any(key in report for key in ("cleanup_error", "camera_provider_error", "artifact_error")) else "failed")
+    report["wrapper_status"] = report["status"]
     Path(output).parent.mkdir(parents=True, exist_ok=True)
     Path(output).write_text(json.dumps(report, indent=2) + "\n")
   return report
+
+
+def run(device, command, output, idle_seconds=30, runtime=None):
+  with device_lease(device.serial):
+    return _run_locked(device, command, output, idle_seconds, runtime)
 
 
 if __name__ == "__main__":
@@ -122,12 +210,16 @@ if __name__ == "__main__":
   parser.add_argument("--report", required=True)
   parser.add_argument("--package", default=PACKAGE)
   parser.add_argument("--idle-seconds", type=int, default=30, choices=range(30, 901))
-  parser.add_argument("--runtime", choices=("physical", "simulation"), help="Start a fresh manager and Raylib after cooldown")
+  parser.add_argument("--runtime", choices=("physical", "simulation", "full-chain"), help="Start a fresh manager and Raylib after cooldown")
   parser.add_argument("command", nargs=argparse.REMAINDER)
   args = parser.parse_args()
   command = args.command[1:] if args.command[:1] == ["--"] else args.command
   if not command:
     parser.error("A command after -- is required")
+  try:
+    check_model_target(command, args.package)
+  except ValueError as exc:
+    parser.error(str(exc))
   result = run(Device(args.serial, args.adb, args.package), command, args.report, args.idle_seconds, args.runtime)
   print(json.dumps(result, indent=2))
   raise SystemExit(0 if result["status"] == "passed" else 1)

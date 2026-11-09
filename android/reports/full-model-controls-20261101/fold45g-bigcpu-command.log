@@ -1,0 +1,79 @@
+taskset: failed to get pid 20819's affinity: Permission denied
+Traceback (most recent call last):
+  File "/Users/sergios/sunnypilot/android/reports/full-model-controls-20261101/controls_affinity_experiment.py", line 34, in <module>
+    before=command('shell','run-as',package,'taskset','-p',tid)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sergios/sunnypilot/android/reports/full-model-controls-20261101/controls_affinity_experiment.py", line 11, in command
+    return subprocess.check_output([adb,'-s',serial,*args],text=True,timeout=30)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sergios/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/subprocess.py", line 466, in check_output
+    return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sergios/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['/Users/sergios/Library/Android/sdk/platform-tools/adb', '-s', 'RFCR81Y1TBJ', 'shell', 'run-as', 'com.samsung.sunnypilot.fold3', 'taskset', '-p', '20819']' returned non-zero exit status 1.
+{
+  "serial": "RFCR81Y1TBJ",
+  "command": [
+    ".venv/bin/python",
+    "android/reports/full-model-controls-20261101/controls_affinity_experiment.py",
+    "android/reports/full-model-controls-20261101/fold45g-bigcpu.json"
+  ],
+  "vehicle_tx_enabled": false,
+  "status": "failed",
+  "validation_status": "failed",
+  "isolation_status": "passed",
+  "forwards_before": [],
+  "before_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 28.9,
+    "thermal_override": false
+  },
+  "apk_sha256": "7c2a8c298ec4710fca3170dc6e67e94a5e37ec0ebc6a3ce2c2189d29ee21758a",
+  "baseline": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 28.0,
+    "thermal_override": false,
+    "idle_seconds": 32.83569824998267,
+    "normal_thermal_seconds": 32.43520087498473
+  },
+  "apk_sha256_at_start": "7c2a8c298ec4710fca3170dc6e67e94a5e37ec0ebc6a3ce2c2189d29ee21758a",
+  "runtime": {
+    "manager_pid": 20614,
+    "ui_pid": 20791,
+    "simulation": true
+  },
+  "returncode": 1,
+  "after_cleanup": {
+    "processes": [],
+    "camera_provider_processes": [
+      "1707 cameraserver",
+      "23821 vendor.samsung.hardware.camera.provider@4.0-service_64"
+    ],
+    "camera_owned": false,
+    "thermal_status": 0,
+    "skin_c": 30.3,
+    "thermal_override": false
+  },
+  "forwards_removed": [
+    [
+      "tcp:54633",
+      "localabstract:sunnypilot_fold3_sim"
+    ]
+  ],
+  "apk_sha256_after": "7c2a8c298ec4710fca3170dc6e67e94a5e37ec0ebc6a3ce2c2189d29ee21758a",
+  "artifact_stable": true,
+  "wrapper_status": "failed"
+}

@@ -1,0 +1,132 @@
+{
+  "experiments": [
+    {
+      "name": "instrumentation",
+      "status": "passed",
+      "isolation_status": "passed",
+      "log": "emulator-candidate45zj-instrumentation-command.log"
+    },
+    {
+      "name": "chain-device-steady",
+      "status": "passed",
+      "isolation_status": "passed",
+      "log": "emulator-candidate45zj-chain-device-steady-command.log"
+    },
+    {
+      "name": "chain-device-faults",
+      "status": "passed",
+      "isolation_status": "passed",
+      "log": "emulator-candidate45zj-chain-device-faults-command.log"
+    },
+    {
+      "name": "lifecycle",
+      "status": "passed",
+      "isolation_status": "passed",
+      "log": "emulator-candidate45zj-lifecycle-command.log"
+    },
+    {
+      "name": "adb-faults",
+      "status": "passed",
+      "isolation_status": "passed",
+      "log": "emulator-candidate45zj-adb-faults-command.log"
+    },
+    {
+      "name": "ipc",
+      "status": "passed",
+      "isolation_status": "passed",
+      "log": "emulator-candidate45zj-ipc-command.log"
+    },
+    {
+      "name": "metadrive-cancel",
+      "status": "passed",
+      "isolation_status": "passed",
+      "log": "emulator-candidate45zj-metadrive-cancel-command.log"
+    },
+    {
+      "name": "metadrive-stale",
+      "status": "passed",
+      "isolation_status": "passed",
+      "log": "emulator-candidate45zj-metadrive-stale-command.log"
+    },
+    {
+      "name": "thermal",
+      "status": "passed",
+      "isolation_status": "passed",
+      "log": "emulator-candidate45zj-thermal-command.log"
+    },
+    {
+      "name": "camera-timing",
+      "status": "failed",
+      "isolation_status": "passed",
+      "log": "emulator-candidate45zj-camera-timing-command.log"
+    }
+  ],
+  "controls_ab": [
+    {
+      "candidate": "candidate45zg",
+      "apk_sha256": "28c7d37923f7b2537c56181a85bc406f65011030a37205f2bbc1524a0e10a3f7",
+      "fixture_sha256": "b5ea99327f0ffc121e5556d29b32d4ce8e6e855d14518f46a3f060ea38721f99",
+      "fixture_status": "passed",
+      "source_deadline_misses": 6,
+      "controls": {
+        "p99_work_ms": 1.25075,
+        "p99_complete_cycle_ms": 11.409459,
+        "mean_cycle_hz": 99.98193075147503,
+        "cycle_deadline_misses": 1306,
+        "scheduled_deadline_misses": 4,
+        "skipped_slots_total": 1,
+        "android_controls_gil_switch_interval_s": null
+      },
+      "p99_stages_ms": {
+        "input_wait_budget_ms": 0,
+        "cycle_interval_ms": 11.30075,
+        "scheduler_delay_ms": 1.568583,
+        "skipped_slots": 0,
+        "selfdrive_ipc_age_ms": 7.643416,
+        "input_handling_ms": 0.713584,
+        "pacing_wait_ms": 10.515875,
+        "computation_ms": 0.441542,
+        "publishing_ms": 0.783917,
+        "parameters_extensions_ms": 0.460042,
+        "cycle_before_reporting_ms": 11.395209,
+        "active_cycle_before_reporting_ms": 1.675625,
+        "release_to_completion_before_reporting_ms": 2.495299,
+        "reporting_ms": 0.126792,
+        "release_to_completion_ms": 2.543961
+      }
+    },
+    {
+      "candidate": "candidate45zi",
+      "apk_sha256": "292136b0d550e2a3bc3910221d33165613d7f9668610f282026041b156bef7f3",
+      "fixture_sha256": "b5ea99327f0ffc121e5556d29b32d4ce8e6e855d14518f46a3f060ea38721f99",
+      "fixture_status": "passed",
+      "source_deadline_misses": 86,
+      "controls": {
+        "p99_work_ms": 5.558833,
+        "p99_complete_cycle_ms": 16.249542,
+        "mean_cycle_hz": 98.50989014306555,
+        "cycle_deadline_misses": 1242,
+        "scheduled_deadline_misses": 18,
+        "skipped_slots_total": 40,
+        "android_controls_gil_switch_interval_s": 0.001
+      },
+      "p99_stages_ms": {
+        "input_wait_budget_ms": 0,
+        "cycle_interval_ms": 12.787875,
+        "scheduler_delay_ms": 3.624711,
+        "skipped_slots": 0,
+        "selfdrive_ipc_age_ms": 15.665625,
+        "input_handling_ms": 2.910042,
+        "pacing_wait_ms": 10.5195,
+        "computation_ms": 2.479875,
+        "publishing_ms": 2.917167,
+        "parameters_extensions_ms": 0.924041,
+        "cycle_before_reporting_ms": 16.163583,
+        "active_cycle_before_reporting_ms": 7.681375,
+        "release_to_completion_before_reporting_ms": 9.096046,
+        "reporting_ms": 0.391958,
+        "release_to_completion_ms": 9.20425
+      }
+    }
+  ]
+}

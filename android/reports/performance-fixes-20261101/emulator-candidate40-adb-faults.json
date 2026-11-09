@@ -1,0 +1,132 @@
+{
+  "serial": "emulator-5560",
+  "package": "com.samsung.sunnypilot.fold3",
+  "status": "passed",
+  "simulation": true,
+  "vehicle_tx_enabled": false,
+  "physical_vehicle_verified": false,
+  "rejected_cases": [
+    "can_service",
+    "output_service",
+    "sequence_gap",
+    "negative_age",
+    "service_payload_mismatch",
+    "malformed_cereal",
+    "invalid_base64",
+    "oversized_packet",
+    "malformed_json",
+    "non_simulation_handshake"
+  ],
+  "manager_before": {
+    "pid": 7004,
+    "simulation": true,
+    "full_chain": false,
+    "vehicle_tx_enabled": false,
+    "engagement_allowed": false,
+    "engagement_blocker": "camera calibration, model parity/performance and physical Panda qualification incomplete",
+    "processes": {
+      "Controls": {
+        "daemon": "controlsd",
+        "pid": 7026,
+        "phase": "waiting_for_selfdrive_state",
+        "error": "",
+        "last_progress_ms": 484634,
+        "ticks": 11,
+        "restarts": 0
+      },
+      "Monitoring": {
+        "daemon": "dmonitoringd",
+        "pid": 7027,
+        "phase": "waiting_for_driver_model",
+        "error": "",
+        "last_progress_ms": 484141,
+        "ticks": 4,
+        "restarts": 0
+      },
+      "Simulator": {
+        "daemon": "sim_bridge",
+        "pid": 7028,
+        "phase": "waiting_for_adb",
+        "error": "",
+        "last_progress_ms": 484252,
+        "ticks": 5,
+        "restarts": 0
+      }
+    },
+    "updated_elapsed_ms": 484733
+  },
+  "manager_after": {
+    "pid": 7004,
+    "simulation": true,
+    "full_chain": false,
+    "vehicle_tx_enabled": false,
+    "engagement_allowed": false,
+    "engagement_blocker": "camera calibration, model parity/performance and physical Panda qualification incomplete",
+    "processes": {
+      "Controls": {
+        "daemon": "controlsd",
+        "pid": 7026,
+        "phase": "waiting_for_selfdrive_state",
+        "error": "",
+        "last_progress_ms": 492534,
+        "ticks": 351,
+        "restarts": 0
+      },
+      "Monitoring": {
+        "daemon": "dmonitoringd",
+        "pid": 7027,
+        "phase": "waiting_for_driver_model",
+        "error": "",
+        "last_progress_ms": 492449,
+        "ticks": 27,
+        "restarts": 0
+      },
+      "Simulator": {
+        "daemon": "sim_bridge",
+        "pid": 7028,
+        "phase": "waiting_for_adb",
+        "error": "",
+        "last_progress_ms": 492762,
+        "ticks": 33,
+        "restarts": 0
+      }
+    },
+    "updated_elapsed_ms": 492775
+  },
+  "active_samples_before_disconnect": 67,
+  "input_freshness_samples": {
+    "active": 221,
+    "missing_model": 52,
+    "recovered": 67
+  },
+  "inactive_samples_after_disconnect": 74,
+  "relay": {
+    "daemon": "sim_bridge",
+    "pid": 7028,
+    "vehicle_tx_enabled": false,
+    "engagement_allowed": false,
+    "work_samples": 0,
+    "deadline_misses": 0,
+    "phase": "waiting_for_adb",
+    "simulation": true,
+    "accepted_packets": 437,
+    "rejected_sessions": 12,
+    "last_disconnect": "ADB stream disconnected",
+    "latest_input_services": [
+      "selfdriveState",
+      "selfdriveStateSP"
+    ],
+    "stale_control_inputs": [
+      "carState",
+      "driverStateV2",
+      "modelV2",
+      "selfdriveState",
+      "selfdriveStateSP"
+    ],
+    "car_fingerprint": "HYUNDAI_IONIQ_PHEV_2019",
+    "factory_acc": true,
+    "min_steer_speed_m_s": 14.305279731750488,
+    "physical_fingerprint_verified": false,
+    "p99_stages_ms": {}
+  }
+}

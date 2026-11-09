@@ -1,0 +1,1268 @@
+{
+  "diagnostic_only": true,
+  "qualified": false,
+  "vehicle_tx_enabled": false,
+  "trace_sha256": "2f8dc5046053fc03a56d2ba18c53446aed74f75f418c81919977744d3f543e58",
+  "checks": [
+    {
+      "operator": "Cast_378",
+      "original_node": "InsertedPrecisionFreeCast_mul",
+      "original_op_type": "Cast",
+      "dtype": "float32",
+      "input_shape": [
+        1,
+        3
+      ],
+      "fused_relu": false,
+      "section_sha256": "e7f6aaff92e98e6b04597993e1b8bdcd7fa62fc65a3518f5980cb119887db68c",
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          3
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "exact_elements": 3,
+      "elements": 3
+    },
+    {
+      "operator": "linear_121",
+      "original_node": "node_linear_45",
+      "original_op_type": "Gemm",
+      "dtype": "float16",
+      "input_shape": [
+        1,
+        515
+      ],
+      "fused_relu": false,
+      "section_sha256": "24fdfbbff7d46c2d71d8ac1f6e88c0a3231f37d9d1a907a69196a16025c96015",
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          96
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "exact_elements": 96,
+      "elements": 96
+    },
+    {
+      "operator": "Cast_381",
+      "original_node": "InsertedPrecisionFreeCast_linear_45",
+      "original_op_type": "Cast",
+      "dtype": "float16",
+      "input_shape": [
+        1,
+        96
+      ],
+      "fused_relu": false,
+      "section_sha256": "2677aa92228f47d44c8afcbb1394ebc38f06587b01d2059170f90362c868b0f2",
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          96
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "exact_elements": 96,
+      "elements": 96
+    },
+    {
+      "operator": "fcrelu_10",
+      "original_node": "fused node_linear_46",
+      "original_op_type": "Gemm",
+      "dtype": "float32",
+      "input_shape": [
+        1,
+        96
+      ],
+      "fused_relu": true,
+      "section_sha256": "9bf4f5030c06a3340a3d02bdd7179520743e2ad0951501b6583605bc4f575210",
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          64
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "exact_elements": 64,
+      "elements": 64
+    },
+    {
+      "operator": "fcrelu_11",
+      "original_node": "fused node_linear_47",
+      "original_op_type": "Gemm",
+      "dtype": "float32",
+      "input_shape": [
+        1,
+        64
+      ],
+      "fused_relu": true,
+      "section_sha256": "185df908c77e4e212a99a55fc286dbf6f6cbcf971ad86f60f5432eb606fddb7e",
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          32
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "exact_elements": 32,
+      "elements": 32
+    },
+    {
+      "operator": "Cast_387",
+      "original_node": "InsertedPrecisionFreeCast_relu_35",
+      "original_op_type": "Cast",
+      "dtype": "float32",
+      "input_shape": [
+        1,
+        32
+      ],
+      "fused_relu": false,
+      "section_sha256": "d96287b55b8a7abddde89215e59cfc0043cfde3e8703a9f88cdaecba64da3833",
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          32
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "exact_elements": 32,
+      "elements": 32
+    },
+    {
+      "operator": "linear_124",
+      "original_node": "node_linear_48",
+      "original_op_type": "Gemm",
+      "dtype": "float16",
+      "input_shape": [
+        1,
+        32
+      ],
+      "fused_relu": false,
+      "section_sha256": "95adff5a9abafbc6ac9a4585de8b61f94d94a39bd1aba0cd1afe9a91ed84104d",
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          1
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "exact_elements": 1,
+      "elements": 1
+    },
+    {
+      "operator": "linear_125",
+      "original_node": "node_linear_41",
+      "original_op_type": "Gemm",
+      "dtype": "float16",
+      "input_shape": [
+        1,
+        515
+      ],
+      "fused_relu": false,
+      "section_sha256": "6552f54efe80336f0601cdcb0b5b0880f4521d6cfdbd457a7e9f9bccdd4f5583",
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          128
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "exact_elements": 128,
+      "elements": 128
+    },
+    {
+      "operator": "Cast_390",
+      "original_node": "InsertedPrecisionFreeCast_linear_41",
+      "original_op_type": "Cast",
+      "dtype": "float16",
+      "input_shape": [
+        1,
+        128
+      ],
+      "fused_relu": false,
+      "section_sha256": "17715445313f346b58e90b93067c0062da47fb14079830c8018c0d272e8bbd7b",
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          128
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "exact_elements": 128,
+      "elements": 128
+    },
+    {
+      "operator": "fcrelu_12",
+      "original_node": "fused node_linear_42",
+      "original_op_type": "Gemm",
+      "dtype": "float32",
+      "input_shape": [
+        1,
+        128
+      ],
+      "fused_relu": true,
+      "section_sha256": "b6871e1bb9f04609d1a87e4c4c52045bf40d1c539685c25cdc84a14610fc873e",
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          64
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "exact_elements": 64,
+      "elements": 64
+    },
+    {
+      "operator": "fcrelu_13",
+      "original_node": "fused node_linear_43",
+      "original_op_type": "Gemm",
+      "dtype": "float32",
+      "input_shape": [
+        1,
+        64
+      ],
+      "fused_relu": true,
+      "section_sha256": "23ab175f8b9363771db0e1fc1413949c2284063eff04ed44e84ef8d8360af7a8",
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          32
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "exact_elements": 32,
+      "elements": 32
+    },
+    {
+      "operator": "Cast_396",
+      "original_node": "InsertedPrecisionFreeCast_relu_32",
+      "original_op_type": "Cast",
+      "dtype": "float32",
+      "input_shape": [
+        1,
+        32
+      ],
+      "fused_relu": false,
+      "section_sha256": "926920aa16106de390eae33e953dc7c29a632bdc0b8f8eecc9005dc37424ccd2",
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          32
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "exact_elements": 32,
+      "elements": 32
+    },
+    {
+      "operator": "linear_128",
+      "original_node": "node_linear_44",
+      "original_op_type": "Gemm",
+      "dtype": "float16",
+      "input_shape": [
+        1,
+        32
+      ],
+      "fused_relu": false,
+      "section_sha256": "96a07071689b0af79f142d606215ed7a3bba589e52048e496991c02f8be67bdc",
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          1
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "exact_elements": 1,
+      "elements": 1
+    },
+    {
+      "operator": "Cast_399",
+      "original_node": "InsertedPrecisionFreeCast_linear_37",
+      "original_op_type": "Cast",
+      "dtype": "float16",
+      "input_shape": [
+        1,
+        32
+      ],
+      "fused_relu": false,
+      "section_sha256": "2083d41a231c334fc49eecd1c9192a5669989522c4ccfcf75454c81515f30d0b",
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          32
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "exact_elements": 32,
+      "elements": 32
+    },
+    {
+      "operator": "fcrelu_14",
+      "original_node": "fused node_linear_38",
+      "original_op_type": "Gemm",
+      "dtype": "float32",
+      "input_shape": [
+        1,
+        32
+      ],
+      "fused_relu": true,
+      "section_sha256": "06918d804fff150757f8337f86911eaf88bb29a1b78324515699fcea5e8a4893",
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          24
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "exact_elements": 24,
+      "elements": 24
+    },
+    {
+      "operator": "fcrelu_15",
+      "original_node": "fused node_linear_39",
+      "original_op_type": "Gemm",
+      "dtype": "float32",
+      "input_shape": [
+        1,
+        24
+      ],
+      "fused_relu": true,
+      "section_sha256": "1bf2d611ff6d97900ab32391899f3d5b0c84aae93fefbe8369e35beb35ffb95c",
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          16
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "exact_elements": 16,
+      "elements": 16
+    },
+    {
+      "operator": "Cast_405",
+      "original_node": "InsertedPrecisionFreeCast_relu_29",
+      "original_op_type": "Cast",
+      "dtype": "float32",
+      "input_shape": [
+        1,
+        16
+      ],
+      "fused_relu": false,
+      "section_sha256": "9a5a75bbc4a7b57db59d0f6d36b549698f5fc40ef6202af3e97a077705fda119",
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          16
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "exact_elements": 16,
+      "elements": 16
+    },
+    {
+      "operator": "linear_132",
+      "original_node": "node_linear_40",
+      "original_op_type": "Gemm",
+      "dtype": "float16",
+      "input_shape": [
+        1,
+        16
+      ],
+      "fused_relu": false,
+      "section_sha256": "2ef01c0545080368b90d0744fe83fcb69122f239b3e1c1801eadef863d3f4337",
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          1
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "exact_elements": 1,
+      "elements": 1
+    },
+    {
+      "operator": "Cast_408",
+      "original_node": "InsertedPrecisionFreeCast_linear_33",
+      "original_op_type": "Cast",
+      "dtype": "float16",
+      "input_shape": [
+        1,
+        64
+      ],
+      "fused_relu": false,
+      "section_sha256": "bc3a80206d28ae37e47ad32625cde294026701f84bf021ed466b679ba5fa95ef",
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          64
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "exact_elements": 64,
+      "elements": 64
+    },
+    {
+      "operator": "fcrelu_16",
+      "original_node": "fused node_linear_34",
+      "original_op_type": "Gemm",
+      "dtype": "float32",
+      "input_shape": [
+        1,
+        64
+      ],
+      "fused_relu": true,
+      "section_sha256": "f1e1e983a05aa588196145b2bee425617736a4d4bdb40f0267b66515b72e5710",
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          48
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "exact_elements": 48,
+      "elements": 48
+    },
+    {
+      "operator": "fcrelu_17",
+      "original_node": "fused node_linear_35",
+      "original_op_type": "Gemm",
+      "dtype": "float32",
+      "input_shape": [
+        1,
+        48
+      ],
+      "fused_relu": true,
+      "section_sha256": "f4e4f57ae1add704ff8874fdc6dd986174d9740b233bc26265161b67f6f6ae9a",
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          32
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "exact_elements": 32,
+      "elements": 32
+    },
+    {
+      "operator": "Cast_414",
+      "original_node": "InsertedPrecisionFreeCast_relu_26",
+      "original_op_type": "Cast",
+      "dtype": "float32",
+      "input_shape": [
+        1,
+        32
+      ],
+      "fused_relu": false,
+      "section_sha256": "3d4517560a0a27ebe679e522064191a72781648a7af8b61e2dfa27d0e8c486fa",
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          32
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "exact_elements": 32,
+      "elements": 32
+    },
+    {
+      "operator": "linear_136",
+      "original_node": "node_linear_36",
+      "original_op_type": "Gemm",
+      "dtype": "float16",
+      "input_shape": [
+        1,
+        32
+      ],
+      "fused_relu": false,
+      "section_sha256": "27e04ec7f4831416485b360df12619c4454206ee24e73acfc564cf55020d9a23",
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          12
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "exact_elements": 12,
+      "elements": 12
+    },
+    {
+      "operator": "linear_137",
+      "original_node": "node_linear_21",
+      "original_op_type": "Gemm",
+      "dtype": "float16",
+      "input_shape": [
+        1,
+        515
+      ],
+      "fused_relu": false,
+      "section_sha256": "099ba43dac56638ad74b4c052eb33af18ef822a543ef9a7764dc04c76a5bb331",
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          96
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "exact_elements": 96,
+      "elements": 96
+    },
+    {
+      "operator": "Cast_417",
+      "original_node": "InsertedPrecisionFreeCast_linear_21",
+      "original_op_type": "Cast",
+      "dtype": "float16",
+      "input_shape": [
+        1,
+        96
+      ],
+      "fused_relu": false,
+      "section_sha256": "a2a088dee2ba02e7ce2827dabd2b5ec5aa26d09dd4ea6c9ab355fbe1d2253b6e",
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          96
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "exact_elements": 96,
+      "elements": 96
+    },
+    {
+      "operator": "fcrelu_18",
+      "original_node": "fused node_linear_22",
+      "original_op_type": "Gemm",
+      "dtype": "float32",
+      "input_shape": [
+        1,
+        96
+      ],
+      "fused_relu": true,
+      "section_sha256": "0d9c9e48b89464651b62436c4380a5196cdc2188bff41c15cc5d22f6ed4d0193",
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          64
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "exact_elements": 64,
+      "elements": 64
+    },
+    {
+      "operator": "fcrelu_19",
+      "original_node": "fused node_linear_23",
+      "original_op_type": "Gemm",
+      "dtype": "float32",
+      "input_shape": [
+        1,
+        64
+      ],
+      "fused_relu": true,
+      "section_sha256": "0ee75585011b6a98b93470b95439db09eb44bf9ad9badb3eee2c426d9153c693",
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          32
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "exact_elements": 32,
+      "elements": 32
+    },
+    {
+      "operator": "Cast_423",
+      "original_node": "InsertedPrecisionFreeCast_relu_17",
+      "original_op_type": "Cast",
+      "dtype": "float32",
+      "input_shape": [
+        1,
+        32
+      ],
+      "fused_relu": false,
+      "section_sha256": "ea8718dc489b78b88d8e9938718b420f1934b2900d327f2a94436e08eb4a8f23",
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          32
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "exact_elements": 32,
+      "elements": 32
+    },
+    {
+      "operator": "linear_140",
+      "original_node": "node_linear_24",
+      "original_op_type": "Gemm",
+      "dtype": "float16",
+      "input_shape": [
+        1,
+        32
+      ],
+      "fused_relu": false,
+      "section_sha256": "0f9f3309fea8e9f6b16659d2bbac190148ebb647198643fe613b21c8b489c975",
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          1
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "exact_elements": 1,
+      "elements": 1
+    },
+    {
+      "operator": "linear_141",
+      "original_node": "node_linear_17",
+      "original_op_type": "Gemm",
+      "dtype": "float16",
+      "input_shape": [
+        1,
+        515
+      ],
+      "fused_relu": false,
+      "section_sha256": "4bd9e343a1578fc78c6f2735961d31c0448b570acff47d9b960d2d21e5611780",
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          128
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "exact_elements": 128,
+      "elements": 128
+    },
+    {
+      "operator": "Cast_426",
+      "original_node": "InsertedPrecisionFreeCast_linear_17",
+      "original_op_type": "Cast",
+      "dtype": "float16",
+      "input_shape": [
+        1,
+        128
+      ],
+      "fused_relu": false,
+      "section_sha256": "609d414c509e0251f9b06a4b4c61983d794d934d83aeab8284e5488f02b2d6ba",
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          128
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "exact_elements": 128,
+      "elements": 128
+    },
+    {
+      "operator": "fcrelu_20",
+      "original_node": "fused node_linear_18",
+      "original_op_type": "Gemm",
+      "dtype": "float32",
+      "input_shape": [
+        1,
+        128
+      ],
+      "fused_relu": true,
+      "section_sha256": "146a73f43a7524a87a29b04f4f70e180a1279a55e1cfa6d07057a941727e185b",
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          64
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "exact_elements": 64,
+      "elements": 64
+    },
+    {
+      "operator": "fcrelu_21",
+      "original_node": "fused node_linear_19",
+      "original_op_type": "Gemm",
+      "dtype": "float32",
+      "input_shape": [
+        1,
+        64
+      ],
+      "fused_relu": true,
+      "section_sha256": "990f55c869b825e76294925aeeab76b9d002874902bff335a58545e52eea27a9",
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          32
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "exact_elements": 32,
+      "elements": 32
+    },
+    {
+      "operator": "Cast_432",
+      "original_node": "InsertedPrecisionFreeCast_relu_14",
+      "original_op_type": "Cast",
+      "dtype": "float32",
+      "input_shape": [
+        1,
+        32
+      ],
+      "fused_relu": false,
+      "section_sha256": "193f168a24c97de0581caeaf36294c69bc8302121f0d6b8dcd12bb6bad7f1483",
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          32
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "exact_elements": 32,
+      "elements": 32
+    },
+    {
+      "operator": "linear_144",
+      "original_node": "node_linear_20",
+      "original_op_type": "Gemm",
+      "dtype": "float16",
+      "input_shape": [
+        1,
+        32
+      ],
+      "fused_relu": false,
+      "section_sha256": "97063fb01accb7d7a69302cb61c8588e5c849403d73eb8187dc19232e6e856a2",
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          1
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "exact_elements": 1,
+      "elements": 1
+    },
+    {
+      "operator": "Cast_435",
+      "original_node": "InsertedPrecisionFreeCast_linear_13",
+      "original_op_type": "Cast",
+      "dtype": "float16",
+      "input_shape": [
+        1,
+        32
+      ],
+      "fused_relu": false,
+      "section_sha256": "415f73d44fd413c18be480ecbe44853cef840b2bb28fd8d2f8029a8a62785c38",
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          32
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "exact_elements": 32,
+      "elements": 32
+    },
+    {
+      "operator": "fcrelu_22",
+      "original_node": "fused node_linear_14",
+      "original_op_type": "Gemm",
+      "dtype": "float32",
+      "input_shape": [
+        1,
+        32
+      ],
+      "fused_relu": true,
+      "section_sha256": "5f24011f050051ce8015a9a598a9e0e0f455de03cdd9121e5f006438e84094f0",
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          24
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "exact_elements": 24,
+      "elements": 24
+    },
+    {
+      "operator": "fcrelu_23",
+      "original_node": "fused node_linear_15",
+      "original_op_type": "Gemm",
+      "dtype": "float32",
+      "input_shape": [
+        1,
+        24
+      ],
+      "fused_relu": true,
+      "section_sha256": "ec6bb4f8354fae3a0a7b9d3e93c3b802b0776362ecc4eb6e50e692eaac496665",
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          16
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "exact_elements": 16,
+      "elements": 16
+    },
+    {
+      "operator": "Cast_441",
+      "original_node": "InsertedPrecisionFreeCast_relu_11",
+      "original_op_type": "Cast",
+      "dtype": "float32",
+      "input_shape": [
+        1,
+        16
+      ],
+      "fused_relu": false,
+      "section_sha256": "44dc69548c7f6a0d2eae1c7ac50e003d2fc4a100a4862041278a52dff4cd4a7b",
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          16
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "exact_elements": 16,
+      "elements": 16
+    },
+    {
+      "operator": "linear_148",
+      "original_node": "node_linear_16",
+      "original_op_type": "Gemm",
+      "dtype": "float16",
+      "input_shape": [
+        1,
+        16
+      ],
+      "fused_relu": false,
+      "section_sha256": "b201236bb47f233cd21cd6f4c8c3186e8e848715cdfdcb3f687335ef1820e8ca",
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          1
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "exact_elements": 1,
+      "elements": 1
+    },
+    {
+      "operator": "Cast_444",
+      "original_node": "InsertedPrecisionFreeCast_linear_9",
+      "original_op_type": "Cast",
+      "dtype": "float16",
+      "input_shape": [
+        1,
+        64
+      ],
+      "fused_relu": false,
+      "section_sha256": "13f5cc6bc73a3b81796496dc4d5839068f77a44f34cd6df22190db2d7b584618",
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          64
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "exact_elements": 64,
+      "elements": 64
+    },
+    {
+      "operator": "fcrelu_24",
+      "original_node": "fused node_linear_10",
+      "original_op_type": "Gemm",
+      "dtype": "float32",
+      "input_shape": [
+        1,
+        64
+      ],
+      "fused_relu": true,
+      "section_sha256": "cf9f1fc4d6e2812cd33d6d8749f9e024db871e17d7074811b29b7eee00a6a656",
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          48
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "exact_elements": 48,
+      "elements": 48
+    },
+    {
+      "operator": "fcrelu_25",
+      "original_node": "fused node_linear_11",
+      "original_op_type": "Gemm",
+      "dtype": "float32",
+      "input_shape": [
+        1,
+        48
+      ],
+      "fused_relu": true,
+      "section_sha256": "e7783776eea59e1f39abc3927113e745e54f9f8f4a126ca60d1ee4b04c554883",
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          32
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "exact_elements": 32,
+      "elements": 32
+    },
+    {
+      "operator": "Cast_450",
+      "original_node": "InsertedPrecisionFreeCast_relu_8",
+      "original_op_type": "Cast",
+      "dtype": "float32",
+      "input_shape": [
+        1,
+        32
+      ],
+      "fused_relu": false,
+      "section_sha256": "af5497aca6d94c49058ef4a56bceaf87c84da638e3579ed353660d445ebabc29",
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          32
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "exact_elements": 32,
+      "elements": 32
+    },
+    {
+      "operator": "linear_152",
+      "original_node": "node_linear_12",
+      "original_op_type": "Gemm",
+      "dtype": "float16",
+      "input_shape": [
+        1,
+        32
+      ],
+      "fused_relu": false,
+      "section_sha256": "72667a06b5315a10f0b88550d2ee9c0bac8f9497033683aafc49975e090ba094",
+      "parity": {
+        "passed": true,
+        "finite": true,
+        "shape": [
+          1,
+          12
+        ],
+        "dtype": "float32",
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": true,
+        "max_abs_error": 0.0,
+        "mismatched_elements": 0
+      },
+      "exact_elements": 12,
+      "elements": 12
+    }
+  ]
+}

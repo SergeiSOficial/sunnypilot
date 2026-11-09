@@ -1,0 +1,640 @@
+{
+  "candidate": "candidate32",
+  "vehicle_tx_enabled": false,
+  "engagement_allowed": false,
+  "scope": "Observed separately cooled Fold 3 runs, not a controlled A/B benchmark. Same original models/goldens/tolerances. Serialized kernel checkpoints are diagnostic only.",
+  "tolerances": {
+    "rtol": 0.001,
+    "atol": 0.0001
+  },
+  "runs": {
+    "candidate29": {
+      "apk_sha256": "04cf8905009abe6d502048b90fd94a6065d49c7b6967c9230603bffbe40e6b39",
+      "models": {
+        "driving_supercombo": {
+          "numerical_status": "failed",
+          "timing": {
+            "samples": 100,
+            "performance_status": "failed",
+            "work_p50_ms": 942.715182,
+            "work_p99_ms": 1121.54721104,
+            "work_max_ms": 1132.506614,
+            "deadline_misses_50ms": 100
+          },
+          "sequences": {
+            "seed42": {
+              "frames": 32,
+              "passed": false,
+              "failed_frames": 2
+            },
+            "seed7": {
+              "frames": 32,
+              "passed": false,
+              "failed_frames": 1
+            },
+            "seed123": {
+              "frames": 32,
+              "passed": false,
+              "failed_frames": 2
+            },
+            "camera-replay": {
+              "frames": 60,
+              "passed": true,
+              "failed_frames": 0
+            }
+          },
+          "source_report": "fold-models-road-candidate29.json"
+        },
+        "dmonitoring_model": {
+          "numerical_status": "passed",
+          "timing": {
+            "samples": 100,
+            "performance_status": "failed",
+            "work_p50_ms": 548.1945835,
+            "work_p99_ms": 605.0626159999999,
+            "work_max_ms": 605.527916,
+            "deadline_misses_50ms": 100
+          },
+          "sequences": {
+            "seed42": {
+              "frames": 32,
+              "passed": true,
+              "failed_frames": 0
+            },
+            "seed7": {
+              "frames": 32,
+              "passed": true,
+              "failed_frames": 0
+            },
+            "seed123": {
+              "frames": 32,
+              "passed": true,
+              "failed_frames": 0
+            },
+            "camera-replay": {
+              "frames": 60,
+              "passed": true,
+              "failed_frames": 0
+            }
+          },
+          "source_report": "fold-models-driver-candidate29.json"
+        }
+      },
+      "controls": {
+        "fold": {
+          "status": "passed",
+          "source_mean_hz": 99.99605334903568,
+          "source_exchange_work_p99_ms": 15.699667012086138,
+          "worker_failures": {},
+          "controls": {
+            "mean_cycle_hz": 100.40959128184927,
+            "work_samples": 2737,
+            "deadline_misses": 18,
+            "cycle_deadline_misses": 1241,
+            "p99_work_ms": 9.332657,
+            "p99_complete_cycle_ms": 23.988489,
+            "p99_stages_ms": {
+              "input_handling_ms": 18.719583,
+              "computation_ms": 4.792657,
+              "publishing_ms": 5.71875,
+              "parameters_extensions_ms": 3.58776,
+              "cycle_before_reporting_ms": 23.324792,
+              "reporting_ms": 2.07651
+            },
+            "updated_input_samples": 2619,
+            "work_timing_excludes_input_wait": true
+          }
+        },
+        "emulator": {
+          "status": "passed",
+          "source_mean_hz": 99.99425449679485,
+          "source_exchange_work_p99_ms": 5.193666991544887,
+          "worker_failures": {},
+          "controls": {
+            "mean_cycle_hz": 100.191691327364,
+            "work_samples": 2670,
+            "deadline_misses": 0,
+            "cycle_deadline_misses": 1335,
+            "p99_work_ms": 1.704417,
+            "p99_complete_cycle_ms": 16.110708,
+            "p99_stages_ms": {
+              "input_handling_ms": 15.466416,
+              "computation_ms": 0.891542,
+              "publishing_ms": 1.183292,
+              "parameters_extensions_ms": 0.332,
+              "cycle_before_reporting_ms": 16.04125,
+              "reporting_ms": 0.70525
+            },
+            "updated_input_samples": 2656,
+            "work_timing_excludes_input_wait": true
+          }
+        }
+      },
+      "vision": {
+        "transport_status": "passed",
+        "status": "blocked",
+        "composite_frames": 901,
+        "composite_fps": 29.96997074864921,
+        "rear_preview_frames": 901,
+        "front_frames": 900,
+        "front_fps": 29.958869039141298,
+        "delivery_age_p99_ns": 108292317,
+        "acquisition_age_p99_ns": 107654244,
+        "preview_delivery_age_p99_ns": 125495233,
+        "preview_acquisition_age_p99_ns": 120094243,
+        "front_delivery_age_p99_ns": 100945433,
+        "front_acquisition_age_p99_ns": 100621943,
+        "preview_readback_p99_ns": 10809115,
+        "preview_render_p99_ns": 2936719,
+        "preview_submit_p99_ns": 4785625,
+        "preview_cpu_conversion_p99_ns": 0,
+        "preview_hash_p99_ns": 1862812,
+        "preview_publication_p99_ns": 3263385,
+        "preview_dropped_readbacks": 0,
+        "packing_errors": 0,
+        "timestamp_errors": 0,
+        "front_timestamp_errors": 0,
+        "rear_candidate_skew_p99_ns": 0,
+        "rear_candidate_overlap_ns": 30030059340,
+        "preview_changed_frames": 898,
+        "thumbnail_changed_frames": 900,
+        "validation_status": "failed",
+        "error": "AssertionError: Insufficient fresh preview samples: {'road': 0, 'driver': 3}",
+        "recoveries": 0,
+        "ui": {
+          "pid": 21102,
+          "backend": "Raylib Android NativeActivity",
+          "vehicle_tx_enabled": false,
+          "status": "running",
+          "full_upstream_ui": true,
+          "camera_preview": [
+            {
+              "stream": "road",
+              "frame_id": 901,
+              "age_ms": 1297.437497,
+              "fresh": false
+            },
+            {
+              "stream": "driver",
+              "frame_id": 900,
+              "age_ms": 1230.820109,
+              "fresh": false
+            }
+          ],
+          "frames": 960,
+          "mean_fps": 29.783810028416934,
+          "width": 2160,
+          "height": 1080,
+          "surface_size": [
+            2289,
+            840
+          ],
+          "last_frame_seconds": 0.03333479166030884,
+          "last_cpu_seconds": 0.0015404169826069847,
+          "recent_p99_frame_ms": 33.828698098659515,
+          "recent_p99_cpu_ms": 14.463383995462209
+        },
+        "independent_rear_identity": "blocked: lens-cover evidence deferred; shared parent timestamps do not prove identity",
+        "models": {
+          "modeld": {
+            "backend": "ORT CPU, 2 threads; OpenCL qualification blocked",
+            "work_samples": 1,
+            "computed_frames": 1,
+            "published_frames": 0,
+            "late_outputs": 1,
+            "p99_work_ms": 69.755052,
+            "deadline_misses": 1,
+            "phase": "waiting_for_synchronized_frames"
+          },
+          "dmonitoringmodeld": {
+            "backend": "ORT CPU, 2 threads; OpenCL qualification blocked",
+            "work_samples": 435,
+            "computed_frames": 435,
+            "published_frames": 4,
+            "late_outputs": 431,
+            "p99_work_ms": 38.280261,
+            "deadline_misses": 1,
+            "phase": "waiting_for_synchronized_frames"
+          }
+        }
+      },
+      "emulator_camera_timing": {
+        "status": "failed",
+        "streams": [
+          {
+            "frames": 288,
+            "fps": 28.92042362274161,
+            "timestamp_errors": 0,
+            "delivery_future_timestamps": 288,
+            "delivery_age_p99_ns": -27116448,
+            "acquisition_age_p99_ns": -27353635
+          }
+        ]
+      }
+    },
+    "candidate31": {
+      "apk_sha256": "fb10875324bd04fe99342516d060eb59689829f8cf8196d7e5b1202bc0832302",
+      "models": {
+        "driving_supercombo": {
+          "numerical_status": "passed",
+          "timing": {
+            "performance_status": "failed",
+            "samples": 100,
+            "work_p50_ms": 941.2316925,
+            "work_p99_ms": 1133.89052193,
+            "deadline_misses_50ms": 100
+          },
+          "sequences": {
+            "seed42": {
+              "passed": true,
+              "frames": 32
+            },
+            "seed7": {
+              "passed": true,
+              "frames": 32
+            },
+            "seed123": {
+              "passed": true,
+              "frames": 32
+            },
+            "camera-replay": {
+              "passed": true,
+              "frames": 60
+            }
+          },
+          "source_report": "fold-models-road-candidate31.json"
+        },
+        "dmonitoring_model": {
+          "numerical_status": "passed",
+          "timing": {
+            "performance_status": "failed",
+            "samples": 100,
+            "work_p50_ms": 497.36877549999997,
+            "work_p99_ms": 560.53559307,
+            "deadline_misses_50ms": 100
+          },
+          "sequences": {
+            "seed42": {
+              "passed": true,
+              "frames": 32
+            },
+            "seed7": {
+              "passed": true,
+              "frames": 32
+            },
+            "seed123": {
+              "passed": true,
+              "frames": 32
+            },
+            "camera-replay": {
+              "passed": true,
+              "frames": 60
+            }
+          },
+          "source_report": "fold-models-driver-candidate31.json"
+        }
+      },
+      "remaining_intermediate_tests": "Stopped after complete original-model gates to validate final candidate32 instead; candidate31-intermediate-stop.json retains the interrupted experiment."
+    },
+    "candidate32": {
+      "apk_sha256": "a62b55187b2a60a15c9b7d34cb5e6e462cc00c353971d8d126940960861a2810",
+      "models": {
+        "driving_supercombo": {
+          "numerical_status": "passed",
+          "timing": {
+            "performance_status": "failed",
+            "samples": 100,
+            "work_p50_ms": 850.808906,
+            "work_p99_ms": 1021.53460205,
+            "work_max_ms": 1021.737656,
+            "deadline_misses_50ms": 100
+          },
+          "sequences": {
+            "seed42": {
+              "passed": true,
+              "frames": 32
+            },
+            "seed7": {
+              "passed": true,
+              "frames": 32
+            },
+            "seed123": {
+              "passed": true,
+              "frames": 32
+            },
+            "camera-replay": {
+              "passed": true,
+              "frames": 60
+            }
+          },
+          "source_report": "fold-models-road-candidate32.json"
+        },
+        "dmonitoring_model": {
+          "numerical_status": "passed",
+          "timing": {
+            "performance_status": "failed",
+            "samples": 100,
+            "work_p50_ms": 496.04755250000005,
+            "work_p99_ms": 559.4138630799999,
+            "work_max_ms": 560.884219,
+            "deadline_misses_50ms": 100
+          },
+          "sequences": {
+            "seed42": {
+              "passed": true,
+              "frames": 32
+            },
+            "seed7": {
+              "passed": true,
+              "frames": 32
+            },
+            "seed123": {
+              "passed": true,
+              "frames": 32
+            },
+            "camera-replay": {
+              "passed": true,
+              "frames": 60
+            }
+          },
+          "source_report": "fold-models-driver-candidate32.json"
+        }
+      },
+      "controls": {
+        "fold": {
+          "status": "passed",
+          "source_mean_hz": 99.99622861225978,
+          "source_exchange_work_p99_ms": 15.328499983297661,
+          "worker_failures": {},
+          "controls": {
+            "mean_cycle_hz": 100.87414828243877,
+            "work_samples": 2701,
+            "deadline_misses": 24,
+            "cycle_deadline_misses": 1213,
+            "p99_work_ms": 9.68349,
+            "p99_complete_cycle_ms": 24.364739,
+            "p99_stages_ms": {
+              "input_handling_ms": 19.182135,
+              "computation_ms": 4.637292,
+              "publishing_ms": 5.297969,
+              "parameters_extensions_ms": 4.2225,
+              "cycle_before_reporting_ms": 23.634271,
+              "reporting_ms": 2.471198
+            },
+            "updated_input_samples": 2567,
+            "work_timing_excludes_input_wait": true
+          }
+        },
+        "emulator": {
+          "status": "passed",
+          "source_mean_hz": 99.99475082890643,
+          "source_exchange_work_p99_ms": 5.870624998351559,
+          "worker_failures": {},
+          "controls": {
+            "mean_cycle_hz": 99.73051287687865,
+            "work_samples": 2763,
+            "deadline_misses": 0,
+            "cycle_deadline_misses": 1353,
+            "p99_work_ms": 2.110625,
+            "p99_complete_cycle_ms": 16.380333,
+            "p99_stages_ms": {
+              "input_handling_ms": 15.585417,
+              "computation_ms": 0.863583,
+              "publishing_ms": 1.367542,
+              "parameters_extensions_ms": 0.399792,
+              "cycle_before_reporting_ms": 16.289667,
+              "reporting_ms": 0.54125
+            },
+            "updated_input_samples": 2728,
+            "work_timing_excludes_input_wait": true
+          }
+        }
+      },
+      "vision": {
+        "transport_status": "passed",
+        "status": "blocked",
+        "composite_frames": 893,
+        "composite_fps": 29.78412377965864,
+        "rear_preview_frames": 897,
+        "front_frames": 894,
+        "front_fps": 29.824978590804587,
+        "delivery_age_p99_ns": 98855025,
+        "acquisition_age_p99_ns": 98515598,
+        "preview_delivery_age_p99_ns": 124604973,
+        "preview_acquisition_age_p99_ns": 119797473,
+        "front_delivery_age_p99_ns": 106474857,
+        "front_acquisition_age_p99_ns": 105372617,
+        "preview_readback_p99_ns": 11397969,
+        "preview_render_p99_ns": 3528385,
+        "preview_submit_p99_ns": 7133386,
+        "preview_cpu_conversion_p99_ns": 0,
+        "preview_hash_p99_ns": 1834584,
+        "preview_publication_p99_ns": 3109375,
+        "preview_dropped_readbacks": 0,
+        "packing_errors": 0,
+        "timestamp_errors": 0,
+        "front_timestamp_errors": 0,
+        "rear_candidate_skew_p99_ns": 0,
+        "rear_candidate_overlap_ns": 29948841423,
+        "preview_changed_frames": 894,
+        "thumbnail_changed_frames": 892,
+        "validation_status": "failed",
+        "error": "AssertionError: Insufficient fresh preview samples: {'road': 0, 'driver': 4}",
+        "recoveries": 0,
+        "ui": {
+          "pid": 10324,
+          "backend": "Raylib Android NativeActivity",
+          "vehicle_tx_enabled": false,
+          "status": "running",
+          "full_upstream_ui": true,
+          "camera_preview": [
+            {
+              "stream": "road",
+              "frame_id": 897,
+              "age_ms": 1659.926587,
+              "fresh": false
+            },
+            {
+              "stream": "driver",
+              "frame_id": 894,
+              "age_ms": 1606.755605,
+              "fresh": false
+            }
+          ],
+          "frames": 960,
+          "mean_fps": 29.514512698206175,
+          "width": 2160,
+          "height": 1080,
+          "surface_size": [
+            2289,
+            840
+          ],
+          "last_frame_seconds": 0.033333905041217804,
+          "last_cpu_seconds": 0.0015901570004643872,
+          "recent_p99_frame_ms": 33.738281577825546,
+          "recent_p99_cpu_ms": 13.985885991132818
+        },
+        "independent_rear_identity": "blocked: lens-cover evidence deferred; shared parent timestamps do not prove identity",
+        "models": {
+          "modeld": {
+            "backend": "ORT CPU, 2 threads; OpenCL qualification blocked",
+            "work_samples": 58,
+            "computed_frames": 58,
+            "published_frames": 0,
+            "late_outputs": 58,
+            "p99_work_ms": 67.889219,
+            "deadline_misses": 29,
+            "phase": "waiting_for_synchronized_frames",
+            "stage_p50_ms": {
+              "receive_copy": 0.263958,
+              "input_age": 98.678045,
+              "prepare": 1.334948,
+              "inference": 47.9816145,
+              "output_age": 149.0354665
+            },
+            "stage_p95_ms": {
+              "receive_copy": 1.7967708,
+              "input_age": 100.06504475,
+              "prepare": 2.85255225,
+              "inference": 55.75255175,
+              "output_age": 158.050585
+            },
+            "stage_p99_ms": {
+              "receive_copy": 3.700936039999975,
+              "input_age": 100.3092149,
+              "prepare": 5.854015750000008,
+              "inference": 62.75052575000001,
+              "output_age": 163.2934113
+            }
+          },
+          "dmonitoringmodeld": {
+            "backend": "ORT CPU, 2 threads; OpenCL qualification blocked",
+            "work_samples": 411,
+            "computed_frames": 411,
+            "published_frames": 1,
+            "late_outputs": 410,
+            "p99_work_ms": 40.124739,
+            "deadline_misses": 0,
+            "phase": "waiting_for_synchronized_frames",
+            "stage_p50_ms": {
+              "receive_copy": 0.090885,
+              "input_age": 89.4102815,
+              "prepare": 1.317448,
+              "inference": 26.128333,
+              "output_age": 117.380185
+            },
+            "stage_p95_ms": {
+              "receive_copy": 0.5127006499999994,
+              "input_age": 97.82651759999999,
+              "prepare": 2.8712942499999996,
+              "inference": 33.8635449,
+              "output_age": 128.12308325
+            },
+            "stage_p99_ms": {
+              "receive_copy": 2.112909970000001,
+              "input_age": 99.57236495999999,
+              "prepare": 6.680136980000005,
+              "inference": 37.37771999,
+              "output_age": 134.73302873000003
+            }
+          }
+        }
+      },
+      "emulator_camera_timing": {
+        "status": "failed",
+        "streams": [
+          {
+            "frames": 289,
+            "fps": 28.961111010983544,
+            "timestamp_errors": 0,
+            "delivery_future_timestamps": 289,
+            "delivery_age_p99_ns": -21707343,
+            "acquisition_age_p99_ns": -25643301
+          }
+        ]
+      }
+    }
+  },
+  "serialized_kernel_profiles": {
+    "candidate29": {
+      "source_report": "candidate29-serialized-kernel-profile.json",
+      "apk_sha256": "04cf8905009abe6d502048b90fd94a6065d49c7b6967c9230603bffbe40e6b39",
+      "diagnostic_only": true,
+      "models": {
+        "dmonitoring_model": {
+          "host_conv": {
+            "launches": 46,
+            "serialized_event_ms": 362.28787200000005
+          },
+          "host_half_dot2": null,
+          "host_matmul": {
+            "launches": 26,
+            "serialized_event_ms": 1.05088
+          },
+          "host_Tanh": {
+            "launches": 30,
+            "serialized_event_ms": 82.93196799999998
+          }
+        },
+        "driving_supercombo": {
+          "host_conv": {
+            "launches": 60,
+            "serialized_event_ms": 658.6155519999999
+          },
+          "host_half_dot2": {
+            "launches": 6,
+            "serialized_event_ms": 80.192256
+          },
+          "host_matmul": {
+            "launches": 65,
+            "serialized_event_ms": 22.235648
+          },
+          "host_Tanh": {
+            "launches": 20,
+            "serialized_event_ms": 74.340864
+          }
+        }
+      }
+    },
+    "candidate32": {
+      "source_report": "candidate32-serialized-kernel-profile.json",
+      "apk_sha256": "a62b55187b2a60a15c9b7d34cb5e6e462cc00c353971d8d126940960861a2810",
+      "diagnostic_only": true,
+      "models": {
+        "dmonitoring_model": {
+          "host_conv": {
+            "launches": 46,
+            "serialized_event_ms": 362.3006720000001
+          },
+          "host_half_dot2": null,
+          "host_matmul": {
+            "launches": 26,
+            "serialized_event_ms": 1.049344
+          },
+          "host_Tanh": {
+            "launches": 30,
+            "serialized_event_ms": 85.64147200000001
+          }
+        },
+        "driving_supercombo": {
+          "host_conv": {
+            "launches": 60,
+            "serialized_event_ms": 658.8564480000001
+          },
+          "host_half_dot2": {
+            "launches": 6,
+            "serialized_event_ms": 4.222976
+          },
+          "host_matmul": {
+            "launches": 65,
+            "serialized_event_ms": 21.922048000000004
+          },
+          "host_Tanh": {
+            "launches": 20,
+            "serialized_event_ms": 75.18079999999998
+          }
+        }
+      }
+    }
+  }
+}

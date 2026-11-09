@@ -1,0 +1,387 @@
+{
+  "candidate": "candidate35",
+  "apk_sha256": "38645e91f806076517de1497cdb6b5c0cbf4873cfecf5efabb980297a014ad51",
+  "vehicle_tx_enabled": false,
+  "engagement_allowed": false,
+  "scope": "Separate cooled device runs, not a controlled A/B; timings are full-model work and every profile retains its actual APK.",
+  "tolerances": {
+    "rtol": 0.001,
+    "atol": 0.0001
+  },
+  "runs": [
+    {
+      "candidate": "candidate32",
+      "apk_sha256": "a62b55187b2a60a15c9b7d34cb5e6e462cc00c353971d8d126940960861a2810",
+      "models": {
+        "driving_supercombo": {
+          "numerical_status": "passed",
+          "comparisons": 636,
+          "failed_comparisons": 0,
+          "nonexact_outputs": 0,
+          "max_abs_error": 0.0,
+          "sequences": {
+            "seed42": {
+              "passed": true,
+              "frames": 32
+            },
+            "seed7": {
+              "passed": true,
+              "frames": 32
+            },
+            "seed123": {
+              "passed": true,
+              "frames": 32
+            },
+            "camera-replay": {
+              "passed": true,
+              "frames": 60
+            }
+          },
+          "timing": {
+            "performance_status": "failed",
+            "samples": 100,
+            "work_p50_ms": 850.808906,
+            "work_p99_ms": 1021.53460205,
+            "work_max_ms": 1021.737656,
+            "deadline_misses_50ms": 100
+          },
+          "source_report": "fold-models-road-candidate32.json"
+        },
+        "dmonitoring_model": {
+          "numerical_status": "passed",
+          "comparisons": 159,
+          "failed_comparisons": 0,
+          "nonexact_outputs": 0,
+          "max_abs_error": 0.0,
+          "sequences": {
+            "seed42": {
+              "passed": true,
+              "frames": 32
+            },
+            "seed7": {
+              "passed": true,
+              "frames": 32
+            },
+            "seed123": {
+              "passed": true,
+              "frames": 32
+            },
+            "camera-replay": {
+              "passed": true,
+              "frames": 60
+            }
+          },
+          "timing": {
+            "performance_status": "failed",
+            "samples": 100,
+            "work_p50_ms": 496.04755250000005,
+            "work_p99_ms": 559.4138630799999,
+            "work_max_ms": 560.884219,
+            "deadline_misses_50ms": 100
+          },
+          "source_report": "fold-models-driver-candidate32.json"
+        }
+      },
+      "decision": "numerically accurate; 20 Hz performance fails"
+    },
+    {
+      "candidate": "candidate33",
+      "apk_sha256": "cdaac6c4223ee64ba2f600e4cac3a0d7775bcde2f7a7d4ab5b69ec3e05092305",
+      "models": {
+        "driving_supercombo": {
+          "numerical_status": "passed",
+          "comparisons": 636,
+          "failed_comparisons": 0,
+          "nonexact_outputs": 0,
+          "max_abs_error": 0.0,
+          "sequences": {
+            "seed42": {
+              "passed": true,
+              "frames": 32
+            },
+            "seed7": {
+              "passed": true,
+              "frames": 32
+            },
+            "seed123": {
+              "passed": true,
+              "frames": 32
+            },
+            "camera-replay": {
+              "passed": true,
+              "frames": 60
+            }
+          },
+          "timing": {
+            "performance_status": "failed",
+            "samples": 100,
+            "work_p50_ms": 2063.07776,
+            "work_p99_ms": 2109.0046665200002,
+            "work_max_ms": 2109.920468,
+            "deadline_misses_50ms": 100
+          },
+          "source_report": "fold-candidate33-opencl-road.json"
+        },
+        "dmonitoring_model": {
+          "numerical_status": "passed",
+          "comparisons": 159,
+          "failed_comparisons": 0,
+          "nonexact_outputs": 0,
+          "max_abs_error": 0.0,
+          "sequences": {
+            "seed42": {
+              "passed": true,
+              "frames": 32
+            },
+            "seed7": {
+              "passed": true,
+              "frames": 32
+            },
+            "seed123": {
+              "passed": true,
+              "frames": 32
+            },
+            "camera-replay": {
+              "passed": true,
+              "frames": 60
+            }
+          },
+          "timing": {
+            "performance_status": "failed",
+            "samples": 100,
+            "work_p50_ms": 1140.501458,
+            "work_p99_ms": 1203.2902971400001,
+            "work_max_ms": 1210.35802,
+            "deadline_misses_50ms": 100
+          },
+          "source_report": "fold-candidate33-opencl-driver.json"
+        }
+      },
+      "decision": "4-channel FP32 FMA tiling reverted after regression"
+    },
+    {
+      "candidate": "candidate35",
+      "apk_sha256": "38645e91f806076517de1497cdb6b5c0cbf4873cfecf5efabb980297a014ad51",
+      "models": {
+        "driving_supercombo": {
+          "numerical_status": "passed",
+          "comparisons": 636,
+          "failed_comparisons": 0,
+          "nonexact_outputs": 0,
+          "max_abs_error": 0.0,
+          "unexpected_nonfinite_elements": 0,
+          "sequences": {
+            "seed42": {
+              "passed": true,
+              "frames": 32
+            },
+            "seed7": {
+              "passed": true,
+              "frames": 32
+            },
+            "seed123": {
+              "passed": true,
+              "frames": 32
+            },
+            "camera-replay": {
+              "passed": true,
+              "frames": 60
+            }
+          },
+          "identity": {
+            "name": "driving_supercombo",
+            "fingerprint": "samsung/q2qxser/q2q:15/AP3A.240905.015.A2/F926BXXSJJZH3:user/release-keys",
+            "sha256": {
+              "model": "5078784511c7bfb22f1546a15532ed6b6ed71ee6c3e83237951ff5b95ca9ce80",
+              "original_references": "610f877bd0f98353a6e7228698ee869d02a5b2976430234b96d097e96e773381",
+              "sequences": "6acb2ec99babfe57b5ec33b601e262ee9f5b4e54a2fd185f2b59e939256ca3d6",
+              "driver": "f64d432f19fd3f2732cd95050b47328e0c84837b7b60376d55fd7a73a6e9dc8c",
+              "runner": "655ed1fbe9862795e4a5c77280001fcf0e6e3b78a7df8552fd3dbdbb4bfee713",
+              "host_math": "c1459b62f417b5fe9fb8f4d8424ab505f866806ef194f1e387215a7c1f701bf3",
+              "tinygrad": "4796c285004584bd8a29d8c5a7207a3fee1e4613b5ef52d32d7a5e35fb61140c",
+              "uops": "c9c8e8a03554b17e83bf25bb5446040126721625adb950cca86fdb21821f0204",
+              "renderer": "dc8601454f33bea9b0e0a0b4ffaec29149692cabd7e733411256e4c18facca6d",
+              "compiler": "dc11b6ec83ccf11c888a15c99d7307096e2b8bb6c5a9e78d9a10844b51b24cb9"
+            }
+          },
+          "timing": {
+            "performance_status": "failed",
+            "samples": 100,
+            "compile_ms": 26404.431448,
+            "work_p50_ms": 845.979479,
+            "work_p99_ms": 881.5674370800001,
+            "work_max_ms": 900.407343,
+            "deadline_misses_50ms": 100
+          },
+          "arithmetic": "reference ordered fma",
+          "source_report": "fold-candidate35-opencl-reference-road.json"
+        },
+        "dmonitoring_model": {
+          "numerical_status": "passed",
+          "comparisons": 159,
+          "failed_comparisons": 0,
+          "nonexact_outputs": 0,
+          "max_abs_error": 0.0,
+          "unexpected_nonfinite_elements": 0,
+          "sequences": {
+            "seed42": {
+              "passed": true,
+              "frames": 32
+            },
+            "seed7": {
+              "passed": true,
+              "frames": 32
+            },
+            "seed123": {
+              "passed": true,
+              "frames": 32
+            },
+            "camera-replay": {
+              "passed": true,
+              "frames": 60
+            }
+          },
+          "identity": {
+            "name": "dmonitoring_model",
+            "fingerprint": "samsung/q2qxser/q2q:15/AP3A.240905.015.A2/F926BXXSJJZH3:user/release-keys",
+            "sha256": {
+              "model": "30f0326378aea3a8c2a59da73cb4e50c38272bb4fc487c810ebbe6f0daabc7b7",
+              "original_references": "610f877bd0f98353a6e7228698ee869d02a5b2976430234b96d097e96e773381",
+              "sequences": "6acb2ec99babfe57b5ec33b601e262ee9f5b4e54a2fd185f2b59e939256ca3d6",
+              "driver": "f64d432f19fd3f2732cd95050b47328e0c84837b7b60376d55fd7a73a6e9dc8c",
+              "runner": "655ed1fbe9862795e4a5c77280001fcf0e6e3b78a7df8552fd3dbdbb4bfee713",
+              "host_math": "c1459b62f417b5fe9fb8f4d8424ab505f866806ef194f1e387215a7c1f701bf3",
+              "tinygrad": "4796c285004584bd8a29d8c5a7207a3fee1e4613b5ef52d32d7a5e35fb61140c",
+              "uops": "c9c8e8a03554b17e83bf25bb5446040126721625adb950cca86fdb21821f0204",
+              "renderer": "dc8601454f33bea9b0e0a0b4ffaec29149692cabd7e733411256e4c18facca6d",
+              "compiler": "dc11b6ec83ccf11c888a15c99d7307096e2b8bb6c5a9e78d9a10844b51b24cb9"
+            }
+          },
+          "timing": {
+            "performance_status": "failed",
+            "samples": 100,
+            "compile_ms": 18444.219837,
+            "work_p50_ms": 522.9349475,
+            "work_p99_ms": 560.16029585,
+            "work_max_ms": 561.024947,
+            "deadline_misses_50ms": 100
+          },
+          "arithmetic": "reference ordered fma",
+          "source_report": "fold-candidate35-opencl-reference-driver.json"
+        }
+      },
+      "decision": "numerically accurate; 20 Hz performance fails"
+    }
+  ],
+  "diagnostic_mad": {
+    "decision": "rejected; original-model parity fails, never eligible for live qualification",
+    "models": {
+      "driving_supercombo": {
+        "numerical_status": "failed",
+        "comparisons": 636,
+        "failed_comparisons": 216,
+        "nonexact_outputs": 318,
+        "max_abs_error": 0.25,
+        "unexpected_nonfinite_elements": 0,
+        "sequences": {
+          "seed42": {
+            "passed": false,
+            "frames": 32
+          },
+          "seed7": {
+            "passed": false,
+            "frames": 32
+          },
+          "seed123": {
+            "passed": false,
+            "frames": 32
+          },
+          "camera-replay": {
+            "passed": false,
+            "frames": 60
+          }
+        },
+        "identity": {
+          "name": "driving_supercombo",
+          "fingerprint": "samsung/q2qxser/q2q:15/AP3A.240905.015.A2/F926BXXSJJZH3:user/release-keys",
+          "sha256": {
+            "model": "5078784511c7bfb22f1546a15532ed6b6ed71ee6c3e83237951ff5b95ca9ce80",
+            "original_references": "610f877bd0f98353a6e7228698ee869d02a5b2976430234b96d097e96e773381",
+            "sequences": "6acb2ec99babfe57b5ec33b601e262ee9f5b4e54a2fd185f2b59e939256ca3d6",
+            "driver": "f64d432f19fd3f2732cd95050b47328e0c84837b7b60376d55fd7a73a6e9dc8c",
+            "runner": "655ed1fbe9862795e4a5c77280001fcf0e6e3b78a7df8552fd3dbdbb4bfee713",
+            "host_math": "c1459b62f417b5fe9fb8f4d8424ab505f866806ef194f1e387215a7c1f701bf3",
+            "tinygrad": "4796c285004584bd8a29d8c5a7207a3fee1e4613b5ef52d32d7a5e35fb61140c",
+            "uops": "c9c8e8a03554b17e83bf25bb5446040126721625adb950cca86fdb21821f0204",
+            "renderer": "dc8601454f33bea9b0e0a0b4ffaec29149692cabd7e733411256e4c18facca6d",
+            "compiler": "dc11b6ec83ccf11c888a15c99d7307096e2b8bb6c5a9e78d9a10844b51b24cb9"
+          }
+        },
+        "timing": {
+          "performance_status": "failed",
+          "samples": 100,
+          "compile_ms": 27251.901031,
+          "work_p50_ms": 134.3941145,
+          "work_p99_ms": 138.39268706000013,
+          "work_max_ms": 164.341979,
+          "deadline_misses_50ms": 100
+        },
+        "arithmetic": "native mad convolution/activation diagnostic",
+        "source_report": "fold-candidate35-opencl-mad-road.json"
+      },
+      "dmonitoring_model": {
+        "numerical_status": "failed",
+        "comparisons": 159,
+        "failed_comparisons": 137,
+        "nonexact_outputs": 156,
+        "max_abs_error": 0.0078125,
+        "unexpected_nonfinite_elements": 0,
+        "sequences": {
+          "seed42": {
+            "passed": false,
+            "frames": 32
+          },
+          "seed7": {
+            "passed": false,
+            "frames": 32
+          },
+          "seed123": {
+            "passed": false,
+            "frames": 32
+          },
+          "camera-replay": {
+            "passed": false,
+            "frames": 60
+          }
+        },
+        "identity": {
+          "name": "dmonitoring_model",
+          "fingerprint": "samsung/q2qxser/q2q:15/AP3A.240905.015.A2/F926BXXSJJZH3:user/release-keys",
+          "sha256": {
+            "model": "30f0326378aea3a8c2a59da73cb4e50c38272bb4fc487c810ebbe6f0daabc7b7",
+            "original_references": "610f877bd0f98353a6e7228698ee869d02a5b2976430234b96d097e96e773381",
+            "sequences": "6acb2ec99babfe57b5ec33b601e262ee9f5b4e54a2fd185f2b59e939256ca3d6",
+            "driver": "f64d432f19fd3f2732cd95050b47328e0c84837b7b60376d55fd7a73a6e9dc8c",
+            "runner": "655ed1fbe9862795e4a5c77280001fcf0e6e3b78a7df8552fd3dbdbb4bfee713",
+            "host_math": "c1459b62f417b5fe9fb8f4d8424ab505f866806ef194f1e387215a7c1f701bf3",
+            "tinygrad": "4796c285004584bd8a29d8c5a7207a3fee1e4613b5ef52d32d7a5e35fb61140c",
+            "uops": "c9c8e8a03554b17e83bf25bb5446040126721625adb950cca86fdb21821f0204",
+            "renderer": "dc8601454f33bea9b0e0a0b4ffaec29149692cabd7e733411256e4c18facca6d",
+            "compiler": "dc11b6ec83ccf11c888a15c99d7307096e2b8bb6c5a9e78d9a10844b51b24cb9"
+          }
+        },
+        "timing": {
+          "performance_status": "failed",
+          "samples": 100,
+          "compile_ms": 19615.958586,
+          "work_p50_ms": 89.6022395,
+          "work_p99_ms": 102.51084485000001,
+          "work_max_ms": 105.291146,
+          "deadline_misses_50ms": 100
+        },
+        "arithmetic": "native mad convolution/activation diagnostic",
+        "source_report": "fold-candidate35-opencl-mad-driver.json"
+      }
+    }
+  }
+}

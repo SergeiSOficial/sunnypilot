@@ -34,6 +34,7 @@ def inputs(elapsed, speed, steering, min_steer_speed, desired_curvature=None):
   model = messages["modelV2"].modelV2
   model.action.desiredCurvature = .0005 * math.cos(elapsed * .5) if desired_curvature is None else desired_curvature
   model.velocity.x, model.acceleration.y = [speed] * 33, [0.] * 33
+  model.meta.disengagePredictions.brakeDisengageProbs = [0.] * 5
   messages["selfdriveState"].selfdriveState.active = speed >= min_steer_speed
   messages["selfdriveState"].selfdriveState.enabled = True
   lp = messages["vehicleParameters"].vehicleParameters
@@ -45,6 +46,9 @@ def inputs(elapsed, speed, steering, min_steer_speed, desired_curvature=None):
   for side in ("leftDriverData", "rightDriverData"):
     driver = getattr(messages["driverStateV2"].driverStateV2, side)
     driver.faceProb, driver.faceOrientation = 1., [0., 0., 0.]
+    driver.facePosition = [0.] * 2
+    driver.faceOrientationStd, driver.facePositionStd = [.01] * 3, [.01] * 2
+    driver.leftEyeProb = driver.rightEyeProb = 1.
   events = messaging.new_message("onroadEvents", 0, valid=True)
   messages["onroadEvents"] = events
   return {name: base64.b64encode(event.to_bytes()).decode() for name, event in messages.items()}
@@ -113,6 +117,11 @@ def validate(serial, adb, duration, fault, metadrive, report_path, port=0):
           lookahead = max(20., speed * 1.5)
           desired_curvature = max(-.005, min(.005, 2 * (lateral - target + lookahead * heading) / lookahead**2))
           report["max_lateral_error_m"] = max(report.get("max_lateral_error_m", 0.), abs(lateral))
+          samples = report.setdefault("feedback_samples", [])
+          if not samples or elapsed - samples[-1]["elapsed_s"] >= 1:
+            samples.append({"elapsed_s": elapsed, "lateral_m": lateral, "heading_rad": heading,
+                            "desired_curvature": desired_curvature, "steering_deg": measured_steering,
+                            "fault": active_fault})
         send(connection, {"sequence": sequence,
                           "messages": inputs(elapsed, speed, measured_steering, min_steer_speed, desired_curvature), "fault": active_fault})
         reply = receive(connection)

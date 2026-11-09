@@ -1,0 +1,111 @@
+{
+  "diagnostic_only": true,
+  "seed": 42,
+  "backend": "host Metal",
+  "checks": [
+    {
+      "index": 442,
+      "operator": "LayerNormalization",
+      "input_dtypes": [
+        "dtypes.f16",
+        "dtypes.f16",
+        "dtypes.f16"
+      ],
+      "input_shapes": [
+        [
+          1,
+          9,
+          512
+        ],
+        [
+          512
+        ],
+        [
+          512
+        ]
+      ],
+      "exact": true,
+      "unequal": 0,
+      "tolerance_failures": 0,
+      "max_abs_error": 0.0
+    },
+    {
+      "index": 452,
+      "operator": "MatMul",
+      "input_dtypes": [
+        "dtypes.f16",
+        "dtypes.f16"
+      ],
+      "input_shapes": [
+        [
+          1,
+          8,
+          9,
+          64
+        ],
+        [
+          1,
+          8,
+          64,
+          9
+        ]
+      ],
+      "exact": true,
+      "unequal": 0,
+      "tolerance_failures": 0,
+      "max_abs_error": 0.0
+    },
+    {
+      "index": 464,
+      "operator": "MatMul",
+      "input_dtypes": [
+        "dtypes.f16",
+        "dtypes.f16"
+      ],
+      "input_shapes": [
+        [
+          1,
+          8,
+          9,
+          9
+        ],
+        [
+          1,
+          8,
+          9,
+          64
+        ]
+      ],
+      "exact": true,
+      "unequal": 0,
+      "tolerance_failures": 0,
+      "max_abs_error": 0.0
+    },
+    {
+      "index": 473,
+      "operator": "LayerNormalization",
+      "input_dtypes": [
+        "dtypes.f16",
+        "dtypes.f16",
+        "dtypes.f16"
+      ],
+      "input_shapes": [
+        [
+          1,
+          9,
+          512
+        ],
+        [
+          512
+        ],
+        [
+          512
+        ]
+      ],
+      "exact": true,
+      "unequal": 0,
+      "tolerance_failures": 0,
+      "max_abs_error": 0.0
+    }
+  ]
+}

@@ -1,0 +1,438 @@
+{
+  "candidate": "candidate10",
+  "generated_utc": "2026-10-31T20:57:21.178617+00:00",
+  "branch": "codex/fold3-android-port",
+  "head": "7631d5248cc9efd10b962107aadacbb908a9f14d",
+  "dirty": true,
+  "status": "blocked",
+  "vehicle_tx_enabled": false,
+  "physical_engagement_allowed": false,
+  "apk_sha256": "566e4c253c05aae9a6d8fdce82c68b67f3558612ad97560a5d12b2ca2ce83a9a",
+  "test_apk_sha256": "e7a159b944a4e82f3f38a4d370436e9c5dc6197e6f918026247ec1d38e989d58",
+  "controls_fixture_sha256": "8dac3b46d116eff9a1d84165e75036cc65e21063003eb9056b3a27e2ab5986e3",
+  "host_checks": {
+    "build_success": true,
+    "gradle_log": "android/build/blocker-candidate10-build.log",
+    "instrumentation_expected": 19,
+    "focused_host": {
+      "run": 59,
+      "failures": 0,
+      "skips": 0,
+      "log": "android/build/blocker-host-candidate10-final.log",
+      "native_compiler": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++",
+      "sdkroot": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk",
+      "elapsed_seconds": 4.145
+    },
+    "hyundai_host": {
+      "run": 13,
+      "skips": 2,
+      "failures": 0,
+      "log": "android/build/blocker-hyundai-host.log"
+    },
+    "panda_safety_host": {
+      "run": 1906,
+      "skips": 198,
+      "failures": 0,
+      "log": "android/build/blocker-panda-hyundai-safety-xcode.log"
+    },
+    "checked_utc": "2026-10-31T20:48:36.967427+00:00",
+    "controls_fixture_sha256": "8dac3b46d116eff9a1d84165e75036cc65e21063003eb9056b3a27e2ab5986e3",
+    "final_source_diff_check": "passed",
+    "submodule_checkouts": "unchanged at pinned commits",
+    "android_kernel_wakeup_checks": {
+      "status": "passed",
+      "reports": [
+        "fold-msgq-kernel-candidate10.json",
+        "emulator-msgq-kernel-candidate10.json"
+      ],
+      "scope": "Actual pinned/patched C++ and real kernel; zero targets, mismatched process/thread and correct subscriber delivery"
+    },
+    "gradle_build": {
+      "status": "passed",
+      "log": "android/build/blocker-candidate10-build.log",
+      "commands": [
+        "assembleDebug",
+        "assembleDebugAndroidTest",
+        "testDebugUnitTest"
+      ]
+    }
+  },
+  "experiments": [
+    {
+      "name": "emulator-host-adb-faults-fixed-candidate10",
+      "report": "android/reports/blocker-fixes/emulator-host-adb-faults-fixed-candidate10.json",
+      "isolation": "android/reports/blocker-fixes/emulator-host-adb-faults-fixed-candidate10-isolation.json",
+      "status": "passed",
+      "isolation_status": "passed",
+      "apk_sha256": "566e4c253c05aae9a6d8fdce82c68b67f3558612ad97560a5d12b2ca2ce83a9a",
+      "artifact_stable": true,
+      "cleanup_verified": true,
+      "error": null
+    },
+    {
+      "name": "emulator-host-camera-dual-candidate10",
+      "report": "android/reports/blocker-fixes/emulator-host-camera-dual-candidate10.json",
+      "isolation": "android/reports/blocker-fixes/emulator-host-camera-dual-candidate10-isolation.json",
+      "status": "failed",
+      "isolation_status": "failed",
+      "apk_sha256": "566e4c253c05aae9a6d8fdce82c68b67f3558612ad97560a5d12b2ca2ce83a9a",
+      "artifact_stable": true,
+      "cleanup_verified": true,
+      "error": null
+    },
+    {
+      "name": "emulator-host-fullchain-candidate10",
+      "report": "android/reports/blocker-fixes/emulator-host-fullchain-candidate10.json",
+      "isolation": "android/reports/blocker-fixes/emulator-host-fullchain-candidate10-isolation.json",
+      "status": "passed",
+      "isolation_status": "passed",
+      "apk_sha256": "566e4c253c05aae9a6d8fdce82c68b67f3558612ad97560a5d12b2ca2ce83a9a",
+      "artifact_stable": true,
+      "cleanup_verified": true,
+      "error": null
+    },
+    {
+      "name": "emulator-host-fullchain-repeat-candidate10",
+      "report": "android/reports/blocker-fixes/emulator-host-fullchain-repeat-candidate10.json",
+      "isolation": "android/reports/blocker-fixes/emulator-host-fullchain-repeat-candidate10-isolation.json",
+      "status": "passed",
+      "isolation_status": "passed",
+      "apk_sha256": "566e4c253c05aae9a6d8fdce82c68b67f3558612ad97560a5d12b2ca2ce83a9a",
+      "artifact_stable": true,
+      "cleanup_verified": true,
+      "error": null
+    },
+    {
+      "name": "emulator-host-instrumentation-candidate10",
+      "report": "android/reports/blocker-fixes/emulator-host-instrumentation-candidate10.json",
+      "isolation": "android/reports/blocker-fixes/emulator-host-instrumentation-candidate10-isolation.json",
+      "status": "passed",
+      "isolation_status": "passed",
+      "apk_sha256": "566e4c253c05aae9a6d8fdce82c68b67f3558612ad97560a5d12b2ca2ce83a9a",
+      "artifact_stable": true,
+      "cleanup_verified": true,
+      "error": null
+    },
+    {
+      "name": "emulator-host-lifecycle-candidate10",
+      "report": "android/reports/blocker-fixes/emulator-host-lifecycle-candidate10.json",
+      "isolation": "android/reports/blocker-fixes/emulator-host-lifecycle-candidate10-isolation.json",
+      "status": "passed",
+      "isolation_status": "passed",
+      "apk_sha256": "566e4c253c05aae9a6d8fdce82c68b67f3558612ad97560a5d12b2ca2ce83a9a",
+      "artifact_stable": true,
+      "cleanup_verified": true,
+      "error": null
+    },
+    {
+      "name": "emulator-host-metadrive-cancel-fixed-candidate10",
+      "report": "android/reports/blocker-fixes/emulator-host-metadrive-cancel-fixed-candidate10.json",
+      "isolation": "android/reports/blocker-fixes/emulator-host-metadrive-cancel-fixed-candidate10-isolation.json",
+      "status": "passed",
+      "isolation_status": "passed",
+      "apk_sha256": "566e4c253c05aae9a6d8fdce82c68b67f3558612ad97560a5d12b2ca2ce83a9a",
+      "artifact_stable": true,
+      "cleanup_verified": true,
+      "error": null
+    },
+    {
+      "name": "emulator-host-metadrive-stale-fixed-candidate10",
+      "report": "android/reports/blocker-fixes/emulator-host-metadrive-stale-fixed-candidate10.json",
+      "isolation": "android/reports/blocker-fixes/emulator-host-metadrive-stale-fixed-candidate10-isolation.json",
+      "status": "passed",
+      "isolation_status": "passed",
+      "apk_sha256": "566e4c253c05aae9a6d8fdce82c68b67f3558612ad97560a5d12b2ca2ce83a9a",
+      "artifact_stable": true,
+      "cleanup_verified": true,
+      "error": null
+    },
+    {
+      "name": "emulator-host-ort-candidate10",
+      "report": "android/reports/blocker-fixes/emulator-host-ort-candidate10.json",
+      "isolation": "android/reports/blocker-fixes/emulator-host-ort-candidate10-isolation.json",
+      "status": "failed",
+      "isolation_status": "failed",
+      "apk_sha256": "566e4c253c05aae9a6d8fdce82c68b67f3558612ad97560a5d12b2ca2ce83a9a",
+      "artifact_stable": true,
+      "cleanup_verified": true,
+      "error": null
+    },
+    {
+      "name": "emulator-host-paced-fault-chain-candidate10",
+      "report": "android/reports/blocker-fixes/emulator-host-paced-fault-chain-candidate10.json",
+      "isolation": "android/reports/blocker-fixes/emulator-host-paced-fault-chain-candidate10-isolation.json",
+      "status": "passed",
+      "isolation_status": "passed",
+      "apk_sha256": "566e4c253c05aae9a6d8fdce82c68b67f3558612ad97560a5d12b2ca2ce83a9a",
+      "artifact_stable": true,
+      "cleanup_verified": true,
+      "error": null
+    },
+    {
+      "name": "emulator-host-steady-chain-candidate10",
+      "report": "android/reports/blocker-fixes/emulator-host-steady-chain-candidate10.json",
+      "isolation": "android/reports/blocker-fixes/emulator-host-steady-chain-candidate10-isolation.json",
+      "status": "passed",
+      "isolation_status": "passed",
+      "apk_sha256": "566e4c253c05aae9a6d8fdce82c68b67f3558612ad97560a5d12b2ca2ce83a9a",
+      "artifact_stable": true,
+      "cleanup_verified": true,
+      "error": null
+    },
+    {
+      "name": "emulator-host-thermal-dual-candidate10",
+      "report": "android/reports/blocker-fixes/emulator-host-thermal-dual-candidate10.json",
+      "isolation": "android/reports/blocker-fixes/emulator-host-thermal-dual-candidate10-isolation.json",
+      "status": "passed",
+      "isolation_status": "passed",
+      "apk_sha256": "566e4c253c05aae9a6d8fdce82c68b67f3558612ad97560a5d12b2ca2ce83a9a",
+      "artifact_stable": true,
+      "cleanup_verified": true,
+      "error": null
+    },
+    {
+      "name": "emulator-msgq-kernel-candidate10",
+      "report": "android/reports/blocker-fixes/emulator-msgq-kernel-candidate10.json",
+      "isolation": "android/reports/blocker-fixes/emulator-msgq-kernel-candidate10-isolation.json",
+      "status": "passed",
+      "isolation_status": "passed",
+      "apk_sha256": "566e4c253c05aae9a6d8fdce82c68b67f3558612ad97560a5d12b2ca2ce83a9a",
+      "artifact_stable": true,
+      "cleanup_verified": true,
+      "error": null
+    },
+    {
+      "name": "fold-adb-faults-fixed-candidate10",
+      "report": "android/reports/blocker-fixes/fold-adb-faults-fixed-candidate10.json",
+      "isolation": "android/reports/blocker-fixes/fold-adb-faults-fixed-candidate10-isolation.json",
+      "status": "passed",
+      "isolation_status": "passed",
+      "apk_sha256": "566e4c253c05aae9a6d8fdce82c68b67f3558612ad97560a5d12b2ca2ce83a9a",
+      "artifact_stable": true,
+      "cleanup_verified": true,
+      "error": null
+    },
+    {
+      "name": "fold-fullchain-candidate10",
+      "report": "android/reports/blocker-fixes/fold-fullchain-candidate10.json",
+      "isolation": "android/reports/blocker-fixes/fold-fullchain-candidate10-isolation.json",
+      "status": "passed",
+      "isolation_status": "passed",
+      "apk_sha256": "566e4c253c05aae9a6d8fdce82c68b67f3558612ad97560a5d12b2ca2ce83a9a",
+      "artifact_stable": true,
+      "cleanup_verified": true,
+      "error": null
+    },
+    {
+      "name": "fold-gpu-vision-candidate10",
+      "report": "android/reports/blocker-fixes/fold-gpu-vision-candidate10.json",
+      "isolation": "android/reports/blocker-fixes/fold-gpu-vision-candidate10-isolation.json",
+      "status": "failed",
+      "isolation_status": "failed",
+      "apk_sha256": "566e4c253c05aae9a6d8fdce82c68b67f3558612ad97560a5d12b2ca2ce83a9a",
+      "artifact_stable": true,
+      "cleanup_verified": true,
+      "error": "AssertionError: Insufficient fresh preview samples: {'road': 0, 'driver': 4}"
+    },
+    {
+      "name": "fold-instrumentation-candidate10",
+      "report": "android/reports/blocker-fixes/fold-instrumentation-candidate10.json",
+      "isolation": "android/reports/blocker-fixes/fold-instrumentation-candidate10-isolation.json",
+      "status": "passed",
+      "isolation_status": "passed",
+      "apk_sha256": "566e4c253c05aae9a6d8fdce82c68b67f3558612ad97560a5d12b2ca2ce83a9a",
+      "artifact_stable": true,
+      "cleanup_verified": true,
+      "error": null
+    },
+    {
+      "name": "fold-isolated-steady-chain-candidate10",
+      "report": "android/reports/blocker-fixes/fold-isolated-steady-chain-candidate10.json",
+      "isolation": "android/reports/blocker-fixes/fold-isolated-steady-chain-candidate10-isolation.json",
+      "status": "passed",
+      "isolation_status": "passed",
+      "apk_sha256": "566e4c253c05aae9a6d8fdce82c68b67f3558612ad97560a5d12b2ca2ce83a9a",
+      "artifact_stable": true,
+      "cleanup_verified": true,
+      "error": null
+    },
+    {
+      "name": "fold-lifecycle-candidate10",
+      "report": "android/reports/blocker-fixes/fold-lifecycle-candidate10.json",
+      "isolation": "android/reports/blocker-fixes/fold-lifecycle-candidate10-isolation.json",
+      "status": "passed",
+      "isolation_status": "passed",
+      "apk_sha256": "566e4c253c05aae9a6d8fdce82c68b67f3558612ad97560a5d12b2ca2ce83a9a",
+      "artifact_stable": true,
+      "cleanup_verified": true,
+      "error": null
+    },
+    {
+      "name": "fold-metadrive-cancel-fixed-candidate10",
+      "report": "android/reports/blocker-fixes/fold-metadrive-cancel-fixed-candidate10.json",
+      "isolation": "android/reports/blocker-fixes/fold-metadrive-cancel-fixed-candidate10-isolation.json",
+      "status": "passed",
+      "isolation_status": "passed",
+      "apk_sha256": "566e4c253c05aae9a6d8fdce82c68b67f3558612ad97560a5d12b2ca2ce83a9a",
+      "artifact_stable": true,
+      "cleanup_verified": true,
+      "error": null
+    },
+    {
+      "name": "fold-metadrive-stale-fixed-candidate10",
+      "report": "android/reports/blocker-fixes/fold-metadrive-stale-fixed-candidate10.json",
+      "isolation": "android/reports/blocker-fixes/fold-metadrive-stale-fixed-candidate10-isolation.json",
+      "status": "passed",
+      "isolation_status": "passed",
+      "apk_sha256": "566e4c253c05aae9a6d8fdce82c68b67f3558612ad97560a5d12b2ca2ce83a9a",
+      "artifact_stable": true,
+      "cleanup_verified": true,
+      "error": null
+    },
+    {
+      "name": "fold-msgq-kernel-candidate10",
+      "report": "android/reports/blocker-fixes/fold-msgq-kernel-candidate10.json",
+      "isolation": "android/reports/blocker-fixes/fold-msgq-kernel-candidate10-isolation.json",
+      "status": "passed",
+      "isolation_status": "passed",
+      "apk_sha256": "566e4c253c05aae9a6d8fdce82c68b67f3558612ad97560a5d12b2ca2ce83a9a",
+      "artifact_stable": true,
+      "cleanup_verified": true,
+      "error": null
+    },
+    {
+      "name": "fold-opencl-candidate10",
+      "report": "android/reports/blocker-fixes/fold-opencl-candidate10.json",
+      "isolation": "android/reports/blocker-fixes/fold-opencl-candidate10-isolation.json",
+      "status": "failed",
+      "isolation_status": "failed",
+      "apk_sha256": "566e4c253c05aae9a6d8fdce82c68b67f3558612ad97560a5d12b2ca2ce83a9a",
+      "artifact_stable": true,
+      "cleanup_verified": true,
+      "error": null
+    },
+    {
+      "name": "fold-ort-candidate10",
+      "report": "android/reports/blocker-fixes/fold-ort-candidate10.json",
+      "isolation": "android/reports/blocker-fixes/fold-ort-candidate10-isolation.json",
+      "status": "failed",
+      "isolation_status": "failed",
+      "apk_sha256": "566e4c253c05aae9a6d8fdce82c68b67f3558612ad97560a5d12b2ca2ce83a9a",
+      "artifact_stable": true,
+      "cleanup_verified": true,
+      "error": null
+    },
+    {
+      "name": "fold-paced-fault-chain-candidate10",
+      "report": "android/reports/blocker-fixes/fold-paced-fault-chain-candidate10.json",
+      "isolation": "android/reports/blocker-fixes/fold-paced-fault-chain-candidate10-isolation.json",
+      "status": "passed",
+      "isolation_status": "passed",
+      "apk_sha256": "566e4c253c05aae9a6d8fdce82c68b67f3558612ad97560a5d12b2ca2ce83a9a",
+      "artifact_stable": true,
+      "cleanup_verified": true,
+      "error": null
+    },
+    {
+      "name": "fold-steady-chain-candidate10",
+      "report": "android/reports/blocker-fixes/fold-steady-chain-candidate10.json",
+      "isolation": "android/reports/blocker-fixes/fold-steady-chain-candidate10-isolation.json",
+      "status": "passed",
+      "isolation_status": "passed",
+      "apk_sha256": "566e4c253c05aae9a6d8fdce82c68b67f3558612ad97560a5d12b2ca2ce83a9a",
+      "artifact_stable": true,
+      "cleanup_verified": true,
+      "error": null
+    }
+  ],
+  "acceptance": {
+    "independent_rear_sensor_identity": {
+      "status": "blocked",
+      "reason": "User deferred three repeated lens-cover trials; composite provenance remains unverified"
+    },
+    "measured_optical_and_mount_calibration": {
+      "status": "blocked",
+      "reason": "Phone unmounted; bench affine geometry is not vehicle calibration"
+    },
+    "original_model_three_seed_parity": {
+      "status": "failed",
+      "reason": "Both original OpenCL and original CPU models differ from unchanged goldens"
+    },
+    "recurrent_sequence_acceptance": {
+      "status": "blocked",
+      "reason": "Not implemented; no backend passes the prerequisite original-output gate"
+    },
+    "pinned_60_frame_replay": {
+      "status": "blocked",
+      "reason": "Replay assets unavailable in this checkout"
+    },
+    "camera_and_prediction_freshness": {
+      "status": "failed",
+      "reason": "See final combined-run metrics; freshness limits are unchanged and no valid live backend is accepted",
+      "computed_and_withheld": {
+        "modeld": {
+          "computed_frames": 53,
+          "published_frames": 0,
+          "late_outputs": 53,
+          "p99_work_ms": 247.386771
+        },
+        "dmonitoringmodeld": {
+          "computed_frames": 469,
+          "published_frames": 0,
+          "late_outputs": 469,
+          "p99_work_ms": 73.612239
+        }
+      }
+    },
+    "sustained_20_hz_inference": {
+      "status": "failed",
+      "reason": "Original-reference parity fails; final OpenCL, CPU and combined work times are recorded separately"
+    },
+    "sustained_100_hz_controls": {
+      "status": "failed",
+      "reason": "Absolute source pacing restores approximately 100 Hz mean controls, but complete-cycle jitter/misses and invalid upstream inputs remain",
+      "measured": {
+        "p99_work_ms": 9.244739,
+        "p99_complete_cycle_ms": 24.52724,
+        "mean_cycle_hz": 98.9732616147874,
+        "deadline_misses": 18,
+        "cycle_deadline_misses": 1267,
+        "work_samples": 2702
+      }
+    },
+    "approximately_30_fps_ui": {
+      "status": "passed",
+      "scope": "Short combined diagnostic only; see final UI frame rate, no 30-minute qualification",
+      "mean_fps": 29.684420655023075
+    },
+    "new_30_minute_workload": {
+      "status": "blocked",
+      "reason": "Identity, parity and freshness prerequisites fail; historical severe-thermal failure retained"
+    },
+    "real_panda_receive_only_integration": {
+      "status": "blocked",
+      "reason": "Panda disconnected; USB rejection and protocol host tests do not qualify physical hardware"
+    },
+    "physical_vehicle_qualification": {
+      "status": "blocked",
+      "reason": "No mounted calibration, firmware compatibility, passive fingerprint, harness or vehicle validation"
+    },
+    "quality_review": {
+      "status": "failed",
+      "reason": "Final quality-delta remains non-clean; see quality-review.json; none acknowledged to suppress gating"
+    }
+  },
+  "installed_evidence": "candidate10-installed.json",
+  "historical_failures": [
+    "candidate8-validation-summary.json",
+    "candidate9-validation-summary.json"
+  ],
+  "performance_comparison": "candidate10-performance-comparison.json",
+  "quality_scan_field": "candidate10_final_scan",
+  "qualification": "Bench diagnostic only; no accepted live inference backend or physical driving qualification",
+  "experiment_counts": {
+    "passed": 21,
+    "failed": 5,
+    "blocked": 0
+  }
+}

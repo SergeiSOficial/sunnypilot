@@ -1,0 +1,12 @@
+{
+  "daemon": "plannerd",
+  "pid": 28371,
+  "vehicle_tx_enabled": false,
+  "engagement_allowed": false,
+  "work_samples": 0,
+  "deadline_misses": 0,
+  "phase": "failed",
+  "simulation": true,
+  "upstream_module": "controls.plannerd",
+  "error": "Traceback (most recent call last):\n  File \"/data/data/com.samsung.sunnypilot.fold3/files/chaquopy/AssetFinder/app/fold3_daemons.py\", line 135, in run\n  File \"/data/data/com.samsung.sunnypilot.fold3/files/chaquopy/AssetFinder/app/fold3_driving.py\", line 52, in upstream\n  File \"/data/data/com.samsung.sunnypilot.fold3/files/chaquopy/AssetFinder/app/openpilot/selfdrive/controls/plannerd.py\", line 29, in main\n    longitudinal_planner = LongitudinalPlanner(CP, CP_SP)\n                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/data/data/com.samsung.sunnypilot.fold3/files/chaquopy/AssetFinder/app/openpilot/selfdrive/controls/lib/longitudinal_planner.py\", line 38, in __init__\n    LongitudinalPlannerSP.__init__(self, self.CP, CP_SP, self.mpc)\n  File \"/data/data/com.samsung.sunnypilot.fold3/files/chaquopy/AssetFinder/app/openpilot/sunnypilot/selfdrive/controls/lib/longitudinal_planner.py\", line 26, in __init__\n    self.scc = SmartCruiseControl()\n               ^^^^^^^^^^^^^^^^^^^^\n  File \"/data/data/com.samsung.sunnypilot.fold3/files/chaquopy/AssetFinder/app/openpilot/sunnypilot/selfdrive/controls/lib/smart_cruise_control/smart_cruise_control.py\", line 15, in __init__\n    self.map = SmartCruiseControlMap()\n               ^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/data/data/com.samsung.sunnypilot.fold3/files/chaquopy/AssetFinder/app/openpilot/sunnypilot/selfdrive/controls/lib/smart_cruise_control/map_controller.py\", line 77, in __init__\n    self.mem_params = Params(\"/dev/shm/params\") if platform.system() != \"Darwin\" else self.params\n                      ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/data/data/com.samsung.sunnypilot.fold3/files/chaquopy/AssetFinder/app/openpilot/common/params.py\", line 120, in __init__\n    self.p = params_create(path, len(path))\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/data/data/com.samsung.sunnypilot.fold3/files/chaquopy/AssetFinder/app/openpilot/common/params.py\", line 60, in checked\n    raise RuntimeError(error.decode())\nRuntimeError: Failed to ensure params path, errno=13, path=/dev/shm/params, param_prefix=/d\n"
+}

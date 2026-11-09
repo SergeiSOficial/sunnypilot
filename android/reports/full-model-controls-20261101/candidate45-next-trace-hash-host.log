@@ -1,0 +1,16 @@
+.......F..
+======================================================================
+FAIL: test_recurrent_trace_checks_hashed_image_history_without_qualifying (test_accel_stages.AccuracyStagesTest.test_recurrent_trace_checks_hashed_image_history_without_qualifying)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sergios/sunnypilot/android/tests/test_accel_stages.py", line 69, in test_recurrent_trace_checks_hashed_image_history_without_qualifying
+    self.assertEqual(entry["status"], "diagnostic_only", entry)
+AssertionError: 'blocked' != 'diagnostic_only'
+- blocked
++ diagnostic_only
+ : {'status': 'blocked', 'diagnostic_only': True, 'performance_status': 'blocked', 'qualified': False, 'accuracy_status': 'pending', 'rtol': 0.001, 'atol': 0.0001, 'identity': {'name': 'driving_supercombo', 'backend': 'mnn-opencl', 'memory_mode': 'buffer', 'cpu_fallback': False, 'fingerprint': 'test-device', 'sha256': {'apk': 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'model': 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'original_model': 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'references': 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'sequences': 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'conversion': 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'provider': 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'opencl_plugin': 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'driver': 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'implementation': 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'native': 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'}}, 'error': "KeyError: 'new_img'"}
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.385s
+
+FAILED (failures=1)

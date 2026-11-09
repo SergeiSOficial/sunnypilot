@@ -1,0 +1,190 @@
+{
+  "status": "failed",
+  "matched_fixture_sha256": "b5ea99327f0ffc121e5556d29b32d4ce8e6e855d14518f46a3f060ea38721f99",
+  "runs": [
+    {
+      "candidate": "candidate44",
+      "report": "npu-recovery-20261101/fold-candidate44-chain-device-steady.json",
+      "apk_sha256": "f18262c93c2132b1e61a1746af6b2c55dcae8820e3d8a9db0dd84bc5472c6360",
+      "fixture_sha256": "b5ea99327f0ffc121e5556d29b32d4ce8e6e855d14518f46a3f060ea38721f99",
+      "functional_status": "passed",
+      "timing_status": "failed",
+      "samples": 2705,
+      "mean_hz": 99.909663972664,
+      "work_p99_ms": 7.304167,
+      "legacy_complete_cycle_p99_ms": 16.612917,
+      "stages_p99_ms": {
+        "input_wait_budget_ms": 9,
+        "cycle_interval_ms": 16.720417,
+        "scheduler_delay_ms": 6.20619,
+        "selfdrive_ipc_age_ms": 20.499115,
+        "input_handling_ms": 10.354531,
+        "pacing_wait_ms": 10.797709,
+        "computation_ms": 4.410521,
+        "publishing_ms": 2.614167,
+        "parameters_extensions_ms": 1.950209,
+        "cycle_before_reporting_ms": 15.843334,
+        "reporting_ms": 1.300313
+      },
+      "work_deadline_misses": 8,
+      "legacy_cycle_deadline_misses": 1350,
+      "scheduled_deadline_misses": null,
+      "skipped_slots": null,
+      "ui_mean_fps": 29.675004522902988,
+      "source_mean_hz": 99.99968927430768,
+      "source_deadline_misses": 202,
+      "timing_schema_version": 1,
+      "metrics_process": "controls",
+      "synthetic_sources": true,
+      "vehicle_tx_enabled": false
+    },
+    {
+      "candidate": "candidate45zd",
+      "report": "full-model-controls-20261101/fold-candidate45zd-chain-device-steady.json",
+      "apk_sha256": "e7ae5461257aae2abef31e1631c4c79e7a32bc1513523f5d38db021ab9a2334e",
+      "fixture_sha256": "b5ea99327f0ffc121e5556d29b32d4ce8e6e855d14518f46a3f060ea38721f99",
+      "functional_status": "passed",
+      "timing_status": "failed",
+      "samples": 2661,
+      "mean_hz": 99.99722462214214,
+      "work_p99_ms": 2.44875,
+      "legacy_complete_cycle_p99_ms": 14.000989,
+      "stages_p99_ms": {
+        "input_wait_budget_ms": 0,
+        "cycle_interval_ms": 12.755625,
+        "scheduler_delay_ms": 2.949473,
+        "skipped_slots": 0,
+        "selfdrive_ipc_age_ms": 20.653854,
+        "input_handling_ms": 1.438958,
+        "pacing_wait_ms": 10.584375,
+        "computation_ms": 0.954479,
+        "publishing_ms": 0.937812,
+        "parameters_extensions_ms": 0.761614,
+        "cycle_before_reporting_ms": 13.681719,
+        "active_cycle_before_reporting_ms": 3.491667,
+        "release_to_completion_before_reporting_ms": 5.92765,
+        "reporting_ms": 0.36677,
+        "release_to_completion_ms": 6.087757
+      },
+      "work_deadline_misses": 0,
+      "legacy_cycle_deadline_misses": 1296,
+      "scheduled_deadline_misses": 0,
+      "skipped_slots": 0,
+      "ui_mean_fps": 29.671381206353686,
+      "source_mean_hz": 99.99954361880565,
+      "source_deadline_misses": 245,
+      "timing_schema_version": 2,
+      "metrics_process": "manager",
+      "synthetic_sources": true,
+      "vehicle_tx_enabled": false,
+      "cpu_placement": {
+        "policy": "fold3-performance-pair-v3",
+        "diagnostic_only": false,
+        "before": [
+          0,
+          1,
+          2,
+          4,
+          5,
+          6,
+          7
+        ],
+        "capacities": {
+          "0": 325,
+          "1": 325,
+          "2": 325,
+          "4": 828,
+          "5": 828,
+          "6": 828,
+          "7": 1024
+        },
+        "status": "applied",
+        "after": [
+          4,
+          6
+        ]
+      },
+      "diagnostic_cpu_affinity": null
+    }
+  ],
+  "accelerator_timing": {
+    "status": "failed",
+    "models": {
+      "dmonitoring_model": {
+        "status": "passed",
+        "performance_status": "failed",
+        "qualified": false,
+        "samples": 100,
+        "work_p50_ms": 1240.5444,
+        "work_p99_ms": 1276.61667059,
+        "deadline_misses_50ms": 100,
+        "initialization_ms": 3392.072134,
+        "error": null,
+        "last_reported_call_wall_stages_ms": {
+          "upload_ms": 2.455677,
+          "compute_ms": 701.089792,
+          "readback_ms": 490.100312
+        },
+        "last_reported_call_is_performance_sample": false,
+        "wall_stage_percentiles_ms": {
+          "compute_ms": {
+            "p50": 713.873698,
+            "p99": 747.15107017
+          },
+          "readback_ms": {
+            "p50": 495.038411,
+            "p99": 511.88443766
+          },
+          "upload_ms": {
+            "p50": 3.1802085,
+            "p99": 4.2897526
+          }
+        },
+        "evidence": "fold45zd-mnn-driver-timing.json",
+        "isolation": "fold45zd-mnn-driver-timing-isolation.json",
+        "evidence_sha256": "46aa4d375e9729672968936b5b4706a74e4f367ed2961aac106859681116d678"
+      },
+      "driving_supercombo": {
+        "status": "passed",
+        "performance_status": "failed",
+        "qualified": false,
+        "samples": 100,
+        "work_p50_ms": 2237.387083,
+        "work_p99_ms": 2261.54379544,
+        "deadline_misses_50ms": 100,
+        "initialization_ms": 4392.414842,
+        "error": null,
+        "last_reported_call_wall_stages_ms": {
+          "upload_ms": 1.608854,
+          "compute_ms": 1596.027396,
+          "readback_ms": 566.750833
+        },
+        "last_reported_call_is_performance_sample": false,
+        "wall_stage_percentiles_ms": {
+          "compute_ms": {
+            "p50": 1608.324114,
+            "p99": 1627.248335
+          },
+          "readback_ms": {
+            "p50": 567.3124735,
+            "p99": 571.95778021
+          },
+          "upload_ms": {
+            "p50": 2.2015105,
+            "p99": 3.1032804
+          }
+        },
+        "evidence": "fold45zd-mnn-road-timing.json",
+        "isolation": "fold45zd-mnn-road-timing-isolation.json",
+        "evidence_sha256": "d27e1ceb54dd426adf6259ad122df52b548827a405f1ed0529ee361073c430d9"
+      }
+    },
+    "measurement": "Complete inference wall time; upload/compute/readback are host wall stages. Asynchronous GPU execution can finish during readback; these are not per-kernel GPU event times."
+  },
+  "notes": [
+    "Raw intervals, legacy complete-cycle latency and deadline counters retain their definitions",
+    "Release-to-completion is supplemental schema-2 evidence",
+    "Force-stop can leave an unflushed journal tail; reported samples are retained",
+    "Injected controls fixtures do not qualify camera perception or vehicle operation"
+  ]
+}

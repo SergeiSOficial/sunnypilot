@@ -1,0 +1,343 @@
+{
+  "candidate": "candidate40",
+  "apk_sha256": "bd42b65a3538b8ad73834e90826eb10a98d8afeacbe9d5aae5877d43a25e30ec",
+  "scope": "Tapped and untapped final graphs on the final APK. Host seed42 export checks, no-CPU partitioning and original-output accuracy remain distinct gates. No diagnostic trace promotes a backend.",
+  "vehicle_tx_enabled": false,
+  "engagement_allowed": false,
+  "rtol": 0.001,
+  "atol": 0.0001,
+  "results": [
+    {
+      "source_report": "candidate40-qnn-image-rank4.json",
+      "isolation_report": "candidate40-qnn-image-rank4-isolation.json",
+      "apk_sha256": "bd42b65a3538b8ad73834e90826eb10a98d8afeacbe9d5aae5877d43a25e30ec",
+      "model": "dmonitoring_model",
+      "exposed_intermediates": true,
+      "derived_model_sha256": "06f4ff488548709ceb0844c15871a916d821dbe4555935c3256bf19b7e648b23",
+      "original_sha256": "dee5a294e8afaacc9295ac5d100e00733ecac278e79264b96331e40a3ede1b04",
+      "host_instrumented_matches_original": {
+        "outputs": true
+      },
+      "providers": {
+        "QNNExecutionProvider": {
+          "partitions": 1,
+          "nodes": 452
+        }
+      },
+      "cpu_nodes": [],
+      "no_cpu_fallback_status": "passed",
+      "first_divergence": {
+        "index": 9,
+        "operator": "Conv",
+        "name": "node_Conv_805_token_561",
+        "output": "android_precision_8_result",
+        "dtype": "float32",
+        "shape": [
+          1,
+          32,
+          120,
+          180
+        ],
+        "inputs": [
+          "android_precision_8_nchw",
+          "FusedBack_model._vision._backbone.conv_stem.weight",
+          "FusedBack_model._vision._backbone.conv_stem.weight_bias"
+        ],
+        "domain": "",
+        "layout": "ONNX declared axes; provider transformations recorded separately",
+        "passed": false,
+        "finite": true,
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": false,
+        "max_abs_error": 0.026052474975585938,
+        "mismatched_elements": 166037
+      },
+      "first_nonfinite": null,
+      "final": {
+        "outputs": {
+          "passed": false,
+          "finite": true,
+          "shape": [
+            1,
+            553
+          ],
+          "dtype": "float16",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 0.0126953125,
+          "mismatched_elements": 312
+        }
+      },
+      "original_final_accuracy_status": "failed",
+      "unexpected_final_nonfinite_elements": 0,
+      "profile_path": "/data/user/0/com.samsung.sunnypilot.fold3/files/trace-dmonitoring_model-qnn-gpu_2026-11-01_11-34-51_672.json",
+      "provider_options": {
+        "profiling_level": "detailed",
+        "profiling_file_path": "/data/user/0/com.samsung.sunnypilot.fold3/files/trace-dmonitoring_model-qnn.csv"
+      }
+    },
+    {
+      "source_report": "candidate40-qnn-image-rank4.json",
+      "isolation_report": "candidate40-qnn-image-rank4-isolation.json",
+      "apk_sha256": "bd42b65a3538b8ad73834e90826eb10a98d8afeacbe9d5aae5877d43a25e30ec",
+      "model": "driving_supercombo",
+      "exposed_intermediates": true,
+      "derived_model_sha256": "8b3ec70bbe8160c487f2b5d1fca45e40dd274714f30608bd98a1df367b35dab2",
+      "original_sha256": "65a08adc31d5c456219687d99b7bf5e44d61dae2d49ea67850e76105c7248cce",
+      "host_instrumented_matches_original": {
+        "outputs": true,
+        "next_state_img_q": true,
+        "next_state_desire_q": true,
+        "next_state_feat_q": true
+      },
+      "providers": {
+        "QNNExecutionProvider": {
+          "partitions": 1,
+          "nodes": 560
+        }
+      },
+      "cpu_nodes": [],
+      "no_cpu_fallback_status": "passed",
+      "first_divergence": {
+        "index": 5,
+        "operator": "Mul",
+        "name": "",
+        "output": "InsertedPrecisionFreeCast_model/p_silu_2",
+        "dtype": "float32",
+        "shape": [
+          1,
+          512
+        ],
+        "inputs": [
+          "InsertedPrecisionFreeCast_model/p_linear_4",
+          "android_precision_4_sigmoid"
+        ],
+        "domain": "",
+        "layout": "ONNX declared axes; provider transformations recorded separately",
+        "passed": false,
+        "finite": true,
+        "expected_nonfinite_elements": 0,
+        "unexpected_nonfinite_elements": 0,
+        "exact": false,
+        "max_abs_error": 0.0009162425994873047,
+        "mismatched_elements": 1
+      },
+      "first_nonfinite": null,
+      "final": {
+        "outputs": {
+          "passed": false,
+          "finite": true,
+          "shape": [
+            1,
+            2576
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 21.546875,
+          "mismatched_elements": 2559
+        },
+        "next_state_img_q": {
+          "passed": false,
+          "finite": true,
+          "shape": [
+            2,
+            5,
+            6,
+            128,
+            256
+          ],
+          "dtype": "uint8",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 255.0,
+          "mismatched_elements": 1958367
+        },
+        "next_state_desire_q": {
+          "passed": true,
+          "finite": true,
+          "shape": [
+            100,
+            1,
+            8
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": true,
+          "max_abs_error": 0.0,
+          "mismatched_elements": 0
+        },
+        "next_state_feat_q": {
+          "passed": false,
+          "finite": true,
+          "shape": [
+            96,
+            1,
+            512
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 0.248443603515625,
+          "mismatched_elements": 511
+        }
+      },
+      "original_final_accuracy_status": "failed",
+      "unexpected_final_nonfinite_elements": 0,
+      "profile_path": "/data/user/0/com.samsung.sunnypilot.fold3/files/trace-driving_supercombo-qnn-gpu_2026-11-01_11-34-57_499.json",
+      "provider_options": {
+        "profiling_level": "detailed",
+        "profiling_file_path": "/data/user/0/com.samsung.sunnypilot.fold3/files/trace-driving_supercombo-qnn.csv"
+      }
+    },
+    {
+      "source_report": "candidate40-qnn-full-rank4.json",
+      "isolation_report": "candidate40-qnn-full-rank4-isolation.json",
+      "apk_sha256": "bd42b65a3538b8ad73834e90826eb10a98d8afeacbe9d5aae5877d43a25e30ec",
+      "model": "dmonitoring_model",
+      "exposed_intermediates": false,
+      "derived_model_sha256": "b852f37d3fce1266acf4f9913d10e576bd2916f3cc9e0e146098fbbb9ea5c63b",
+      "original_sha256": "dee5a294e8afaacc9295ac5d100e00733ecac278e79264b96331e40a3ede1b04",
+      "host_instrumented_matches_original": {
+        "outputs": true
+      },
+      "providers": {
+        "QNNExecutionProvider": {
+          "partitions": 1,
+          "nodes": 435
+        }
+      },
+      "cpu_nodes": [],
+      "no_cpu_fallback_status": "passed",
+      "first_divergence": null,
+      "first_nonfinite": null,
+      "final": {
+        "outputs": {
+          "passed": false,
+          "finite": true,
+          "shape": [
+            1,
+            553
+          ],
+          "dtype": "float16",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 0.0126953125,
+          "mismatched_elements": 312
+        }
+      },
+      "original_final_accuracy_status": "failed",
+      "unexpected_final_nonfinite_elements": 0,
+      "profile_path": "/data/user/0/com.samsung.sunnypilot.fold3/files/trace-dmonitoring_model-qnn-gpu_2026-11-01_11-36-20_822.json",
+      "provider_options": {
+        "profiling_level": "detailed",
+        "profiling_file_path": "/data/user/0/com.samsung.sunnypilot.fold3/files/trace-dmonitoring_model-qnn.csv"
+      }
+    },
+    {
+      "source_report": "candidate40-qnn-full-rank4.json",
+      "isolation_report": "candidate40-qnn-full-rank4-isolation.json",
+      "apk_sha256": "bd42b65a3538b8ad73834e90826eb10a98d8afeacbe9d5aae5877d43a25e30ec",
+      "model": "driving_supercombo",
+      "exposed_intermediates": false,
+      "derived_model_sha256": "a39f795777c2ebb9222e7878003cac3215495f99fa8bed70f54311cfb041dc9d",
+      "original_sha256": "65a08adc31d5c456219687d99b7bf5e44d61dae2d49ea67850e76105c7248cce",
+      "host_instrumented_matches_original": {
+        "outputs": true,
+        "next_state_img_q": true,
+        "next_state_desire_q": true,
+        "next_state_feat_q": true
+      },
+      "providers": {
+        "QNNExecutionProvider": {
+          "partitions": 1,
+          "nodes": 559
+        }
+      },
+      "cpu_nodes": [],
+      "no_cpu_fallback_status": "passed",
+      "first_divergence": null,
+      "first_nonfinite": null,
+      "final": {
+        "outputs": {
+          "passed": false,
+          "finite": false,
+          "shape": [
+            1,
+            2576
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 998,
+          "exact": false,
+          "max_abs_error": 73.890625,
+          "mismatched_elements": 2569
+        },
+        "next_state_img_q": {
+          "passed": false,
+          "finite": true,
+          "shape": [
+            2,
+            5,
+            6,
+            128,
+            256
+          ],
+          "dtype": "uint8",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 255.0,
+          "mismatched_elements": 1958474
+        },
+        "next_state_desire_q": {
+          "passed": true,
+          "finite": true,
+          "shape": [
+            100,
+            1,
+            8
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": true,
+          "max_abs_error": 0.0,
+          "mismatched_elements": 0
+        },
+        "next_state_feat_q": {
+          "passed": false,
+          "finite": true,
+          "shape": [
+            96,
+            1,
+            512
+          ],
+          "dtype": "float32",
+          "expected_nonfinite_elements": 0,
+          "unexpected_nonfinite_elements": 0,
+          "exact": false,
+          "max_abs_error": 0.092437744140625,
+          "mismatched_elements": 512
+        }
+      },
+      "original_final_accuracy_status": "failed",
+      "unexpected_final_nonfinite_elements": 998,
+      "profile_path": "/data/user/0/com.samsung.sunnypilot.fold3/files/trace-driving_supercombo-qnn-gpu_2026-11-01_11-36-24_002.json",
+      "provider_options": {
+        "profiling_level": "detailed",
+        "profiling_file_path": "/data/user/0/com.samsung.sunnypilot.fold3/files/trace-driving_supercombo-qnn.csv"
+      }
+    }
+  ],
+  "earlier_traces": "candidate38-qnn-diagnostic-summary.json",
+  "result": "failed; QNN GPU remains diagnostic and HTP remains deferred",
+  "qualification_status": "blocked"
+}

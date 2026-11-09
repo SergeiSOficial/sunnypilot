@@ -1,0 +1,338 @@
+{
+  "candidate": "candidate45ze",
+  "apk_sha256": "54a613533c10795ab754e2737d5bf2facfd387dfb2bd58ef43017260dd063a3f",
+  "branch": "codex/fold3-android-port",
+  "vehicle_tx_enabled": false,
+  "physical_engagement_allowed": false,
+  "qualification_status": "blocked",
+  "accuracy": {
+    "status": "passed",
+    "comparisons": 795,
+    "no_cpu_fallback": true,
+    "rtol": 0.001,
+    "atol": 0.0001,
+    "evidence": "candidate45ze-accuracy.json",
+    "sha256": "7f619170b15d502694de7aa24866e635031146aef5338ffc8260ebbcf1a36ec4"
+  },
+  "accelerator_timing": {
+    "dmonitoring_model": {
+      "status": "passed",
+      "performance_status": "failed",
+      "qualified": false,
+      "samples": 100,
+      "work_p50_ms": 1027.4892965,
+      "work_p99_ms": 1058.9417825799999,
+      "deadline_misses_50ms": 100,
+      "initialization_ms": 3567.952655,
+      "error": null,
+      "last_reported_call_wall_stages_ms": {
+        "upload_ms": 0.924532,
+        "compute_ms": 506.295208,
+        "readback_ms": 480.034166
+      },
+      "last_reported_call_is_performance_sample": false,
+      "wall_stage_percentiles_ms": {
+        "compute_ms": {
+          "p50": 510.31354150000004,
+          "p99": 522.9818897499999
+        },
+        "readback_ms": {
+          "p50": 486.5461715,
+          "p99": 512.57413317
+        },
+        "upload_ms": {
+          "p50": 3.275755,
+          "p99": 4.06198284000001
+        }
+      },
+      "evidence": "fold45ze-mnn-driver-timing.json",
+      "isolation": "fold45ze-mnn-driver-timing-isolation.json",
+      "evidence_sha256": "675206cbe79797b7edca75e1b2807d296eab798e478a5a13d8711cbb19fa8c93"
+    },
+    "driving_supercombo": {
+      "status": "blocked",
+      "performance_status": "blocked",
+      "qualified": false,
+      "samples": 0,
+      "work_p50_ms": null,
+      "work_p99_ms": null,
+      "deadline_misses_50ms": null,
+      "initialization_ms": 4693.887967,
+      "error": "Unsafe or unavailable Android thermal state: 2",
+      "last_reported_call_wall_stages_ms": {
+        "upload_ms": 1.832656,
+        "compute_ms": 1663.355728,
+        "readback_ms": 516.919219
+      },
+      "last_reported_call_is_performance_sample": false,
+      "wall_stage_percentiles_ms": {},
+      "evidence": "fold45ze-mnn-road-timing.json",
+      "isolation": "fold45ze-mnn-road-timing-isolation.json",
+      "evidence_sha256": "e963557750a11781e8dcbce9add037558e4a24a59b9f1969a76289ee52d44c0a"
+    }
+  },
+  "matched_controls": [
+    {
+      "candidate": "candidate44",
+      "report": "npu-recovery-20261101/fold-candidate44-chain-device-steady.json",
+      "apk_sha256": "f18262c93c2132b1e61a1746af6b2c55dcae8820e3d8a9db0dd84bc5472c6360",
+      "fixture_sha256": "b5ea99327f0ffc121e5556d29b32d4ce8e6e855d14518f46a3f060ea38721f99",
+      "functional_status": "passed",
+      "timing_status": "failed",
+      "samples": 2705,
+      "mean_hz": 99.909663972664,
+      "work_p99_ms": 7.304167,
+      "legacy_complete_cycle_p99_ms": 16.612917,
+      "stages_p99_ms": {
+        "input_wait_budget_ms": 9,
+        "cycle_interval_ms": 16.720417,
+        "scheduler_delay_ms": 6.20619,
+        "selfdrive_ipc_age_ms": 20.499115,
+        "input_handling_ms": 10.354531,
+        "pacing_wait_ms": 10.797709,
+        "computation_ms": 4.410521,
+        "publishing_ms": 2.614167,
+        "parameters_extensions_ms": 1.950209,
+        "cycle_before_reporting_ms": 15.843334,
+        "reporting_ms": 1.300313
+      },
+      "work_deadline_misses": 8,
+      "legacy_cycle_deadline_misses": 1350,
+      "scheduled_deadline_misses": null,
+      "skipped_slots": null,
+      "ui_mean_fps": 29.675004522902988,
+      "source_mean_hz": 99.99968927430768,
+      "source_deadline_misses": 202,
+      "timing_schema_version": 1,
+      "metrics_process": "controls",
+      "synthetic_sources": true,
+      "vehicle_tx_enabled": false
+    },
+    {
+      "candidate": "candidate45zd",
+      "report": "full-model-controls-20261101/fold-candidate45zd-chain-device-steady.json",
+      "apk_sha256": "e7ae5461257aae2abef31e1631c4c79e7a32bc1513523f5d38db021ab9a2334e",
+      "fixture_sha256": "b5ea99327f0ffc121e5556d29b32d4ce8e6e855d14518f46a3f060ea38721f99",
+      "functional_status": "passed",
+      "timing_status": "failed",
+      "samples": 2661,
+      "mean_hz": 99.99722462214214,
+      "work_p99_ms": 2.44875,
+      "legacy_complete_cycle_p99_ms": 14.000989,
+      "stages_p99_ms": {
+        "input_wait_budget_ms": 0,
+        "cycle_interval_ms": 12.755625,
+        "scheduler_delay_ms": 2.949473,
+        "skipped_slots": 0,
+        "selfdrive_ipc_age_ms": 20.653854,
+        "input_handling_ms": 1.438958,
+        "pacing_wait_ms": 10.584375,
+        "computation_ms": 0.954479,
+        "publishing_ms": 0.937812,
+        "parameters_extensions_ms": 0.761614,
+        "cycle_before_reporting_ms": 13.681719,
+        "active_cycle_before_reporting_ms": 3.491667,
+        "release_to_completion_before_reporting_ms": 5.92765,
+        "reporting_ms": 0.36677,
+        "release_to_completion_ms": 6.087757
+      },
+      "work_deadline_misses": 0,
+      "legacy_cycle_deadline_misses": 1296,
+      "scheduled_deadline_misses": 0,
+      "skipped_slots": 0,
+      "ui_mean_fps": 29.671381206353686,
+      "source_mean_hz": 99.99954361880565,
+      "source_deadline_misses": 245,
+      "timing_schema_version": 2,
+      "metrics_process": "manager",
+      "synthetic_sources": true,
+      "vehicle_tx_enabled": false
+    },
+    {
+      "candidate": "candidate45ze",
+      "report": "performance-followup-20261103/fold-candidate45ze-chain-device-steady.json",
+      "apk_sha256": "54a613533c10795ab754e2737d5bf2facfd387dfb2bd58ef43017260dd063a3f",
+      "fixture_sha256": "b5ea99327f0ffc121e5556d29b32d4ce8e6e855d14518f46a3f060ea38721f99",
+      "functional_status": "passed",
+      "timing_status": "failed",
+      "samples": 2661,
+      "mean_hz": 100.00335698111049,
+      "work_p99_ms": 2.668698,
+      "legacy_complete_cycle_p99_ms": 13.549531,
+      "stages_p99_ms": {
+        "input_wait_budget_ms": 0,
+        "cycle_interval_ms": 12.584896,
+        "scheduler_delay_ms": 2.836246,
+        "skipped_slots": 0,
+        "selfdrive_ipc_age_ms": 19.039843,
+        "input_handling_ms": 1.677605,
+        "pacing_wait_ms": 10.402343,
+        "computation_ms": 1.018489,
+        "publishing_ms": 0.925209,
+        "parameters_extensions_ms": 0.800938,
+        "cycle_before_reporting_ms": 13.521406,
+        "active_cycle_before_reporting_ms": 3.94875,
+        "release_to_completion_before_reporting_ms": 5.879837,
+        "reporting_ms": 0.356927,
+        "release_to_completion_ms": 5.914314999999999
+      },
+      "work_deadline_misses": 0,
+      "legacy_cycle_deadline_misses": 1214,
+      "scheduled_deadline_misses": 0,
+      "skipped_slots": 0,
+      "ui_mean_fps": 29.69308041479472,
+      "source_mean_hz": 99.99964535129304,
+      "source_deadline_misses": 228,
+      "timing_schema_version": 2,
+      "metrics_process": "manager",
+      "synthetic_sources": true,
+      "vehicle_tx_enabled": false
+    }
+  ],
+  "devices": {
+    "fold": {
+      "functional_status": "passed",
+      "checks": [
+        {
+          "name": "chain-device-steady",
+          "status": "passed",
+          "isolation_status": "passed",
+          "isolation": "fold-candidate45ze-chain-device-steady-isolation.json"
+        },
+        {
+          "name": "chain-device-faults",
+          "status": "passed",
+          "isolation_status": "passed",
+          "isolation": "fold-candidate45ze-chain-device-faults-isolation.json"
+        },
+        {
+          "name": "instrumentation",
+          "status": "passed",
+          "isolation_status": "passed",
+          "isolation": "fold-candidate45ze-instrumentation-isolation.json"
+        },
+        {
+          "name": "lifecycle",
+          "status": "passed",
+          "isolation_status": "passed",
+          "isolation": "fold-candidate45ze-lifecycle-isolation.json"
+        },
+        {
+          "name": "adb-faults",
+          "status": "passed",
+          "isolation_status": "passed",
+          "isolation": "fold-candidate45ze-adb-faults-isolation.json"
+        },
+        {
+          "name": "ipc",
+          "status": "passed",
+          "isolation_status": "passed",
+          "isolation": "fold-candidate45ze-ipc-isolation.json"
+        }
+      ],
+      "inventory": "fold-candidate45ze-validation-driver.json",
+      "installed_hash_status": "passed",
+      "installed_evidence": "candidate45ze-installed-fold.json",
+      "retained_attempts": []
+    },
+    "emulator": {
+      "functional_status": "failed",
+      "checks": [
+        {
+          "name": "instrumentation",
+          "status": "passed",
+          "isolation_status": "passed",
+          "isolation": "emulator-candidate45ze-retry1-instrumentation-isolation.json"
+        },
+        {
+          "name": "chain-device-steady",
+          "status": "passed",
+          "isolation_status": "passed",
+          "isolation": "emulator-candidate45ze-retry1-chain-device-steady-isolation.json"
+        },
+        {
+          "name": "chain-device-faults",
+          "status": "passed",
+          "isolation_status": "passed",
+          "isolation": "emulator-candidate45ze-retry1-chain-device-faults-isolation.json"
+        },
+        {
+          "name": "lifecycle",
+          "status": "passed",
+          "isolation_status": "passed",
+          "isolation": "emulator-candidate45ze-retry1-lifecycle-isolation.json"
+        },
+        {
+          "name": "adb-faults",
+          "status": "passed",
+          "isolation_status": "passed",
+          "isolation": "emulator-candidate45ze-retry1-adb-faults-isolation.json"
+        },
+        {
+          "name": "ipc",
+          "status": "passed",
+          "isolation_status": "passed",
+          "isolation": "emulator-candidate45ze-retry1-ipc-isolation.json"
+        },
+        {
+          "name": "metadrive-cancel",
+          "status": "passed",
+          "isolation_status": "passed",
+          "isolation": "emulator-candidate45ze-retry1-metadrive-cancel-isolation.json"
+        },
+        {
+          "name": "metadrive-stale",
+          "status": "passed",
+          "isolation_status": "passed",
+          "isolation": "emulator-candidate45ze-retry1-metadrive-stale-isolation.json"
+        },
+        {
+          "name": "thermal",
+          "status": "passed",
+          "isolation_status": "passed",
+          "isolation": "emulator-candidate45ze-retry1-thermal-isolation.json"
+        },
+        {
+          "name": "camera-timing",
+          "status": "failed",
+          "isolation_status": "passed",
+          "isolation": "emulator-candidate45ze-retry1-camera-timing-isolation.json"
+        }
+      ],
+      "inventory": "emulator-candidate45ze-retry1-validation-driver.json",
+      "installed_hash_status": "passed",
+      "installed_evidence": "candidate45ze-installed-emulator-retry1.json",
+      "retained_attempts": [
+        "emulator-candidate45ze-validation-driver.json",
+        "candidate45ze-emulator-attempt1-interrupted-cleanup.json"
+      ]
+    }
+  },
+  "combined_visual_workloads": {
+    "status": "blocked",
+    "stages": [
+      "30 seconds",
+      "2 minutes",
+      "30 minutes"
+    ],
+    "reason": "Inference timing, complete-cycle controls timing and physical camera gates are not cleared"
+  },
+  "physical_gates": {
+    "rear_sensor_identity": "blocked",
+    "mounted_calibration": "blocked",
+    "Panda_vehicle_validation": "blocked"
+  },
+  "cooling_optimization": "deferred",
+  "thermal_safeguards": "enforced",
+  "retained_baselines": [
+    "candidate35",
+    "candidate40",
+    "candidate44",
+    "candidate45zd"
+  ],
+  "notes": [
+    "Functional fixture success cannot qualify perception or physical vehicle operation",
+    "Blocked road timing has no completed p99; last-call wall stages are diagnostic only",
+    "Matched fixture does not establish causality across differing CPU policies or device conditions"
+  ]
+}

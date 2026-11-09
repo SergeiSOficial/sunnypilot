@@ -1,0 +1,16 @@
+test_tanh_fma_retains_midpoint_tail (android.tests.test_ncnn_fma.NcnnFmaTest.test_tanh_fma_retains_midpoint_tail) ... ERROR
+
+======================================================================
+ERROR: test_tanh_fma_retains_midpoint_tail (android.tests.test_ncnn_fma.NcnnFmaTest.test_tanh_fma_retains_midpoint_tail)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sergios/sunnypilot/android/tests/test_ncnn_fma.py", line 56, in test_tanh_fma_retains_midpoint_tail
+    subprocess.run([compiler, "-std=c11", "-O2", "-ffp-contract=off", str(path / "fma.c"), "-lm", "-o", str(path / "fma")],
+  File "/Users/sergios/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['/usr/bin/clang', '-std=c11', '-O2', '-ffp-contract=off', '/var/folders/8z/wn5gq57n6dqffngwg62nm8lc0000gn/T/tmpkh5zol2k/fma.c', '-lm', '-o', '/var/folders/8z/wn5gq57n6dqffngwg62nm8lc0000gn/T/tmpkh5zol2k/fma']' returned non-zero exit status 1.
+
+----------------------------------------------------------------------
+Ran 1 test in 0.201s
+
+FAILED (errors=1)

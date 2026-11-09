@@ -1,0 +1,74 @@
+{
+  "diagnostic_only": true,
+  "candidate": "candidate45u",
+  "apk_sha256": "e34f7d2979bd37b1457b8f83052bdf9436c4b10c491097988078822c87b29319",
+  "model": "driving_supercombo",
+  "seed": 42,
+  "tensor": "model/p_getitem_2",
+  "captured_sha256": "e6afa52c917ed678a87518bf43044fc89c841cc9f637325d7599bb62068ed896",
+  "original_host_graph_sha256": "5078784511c7bfb22f1546a15532ed6b6ed71ee6c3e83237951ff5b95ca9ce80",
+  "diagnostic_graph_sha256": "95f967a0fe57d4b5f5b49515e48dfc3e341122b492313d6675c626ae37cff65a",
+  "checks": {
+    "outputs": {
+      "passed": false,
+      "finite": true,
+      "shape": [
+        1,
+        2576
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": false,
+      "max_abs_error": 0.01171875,
+      "mismatched_elements": 25
+    },
+    "next_state_img_q": {
+      "passed": true,
+      "finite": true,
+      "shape": [
+        2,
+        5,
+        6,
+        128,
+        256
+      ],
+      "dtype": "uint8",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": true,
+      "max_abs_error": 0.0,
+      "mismatched_elements": 0
+    },
+    "next_state_desire_q": {
+      "passed": true,
+      "finite": true,
+      "shape": [
+        100,
+        1,
+        8
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": true,
+      "max_abs_error": 0.0,
+      "mismatched_elements": 0
+    },
+    "next_state_feat_q": {
+      "passed": true,
+      "finite": true,
+      "shape": [
+        96,
+        1,
+        512
+      ],
+      "dtype": "float32",
+      "expected_nonfinite_elements": 0,
+      "unexpected_nonfinite_elements": 0,
+      "exact": true,
+      "max_abs_error": 0.0,
+      "mismatched_elements": 0
+    }
+  }
+}

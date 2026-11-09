@@ -1,0 +1,102 @@
+TID251 `time.time` is banned: Use time.monotonic. time.time can skip due to its reference clock, you probably want a monotonic clock
+   --> android/app/src/main/python/fold3_accel.py:210:28
+    |
+208 |   manifest = json.loads((root / "accelerators/manifest.json").read_text())
+209 |   engine = "mnn" if backend == "mnn-opencl" else "ncnn"
+210 |   report = {"started_utc": time.time(), "backend": backend, "memory_mode": memory_mode,
+    |                            ^^^^^^^^^
+211 |             "stage": stage, "diagnostic_tracing": bool(trace_limit), "vehicle_tx_enabled": False, "models": {}}
+212 |   if accuracy_part is not None:
+    |
+
+TID251 `time.time` is banned: Use time.monotonic. time.time can skip due to its reference clock, you probably want a monotonic clock
+   --> android/app/src/main/python/fold3_accel.py:321:73
+    |
+319 |         if accuracy_part is not None:
+320 |           entry.update(status="passed", accuracy_status="partial", accuracy_part=accuracy_part,
+321 |                        started_utc=report["started_utc"], completed_utc=time.time())
+    |                                                                         ^^^^^^^^^
+322 |           if not accuracy_part_passed(entry, entry["identity"], accuracy_part):
+323 |             entry.update(status="failed", accuracy_status="failed", error="Original-reference accuracy part failed")
+    |
+
+TID251 `time.time` is banned: Use time.monotonic. time.time can skip due to its reference clock, you probably want a monotonic clock
+   --> android/app/src/main/python/fold3_accel.py:396:29
+    |
+394 |         del model
+395 |         save()
+396 |   report["completed_utc"] = time.time()
+    |                             ^^^^^^^^^
+397 |   save()
+398 |   return report
+    |
+
+TID251 `time.time` is banned: Use time.monotonic. time.time can skip due to its reference clock, you probably want a monotonic clock
+   --> android/app/src/main/python/fold3_accel.py:434:28
+    |
+432 |   root = Path(__file__).parent / "fold3_reference/gpu-probes"
+433 |   manifest = json.loads((root / "manifest.json").read_text())
+434 |   report = {"started_utc": time.time(), "diagnostic_only": True, "vehicle_tx_enabled": False, "models": {}}
+    |                            ^^^^^^^^^
+435 |   destination = Path(data_dir) / "model-report.json"
+436 |   for backend, engine in (("mnn-opencl", "mnn"), ("ncnn-vulkan", "ncnn")):
+    |
+
+TID251 `time.time` is banned: Use time.monotonic. time.time can skip due to its reference clock, you probably want a monotonic clock
+   --> android/app/src/main/python/fold3_accel.py:471:29
+    |
+469 |         del model
+470 |       destination.write_text(json.dumps(report, indent=2) + "\n")
+471 |   report["completed_utc"] = time.time()
+    |                             ^^^^^^^^^
+472 |   destination.write_text(json.dumps(report, indent=2) + "\n")
+473 |   return report
+    |
+
+TID251 `time.time` is banned: Use time.monotonic. time.time can skip due to its reference clock, you probably want a monotonic clock
+   --> android/app/src/main/python/fold3_accel.py:483:28
+    |
+481 |   root = Path(__file__).parent / "fold3_reference/htp-probes"
+482 |   manifest = json.loads((root / "manifest.json").read_text())
+483 |   report = {"started_utc": time.time(), "backend": "qnn-htp", "diagnostic_only": True,
+    |                            ^^^^^^^^^
+484 |             "vehicle_tx_enabled": False, "models": {}, "manifest": manifest,
+485 |             "provider_options": {"htp_arch": "68", "device_id": "0", "profiling_level": "detailed"}}
+    |
+
+TID251 `time.time` is banned: Use time.monotonic. time.time can skip due to its reference clock, you probably want a monotonic clock
+   --> android/app/src/main/python/fold3_accel.py:538:29
+    |
+536 |       del model
+537 |     save()
+538 |   report["completed_utc"] = time.time()
+    |                             ^^^^^^^^^
+539 |   report["validation_status"] = "diagnostic_only"
+540 |   save()
+    |
+
+C420 [*] Unnecessary dict comprehension for iterable; use `dict.fromkeys` instead
+  --> android/tests/test_accel_stages.py:28:64
+   |
+26 |     checks = {key: {"passed": True, "unexpected_nonfinite_elements": 0} for key in outputs}
+27 |     return {"identity": {"name": name, "backend": "mnn-opencl", "memory_mode": "buffer", "cpu_fallback": False,
+28 |                          "fingerprint": "test-device", "sha256": {key: "a" * 64 for key in
+   |  ________________________________________________________________^
+29 | |                          ("apk", "model", "original_model", "references", "sequences", "conversion", "provider",
+30 | |                           "opencl_plugin", "driver", "implementation", "native")}},
+   | |_________________________________________________________________________________^
+31 |             "status": "passed", "accuracy_status": "passed", "performance_status": "not_run", "diagnostic_only": True,
+32 |             "qualified": False, "rtol": 1e-3, "atol": 1e-4,
+   |
+help: Replace with `dict.fromkeys(iterable)`)
+   |
+27 |   return {"identity": {"name": name, "backend": "mnn-opencl", "memory_mode": "buffer", "cpu_fallback": False,
+   -                        "fingerprint": "test-device", "sha256": {key: "a" * 64 for key in
+   -                          ("apk", "model", "original_model", "references", "sequences", "conversion", "provider",
+   -                           "opencl_plugin", "driver", "implementation", "native")}},
+28 +                        "fingerprint": "test-device", "sha256": dict.fromkeys(("apk", "model", "original_model", "references", "sequences", "conversion", "provider", "opencl_plugin", "driver", "implementation", "native"), "a" * 64)},
+29 |           "status": "passed", "accuracy_status": "passed", "performance_status": "not_run", "diagnostic_only": True,
+   |
+
+Found 8 errors.
+[*] 1 fixable with the `--fix` option.

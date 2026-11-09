@@ -1,0 +1,13 @@
+{
+  "diagnostic_only": true,
+  "vehicle_tx_enabled": false,
+  "source": "android/reports/blocker-fixes/opencl-arithmetic-probe.cpp",
+  "source_sha256": "e6451f970e98f4df9a89148c922a14389b52c313cc2a365aa71abd9f8ebd8fca",
+  "elf": "android/build/opencl-half-product-probe",
+  "elf_sha256": "57d9f1f4be49f5cbecf385793d68de7617798c93491f0967f3d97b882c0ba942",
+  "arguments": [
+    "--half-inputs"
+  ],
+  "build_command": "$ANDROID_HOME/ndk/28.2.13676358/toolchains/llvm/prebuilt/darwin-x86_64/bin/aarch64-linux-android28-clang++ -O2 -std=c++17 android/reports/blocker-fixes/opencl-arithmetic-probe.cpp -o android/build/opencl-half-product-probe -ldl",
+  "qualification_scope": "Every finite binary16 input encoding, 128 finite half weights; sequential and paired FP32 accumulation against CPU std::fma; not a model performance gate"
+}

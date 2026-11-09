@@ -1,0 +1,1521 @@
+{
+  "scope": "diagnostic: observing intermediate tensors can change fusion/rounding",
+  "diagnostic_only": true,
+  "vehicle_tx_enabled": false,
+  "models": {
+    "dmonitoring_model": {
+      "sha256": "845b269cd45654b2ef802395a7ea4914519caa4b30bf94ee4b8b42d010eeb2b1",
+      "original_sha256": "dee5a294e8afaacc9295ac5d100e00733ecac278e79264b96331e40a3ede1b04",
+      "instrumented_matches_original": {
+        "outputs": true
+      },
+      "engines": {
+        "ort": {
+          "assignment": {
+            "providers": {
+              "CPUExecutionProvider": {
+                "partitions": 201,
+                "nodes": 201
+              }
+            },
+            "device": {
+              "type": -1,
+              "vendor_id": 0,
+              "device_id": 0
+            }
+          },
+          "profile_path": "/data/user/0/com.samsung.sunnypilot.fold3/files/trace-dmonitoring_model-ort_2026-11-01_10-11-42_924.json",
+          "nodes": [
+            {
+              "index": 0,
+              "operator": "Cast",
+              "name": "node__to_copy",
+              "output": "_to_copy",
+              "dtype": "float16",
+              "shape": [
+                1,
+                3
+              ],
+              "inputs": [
+                "calib"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": true,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": true,
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 1,
+              "operator": "Sub",
+              "name": "node_sub",
+              "output": "sub",
+              "dtype": "float16",
+              "shape": [
+                1,
+                3
+              ],
+              "inputs": [
+                "_to_copy",
+                "unsqueeze"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": true,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": true,
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 2,
+              "operator": "Mul",
+              "name": "node_mul",
+              "output": "mul",
+              "dtype": "float16",
+              "shape": [
+                1,
+                3
+              ],
+              "inputs": [
+                "sub",
+                "rsqrt"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": true,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": true,
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 3,
+              "operator": "Cast",
+              "name": "node__to_copy_1",
+              "output": "_to_copy_1",
+              "dtype": "float16",
+              "shape": [
+                1,
+                1382400
+              ],
+              "inputs": [
+                "input_img"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": true,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": true,
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 4,
+              "operator": "Div",
+              "name": "node_div",
+              "output": "div",
+              "dtype": "float16",
+              "shape": [
+                1,
+                1382400
+              ],
+              "inputs": [
+                "_to_copy_1",
+                "scalar_tensor_default_1"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": true,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": true,
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 5,
+              "operator": "Reshape",
+              "name": "node_view",
+              "output": "view",
+              "dtype": "float16",
+              "shape": [
+                1,
+                960,
+                360,
+                4
+              ],
+              "inputs": [
+                "div",
+                "val_9"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": true,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": true,
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 6,
+              "operator": "Transpose",
+              "name": "node_permute",
+              "output": "permute",
+              "dtype": "float16",
+              "shape": [
+                1,
+                360,
+                960,
+                4
+              ],
+              "inputs": [
+                "view"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": true,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": true,
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 7,
+              "operator": "Reshape",
+              "name": "node__unsafe_view",
+              "output": "_unsafe_view",
+              "dtype": "float16",
+              "shape": [
+                1,
+                360,
+                240,
+                16
+              ],
+              "inputs": [
+                "permute",
+                "val_15"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": true,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": true,
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 8,
+              "operator": "Transpose",
+              "name": "node_permute_1",
+              "output": "permute_1",
+              "dtype": "float16",
+              "shape": [
+                1,
+                16,
+                240,
+                360
+              ],
+              "inputs": [
+                "_unsafe_view"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": true,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": true,
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 9,
+              "operator": "Conv",
+              "name": "node_Conv_805",
+              "output": "getitem",
+              "dtype": "float16",
+              "shape": [
+                1,
+                32,
+                120,
+                180
+              ],
+              "inputs": [
+                "permute_1",
+                "model._vision._backbone.conv_stem.weight",
+                "model._vision._backbone.conv_stem.weight_bias"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 0.234375,
+              "mismatched_elements": 543700
+            },
+            {
+              "index": 10,
+              "operator": "Gelu",
+              "name": "node_gelu",
+              "output": "gelu",
+              "dtype": "float16",
+              "shape": [
+                1,
+                32,
+                120,
+                180
+              ],
+              "inputs": [
+                "getitem"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 0.1875,
+              "mismatched_elements": 481700
+            },
+            {
+              "index": 11,
+              "operator": "Conv",
+              "name": "node_Conv_807",
+              "output": "getitem_3",
+              "dtype": "float16",
+              "shape": [
+                1,
+                32,
+                60,
+                90
+              ],
+              "inputs": [
+                "gelu",
+                "model._vision._backbone.blocks.0.0.conv.weight",
+                "model._vision._backbone.blocks.0.0.conv.weight_bias"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 0.265625,
+              "mismatched_elements": 152757
+            }
+          ],
+          "final": {
+            "outputs": {
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                553
+              ],
+              "dtype": "float16",
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 0.078125,
+              "mismatched_elements": 530
+            }
+          },
+          "first_difference": {
+            "index": 9,
+            "operator": "Conv",
+            "name": "node_Conv_805",
+            "output": "getitem",
+            "dtype": "float16",
+            "shape": [
+              1,
+              32,
+              120,
+              180
+            ],
+            "inputs": [
+              "permute_1",
+              "model._vision._backbone.conv_stem.weight",
+              "model._vision._backbone.conv_stem.weight_bias"
+            ],
+            "domain": "",
+            "layout": "ONNX declared axes; provider transformations recorded separately",
+            "passed": false,
+            "finite": true,
+            "expected_nonfinite_elements": 0,
+            "unexpected_nonfinite_elements": 0,
+            "exact": false,
+            "max_abs_error": 0.234375,
+            "mismatched_elements": 543700
+          },
+          "first_divergence": {
+            "index": 9,
+            "operator": "Conv",
+            "name": "node_Conv_805",
+            "output": "getitem",
+            "dtype": "float16",
+            "shape": [
+              1,
+              32,
+              120,
+              180
+            ],
+            "inputs": [
+              "permute_1",
+              "model._vision._backbone.conv_stem.weight",
+              "model._vision._backbone.conv_stem.weight_bias"
+            ],
+            "domain": "",
+            "layout": "ONNX declared axes; provider transformations recorded separately",
+            "passed": false,
+            "finite": true,
+            "expected_nonfinite_elements": 0,
+            "unexpected_nonfinite_elements": 0,
+            "exact": false,
+            "max_abs_error": 0.234375,
+            "mismatched_elements": 543700
+          },
+          "first_nonfinite": null
+        },
+        "qnn-gpu": {
+          "assignment": {
+            "providers": {
+              "QNNExecutionProvider": {
+                "partitions": 1,
+                "nodes": 206
+              }
+            },
+            "device": {
+              "type": 2,
+              "vendor_id": 1297040209,
+              "device_id": 0
+            }
+          },
+          "profile_path": "/data/user/0/com.samsung.sunnypilot.fold3/files/trace-dmonitoring_model-qnn-gpu_2026-11-01_10-11-43_727.json",
+          "nodes": [
+            {
+              "index": 0,
+              "operator": "Cast",
+              "name": "node__to_copy",
+              "output": "_to_copy",
+              "dtype": "float16",
+              "shape": [
+                1,
+                3
+              ],
+              "inputs": [
+                "calib"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": true,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": true,
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 1,
+              "operator": "Sub",
+              "name": "node_sub",
+              "output": "sub",
+              "dtype": "float16",
+              "shape": [
+                1,
+                3
+              ],
+              "inputs": [
+                "_to_copy",
+                "unsqueeze"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": true,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": true,
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 2,
+              "operator": "Mul",
+              "name": "node_mul",
+              "output": "mul",
+              "dtype": "float16",
+              "shape": [
+                1,
+                3
+              ],
+              "inputs": [
+                "sub",
+                "rsqrt"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": true,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": true,
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 3,
+              "operator": "Cast",
+              "name": "node__to_copy_1",
+              "output": "_to_copy_1",
+              "dtype": "float16",
+              "shape": [
+                1,
+                1382400
+              ],
+              "inputs": [
+                "input_img"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": true,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": true,
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 4,
+              "operator": "Div",
+              "name": "node_div",
+              "output": "div",
+              "dtype": "float16",
+              "shape": [
+                1,
+                1382400
+              ],
+              "inputs": [
+                "_to_copy_1",
+                "scalar_tensor_default_1"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": true,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": true,
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 5,
+              "operator": "Reshape",
+              "name": "node_view",
+              "output": "view",
+              "dtype": "float16",
+              "shape": [
+                1,
+                960,
+                360,
+                4
+              ],
+              "inputs": [
+                "div",
+                "val_9"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": true,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": true,
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 6,
+              "operator": "Transpose",
+              "name": "node_permute",
+              "output": "permute",
+              "dtype": "float16",
+              "shape": [
+                1,
+                360,
+                960,
+                4
+              ],
+              "inputs": [
+                "view"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": true,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": true,
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 7,
+              "operator": "Reshape",
+              "name": "node__unsafe_view",
+              "output": "_unsafe_view",
+              "dtype": "float16",
+              "shape": [
+                1,
+                360,
+                240,
+                16
+              ],
+              "inputs": [
+                "permute",
+                "val_15"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": true,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": true,
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 8,
+              "operator": "Transpose",
+              "name": "node_permute_1",
+              "output": "permute_1",
+              "dtype": "float16",
+              "shape": [
+                1,
+                16,
+                240,
+                360
+              ],
+              "inputs": [
+                "_unsafe_view"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": true,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": true,
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 9,
+              "operator": "Conv",
+              "name": "node_Conv_805",
+              "output": "getitem",
+              "dtype": "float16",
+              "shape": [
+                1,
+                32,
+                120,
+                180
+              ],
+              "inputs": [
+                "permute_1",
+                "model._vision._backbone.conv_stem.weight",
+                "model._vision._backbone.conv_stem.weight_bias"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 0.15625,
+              "mismatched_elements": 483698
+            },
+            {
+              "index": 10,
+              "operator": "Gelu",
+              "name": "node_gelu",
+              "output": "gelu",
+              "dtype": "float16",
+              "shape": [
+                1,
+                32,
+                120,
+                180
+              ],
+              "inputs": [
+                "getitem"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 0.127197265625,
+              "mismatched_elements": 418587
+            },
+            {
+              "index": 11,
+              "operator": "Conv",
+              "name": "node_Conv_807",
+              "output": "getitem_3",
+              "dtype": "float16",
+              "shape": [
+                1,
+                32,
+                60,
+                90
+              ],
+              "inputs": [
+                "gelu",
+                "model._vision._backbone.blocks.0.0.conv.weight",
+                "model._vision._backbone.blocks.0.0.conv.weight_bias"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": false,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 0.263671875,
+              "mismatched_elements": 143468
+            }
+          ],
+          "final": {
+            "outputs": {
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                553
+              ],
+              "dtype": "float16",
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 0.02734375,
+              "mismatched_elements": 475
+            }
+          },
+          "first_difference": {
+            "index": 9,
+            "operator": "Conv",
+            "name": "node_Conv_805",
+            "output": "getitem",
+            "dtype": "float16",
+            "shape": [
+              1,
+              32,
+              120,
+              180
+            ],
+            "inputs": [
+              "permute_1",
+              "model._vision._backbone.conv_stem.weight",
+              "model._vision._backbone.conv_stem.weight_bias"
+            ],
+            "domain": "",
+            "layout": "ONNX declared axes; provider transformations recorded separately",
+            "passed": false,
+            "finite": true,
+            "expected_nonfinite_elements": 0,
+            "unexpected_nonfinite_elements": 0,
+            "exact": false,
+            "max_abs_error": 0.15625,
+            "mismatched_elements": 483698
+          },
+          "first_divergence": {
+            "index": 9,
+            "operator": "Conv",
+            "name": "node_Conv_805",
+            "output": "getitem",
+            "dtype": "float16",
+            "shape": [
+              1,
+              32,
+              120,
+              180
+            ],
+            "inputs": [
+              "permute_1",
+              "model._vision._backbone.conv_stem.weight",
+              "model._vision._backbone.conv_stem.weight_bias"
+            ],
+            "domain": "",
+            "layout": "ONNX declared axes; provider transformations recorded separately",
+            "passed": false,
+            "finite": true,
+            "expected_nonfinite_elements": 0,
+            "unexpected_nonfinite_elements": 0,
+            "exact": false,
+            "max_abs_error": 0.15625,
+            "mismatched_elements": 483698
+          },
+          "first_nonfinite": null
+        }
+      }
+    },
+    "driving_supercombo": {
+      "sha256": "c60702ff25ab5bd58bfc4f304858e5b478c1a7b69129c2564d08278093c8281b",
+      "original_sha256": "65a08adc31d5c456219687d99b7bf5e44d61dae2d49ea67850e76105c7248cce",
+      "instrumented_matches_original": {
+        "outputs": true,
+        "next_state_img_q": true,
+        "next_state_desire_q": true,
+        "next_state_feat_q": true
+      },
+      "engines": {
+        "ort": {
+          "assignment": {
+            "providers": {
+              "CPUExecutionProvider": {
+                "partitions": 372,
+                "nodes": 372
+              }
+            },
+            "device": {
+              "type": -1,
+              "vendor_id": 0,
+              "device_id": 0
+            }
+          },
+          "profile_path": "/data/user/0/com.samsung.sunnypilot.fold3/files/trace-driving_supercombo-ort_2026-11-01_10-11-46_921.json",
+          "nodes": [
+            {
+              "index": 0,
+              "operator": "Slice",
+              "name": "node_slice_1",
+              "output": "slice_1",
+              "dtype": "uint8",
+              "shape": [
+                2,
+                4,
+                6,
+                128,
+                256
+              ],
+              "inputs": [
+                "state_img_q",
+                "val_3",
+                "val_7",
+                "val_3",
+                "val_3"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": true,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": true,
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 1,
+              "operator": "Unsqueeze",
+              "name": "node_unsqueeze",
+              "output": "unsqueeze",
+              "dtype": "uint8",
+              "shape": [
+                2,
+                1,
+                6,
+                128,
+                256
+              ],
+              "inputs": [
+                "new_img",
+                "val_3"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": true,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": true,
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 3,
+              "operator": "Reshape",
+              "name": "node_view",
+              "output": "view",
+              "dtype": "float32",
+              "shape": [
+                1,
+                1,
+                8
+              ],
+              "inputs": [
+                "desire",
+                "val_17"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": true,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": true,
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 4,
+              "operator": "Slice",
+              "name": "node_slice_2",
+              "output": "slice_2",
+              "dtype": "float32",
+              "shape": [
+                99,
+                1,
+                8
+              ],
+              "inputs": [
+                "state_desire_q",
+                "val_3",
+                "val_7",
+                "val_27",
+                "val_3"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": true,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": true,
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 6,
+              "operator": "Gather",
+              "name": "node_select",
+              "output": "select",
+              "dtype": "uint8",
+              "shape": [
+                5,
+                6,
+                128,
+                256
+              ],
+              "inputs": [
+                "next_state_img_q",
+                "val_24"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": true,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": true,
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 7,
+              "operator": "Slice",
+              "name": "node_slice_3",
+              "output": "slice_3",
+              "dtype": "uint8",
+              "shape": [
+                2,
+                6,
+                128,
+                256
+              ],
+              "inputs": [
+                "select",
+                "val_27",
+                "val_7",
+                "val_27",
+                "val_41"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": true,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": true,
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 8,
+              "operator": "Reshape",
+              "name": "node__unsafe_view",
+              "output": "_unsafe_view",
+              "dtype": "uint8",
+              "shape": [
+                1,
+                12,
+                128,
+                256
+              ],
+              "inputs": [
+                "slice_3",
+                "val_47"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": true,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": true,
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 9,
+              "operator": "Gather",
+              "name": "node_select_1",
+              "output": "select_1",
+              "dtype": "uint8",
+              "shape": [
+                5,
+                6,
+                128,
+                256
+              ],
+              "inputs": [
+                "next_state_img_q",
+                "val_0"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": true,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": true,
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 10,
+              "operator": "Slice",
+              "name": "node_slice_4",
+              "output": "slice_4",
+              "dtype": "uint8",
+              "shape": [
+                2,
+                6,
+                128,
+                256
+              ],
+              "inputs": [
+                "select_1",
+                "val_27",
+                "val_7",
+                "val_27",
+                "val_41"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": true,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": true,
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 11,
+              "operator": "Reshape",
+              "name": "node__unsafe_view_1",
+              "output": "_unsafe_view_1",
+              "dtype": "uint8",
+              "shape": [
+                1,
+                12,
+                128,
+                256
+              ],
+              "inputs": [
+                "slice_4",
+                "val_47"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": true,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": true,
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            }
+          ],
+          "final": {
+            "outputs": {
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                2576
+              ],
+              "dtype": "float32",
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 1.5234375,
+              "mismatched_elements": 2185
+            },
+            "next_state_img_q": {
+              "passed": true,
+              "finite": true,
+              "shape": [
+                2,
+                5,
+                6,
+                128,
+                256
+              ],
+              "dtype": "uint8",
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": true,
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            "next_state_desire_q": {
+              "passed": true,
+              "finite": true,
+              "shape": [
+                100,
+                1,
+                8
+              ],
+              "dtype": "float32",
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": true,
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            "next_state_feat_q": {
+              "passed": false,
+              "finite": true,
+              "shape": [
+                96,
+                1,
+                512
+              ],
+              "dtype": "float32",
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 0.0032958984375,
+              "mismatched_elements": 448
+            }
+          },
+          "first_difference": null,
+          "first_divergence": null,
+          "first_nonfinite": null
+        },
+        "qnn-gpu": {
+          "assignment": {
+            "providers": {
+              "CPUExecutionProvider": {
+                "partitions": 4,
+                "nodes": 4
+              },
+              "QNNExecutionProvider": {
+                "partitions": 3,
+                "nodes": 366
+              }
+            },
+            "device": {
+              "type": 2,
+              "vendor_id": 1297040209,
+              "device_id": 0
+            }
+          },
+          "profile_path": "/data/user/0/com.samsung.sunnypilot.fold3/files/trace-driving_supercombo-qnn-gpu_2026-11-01_10-11-47_537.json",
+          "nodes": [
+            {
+              "index": 0,
+              "operator": "Slice",
+              "name": "node_slice_1",
+              "output": "slice_1",
+              "dtype": "uint8",
+              "shape": [
+                2,
+                4,
+                6,
+                128,
+                256
+              ],
+              "inputs": [
+                "state_img_q",
+                "val_3",
+                "val_7",
+                "val_3",
+                "val_3"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": true,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": true,
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 1,
+              "operator": "Unsqueeze",
+              "name": "node_unsqueeze",
+              "output": "unsqueeze",
+              "dtype": "uint8",
+              "shape": [
+                2,
+                1,
+                6,
+                128,
+                256
+              ],
+              "inputs": [
+                "new_img",
+                "val_3"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": true,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": true,
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 3,
+              "operator": "Reshape",
+              "name": "node_view",
+              "output": "view",
+              "dtype": "float32",
+              "shape": [
+                1,
+                1,
+                8
+              ],
+              "inputs": [
+                "desire",
+                "val_17"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": true,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": true,
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 4,
+              "operator": "Slice",
+              "name": "node_slice_2",
+              "output": "slice_2",
+              "dtype": "float32",
+              "shape": [
+                99,
+                1,
+                8
+              ],
+              "inputs": [
+                "state_desire_q",
+                "val_3",
+                "val_7",
+                "val_27",
+                "val_3"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": true,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": true,
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 6,
+              "operator": "Gather",
+              "name": "node_select",
+              "output": "select",
+              "dtype": "uint8",
+              "shape": [
+                5,
+                6,
+                128,
+                256
+              ],
+              "inputs": [
+                "next_state_img_q",
+                "val_24"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": true,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": true,
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 7,
+              "operator": "Slice",
+              "name": "node_slice_3",
+              "output": "slice_3",
+              "dtype": "uint8",
+              "shape": [
+                2,
+                6,
+                128,
+                256
+              ],
+              "inputs": [
+                "select",
+                "val_27",
+                "val_7",
+                "val_27",
+                "val_41"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": true,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": true,
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 8,
+              "operator": "Reshape",
+              "name": "node__unsafe_view",
+              "output": "_unsafe_view",
+              "dtype": "uint8",
+              "shape": [
+                1,
+                12,
+                128,
+                256
+              ],
+              "inputs": [
+                "slice_3",
+                "val_47"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": true,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": true,
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 9,
+              "operator": "Gather",
+              "name": "node_select_1",
+              "output": "select_1",
+              "dtype": "uint8",
+              "shape": [
+                5,
+                6,
+                128,
+                256
+              ],
+              "inputs": [
+                "next_state_img_q",
+                "val_0"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": true,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": true,
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 10,
+              "operator": "Slice",
+              "name": "node_slice_4",
+              "output": "slice_4",
+              "dtype": "uint8",
+              "shape": [
+                2,
+                6,
+                128,
+                256
+              ],
+              "inputs": [
+                "select_1",
+                "val_27",
+                "val_7",
+                "val_27",
+                "val_41"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": true,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": true,
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            {
+              "index": 11,
+              "operator": "Reshape",
+              "name": "node__unsafe_view_1",
+              "output": "_unsafe_view_1",
+              "dtype": "uint8",
+              "shape": [
+                1,
+                12,
+                128,
+                256
+              ],
+              "inputs": [
+                "slice_4",
+                "val_47"
+              ],
+              "domain": "",
+              "layout": "ONNX declared axes; provider transformations recorded separately",
+              "passed": true,
+              "finite": true,
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": true,
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            }
+          ],
+          "final": {
+            "outputs": {
+              "passed": false,
+              "finite": true,
+              "shape": [
+                1,
+                2576
+              ],
+              "dtype": "float32",
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 2258.9765625,
+              "mismatched_elements": 2558
+            },
+            "next_state_img_q": {
+              "passed": true,
+              "finite": true,
+              "shape": [
+                2,
+                5,
+                6,
+                128,
+                256
+              ],
+              "dtype": "uint8",
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": true,
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            "next_state_desire_q": {
+              "passed": true,
+              "finite": true,
+              "shape": [
+                100,
+                1,
+                8
+              ],
+              "dtype": "float32",
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": true,
+              "max_abs_error": 0.0,
+              "mismatched_elements": 0
+            },
+            "next_state_feat_q": {
+              "passed": false,
+              "finite": true,
+              "shape": [
+                96,
+                1,
+                512
+              ],
+              "dtype": "float32",
+              "expected_nonfinite_elements": 0,
+              "unexpected_nonfinite_elements": 0,
+              "exact": false,
+              "max_abs_error": 0.1468505859375,
+              "mismatched_elements": 510
+            }
+          },
+          "first_difference": null,
+          "first_divergence": null,
+          "first_nonfinite": null
+        }
+      }
+    }
+  },
+  "completed": true
+}

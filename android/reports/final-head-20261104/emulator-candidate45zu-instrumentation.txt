@@ -1,0 +1,48 @@
+
+ai.sunnypilot.fold3.AcceleratorTest:.
+ai.sunnypilot.fold3.CameraPreviewSampleTest:..
+Error in slowPublisherOwnsItsBufferAndDropsQueuedFrames(ai.sunnypilot.fold3.CameraPreviewSampleTest):
+java.lang.AssertionError: Acquisition stalled behind sink
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at ai.sunnypilot.fold3.CameraPreviewSampleTest.slowPublisherOwnsItsBufferAndDropsQueuedFrames(CameraPreviewSampleTest.java:84)
+.
+ai.sunnypilot.fold3.ControlsMetricsIntegrationTest:.....
+ai.sunnypilot.fold3.GpuNv12Test:.
+ai.sunnypilot.fold3.LifecycleTest:.
+ai.sunnypilot.fold3.NativeBridgeTest:.
+Error in javaPublisherReachesPythonVisionIpcWithoutClaimingCalibration(ai.sunnypilot.fold3.NativeBridgeTest):
+com.chaquo.python.PyException: TimeoutError: Insufficient Java/Python camera frames
+	at <python>.fold3_runtime.receive_camera_test(fold3_runtime.py:137)
+	at <python>.chaquopy_java.call(chaquopy_java.pyx:352)
+	at <python>.chaquopy_java.Java_com_chaquo_python_PyObject_callAttrThrowsNative(chaquopy_java.pyx:324)
+	at com.chaquo.python.PyObject.callAttrThrowsNative(Native Method)
+	at com.chaquo.python.PyObject.callAttrThrows(PyObject.java:232)
+	at com.chaquo.python.PyObject.callAttr(PyObject.java:221)
+	at ai.sunnypilot.fold3.NativeBridgeTest.javaPublisherReachesPythonVisionIpcWithoutClaimingCalibration(NativeBridgeTest.java:32)
+.....
+ai.sunnypilot.fold3.PerceptionTest:.......
+ai.sunnypilot.fold3.RuntimeTest:.
+ai.sunnypilot.fold3.SupervisorTest:.
+
+Time: 170.805
+There were 2 failures:
+1) slowPublisherOwnsItsBufferAndDropsQueuedFrames(ai.sunnypilot.fold3.CameraPreviewSampleTest)
+java.lang.AssertionError: Acquisition stalled behind sink
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at ai.sunnypilot.fold3.CameraPreviewSampleTest.slowPublisherOwnsItsBufferAndDropsQueuedFrames(CameraPreviewSampleTest.java:84)
+2) javaPublisherReachesPythonVisionIpcWithoutClaimingCalibration(ai.sunnypilot.fold3.NativeBridgeTest)
+com.chaquo.python.PyException: TimeoutError: Insufficient Java/Python camera frames
+	at <python>.fold3_runtime.receive_camera_test(fold3_runtime.py:137)
+	at <python>.chaquopy_java.call(chaquopy_java.pyx:352)
+	at <python>.chaquopy_java.Java_com_chaquo_python_PyObject_callAttrThrowsNative(chaquopy_java.pyx:324)
+	at com.chaquo.python.PyObject.callAttrThrowsNative(Native Method)
+	at com.chaquo.python.PyObject.callAttrThrows(PyObject.java:232)
+	at com.chaquo.python.PyObject.callAttr(PyObject.java:221)
+	at ai.sunnypilot.fold3.NativeBridgeTest.javaPublisherReachesPythonVisionIpcWithoutClaimingCalibration(NativeBridgeTest.java:32)
+
+FAILURES!!!
+Tests run: 28,  Failures: 2
+
+
