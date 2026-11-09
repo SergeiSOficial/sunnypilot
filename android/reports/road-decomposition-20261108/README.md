@@ -1,5 +1,32 @@
 # Linux converter and emulator follow-up
 
+## 9 November: isolate policy normalization and retest devices
+
+**PARTIAL / NOT QUALIFIED.** The new [layer-normalization isolation helper](../../scripts/isolate_litert_layernorm.py) checks the pinned ONNX and section hashes, exact parameters, lossless FP16 input boundary, and the impact of tapping reference outputs. It compares the converted CPU operation against an isolated ONNX operation with the same captured input, then rounds the result at the original output boundary. For seeds 42 / 7 / 123, all three comparisons pass the original tolerance with no unexpected non-finite values. The isolated original-input results and tapped public outputs are bit-exact to the untapped original. This is host CPU evidence only, not an accelerator qualification.
+
+The diagnostic input itself differs from the tapped original in **143 / 165 / 156** values above tolerance. Individually tapped FP32 residual sums already differ: `p_add` has **22 / 22 / 18**, `p_add_1` has **26 / 22 / 10**, and `p_add_2` has **94 / 98 / 93** tolerance failures. Each reference tap preserved public outputs exactly, but taps can still affect intermediate execution. Upstream input and rounding differences remain the priority; a normalization kernel rewrite is not justified by this evidence.
+
+Restoring the missing FP16 round trip at `model/p_linear_7` in a separately hashed suffix (`ce45b05552976e3b52a0a3a2235aa5d1207a78a3a408016003abbfab3f73311f`) changed road-output mismatch counts from **42 / 25 / 62** to **42 / 28 / 61**. It regresses seed 7 and does not pass the complete suffix, so it is rejected. Neither this graph nor the reference-value interventions are selected for live inference; no production model or GPU runtime has been changed.
+
+The Fold 3 and dedicated Android 15 emulator each passed six focused instrumentation tests covering camera buffer checks, YUV conversion, the compiled-out TX flag and USB descriptor rejection. Both used installed APK SHA256 `d06b27a435e1c2fa947066c7cc71efcaf810a053a57834c603d86c1722c74272`. An initial emulator attempt completed only five of the six requested tests on an older installed APK and was correctly marked failed; the matching archived APK and test APK were installed before the successful rerun. Each attempt used the guarded cooldown and process/camera/forward cleanup; the emulator was stopped. These checks do not validate camera freshness, full inference, controls timing or vehicle hardware.
+
+The unchanged candidate73 `ncnn-dispatch-524288` Fold benchmark passed **795/795** original-reference comparisons with no CPU fallback, but failed timing: 100/100 samples exceeded 50 ms for each model. Driver inference p50/p99 were **138.255 / 157.908 ms**, and road inference p50/p99 were **292.096 / 352.571 ms**. These are inference-only measurements and exclude camera delivery and publication. The earlier candidate73 road result was 309.712 / 352.664 ms; no implementation change or controlled evidence supports claiming a performance improvement from the difference. The guarded run began after 32.3 continuous seconds NORMAL with 26.8°C skin and ended with NORMAL status at 34.1°C; the APK hash remained unchanged, the processes and cameras were released, and no experiment forwards remained. Its performance failure is preserved in `fold-ncnn-recheck.json` and `fold-ncnn-recheck-experiment.json`. No combined workload was advanced.
+
+Focused host validation passed 18 LiteRT isolation, trace, boundary and intervention tests and 69 controls, thermal, experiment-isolation and Panda tests. These tests do not establish the failed timing gates.
+
+To reproduce the host diagnostic with fresh output paths:
+
+```sh
+VENV=android/build/candidates/candidate74-runtime/follow-up/litert-mac-converter-venv
+BASE=android/build/candidates/candidate74-runtime/follow-up/dense-split-mac-20261109
+"$VENV/bin/python" android/scripts/isolate_litert_layernorm.py --sections "$BASE/rewritten-sections" --conversion "$BASE/rewritten-suffix" --model "$BASE/suffix-history-add3-select-half.tflite" --model-sha256 bc0b990f45a5fded8d36770ecc139dd5a8a61d6ec8f1f8899be6a347d677a01f --seed 42 --output "$NEW_ISOLATION_DIR"
+"$VENV/bin/python" android/scripts/patch_litert_half_boundaries.py --source "$BASE/suffix-history-half.tflite" --source-sha256 537b6b345d335c2930d21cd7ba8df0b01b267519e1f83a6e44ea9a91e3872a05 --tensor model/p_linear_7 --producer reshape --output "$NEW_SUFFIX"
+"$VENV/bin/python" android/scripts/validate_litert_dense_sections_host.py --sections "$BASE/rewritten-sections" --prefix "$BASE/rewritten-prefix/converted/prefix_float32.tflite" --suffix "$NEW_SUFFIX" --output "$NEW_REPORT"
+.venv/bin/python android/scripts/experiment.py --serial "$FOLD_SERIAL" --package com.samsung.sunnypilot.fold3 --report "$NEW_EXPERIMENT_REPORT" -- .venv/bin/python android/scripts/validate_models.py --serial "$FOLD_SERIAL" --package com.samsung.sunnypilot.fold3 --profile ncnn-dispatch-524288 --timeout 600 --report "$NEW_MODEL_REPORT"
+```
+
+The results and per-attempt experiment receipts are under `android/build/candidates/candidate74-runtime/follow-up/dense-split-mac-20261109/`. Accuracy tolerances, the 50 ms sensor-to-output deadline, TX prohibition, physical engagement block, and thermal safeguards remain unchanged.
+
 ## 9 November: residual precision and selective consumers
 
 **PARTIAL / NOT QUALIFIED.** Supplying the original pre-cast FP32 residual
